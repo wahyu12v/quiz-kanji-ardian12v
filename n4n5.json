@@ -1,0 +1,1706 @@
+[
+    {
+        "No": 1.0,
+        "Kanji": "一",
+        "Hiragana": "いち",
+        "Arti": "satu"
+    },
+    {
+        "No": 2.0,
+        "Kanji": "二",
+        "Hiragana": "に",
+        "Arti": "dua"
+    },
+    {
+        "No": 3.0,
+        "Kanji": "三",
+        "Hiragana": "さん",
+        "Arti": "tiga"
+    },
+    {
+        "No": 4.0,
+        "Kanji": "四",
+        "Hiragana": "よん",
+        "Arti": "empat"
+    },
+    {
+        "No": 5.0,
+        "Kanji": "五",
+        "Hiragana": "ご",
+        "Arti": "lima"
+    },
+    {
+        "No": 6.0,
+        "Kanji": "六",
+        "Hiragana": "ろく",
+        "Arti": "enam"
+    },
+    {
+        "No": 7.0,
+        "Kanji": "七",
+        "Hiragana": "なな",
+        "Arti": "tujuh"
+    },
+    {
+        "No": 8.0,
+        "Kanji": "八",
+        "Hiragana": "はち",
+        "Arti": "delapan"
+    },
+    {
+        "No": 9.0,
+        "Kanji": "九",
+        "Hiragana": "きゅう",
+        "Arti": "sembilan"
+    },
+    {
+        "No": 10.0,
+        "Kanji": "十",
+        "Hiragana": "じゅう",
+        "Arti": "sepuluh"
+    },
+    {
+        "No": 11.0,
+        "Kanji": "人",
+        "Hiragana": "ひと",
+        "Arti": "orang"
+    },
+    {
+        "No": 12.0,
+        "Kanji": "入ります",
+        "Hiragana": "はいります",
+        "Arti": "masuk"
+    },
+    {
+        "No": 13.0,
+        "Kanji": "出ます",
+        "Hiragana": "でます",
+        "Arti": "keluar"
+    },
+    {
+        "No": 14.0,
+        "Kanji": "大きい",
+        "Hiragana": "おおきい",
+        "Arti": "besar"
+    },
+    {
+        "No": 15.0,
+        "Kanji": "小さい",
+        "Hiragana": "ちいさい",
+        "Arti": "kecil"
+    },
+    {
+        "No": 16.0,
+        "Kanji": "山",
+        "Hiragana": "やま",
+        "Arti": "gunung"
+    },
+    {
+        "No": 17.0,
+        "Kanji": "川",
+        "Hiragana": "かわ",
+        "Arti": "sungai"
+    },
+    {
+        "No": 18.0,
+        "Kanji": "日",
+        "Hiragana": "ひ",
+        "Arti": "hari / matahari"
+    },
+    {
+        "No": 19.0,
+        "Kanji": "月",
+        "Hiragana": "つき",
+        "Arti": "bulan"
+    },
+    {
+        "No": 20.0,
+        "Kanji": "火",
+        "Hiragana": "ひ",
+        "Arti": "api"
+    },
+    {
+        "No": 21.0,
+        "Kanji": "水",
+        "Hiragana": "みず",
+        "Arti": "air"
+    },
+    {
+        "No": 22.0,
+        "Kanji": "木",
+        "Hiragana": "き",
+        "Arti": "pohon / kayu"
+    },
+    {
+        "No": 23.0,
+        "Kanji": "金",
+        "Hiragana": "かね",
+        "Arti": "uang / emas"
+    },
+    {
+        "No": 24.0,
+        "Kanji": "土",
+        "Hiragana": "つち",
+        "Arti": "tanah"
+    },
+    {
+        "No": 25.0,
+        "Kanji": "今",
+        "Hiragana": "いま",
+        "Arti": "sekarang"
+    },
+    {
+        "No": 26.0,
+        "Kanji": "分",
+        "Hiragana": "わかります",
+        "Arti": "mengerti"
+    },
+    {
+        "No": 27.0,
+        "Kanji": "午",
+        "Hiragana": "ご",
+        "Arti": "siang (午前・午後)"
+    },
+    {
+        "No": 28.0,
+        "Kanji": "天",
+        "Hiragana": "てん",
+        "Arti": "langit / surga"
+    },
+    {
+        "No": 29.0,
+        "Kanji": "父",
+        "Hiragana": "ちち",
+        "Arti": "ayah"
+    },
+    {
+        "No": 30.0,
+        "Kanji": "友",
+        "Hiragana": "とも",
+        "Arti": "teman"
+    },
+    {
+        "No": 31.0,
+        "Kanji": "手",
+        "Hiragana": "て",
+        "Arti": "tangan"
+    },
+    {
+        "No": 32.0,
+        "Kanji": "少ない",
+        "Hiragana": "すくない",
+        "Arti": "sedikit"
+    },
+    {
+        "No": 33.0,
+        "Kanji": "外",
+        "Hiragana": "そと",
+        "Arti": "luar"
+    },
+    {
+        "No": 34.0,
+        "Kanji": "左",
+        "Hiragana": "ひだり",
+        "Arti": "kiri"
+    },
+    {
+        "No": 35.0,
+        "Kanji": "右",
+        "Hiragana": "みぎ",
+        "Arti": "kanan"
+    },
+    {
+        "No": 36.0,
+        "Kanji": "半",
+        "Hiragana": "はん",
+        "Arti": "setengah"
+    },
+    {
+        "No": 37.0,
+        "Kanji": "北",
+        "Hiragana": "きた",
+        "Arti": "utara"
+    },
+    {
+        "No": 38.0,
+        "Kanji": "母",
+        "Hiragana": "はは",
+        "Arti": "ibu"
+    },
+    {
+        "No": 39.0,
+        "Kanji": "目",
+        "Hiragana": "め",
+        "Arti": "mata"
+    },
+    {
+        "No": 40.0,
+        "Kanji": "古い",
+        "Hiragana": "ふるい",
+        "Arti": "lama / tua"
+    },
+    {
+        "No": 41.0,
+        "Kanji": "白い",
+        "Hiragana": "しろい",
+        "Arti": "putih"
+    },
+    {
+        "No": 42.0,
+        "Kanji": "生まれます",
+        "Hiragana": "うまれます",
+        "Arti": "lahir"
+    },
+    {
+        "No": 43.0,
+        "Kanji": "本",
+        "Hiragana": "ほん",
+        "Arti": "buku"
+    },
+    {
+        "No": 44.0,
+        "Kanji": "百",
+        "Hiragana": "ひゃく",
+        "Arti": "seratus"
+    },
+    {
+        "No": 45.0,
+        "Kanji": "毎",
+        "Hiragana": "まい",
+        "Arti": "setiap"
+    },
+    {
+        "No": 46.0,
+        "Kanji": "年",
+        "Hiragana": "とし",
+        "Arti": "tahun"
+    },
+    {
+        "No": 47.0,
+        "Kanji": "先",
+        "Hiragana": "さき",
+        "Arti": "sebelum / depan"
+    },
+    {
+        "No": 48.0,
+        "Kanji": "西",
+        "Hiragana": "にし",
+        "Arti": "barat"
+    },
+    {
+        "No": 49.0,
+        "Kanji": "気",
+        "Hiragana": "き",
+        "Arti": "perasaan / suasana"
+    },
+    {
+        "No": 50.0,
+        "Kanji": "耳",
+        "Hiragana": "みみ",
+        "Arti": "telinga"
+    },
+    {
+        "No": 51.0,
+        "Kanji": "安い",
+        "Hiragana": "やすい",
+        "Arti": "murah"
+    },
+    {
+        "No": 52.0,
+        "Kanji": "多い",
+        "Hiragana": "おおい",
+        "Arti": "banyak"
+    },
+    {
+        "No": 53.0,
+        "Kanji": "円",
+        "Hiragana": "えん",
+        "Arti": "yen"
+    },
+    {
+        "No": 54.0,
+        "Kanji": "中",
+        "Hiragana": "なか",
+        "Arti": "dalam / tengah"
+    },
+    {
+        "No": 55.0,
+        "Kanji": "上",
+        "Hiragana": "うえ",
+        "Arti": "atas"
+    },
+    {
+        "No": 56.0,
+        "Kanji": "下",
+        "Hiragana": "した",
+        "Arti": "bawah"
+    },
+    {
+        "No": 57.0,
+        "Kanji": "前",
+        "Hiragana": "まえ",
+        "Arti": "depan / sebelum"
+    },
+    {
+        "No": 58.0,
+        "Kanji": "後",
+        "Hiragana": "あと",
+        "Arti": "setelah / belakang"
+    },
+    {
+        "No": 59.0,
+        "Kanji": "南",
+        "Hiragana": "みなみ",
+        "Arti": "selatan"
+    },
+    {
+        "No": 60.0,
+        "Kanji": "東",
+        "Hiragana": "ひがし",
+        "Arti": "timur"
+    },
+    {
+        "No": 61.0,
+        "Kanji": "行きます",
+        "Hiragana": "いきます",
+        "Arti": "pergi"
+    },
+    {
+        "No": 62.0,
+        "Kanji": "来ます",
+        "Hiragana": "きます",
+        "Arti": "datang"
+    },
+    {
+        "No": 63.0,
+        "Kanji": "帰ります",
+        "Hiragana": "かえります",
+        "Arti": "pulang"
+    },
+    {
+        "No": 64.0,
+        "Kanji": "見ます",
+        "Hiragana": "みます",
+        "Arti": "melihat"
+    },
+    {
+        "No": 65.0,
+        "Kanji": "聞きます",
+        "Hiragana": "ききます",
+        "Arti": "mendengar / bertanya"
+    },
+    {
+        "No": 66.0,
+        "Kanji": "話します",
+        "Hiragana": "はなします",
+        "Arti": "berbicara"
+    },
+    {
+        "No": 67.0,
+        "Kanji": "食べます",
+        "Hiragana": "たべます",
+        "Arti": "makan"
+    },
+    {
+        "No": 68.0,
+        "Kanji": "飲みます",
+        "Hiragana": "のみます",
+        "Arti": "minum"
+    },
+    {
+        "No": 69.0,
+        "Kanji": "買います",
+        "Hiragana": "かいます",
+        "Arti": "membeli"
+    },
+    {
+        "No": 70.0,
+        "Kanji": "書きます",
+        "Hiragana": "かきます",
+        "Arti": "menulis"
+    },
+    {
+        "No": 71.0,
+        "Kanji": "読みます",
+        "Hiragana": "よみます",
+        "Arti": "membaca"
+    },
+    {
+        "No": 72.0,
+        "Kanji": "学校",
+        "Hiragana": "がっこう",
+        "Arti": "sekolah"
+    },
+    {
+        "No": 73.0,
+        "Kanji": "先生",
+        "Hiragana": "せんせい",
+        "Arti": "guru"
+    },
+    {
+        "No": 74.0,
+        "Kanji": "学生",
+        "Hiragana": "がくせい",
+        "Arti": "murid"
+    },
+    {
+        "No": 75.0,
+        "Kanji": "会社",
+        "Hiragana": "かいしゃ",
+        "Arti": "perusahaan"
+    },
+    {
+        "No": 76.0,
+        "Kanji": "車",
+        "Hiragana": "くるま",
+        "Arti": "mobil / kendaraan"
+    },
+    {
+        "No": 77.0,
+        "Kanji": "駅",
+        "Hiragana": "えき",
+        "Arti": "stasiun"
+    },
+    {
+        "No": 78.0,
+        "Kanji": "友だち",
+        "Hiragana": "ともだち",
+        "Arti": "teman"
+    },
+    {
+        "No": 79.0,
+        "Kanji": "名前",
+        "Hiragana": "なまえ",
+        "Arti": "nama"
+    },
+    {
+        "No": 80.0,
+        "Kanji": "時間",
+        "Hiragana": "じかん",
+        "Arti": "waktu"
+    },
+    {
+        "No": 81.0,
+        "Kanji": "国",
+        "Hiragana": "くに",
+        "Arti": "negara"
+    },
+    {
+        "No": 82.0,
+        "Kanji": "町",
+        "Hiragana": "まち",
+        "Arti": "kota"
+    },
+    {
+        "No": 83.0,
+        "Kanji": "店",
+        "Hiragana": "みせ",
+        "Arti": "toko"
+    },
+    {
+        "No": 84.0,
+        "Kanji": "部屋",
+        "Hiragana": "へや",
+        "Arti": "kamar"
+    },
+    {
+        "No": 85.0,
+        "Kanji": "家",
+        "Hiragana": "いえ",
+        "Arti": "rumah"
+    },
+    {
+        "No": 86.0,
+        "Kanji": "朝",
+        "Hiragana": "あさ",
+        "Arti": "pagi"
+    },
+    {
+        "No": 87.0,
+        "Kanji": "昼",
+        "Hiragana": "ひる",
+        "Arti": "siang"
+    },
+    {
+        "No": 88.0,
+        "Kanji": "夜",
+        "Hiragana": "よる",
+        "Arti": "malam"
+    },
+    {
+        "No": 89.0,
+        "Kanji": "今日",
+        "Hiragana": "きょう",
+        "Arti": "hari ini"
+    },
+    {
+        "No": 90.0,
+        "Kanji": "明日",
+        "Hiragana": "あした",
+        "Arti": "besok"
+    },
+    {
+        "No": 91.0,
+        "Kanji": "昨日",
+        "Hiragana": "きのう",
+        "Arti": "kemarin"
+    },
+    {
+        "No": 92.0,
+        "Kanji": "毎日",
+        "Hiragana": "まいにち",
+        "Arti": "setiap hari"
+    },
+    {
+        "No": 93.0,
+        "Kanji": "仕事",
+        "Hiragana": "しごと",
+        "Arti": "pekerjaan"
+    },
+    {
+        "No": 94.0,
+        "Kanji": "休みます",
+        "Hiragana": "やすみます",
+        "Arti": "istirahat / libur"
+    },
+    {
+        "No": 95.0,
+        "Kanji": "勉強します",
+        "Hiragana": "べんきょうします",
+        "Arti": "belajar"
+    },
+    {
+        "No": 96.0,
+        "Kanji": "住みます",
+        "Hiragana": "すみます",
+        "Arti": "tinggal"
+    },
+    {
+        "No": 97.0,
+        "Kanji": "知ります",
+        "Hiragana": "しります",
+        "Arti": "mengetahui"
+    },
+    {
+        "No": 98.0,
+        "Kanji": "会います",
+        "Hiragana": "あいます",
+        "Arti": "bertemu"
+    },
+    {
+        "No": 99.0,
+        "Kanji": "待ちます",
+        "Hiragana": "まちます",
+        "Arti": "menunggu"
+    },
+    {
+        "No": 100.0,
+        "Kanji": "作ります",
+        "Hiragana": "つくります",
+        "Arti": "membuat"
+    },
+    {
+        "No": 101.0,
+        "Kanji": "使います",
+        "Hiragana": "つかいます",
+        "Arti": "menggunakan"
+    },
+    {
+        "No": 102.0,
+        "Kanji": "分かります",
+        "Hiragana": "わかります",
+        "Arti": "mengerti"
+    },
+    {
+        "No": 103.0,
+        "Kanji": "始めます",
+        "Hiragana": "はじめます",
+        "Arti": "memulai"
+    },
+    {
+        "No": 104,
+        "Kanji": "力",
+        "Hiragana": "ちから",
+        "Arti": "kekuatan"
+    },
+    {
+        "No": 105,
+        "Kanji": "工",
+        "Hiragana": "こう",
+        "Arti": "konstruksi, teknik"
+    },
+    {
+        "No": 106,
+        "Kanji": "夕",
+        "Hiragana": "ゆう",
+        "Arti": "sore"
+    },
+    {
+        "No": 107,
+        "Kanji": "引きます",
+        "Hiragana": "ひきます",
+        "Arti": "menarik"
+    },
+    {
+        "No": 108,
+        "Kanji": "牛",
+        "Hiragana": "うし",
+        "Arti": "sapi"
+    },
+    {
+        "No": 109,
+        "Kanji": "区",
+        "Hiragana": "く",
+        "Arti": "wilayah, distrik"
+    },
+    {
+        "No": 110,
+        "Kanji": "犬",
+        "Hiragana": "いぬ",
+        "Arti": "anjing"
+    },
+    {
+        "No": 111,
+        "Kanji": "元",
+        "Hiragana": "もと",
+        "Arti": "asal"
+    },
+    {
+        "No": 112,
+        "Kanji": "止まります",
+        "Hiragana": "とまります",
+        "Arti": "berhenti"
+    },
+    {
+        "No": 113,
+        "Kanji": "心",
+        "Hiragana": "こころ",
+        "Arti": "hati, perasaan"
+    },
+    {
+        "No": 114,
+        "Kanji": "切ります",
+        "Hiragana": "きります",
+        "Arti": "memotong"
+    },
+    {
+        "No": 115,
+        "Kanji": "太い",
+        "Hiragana": "ふとい",
+        "Arti": "tebal, gemuk"
+    },
+    {
+        "No": 116,
+        "Kanji": "以",
+        "Hiragana": "い",
+        "Arti": "lebih (perbandingan)"
+    },
+    {
+        "No": 117,
+        "Kanji": "去ります",
+        "Hiragana": "さります",
+        "Arti": "meninggalkan"
+    },
+    {
+        "No": 118,
+        "Kanji": "兄",
+        "Hiragana": "あに",
+        "Arti": "kakak laki-laki"
+    },
+    {
+        "No": 119,
+        "Kanji": "広い",
+        "Hiragana": "ひろい",
+        "Arti": "luas"
+    },
+    {
+        "No": 120,
+        "Kanji": "市",
+        "Hiragana": "し",
+        "Arti": "kota, pasar"
+    },
+    {
+        "No": 121,
+        "Kanji": "仕えます",
+        "Hiragana": "つかえます",
+        "Arti": "melayani"
+    },
+    {
+        "No": 122,
+        "Kanji": "写します",
+        "Hiragana": "うつします",
+        "Arti": "memotret, menyalin"
+    },
+    {
+        "No": 123,
+        "Kanji": "主",
+        "Hiragana": "ぬし",
+        "Arti": "tuan, pemilik"
+    },
+    {
+        "No": 124,
+        "Kanji": "正",
+        "Hiragana": "ただしい",
+        "Arti": "benar"
+    },
+    {
+        "No": 125,
+        "Kanji": "世",
+        "Hiragana": "よ",
+        "Arti": "dunia"
+    },
+    {
+        "No": 126,
+        "Kanji": "台",
+        "Hiragana": "だい",
+        "Arti": "alas, dasar"
+    },
+    {
+        "No": 127,
+        "Kanji": "代",
+        "Hiragana": "だい",
+        "Arti": "generasi, pengganti"
+    },
+    {
+        "No": 128,
+        "Kanji": "田",
+        "Hiragana": "た",
+        "Arti": "sawah"
+    },
+    {
+        "No": 129,
+        "Kanji": "冬",
+        "Hiragana": "ふゆ",
+        "Arti": "musim dingin"
+    },
+    {
+        "No": 130,
+        "Kanji": "民",
+        "Hiragana": "たみ",
+        "Arti": "warga"
+    },
+    {
+        "No": 131,
+        "Kanji": "用",
+        "Hiragana": "もちいます",
+        "Arti": "menggunakan"
+    },
+    {
+        "No": 132,
+        "Kanji": "回ります",
+        "Hiragana": "まわります",
+        "Arti": "berputar, berkeliling"
+    },
+    {
+        "No": 133,
+        "Kanji": "考えます",
+        "Hiragana": "かんがえます",
+        "Arti": "berpikir"
+    },
+    {
+        "No": 134,
+        "Kanji": "光",
+        "Hiragana": "ひかり",
+        "Arti": "cahaya"
+    },
+    {
+        "No": 135,
+        "Kanji": "好き",
+        "Hiragana": "すき",
+        "Arti": "suka"
+    },
+    {
+        "No": 136,
+        "Kanji": "合います",
+        "Hiragana": "あいます",
+        "Arti": "cocok, bertemu"
+    },
+    {
+        "No": 137,
+        "Kanji": "死にます",
+        "Hiragana": "しにます",
+        "Arti": "mati"
+    },
+    {
+        "No": 138,
+        "Kanji": "字",
+        "Hiragana": "じ",
+        "Arti": "huruf"
+    },
+    {
+        "No": 139,
+        "Kanji": "自",
+        "Hiragana": "みずから",
+        "Arti": "diri sendiri"
+    },
+    {
+        "No": 140,
+        "Kanji": "色",
+        "Hiragana": "いろ",
+        "Arti": "warna"
+    },
+    {
+        "No": 141,
+        "Kanji": "早い",
+        "Hiragana": "はやい",
+        "Arti": "cepat, pagi"
+    },
+    {
+        "No": 142,
+        "Kanji": "地",
+        "Hiragana": "ち",
+        "Arti": "tanah, daerah"
+    },
+    {
+        "No": 143,
+        "Kanji": "池",
+        "Hiragana": "いけ",
+        "Arti": "kolam"
+    },
+    {
+        "No": 144,
+        "Kanji": "同じ",
+        "Hiragana": "おなじ",
+        "Arti": "sama"
+    },
+    {
+        "No": 145,
+        "Kanji": "肉",
+        "Hiragana": "にく",
+        "Arti": "daging"
+    },
+    {
+        "No": 146,
+        "Kanji": "有ります",
+        "Hiragana": "あります",
+        "Arti": "ada (benda mati)"
+    },
+    {
+        "No": 147,
+        "Kanji": "医",
+        "Hiragana": "い",
+        "Arti": "dokter, medis"
+    },
+    {
+        "No": 148,
+        "Kanji": "究めます",
+        "Hiragana": "きわめます",
+        "Arti": "meneliti, mendalami"
+    },
+    {
+        "No": 149,
+        "Kanji": "近い",
+        "Hiragana": "ちかい",
+        "Arti": "dekat"
+    },
+    {
+        "No": 150,
+        "Kanji": "作ります",
+        "Hiragana": "つくります",
+        "Arti": "membuat"
+    },
+    {
+        "No": 151,
+        "Kanji": "私",
+        "Hiragana": "わたし",
+        "Arti": "saya"
+    },
+    {
+        "No": 152,
+        "Kanji": "住みます",
+        "Hiragana": "すみます",
+        "Arti": "tinggal"
+    },
+    {
+        "No": 153,
+        "Kanji": "図",
+        "Hiragana": "ず",
+        "Arti": "gambar, peta"
+    },
+    {
+        "No": 154,
+        "Kanji": "声",
+        "Hiragana": "こえ",
+        "Arti": "suara"
+    },
+    {
+        "No": 155,
+        "Kanji": "赤い",
+        "Hiragana": "あかい",
+        "Arti": "merah"
+    },
+    {
+        "No": 156,
+        "Kanji": "走ります",
+        "Hiragana": "はしります",
+        "Arti": "berlari"
+    },
+    {
+        "No": 157,
+        "Kanji": "村",
+        "Hiragana": "むら",
+        "Arti": "kampung"
+    },
+    {
+        "No": 158,
+        "Kanji": "体",
+        "Hiragana": "からだ",
+        "Arti": "tubuh"
+    },
+    {
+        "No": 159,
+        "Kanji": "町",
+        "Hiragana": "まち",
+        "Arti": "kota kecil"
+    },
+    {
+        "No": 160,
+        "Kanji": "弟",
+        "Hiragana": "おとうと",
+        "Arti": "adik laki-laki"
+    },
+    {
+        "No": 161,
+        "Kanji": "低い",
+        "Hiragana": "ひくい",
+        "Arti": "rendah"
+    },
+    {
+        "No": 162,
+        "Kanji": "売ります",
+        "Hiragana": "うります",
+        "Arti": "menjual"
+    },
+    {
+        "No": 163,
+        "Kanji": "別れます",
+        "Hiragana": "わかれます",
+        "Arti": "berpisah"
+    },
+    {
+        "No": 164,
+        "Kanji": "待ちます",
+        "Hiragana": "まちます",
+        "Arti": "menunggu"
+    },
+    {
+        "No": 165,
+        "Kanji": "茶",
+        "Hiragana": "おちゃ",
+        "Arti": "teh"
+    },
+    {
+        "No": 166,
+        "Kanji": "昼",
+        "Hiragana": "ひる",
+        "Arti": "siang"
+    },
+    {
+        "No": 167,
+        "Kanji": "度",
+        "Hiragana": "ど",
+        "Arti": "kali, derajat"
+    },
+    {
+        "No": 168,
+        "Kanji": "発",
+        "Hiragana": "はつ",
+        "Arti": "keberangkatan, awal"
+    },
+    {
+        "No": 169,
+        "Kanji": "品",
+        "Hiragana": "しな",
+        "Arti": "barang"
+    },
+    {
+        "No": 170,
+        "Kanji": "風",
+        "Hiragana": "かぜ",
+        "Arti": "angin"
+    },
+    {
+        "No": 171,
+        "Kanji": "便",
+        "Hiragana": "びん",
+        "Arti": "surat, kemudahan"
+    },
+    {
+        "No": 172,
+        "Kanji": "洋",
+        "Hiragana": "よう",
+        "Arti": "barat, gaya barat"
+    },
+    {
+        "No": 173,
+        "Kanji": "界",
+        "Hiragana": "かい",
+        "Arti": "dunia"
+    },
+    {
+        "No": 174,
+        "Kanji": "院",
+        "Hiragana": "いん",
+        "Arti": "institusi"
+    },
+    {
+        "No": 175,
+        "Kanji": "員",
+        "Hiragana": "いん",
+        "Arti": "anggota"
+    },
+    {
+        "No": 176,
+        "Kanji": "夏",
+        "Hiragana": "なつ",
+        "Arti": "musim panas"
+    },
+    {
+        "No": 177,
+        "Kanji": "家",
+        "Hiragana": "いえ",
+        "Arti": "rumah"
+    },
+    {
+        "No": 178,
+        "Kanji": "帰ります",
+        "Hiragana": "かえります",
+        "Arti": "pulang"
+    },
+    {
+        "No": 179,
+        "Kanji": "起きます",
+        "Hiragana": "おきます",
+        "Arti": "bangun"
+    },
+    {
+        "No": 180,
+        "Kanji": "紙",
+        "Hiragana": "かみ",
+        "Arti": "kertas"
+    },
+    {
+        "No": 181,
+        "Kanji": "借ります",
+        "Hiragana": "かります",
+        "Arti": "meminjam"
+    },
+    {
+        "No": 182,
+        "Kanji": "弱い",
+        "Hiragana": "よわい",
+        "Arti": "lemah"
+    },
+    {
+        "No": 183,
+        "Kanji": "真",
+        "Hiragana": "ま",
+        "Arti": "benar, sungguh"
+    },
+    {
+        "No": 184,
+        "Kanji": "通ります",
+        "Hiragana": "とおります",
+        "Arti": "melewati"
+    },
+    {
+        "No": 185,
+        "Kanji": "特",
+        "Hiragana": "とく",
+        "Arti": "khusus"
+    },
+    {
+        "No": 186,
+        "Kanji": "病",
+        "Hiragana": "びょう",
+        "Arti": "penyakit"
+    },
+    {
+        "No": 187,
+        "Kanji": "勤めます",
+        "Hiragana": "つとめます",
+        "Arti": "bekerja (di perusahaan)"
+    },
+    {
+        "No": 188,
+        "Kanji": "旅",
+        "Hiragana": "たび",
+        "Arti": "perjalanan"
+    },
+    {
+        "No": 189,
+        "Kanji": "料",
+        "Hiragana": "りょう",
+        "Arti": "biaya, bahan"
+    },
+    {
+        "No": 190,
+        "Kanji": "悪い",
+        "Hiragana": "わるい",
+        "Arti": "buruk"
+    },
+    {
+        "No": 191,
+        "Kanji": "強い",
+        "Hiragana": "つよい",
+        "Arti": "kuat"
+    },
+    {
+        "No": 192,
+        "Kanji": "教えます",
+        "Hiragana": "おしえます",
+        "Arti": "mengajar"
+    },
+    {
+        "No": 193,
+        "Kanji": "黒い",
+        "Hiragana": "くろい",
+        "Arti": "hitam"
+    },
+    {
+        "No": 194,
+        "Kanji": "菜",
+        "Hiragana": "な",
+        "Arti": "sayur"
+    },
+    {
+        "No": 195,
+        "Kanji": "産まれます",
+        "Hiragana": "うまれます",
+        "Arti": "lahir"
+    },
+    {
+        "No": 196,
+        "Kanji": "習います",
+        "Hiragana": "ならいます",
+        "Arti": "belajar, berlatih"
+    },
+    {
+        "No": 197,
+        "Kanji": "終わります",
+        "Hiragana": "おわります",
+        "Arti": "berakhir"
+    },
+    {
+        "No": 198,
+        "Kanji": "進みます",
+        "Hiragana": "すすみます",
+        "Arti": "maju"
+    },
+    {
+        "No": 199,
+        "Kanji": "族",
+        "Hiragana": "ぞく",
+        "Arti": "keluarga, suku"
+    },
+    {
+        "No": 200,
+        "Kanji": "鳥",
+        "Hiragana": "とり",
+        "Arti": "burung"
+    },
+    {
+        "No": 201,
+        "Kanji": "転びます",
+        "Hiragana": "ころびます",
+        "Arti": "jatuh"
+    },
+    {
+        "No": 202,
+        "Kanji": "都",
+        "Hiragana": "と",
+        "Arti": "ibu kota"
+    },
+    {
+        "No": 203,
+        "Kanji": "動きます",
+        "Hiragana": "うごきます",
+        "Arti": "bergerak"
+    },
+    {
+        "No": 204,
+        "Kanji": "堂",
+        "Hiragana": "どう",
+        "Arti": "aula, gedung"
+    },
+    {
+        "No": 205,
+        "Kanji": "問います",
+        "Hiragana": "といます",
+        "Arti": "bertanya"
+    },
+    {
+        "No": 206,
+        "Kanji": "野",
+        "Hiragana": "の",
+        "Arti": "lapangan, alam"
+    },
+    {
+        "No": 207,
+        "Kanji": "理",
+        "Hiragana": "り",
+        "Arti": "alasan, logika"
+    },
+    {
+        "No": 208,
+        "Kanji": "運びます",
+        "Hiragana": "はこびます",
+        "Arti": "mengangkut"
+    },
+    {
+        "No": 209,
+        "Kanji": "開きます",
+        "Hiragana": "ひらきます",
+        "Arti": "membuka"
+    },
+    {
+        "No": 210,
+        "Kanji": "寒い",
+        "Hiragana": "さむい",
+        "Arti": "dingin"
+    },
+    {
+        "No": 211,
+        "Kanji": "軽い",
+        "Hiragana": "かるい",
+        "Arti": "ringan"
+    },
+    {
+        "No": 212,
+        "Kanji": "集まります",
+        "Hiragana": "あつまります",
+        "Arti": "berkumpul"
+    },
+    {
+        "No": 213,
+        "Kanji": "暑い",
+        "Hiragana": "あつい",
+        "Arti": "panas (cuaca)"
+    },
+    {
+        "No": 214,
+        "Kanji": "場",
+        "Hiragana": "ば",
+        "Arti": "tempat"
+    },
+    {
+        "No": 215,
+        "Kanji": "森",
+        "Hiragana": "もり",
+        "Arti": "hutan"
+    },
+    {
+        "No": 216,
+        "Kanji": "貸します",
+        "Hiragana": "かします",
+        "Arti": "meminjamkan"
+    },
+    {
+        "No": 217,
+        "Kanji": "短い",
+        "Hiragana": "みじかい",
+        "Arti": "pendek"
+    },
+    {
+        "No": 218,
+        "Kanji": "着ます",
+        "Hiragana": "きます",
+        "Arti": "memakai (pakaian)"
+    },
+    {
+        "No": 219,
+        "Kanji": "朝",
+        "Hiragana": "あさ",
+        "Arti": "pagi"
+    },
+    {
+        "No": 220,
+        "Kanji": "答えます",
+        "Hiragana": "こたえます",
+        "Arti": "menjawab"
+    },
+    {
+        "No": 221,
+        "Kanji": "飯",
+        "Hiragana": "ごはん",
+        "Arti": "nasi, makan"
+    },
+    {
+        "No": 222,
+        "Kanji": "暗い",
+        "Hiragana": "くらい",
+        "Arti": "gelap"
+    },
+    {
+        "No": 223,
+        "Kanji": "意",
+        "Hiragana": "い",
+        "Arti": "arti, maksud"
+    },
+    {
+        "No": 224,
+        "Kanji": "飲みます",
+        "Hiragana": "のみます",
+        "Arti": "minum"
+    },
+    {
+        "No": 225,
+        "Kanji": "遠い",
+        "Hiragana": "とおい",
+        "Arti": "jauh"
+    },
+    {
+        "No": 226,
+        "Kanji": "屋",
+        "Hiragana": "や",
+        "Arti": "toko, penjual"
+    },
+    {
+        "No": 227,
+        "Kanji": "重い",
+        "Hiragana": "おもい",
+        "Arti": "berat"
+    },
+    {
+        "No": 228,
+        "Kanji": "泳ぎます",
+        "Hiragana": "およぎます",
+        "Arti": "berenang"
+    },
+    {
+        "No": 229,
+        "Kanji": "銀",
+        "Hiragana": "ぎん",
+        "Arti": "perak, bank"
+    },
+    {
+        "No": 230,
+        "Kanji": "使います",
+        "Hiragana": "つかいます",
+        "Arti": "menggunakan"
+    },
+    {
+        "No": 231,
+        "Kanji": "送ります",
+        "Hiragana": "おくります",
+        "Arti": "mengirim"
+    },
+    {
+        "No": 232,
+        "Kanji": "早く",
+        "Hiragana": "はやく",
+        "Arti": "cepat (keterangan)"
+    },
+    {
+        "No": 233,
+        "Kanji": "多い",
+        "Hiragana": "おおい",
+        "Arti": "banyak"
+    },
+    {
+        "No": 234,
+        "Kanji": "妹",
+        "Hiragana": "いもうと",
+        "Arti": "adik perempuan"
+    },
+    {
+        "No": 235,
+        "Kanji": "寒さ",
+        "Hiragana": "さむさ",
+        "Arti": "dinginnya udara"
+    },
+    {
+        "No": 236,
+        "Kanji": "急ぎます",
+        "Hiragana": "いそぎます",
+        "Arti": "bergegas"
+    },
+    {
+        "No": 237,
+        "Kanji": "楽しい",
+        "Hiragana": "たのしい",
+        "Arti": "menyenangkan"
+    },
+    {
+        "No": 238,
+        "Kanji": "少ない",
+        "Hiragana": "すくない",
+        "Arti": "sedikit"
+    },
+    {
+        "No": 239,
+        "Kanji": "空",
+        "Hiragana": "そら",
+        "Arti": "langit"
+    },
+    {
+        "No": 240,
+        "Kanji": "貸し出します",
+        "Hiragana": "かしだします",
+        "Arti": "meminjamkan (resmi)"
+    },
+    {
+        "No": 241,
+        "Kanji": "青い",
+        "Hiragana": "あおい",
+        "Arti": "biru"
+    },
+    {
+        "No": 242,
+        "Kanji": "建てます",
+        "Hiragana": "たてます",
+        "Arti": "membangun"
+    },
+    {
+        "No": 243,
+        "Kanji": "晴れ",
+        "Hiragana": "はれ",
+        "Arti": "cerah"
+    },
+    {
+        "No": 244,
+        "Kanji": "落ちます",
+        "Hiragana": "おちます",
+        "Arti": "jatuh"
+    },
+    {
+        "No": 245,
+        "Kanji": "走り出します",
+        "Hiragana": "はしりだします",
+        "Arti": "mulai berlari"
+    },
+    {
+        "No": 246,
+        "Kanji": "考え",
+        "Hiragana": "かんがえ",
+        "Arti": "pikiran"
+    },
+    {
+        "No": 247,
+        "Kanji": "覚えます",
+        "Hiragana": "おぼえます",
+        "Arti": "mengingat"
+    },
+    {
+        "No": 248,
+        "Kanji": "曲",
+        "Hiragana": "きょく",
+        "Arti": "lagu"
+    },
+    {
+        "No": 249,
+        "Kanji": "楽",
+        "Hiragana": "らく",
+        "Arti": "mudah, nyaman"
+    },
+    {
+        "No": 250,
+        "Kanji": "漢",
+        "Hiragana": "かん",
+        "Arti": "Cina (kanji)"
+    },
+    {
+        "No": 251,
+        "Kanji": "館",
+        "Hiragana": "かん",
+        "Arti": "gedung"
+    },
+    {
+        "No": 252,
+        "Kanji": "空きます",
+        "Hiragana": "あきます",
+        "Arti": "kosong, tersedia"
+    },
+    {
+        "No": 253,
+        "Kanji": "決めます",
+        "Hiragana": "きめます",
+        "Arti": "memutuskan"
+    },
+    {
+        "No": 254,
+        "Kanji": "強さ",
+        "Hiragana": "つよさ",
+        "Arti": "kekuatan"
+    },
+    {
+        "No": 255,
+        "Kanji": "細い",
+        "Hiragana": "ほそい",
+        "Arti": "tipis"
+    },
+    {
+        "No": 256,
+        "Kanji": "続きます",
+        "Hiragana": "つづきます",
+        "Arti": "berlanjut"
+    },
+    {
+        "No": 257,
+        "Kanji": "伝えます",
+        "Hiragana": "つたえます",
+        "Arti": "menyampaikan"
+    },
+    {
+        "No": 258,
+        "Kanji": "登ります",
+        "Hiragana": "のぼります",
+        "Arti": "naik, mendaki"
+    },
+    {
+        "No": 259,
+        "Kanji": "半",
+        "Hiragana": "はん",
+        "Arti": "setengah"
+    },
+    {
+        "No": 260,
+        "Kanji": "美しい",
+        "Hiragana": "うつくしい",
+        "Arti": "indah"
+    },
+    {
+        "No": 261,
+        "Kanji": "不",
+        "Hiragana": "ふ",
+        "Arti": "tidak, bukan"
+    },
+    {
+        "No": 262,
+        "Kanji": "勉",
+        "Hiragana": "べん",
+        "Arti": "belajar (bagian 勉強)"
+    },
+    {
+        "No": 263,
+        "Kanji": "放します",
+        "Hiragana": "はなします",
+        "Arti": "melepaskan"
+    },
+    {
+        "No": 264,
+        "Kanji": "変",
+        "Hiragana": "へん",
+        "Arti": "aneh, berubah"
+    },
+    {
+        "No": 265,
+        "Kanji": "味",
+        "Hiragana": "あじ",
+        "Arti": "rasa"
+    },
+    {
+        "No": 266,
+        "Kanji": "命",
+        "Hiragana": "いのち",
+        "Arti": "nyawa"
+    },
+    {
+        "No": 267,
+        "Kanji": "面",
+        "Hiragana": "めん",
+        "Arti": "permukaan, wajah"
+    },
+    {
+        "No": 268,
+        "Kanji": "問",
+        "Hiragana": "とい",
+        "Arti": "pertanyaan"
+    },
+    {
+        "No": 269,
+        "Kanji": "役",
+        "Hiragana": "やく",
+        "Arti": "peran, tugas"
+    },
+    {
+        "No": 270,
+        "Kanji": "薬",
+        "Hiragana": "くすり",
+        "Arti": "obat"
+    },
+    {
+        "No": 271,
+        "Kanji": "由",
+        "Hiragana": "ゆ",
+        "Arti": "alasan, sebab"
+    },
+    {
+        "No": 272,
+        "Kanji": "油",
+        "Hiragana": "あぶら",
+        "Arti": "minyak"
+    },
+    {
+        "No": 273,
+        "Kanji": "様",
+        "Hiragana": "さま",
+        "Arti": "tuan, cara"
+    },
+    {
+        "No": 274,
+        "Kanji": "泳",
+        "Hiragana": "およぎます",
+        "Arti": "berenang"
+    },
+    {
+        "No": 275,
+        "Kanji": "表",
+        "Hiragana": "おもて",
+        "Arti": "permukaan, depan"
+    },
+    {
+        "No": 276,
+        "Kanji": "服",
+        "Hiragana": "ふく",
+        "Arti": "pakaian"
+    },
+    {
+        "No": 277,
+        "Kanji": "服用します",
+        "Hiragana": "ふくようします",
+        "Arti": "minum obat"
+    },
+    {
+        "No": 278,
+        "Kanji": "返します",
+        "Hiragana": "かえします",
+        "Arti": "mengembalikan"
+    },
+    {
+        "No": 279,
+        "Kanji": "勉強します",
+        "Hiragana": "べんきょうします",
+        "Arti": "belajar"
+    },
+    {
+        "No": 280,
+        "Kanji": "妹",
+        "Hiragana": "いもうと",
+        "Arti": "adik perempuan"
+    },
+    {
+        "No": 281,
+        "Kanji": "顔",
+        "Hiragana": "かお",
+        "Arti": "wajah"
+    },
+    {
+        "No": 282,
+        "Kanji": "験",
+        "Hiragana": "けん",
+        "Arti": "tes, ujian"
+    },
+    {
+        "No": 283,
+        "Kanji": "題",
+        "Hiragana": "だい",
+        "Arti": "topik, judul"
+    },
+    {
+        "No": 284,
+        "Kanji": "曜",
+        "Hiragana": "よう",
+        "Arti": "hari (曜日)"
+    }
+]
