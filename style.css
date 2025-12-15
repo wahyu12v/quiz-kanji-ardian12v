@@ -1,193 +1,198 @@
 /* --- VARIABLES & GLOBAL --- */
 :root {
-  /* PALET WARNA SESUAI LOGO */
-  --primary: #0ea5e9;       /* Biru Logo (Sky Blue) */
-  --primary-dark: #0284c7;  /* Biru lebih gelap untuk hover */
-  --primary-light: #e0f2fe; /* Biru sangat muda untuk background aktif */
+  /* PALET WARNA (BIRU AZURE GRADIENT) */
+  --primary: #0ea5e9;
+  --primary-gradient: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+  --primary-light: #e0f2fe;
+  --secondary-bg: #f1f5f9;
   
-  --text-main: #0f172a;     /* Hitam kebiruan (Slate 900) */
-  --text-muted: #64748b;    /* Abu-abu kebiruan (Slate 500) */
-  
-  --bg-body: #f1f5f9;       /* Background halaman (abu sangat muda) */
-  --surface: #ffffff;       /* Warna kartu putih */
-  
-  /* SHADOWS (Lebih halus & modern) */
-  --shadow-card: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
-  --shadow-hover: 0 10px 15px -3px rgb(14 165 233 / 0.15), 0 4px 6px -4px rgb(14 165 233 / 0.1);
+  --text-dark: #0f172a;
+  --text-muted: #64748b;
+  --text-light: #ffffff;
+  --surface: #ffffff;
+
+  /* SHADOWS (Soft & Modern) */
+  --shadow-sm: 0 2px 4px rgba(148, 163, 184, 0.1);
+  --shadow-md: 0 6px 12px -2px rgba(148, 163, 184, 0.15), 0 3px 7px -3px rgba(148, 163, 184, 0.1);
+  --shadow-lg: 0 20px 25px -5px rgba(148, 163, 184, 0.1), 0 10px 10px -5px rgba(148, 163, 184, 0.04);
+  --shadow-primary: 0 10px 20px -5px rgba(14, 165, 233, 0.4);
 }
 
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background-color: var(--bg-body);
-  color: var(--text-main);
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  background-color: var(--secondary-bg);
+  color: var(--text-dark);
+  display: flex; flex-direction: column; min-height: 100vh;
+  /* Background Pattern Halus */
+  background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
-/* --- NAVBAR (Clean White) --- */
+/* --- NAVBAR --- */
 #main-nav {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid #e2e8f0;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.5);
+  box-shadow: var(--shadow-sm);
 }
+.brand-title { font-size: 18px; color: var(--text-dark); letter-spacing: -0.5px; }
+.brand-subtitle { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+.progress-bar { background: var(--primary-gradient) !important; }
 
-.brand-title {
-  font-size: 18px; 
-  color: var(--primary-dark); /* Mengikuti warna teks logo */
-  letter-spacing: -0.5px;
-}
-.brand-subtitle {
-  font-size: 12px; color: var(--text-muted); font-weight: 500;
-}
 
-/* Progress Bar Simple */
-.progress-bar { background-color: var(--primary) !important; }
-
-/* --- HERO CARD (Tampilan Utama) --- */
+/* --- HERO SECTION --- */
 .hero-card {
-    background: var(--surface);
-    border: 1px solid #fff;
-    box-shadow: var(--shadow-card);
+    background: var(--primary-gradient);
+    color: var(--text-light);
+    border: none;
+    box-shadow: var(--shadow-lg);
     transition: transform 0.3s ease;
 }
-.hero-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-hover);
-}
+.hero-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-primary); }
 
-/* Ikon Latar Belakang (Sangat Halus) */
 .hero-bg-kanji {
-    position: absolute;
-    top: -30px; right: -20px;
-    font-size: 200px; font-weight: 900;
-    color: var(--primary);
-    opacity: 0.03; /* Sangat transparan */
-    pointer-events: none; z-index: 1;
+    position: absolute; top: -40px; right: -30px;
+    font-size: 220px; font-weight: 900;
+    color: var(--text-light); opacity: 0.1;
+    pointer-events: none; z-index: 1; transform: rotate(10deg);
 }
 
-/* --- TOMBOL (Simple & Pill Shaped) --- */
+/* Override Text Colors in Hero */
+.hero-card .text-dark { color: white !important; }
+.hero-card .text-muted { color: rgba(255,255,255,0.8) !important; }
+.hero-card .bg-white { background: rgba(255,255,255,0.15) !important; border: 1px solid rgba(255,255,255,0.2) !important; color: white; }
+.hero-card .text-primary-custom { color: white !important; }
+
+
+/* --- BUTTONS --- */
 .btn-primary-custom {
-    background-color: var(--primary); 
-    color: white; 
-    border: none;
-    transition: all 0.2s;
+    background-image: var(--primary-gradient); color: white; border: none;
+    font-weight: 600; padding: 12px 30px; transition: all 0.2s;
 }
 .btn-primary-custom:hover { 
-    background-color: var(--primary-dark); 
-    color: white;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+    background-size: 150%; color: white; transform: translateY(-2px);
+    box-shadow: var(--shadow-primary);
 }
 
 .btn-outline-custom {
-    color: var(--primary); 
-    border: 2px solid var(--primary-light); 
-    background: transparent;
-    font-weight: 600;
+    color: var(--primary); border: 2px solid var(--primary-light); background: transparent; font-weight: 600;
 }
 .btn-outline-custom:hover { 
-    background-color: var(--primary-light); 
-    border-color: var(--primary);
-    color: var(--primary-dark); 
+    background-color: var(--primary-light); border-color: var(--primary); color: var(--primary-dark); 
 }
 
-/* --- CARD QUIZ (Area Soal) --- */
+/* Hero specific buttons (Outline Putih) */
+.hero-card .btn-outline-custom {
+    color: white; border: 2px solid rgba(255,255,255,0.6);
+}
+.hero-card .btn-outline-custom:hover {
+    background: white; color: var(--primary); border-color: white;
+}
+
+
+/* --- QUIZ AREA --- */
 .card-kanji {
-  border-radius: 24px; border: none; background: #fff;
-  box-shadow: var(--shadow-card); overflow: hidden;
+  border-radius: 24px; border: none; background: var(--surface);
+  box-shadow: var(--shadow-md); overflow: hidden;
 }
-
 .kanji-big {
-  font-size: 100px; text-align: center; padding: 30px 10px;
-  font-weight: 800; 
-  color: var(--text-main);
+  font-size: 110px; text-align: center; padding: 40px 10px;
+  font-weight: 900; color: var(--text-dark);
+  background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
-@media (max-width: 576px) { .kanji-big { font-size: 72px; } }
+@media (max-width: 576px) { .kanji-big { font-size: 80px; padding: 30px 10px; } }
 
-/* --- PILIHAN GANDA (Choices) --- */
 .choice-card {
-  border-radius: 12px; padding: 16px 20px;
-  background: #fff; 
-  border: 1px solid #e2e8f0; /* Border abu tipis */
-  color: var(--text-main); font-weight: 600;
-  cursor: pointer; display: flex; align-items: center; min-height: 70px;
-  transition: all 0.2s;
+  border-radius: 16px; padding: 18px 24px;
+  background: var(--surface); border: 2px solid transparent;
+  box-shadow: var(--shadow-sm); color: var(--text-dark); font-weight: 600;
+  cursor: pointer; display: flex; align-items: center; min-height: 75px;
+  transition: all 0.2s; position: relative; z-index: 1;
 }
-.choice-card:hover {
-    border-color: var(--primary); 
-    background: var(--primary-light);
-    color: var(--primary-dark);
-}
-.choice-card:active { transform: scale(0.98); }
-
-/* Pilihan Terpilih (Active) */
+.choice-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
 .choice-selected {
-  background: var(--primary) !important; 
-  border-color: var(--primary) !important;
-  color: #fff !important; 
-  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.4) !important;
+  background-image: var(--primary-gradient) !important; color: #fff !important; 
+  box-shadow: var(--shadow-primary) !important; border-color: transparent !important;
 }
 
-/* --- MODAL & CHECKBOXES --- */
-.modal-content { border: none; border-radius: 20px; }
 
-/* Grid Container untuk Paket */
+/* --- MODALS & CHECKBOX --- */
+.modal-content { border: none; border-radius: 24px; box-shadow: var(--shadow-lg); }
+.modal-header { border-bottom: 1px solid var(--secondary-bg); }
+
+/* Range Grid */
 .range-grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    gap: 10px;
-    max-height: 350px; overflow-y: auto;
-    padding: 4px;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px; padding: 8px; max-height: 350px; overflow-y: auto;
 }
+.range-grid-container .form-check { padding: 0; margin: 0; }
+.range-grid-container .form-check-input { position: absolute; opacity: 0; }
 
-.range-grid-container .form-check { padding: 0; margin: 0; position: relative; }
-.range-grid-container .form-check-input { position: absolute; opacity: 0; z-index: -1; }
-
-/* Tampilan Kartu Paket (Unchecked) */
 .range-grid-container .form-check-label {
-    display: block; padding: 12px;
-    background: #fff;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    cursor: pointer; transition: all 0.2s;
+    display: block; padding: 16px; background: var(--surface);
+    border: 2px solid var(--secondary-bg); border-radius: 16px;
+    cursor: pointer; transition: all 0.2s; box-shadow: var(--shadow-sm);
 }
-.range-grid-container .form-check-label:hover {
-    border-color: var(--primary); background: #f8fafc;
-}
-
-/* Tampilan Kartu Paket (Checked - BIRU) */
+.range-grid-container .form-check-label:hover { border-color: var(--primary); transform: translateY(-2px); }
 .range-grid-container .form-check-input:checked + .form-check-label {
-    background: var(--primary);
-    border-color: var(--primary);
-    color: white;
-    box-shadow: 0 4px 6px rgba(14, 165, 233, 0.3);
+    background-image: var(--primary-gradient); border-color: transparent;
+    color: white; box-shadow: var(--shadow-primary);
+}
+.range-grid-container .form-check-input:checked + .form-check-label .text-muted { color: rgba(255,255,255,0.8) !important; }
+
+
+/* --- KANJI LIST GRID (VERTICAL CARD) --- */
+.kanji-list-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
+    gap: 16px; padding: 8px;
 }
 
-/* Penyesuaian teks di dalam kartu */
-.range-grid-container .form-check-label strong { display: block; font-size: 15px; }
-.range-grid-container .form-check-label .text-muted { color: #94a3b8 !important; }
-/* Saat dicentang, teks kecil jadi putih */
-.range-grid-container .form-check-input:checked + .form-check-label .text-muted {
-    color: rgba(255,255,255,0.8) !important;
+/* Kartu Daftar (Layout Baru) */
+.kanji-list-card {
+    background: var(--surface);
+    border-radius: 20px; 
+    padding: 20px 16px;
+    display: flex; 
+    flex-direction: column; /* Vertikal */
+    align-items: center; 
+    justify-content: center;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-sm); 
+    border: 1px solid rgba(0,0,0,0.05);
+    height: 100%;
+}
+.kanji-list-card:hover {
+    transform: translateY(-4px); 
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-light);
 }
 
-/* Icon Centang Otomatis */
-.range-grid-container .form-check-input:checked + .form-check-label::after {
-    content: '✓';
-    position: absolute; top: 8px; right: 10px;
-    font-weight: bold; font-size: 14px;
-    color: white;
+/* Style Kanji Besar di Daftar */
+.kanji-display {
+    font-size: 42px; 
+    font-weight: 800;
+    color: var(--text-dark);
+    line-height: 1.2;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-/* --- TOMBOL LAIN --- */
-.btn-lupa { background: #f1f5f9; color: var(--text-muted); border: none; }
-.btn-lupa:hover { background: #e2e8f0; color: var(--text-main); }
+/* Input Pencarian */
+.search-box-custom {
+    background: var(--secondary-bg); border: 2px solid transparent;
+    border-radius: 50px; padding-left: 45px;
+    transition: all 0.2s;
+}
+.search-box-custom:focus {
+    background: #fff; border-color: var(--primary);
+    box-shadow: 0 0 0 4px var(--primary-light);
+}
+.search-icon-pos { left: 18px; top: 50%; transform: translateY(-50%); font-size: 1.1rem; }
 
+
+/* --- FOOTER & ETC --- */
+.btn-lupa { background: var(--secondary-bg); color: var(--text-muted); border: none; }
 #confetti-wrapper { position: fixed; inset: 0; pointer-events: none; z-index: 2000; }
-.text-primary-custom { color: var(--primary); }
-
-/* Footer */
-.page-footer { background: white; border-top: 1px solid #f1f5f9; font-size: 0.9rem; }
-
-
+.page-footer { background: var(--surface); border-top: 1px solid #e2e8f0; }
