@@ -102,19 +102,47 @@ body {
 }
 @media (max-width: 576px) { .kanji-big { font-size: 80px; padding: 30px 10px; } }
 
+/* --- PILIHAN GANDA (Update agar lebih jelas) --- */
 .choice-card {
-  border-radius: 16px; padding: 18px 24px;
-  background: var(--surface); border: 2px solid transparent;
-  box-shadow: var(--shadow-sm); color: var(--text-dark); font-weight: 600;
-  cursor: pointer; display: flex; align-items: center; min-height: 75px;
-  transition: all 0.2s; position: relative; z-index: 1;
-}
-.choice-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
-.choice-selected {
-  background-image: var(--primary-gradient) !important; color: #fff !important; 
-  box-shadow: var(--shadow-primary) !important; border-color: transparent !important;
+  border-radius: 16px; 
+  padding: 18px 24px;
+  background: #ffffff; /* Warna dasar putih */
+  
+  /* Tambahkan border abu tipis agar batas tombol terlihat jelas di HP */
+  border: 2px solid #e2e8f0; 
+  
+  box-shadow: var(--shadow-sm); 
+  color: var(--text-dark); 
+  font-weight: 600;
+  cursor: pointer; 
+  display: flex; align-items: center; min-height: 75px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative; z-index: 1;
 }
 
+/* SAAT DISENTUH / DI-HOVER: Berubah warna & border */
+.choice-card:hover {
+    background-color: var(--primary-light); /* Background jadi biru muda */
+    border-color: var(--primary);           /* Border jadi biru cerah */
+    color: var(--primary-dark);             /* Teks jadi biru tua */
+    transform: translateY(-2px) scale(1.01); /* Sedikit membesar */
+    box-shadow: var(--shadow-md);
+}
+
+/* SAAT DIPILIH (SELECTED): Warna Penuh & Kontras */
+.choice-selected {
+  /* Pakai gradient biru kuat */
+  background-image: var(--primary-gradient) !important; 
+  background-color: var(--primary) !important; /* Fallback */
+  
+  color: #ffffff !important; /* Teks Putih */
+  border-color: transparent !important;
+  
+  /* Efek 'Pop-up' */
+  box-shadow: 0 8px 20px -4px rgba(14, 165, 233, 0.5) !important;
+  transform: scale(1.02) !important; 
+  font-weight: 700;
+}
 
 /* --- MODALS & CHECKBOX --- */
 .modal-content { border: none; border-radius: 24px; box-shadow: var(--shadow-lg); }
