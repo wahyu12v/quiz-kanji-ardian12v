@@ -220,3 +220,154 @@ body {
 .search-icon-pos { left: 18px; top: 50%; transform: translateY(-50%); font-size: 1.1rem; }
 
 
+/* --- JFT SIMULATION STYLES --- */
+body.jft-mode {
+    background-color: #f3f4f6; /* Abu-abu lembut agar mata tidak lelah */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header Ujian */
+.cbt-header {
+    background: #ffffff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.timer-badge {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    background-color: #ffe5e5;
+    color: #d63384;
+    border: 1px solid #ffb3b3;
+}
+
+/* Kartu Soal */
+.question-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    background: white;
+    padding: 40px;
+    min-height: 450px;
+    transition: all 0.3s ease;
+}
+
+.section-badge {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    background-color: #e7f1ff;
+    color: #0d6efd;
+}
+
+/* Teks Soal */
+#questionText {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: #2c3e50;
+    line-height: 1.6;
+}
+
+/* Tombol Pilihan Jawaban */
+.choice-btn {
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    background-color: #fff;
+    color: #495057;
+    font-size: 1.1rem;
+    padding: 15px 20px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.choice-btn:hover {
+    background-color: #f8f9fa;
+    border-color: #dee2e6;
+    transform: translateY(-2px);
+}
+
+.choice-btn.selected {
+    border-color: #0d6efd;
+    background-color: #e7f1ff; /* Biru sangat muda */
+    color: #0d6efd;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.15);
+}
+
+.choice-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 15px;
+    background: #f1f3f5;
+    font-weight: bold;
+    color: #adb5bd;
+    transition: all 0.2s;
+}
+
+.choice-btn.selected .choice-mark {
+    background: #0d6efd;
+    color: white;
+}
+
+/* Animasi Listening */
+.listening-pulse {
+    width: 80px;
+    height: 80px;
+    background-color: #0d6efd;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    animation: pulse-animation 1.5s infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+}
+
+@keyframes pulse-animation {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(13, 110, 253, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 20px rgba(13, 110, 253, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(13, 110, 253, 0); }
+}
+
+/* Modal Hasil */
+.score-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: conic-gradient(#0d6efd 0% 0%, #e9ecef 0% 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #0d6efd;
+    position: relative;
+}
+.score-circle::before {
+    content: '';
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    background: white;
+    border-radius: 50%;
+}
+.score-text {
+    position: relative;
+    z-index: 1;
+}
