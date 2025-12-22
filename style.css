@@ -220,7 +220,3 @@ body {
 .search-icon-pos { left: 18px; top: 50%; transform: translateY(-50%); font-size: 1.1rem; }
 
 
-/* --- FOOTER & ETC --- */
-.btn-lupa { background: var(--secondary-bg); color: var(--text-muted); border: none; }
-#confetti-wrapper { position: fixed; inset: 0; pointer-events: none; z-index: 2000; }
-.page-footer { background: var(--surface); border-top: 1px solid #e2e8f0; }
