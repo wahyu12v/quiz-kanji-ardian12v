@@ -14,17 +14,53 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <nav class="navbar sticky-top navbar-light py-3" id="main-nav">
-      <div class="container d-flex align-items-center">
-        <a href="index.html" class="navbar-brand d-flex align-items-center gap-3 mb-0" href="#">
-          <img src="/asset/logo2-removebg.png" alt="Logo" style="height: 42px; width: auto" class="brand-logo" onerror="this.style.display='none'"/>
-               <div class="d-flex flex-column">
-                <div class="fw-bold brand-title">Hafalan Kanji</div>
-                <small class="brand-subtitle">by Ardian Wahyu Saputra</small>
-              </div>
+   
+    <nav class="navbar sticky-top navbar-light bg-white py-3 shadow-sm" id="main-nav">
+      <div class="container d-flex justify-content-between align-items-center">
+        
+        <a href="index.html" class="navbar-brand d-flex align-items-center gap-3 m-0">
+          <img src="/asset/logo2-removebg.png" alt="Logo" style="height: 42px; width: auto;" class="brand-logo" onerror="this.style.display='none'"/>
+          <div class="d-flex flex-column lh-1">
+            <span class="fw-bold brand-title fs-5">Hafalan Kanji</span>
+            <small class="brand-subtitle text-muted" style="font-size: 0.75rem;">by Ardian Wahyu Saputra</small>
+          </div>
         </a>
+
+      <button id="btn-stop-quiz" class="btn btn-outline-danger btn-sm rounded-pill px-3 fw-bold d-none" data-bs-toggle="modal" data-bs-target="#stopQuizModal">
+          <i class="bi bi-stop-circle-fill me-1"></i> Berhenti
+      </button>
+
       </div>
+
+      
     </nav>
+
+    <div class="modal fade" id="stopQuizModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm"> <div class="modal-content border-0 shadow-lg rounded-4 text-center p-4">
+      
+      <div class="modal-body p-0">
+        <div class="mb-3 text-warning">
+            <i class="bi bi-exclamation-circle-fill" style="font-size: 3.5rem;"></i>
+        </div>
+        
+        <h5 class="fw-bold mb-2">Hentikan Ujian?</h5>
+        <p class="text-muted small mb-4">
+            Progress saat ini akan langsung dinilai.<br>Anda tidak bisa melanjutkan lagi.
+        </p>
+        
+        <div class="d-grid gap-2">
+            <button type="button" class="btn btn-danger rounded-pill fw-bold shadow-sm" onclick="executeStopQuiz()">
+                Ya, Selesai Sekarang
+            </button>
+            <button type="button" class="btn btn-light rounded-pill fw-medium text-muted" data-bs-dismiss="modal">
+                Batal
+            </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
 
     <main class="container my-5 d-flex flex-column justify-content-center" style="min-height: 70vh;">
       <div class="row g-4 justify-content-center">
@@ -65,7 +101,7 @@
                       </button>
 
                        <button id="startBtn" class="btn btn-light btn-lg rounded-pill px-5 py-3 text-primary fw-bold shadow-sm" data-bs-toggle="modal" data-bs-target="#startExamModal">
-                          <i class="bi bi-pen-fill me-2"></i> Simulasi JFT-Basic A2
+                          <i class="bi bi-pen-fill me-2"></i> Simulasi JFT
                       </button>
                       
                   </div>
@@ -202,8 +238,7 @@ function startSelectedExam() {
     <div id="confetti-wrapper"></div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="js/main.js"></script>
-    <script src="hafalan.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script type="module" src="js/main.js"></script>
   </body>
 </html>

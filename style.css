@@ -454,3 +454,61 @@ body.jft-mode {
     right: 10px;
     font-size: 0.8rem;
 }
+
+
+/* --- STYLE UNTUK MODAL DAFTAR KANJI --- */
+
+/* Container Grid */
+.kanji-list-grid {
+    display: grid;
+    /* Grid Responsif: Otomatis menyesuaikan jumlah kolom */
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 15px;
+    padding-bottom: 20px;
+}
+
+/* Kartu Kecil Kanji */
+.kanji-card-small {
+    background: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: default;
+}
+
+.kanji-card-small:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border-color: #cfe2ff;
+}
+
+/* Teks di dalam Kartu */
+.k-char {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #0d6efd; /* Warna Biru Utama */
+    margin-bottom: 5px;
+    line-height: 1;
+}
+
+.k-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.k-read {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #212529;
+}
+
+.k-mean {
+    font-size: 0.8rem;
+    color: #6c757d;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

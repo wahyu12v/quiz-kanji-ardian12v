@@ -119,13 +119,13 @@ if (btnReset) btnReset.onclick = () => document.querySelectorAll('#rangeListDaft
 
 async function loadData() {
     try {
-        const res = await fetch("questions.json");
+        const res = await fetch("kanjiasli.json");
         if(!res.ok) throw new Error("Gagal fetch");
         RAW_DATA = await res.json();
         generateCheckboxes();
     } catch (e) {
         console.error(e);
-        if (rangeContainer) rangeContainer.innerHTML = `<div class="text-danger p-3 text-center">Gagal memuat data questions.json</div>`;
+        if (rangeContainer) rangeContainer.innerHTML = `<div class="text-danger p-3 text-center">Gagal memuat data kanjiasli.json</div>`;
     }
 }
 
