@@ -41,5 +41,32 @@ export const STORIES = [
         title: "Belajar dan Masa Depan (勉強と将来)",
         template: "毎日 {65} は 日本語 を {434}。{479} や {487} を {490} します。{488} 書いて、{480} を 確認します。{432} と 思う ときも ありますが、{429} を 持ちます。{369} の {431} を 考えて、{609} を 大切に します。{214} は もっと {370} に なりたいです。社会 に {613} 人 に なります。",
         translation: "Setiap hari saya belajar bahasa Jepang. Saya berlatih kanji dan tata bahasa. Saya menulis lagi dan mengecek jawaban. Kadang terasa sulit, tetapi saya punya kepercayaan diri. Saya memikirkan tujuan hidup dan menjaga harapan. Tahun depan saya ingin menjadi lebih baik. Saya ingin menjadi orang yang berguna bagi masyarakat."
+    },
+     {
+        id: "s7",
+        title: "Hari yang Melelahkan (大変な一日)",
+        template: "{65} は {133} 早く {200} が、{299} で 体 が {326} です。{217} から {124} へ {59}、{180} に {136} ます。{400} の 途中で {403} と 感じます。{450} で {225}、{472} を 書いて {473} を します。{416} の 時間 が 少なく、{165} しか 食べられません。{135} に {217} に 帰って、{387}。とても {602} な 一日 でした。",
+        translation: "Saya bangun pagi tetapi merasa sibuk dan tubuh terasa berat. Saya pergi dari rumah ke stasiun dan naik kereta. Dalam perjalanan ke kantor terasa jauh. Di tempat kerja saya bekerja, menulis laporan, dan berkomunikasi. Waktu makan siang sedikit dan saya hanya makan sedikit. Malam hari saya pulang ke rumah dan tidur. Itu hari yang sangat melelahkan."
+    },
+
+    {
+        id: "s8",
+        title: "Acara dan Pertemuan (イベントの日)",
+        template: "{197} に {287} が あります。{65} は {289} へ {59}。{291} が たくさん {282} ます。{286} の 話 を 聞いて、{346} を 読みます。{283} の 時間 に {151} な 雰囲気 に なります。{284} の 後、友達 と {208} を 撮ります。{379} に 残る いい 時間 でした。",
+        translation: "Pada akhir pekan ada festival. Saya pergi ke lokasi acara. Banyak peserta berkumpul. Saya mendengarkan penjelasan dan membaca informasi. Saat acara dimulai suasananya menyenangkan. Setelah selesai saya berfoto dengan teman. Itu menjadi kenangan yang baik."
+    },
+
+    {
+        id: "s9",
+        title: "Masalah di Kota (町の問題)",
+        template: "{104} で {280} が 起きました。{399} が {403}、{402} と 感じます。{65} は {424} して {346} を 聞きます。{401} の ために {285} に なりました。{286} が {473} を して、{472} が 出されます。{281} 意見 は ありません。{339} で 解決 を 待ちます。",
+        translation: "Di kota terjadi masalah. Lalu lintas jauh dan terasa berbahaya. Saya duduk dan mendengarkan penjelasan. Demi keselamatan acara dibatalkan. Petugas menghubungi dan laporan dikeluarkan. Tidak semua orang punya pendapat yang sama. Kami menunggu penyelesaian di pusat kota."
+    },
+
+    {
+        id: "s10",
+        title: "Mimpi dan Tujuan (夢と目標)",
+        template: "{65} は {369} の {431} を よく 考えます。{444} は {432} と 思う こと も あります。{608} しても {609} を 捨てません。毎日 {434}、{490} を 続けます。{429} が 少し ずつ {606}。{214} は 新しい 仕事 に {374} したいです。社会 に {613} 人 に なります。",
+        translation: "Saya sering memikirkan tujuan hidup. Akhir-akhir ini kadang terasa sulit. Walaupun bersusah payah, saya tidak meninggalkan harapan. Saya terus belajar dan berlatih setiap hari. Kepercayaan diri sedikit demi sedikit bertambah. Tahun depan saya ingin memulai pekerjaan baru. Saya ingin menjadi orang yang berguna bagi masyarakat."
     }
 ];
