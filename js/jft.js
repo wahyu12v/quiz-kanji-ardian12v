@@ -35,48 +35,48 @@ if (speechSynthesis.onvoiceschanged !== undefined) {
     speechSynthesis.onvoiceschanged = loadVoices; 
 }
 
-// --- INISIALISASI ---
-// --- 2. INISIALISASI ---
+// --- INISIALISASI (BAGIAN INI YANG DIUBAH) ---
 document.addEventListener('DOMContentLoaded', async () => {
     try {
-        // --- LOGIKA LOAD PAKET DINAMIS ---
-        // Ambil pilihan dari LocalStorage
-        const packageId = localStorage.getItem('jft_package_id') || ""; 
+        // 1. AMBIL PILIHAN PAKET DARI LOCALSTORAGE
+        // (Disimpan oleh main.js saat user klik Mulai di halaman depan)
+        const packageId = localStorage.getItem('jft_package_id') || "1";
         
-        // Tentukan nama file berdasarkan struktur folder kamu
+        // 2. TENTUKAN NAMA FILE
         // Paket 1 -> jft_questions.json
         // Paket 2 -> jft_questions2.json
         // dst...
-        let fileName = 'jft_questions.json'; // Default
-        if (packageId !== "" && packageId !== "1") {
+        let fileName = 'jft_questions.json'; 
+        if (packageId !== "1") {
             fileName = `jft_questions${packageId}.json`;
         }
 
-        console.log("Memuat Paket:", fileName); // Untuk debugging
+        console.log(`Memuat Soal JFT: ${fileName}`); // Cek console untuk memastikan
 
-        // Tampilkan info paket di layar (Opsional, agar user tau)
-        const headerTitle = document.querySelector('.cbt-header h6');
-        if(headerTitle) {
-            const pkgName = packageId === "" || packageId === "1" ? "1" : packageId;
-            headerTitle.innerHTML = `JFT-Basic <span class="badge bg-warning text-dark">A2</span> <span class="badge bg-primary">Paket ${pkgName}</span>`;
-        }
-
-        // Fetch file yang sesuai
-        const response = await fetch(`data/${fileName}`);
+        // 3. FETCH DATA DENGAN CACHE BUSTER (Agar file baru terbaca)
+        const uniqueUrl = `data/${fileName}?v=` + new Date().getTime();
+        const response = await fetch(uniqueUrl);
         
-        if (!response.ok) throw new Error(`Gagal memuat soal (${fileName}). Pastikan file ada.`);
+        if (!response.ok) throw new Error(`Gagal memuat file ${fileName}. Pastikan file ada di folder data.`);
         let rawData = await response.json();
         
-        // Sorting Soal
+        // 4. SORTING & LOAD
         allQuestions = rawData.sort((a, b) => {
             return (SECTION_ORDER[a.section] || 99) - (SECTION_ORDER[b.section] || 99);
         });
 
+        // Update Judul Paket di Navbar (Opsional, biar keren)
+        const titleBadge = document.querySelector('.cbt-header .badge.bg-warning');
+        if(titleBadge) {
+            titleBadge.innerHTML = `A2 <span class="ms-1 bg-white text-dark px-2 rounded">Paket ${packageId}</span>`;
+        }
+
         startTimer();
         loadQuestion(0);
+        
     } catch (error) { 
-        alert("Terjadi Kesalahan: " + error.message); 
         console.error(error);
+        alert("Terjadi kesalahan memuat soal: " + error.message);
     }
 });
 
@@ -88,7 +88,7 @@ window.jumpToSection = (sectionName) => {
         currentIdx = targetIndex;
         loadQuestion(currentIdx);
     } else {
-        alert("Section ini tidak memiliki soal.");
+        alert("Bagian ini tidak memiliki soal di paket ini.");
     }
 };
 
@@ -103,8 +103,7 @@ function loadQuestion(index) {
     elBtnPrev.disabled = (index === 0);
     elBtnNext.textContent = (index === allQuestions.length - 1) ? "Selesai" : "Berikutnya";
     
-    // --- PERUBAHAN UTAMA DI SINI ---
-    // Hapus logika disable. Tombol Next SELALU AKTIF.
+    // Tombol Next SELALU AKTIF (Fitur Skip)
     elBtnNext.disabled = false; 
 
     elProgress.textContent = `Soal ${index + 1}/${allQuestions.length}`;
@@ -226,7 +225,6 @@ function renderChoices(q) {
         btn.onclick = () => {
             userAnswers[currentIdx] = i;
             renderChoices(q); 
-            // Tidak perlu enable tombol di sini karena sudah enable dari awal
         };
         elChoices.appendChild(btn);
     });
@@ -279,7 +277,6 @@ window.finishExam = () => {
         const isCorrect = (userAnswer === q.correctAnswer);
         if (isCorrect) correctCount++;
 
-        // Logika Tampilan Jika TIDAK DIJAWAB
         let userLabel = "<span class='text-danger fst-italic'>Tidak Dijawab</span>";
         if (userAnswer !== undefined) {
             userLabel = q.choices[userAnswer];

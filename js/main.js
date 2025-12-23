@@ -8,44 +8,41 @@ let QUESTIONS = [];
 let state = null; 
 
 // --- BOOTSTRAP MODAL INSTANCES ---
-// Kita inisialisasi nanti di dalam init() agar elemen DOM pasti sudah ada
 let quizModal, memModal, confirmModal, daftarRangeModal, daftarListModal;
 
 // --- INITIALIZATION ---
 async function init() {
     try {
-        // 1. Setup Modals
         setupModals();
 
-        // 2. Fetch Data (Cache Busting)
+        // 1. FETCH DATA UTAMA (KHUSUS QUIZ & HAFALAN KANJI)
+        // Ini TIDAK berhubungan dengan JFT. JFT punya file sendiri.
         const uniqueUrl = 'kanjiasli.json?v=' + new Date().getTime();
         const response = await fetch(uniqueUrl);
         if(!response.ok) throw new Error("File kanjiasli.json tidak ditemukan!");
         
         QUESTIONS = await response.json();
         
-        // 3. Update UI Total Data
+        // 2. Update UI Total Data (Total Kanji)
         const totalEl = document.getElementById('totalCount');
         if(totalEl) totalEl.innerText = QUESTIONS.length;
         
-        // 4. Generate Checkboxes
+        // 3. Generate Checkbox (Hanya untuk Quiz & Hafalan)
         generateCheckboxes('rangeListQuiz', 'q_cb');
         generateCheckboxes('rangeListMem', 'm_cb');
-        generateCheckboxes('rangeListDaftar', 'd_cb'); // Penting untuk menu Daftar
+        generateCheckboxes('rangeListDaftar', 'd_cb'); 
 
-        // 5. Update Dropdown JFT
+        // 4. Update Dropdown JFT (DIPISAH, Manual 1-10)
         updateJftDropdown();
         
     } catch(e) { 
         console.error("Error Loading:", e);
-        // Jangan alert error jika hanya masalah minor rendering
     }
     
     setupEventListeners();
 }
 
 function setupModals() {
-    // Helper aman untuk inisialisasi modal
     const getModal = (id) => document.getElementById(id) ? new bootstrap.Modal(document.getElementById(id)) : null;
     
     quizModal = getModal('quizModal');
@@ -56,7 +53,6 @@ function setupModals() {
 }
 
 function setupEventListeners() {
-    // Tombol Menu Utama
     if(document.getElementById('startBtn')) 
         document.getElementById('startBtn').onclick = () => quizModal?.show();
     
@@ -66,12 +62,10 @@ function setupEventListeners() {
     if(document.getElementById('daftarHafalanBtn')) 
         document.getElementById('daftarHafalanBtn').onclick = () => daftarRangeModal?.show();
     
-    // Helpers Checkbox (Pilih Semua / Reset)
     setupCheckboxHelpers('selectAllQuiz', 'clearAllQuiz', 'rangeListQuiz');
     setupCheckboxHelpers('selectAllMem', 'clearAllMem', 'rangeListMem');
     setupCheckboxHelpers('btnDaftarSelectAll', 'btnDaftarReset', 'rangeListDaftar');
 
-    // FORM SUBMIT: Quiz
     const quizForm = document.getElementById('quizForm');
     if(quizForm) {
         quizForm.onsubmit = (e) => {
@@ -84,7 +78,6 @@ function setupEventListeners() {
         };
     }
     
-    // FORM SUBMIT: Hafalan
     const memForm = document.getElementById('memForm');
     if(memForm) {
         memForm.onsubmit = (e) => {
@@ -97,7 +90,6 @@ function setupEventListeners() {
         };
     }
 
-    // TOMBOL "TAMPILKAN" DI MENU DAFTAR
     const btnShowList = document.getElementById('btnShowList');
     if(btnShowList) {
         btnShowList.onclick = () => {
@@ -106,45 +98,26 @@ function setupEventListeners() {
     }
 }
 
-// --- FUNGSI RENDER DAFTAR (FIXED) ---
-function renderDaftarList() {
-    const indices = getCheckedIndices('rangeListDaftar');
-    if(indices.length === 0) return alert("Pilih minimal satu paket untuk ditampilkan.");
+// --- FUNGSI KHUSUS JFT DROPDOWN (DIPISAH) ---
+function updateJftDropdown() {
+    const select = document.getElementById('examPackageSelect');
+    if(!select) return;
+
+    select.innerHTML = ''; // Bersihkan opsi lama
     
-    // 1. Tutup Modal Pilihan
-    daftarRangeModal?.hide();
+    // KARENA FILE JFT ANDA ADA 10 (jft_questions.json s.d jft_questions10.json)
+    // Kita buat loop fix 10 kali. Tidak tergantung kanjiasli.json.
+    const TOTAL_JFT_PACKETS = 10; 
 
-    // 2. Render Isi Daftar
-    const listContainer = document.getElementById('daftarList');
-    if(listContainer) {
-        listContainer.innerHTML = '';
-        
-        indices.forEach(idx => {
-            const item = QUESTIONS[idx];
-            if(!item) return;
-
-            // Buat HTML Kartu
-            const card = document.createElement('div');
-            card.className = 'kanji-card-small shadow-sm'; 
-            card.innerHTML = `
-                <div class="k-char">${item.Kanji || item.kanji || '?'}</div>
-                <div class="k-info">
-                    <div class="k-read text-dark">${item.Hiragana || item.hiragana || '-'}</div>
-                    <div class="k-mean text-muted small">${item.Arti || item.arti || item.meaning || ''}</div>
-                </div>
-            `;
-            listContainer.appendChild(card);
-        });
+    for(let i=1; i<=TOTAL_JFT_PACKETS; i++) {
+        const option = document.createElement('option');
+        option.value = i.toString(); // Value: 1, 2, ... 10
+        option.text = `Paket Ujian ${i}`;
+        select.appendChild(option);
     }
-
-    // 3. Buka Modal Hasil (Beri jeda sedikit agar transisi mulus)
-    setTimeout(() => {
-        daftarListModal?.show();
-    }, 300);
 }
 
-// --- GENERATORS & HELPERS ---
-
+// --- LOGIC GENERATE CHECKBOX (KANJI ASLI) ---
 function generateCheckboxes(containerId, prefix) {
     const container = document.getElementById(containerId);
     if(!container) return; 
@@ -169,6 +142,34 @@ function generateCheckboxes(containerId, prefix) {
     }
 }
 
+function renderDaftarList() {
+    const indices = getCheckedIndices('rangeListDaftar');
+    if(indices.length === 0) return alert("Pilih minimal satu paket untuk ditampilkan.");
+    
+    daftarRangeModal?.hide();
+
+    const listContainer = document.getElementById('daftarList');
+    if(listContainer) {
+        listContainer.innerHTML = '';
+        indices.forEach(idx => {
+            const item = QUESTIONS[idx];
+            if(!item) return;
+
+            const card = document.createElement('div');
+            card.className = 'kanji-card-small shadow-sm'; 
+            card.innerHTML = `
+                <div class="k-char">${item.Kanji || item.kanji || '?'}</div>
+                <div class="k-info">
+                    <div class="k-read text-dark">${item.Hiragana || item.hiragana || '-'}</div>
+                    <div class="k-mean text-muted small">${item.Arti || item.arti || item.meaning || ''}</div>
+                </div>
+            `;
+            listContainer.appendChild(card);
+        });
+    }
+    setTimeout(() => { daftarListModal?.show(); }, 300);
+}
+
 function setupCheckboxHelpers(btnAllId, btnClearId, containerId) {
     const btnAll = document.getElementById(btnAllId);
     const btnClear = document.getElementById(btnClearId);
@@ -177,7 +178,6 @@ function setupCheckboxHelpers(btnAllId, btnClearId, containerId) {
     if(btnClear) btnClear.onclick = () => document.querySelectorAll(`#${containerId} input[type=checkbox]`).forEach(cb => cb.checked = false);
 }
 
-// Export global untuk aksesibilitas jika perlu
 window.getCheckedIndices = function(containerId) {
     const checkedBoxes = document.querySelectorAll(`#${containerId} input[type=checkbox]:checked`);
     let allIndices = [];
@@ -188,22 +188,6 @@ window.getCheckedIndices = function(containerId) {
         }
     });
     return allIndices;
-}
-
-// --- UPDATE DROPDOWN JFT ---
-function updateJftDropdown() {
-    const select = document.getElementById('examPackageSelect');
-    if(!select) return;
-    select.innerHTML = ''; 
-    const totalBatches = Math.ceil(QUESTIONS.length / 60); 
-    for(let i=0; i<totalBatches; i++) {
-        const start = i * 60 + 1;
-        const end = Math.min((i + 1) * 60, QUESTIONS.length);
-        const option = document.createElement('option');
-        option.value = (i+1).toString();
-        option.text = `Paket Ujian ${i+1} (No ${start}-${end})`;
-        select.appendChild(option);
-    }
 }
 
 // --- SESSION LOGIC (QUIZ & MEM) ---
@@ -226,7 +210,7 @@ function renderCurrent() {
     else UI.renderMem(state, state.current);
 }
 
-// --- GLOBAL HANDLERS (Diperlukan oleh HTML onclick) ---
+// --- GLOBAL HANDLERS ---
 window.handleAnswer = (idx) => {
     state.answers[state.current] = idx;
     Storage.saveTemp(state);
@@ -262,7 +246,6 @@ function finishSession() {
     hideStopButton();
 }
 
-// --- MANAJEMEN TOMBOL BERHENTI ---
 function showStopButton() { document.getElementById('btn-stop-quiz')?.classList.remove('d-none'); }
 function hideStopButton() { document.getElementById('btn-stop-quiz')?.classList.add('d-none'); }
 
@@ -275,5 +258,4 @@ window.executeStopQuiz = function() {
     finishSession(); 
 };
 
-// Start App
 init();
