@@ -1,0 +1,501 @@
+[
+
+  {
+    "id": 1,
+    "section": "vocabulary",
+    "question": "「図書館」の いみは どれですか。",
+    "choices": ["ほんを かう ばしょ", "ほんを よむ ばしょ", "たべる ばしょ", "はたらく ばしょ"],
+    "correctAnswer": 1,
+    "audio": null
+  },
+  {
+    "id": 2,
+    "section": "vocabulary",
+    "question": "きょうは とても（　　　）です。３０どです。",
+    "choices": ["さむい", "すずしい", "あつい", "つめたい"],
+    "correctAnswer": 2,
+    "audio": null
+  },
+  {
+    "id": 3,
+    "section": "vocabulary",
+    "question": "この かんじの よみかたは どれですか。\n\n「駅」",
+    "choices": ["まち", "えき", "みち", "ばしょ"],
+    "correctAnswer": 1,
+    "audio": null
+  },
+  {
+    "id": 4,
+    "section": "vocabulary",
+    "question": "まいあさ ６じに（　　　）。",
+    "choices": ["ねます", "おきます", "たべます", "のみます"],
+    "correctAnswer": 1,
+    "audio": null
+  },
+  {
+    "id": 5,
+    "section": "vocabulary",
+    "question": "かさは どこですか。つくえの（　　　）です。",
+    "choices": ["した", "なか", "うえ", "そと"],
+    "correctAnswer": 2,
+    "audio": null
+  },
+  {
+    "id": 6,
+    "section": "vocabulary",
+    "question": "「早い」の いみは どれですか。",
+    "choices": ["はやい", "おそい", "ながい", "みじかい"],
+    "correctAnswer": 0,
+    "audio": null
+  },
+  {
+    "id": 7,
+    "section": "vocabulary",
+    "question": "テレビを（　　　）。",
+    "choices": ["ききます", "みます", "よみます", "かきます"],
+    "correctAnswer": 1,
+    "audio": null
+  },
+  {
+    "id": 8,
+    "section": "vocabulary",
+    "question": "スーパーで やさいを（　　　）。",
+    "choices": ["あそびます", "かいます", "いきます", "みます"],
+    "correctAnswer": 1,
+    "audio": null
+  },
+  {
+    "id": 9,
+    "section": "vocabulary",
+    "question": "この かんじの よみかたは どれですか。\n\n「水」",
+    "choices": ["ひ", "みず", "そら", "あめ"],
+    "correctAnswer": 1,
+    "audio": null
+  },
+  {
+    "id": 10,
+    "section": "vocabulary",
+    "question": "この りょうりは（　　　）です。さとうが たくさん あります。",
+    "choices": ["からい", "すっぱい", "あまい", "にがい"],
+    "correctAnswer": 2,
+    "audio": null
+  },
+  {
+    "id": 11,
+    "section": "vocabulary",
+    "question": "「妹」は だれですか。",
+    "choices": ["あね", "いもうと", "あに", "おとうと"],
+    "correctAnswer": 1,
+    "audio": null
+  },
+  {
+    "id": 12,
+    "section": "vocabulary",
+    "question": "がっこうが おわったら いえに（　　　）。",
+    "choices": ["いきます", "かえります", "きます", "でます"],
+    "correctAnswer": 1,
+    "audio": null
+  },
+  {
+    "id": 13,
+    "section": "vocabulary",
+    "question": "「病院」は なにを する ばしょですか。",
+    "choices": ["べんきょうします", "はたらきます", "びょうきを みます", "かいものします"],
+    "correctAnswer": 2,
+    "audio": null
+  },
+  {
+    "id": 14,
+    "section": "vocabulary",
+    "question": "この みちは（　　　）です。くるまが たくさん あります。",
+    "choices": ["ひろい", "せまい", "ながい", "みじかい"],
+    "correctAnswer": 0,
+    "audio": null
+  },
+  {
+    "id": 15,
+    "section": "vocabulary",
+    "question": "この かんじの よみかたは どれですか。\n\n「火」",
+    "choices": ["みず", "ひ", "つち", "き"],
+    "correctAnswer": 1,
+    "audio": null
+  },
+
+  {
+    "id": 16,
+    "section": "conversation",
+    "question": "A: すみません、いま なんじですか。\nB: （＿＿＿＿）。",
+    "choices": ["はい", "３じです", "そうです", "ここです"],
+    "correctAnswer": 1,
+    "audio": null
+  },
+  {
+    "id": 17,
+    "section": "conversation",
+    "question": "A: コーヒーを のみますか。\nB: （＿＿＿＿）。",
+    "choices": ["はい、のみます", "はい、です", "のみませんか", "のんでいます"],
+    "correctAnswer": 0,
+    "audio": null
+  },
+  {
+    "id": 18,
+    "section": "conversation",
+    "question": "A: どこに すんでいますか。\nB: （＿＿＿＿）。",
+    "choices": ["がくせいです", "とうきょうです", "２５さいです", "にほんじんです"],
+    "correctAnswer": 1,
+    "audio": null
+  },
+  {
+    "id": 19,
+    "section": "conversation",
+    "question": "A: しゅくだいは もう しましたか。\nB: はい、（＿＿＿＿）。",
+    "choices": ["します", "しました", "して", "しません"],
+    "correctAnswer": 1,
+    "audio": null
+  },
+  {
+    "id": 20,
+    "section": "conversation",
+    "question": "A: ちょっと まって ください。\nB: （＿＿＿＿）。",
+    "choices": ["はい、わかりました", "いいえ", "どうぞ", "すみません"],
+    "correctAnswer": 0,
+    "audio": null
+  },
+  {
+    "id": 21,
+    "section": "conversation",
+    "question": "A: いっしょに かえりませんか。\nB: （＿＿＿＿）。",
+    "choices": ["いいですね", "いきます", "あります", "だめでした"],
+    "correctAnswer": 0,
+    "audio": null
+  },
+  {
+    "id": 22,
+    "section": "conversation",
+    "question": "A: おなまえは？\nB: （＿＿＿＿）。",
+    "choices": ["たなかです", "はい", "がくせいです", "２５さいです"],
+    "correctAnswer": 0,
+    "audio": null
+  },
+  {
+    "id": 23,
+    "section": "conversation",
+    "question": "A: なんさいですか。\nB: （＿＿＿＿）。",
+    "choices": ["がくせいです", "２０さいです", "とうきょうです", "おとこです"],
+    "correctAnswer": 1,
+    "audio": null
+  },
+  {
+    "id": 24,
+    "section": "conversation",
+    "question": "A: どこへ いきますか。\nB: （＿＿＿＿）。",
+    "choices": ["がっこうへ いきます", "たべます", "ねます", "のみます"],
+    "correctAnswer": 0,
+    "audio": null
+  },
+  {
+    "id": 25,
+    "section": "conversation",
+    "question": "A: にほんごは むずかしいですか。\nB: （＿＿＿＿）。",
+    "choices": ["はい、むずかしいです", "にほんごです", "わかりません", "だれですか"],
+    "correctAnswer": 0,
+    "audio": null
+  },
+  {
+    "id": 26,
+    "section": "conversation",
+    "question": "A: これを おねがいします。\nB: （＿＿＿＿）。",
+    "choices": ["かしこまりました", "だめです", "しりません", "どうも"],
+    "correctAnswer": 0,
+    "audio": null
+  },
+  {
+    "id": 27,
+    "section": "conversation",
+    "question": "A: ありがとうございます。\nB: （＿＿＿＿）。",
+    "choices": ["どういたしまして", "ごめんなさい", "すみません", "はい"],
+    "correctAnswer": 0,
+    "audio": null
+  },
+  {
+    "id": 28,
+    "section": "conversation",
+    "question": "A: いってきます。\nB: （＿＿＿＿）。",
+    "choices": ["いってらっしゃい", "おかえりなさい", "ただいま", "いただきます"],
+    "correctAnswer": 0,
+    "audio": null
+  },
+  {
+    "id": 29,
+    "section": "conversation",
+    "question": "A: ただいま。\nB: （＿＿＿＿）。",
+    "choices": ["おかえりなさい", "いってらっしゃい", "おやすみ", "ごちそうさま"],
+    "correctAnswer": 0,
+    "audio": null
+  },
+  {
+    "id": 30,
+    "section": "conversation",
+    "question": "A: おやすみなさい。\nB: （＿＿＿＿）。",
+    "choices": ["おやすみなさい", "おはようございます", "こんにちは", "ありがとう"],
+    "correctAnswer": 0,
+    "audio": null
+  },
+
+  {
+    "id": 31,
+    "section": "listening",
+    "question": "おとこのひとは なにで がっこうへ いきますか。",
+    "choices": ["バス", "でんしゃ", "じてんしゃ", "あるいて"],
+    "correctAnswer": 3,
+    "audio": null,
+    "script": "おんなのひと： がっこうまで どうやって いきますか。\nおとこのひと： あるいて いきます。"
+  },
+  {
+    "id": 32,
+    "section": "listening",
+    "question": "ふたりは なんじに あいますか。",
+    "choices": ["１じ", "２じ", "３じ", "４じ"],
+    "correctAnswer": 2,
+    "audio": null,
+    "script": "おとこのひと： ３じに あいましょう。\nおんなのひと： はい。"
+  },
+  {
+    "id": 33,
+    "section": "listening",
+    "question": "おんなのひとは なにを かいますか。",
+    "choices": ["りんご", "みかん", "バナナ", "ぶどう"],
+    "correctAnswer": 1,
+    "audio": null,
+    "script": "みせのひと： なにを かいますか。\nおんなのひと： みかんを ください。"
+  },
+  {
+    "id": 34,
+    "section": "listening",
+    "question": "あしたの てんきは どうですか。",
+    "choices": ["はれ", "くもり", "あめ", "ゆき"],
+    "correctAnswer": 0,
+    "audio": null,
+    "script": "テレビ： あしたは はれです。"
+  },
+  {
+    "id": 35,
+    "section": "listening",
+    "question": "おとこのひとは どの ぼうしを かぶりますか。",
+    "choices": ["あかい", "しろい", "くろい", "あおい"],
+    "correctAnswer": 2,
+    "audio": null,
+    "script": "おとこのひと： きょうは くろい ぼうしを かぶります。"
+  },
+  {
+    "id": 36,
+    "section": "listening",
+    "question": "いま なんじですか。",
+    "choices": ["１じ", "２じ", "３じ", "４じ"],
+    "correctAnswer": 1,
+    "audio": null,
+    "script": "いま ２じです。"
+  },
+  {
+    "id": 37,
+    "section": "listening",
+    "question": "ひるごはんに なにを たべますか。",
+    "choices": ["パン", "ごはん", "ラーメン", "サラダ"],
+    "correctAnswer": 2,
+    "audio": null,
+    "script": "ひるごはんは ラーメンを たべます。"
+  },
+  {
+    "id": 38,
+    "section": "listening",
+    "question": "あの ひとは だれですか。",
+    "choices": ["たなかさん", "やまださん", "すずきさん", "さとうさん"],
+    "correctAnswer": 3,
+    "audio": null,
+    "script": "あの ひとは さとうさんです。"
+  },
+  {
+    "id": 39,
+    "section": "listening",
+    "question": "トイレは どこですか。",
+    "choices": ["みぎ", "ひだり", "まえ", "うしろ"],
+    "correctAnswer": 1,
+    "audio": null,
+    "script": "トイレは ひだりです。"
+  },
+  {
+    "id": 40,
+    "section": "listening",
+    "question": "これは いくらですか。",
+    "choices": ["１００えん", "２００えん", "３００えん", "４００えん"],
+    "correctAnswer": 3,
+    "audio": null,
+    "script": "４００えんです。"
+  },
+  {
+    "id": 41,
+    "section": "listening",
+    "question": "テストは いつですか。",
+    "choices": ["きょう", "あした", "きのう", "らいしゅう"],
+    "correctAnswer": 3,
+    "audio": null,
+    "script": "テストは らいしゅうです。"
+  },
+  {
+    "id": 42,
+    "section": "listening",
+    "question": "あした なにを しますか。",
+    "choices": ["べんきょうします", "やすみます", "しごとします", "りょこうします"],
+    "correctAnswer": 1,
+    "audio": null,
+    "script": "あしたは やすみます。"
+  },
+  {
+    "id": 43,
+    "section": "listening",
+    "question": "どうやって えきへ いきますか。",
+    "choices": ["バスで", "でんしゃで", "あるいて", "くるまで"],
+    "correctAnswer": 0,
+    "audio": null,
+    "script": "バスで いきます。"
+  },
+  {
+    "id": 44,
+    "section": "listening",
+    "question": "すきな たべものは なんですか。",
+    "choices": ["すし", "てんぷら", "ラーメン", "うどん"],
+    "correctAnswer": 3,
+    "audio": null,
+    "script": "うどんが すきです。"
+  },
+  {
+    "id": 45,
+    "section": "listening",
+    "question": "きょうは なんようびですか。",
+    "choices": ["げつようび", "かようび", "すいようび", "もくようび"],
+    "correctAnswer": 2,
+    "audio": null,
+    "script": "きょうは すいようびです。"
+  },
+
+  {
+    "id": 46,
+    "section": "reading",
+    "question": "【メール】\nあしたの かいぎは ごご２じからです。\n３かいの へやに きてください。\n\nしつもん：かいぎは なんじからですか。",
+    "choices": ["１じ", "２じ", "３じ", "４じ"],
+    "correctAnswer": 1,
+    "audio": null
+  },
+  {
+    "id": 47,
+    "section": "reading",
+    "question": "【メモ】\nパンと ミルクを かってください。\n\nしつもん：なにを かいますか。",
+    "choices": ["パンだけ", "ミルクだけ", "パンと ミルク", "なにも かいません"],
+    "correctAnswer": 2,
+    "audio": null
+  },
+  {
+    "id": 48,
+    "section": "reading",
+    "question": "【かんばん】\nトイレは ２かいです。\n\nしつもん：トイレは どこですか。",
+    "choices": ["１かい", "２かい", "３かい", "ちか"],
+    "correctAnswer": 1,
+    "audio": null
+  },
+  {
+    "id": 49,
+    "section": "reading",
+    "question": "【メール】\nらいしゅうの げつようびは やすみです。\n\nしつもん：いつ やすみですか。",
+    "choices": ["こんしゅう", "らいしゅう", "きょう", "あした"],
+    "correctAnswer": 1,
+    "audio": null
+  },
+  {
+    "id": 50,
+    "section": "reading",
+    "question": "【メモ】\nれいぞうこに ケーキが あります。\n\nしつもん：ケーキは どこですか。",
+    "choices": ["つくえの うえ", "れいぞうこの なか", "かばんの なか", "へやの なか"],
+    "correctAnswer": 1,
+    "audio": null
+  },
+  {
+    "id": 51,
+    "section": "reading",
+    "question": "【おしらせ】\nあしたは あめです。\n\nしつもん：あしたの てんきは どうですか。",
+    "choices": ["はれ", "くもり", "あめ", "ゆき"],
+    "correctAnswer": 2,
+    "audio": null
+  },
+  {
+    "id": 52,
+    "section": "reading",
+    "question": "【メール】\nとても たのしかったです。\n\nしつもん：この ひとは どう かんじていますか。",
+    "choices": ["かなしい", "たのしい", "いそがしい", "つかれた"],
+    "correctAnswer": 1,
+    "audio": null
+  },
+  {
+    "id": 53,
+    "section": "reading",
+    "question": "【メモ】\n９じに でんわがあります。\nそのあと かいぎです。\n\nしつもん：かいぎの まえに なにが ありますか。",
+    "choices": ["ひるごはん", "でんわ", "やすみ", "しごと"],
+    "correctAnswer": 1,
+    "audio": null
+  },
+  {
+    "id": 54,
+    "section": "reading",
+    "question": "【かんばん】\nこの バスは えきまで いきます。\n\nしつもん：どこへ いきますか。",
+    "choices": ["びょういん", "がっこう", "えき", "スーパー"],
+    "correctAnswer": 2,
+    "audio": null
+  },
+  {
+    "id": 55,
+    "section": "reading",
+    "question": "【メール】\n７じに レストランで あいましょう。\n\nしつもん：なんじに あいますか。",
+    "choices": ["５じ", "６じ", "７じ", "８じ"],
+    "correctAnswer": 2,
+    "audio": null
+  },
+  {
+    "id": 56,
+    "section": "reading",
+    "question": "【メモ】\nごみは あさ８じまでに だしてください。\n\nしつもん：いつまでに だしますか。",
+    "choices": ["７じ", "８じ", "９じ", "ひる"],
+    "correctAnswer": 1,
+    "audio": null
+  },
+  {
+    "id": 57,
+    "section": "reading",
+    "question": "【おしらせ】\nでんきは ごご３じまで つかえません。\n\nしつもん：なんじまで ですか。",
+    "choices": ["１じ", "２じ", "３じ", "４じ"],
+    "correctAnswer": 2,
+    "audio": null
+  },
+  {
+    "id": 58,
+    "section": "reading",
+    "question": "【メール】\nあしたは いえで ゆっくり します。\n\nしつもん：あした なにを しますか。",
+    "choices": ["はたらきます", "でかけます", "いえで すごします", "りょこうします"],
+    "correctAnswer": 2,
+    "audio": null
+  },
+  {
+    "id": 59,
+    "section": "reading",
+    "question": "【メモ】\nともだちの たんじょうびです。\nケーキを かいます。\n\nしつもん：なにを かいますか。",
+    "choices": ["プレゼント", "ケーキ", "はな", "のみもの"],
+    "correctAnswer": 1,
+    "audio": null
+  },
+  {
+    "id": 60,
+    "section": "reading",
+    "question": "【かんばん】\nこの みせは ごぜん１０じから ごご８じまでです。\n\nしつもん：なんじまで あいていますか。",
+    "choices": ["６じ", "７じ", "８じ", "９じ"],
+    "correctAnswer": 2,
+    "audio": null
+  }
+]

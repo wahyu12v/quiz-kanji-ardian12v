@@ -36,19 +36,48 @@ if (speechSynthesis.onvoiceschanged !== undefined) {
 }
 
 // --- INISIALISASI ---
+// --- 2. INISIALISASI ---
 document.addEventListener('DOMContentLoaded', async () => {
     try {
-        const response = await fetch('data/jft_questions.json');
-        if (!response.ok) throw new Error("Gagal memuat soal");
+        // --- LOGIKA LOAD PAKET DINAMIS ---
+        // Ambil pilihan dari LocalStorage
+        const packageId = localStorage.getItem('jft_package_id') || ""; 
+        
+        // Tentukan nama file berdasarkan struktur folder kamu
+        // Paket 1 -> jft_questions.json
+        // Paket 2 -> jft_questions2.json
+        // dst...
+        let fileName = 'jft_questions.json'; // Default
+        if (packageId !== "" && packageId !== "1") {
+            fileName = `jft_questions${packageId}.json`;
+        }
+
+        console.log("Memuat Paket:", fileName); // Untuk debugging
+
+        // Tampilkan info paket di layar (Opsional, agar user tau)
+        const headerTitle = document.querySelector('.cbt-header h6');
+        if(headerTitle) {
+            const pkgName = packageId === "" || packageId === "1" ? "1" : packageId;
+            headerTitle.innerHTML = `JFT-Basic <span class="badge bg-warning text-dark">A2</span> <span class="badge bg-primary">Paket ${pkgName}</span>`;
+        }
+
+        // Fetch file yang sesuai
+        const response = await fetch(`data/${fileName}`);
+        
+        if (!response.ok) throw new Error(`Gagal memuat soal (${fileName}). Pastikan file ada.`);
         let rawData = await response.json();
         
+        // Sorting Soal
         allQuestions = rawData.sort((a, b) => {
             return (SECTION_ORDER[a.section] || 99) - (SECTION_ORDER[b.section] || 99);
         });
 
         startTimer();
         loadQuestion(0);
-    } catch (error) { console.error(error); }
+    } catch (error) { 
+        alert("Terjadi Kesalahan: " + error.message); 
+        console.error(error);
+    }
 });
 
 // --- FITUR: LOMPAT SECTION ---

@@ -77,52 +77,70 @@
       </div>
     </main>
 
-    <div class="modal fade" id="startExamModal" tabindex="-1" aria-labelledby="startExamLabel" aria-hidden="true">
+  <div class="modal fade" id="startExamModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content border-0 rounded-4 shadow-lg">
       
       <div class="modal-header bg-primary text-white border-0 rounded-top-4">
-        <h5 class="modal-title fw-bold" id="startExamLabel">
-            <i class="bi bi-info-circle-fill me-2"></i> Konfirmasi Ujian
+        <h5 class="modal-title fw-bold">
+            <i class="bi bi-grid-fill me-2"></i> Pilih Paket Ujian
         </h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
       </div>
 
       <div class="modal-body p-4">
-        <div class="text-center mb-4">
-            <h4 class="fw-bold text-dark">Simulasi JFT-Basic (Level A2)</h4>
-            <span class="badge bg-warning text-dark px-3 py-2 rounded-pill">Mode Latihan</span>
+        <div class="text-center mb-3">
+            <h4 class="fw-bold text-dark">Simulasi JFT-Basic A2</h4>
+            <p class="text-muted small">Silakan pilih paket soal yang ingin dikerjakan</p>
         </div>
 
-        <div class="alert alert-light border shadow-sm">
-            <ul class="list-unstyled m-0 text-start small text-muted">
-                <li class="mb-2"><i class="bi bi-clock text-danger me-2"></i> <strong>Waktu:</strong> 60 Menit</li>
-                <li class="mb-2"><i class="bi bi-list-ol text-primary me-2"></i> <strong>Jumlah Soal:</strong> 60 Butir</li>
-                <li class="mb-2"><i class="bi bi-volume-up text-success me-2"></i> <strong>Audio:</strong> Putar Otomatis</li>
-                <li><i class="bi bi-check-circle text-info me-2"></i> <strong>Passing Grade:</strong> Skor ≥ 200</li>
+        <div class="mb-4">
+            <label for="examPackageSelect" class="form-label fw-bold">Paket Soal:</label>
+            <select class="form-select form-select-lg border-primary shadow-sm" id="examPackageSelect">
+                <option value="">Paket Ujian 1 </option>
+                <option value="2">Paket Ujian 2</option>
+                <option value="3">Paket Ujian 3</option>
+                <option value="4">Paket Ujian 4</option>
+                <option value="5">Paket Ujian 5</option>
+                <option value="6">Paket Ujian 6</option>
+                <option value="7">Paket Ujian 7</option>
+                <option value="8">Paket Ujian 8</option>
+                <option value="9">Paket Ujian 9</option>
+                <option value="10">Paket Ujian 10</option>
+            </select>
+        </div>
+
+        <div class="alert alert-light border small">
+            <ul class="list-unstyled m-0">
+                <li><i class="bi bi-clock text-danger me-2"></i> Waktu: 60 Menit</li>
+                <li><i class="bi bi-file-earmark-text text-primary me-2"></i> Soal: 60 Butir</li>
             </ul>
         </div>
-
-        <p class="text-center text-muted small mt-3">
-            Pastikan koneksi internet stabil dan volume perangkat menyala untuk sesi Listening.
-        </p>
       </div>
 
-      <div class="modal-footer border-0 p-3 pt-0 justify-content-center">
-        <div class="d-grid gap-2 w-100">
-            <a href="jft.html" class="btn btn-primary btn-lg fw-bold rounded-3">
-                Mulai Ujian Sekarang <i class="bi bi-arrow-right ms-2"></i>
-            </a>
-            
-            <button type="button" class="btn btn-outline-secondary rounded-3" data-bs-dismiss="modal">
-                Batal
-            </button>
-        </div>
+      <div class="modal-footer border-0 p-3 pt-0">
+        <button onclick="startSelectedExam()" class="btn btn-primary btn-lg w-100 fw-bold rounded-3">
+            Mulai Mengerjakan <i class="bi bi-arrow-right ms-2"></i>
+        </button>
       </div>
 
     </div>
   </div>
 </div>
+
+<script>
+function startSelectedExam() {
+    // 1. Ambil nilai dari dropdown
+    const selectedPkg = document.getElementById('examPackageSelect').value;
+    
+    // 2. Simpan ke LocalStorage agar bisa dibaca di halaman sebelah
+    // Jika kosong (Paket 1), simpan string kosong
+    localStorage.setItem('jft_package_id', selectedPkg);
+    
+    // 3. Pindah ke halaman ujian
+    window.location.href = 'jft.html';
+}
+</script>
 
     <div class="modal fade" id="daftarRangeModal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg">
