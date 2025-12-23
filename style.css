@@ -371,3 +371,86 @@ body.jft-mode {
     position: relative;
     z-index: 1;
 }
+
+
+/* --- MOBILE OPTIMIZATION --- */
+@media (max-width: 768px) {
+    .cbt-header {
+        padding: 10px 0;
+    }
+    .cbt-header h5 {
+        font-size: 1rem;
+    }
+    .timer-badge {
+        font-size: 1rem;
+        padding: 5px 10px;
+    }
+    /* Grid Tombol Section di HP (2 kolom) */
+    .section-nav-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+    .question-card {
+        padding: 20px;
+        min-height: auto;
+    }
+    #questionText {
+        font-size: 1.1rem;
+    }
+    /* Tombol Navigasi Bawah Sticky di HP */
+    .nav-buttons-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 15px;
+        box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+        z-index: 99;
+    }
+    main {
+        padding-bottom: 80px; /* Spacer biar konten gak ketutup tombol */
+    }
+}
+
+/* Tampilan Desktop Default */
+.section-nav-grid {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* --- REVIEW MODE (PEMBAHASAN) --- */
+.review-item {
+    text-align: left;
+    background: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.review-item.correct {
+    border-left: 5px solid #198754; /* Garis Hijau */
+    background-color: #f8fffb;
+}
+
+.review-item.wrong {
+    border-left: 5px solid #dc3545; /* Garis Merah */
+    background-color: #fff8f8;
+}
+
+.review-question {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.review-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 0.8rem;
+}

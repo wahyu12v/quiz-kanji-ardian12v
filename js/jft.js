@@ -51,15 +51,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (error) { console.error(error); }
 });
 
-// --- FITUR BARU: LOMPAT SECTION ---
+// --- FITUR: LOMPAT SECTION ---
 window.jumpToSection = (sectionName) => {
-    // 1. Matikan audio jika sedang jalan
     stopAllAudio();
-
-    // 2. Cari soal pertama dari section yang dituju
-    // findIndex akan mencari urutan pertama yang cocok
     const targetIndex = allQuestions.findIndex(q => q.section === sectionName);
-    
     if (targetIndex !== -1) {
         currentIdx = targetIndex;
         loadQuestion(currentIdx);
@@ -68,15 +63,22 @@ window.jumpToSection = (sectionName) => {
     }
 };
 
+// --- FITUR: KONFIRMASI STOP ---
+window.confirmStop = () => {
+    const stopModal = new bootstrap.Modal(document.getElementById('stopModal'));
+    stopModal.show();
+}
+
 // --- LOAD SOAL ---
 function loadQuestion(index) {
     elBtnPrev.disabled = (index === 0);
-    elBtnNext.textContent = (index === allQuestions.length - 1) ? "Selesai / Finish" : "Berikutnya";
+    elBtnNext.textContent = (index === allQuestions.length - 1) ? "Selesai" : "Berikutnya";
     
-    // Aktifkan Next jika sudah pernah dijawab
-    elBtnNext.disabled = (userAnswers[index] === undefined);
+    // --- PERUBAHAN UTAMA DI SINI ---
+    // Hapus logika disable. Tombol Next SELALU AKTIF.
+    elBtnNext.disabled = false; 
 
-    elProgress.textContent = `Soal ${index + 1} dari ${allQuestions.length}`;
+    elProgress.textContent = `Soal ${index + 1}/${allQuestions.length}`;
     const progressPercent = ((index + 1) / allQuestions.length) * 100;
     elProgressBar.style.width = `${progressPercent}%`;
 
@@ -85,15 +87,15 @@ function loadQuestion(index) {
     // Label Section & Warna
     let sectionLabel = q.section.toUpperCase();
     let badgeClass = "bg-primary";
-    if(q.section === 'vocabulary') { sectionLabel = "Script & Vocabulary"; badgeClass = "bg-info text-dark"; }
-    if(q.section === 'conversation') { sectionLabel = "Expression & Conversation"; badgeClass = "bg-success"; }
-    if(q.section === 'listening') { sectionLabel = "Listening Comprehension"; badgeClass = "bg-danger"; }
-    if(q.section === 'reading') { sectionLabel = "Reading Comprehension"; badgeClass = "bg-warning text-dark"; }
+    if(q.section === 'vocabulary') { sectionLabel = "VOCAB"; badgeClass = "bg-info text-dark"; }
+    if(q.section === 'conversation') { sectionLabel = "CONVERSATION"; badgeClass = "bg-success"; }
+    if(q.section === 'listening') { sectionLabel = "LISTENING"; badgeClass = "bg-danger"; }
+    if(q.section === 'reading') { sectionLabel = "READING"; badgeClass = "bg-warning text-dark"; }
     
     elSection.textContent = sectionLabel;
-    elSection.className = `section-badge ${badgeClass} text-white`;
+    elSection.className = `section-badge ${badgeClass} text-white rounded`;
 
-    // --- LOGIKA AUDIO (Dipertahankan) ---
+    // Audio Logic
     if (q.section === 'listening') {
         elQuestionContent.style.display = 'none';
         elListeningOverlay.style.display = 'block'; 
@@ -120,7 +122,7 @@ function loadQuestion(index) {
     }
 }
 
-// --- AUDIO ENGINE (Dipertahankan) ---
+// --- AUDIO ENGINE ---
 function playSmartAudio(text, onEndCallback) {
     if (availableVoices.length === 0) availableVoices = window.speechSynthesis.getVoices();
     const jaVoice = availableVoices.find(v => v.lang.includes('ja') || v.name.includes('Japan'));
@@ -159,10 +161,7 @@ function playOnlineAudio(text, onEndCallback) {
     elAudio.onend = () => { if (onEndCallback) onEndCallback(); };
     elAudio.onerror = (e) => { if (onEndCallback) onEndCallback(); };
 
-    const playPromise = elAudio.play();
-    if (playPromise !== undefined) {
-        playPromise.catch(error => { });
-    }
+    elAudio.play().catch(error => { });
 }
 
 function stopAllAudio() {
@@ -179,29 +178,26 @@ function renderChoices(q) {
 
     q.choices.forEach((choice, i) => {
         const btn = document.createElement('button');
-        btn.className = 'btn choice-btn w-100 text-start d-flex align-items-center';
+        btn.className = 'btn choice-btn w-100 text-start d-flex align-items-center p-3 mb-2';
+        btn.style.border = "1px solid #dee2e6";
+        btn.style.borderRadius = "8px";
+        btn.style.background = "white";
         
         let markContent = ["A", "B", "C", "D"][i] || "";
-
+        
         if (savedAnswer === i) {
             btn.classList.add('selected');
-            btn.innerHTML = `<span class="choice-mark"><i class="bi bi-check-lg"></i></span> ${choice}`;
+            btn.style.borderColor = "#0d6efd";
+            btn.style.backgroundColor = "#e7f1ff";
+            btn.innerHTML = `<span class="badge bg-primary me-3 p-2 rounded-circle"><i class="bi bi-check"></i></span> ${choice}`;
         } else {
-            btn.innerHTML = `<span class="choice-mark">${markContent}</span> ${choice}`;
+            btn.innerHTML = `<span class="badge bg-light text-dark border me-3 p-2 rounded-circle" style="width:30px">${markContent}</span> ${choice}`;
         }
         
         btn.onclick = () => {
-            document.querySelectorAll('.choice-btn').forEach((b, idx) => {
-                b.classList.remove('selected');
-                let char = ["A", "B", "C", "D"][idx];
-                b.querySelector('.choice-mark').innerHTML = char;
-            });
-            
-            btn.classList.add('selected');
-            btn.querySelector('.choice-mark').innerHTML = `<i class="bi bi-check-lg"></i>`;
-            
             userAnswers[currentIdx] = i;
-            elBtnNext.disabled = false;
+            renderChoices(q); 
+            // Tidak perlu enable tombol di sini karena sudah enable dari awal
         };
         elChoices.appendChild(btn);
     });
@@ -236,13 +232,48 @@ function startTimer() {
     }, 1000);
 }
 
-function finishExam() {
+// --- SELESAI & PEMBAHASAN ---
+window.finishExam = () => {
     clearInterval(timerInterval);
     stopAllAudio();
     
+    const stopModalEl = document.getElementById('stopModal');
+    const stopModal = bootstrap.Modal.getInstance(stopModalEl);
+    if (stopModal) stopModal.hide();
+
     let correctCount = 0;
+    const reviewContainer = document.getElementById('reviewContainer');
+    reviewContainer.innerHTML = ""; 
+
     allQuestions.forEach((q, i) => {
-        if (userAnswers[i] === q.correctAnswer) { correctCount++; }
+        const userAnswer = userAnswers[i];
+        const isCorrect = (userAnswer === q.correctAnswer);
+        if (isCorrect) correctCount++;
+
+        // Logika Tampilan Jika TIDAK DIJAWAB
+        let userLabel = "<span class='text-danger fst-italic'>Tidak Dijawab</span>";
+        if (userAnswer !== undefined) {
+            userLabel = q.choices[userAnswer];
+        }
+        
+        const correctLabel = q.choices[q.correctAnswer];
+        
+        const reviewItem = document.createElement('div');
+        reviewItem.className = `review-item ${isCorrect ? 'correct' : 'wrong'}`;
+        
+        reviewItem.innerHTML = `
+            <div class="review-badge badge ${isCorrect ? 'bg-success' : 'bg-danger'}">
+                ${isCorrect ? 'Benar' : 'Salah'}
+            </div>
+            <p class="small text-muted mb-1">Soal No. ${i + 1} (${q.section.toUpperCase()})</p>
+            <div class="review-question">${q.question.replace(/\n/g, "<br>")}</div>
+            <hr class="my-2">
+            <div class="small">
+                <div>Jawaban Kamu: <strong>${userLabel}</strong></div>
+                ${!isCorrect ? `<div class="text-success">Jawaban Benar: <strong>${correctLabel}</strong></div>` : ''}
+            </div>
+        `;
+        reviewContainer.appendChild(reviewItem);
     });
 
     const finalScore = Math.round((correctCount / allQuestions.length) * 250);
