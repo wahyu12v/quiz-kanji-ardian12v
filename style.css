@@ -512,3 +512,381 @@ body.jft-mode {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+
+/* =========================================================
+   STORY MODE COMPLETE STYLES (MENU + GAMEPLAY)
+   ========================================================= */
+
+/* --- BAGIAN 1: MENU PILIH CERITA (GRID CARD) --- */
+/* Ini yang hilang sebelumnya, makanya tampilan jadi list biasa */
+
+.story-list-grid {
+    display: grid;
+    /* Grid Responsif: Minimal lebar 250px, sisanya menyesuaikan */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 10px 5px;
+}
+
+.story-card-item {
+    background-color: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 200px; /* Tinggi seragam */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+.story-card-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    border-color: #3b82f6;
+}
+
+.card-icon-wrapper {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    color: #2563eb;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.story-card-title {
+    font-weight: 700;
+    color: #1e293b;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.story-card-desc {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-bottom: 20px;
+    line-height: 1.5;
+    /* Batasi teks panjang */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.story-card-footer-action {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px dashed #e2e8f0;
+    padding-top: 12px;
+}
+
+
+/* --- BAGIAN 2: GAMEPLAY (DUOLINGO STYLE) --- */
+/* Ini style agar Furigana rapi & Bank Kata tidak mengecil */
+
+/* Container Game */
+.story-card-container {
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 8px 0 #e5e7eb, 0 15px 20px rgba(0,0,0,0.05); /* Efek 3D Tebal */
+    border: 2px solid #e5e7eb;
+    overflow: hidden;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.story-card-header {
+    background: #fff;
+    color: #4b5563;
+    padding: 15px 25px;
+    font-weight: 700;
+    font-size: 1rem;
+    border-bottom: 2px solid #f3f4f6;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Area Teks Cerita (Scrollable) */
+.story-card-body {
+    padding: 30px;
+    font-size: 1.5rem; 
+    line-height: 2.8;  /* Jarak renggang untuk Tile */
+    color: #374151;
+    background-color: #fff;
+    
+    max-height: 45vh; /* Batas tinggi scroll */
+    overflow-y: auto;
+    text-align: center; /* Teks rata tengah */
+}
+
+.story-card-footer {
+    background-color: #f9fafb;
+    border-top: 2px solid #f3f4f6;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+/* SLOT KOSONG (Target) */
+.story-slot {
+    display: inline-flex;
+    vertical-align: middle;
+    width: 80px;
+    height: 50px;
+    margin: 0 6px;
+    background-color: #e5e7eb;
+    border-radius: 12px;
+    border-bottom: 4px solid #d1d5db; /* Efek 3D Kosong */
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+.active-slot {
+    background-color: #bfdbfe !important;
+    border-color: #60a5fa !important;
+    border-bottom-color: #3b82f6 !important;
+    transform: translateY(2px);
+}
+
+/* SLOT TERISI (TILE) - FLEXBOX UNTUK FURIGANA */
+.filled-slot {
+    display: inline-flex;
+    flex-direction: column; /* Susun Atas-Bawah */
+    justify-content: center;
+    align-items: center;
+    
+    background-color: #fff !important;
+    border: 2px solid #e5e7eb;
+    border-bottom: 4px solid #e5e7eb; /* Efek 3D */
+    border-radius: 12px;
+    
+    padding: 4px 12px;
+    min-width: 80px;
+    height: auto;
+    
+    vertical-align: middle;
+    margin: 0 4px;
+    cursor: pointer;
+    transform: translateY(-8px); /* Geser naik agar sejajar teks */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Teks Hiragana (Kecil) */
+.tile-furigana {
+    font-size: 0.7rem;
+    color: #6b7280;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 2px;
+}
+
+/* Teks Kanji (Besar) */
+.tile-kanji {
+    font-size: 1.3rem;
+    color: #111827;
+    font-weight: 800;
+    line-height: 1;
+}
+
+/* Hover Effect (Lepas) */
+.filled-slot:hover {
+    background-color: #fee2e2 !important;
+    border-color: #fca5a5 !important;
+    border-bottom-color: #f87171 !important;
+}
+.filled-slot:hover .tile-kanji, 
+.filled-slot:hover .tile-furigana { color: #ef4444; }
+
+/* BANK KATA (ANTI KEMPOT) */
+.bank-container {
+    min-height: 200px; /* Tinggi dikunci agar tidak mengecil */
+    background-color: #fff;
+    border: 2px dashed #e5e7eb;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    align-content: flex-start;
+}
+
+/* Tombol Pilihan */
+.choice-chip {
+    background: #fff;
+    border: 2px solid #e5e7eb;
+    border-bottom: 4px solid #e5e7eb; /* Efek 3D */
+    border-radius: 14px;
+    padding: 8px 16px;
+    min-width: 80px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.1s;
+    height: fit-content;
+}
+
+.choice-chip:active {
+    transform: translateY(4px);
+    border-bottom-width: 0px;
+    margin-bottom: 4px;
+}
+
+.choice-chip .lead {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #374151;
+    margin: 0;
+    line-height: 1.2;
+}
+.choice-chip small {
+    font-size: 0.75rem;
+    color: #9ca3af;
+    font-weight: 600;
+}
+
+/* Hide Used Words (Invisible but takes space if needed, 
+   OR use display:none if layout shift is okay inside bank) */
+.choice-chip.used {
+    visibility: hidden; 
+    pointer-events: none;
+}
+
+
+/* --- UPDATE BANK KATA (Agar Mengecil) --- */
+
+.bank-container {
+    min-height: 60px; /* Tinggi minimal kecil saja */
+    background-color: #fff;
+    border: 2px dashed #e5e7eb;
+    border-radius: 16px;
+    padding: 20px;
+    
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-content: flex-start;
+    
+    /* Transisi halus saat ukurannya berubah */
+    transition: all 0.3s ease;
+}
+
+/* KATA YANG SUDAH DIPAKAI -> HILANG TOTAL */
+.choice-chip.used {
+    display: none !important; /* Ini yang membuat bank kata menyusut */
+}
+
+/* --- UPDATE WARNA VALIDASI (MERAH/HIJAU) --- */
+/* Class ini akan ditambahkan lewat JS saat tombol Cek ditekan */
+
+.slot-correct {
+    background-color: #d1e7dd !important; /* Hijau Muda */
+    border-color: #198754 !important;
+    border-bottom-color: #198754 !important;
+    color: #0f5132 !important;
+}
+.slot-correct .tile-kanji { color: #0f5132 !important; }
+.slot-correct .tile-furigana { color: #0f5132 !important; }
+
+.slot-wrong {
+    background-color: #f8d7da !important; /* Merah Muda */
+    border-color: #dc3545 !important;
+    border-bottom-color: #dc3545 !important;
+    color: #842029 !important;
+    animation: shake 0.4s; /* Efek getar */
+}
+.slot-wrong .tile-kanji { color: #842029 !important; }
+.slot-wrong .tile-furigana { color: #842029 !important; }
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+
+/* --- RESULT AREA (IN-PAGE) --- */
+
+.correction-box {
+    background-color: #fff;
+    border-left: 5px solid #dc3545;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    text-align: left; /* Agar teks koreksi rata kiri */
+}
+
+.result-container {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- RESULT AREA: CORRECTION GRID (CARD STYLE) --- */
+
+/* Wadah Grid: Otomatis mengatur kolom (responsif) */
+.correction-list-grid {
+    display: grid;
+    /* Lebar minimal kartu 240px, sisanya menyesuaikan layar */
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); 
+    gap: 15px;
+    margin-top: 15px;
+}
+
+/* Desain Kartu Koreksi */
+.correction-card {
+    background-color: #fff;
+    border: 1px solid #e2e8f0;
+    border-left: 5px solid #dc3545; /* Garis merah penanda salah */
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%; /* Agar tinggi kartu seragam */
+    transition: transform 0.2s;
+}
+
+.correction-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(220, 53, 69, 0.1);
+}
+
+/* Header Kartu */
+.corr-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed #f1f5f9;
+}
+
+.corr-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #dc3545;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
