@@ -890,3 +890,37 @@ body.jft-mode {
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
+
+/* =========================================
+   PERBAIKAN TAMPILAN FURIGANA SOAL (FINAL)
+   ========================================= */
+
+/* 1. Container Teks Cerita
+   Kita sesuaikan line-height agar baris tidak terlalu renggang
+   gara-gara ada furigana di atasnya. */
+.story-card-body {
+    line-height: 2.4 !important; /* Jarak baris yang pas dan nyaman */
+}
+
+/* 2. Tag <ruby> (Pembungkus Kanji & Furigana)
+   Kita ubah jadi Flexbox agar bisa diatur posisinya dengan presisi. */
+.story-card-body ruby {
+    display: inline-flex;
+    flex-direction: column-reverse; /* Trik: Hiragana di atas, Kanji di bawah */
+    align-items: center; /* KUNCI: Rata tengah horizontal */
+    vertical-align: text-bottom; /* Sejajarkan dasar Kanji dengan teks normal */
+    line-height: 1; /* Rapatkan jarak internal antara kanji dan hiragana */
+    margin: 0 0.05em; /* Jarak horizontal sangat tipis agar tidak terlalu mepet */
+}
+
+/* 3. Tag <rt> (Teks Hiragana Kecil) */
+.story-card-body rt {
+    font-size: 0.55em; /* Ukuran ideal (sekitar setengah dari Kanji) */
+    color: #94a3b8; /* Warna abu-abu lembut, agar tidak mendominasi Kanji */
+    font-weight: normal;
+    margin-bottom: 0.1em; /* Jarak super tipis di atas Kanji */
+    letter-spacing: 0.02em; /* Sedikit renggang agar mudah dibaca */
+    
+    /* Opsional: Agar saat teks dicopy, furigananya tidak ikut (lebih rapi) */
+    user-select: none; 
+}
