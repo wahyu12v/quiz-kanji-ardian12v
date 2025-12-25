@@ -902,25 +902,179 @@ body.jft-mode {
     line-height: 2.4 !important; /* Jarak baris yang pas dan nyaman */
 }
 
-/* 2. Tag <ruby> (Pembungkus Kanji & Furigana)
-   Kita ubah jadi Flexbox agar bisa diatur posisinya dengan presisi. */
-.story-card-body ruby {
-    display: inline-flex;
-    flex-direction: column-reverse; /* Trik: Hiragana di atas, Kanji di bawah */
-    align-items: center; /* KUNCI: Rata tengah horizontal */
-    vertical-align: text-bottom; /* Sejajarkan dasar Kanji dengan teks normal */
-    line-height: 1; /* Rapatkan jarak internal antara kanji dan hiragana */
-    margin: 0 0.05em; /* Jarak horizontal sangat tipis agar tidak terlalu mepet */
+
+
+/* --- STORY IMAGE STYLE --- */
+
+.story-image-wrapper {
+    width: 100%;
+    margin: 0 auto 25px auto; /* Jarak bawah ke teks */
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    background-color: #f1f5f9; /* Placeholder color loading */
+    max-width: 500px; /* Lebar maksimal agar tidak raksasa di PC */
 }
 
-/* 3. Tag <rt> (Teks Hiragana Kecil) */
+.story-image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.story-image-wrapper:hover img {
+    transform: scale(1.02); /* Efek zoom dikit saat hover */
+}
+
+
+/* =========================================
+   LAYOUT SPLIT VIEW (ANTI-SCROLL)
+   ========================================= */
+
+/* =========================================
+   LAYOUT SPLIT VIEW (FLUID + STICKY)
+   ========================================= */
+
+.game-layout-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+@media (min-width: 992px) {
+    .game-layout-wrapper {
+        flex-direction: row; 
+        align-items: flex-start; /* KUNCI: Agar kolom kanan bisa sticky */
+        /* height: 70vh; <--- HAPUS INI agar tidak membatasi tinggi */
+    }
+
+    /* KOLOM KIRI: CERITA */
+    .game-col-story {
+        flex: 7;
+        /* Hapus overflow & scrollbar internal */
+        overflow: visible; 
+    }
+
+    /* KOLOM KANAN: BANK KATA (STICKY) */
+    .game-col-interaction {
+        flex: 3;
+        
+        /* Agar dia diam/nempel saat kiri discroll */
+        position: sticky; 
+        top: 0; 
+        z-index: 10;
+        
+        background-color: #f8fafc;
+        border-radius: 16px;
+        border: 1px dashed #cbd5e1;
+        padding: 20px;
+        
+        /* Agar tingginya pas dengan layar */
+        max-height: 80vh; 
+        overflow-y: auto; /* Scroll cuma di bank kata jika layar terlalu pendek */
+    }
+}
+
+/* --- LOADING SKELETON ANIMATION --- */
+
+.story-image-wrapper {
+    /* Placeholder awal: kotak abu-abu */
+    background-color: #e2e8f0; 
+    min-height: 200px; 
+    position: relative;
+    /* Animasi denyut */
+    animation: pulse-bg 1.5s infinite ease-in-out;
+}
+
+/* Gambar disembunyikan dulu (opacity 0) */
+.story-image-wrapper img {
+    opacity: 0; 
+    transition: opacity 0.5s ease; /* Fade-in effect */
+}
+
+/* Class 'loaded' ditambahkan via JS saat gambar selesai download */
+.story-image-wrapper img.loaded {
+    opacity: 1;
+}
+
+/* Keyframes untuk efek denyut */
+@keyframes pulse-bg {
+    0% { background-color: #e2e8f0; }
+    50% { background-color: #cbd5e1; }
+    100% { background-color: #e2e8f0; }
+}
+
+/* Tweak Bank Kata di Kolom Kanan */
+.game-col-interaction .bank-container {
+    border: none; /* Hilangkan border ganda */
+    background: transparent;
+    padding: 0;
+    min-height: auto;
+}
+
+
+/* =========================================
+   PERBAIKAN FURIGANA (NATURAL FLOW)
+   ========================================= */
+
+/* 1. Kembalikan ke display native (agar menyatu dengan okurigana) */
+.story-card-body ruby {
+    display: ruby;       /* Gunakan standar browser modern */
+    ruby-position: over; /* Paksa furigana di atas */
+    margin: 0;           /* Hapus jarak aneh */
+    padding: 0 1px;      /* Sedikit napas kiri-kanan */
+    vertical-align: baseline; /* KUNCI: Sejajar garis dengan hiragana sebelahnya */
+    line-height: 1.5;    /* Jarak baris normal */
+}
+
+/* 2. Styling Teks Furigana (Hiragana Kecil) */
 .story-card-body rt {
-    font-size: 0.55em; /* Ukuran ideal (sekitar setengah dari Kanji) */
-    color: #94a3b8; /* Warna abu-abu lembut, agar tidak mendominasi Kanji */
+    font-size: 0.55em;   /* Ukuran pas */
+    color: #94a3b8;      /* Abu-abu soft */
+    text-align: center;
     font-weight: normal;
-    margin-bottom: 0.1em; /* Jarak super tipis di atas Kanji */
-    letter-spacing: 0.02em; /* Sedikit renggang agar mudah dibaca */
     
-    /* Opsional: Agar saat teks dicopy, furigananya tidak ikut (lebih rapi) */
-    user-select: none; 
+    /* Geser sedikit ke atas agar tidak nempel Kanji */
+    transform: translateY(-2px); 
+    
+    /* Agar tidak bisa diseleksi (biar rapi saat copy-paste) */
+    user-select: none;   
+}
+
+/* Tweak khusus jika browser tidak support 'display: ruby' sempurna */
+@supports not (display: ruby) {
+    .story-card-body ruby {
+        display: inline-block;
+        text-align: center;
+    }
+}
+
+
+/* --- FIX: HAPUS RUANG KOSONG DI BAWAH CERITA --- */
+
+@media (min-width: 992px) {
+    /* Reset batasan tinggi yang lama */
+    .story-card-body {
+        max-height: none !important; /* Biarkan memanjang natural */
+        overflow: visible !important; /* Matikan scroll internal yang dobel */
+        height: auto !important;
+    }
+
+    /* Pastikan container mengikuti tinggi konten, bukan dipaksa 100% */
+    .game-col-story .story-card-container {
+        height: auto !important; 
+        min-height: 100%; /* Minimal setinggi kolom, tapi bisa lebih */
+        background-color: transparent !important; /* Hilangkan background putih yang sisa */
+        box-shadow: none !important;
+        border: none !important;
+    }
+    
+    /* Pindahkan background putih ke body agar pas dengan teks */
+    .game-col-story .story-card-body {
+        background-color: #fff;
+        border-radius: 16px;
+        min-height: 100%; /* Agar tetap terlihat penuh */
+    }
 }
