@@ -3,7 +3,6 @@ import { shuffleArray } from './utils.js';
 import * as Storage from './storage.js';
 import * as Logic from './logic.js';
 import * as UI from './ui.js';
-// IMPORT BARU: Story Mode
 import * as Story from './story.js'; 
 
 let QUESTIONS = [];
@@ -13,30 +12,22 @@ let quizModal, memModal, confirmModal, daftarRangeModal, daftarListModal, storyM
 async function init() {
     try {
         setupModals();
-
-        // 1. Fetch Data
         const uniqueUrl = 'kanjiasli.json?v=' + new Date().getTime();
         const response = await fetch(uniqueUrl);
         if(!response.ok) throw new Error("File kanjiasli.json tidak ditemukan!");
         QUESTIONS = await response.json();
         
-        // 2. Update Total
         const totalEl = document.getElementById('totalCount');
         if(totalEl) totalEl.innerText = QUESTIONS.length;
         
-        // 3. Generate Checkboxes
         generateCheckboxes('rangeListQuiz', 'q_cb');
         generateCheckboxes('rangeListMem', 'm_cb');
         generateCheckboxes('rangeListDaftar', 'd_cb'); 
 
-        // 4. Update JFT
         updateJftDropdown();
-
-        // 5. INIT STORY MODE (Kirim data pertanyaan ke story.js)
         Story.initStoryMode(QUESTIONS);
         
     } catch(e) { console.error("Error Loading:", e); }
-    
     setupEventListeners();
 }
 
@@ -47,7 +38,6 @@ function setupModals() {
     confirmModal = getModal('confirmModal');
     daftarRangeModal = getModal('daftarRangeModal');
     daftarListModal = getModal('daftarHafalanModal');
-    // Init Modal Story
     storyModal = getModal('storyModal');
 }
 
@@ -60,7 +50,6 @@ function setupEventListeners() {
     bindClick('startBtn', quizModal);
     bindClick('memorizeBtn', memModal);
     bindClick('daftarHafalanBtn', daftarRangeModal);
-    // Bind Tombol Story
     bindClick('storyBtn', storyModal);
     
     setupCheckboxHelpers('selectAllQuiz', 'clearAllQuiz', 'rangeListQuiz');
@@ -87,11 +76,6 @@ function setupEventListeners() {
     const btnShowList = document.getElementById('btnShowList');
     if(btnShowList) btnShowList.onclick = () => renderDaftarList();
 }
-
-// ... (SISA KODE main.js SAMA SEPERTI SEBELUMNYA, TIDAK PERLU DIUBAH) ...
-// (Function updateJftDropdown, generateCheckboxes, renderDaftarList, dll, biarkan sama)
-// ...
-// ...
 
 function updateJftDropdown() {
     const select = document.getElementById('examPackageSelect');
@@ -194,10 +178,27 @@ window.handleBack = () => { Storage.clearTemp(); window.location.href = 'index.h
 
 function finishSession() {
     const result = Logic.gradeSession(state, QUESTIONS);
+    Storage.saveToHistory(result.score, result.total, state.sessionType);
+    
+    const wrongIndices = [];
+    result.details.forEach((item, i) => {
+        if (!item.isCorrect || state.answers[i] === 'Lupa') {
+            wrongIndices.push(state.orderIndices[i]);
+        }
+    });
+
     Storage.clearTemp();
-    UI.renderResult(result, state.sessionType === 'quiz');
+    UI.renderResult(result, state.sessionType === 'quiz', wrongIndices);
     hideStopButton();
 }
+
+// PERBAIKAN: Memastikan tombol berhenti tetap ada saat mengulang soal salah
+window.handleRetryWrong = (indices) => {
+    if (!indices || indices.length === 0) return;
+    startSession(state.sessionType, indices);
+    showStopButton(); // Memunculkan kembali tombol Berhenti
+};
+
 function showStopButton() { document.getElementById('btn-stop-quiz')?.classList.remove('d-none'); }
 function hideStopButton() { document.getElementById('btn-stop-quiz')?.classList.add('d-none'); }
 window.executeStopQuiz = function() {

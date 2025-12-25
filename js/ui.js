@@ -3,7 +3,6 @@ import { KEYS, SELECTORS } from './constants.js';
 
 const area = document.getElementById(SELECTORS.quizArea);
 
-// --- RENDER QUIZ (PILIHAN GANDA) ---
 export function renderQuiz(state, qNo) {
     area.innerHTML = "";
     const idx = state.current;
@@ -46,7 +45,6 @@ export function renderQuiz(state, qNo) {
     area.appendChild(card);
 }
 
-// --- RENDER MEM (HAFALAN) ---
 export function renderMem(state, qNo) {
     area.innerHTML = "";
     const idx = state.current;
@@ -84,69 +82,71 @@ export function renderMem(state, qNo) {
     inp.onkeydown = (e) => { if(e.key === 'Enter') window.handleNextOrSubmit(); };
 }
 
-// --- RENDER HASIL (DIPERBAIKI) ---
-export function renderResult(result, isQuiz) {
+export function renderResult(result, isQuiz, wrongIndices = []) {
     area.innerHTML = "";
     const pct = Math.round((result.score / result.total) * 100);
-    
+    const history = JSON.parse(localStorage.getItem("kanji_app_history") || "[]");
+    const lastHistory = history.slice(0, 3);
+
     let html = `
-    <div class="card shadow-sm"><div class="card-body">
+    <div class="card shadow-sm border-0 mb-4"><div class="card-body">
       <div class="text-center mb-4">
-        <h4>Hasil ${isQuiz?'Quiz':'Tes Hafalan'}</h4>
-        <h1 class="display-4 fw-bold ${pct>60?'text-success':'text-danger'}">${pct}%</h1>
+        <h4 class="fw-bold">Hasil ${isQuiz?'Quiz':'Tes Hafalan'}</h4>
+        <h1 class="display-3 fw-bold ${pct>60?'text-success':'text-danger'}">${pct}%</h1>
         <p class="text-muted">Skor: ${result.score} / ${result.total}</p>
       </div>
-      <div class="d-flex justify-content-center gap-2 mb-4">
-        <button class="btn btn-outline-primary" onclick="window.handleRetry()">Ulangi Sesi Ini</button>
-        <button class="btn btn-dark" onclick="window.handleBack()">Kembali ke Menu</button>
+
+      <div class="d-grid gap-2 mb-4">
+        <div class="row g-2">
+            <div class="col-6">
+                <button class="btn btn-outline-primary w-100 fw-bold" onclick="window.handleRetry()">Ulangi Semua</button>
+            </div>
+            <div class="col-6">
+                <button class="btn btn-dark w-100 fw-bold" onclick="window.handleBack()">Menu Utama</button>
+            </div>
+        </div>
+        
+        ${wrongIndices.length > 0 ? `
+            <button class="btn btn-danger btn-lg shadow-sm fw-bold mt-2" 
+                    onclick="window.handleRetryWrong([${wrongIndices}])">
+                <i class="bi bi-arrow-counterclockwise me-2"></i> Perbaiki ${wrongIndices.length} Soal Salah
+            </button>
+        ` : `
+            <div class="alert alert-success text-center py-2 fw-bold"><i class="bi bi-stars me-2"></i>Sempurna! Tidak ada kesalahan.</div>
+        `}
+      </div>
+
+      <div class="bg-light p-3 rounded-3 mb-4">
+        <h6 class="fw-bold mb-3 small text-uppercase text-secondary"><i class="bi bi-clock-history me-2"></i>Riwayat Terakhir</h6>
+        <div class="table-responsive">
+            <table class="table table-sm table-borderless mb-0" style="font-size: 0.85rem;">
+                ${lastHistory.map(h => `
+                    <tr>
+                        <td class="text-muted">${h.date.split(',')[0]}</td>
+                        <td class="fw-bold">${h.type}</td>
+                        <td class="text-end fw-bold ${h.percentage >= 60 ? 'text-success' : 'text-danger'}">${h.percentage}%</td>
+                    </tr>
+                `).join('')}
+            </table>
+        </div>
       </div>
     `;
     
     result.details.forEach((d, i) => {
         const color = d.isCorrect ? 'text-success' : 'text-danger';
         const label = d.isCorrect ? 'Benar' : 'Salah';
-        
-        // --- LOGIKA TAMPILAN JAWABAN ---
-        let userDisplayHtml = '';
-        
-        if (isQuiz) {
-            // Mode Quiz (Pilihan Ganda)
-            if (d.userAns === 'Lupa') {
-                userDisplayHtml = '<span class="badge bg-warning text-dark">Ditandai Lupa</span>';
-            } else if (d.userAns) {
-                userDisplayHtml = `<strong>${escapeHtml(d.userAns)}</strong>`;
-            } else {
-                userDisplayHtml = '<span class="text-muted fst-italic opacity-50">(Kosong)</span>';
-            }
-        } else {
-            // Mode Hafalan (Ketik Romaji)
-            if (d.userAns === 'Lupa') {
-                // Jika user menekan tombol LUPA
-                userDisplayHtml = '<span class="badge bg-secondary">Ditandai Lupa</span>';
-            } else if (!d.userAns || d.userAns.trim() === '') {
-                // Jika user TIDAK mengisi apa-apa (Kosong)
-                userDisplayHtml = '<span class="text-muted fst-italic opacity-50">(Kosong / Tidak Diisi)</span>';
-            } else {
-                // Jika user mengetik sesuatu (termasuk typo) -> Tampilkan TEBAL & HITAM
-                userDisplayHtml = `<strong class="text-dark border-bottom border-dark px-1">${escapeHtml(d.userAns)}</strong>`;
-            }
-        }
+        const userTxt = isQuiz 
+            ? (d.userAns === 'Lupa' ? 'Lupa' : (d.userAns ? d.userAns : '(Kosong)')) 
+            : (d.userAns || '(Kosong)');
             
         html += `
-        <div class="border-top py-3">
-           <div class="d-flex justify-content-between align-items-center mb-2">
-              <h5 class="mb-0">No ${i+1}: ${escapeHtml(d.q[KEYS.kanji])}</h5>
-              <span class="${color} fw-bold small text-uppercase px-2 py-1 rounded bg-light border">${label}</span>
+        <div class="border-top py-2">
+           <div class="d-flex justify-content-between">
+              <strong>No ${i+1}: ${escapeHtml(d.q[KEYS.kanji])}</strong>
+              <span class="${color} fw-bold small">${label}</span>
            </div>
-           <div class="small text-muted mb-2">
-                Arti: <span class="text-dark">${escapeHtml(d.realMean)}</span> | 
-                Romaji: <span class="text-primary fw-bold">${d.romTrue}</span>
-           </div>
-           
-           <div class="p-2 rounded bg-light border">
-               <small class="text-secondary d-block mb-1" style="font-size: 0.75rem;">Jawaban Kamu:</small>
-               <div style="font-size: 1.1rem;">${userDisplayHtml}</div>
-           </div>
+           <div class="small text-muted">Arti: ${escapeHtml(d.realMean)} | Romaji: ${d.romTrue}</div>
+           <div class="small mt-1">Jawaban Kamu: <strong>${escapeHtml(userTxt)}</strong></div>
         </div>`;
     });
     
