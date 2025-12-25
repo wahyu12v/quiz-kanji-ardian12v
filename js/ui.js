@@ -84,7 +84,7 @@ export function renderMem(state, qNo) {
     inp.onkeydown = (e) => { if(e.key === 'Enter') window.handleNextOrSubmit(); };
 }
 
-// --- RENDER HASIL ---
+// --- RENDER HASIL (DIPERBAIKI) ---
 export function renderResult(result, isQuiz) {
     area.innerHTML = "";
     const pct = Math.round((result.score / result.total) * 100);
@@ -105,18 +105,48 @@ export function renderResult(result, isQuiz) {
     result.details.forEach((d, i) => {
         const color = d.isCorrect ? 'text-success' : 'text-danger';
         const label = d.isCorrect ? 'Benar' : 'Salah';
-        const userTxt = isQuiz 
-            ? (d.userAns === 'Lupa' ? 'Lupa' : (d.userAns ? d.userAns.meaning : '(Kosong)')) 
-            : (d.userAns || '(Kosong)');
+        
+        // --- LOGIKA TAMPILAN JAWABAN ---
+        let userDisplayHtml = '';
+        
+        if (isQuiz) {
+            // Mode Quiz (Pilihan Ganda)
+            if (d.userAns === 'Lupa') {
+                userDisplayHtml = '<span class="badge bg-warning text-dark">Ditandai Lupa</span>';
+            } else if (d.userAns) {
+                userDisplayHtml = `<strong>${escapeHtml(d.userAns)}</strong>`;
+            } else {
+                userDisplayHtml = '<span class="text-muted fst-italic opacity-50">(Kosong)</span>';
+            }
+        } else {
+            // Mode Hafalan (Ketik Romaji)
+            if (d.userAns === 'Lupa') {
+                // Jika user menekan tombol LUPA
+                userDisplayHtml = '<span class="badge bg-secondary">Ditandai Lupa</span>';
+            } else if (!d.userAns || d.userAns.trim() === '') {
+                // Jika user TIDAK mengisi apa-apa (Kosong)
+                userDisplayHtml = '<span class="text-muted fst-italic opacity-50">(Kosong / Tidak Diisi)</span>';
+            } else {
+                // Jika user mengetik sesuatu (termasuk typo) -> Tampilkan TEBAL & HITAM
+                userDisplayHtml = `<strong class="text-dark border-bottom border-dark px-1">${escapeHtml(d.userAns)}</strong>`;
+            }
+        }
             
         html += `
-        <div class="border-top py-2">
-           <div class="d-flex justify-content-between">
-              <strong>No ${i+1}: ${escapeHtml(d.q[KEYS.kanji])}</strong>
-              <span class="${color} fw-bold small">${label}</span>
+        <div class="border-top py-3">
+           <div class="d-flex justify-content-between align-items-center mb-2">
+              <h5 class="mb-0">No ${i+1}: ${escapeHtml(d.q[KEYS.kanji])}</h5>
+              <span class="${color} fw-bold small text-uppercase px-2 py-1 rounded bg-light border">${label}</span>
            </div>
-           <div class="small text-muted">Arti: ${escapeHtml(d.realMean)} | Romaji: ${d.romTrue}</div>
-           <div class="small mt-1">Jawab: <strong>${escapeHtml(userTxt)}</strong></div>
+           <div class="small text-muted mb-2">
+                Arti: <span class="text-dark">${escapeHtml(d.realMean)}</span> | 
+                Romaji: <span class="text-primary fw-bold">${d.romTrue}</span>
+           </div>
+           
+           <div class="p-2 rounded bg-light border">
+               <small class="text-secondary d-block mb-1" style="font-size: 0.75rem;">Jawaban Kamu:</small>
+               <div style="font-size: 1.1rem;">${userDisplayHtml}</div>
+           </div>
         </div>`;
     });
     
@@ -139,7 +169,6 @@ function launchConfetti() {
         wrap.appendChild(el);
         setTimeout(()=>el.remove(), 3000);
     }
-    // Simple inline style injection for animation if keyframes missing
     if(!document.getElementById('confetti-style')){
         const style = document.createElement('style');
         style.id = 'confetti-style';

@@ -1,26 +1,24 @@
 [
-  
-  
   {
     "id": 1,
     "section": "vocabulary",
-    "question": "「教室」 の いみは どれですか。",
-    "choices": ["きょうしつ", "じむしょ", "しょくどう", "かいぎしつ"],
+    "question": "「教室」の意味はどれですか。",
+    "choices": ["教室", "事務所", "食堂", "会議室"],
     "correctAnswer": 0,
     "audio": null
   },
   {
     "id": 2,
     "section": "vocabulary",
-    "question": "あしたは （　　　） ですから、しごとが ありません。",
-    "choices": ["げつようび", "やすみ", "ざんぎょう", "かいぎ"],
+    "question": "明日は （　　　） ですから、仕事がありません。",
+    "choices": ["月曜日", "休み", "残業", "会議"],
     "correctAnswer": 1,
     "audio": null
   },
   {
     "id": 3,
     "section": "vocabulary",
-    "question": "この かんじ の よみかたは どれですか。\n\n「入口」",
+    "question": "この漢字の読み方はどれですか。\n\n「入口」",
     "choices": ["でぐち", "いりぐち", "じんこう", "やまぐち"],
     "correctAnswer": 1,
     "audio": null
@@ -28,46 +26,101 @@
   {
     "id": 4,
     "section": "vocabulary",
-    "question": "「泳ぎます」 の いみは どれですか。",
-    "choices": ["はしります", "あるきます", "およぎます", "やすみます"],
+    "question": "「泳ぎます」の意味はどれですか。",
+    "choices": ["走ります", "歩きます", "泳ぎます", "休みます"],
     "correctAnswer": 2,
     "audio": null
   },
   {
     "id": 5,
     "section": "vocabulary",
-    "question": "机の （　　　） に かばんが あります。",
-    "choices": ["うえ", "なか", "した", "となり"],
+    "question": "机の （　　　） にかばんがあります。",
+    "choices": ["上", "中", "下", "隣"],
     "correctAnswer": 2,
     "audio": null
   },
-  
-  
-  { "id": 6, "section": "vocabulary", "question": "（Soal Latihan 6: Edit di JSON）「新しい」のいみは？", "choices": ["あたらしい", "ふるい", "おおきい", "ちいさい"], "correctAnswer": 0 },
-  { "id": 7, "section": "vocabulary", "question": "（Soal Latihan 7: Edit di JSON）「聞く」のいみは？", "choices": ["きく", "みる", "はなす", "よむ"], "correctAnswer": 0 },
-  { "id": 8, "section": "vocabulary", "question": "（Soal Latihan 8: Edit di JSON）「勉強」のいみは？", "choices": ["べんきょう", "しごと", "うんどう", "かいもの"], "correctAnswer": 0 },
-  { "id": 9, "section": "vocabulary", "question": "（Soal Latihan 9: Edit di JSON）漢字「月」の読み方は？", "choices": ["つき", "ひ", "みず", "き"], "correctAnswer": 0 },
-  { "id": 10, "section": "vocabulary", "question": "（Soal Latihan 10: Edit di JSON）「甘い」のいみは？", "choices": ["あまい", "からい", "すっぱい", "にがい"], "correctAnswer": 0 },
-  { "id": 11, "section": "vocabulary", "question": "（Soal Latihan 11: Edit di JSON）「兄」のいみは？", "choices": ["あに", "おとうと", "あね", "いもうと"], "correctAnswer": 0 },
-  { "id": 12, "section": "vocabulary", "question": "（Soal Latihan 12: Edit di JSON）「帰る」のいみは？", "choices": ["かえる", "いく", "くる", "ねる"], "correctAnswer": 0 },
-  { "id": 13, "section": "vocabulary", "question": "（Soal Latihan 13: Edit di JSON）「会社」のいみは？", "choices": ["かいしゃ", "がっこう", "びょういん", "えき"], "correctAnswer": 0 },
-  { "id": 14, "section": "vocabulary", "question": "（Soal Latihan 14: Edit di JSON）「高い」のいみは？", "choices": ["たかい", "やすい", "ひくい", "みじかい"], "correctAnswer": 0 },
-  { "id": 15, "section": "vocabulary", "question": "（Soal Latihan 15: Edit di JSON）漢字「雨」の読み方は？", "choices": ["あめ", "ゆき", "くもり", "はれ"], "correctAnswer": 0 },
-
-  
-  
+  {
+    "id": 6,
+    "section": "vocabulary",
+    "question": "「新しい」の意味はどれですか。",
+    "choices": ["新しい", "古い", "大きい", "小さい"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 7,
+    "section": "vocabulary",
+    "question": "「聞く」の意味はどれですか。",
+    "choices": ["聞く", "見る", "話す", "読む"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 8,
+    "section": "vocabulary",
+    "question": "「勉強」の意味はどれですか。",
+    "choices": ["勉強", "仕事", "運動", "買い物"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 9,
+    "section": "vocabulary",
+    "question": "漢字「月」の読み方はどれですか。",
+    "choices": ["つき", "ひ", "みず", "き"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 10,
+    "section": "vocabulary",
+    "question": "「甘い」の意味はどれですか。",
+    "choices": ["甘い", "辛い", "酸っぱい", "苦い"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 11,
+    "section": "vocabulary",
+    "question": "「兄」の意味はどれですか。",
+    "choices": ["兄", "弟", "姉", "妹"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 12,
+    "section": "vocabulary",
+    "question": "「帰る」の意味はどれですか。",
+    "choices": ["帰る", "行く", "来る", "寝る"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 13,
+    "section": "vocabulary",
+    "question": "「会社」の意味はどれですか。",
+    "choices": ["会社", "学校", "病院", "駅"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 14,
+    "section": "vocabulary",
+    "question": "「高い」の意味はどれですか。",
+    "choices": ["高い", "安い", "低い", "短い"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 15,
+    "section": "vocabulary",
+    "question": "漢字「雨」の読み方はどれですか。",
+    "choices": ["あめ", "ゆき", "くもり", "はれ"],
+    "correctAnswer": 0
+  },
   {
     "id": 16,
     "section": "conversation",
-    "question": "A: すみません。この ペンは いくらですか。\nB: （＿＿＿＿）。",
-    "choices": ["それは ペンです", "１００えんです", "はい、そうです", "わたしの ペンです"],
+    "question": "A: すみません。このペンはいくらですか。\nB: （＿＿＿＿）。",
+    "choices": ["それはペンです", "100円です", "はい、そうです", "私のペンです"],
     "correctAnswer": 1,
     "audio": null
   },
   {
     "id": 17,
     "section": "conversation",
-    "question": "A: いっしょに 昼ごはんを たべませんか。\nB: （＿＿＿＿）。いきましょう。",
+    "question": "A: 一緒に昼ご飯を食べませんか。\nB: （＿＿＿＿）。行きましょう。",
     "choices": ["ごちそうさまでした", "いいえ、だめです", "いいですね", "さようなら"],
     "correctAnswer": 2,
     "audio": null
@@ -75,131 +128,250 @@
   {
     "id": 18,
     "section": "conversation",
-    "question": "A: おしごとは なんですか。\nB: （＿＿＿＿）。",
-    "choices": ["かいしゃいんです", "２５さいです", "インドネシアです", "たなかです"],
+    "question": "A: お仕事は何ですか。\nB: （＿＿＿＿）。",
+    "choices": ["会社員です", "25歳です", "インドネシアです", "田中です"],
     "correctAnswer": 0,
     "audio": null
   },
   {
     "id": 19,
     "section": "conversation",
-    "question": "A: どうぞ たべてください。\nB: はい、（＿＿＿＿）。",
-    "choices": ["ただいま", "いただきます", "ごちそうさま", "おねがいします"],
+    "question": "A: どうぞ食べてください。\nB: はい、（＿＿＿＿）。",
+    "choices": ["ただいま", "いただきます", "ごちそうさま", "お願いします"],
     "correctAnswer": 1,
     "audio": null
   },
   {
     "id": 20,
     "section": "conversation",
-    "question": "A: トイレは どこですか。\nB: （＿＿＿＿）。",
-    "choices": ["あそこです", "これです", "６じです", "電車です"],
+    "question": "A: トイレはどこですか。\nB: （＿＿＿＿）。",
+    "choices": ["あそこです", "これです", "6時です", "電車です"],
     "correctAnswer": 0,
     "audio": null
   },
-
-  
-  { "id": 21, "section": "conversation", "question": "（Soal 21: Placeholder）A: 元気ですか？ B: ____", "choices": ["はい、元気です", "いいえ", "だめです", "さようなら"], "correctAnswer": 0 },
-  { "id": 22, "section": "conversation", "question": "（Soal 22: Placeholder）A: 名前は？ B: ____", "choices": ["田中です", "はい", "いいえ", "元気"], "correctAnswer": 0 },
-  { "id": 23, "section": "conversation", "question": "（Soal 23: Placeholder）A: 何歳ですか？ B: ____", "choices": ["20歳です", "学生です", "社員です", "男です"], "correctAnswer": 0 },
-  { "id": 24, "section": "conversation", "question": "（Soal 24: Placeholder）A: どこへ行きますか？ B: ____", "choices": ["学校へ行きます", "食べます", "寝ます", "読みます"], "correctAnswer": 0 },
-  { "id": 25, "section": "conversation", "question": "（Soal 25: Placeholder）A: 好きですか？ B: ____", "choices": ["はい、好きです", "知りません", "わかりません", "誰ですか"], "correctAnswer": 0 },
-  { "id": 26, "section": "conversation", "question": "（Soal 26: Placeholder）A: お願いします B: ____", "choices": ["かしこまりました", "だめです", "嫌です", "何ですか"], "correctAnswer": 0 },
-  { "id": 27, "section": "conversation", "question": "（Soal 27: Placeholder）A: ありがとう B: ____", "choices": ["どういたしまして", "ごめんなさい", "すみません", "はい"], "correctAnswer": 0 },
-  { "id": 28, "section": "conversation", "question": "（Soal 28: Placeholder）A: いってきます B: ____", "choices": ["いってらっしゃい", "おかえり", "ただいま", "いただきます"], "correctAnswer": 0 },
-  { "id": 29, "section": "conversation", "question": "（Soal 29: Placeholder）A: ただいま B: ____", "choices": ["おかえりなさい", "いってらっしゃい", "ごちそうさま", "おやすみ"], "correctAnswer": 0 },
-  { "id": 30, "section": "conversation", "question": "（Soal 30: Placeholder）A: おやすみ B: ____", "choices": ["おやすみなさい", "おはよう", "こんにちは", "こんばんは"], "correctAnswer": 0 },
-
-
-  
-  
+  {
+    "id": 21,
+    "section": "conversation",
+    "question": "A: 元気ですか。\nB: （＿＿＿＿）。",
+    "choices": ["はい、元気です", "いいえ", "だめです", "さようなら"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 22,
+    "section": "conversation",
+    "question": "A: お名前は？\nB: （＿＿＿＿）。",
+    "choices": ["田中です", "はい", "いいえ", "元気"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 23,
+    "section": "conversation",
+    "question": "A: 何歳ですか。\nB: （＿＿＿＿）。",
+    "choices": ["20歳です", "学生です", "社員です", "男です"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 24,
+    "section": "conversation",
+    "question": "A: どこへ行きますか。\nB: （＿＿＿＿）。",
+    "choices": ["学校へ行きます", "食べます", "寝ます", "読みます"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 25,
+    "section": "conversation",
+    "question": "A: 好きですか。\nB: （＿＿＿＿）。",
+    "choices": ["はい、好きです", "知りません", "わかりません", "誰ですか"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 26,
+    "section": "conversation",
+    "question": "A: お願いします。\nB: （＿＿＿＿）。",
+    "choices": ["かしこまりました", "だめです", "嫌です", "何ですか"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 27,
+    "section": "conversation",
+    "question": "A: ありがとうございます。\nB: （＿＿＿＿）。",
+    "choices": ["どういたしまして", "ごめんなさい", "すみません", "はい"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 28,
+    "section": "conversation",
+    "question": "A: いってきます。\nB: （＿＿＿＿）。",
+    "choices": ["いってらっしゃい", "おかえりなさい", "ただいま", "いただきます"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 29,
+    "section": "conversation",
+    "question": "A: ただいま。\nB: （＿＿＿＿）。",
+    "choices": ["おかえりなさい", "いってらっしゃい", "ごちそうさま", "おやすみなさい"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 30,
+    "section": "conversation",
+    "question": "A: おやすみなさい。\nB: （＿＿＿＿）。",
+    "choices": ["おやすみなさい", "おはようございます", "こんにちは", "こんばんは"],
+    "correctAnswer": 0
+  },
   {
     "id": 31,
     "section": "listening",
-    "question": "おとこのひとは なにで かいしゃへ いきますか。",
-    "choices": ["バス", "タクシー", "じてんしゃ", "あるいて"],
+    "question": "男の人は何で会社へ行きますか。",
+    "choices": ["バス", "タクシー", "自転車", "歩いて"],
     "correctAnswer": 2,
     "audio": null,
-    "script": "おとこのひと： 田中さん、まいにち どうやって かいしゃへ いきますか。\nおんなのひと： わたしは バスで いきます。ヤンさんは？\nおとこのひと： わたしは じてんしゃで いきます。"
+    "script": "男の人： 田中さん、毎日どうやって会社へ行きますか。\n女の人： 私はバスで行きます。ヤンさんは？\n男の人： 私は自転車で行きます。"
   },
   {
     "id": 32,
     "section": "listening",
-    "question": "ふたりは なんじに あいますか。",
-    "choices": ["１じ", "２じ", "３じ", "４じ"],
+    "question": "二人は何時に会いますか。",
+    "choices": ["1時", "2時", "3時", "4時"],
     "correctAnswer": 1,
     "audio": null,
-    "script": "おとこのひと： あした、えいがを みにいきませんか。\nおんなのひと： いいですね。なんじに あいましょうか。\nおとこのひと： えいがは ３じからです。２じに えきで あいましょう。"
+    "script": "男の人： 明日、映画を見に行きませんか。\n女の人： いいですね。何時に会いましょうか。\n男の人： 映画は3時からです。2時に駅で会いましょう。"
   },
   {
     "id": 33,
     "section": "listening",
-    "question": "おんなのひとは なにを かいますか。",
+    "question": "女の人は何を買いますか。",
     "choices": ["りんご", "みかん", "バナナ", "ぶどう"],
     "correctAnswer": 0,
     "audio": null,
-    "script": "みせのひと： いらっしゃいませ。\nおんなのひと： すみません、この りんごを ３つ ください。\nみせのひと： はい、ありがとうございます。"
+    "script": "店の人： いらっしゃいませ。\n女の人： すみません、このりんごを3つください。\n店の人： はい、ありがとうございます。"
   },
   {
     "id": 34,
     "section": "listening",
-    "question": "あしたの てんきは どうですか。",
-    "choices": ["はれ", "くもり", "あめ", "ゆき"],
+    "question": "明日の天気はどうですか。",
+    "choices": ["晴れ", "曇り", "雨", "雪"],
     "correctAnswer": 2,
     "audio": null,
-    "script": "テレビ： あしたの てんきです。あしたは あさから 雨が ふるでしょう。\nかさを わすれないで ください。"
+    "script": "テレビ： 明日の天気です。明日は朝から雨が降るでしょう。傘を忘れないでください。"
   },
   {
     "id": 35,
     "section": "listening",
-    "question": "どの ぼうしを かぶりますか。",
-    "choices": ["くろい ぼうし", "しろい ぼうし", "あかい ぼうし", "あおい ぼうし"],
+    "question": "どの帽子をかぶりますか。",
+    "choices": ["黒い帽子", "白い帽子", "赤い帽子", "青い帽子"],
     "correctAnswer": 1,
     "audio": null,
-    "script": "おんなのひと： その あかい ぼうし、いいですね。\nおとこのひと： ありがとう。でも きょうは この しろい ぼうしを かぶります。"
+    "script": "女の人： その赤い帽子、いいですね。\n男の人： ありがとう。でも今日はこの白い帽子をかぶります。"
   },
-
-  
-  { "id": 36, "section": "listening", "question": "（Soal 36: Listening Placeholder）なんじですか？", "choices": ["1じ", "2じ", "3じ", "4じ"], "correctAnswer": 0, "script": "いま なんじですか。１じです。" },
-  { "id": 37, "section": "listening", "question": "（Soal 37: Listening Placeholder）なにを食べますか？", "choices": ["パン", "ごはん", "にく", "さかな"], "correctAnswer": 0, "script": "あさごはん、なにをたべますか。パンをたべます。" },
-  { "id": 38, "section": "listening", "question": "（Soal 38: Listening Placeholder）だれですか？", "choices": ["たなかさん", "やまださん", "すずきさん", "さとうさん"], "correctAnswer": 0, "script": "あそこにいるひとは だれですか。たなかさんです。" },
-  { "id": 39, "section": "listening", "question": "（Soal 39: Listening Placeholder）どこですか？", "choices": ["トイレ", "かいぎしつ", "じむしょ", "食堂"], "correctAnswer": 0, "script": "トイレはどこですか。あそこです。" },
-  { "id": 40, "section": "listening", "question": "（Soal 40: Listening Placeholder）いくらですか？", "choices": ["100円", "200円", "300円", "400円"], "correctAnswer": 0, "script": "これはいくらですか。ひゃくえんです。" },
-  { "id": 41, "section": "listening", "question": "（Soal 41: Listening Placeholder）いつですか？", "choices": ["あした", "あさって", "きょう", "きのう"], "correctAnswer": 0, "script": "テストはいつですか。あしたです。" },
-  { "id": 42, "section": "listening", "question": "（Soal 42: Listening Placeholder）なにをしますか？", "choices": ["勉強", "運動", "仕事", "買い物"], "correctAnswer": 0, "script": "あした なにをしますか。べんきょうします。" },
-  { "id": 43, "section": "listening", "question": "（Soal 43: Listening Placeholder）どうやって？", "choices": ["バス", "電車", "車", "歩いて"], "correctAnswer": 0, "script": "どうやって学校へいきますか。バスでいきます。" },
-  { "id": 44, "section": "listening", "question": "（Soal 44: Listening Placeholder）すきなものは？", "choices": ["すし", "てんぷら", "ラーメン", "うどん"], "correctAnswer": 0, "script": "すきなたべものはなんですか。すしです。" },
-  { "id": 45, "section": "listening", "question": "（Soal 45: Listening Placeholder）なんようび？", "choices": ["月曜", "火曜", "水曜", "木曜"], "correctAnswer": 0, "script": "きょうはなんようびですか。げつようびです。" },
-
-  
-  
+  {
+    "id": 36,
+    "section": "listening",
+    "question": "今、何時ですか。",
+    "choices": ["1時", "2時", "3時", "4時"],
+    "correctAnswer": 0,
+    "script": "今、何時ですか。1時です。"
+  },
+  {
+    "id": 37,
+    "section": "listening",
+    "question": "朝ご飯、何を食べますか。",
+    "choices": ["パン", "ご飯", "肉", "魚"],
+    "correctAnswer": 0,
+    "script": "朝ご飯、何を食べますか。パンを食べます。"
+  },
+  {
+    "id": 38,
+    "section": "listening",
+    "question": "あの人は誰ですか。",
+    "choices": ["田中さん", "山田さん", "鈴木さん", "佐藤さん"],
+    "correctAnswer": 0,
+    "script": "あそこにいる人は誰ですか。田中さんです。"
+  },
+  {
+    "id": 39,
+    "section": "listening",
+    "question": "トイレはどこですか。",
+    "choices": ["トイレ", "会議室", "事務所", "食堂"],
+    "correctAnswer": 0,
+    "script": "トイレはどこですか。あそこです。"
+  },
+  {
+    "id": 40,
+    "section": "listening",
+    "question": "これはいくらですか。",
+    "choices": ["100円", "200円", "300円", "400円"],
+    "correctAnswer": 0,
+    "script": "これはいくらですか。100円です。"
+  },
+  {
+    "id": 41,
+    "section": "listening",
+    "question": "テストはいつですか。",
+    "choices": ["明日", "明後日", "今日", "昨日"],
+    "correctAnswer": 0,
+    "script": "テストはいつですか。明日です。"
+  },
+  {
+    "id": 42,
+    "section": "listening",
+    "question": "明日、何をしますか。",
+    "choices": ["勉強", "運動", "仕事", "買い物"],
+    "correctAnswer": 0,
+    "script": "明日、何をしますか。勉強します。"
+  },
+  {
+    "id": 43,
+    "section": "listening",
+    "question": "どうやって学校へ行きますか。",
+    "choices": ["バス", "電車", "車", "歩いて"],
+    "correctAnswer": 0,
+    "script": "どうやって学校へ行きますか。バスで行きます。"
+  },
+  {
+    "id": 44,
+    "section": "listening",
+    "question": "好きな食べ物は何ですか。",
+    "choices": ["寿司", "天ぷら", "ラーメン", "うどん"],
+    "correctAnswer": 0,
+    "script": "好きな食べ物は何ですか。寿司です。"
+  },
+  {
+    "id": 45,
+    "section": "listening",
+    "question": "今日は何曜日ですか。",
+    "choices": ["月曜日", "火曜日", "水曜日", "木曜日"],
+    "correctAnswer": 0,
+    "script": "今日は何曜日ですか。月曜日です。"
+  },
   {
     "id": 46,
     "section": "reading",
-    "question": "【メール】\nたなかさん、あしたの かいぎは ２じからです。\n３かいの かいぎしつに きてください。\n\nしつもん： かいぎは どこで ありますか。",
-    "choices": ["２かい", "３かい", "４かい", "５かい"],
+    "question": "【メール】\n田中さん、明日の会議は2時からです。\n3階の会議室に来てください。\n\n質問： 会議はどこでありますか。",
+    "choices": ["2階", "3階", "4階", "5階"],
     "correctAnswer": 1,
     "audio": null
   },
   {
     "id": 47,
     "section": "reading",
-    "question": "【メモ】\n「さとう かってきて。ぎゅうにゅうも おねがい。」\n\nしつもん： なにを かいますか。",
-    "choices": ["さとう だけ", "ぎゅうにゅう だけ", "さとう と ぎゅうにゅう", "なにも かいません"],
+    "question": "【メモ】\n「砂糖、買ってきて。牛乳もお願い。」\n\n質問： 何を買いますか。",
+    "choices": ["砂糖だけ", "牛乳だけ", "砂糖と牛乳", "何も買いません"],
     "correctAnswer": 2,
     "audio": null
   },
   {
     "id": 48,
     "section": "reading",
-    "question": "【かんばん】\n「ここは エレベーターです。かいだんは あちらです。」\n\nしつもん： ここは なんですか。",
-    "choices": ["かいだん", "トイレ", "エレベーター", "へや"],
+    "question": "【看板】\n「ここはエレベーターです。階段はあちらです。」\n\n質問： ここは何ですか。",
+    "choices": ["階段", "トイレ", "エレベーター", "部屋"],
     "correctAnswer": 2,
     "audio": null
   },
   {
     "id": 49,
     "section": "reading",
-    "question": "【メール】\n「来週の日曜日は 暇ですか。映画を見に行きませんか。」\n\nしつもん： いつ 映画に行きますか。",
+    "question": "【メール】\n「来週の日曜日は暇ですか。映画を見に行きませんか。」\n\n質問： いつ映画に行きますか。",
     "choices": ["今週の日曜日", "来週の日曜日", "来週の月曜日", "明日"],
     "correctAnswer": 1,
     "audio": null
@@ -207,21 +379,79 @@
   {
     "id": 50,
     "section": "reading",
-    "question": "【メモ】\n「冷蔵庫に ケーキがあります。食べてください。」\n\nしつもん： ケーキは どこに ありますか。",
+    "question": "【メモ】\n「冷蔵庫にケーキがあります。食べてください。」\n\n質問： ケーキはどこにありますか。",
     "choices": ["机の上", "冷蔵庫の中", "箱の中", "かばんの中"],
     "correctAnswer": 1,
     "audio": null
   },
-  
-  
-  { "id": 51, "section": "reading", "question": "（Soal 51 Reading Placeholder）これは何ですか？", "choices": ["A", "B", "C", "D"], "correctAnswer": 0 },
-  { "id": 52, "section": "reading", "question": "（Soal 52 Reading Placeholder）これは何ですか？", "choices": ["A", "B", "C", "D"], "correctAnswer": 0 },
-  { "id": 53, "section": "reading", "question": "（Soal 53 Reading Placeholder）これは何ですか？", "choices": ["A", "B", "C", "D"], "correctAnswer": 0 },
-  { "id": 54, "section": "reading", "question": "（Soal 54 Reading Placeholder）これは何ですか？", "choices": ["A", "B", "C", "D"], "correctAnswer": 0 },
-  { "id": 55, "section": "reading", "question": "（Soal 55 Reading Placeholder）これは何ですか？", "choices": ["A", "B", "C", "D"], "correctAnswer": 0 },
-  { "id": 56, "section": "reading", "question": "（Soal 56 Reading Placeholder）これは何ですか？", "choices": ["A", "B", "C", "D"], "correctAnswer": 0 },
-  { "id": 57, "section": "reading", "question": "（Soal 57 Reading Placeholder）これは何ですか？", "choices": ["A", "B", "C", "D"], "correctAnswer": 0 },
-  { "id": 58, "section": "reading", "question": "（Soal 58 Reading Placeholder）これは何ですか？", "choices": ["A", "B", "C", "D"], "correctAnswer": 0 },
-  { "id": 59, "section": "reading", "question": "（Soal 59 Reading Placeholder）これは何ですか？", "choices": ["A", "B", "C", "D"], "correctAnswer": 0 },
-  { "id": 60, "section": "reading", "question": "（Soal 60 Reading Placeholder）これは何ですか？", "choices": ["A", "B", "C", "D"], "correctAnswer": 0 }
+  {
+    "id": 51,
+    "section": "reading",
+    "question": "【注意書き】\n「ここで写真を撮らないでください。」\n\n質問： ここで何をしてはいけませんか。",
+    "choices": ["写真を撮る", "ご飯を食べる", "話す", "走る"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 52,
+    "section": "reading",
+    "question": "【メール】\n「明日、3時に駅で会いましょう。」\n\n質問： どこで会いますか。",
+    "choices": ["駅", "会社", "学校", "公園"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 53,
+    "section": "reading",
+    "question": "【日記】\n「今日は日曜日です。朝、パンを食べました。それから、図書館へ行きました。」\n\n質問： どこへ行きましたか。",
+    "choices": ["図書館", "デパート", "映画館", "美術館"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 54,
+    "section": "reading",
+    "question": "【メモ】\n「鈴木さん、電話がありました。後で、山田さんに電話してください。」\n\n質問： 誰に電話しますか。",
+    "choices": ["山田さん", "鈴木さん", "佐藤さん", "田中さん"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 55,
+    "section": "reading",
+    "question": "【案内】\n「図書館は午前9時から午後8時までです。」\n\n質問： 図書館は何時に終わりますか。",
+    "choices": ["午後8時", "午前9時", "午後9時", "午前8時"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 56,
+    "section": "reading",
+    "question": "【メール】\n「来週のパーティーは、金曜日です。時間は6時からです。」\n\n質問： パーティーは何曜日ですか。",
+    "choices": ["金曜日", "土曜日", "日曜日", "月曜日"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 57,
+    "section": "reading",
+    "question": "【手紙】\n「元気ですか。私は今、日本にいます。毎日日本語を勉強しています。」\n\n質問： この人は今どこにいますか。",
+    "choices": ["日本", "アメリカ", "中国", "韓国"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 58,
+    "section": "reading",
+    "question": "【ポスター】\n「夏休み子供映画祭り！ 8月1日から8月10日まで。」\n\n質問： いつ始まりますか。",
+    "choices": ["8月1日", "8月10日", "8月20日", "7月1日"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 59,
+    "section": "reading",
+    "question": "【メモ】\n「会議室の鍵は、事務所にあります。」\n\n質問： 鍵はどこにありますか。",
+    "choices": ["事務所", "会議室", "教室", "受付"],
+    "correctAnswer": 0
+  },
+  {
+    "id": 60,
+    "section": "reading",
+    "question": "【メール】\n「土曜日、サッカーをしませんか。」\n\n質問： 何をしますか。",
+    "choices": ["サッカー", "テニス", "野球", "バスケットボール"],
+    "correctAnswer": 0
+  }
 ]
