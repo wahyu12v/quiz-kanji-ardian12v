@@ -1,6 +1,9 @@
 let storiesData = [];
 let currentStoryIndex = 0; // Untuk melacak posisi cerita
 
+// VARIABEL GLOBAL AUDIO (PENTING: Agar suara tidak putus/bisu di PC)
+let activeUtterance = null; 
+
 document.addEventListener("DOMContentLoaded", () => {
     // Setup Tampilan Awal
     const exitBtn = document.getElementById("exit-btn");
@@ -22,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnAudio = document.getElementById("btn-audio");
     if (btnAudio) btnAudio.addEventListener("click", playAudio);
 
-    // Listener Tombol Stop (Pastikan tombol ini ada di HTML Anda)
+    // Listener Tombol Stop (BARU)
     const btnStop = document.getElementById("btn-stop");
     if (btnStop) btnStop.addEventListener("click", stopAudio);
 
@@ -87,7 +90,7 @@ function parseTemplate(text) {
     });
 }
 
-// --- LOGIKA UTAMA (TIDAK DIUBAH, KECUALI STOP AUDIO) ---
+// --- LOGIKA UTAMA ---
 
 function openStory(id) {
     // Simpan index cerita yang sedang dibuka
@@ -172,16 +175,16 @@ function toggleTranslation() {
     }
 }
 
-// --- LOGIKA AUDIO (DIPERBAIKI UNTUK PC & STOP) ---
+// --- LOGIKA AUDIO (PERBAIKAN UTAMA) ---
 
-// Fungsi Helper: Menunggu daftar suara dimuat (Fix untuk PC Chrome/Edge)
+// Fungsi Helper: Menunggu daftar suara dimuat (Solusi untuk PC)
 function getVoicesPromise() {
     return new Promise((resolve) => {
         let voices = window.speechSynthesis.getVoices();
         if (voices.length > 0) {
             resolve(voices);
         } else {
-            // Jika suara belum siap (array kosong), tunggu event ini
+            // Jika suara belum siap, tunggu event onvoiceschanged
             window.speechSynthesis.onvoiceschanged = () => {
                 resolve(window.speechSynthesis.getVoices());
             };
@@ -200,25 +203,26 @@ async function playAudio() {
     const cleanText = story.template.replace(/\[\[(.*?)\|.*?\]\]/g, "$1");
 
     if ('speechSynthesis' in window) {
-        // 3. Tunggu sampai browser siap memberikan daftar suara
+        // 3. Tunggu sampai browser siap (Fix untuk PC)
         const voices = await getVoicesPromise();
 
-        const utterance = new SpeechSynthesisUtterance(cleanText);
+        // 4. Masukkan ke variabel GLOBAL activeUtterance
+        activeUtterance = new SpeechSynthesisUtterance(cleanText);
         
-        // 4. Paksa Bahasa Jepang
-        utterance.lang = 'ja-JP'; 
+        // 5. Paksa Bahasa Jepang
+        activeUtterance.lang = 'ja-JP'; 
         
-        // 5. Coba cari suara Jepang asli (Google / Microsoft / Apple)
-        // Agar tidak membaca angka dalam bahasa Inggris
+        // 6. Cari suara Jepang terbaik
         const japanVoice = voices.find(v => v.lang === 'ja-JP' || v.name.includes('Japan') || v.name.includes('Google日本語'));
         
         if (japanVoice) {
-            utterance.voice = japanVoice;
+            activeUtterance.voice = japanVoice;
         }
 
-        utterance.rate = 0.9; // Kecepatan sedikit lambat
+        activeUtterance.rate = 0.9; // Kecepatan
         
-        window.speechSynthesis.speak(utterance);
+        // 7. Mainkan
+        window.speechSynthesis.speak(activeUtterance);
     } else {
         alert("Browser Anda tidak mendukung fitur suara.");
     }
@@ -227,6 +231,7 @@ async function playAudio() {
 function stopAudio() {
     if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
+        activeUtterance = null; // Reset variabel global
     }
 }
 
@@ -257,7 +262,6 @@ function updateNavButtons() {
 
 function prevStory() {
     if (currentStoryIndex > 0) {
-        // Ambil ID dari index sebelumnya
         const prevId = storiesData[currentStoryIndex - 1].id;
         openStory(prevId);
     }
@@ -265,7 +269,6 @@ function prevStory() {
 
 function nextStory() {
     if (currentStoryIndex < storiesData.length - 1) {
-        // Ambil ID dari index setelahnya
         const nextId = storiesData[currentStoryIndex + 1].id;
         openStory(nextId);
     }

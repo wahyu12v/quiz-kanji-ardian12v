@@ -409,3 +409,20 @@ rt {
 .custom-btn i {
     font-size: 18px;
 }
+
+/* Style Tombol Stop (Merah) */
+.btn-stop {
+    background-color: white;
+    border: 1px solid #ff4757;
+    color: #ff4757;
+}
+
+.btn-stop:hover {
+    background-color: #ffe0e3; /* Merah muda pudar saat di-hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(255, 71, 87, 0.2);
+}
+
+.btn-stop:active {
+    transform: scale(0.95);
+}
