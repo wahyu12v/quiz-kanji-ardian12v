@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function fetchStories() {
     const spinner = document.getElementById("loading-spinner");
-    fetch('data.json')
+    fetch('bacaanlengkap.json')
         .then(res => {
             if (!res.ok) throw new Error("Gagal mengambil data.");
             return res.json();
