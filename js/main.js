@@ -5,6 +5,7 @@ import * as Logic from './logic.js';
 import * as UI from './ui.js';
 import * as Story from './story.js'; 
 
+
 let QUESTIONS = [];
 let state = null; 
 let quizModal, memModal, confirmModal, daftarRangeModal, daftarListModal, storyModal;
@@ -12,11 +13,18 @@ let quizModal, memModal, confirmModal, daftarRangeModal, daftarListModal, storyM
 async function init() {
     try {
         setupModals();
+        // Load data dengan timestamp untuk mencegah cache browser (masalah data lama)
         const uniqueUrl = 'kanjiasli.json?v=' + new Date().getTime();
         const response = await fetch(uniqueUrl);
         if(!response.ok) throw new Error("File kanjiasli.json tidak ditemukan!");
+        
         QUESTIONS = await response.json();
         
+        // Debugging: Cek di Console browser apakah data romaji ada
+        if(QUESTIONS.length > 0) {
+            console.log("Cek Data Pertama:", QUESTIONS[0]); 
+        }
+
         const totalEl = document.getElementById('totalCount');
         if(totalEl) totalEl.innerText = QUESTIONS.length;
         
@@ -104,19 +112,39 @@ function generateCheckboxes(containerId, prefix) {
     }
 }
 
+// === BAGIAN UTAMA YANG DIPERBAIKI ===
 function renderDaftarList() {
     const indices = getCheckedIndices('rangeListDaftar');
     if(indices.length === 0) return alert("Pilih minimal satu paket.");
+    
     daftarRangeModal?.hide();
     const listContainer = document.getElementById('daftarList');
+    
     if(listContainer) {
         listContainer.innerHTML = '';
         indices.forEach(idx => {
             const item = QUESTIONS[idx];
             if(!item) return;
+            
             const card = document.createElement('div');
-            card.className = 'kanji-card-small shadow-sm'; 
-            card.innerHTML = `<div class="k-char">${item.Kanji || item.kanji || '?'}</div><div class="k-info"><div class="k-read text-dark">${item.Hiragana || item.hiragana || '-'}</div><div class="k-mean text-muted small">${item.Arti || item.arti || item.meaning || ''}</div></div>`;
+            card.className = 'kanji-card-small shadow-sm text-center p-2'; 
+            
+            // Perhatikan baris div class="k-romaji" di bawah ini:
+            // Pastikan data JSON memiliki key "romaji" atau "Romaji"
+            const romajiText = item.Romaji || item.romaji || "-";
+
+            card.innerHTML = `
+                <div class="k-char fw-bold text-primary" style="font-size: 2rem;">${item.Kanji || item.kanji || '?'}</div>
+                <div class="k-info">
+                    <div class="k-read text-dark fw-bold">${item.Hiragana || item.hiragana || '-'}</div>
+                    
+                    <div class="k-romaji text-danger fw-bold" style="font-size: 0.9rem; margin: 2px 0;">
+                        ${romajiText}
+                    </div>
+
+                    <div class="k-mean text-secondary small border-top pt-1 mt-1">${item.Arti || item.arti || ''}</div>
+                </div>`;
+            
             listContainer.appendChild(card);
         });
     }
@@ -192,11 +220,10 @@ function finishSession() {
     hideStopButton();
 }
 
-// PERBAIKAN: Memastikan tombol berhenti tetap ada saat mengulang soal salah
 window.handleRetryWrong = (indices) => {
     if (!indices || indices.length === 0) return;
     startSession(state.sessionType, indices);
-    showStopButton(); // Memunculkan kembali tombol Berhenti
+    showStopButton(); 
 };
 
 function showStopButton() { document.getElementById('btn-stop-quiz')?.classList.remove('d-none'); }
