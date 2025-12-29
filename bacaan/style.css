@@ -153,30 +153,109 @@ body {
     border-radius: 30px;
     overflow: hidden;
     position: relative;
+    /* Tambahkan shadow agar lebih pop-up */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
 }
 
+/* Container Header - UBAH KE AUTO agar tidak ada jarak sisa */
 .reader-hero-container {
-    height: 400px;
-    background-color: #eee;
+    height: auto; /* DULU 400px, SEKARANG AUTO */
+    background-color: transparent; /* Hilangkan warna abu-abu */
 }
 
-.reader-image-hero {
+/* Header Reader untuk Ikon */
+.reader-hero-icon {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: 250px; /* Tinggi Header Ikon */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    color: white;
+    /* Hapus border-radius jika ingin full lebar */
+    text-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
 .reader-main-title {
     font-family: 'Noto Sans JP', sans-serif;
     color: var(--primary-color);
     font-size: 2rem;
+    margin-top: -10px; /* Sedikit naik ke atas */
 }
 
 .reader-divider {
-    width: 60px;
-    border-top: 3px solid var(--primary-color);
+    width: 80px;
+    border-top: 4px solid var(--primary-color);
     opacity: 1;
     border-radius: 10px;
+    margin-bottom: 40px !important; /* Jarak ke teks Jepang */
+}
+
+/* Konten Teks */
+.reader-body {
+    padding: 40px 50px; /* Padding isi cerita */
+}
+
+.japanese-content {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1.6rem;
+    line-height: 2.6; /* Spasi baris agar furigana jelas */
+    color: #333;
+    text-align: justify;
+}
+
+ruby {
+    ruby-position: over;
+}
+rt {
+    font-size: 0.6em;
+    color: var(--primary-color);
+    font-weight: normal;
+    user-select: none;
+}
+
+.translation-box {
+    background-color: #f0f7ff;
+    border-left: 5px solid var(--primary-color); /* Garis biru di kiri */
+    padding: 25px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    margin-top: 20px;
+}
+
+/* --- ICON STYLE (CARD LIST) --- */
+.card-icon-wrapper {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    color: white;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: transform 0.5s ease;
+}
+
+.story-card:hover .card-icon-wrapper {
+    transform: scale(1.05);
+}
+
+.story-card:hover .card-icon-wrapper i {
+    transform: scale(1.2) rotate(5deg);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Hapus skeleton loading */
+.skeleton { animation: none; background: none; }
+
+/* Responsif Mobile */
+@media (max-width: 768px) {
+    .card-icon-wrapper { height: 150px; font-size: 3rem; }
+    .reader-hero-icon { height: 200px; font-size: 4rem; }
+    .japanese-content { font-size: 1.3rem; line-height: 2.2; }
+    .reader-main-title { font-size: 1.5rem; }
+    .reader-body { padding: 30px 20px; }
 }
 
 .japanese-content {
@@ -234,4 +313,46 @@ rt {
     .reader-main-title {
         font-size: 1.5rem;
     }
+}
+
+
+/* --- ICON STYLE PENGGANTI GAMBAR --- */
+
+.card-icon-wrapper {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem; /* Ukuran Ikon Besar */
+    color: white;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: transform 0.5s ease;
+}
+
+.story-card:hover .card-icon-wrapper {
+    transform: scale(1.05);
+}
+
+.story-card:hover .card-icon-wrapper i {
+    transform: scale(1.2) rotate(5deg);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Style untuk Header di Mode Baca */
+.reader-hero-icon {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 6rem;
+    color: white;
+    border-radius: 30px 30px 0 0; /* Lengkung atas saja */
+    text-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* Sembunyikan skeleton loading karena kita tidak pakai gambar lagi */
+.skeleton {
+    animation: none;
+    background: none;
 }

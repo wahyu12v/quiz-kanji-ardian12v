@@ -1,18 +1,18 @@
 let storiesData = [];
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Pastikan state awal: Tombol Exit MUNCUL, Tombol Back-to-List SEMBUNYI
+    // Navigasi Awal: Tampilkan Exit, Sembunyikan Back
     document.getElementById("exit-btn").classList.remove('d-none');
     document.getElementById("header-back-btn").classList.add('d-none');
 
     fetchStories();
     
-    // Event listener
+    // Listeners
     document.getElementById("header-back-btn").addEventListener("click", goBack);
     document.getElementById("toggle-trans-btn").addEventListener("click", toggleTranslation);
 });
 
-// --- FUNGSI UTAMA ---
+// --- FUNGSI FETCH & RENDER ---
 
 function fetchStories() {
     const spinner = document.getElementById("loading-spinner");
@@ -41,10 +41,11 @@ function renderStories(stories) {
         const col = document.createElement("div");
         col.className = "col-md-6 col-lg-4 d-flex align-items-stretch";
         
+        // RENDER KARTU DENGAN IKON & BACKGROUND GRADASI
         col.innerHTML = `
             <div class="story-card w-100">
-                <div class="card-img-wrapper skeleton">
-                    <img src="${story.image}" class="card-img-top" alt="${story.title}" loading="lazy" onload="this.parentElement.classList.remove('skeleton')">
+                <div class="card-icon-wrapper" style="background: ${story.color}">
+                    <i class="${story.icon}"></i>
                 </div>
                 <div class="card-body-custom text-center">
                     <h5 class="story-title">${story.title}</h5>
@@ -64,30 +65,45 @@ function parseTemplate(text) {
     });
 }
 
-// --- INTERAKSI ---
+// --- LOGIKA NAVIGASI ---
 
 function openStory(id) {
     const story = storiesData.find(s => s.id === id);
     if (!story) return;
 
+    // --- SETUP HEADER READER (IKON) ---
     const readerImg = document.getElementById("reader-img");
-    readerImg.parentElement.classList.add('skeleton');
-    readerImg.src = story.image;
-    readerImg.onload = function() { this.parentElement.classList.remove('skeleton'); };
+    readerImg.style.display = 'none'; // Sembunyikan elemen gambar asli
+
+    // Cek apakah wrapper ikon sudah ada, jika belum buat baru
+    let iconWrapper = document.getElementById("reader-icon-wrapper");
+    if (!iconWrapper) {
+        iconWrapper = document.createElement("div");
+        iconWrapper.id = "reader-icon-wrapper";
+        iconWrapper.className = "reader-hero-icon";
+        // Masukkan sebelum elemen gambar
+        readerImg.parentNode.insertBefore(iconWrapper, readerImg);
+    }
+    
+    // Update Tampilan Ikon Reader
+    iconWrapper.style.background = story.color;
+    iconWrapper.innerHTML = `<i class="${story.icon}"></i>`;
+    iconWrapper.style.display = 'flex';
+    // ----------------------------------
 
     document.getElementById("reader-title").innerText = story.title;
     document.getElementById("reader-text").innerHTML = parseTemplate(story.template);
     document.getElementById("reader-translation").innerText = story.translation;
     
-    // Reset View
+    // Reset State
     document.getElementById("reader-translation").style.display = 'none';
     document.getElementById("toggle-trans-btn").innerHTML = '<i class="fas fa-language me-2"></i> Tampilkan Terjemahan';
 
-    // Pindah Tampilan ke Reader
+    // Switch View
     document.getElementById("list-view").style.display = 'none';
     document.getElementById("reader-view").style.display = 'block';
     
-    // LOGIKA TOMBOL: Sembunyikan "Exit", Tampilkan "Back to List"
+    // Switch Tombol Navigasi
     document.getElementById("exit-btn").classList.add('d-none');
     document.getElementById("header-back-btn").classList.remove('d-none');
     
@@ -95,11 +111,10 @@ function openStory(id) {
 }
 
 function goBack() {
-    // Pindah Tampilan ke List
     document.getElementById("reader-view").style.display = 'none';
     document.getElementById("list-view").style.display = 'block';
     
-    // LOGIKA TOMBOL: Tampilkan "Exit", Sembunyikan "Back to List"
+    // Switch Tombol Navigasi
     document.getElementById("exit-btn").classList.remove('d-none');
     document.getElementById("header-back-btn").classList.add('d-none');
 }

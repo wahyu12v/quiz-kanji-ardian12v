@@ -4,41 +4,47 @@
     "title": "Gunung Fuji (富士山)",
     "translation": "Ini adalah Gunung Fuji. Gunung Fuji adalah gunung tertinggi di Jepang. Gunung yang sangat besar dan indah. Gunung Fuji sangat terkenal di Jepang. Gunung Fuji adalah simbol Jepang. Banyak orang Jepang dan orang asing pergi untuk melihat Gunung Fuji. Di musim dingin, Gunung Fuji memiliki salju putih dan sangat indah. Di musim panas, ada banyak orang yang mendaki Gunung Fuji. Di sekitar Gunung Fuji terdapat danau dan hutan. Pada hari dengan cuaca bagus, langit biru dan Gunung Fuji terlihat sangat cantik. Saya ingin mendaki Gunung Fuji suatu saat nanti.",
     "template": "これは [[富士山|ふじさん]]です。[[富士山|ふじさん]]は [[日本|にほん]]で [[一番|いちばん]] [[高い|たかい]] [[山|やま]]です。とても [[大きく|おおきく]]て [[綺麗|きれい]]な [[山|やま]]です。[[富士山|ふじさん]]は [[日本|にほん]]で とても [[有名|ゆうめい]]です。[[富士山|ふじさん]]は [[日本|にほん]]の シンボルです。たくさんの [[日本人|にほんじん]]や [[外国人|がいこくじん]]が [[富士山|ふじさん]]を [[見|み]]に [[行き|いき]]ます。[[冬|ふゆ]]の [[富士山|ふじさん]]は [[白い|しろい]] [[雪|ゆき]]が あって、とても [[美しい|うつくしい]]です。[[夏|なつ]]には [[富士山|ふじさん]]に [[登る|のぼる]] [[人|ひと]]が [[沢山|たくさん]] います。[[富士山|ふじさん]]の [[周り|まわり]]には、[[湖|みずうみ]]や [[森|もり]]が あります。[[天気|てんき]]が [[良い|いい]] [[日|ひ]]には、[[空|そら]]が [[青く|あおく]]て、[[富士山|ふじさん]]が とても [[綺麗|きれい]]に [[見え|みえ]]ます。[[私|わたし]]は [[何時か|いつか]] [[富士山|ふじさん]]に [[登りたい|のぼりたい]]です。",
-    "image": "https://cdn.dribbble.com/users/1931375/screenshots/5997034/media/a8185042412c048a16654666d15b5489.jpg?resize=800x600&vertical=center"
+    "icon": "fas fa-mountain",
+    "color": "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)"
   },
   {
     "id": "s2",
     "title": "Kehidupan Anjing (犬の生活)",
     "translation": "Saya adalah Tomo. Saya tinggal di rumah Tuan Santos. Setiap pagi saya pergi jalan-jalan bersama Nyonya. Sekitar jam 8 saya pergi ke sekolah bersama Teresa. Setelah itu saya pulang ke rumah. Lalu, saya pergi berbelanja bersama Nyonya. Sore harinya saya pergi menjemput Teresa di sekolah. Kemudian kami pergi bermain bersama di taman. Pada akhir pekan, sekolah Teresa dan kantor Tuan Santos libur. Keluarga Tuan Santos pergi bermain ke tempat yang jauh dengan mobil. Saya juga ikut pergi bersama. Sangat melelahkan. Di rumah Tuan Santos juga ada kucing. Kucing itu setiap hari tidak melakukan apa-apa. Tidak pergi ke mana pun. Saya sibuk dari pagi sampai malam. Sama sekali tidak ada libur. Saya ingin beristirahat bersama kucing.",
     "template": "[[私|わたし]]は トモです。サントスさんの うちに います。[[私|わたし]]は [[毎朝|まいあさ]] [[奥|おく]]さんと [[散歩|さんぽ]]に [[行|い]]きます。[[8時|はちじ]]ごろ テレーザちゃんと [[学校|がっこう]]へ [[行|い]]きます。それから うちへ [[帰|かえ]]ります。そして、[[奥|おく]]さんと [[買い物|かいもの]]に [[行|い]]きます。[[午後|ごご]] [[学校|がっこう]]へ テレーザちゃんを [[迎|むか]]えに [[行|い]]きます。それから いっしょに [[公園|こうえん]]へ [[遊|あそ]]びに [[行|い]]きます。[[週末|しゅうまつ]]は テレーザちゃんの [[学校|がっこう]]と サントスさんの [[会社|かいしゃ]]は [[休|やす]]みです。サントスさんの [[家族|かぞく]]は [[遠|とお]]い ところへ [[車|くるま]]で [[遊|あそ]]びに [[行|い]]きます。[[私|わたし]]も いっしょに [[行|い]]きます。とても [[疲|つか]]れます。サントスさんの うちに [[猫|ねこ]]も います。[[猫|ねこ]]は [[毎日|まいにち]] なにも しません。どこも [[行|い]]きません。[[私|わたし]]は [[朝|あさ]]から [[晩|ばん]]まで [[忙|いそが]]しいです。[[休|やす]]みが [[全然|ぜんぜん]] ありません。[[私|わたし]]は [[猫|ねこ]]と いっしょに [[休|やす]]みたいです。",
-    "image": "https://cdn.dribbble.com/users/1769954/screenshots/11917107/media/c13398035699f3b158207026fc674192.png?resize=800x600&vertical=center"
+    "icon": "fas fa-dog",
+    "color": "linear-gradient(135deg, #f6d365 0%, #fda085 100%)"
   },
   {
     "id": "s3",
     "title": "Hari Natal (クリスマス)",
     "translation": "Natal adalah tanggal 24 Desember. Natal adalah hari yang sangat istimewa. Ketika memasuki bulan Desember, cuaca menjadi dingin. Di rumah dan di toko-toko terdapat hiasan Natal. Melihat pohon Natal yang besar itu menyenangkan. Malam harinya, saya makan bersama keluarga. Kami makan kue dan minum jus. Kami mengucapkan 'Selamat Natal' kepada teman-teman. Anak-anak senang mendapatkan hadiah. Natal adalah hari yang sangat menyenangkan. Saya sangat suka Natal.",
     "template": "[[クリスマス|くりすます]]は [[12月|じゅうにがつ]][[24日|にじゅうよっか]]です。[[クリスマス|くりすます]]は とても [[特別|とくべつ]]な [[日|ひ]]です。[[12月|じゅうにがつ]]に なると、[[寒|さむ]]く なります。[[家|いえ]]や [[店|みせ]]に [[クリスマス|くりすます]]の [[飾|かざ]]りが あります。[[大|おお]]きい [[クリスマス|くりすます]]ツリーを [[見|み]]るのは [[楽|たの]]しいです。[[夜|よる]]、[[家族|かぞく]]と [[一緒|いっしょ]]に [[食事|しょくじ]]を します。ケーキを [[食|た]]べて、ジュースを [[飲|の]]みます。[[友達|ともだち]]に「メリークリスマス」と [[言|い]]います。[[子供|こども]]たちは プレゼントを もらって [[嬉|うれ]]しいです。[[クリスマス|くりすます]]は とても [[楽|たの]]しい [[日|ひ]]です。[[私|わたし]]は [[クリスマス|くりすます]]が とても [[好|す]]きです。",
-    "image": "https://cdn.dribbble.com/users/131502/screenshots/9685190/media/975d60e2673d59993b06a62d0566046b.png?resize=800x600&vertical=center"
+    "icon": "fas fa-tree",
+    "color": "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)"
   },
   {
     "id": "s4",
     "title": "Santa Claus (サンタクロース)",
     "translation": "Saya adalah Santa Claus. Saya tinggal di tempat yang sangat dingin. Saya suka baju merah. Baju merah itu hangat. Saya hanya bekerja satu hari dalam setahun. Yaitu tanggal 24 Desember. Pada malam tanggal 24 Desember, saya memberikan hadiah yang bagus kepada anak-anak. Saya masih lajang. Saya tidak punya anak, tapi saya suka anak-anak. Semua anak mengenal saya. Dan, pada malam tanggal 24 Desember mereka menunggu hadiah dari saya. Pekerjaan saya sangat menyenangkan.",
     "template": "[[私|わたし]]は サンタクロースです。[[私|わたし]]は とても [[寒|さむ]]い [[所|ところ]]に [[住|す]]んで います。[[私|わたし]]は [[赤|あか]]い [[服|ふく]]が [[好|す]]きです。[[赤|あか]]い [[服|ふく]]は [[暖|あたた]]かいです。[[私|わたし]]は [[1年|いちねん]]に [[一日|いちにち]]だけ [[働|はたら]]きます。[[12月|じゅうにがつ]][[24日|にじゅうよっか]]です。[[12月|じゅうにがつ]][[24日|にじゅうよっか]]の [[夜|よる]] すてきな プレゼントを [[子供|こども]]に あげます。[[私|わたし]]は [[独身|どくしん]]です。[[子供|こども]]が いませんが、[[子供|こども]]が [[好|す]]きです。[[子供|こども]]は みんな [[私|わたし]]を [[知|し]]って います。そして、[[12月|じゅうにがつ]][[24日|にじゅうよっか]]の [[夜|よる]] [[私|わたし]]の プレゼントを [[待|ま]]って います。[[私|わたし]]の [[仕事|しごと]]は とても [[楽|たの]]しいです。",
-    "image": "https://cdn.dribbble.com/users/2063795/screenshots/8856314/media/7e30414c04a481f5129b5e9f4240238f.png?resize=800x600&vertical=center"
+    "icon": "fas fa-sleigh",
+    "color": "linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%)"
   },
   {
     "id": "s5",
     "title": "Keluarga Saya (わたしの家族)",
     "translation": "Keluarga saya ada 5 orang. Ibu, Ayah, Kakak laki-laki, Adik perempuan, dan saya. Ayah adalah pegawai perusahaan. Setiap hari beliau pergi ke kantor pagi-pagi sekali. Ibu ada di rumah. Ibu pandai memasak. Setiap hari beliau membuat masakan yang enak. Kakak laki-laki adalah insinyur. Dia bekerja di perusahaan IT. Adik perempuan adalah siswa SMA. Setiap hari dia belajar. Saya adalah mahasiswa. Setiap hari saya pergi ke universitas. Kami pergi ke taman bersama-sama setiap hari Minggu. Di rumah kami menonton TV dan mengobrol. Malam harinya kami makan malam bersama. Keluarga saya baik hati dan menyenangkan. Saya bahagia saat bersama keluarga. Saya sangat menyayangi keluarga saya.",
     "template": "[[私|わたし]]の [[家族|かぞく]]は [[5人|ごにん]]です。[[母|はは]]と [[父|ちち]]と [[兄|あに]]と [[妹|いもうと]]と [[私|わたし]]です。[[父|ちち]]は [[会社員|かいしゃいん]]です。[[毎日|まいにち]] [[朝|あさ]] [[早|はや]]く [[会社|かいしゃ]]へ [[行|い]]きます。[[母|はは]]は [[家|いえ]]に います。[[母|はは]]は [[料理|りょうり]]が [[上手|じょうず]]です。[[毎日|まいにち]] [[美味|おい]]しい [[料理|りょうり]]を [[作|つく]]ります。[[兄|あに]]は エンジニアです。ITの [[会社|かいしゃ]]で [[働|はたら]]いて います。[[妹|いもうと]]は [[高校生|こうこうせい]]です。[[毎日|まいにち]] [[勉強|べんきょう]]して います。[[私|わたし]]は [[大学生|だいがくせい]]です。[[毎日|まいにち]] [[大学|だいがく]]へ [[行|い]]きます。[[私|わたし]]たちは [[毎週|まいしゅう]]の [[日曜日|にちようび]]に [[一緒|いっしょ]]に [[公園|こうえん]]へ [[行|い]]きます。[[家|いえ]]で テレビを [[見|み]]たり、[[話|はな]]したり します。[[夜|よる]]は [[一緒|いっしょ]]に [[ご飯|ごはん]]を [[食|た]]べます。[[私|わたし]]の [[家族|かぞく]]は やさしくて [[楽|たの]]しいです。[[私|わたし]]は [[家族|かぞく]]と [[一緒|いっしょ]]に いると [[幸|しあわ]]せです。[[私|わたし]]は [[家族|かぞく]]が [[大好き|だいすき]]です。",
-    "image": "https://cdn.dribbble.com/users/427857/screenshots/14554060/media/3e66040785d29e25f2307d5519b985cc.png?resize=800x600&vertical=center"
+    "icon": "fas fa-users",
+    "color": "linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)"
   },
   {
     "id": "s6",
     "title": "Hari Sabtu Saya (私の土曜日)",
     "translation": "Hari Sabtu saya sangat menyenangkan. Saya bangun jam 8 pagi. Kemudian, saya makan pagi. Setelah makan pagi, saya membersihkan kamar. Siang harinya saya pergi ke taman bersama teman. Di taman kami berjalan-jalan dan bermain sepak bola. Setelah itu, kami makan kue dan minum kopi di kafe. Sore harinya saya pulang ke rumah lalu membaca buku dan menonton TV. Setelah makan malam, saya masuk ofuro (mandi berendam). Malam harinya sebelum tidur, saya mendengarkan musik. Hari Sabtu adalah hari yang sangat menyenangkan.",
     "template": "[[私|わたし]]の [[土曜日|どようび]]は とても [[楽|たの]]しいです。[[朝|あさ]] [[8時|はちじ]]に [[起|お]]きます。そして、[[朝ご飯|あさごはん]]を [[食|た]]べます。[[朝ご飯|あさごはん]]の [[後|あと]]で、[[部屋|へや]]を そうじします。[[昼|ひる]]は [[友達|ともだち]]と [[公園|こうえん]]へ [[行|い]]きます。[[公園|こうえん]]で [[散歩|さんぽ]]したり、サッカーしたり します。それから、カフェで コーヒーや ケーキを [[食|た]]べます。[[夕方|ゆうがた]]は [[家|いえ]]へ [[帰|かえ]]って [[本|ほん]]を [[読|よ]]んだり、テレビを [[見|み]]たり します。[[晩ご飯|ばんごはん]]を [[食|た]]べてから、お[[風呂|ふろ]]に [[入|はい]]ります。[[夜|よる]]は [[寝|ね]]る [[前|まえ]]に、[[音楽|おんがく]]を [[聞|き]]きます。[[土曜日|どようび]]は とても [[楽|たの]]しい [[日|ひ]]です。",
-    "image": "https://cdn.dribbble.com/users/1440764/screenshots/5530590/media/f513666a764819345d6d98206a242c9c.png?resize=800x600&vertical=center"
+    "icon": "fas fa-mug-hot",
+    "color": "linear-gradient(135deg, #cfd9df 0%, #e2ebf0 100%)"
   }
 ]
