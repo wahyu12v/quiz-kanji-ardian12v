@@ -104,6 +104,11 @@
                           <i class="bi bi-clock-fill me-2"></i> Mode Cerita
                       </button>
 
+                      <button id="startBtn" class="btn btn-outline-custom btn-lg rounded-pill px-4 py-3" data-bs-toggle="modal" data-bs-target="#backToHomeModal">
+                          <i class="bi bi-book-fill me-2"></i> Bacaan
+                      </button>
+
+
                        <button id="startBtn" class="btn btn-light btn-lg rounded-pill px-5 py-3 text-primary fw-bold shadow-sm" data-bs-toggle="modal" data-bs-target="#startExamModal">
                           <i class="bi bi-pen-fill me-2"></i> Simulasi  JFT
                       </button>
@@ -116,6 +121,41 @@
         </div>
       </div>
     </main>
+
+
+<div class="modal fade" id="backToHomeModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true" style="backdrop-filter: blur(4px);">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="border: none; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); overflow: hidden; background: white;">
+      
+      <div style="height: 6px; background: linear-gradient(90deg, #00C6FF 0%, #0072FF 100%); width: 100%;"></div>
+
+      <div class="modal-body text-center px-4 py-5">
+        
+        <h4 style="font-weight: 800; color: #2c3e50; margin-bottom: 12px; letter-spacing: -0.5px; font-size: 1.5rem;">
+            Ke Halaman Bacaan?
+        </h4>
+        
+        <p style="color: #64748b; font-size: 1rem; margin-bottom: 30px; line-height: 1.6;">
+            Anda akan diarahkan <b>ke</b> daftar bacaan<br>
+            <span style="color: #0072FF; font-weight: 600; background: rgba(0, 114, 255, 0.08); padding: 2px 8px; border-radius: 6px; font-size: 0.9em;">Hiragana / Katakana / Kanji</span>
+        </p>
+
+        <div class="d-flex justify-content-center gap-3">
+            <button type="button" class="btn" data-bs-dismiss="modal" style="min-width: 100px; border-radius: 50px; padding: 10px 24px; border: 1.5px solid #e2e8f0; color: #64748b; font-weight: 600; background: transparent; transition: all 0.2s;" onmouseover="this.style.background='#f1f5f9'; this.style.borderColor='#cbd5e1';" onmouseout="this.style.background='transparent'; this.style.borderColor='#e2e8f0';">
+                Batal
+            </button>
+            
+            <a href="/bacaan/index.html" class="btn" style="min-width: 100px; border-radius: 50px; padding: 10px 24px; background: linear-gradient(90deg, #00C6FF 0%, #0072FF 100%); border: none; color: white; font-weight: 600; box-shadow: 0 4px 12px rgba(0, 114, 255, 0.25); transition: all 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 15px rgba(0, 114, 255, 0.35)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0, 114, 255, 0.25)';">
+                Ya, Lanjutkan
+            </a>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
 
     <div class="modal fade" id="storyModal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
