@@ -187,10 +187,10 @@ function updateNavButtons() {
     // Cek Tombol Next
     if (currentStoryIndex === storiesData.length - 1) {
         btnNext.classList.add("disabled"); // Matikan jika cerita terakhir
-        btnNext.innerHTML = 'Selesai <i class="fas fa-check ms-2"></i>';
+        btnNext.innerHTML = 'Selesai';
     } else {
         btnNext.classList.remove("disabled");
-        btnNext.innerHTML = 'Selanjutnya <i class="fas fa-arrow-right ms-2"></i>';
+        btnNext.innerHTML = 'Selanjutnya ';
     }
 }
 

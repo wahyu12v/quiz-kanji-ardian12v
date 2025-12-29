@@ -153,6 +153,14 @@
   },
   {
     "id": "s20",
+    "title": "Datangnya Topan (台風が来る)",
+    "translation": "Berita cuaca mengatakan topan besar akan datang besok. Angin akan bertiup sangat kencang dan hujan deras. Sekolah dan kantor akan libur. Kereta mungkin akan berhenti beroperasi. Saya pergi ke supermarket untuk membeli air dan mie instan. Saya juga mengisi baterai HP sampai penuh. Saat topan datang, jangan keluar rumah. Berbahaya. Saya akan tinggal di rumah dan membaca buku seharian.",
+    "template": "[[天気予報|てんきよほう]]は、[[明日|あした]] [[大|おお]]きい [[台風|たいふう]]が [[来|く]]ると [[言|い]]いました。[[風|かぜ]]が とても [[強|つよ]]くて、[[雨|あめ]]が [[沢山|たくさん]] [[降|ふ]]ります。[[学校|がっこう]]と [[会社|かいしゃ]]は [[休|やす]]みになります。[[電車|でんしゃ]]も [[止|と]]まるかもしれません。[[私|わたし]]は スーパーへ [[水|みず]]と カップラーメンを [[買|か]]いに [[行|い]]きました。スマホの [[充電|じゅうでん]]も しました。[[台風|たいふう]]の とき、[[外|そと]]へ [[出|で]]ないでください。[[危|あぶ]]ないです。[[私|わたし]]は [[一日中|いちにちじゅう]] [[家|いえ]]に いて、[[本|ほん]]を [[読|よ]]みます。",
+    "icon": "fas fa-wind",
+    "color": "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)"
+  },
+  {
+    "id": "s21",
     "title": "Membeli Baju (服を買う)",
     "translation": "Saya ingin membeli kemeja putih untuk kerja. Saya pergi ke toko baju di Shibuya. Tokonya sangat besar. Saya menemukan kemeja yang bagus. Saya bertanya kepada pelayan, 'Boleh saya mencobanya?'. Pelayan berkata, 'Silakan, kamar pas ada di sebelah sana'. Ukuran M agak kecil. Saya minta ukuran L. Ukuran L pas sekali. Harganya 3000 yen. Saya membelinya. Saya senang bisa belanja baju baru.",
     "template": "[[仕事|しごと]]の [[白|しろ]]い シャツを [[買|か]]いたいです。[[渋谷|しぶや]]の [[服|ふく]]屋へ [[行|い]]きました。お[[店|みせ]]は とても [[大|おお]]きいです。いい シャツを [[見|み]]つけました。[[店員|てんいん]]さんに「[[試着|しちゃく]]してもいいですか」と [[聞|き]]きました。[[店員|てんいん]]さんは「はい、[[試着室|しちゃくしつ]]は あちらです」と [[言|い]]ました。Mサイズは ちょっと [[小|ちい]]さかったです。Lサイズを お[[願|ねが]]いしました。Lサイズは ちょうど よかったです。[[値段|ねだん]]は 3000[[円|えん]]でした。[[私|わたし]]は それを [[買|か]]いました。[[新|あたら]]しい [[服|ふく]]が [[買|か]]えて、[[嬉|うれ]]しいです。",
@@ -160,7 +168,7 @@
     "color": "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)"
   },
   {
-    "id": "s21",
+    "id": "s22",
     "title": "Di Kantor Pos (郵便局で)",
     "translation": "Saya pergi ke kantor pos untuk mengirim paket ke Indonesia. Di dalam paket ada oleh-oleh makanan Jepang. Pegawai pos menimbang berat paket itu. Beratnya 2 kilogram. Dia bertanya, 'Mau lewat udara (EMS) atau laut?'. Lewat udara cepat tapi mahal. Lewat laut murah tapi butuh 1 bulan. Saya pilih lewat udara karena ada cokelat. Biayanya 4000 yen. Paket akan sampai dalam 5 hari.",
     "template": "[[郵便局|ゆうびんきょく]]へ インドネシアに [[荷物|にもつ]]を [[送|おく]]りに [[行|い]]きました。[[荷物|にもつ]]の [[中|なか]]に [[日本|にほん]]の お[[菓子|かし]]が あります。[[郵便局|ゆうびんきょく]]の [[人|ひと]]は [[重|おも]]さを [[量|はか]]りました。2キロでした。[[彼|かれ]]は「[[航空便|こうくうびん]]ですか、[[船便|ふなびん]]ですか」と [[聞|き]]きました。[[航空便|こうくうびん]]は [[速|はや]]いですが、[[高|たか]]いです。[[船便|ふなびん]]は [[安|やす]]いですが、1ヶ月 かかります。チョコがありますから、[[航空便|こうくうびん]]に しました。4000[[円|えん]]でした。[[荷物|にもつ]]は 5[[日|か]]で [[着|つ]]きます。",
@@ -168,7 +176,7 @@
     "color": "linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%)"
   },
   {
-    "id": "s22",
+    "id": "s23",
     "title": "Bertanya Jalan (道を聞く)",
     "translation": "Maaf, saya tersesat. Saya ingin pergi ke Museum Seni, tapi saya tidak tahu jalannya. Saya bertanya kepada orang di jalan. 'Permisi, Museum Seni ada di mana?'. Orang itu sangat ramah. Dia berkata, 'Pergilah lurus jalan ini. Lalu belok kanan di lampu merah kedua. Museum ada di sebelah kiri'. Saya mengucapkan terima kasih. Orang Jepang sangat baik membantu orang asing yang tersesat.",
     "template": "すみません、[[道|みち]]に [[迷|まよ]]いました。[[美術館|びじゅつかん]]へ [[行|い]]きたいですが、[[場所|ばしょ]]が [[分|わ]]かりません。[[道|みち]]を [[歩|ある]]いている [[人|ひと]]に [[聞|き]]きました。「すみません、[[美術館|びじゅつかん]]は どこですか」。その[[人|ひと]]は とても [[親切|しんせつ]]でした。「この [[道|みち]]を [[真|ま]]っ[[直|す]]ぐ [[行|い]]ってください。そして、[[二|ふた]]つ[[目|め]]の [[信号|しんごう]]を [[右|みぎ]]に [[曲|ま]]がってください。[[美術館|びじゅつかん]]は [[左|ひだり]]に あります」と [[言|い]]ました。[[私|わたし]]は お[[礼|れい]]を [[言|い]]ました。[[日本人|にほんじん]]は とても [[優|やさ]]しいです。",
@@ -176,7 +184,7 @@
     "color": "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)"
   },
   {
-    "id": "s23",
+    "id": "s24",
     "title": "Pesta Ulang Tahun (誕生日パーティー)",
     "translation": "Hari ini adalah ulang tahun teman saya, Yuki. Kami mengadakan pesta kejutan di restoran. Kami membeli kue ulang tahun yang besar. Di atas kue ada lilin. Ketika Yuki datang, kami bernyanyi 'Happy Birthday'. Yuki sangat terkejut dan senang. Kami memberikan hadiah. Saya memberi dia buku. Kami makan pizza dan minum jus. Pestanya sangat seru. Yuki berkata ini ulang tahun terbaiknya.",
     "template": "[[今日|きょう]]は [[友達|ともだち]]の ゆきさんの [[誕生日|たんじょうび]]です。[[私|わたし]]たちは レストランで サプライズパーティーを しました。[[大|おお]]きい ケーキを [[買|か]]いました。ケーキの [[上|うえ]]に ローソクが あります。ゆきさんが [[来|き]]たとき、みんなで ハッピーバースデーを [[歌|うた]]いました。ゆきさんは びっくりして、[[喜|よろこ]]びました。[[私|わたし]]たちは プレゼントを あげました。[[私|わたし]]は [[本|ほん]]を あげました。ピザを [[食|た]]べて、ジュースを [[飲|の]]みました。パーティーは とても [[楽|たの]]しかったです。ゆきさんは「[[最高|さいこう]]の [[誕生日|たんじょうび]]だ」と [[言|い]]ました。",
@@ -184,11 +192,51 @@
     "color": "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)"
   },
   {
-    "id": "s24",
+    "id": "s25",
     "title": "Belajar Bahasa Jepang (日本語の勉強)",
     "translation": "Saya belajar bahasa Jepang setiap hari. Kanji itu sulit, tapi menarik. Setiap pagi saya menghafal 5 kanji baru. Saya juga latihan berbicara dengan teman Jepang. Tujuan saya adalah lulus tes JLPT N4 tahun ini. Jika lulus, saya ingin bekerja di perusahaan Jepang. Saya harus semangat belajar. Jangan menyerah. Bahasa Jepang akan berguna untuk masa depan saya.",
     "template": "[[私|わたし]]は [[毎日|まいにち]] [[日本語|にほんご]]を [[勉強|べんきょう]]します。[[漢字|かんじ]]は [[難|むずか]]しいですが、[[面白|おもしろ]]いです。[[毎朝|まいあさ]] [[新|あたら]]しい [[漢字|かんじ]]を 5つ [[覚|おぼ]]えます。[[日本人|にほんじん]]の [[友達|ともだち]]と [[話|はな]]す [[練習|れんしゅう]]も します。[[私|わたし]]の [[目標|もくひょう]]は [[今年|ことし]] JLPT N4に [[合格|ごうかく]]することです。もし [[合格|ごうかく]]したら、[[日本|にほん]]の [[会社|かいしゃ]]で [[働|はたら]]きたいです。[[頑張|がんば]]らなければなりません。[[諦|あきら]]めないでください。[[日本語|にほんご]]は [[将来|しょうらい]] 役に立ちます。",
     "icon": "fas fa-book-reader",
     "color": "linear-gradient(135deg, #fa709a 0%, #fee140 100%)"
+  },
+  {
+    "id": "s26",
+    "title": "Cita-cita Saya (私の夢)",
+    "translation": "Cita-cita saya adalah menjadi penerjemah bahasa Jepang. Saya suka belajar bahasa asing. Sekarang saya belajar kanji setiap hari. Sangat sulit, tapi menyenangkan. Nanti, saya ingin bekerja di Tokyo. Saya ingin berbicara dengan banyak orang Jepang. Saya akan berusaha keras untuk mewujudkan mimpi saya.",
+    "template": "[[私|わたし]]の [[夢|ゆめ]]は [[日本語|にほんご]]の [[通訳|つうやく]]に なることです。[[私|わたし]]は [[外国語|がいこくご]]を [[勉強|べんきょう]]するのが [[好|す]]きです。[[今|いま]]、[[毎日|まいにち]] [[漢字|かんじ]]を [[勉強|べんきょう]]しています。とても [[難|むずか]]しいですが、[[楽|たの]]しいです。[[将来|しょうらい]]、[[東京|とうきょう]]で [[働|はたら]]きたいです。[[沢山|たくさん]]の [[日本人|にほんじん]]と [[話|はな]]したいです。[[夢|ゆめ]]を [[叶|かな]]えるために、[[頑張|がんば]]ります。",
+    "icon": "fas fa-star",
+    "color": "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)"
+  },
+  {
+    "id": "s27",
+    "title": "Adik Saya (私の弟)",
+    "translation": "Saya punya satu adik laki-laki. Namanya Ken. Dia berumur 10 tahun. Dia sangat energik dan lucu. Dia suka bermain sepak bola dan game. Setiap hari setelah sekolah, dia bermain game di rumah. Terkadang kami bertengkar, tapi kami segera berbaikan. Dia suka makan hamburger. Saya sangat menyayangi adik saya.",
+    "template": "[[私|わたし]]には [[弟|おとうと]]が [[一人|ひとり]] います。[[名前|なまえ]]は ケンです。[[10歳|じゅっさい]]です。[[彼|かれ]]は とても [[元気|げんき]]で [[可愛|かわい]]いです。サッカーと ゲームが [[好|す]]きです。[[毎日|まいにち]] [[学校|がっこう]]の あとで、[[家|いえ]]で ゲームを します。ときどき [[喧嘩|けんか]]しますが、すぐ [[仲直|なかなお]]りします。[[彼|かれ]]は ハンバーガーが [[好|す]]きです。[[私|わたし]]は [[弟|おとうと]]が [[大好き|だいすき]]です。",
+    "icon": "fas fa-child",
+    "color": "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)"
+  },
+  {
+    "id": "s28",
+    "title": "Kota Saya (私の町)",
+    "translation": "Kota saya adalah kota yang tenang. Tidak ada gedung tinggi. Tapi, ada taman yang luas dan indah. Udara di sini bersih. Orang-orangnya ramah. Di dekat stasiun ada supermarket besar, jadi praktis untuk belanja. Di musim semi, bunga sakura mekar di sepanjang sungai. Saya sangat suka tinggal di kota ini.",
+    "template": "[[私|わたし]]の [[町|まち]]は [[静|しず]]かな [[町|まち]]です。[[高|たか]]い [[建物|たてもの]]は ありません。でも、[[広|ひろ]]くて [[綺麗|きれい]]な [[公園|こうえん]]が あります。ここの [[空気|くうき]]は [[綺麗|きれい]]です。[[人|ひと]]は [[親切|しんせつ]]です。[[駅|えき]]の [[近|ちか]]くに [[大|おお]]きい スーパーが ありますから、[[買い物|かいもの]]に [[便利|べんり]]です。[[春|はる]]には、[[川|かわ]]の そばで [[桜|さくら]]が [[咲|さ]]きます。[[私|わたし]]は この [[町|まち]]に [[住|す]]むのが [[大好|だいす]]きです。",
+    "icon": "fas fa-building",
+    "color": "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)"
+  },
+  {
+    "id": "s29",
+    "title": "Olahraga Favorit (好きなスポーツ)",
+    "translation": "Saya sangat suka olahraga. Khususnya sepak bola. Setiap hari Minggu, saya bermain futsal bersama teman kantor. Kami bermain di lapangan dekat sungai. Berlari itu melelahkan, tapi perasaan jadi segar. Setelah berolahraga, kami pergi makan ramen bersama. Itu adalah waktu yang paling menyenangkan dalam satu minggu.",
+    "template": "[[私|わたし]]は [[スポーツ|すぽーつ]]が [[大好|だいす]]きです。とくに サッカーです。[[毎週|まいしゅう]] [[日曜日|にちようび]]、[[会社|かいしゃ]]の [[友達|ともだち]]と フットサルを します。[[川|かわ]]の [[近|ちか]]くの コートで します。[[走|はし]]るのは [[疲|つか]]れますが、[[気分|きぶん]]が すっきりします。[[運動|うんどう]]した あとで、[[一緒|いっしょ]]に ラーメンを [[食|た]]べに [[行|い]]きます。それは [[一週間|いっしゅうかん]]で [[一番|いちばん]] [[楽|たの]]しい [[時間|じかん]]です。",
+    "icon": "fas fa-futbol",
+    "color": "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)"
+  },
+  {
+    "id": "s30",
+    "title": "Musim Hujan (梅雨)",
+    "translation": "Di Jepang, bulan Juni adalah musim hujan yang disebut 'Tsuyu'. Setiap hari hujan turun dan udaranya lembab. Saya tidak bisa menjemur pakaian di luar. Sedikit merepotkan. Tapi, di musim ini bunga Ajisai (Hydrangea) mekar dengan cantik. Warnanya biru dan ungu. Melihat bunga itu membuat perasaan saya menjadi tenang. Saya suka berjalan-jalan sambil memegang payung.",
+    "template": "[[日本|にほん]]では、[[6月|ろくがつ]]は「[[梅雨|つゆ]]」という [[雨|あめ]]の [[季節|きせつ]]です。[[毎日|まいにち]] [[雨|あめ]]が [[降|ふ]]って、[[蒸|む]]し[[暑|あつ]]いです。[[外|そと]]に [[洗濯物|せんたくもの]]を [[干|ほ]]すことが できません。ちょっと [[大変|たいへん]]です。でも、この [[季節|きせつ]]に アジサイの [[花|はな]]が [[綺麗|きれい]]に [[咲|さ]]きます。[[色|いろ]]は [[青|あお]]や [[紫|むらさき]]です。その [[花|はな]]を [[見|み]]ると、[[気持|きも]]ちが [[落|お]]ち[[着|つ]]きます。[[私|わたし]]は [[傘|かさ]]を さして [[散歩|さんぽ]]するのが [[好|す]]きです。",
+    "icon": "fas fa-cloud-rain",
+    "color": "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)"
   }
 ]
