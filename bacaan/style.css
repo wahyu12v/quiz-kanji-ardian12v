@@ -348,3 +348,64 @@ rt {
 
 
 
+/* Container agar tombol sejajar dan rapi */
+.reader-actions {
+    display: flex;
+    justify-content: center; /* Posisi tengah */
+    gap: 15px; /* Jarak antar tombol */
+    margin: 20px 0;
+    flex-wrap: wrap; /* Agar aman di HP layar kecil */
+}
+
+/* Style Dasar Tombol */
+.custom-btn {
+    padding: 12px 25px;
+    border-radius: 50px; /* Membuat bentuk kapsul/bulat */
+    font-size: 16px;
+    font-family: sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Jarak ikon dan teks */
+    transition: all 0.3s ease;
+    border: none;
+    outline: none;
+}
+
+/* Style Tombol Audio (Putih dengan Garis Biru) */
+.btn-outline {
+    background-color: white;
+    border: 1px solid #2b7af1; /* Warna biru border */
+    color: #2b7af1; /* Warna teks biru */
+}
+
+.btn-outline:hover {
+    background-color: #f0f8ff; /* Warna background saat disentuh */
+}
+
+.btn-outline:active {
+    transform: scale(0.95); /* Efek tekan */
+}
+
+/* Style Tombol Terjemahan (Gradient Biru Muda ke Biru Tua) */
+.btn-gradient {
+    /* Gradient persis seperti di gambar */
+    background: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%); 
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 114, 255, 0.3); /* Bayangan halus */
+}
+
+.btn-gradient:hover {
+    background: linear-gradient(90deg, #0072ff 0%, #00c6ff 100%); /* Balik warna saat hover */
+    box-shadow: 0 6px 20px rgba(0, 114, 255, 0.4);
+}
+
+.btn-gradient:active {
+    transform: scale(0.95);
+}
+
+/* Ikon sedikit diperbesar */
+.custom-btn i {
+    font-size: 18px;
+}

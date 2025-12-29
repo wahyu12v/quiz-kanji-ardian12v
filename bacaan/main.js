@@ -2,22 +2,38 @@ let storiesData = [];
 let currentStoryIndex = 0; // Untuk melacak posisi cerita
 
 document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("exit-btn").classList.remove('d-none');
-    document.getElementById("header-back-btn").classList.add('d-none');
+    // Setup Tampilan Awal
+    const exitBtn = document.getElementById("exit-btn");
+    const headerBackBtn = document.getElementById("header-back-btn");
+
+    if (exitBtn) exitBtn.classList.remove('d-none');
+    if (headerBackBtn) headerBackBtn.classList.add('d-none');
 
     fetchStories();
     
-    // Listeners Dasar
-    document.getElementById("header-back-btn").addEventListener("click", goBack);
-    document.getElementById("toggle-trans-btn").addEventListener("click", toggleTranslation);
+    // --- Listeners Dasar ---
+    const btnBack = document.getElementById("header-back-btn");
+    if (btnBack) btnBack.addEventListener("click", goBack);
+
+    const btnTrans = document.getElementById("toggle-trans-btn");
+    if (btnTrans) btnTrans.addEventListener("click", toggleTranslation);
     
-    // Listeners Baru (Audio & Navigasi)
-    document.getElementById("btn-audio").addEventListener("click", playAudio);
-    document.getElementById("btn-prev").addEventListener("click", prevStory);
-    document.getElementById("btn-next").addEventListener("click", nextStory);
+    // --- Listeners Audio & Navigasi ---
+    const btnAudio = document.getElementById("btn-audio");
+    if (btnAudio) btnAudio.addEventListener("click", playAudio);
+
+    // Listener Tombol Stop (Pastikan tombol ini ada di HTML Anda)
+    const btnStop = document.getElementById("btn-stop");
+    if (btnStop) btnStop.addEventListener("click", stopAudio);
+
+    const btnPrev = document.getElementById("btn-prev");
+    if (btnPrev) btnPrev.addEventListener("click", prevStory);
+
+    const btnNext = document.getElementById("btn-next");
+    if (btnNext) btnNext.addEventListener("click", nextStory);
 });
 
-// --- FUNGSI FETCH & RENDER ---
+// --- FUNGSI FETCH & RENDER (TIDAK DIUBAH) ---
 
 function fetchStories() {
     const spinner = document.getElementById("loading-spinner");
@@ -30,16 +46,18 @@ function fetchStories() {
         .then(data => {
             storiesData = data;
             renderStories(data);
-            spinner.style.display = 'none';
+            if (spinner) spinner.style.display = 'none';
         })
         .catch(error => {
             console.error('Error:', error);
-            spinner.innerHTML = `<div class="alert alert-danger">Gagal memuat data (Gunakan Live Server).</div>`;
+            if (spinner) spinner.innerHTML = `<div class="alert alert-danger">Gagal memuat data (Gunakan Live Server).</div>`;
         });
 }
 
 function renderStories(stories) {
     const gridContainer = document.getElementById("story-grid");
+    if (!gridContainer) return;
+    
     gridContainer.innerHTML = "";
 
     stories.forEach(story => {
@@ -69,7 +87,7 @@ function parseTemplate(text) {
     });
 }
 
-// --- LOGIKA UTAMA ---
+// --- LOGIKA UTAMA (TIDAK DIUBAH, KECUALI STOP AUDIO) ---
 
 function openStory(id) {
     // Simpan index cerita yang sedang dibuka
@@ -78,43 +96,54 @@ function openStory(id) {
     
     if (!story) return;
 
-    // Update Tombol Navigasi (Aktif/Nonaktif)
+    // Update Tombol Navigasi
     updateNavButtons();
     
-    // Stop audio jika ada yang sedang berjalan
+    // PENTING: Matikan suara saat ganti cerita
     stopAudio();
 
     // --- SETUP HEADER ---
     const readerImg = document.getElementById("reader-img");
-    readerImg.style.display = 'none';
+    if (readerImg) readerImg.style.display = 'none';
 
     let iconWrapper = document.getElementById("reader-icon-wrapper");
-    if (!iconWrapper) {
+    // Jika wrapper belum ada, buat baru
+    if (!iconWrapper && readerImg) {
         iconWrapper = document.createElement("div");
         iconWrapper.id = "reader-icon-wrapper";
         iconWrapper.className = "reader-hero-icon";
         readerImg.parentNode.insertBefore(iconWrapper, readerImg);
     }
     
-    iconWrapper.style.background = story.color;
-    iconWrapper.innerHTML = `<i class="${story.icon}"></i>`;
-    iconWrapper.style.display = 'flex';
+    if (iconWrapper) {
+        iconWrapper.style.background = story.color;
+        iconWrapper.innerHTML = `<i class="${story.icon}"></i>`;
+        iconWrapper.style.display = 'flex';
+    }
 
     // --- ISI KONTEN ---
     document.getElementById("reader-title").innerText = story.title;
     document.getElementById("reader-text").innerHTML = parseTemplate(story.template);
-    document.getElementById("reader-translation").innerText = story.translation;
     
-    // Reset Tampilan
-    document.getElementById("reader-translation").style.display = 'none';
-    document.getElementById("toggle-trans-btn").innerHTML = '<i class="fas fa-language me-2"></i> Tampilkan Terjemahan';
+    const transBox = document.getElementById("reader-translation");
+    if (transBox) {
+        transBox.innerText = story.translation;
+        transBox.style.display = 'none';
+    }
+    
+    const transBtn = document.getElementById("toggle-trans-btn");
+    if (transBtn) {
+        transBtn.innerHTML = '<i class="fas fa-language me-2"></i> Tampilkan Terjemahan';
+    }
 
     // Pindah Halaman
     document.getElementById("list-view").style.display = 'none';
     document.getElementById("reader-view").style.display = 'block';
     
-    document.getElementById("exit-btn").classList.add('d-none');
-    document.getElementById("header-back-btn").classList.remove('d-none');
+    const exitBtn = document.getElementById("exit-btn");
+    const backBtn = document.getElementById("header-back-btn");
+    if (exitBtn) exitBtn.classList.add('d-none');
+    if (backBtn) backBtn.classList.remove('d-none');
     
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -124,8 +153,10 @@ function goBack() {
     document.getElementById("reader-view").style.display = 'none';
     document.getElementById("list-view").style.display = 'block';
     
-    document.getElementById("exit-btn").classList.remove('d-none');
-    document.getElementById("header-back-btn").classList.add('d-none');
+    const exitBtn = document.getElementById("exit-btn");
+    const backBtn = document.getElementById("header-back-btn");
+    if (exitBtn) exitBtn.classList.remove('d-none');
+    if (backBtn) backBtn.classList.add('d-none');
 }
 
 function toggleTranslation() {
@@ -141,23 +172,51 @@ function toggleTranslation() {
     }
 }
 
-// --- LOGIKA AUDIO (TEXT TO SPEECH) ---
+// --- LOGIKA AUDIO (DIPERBAIKI UNTUK PC & STOP) ---
 
-function playAudio() {
+// Fungsi Helper: Menunggu daftar suara dimuat (Fix untuk PC Chrome/Edge)
+function getVoicesPromise() {
+    return new Promise((resolve) => {
+        let voices = window.speechSynthesis.getVoices();
+        if (voices.length > 0) {
+            resolve(voices);
+        } else {
+            // Jika suara belum siap (array kosong), tunggu event ini
+            window.speechSynthesis.onvoiceschanged = () => {
+                resolve(window.speechSynthesis.getVoices());
+            };
+        }
+    });
+}
+
+async function playAudio() {
     const story = storiesData[currentStoryIndex];
     if (!story) return;
 
-    // Bersihkan teks dari format [[Kanji|Furigana]] agar dibaca lancar
-    // Regex ini mengambil "Kanji" dan membuang "|Furigana"
+    // 1. Matikan suara sebelumnya jika ada
+    stopAudio();
+
+    // 2. Bersihkan teks (Ambil Kanji saja, buang Furigana)
     const cleanText = story.template.replace(/\[\[(.*?)\|.*?\]\]/g, "$1");
 
     if ('speechSynthesis' in window) {
-        // Stop jika ada suara sebelumnya
-        window.speechSynthesis.cancel();
+        // 3. Tunggu sampai browser siap memberikan daftar suara
+        const voices = await getVoicesPromise();
 
         const utterance = new SpeechSynthesisUtterance(cleanText);
-        utterance.lang = 'ja-JP'; // Bahasa Jepang
-        utterance.rate = 0.9; // Kecepatan sedikit lambat agar jelas
+        
+        // 4. Paksa Bahasa Jepang
+        utterance.lang = 'ja-JP'; 
+        
+        // 5. Coba cari suara Jepang asli (Google / Microsoft / Apple)
+        // Agar tidak membaca angka dalam bahasa Inggris
+        const japanVoice = voices.find(v => v.lang === 'ja-JP' || v.name.includes('Japan') || v.name.includes('Google日本語'));
+        
+        if (japanVoice) {
+            utterance.voice = japanVoice;
+        }
+
+        utterance.rate = 0.9; // Kecepatan sedikit lambat
         
         window.speechSynthesis.speak(utterance);
     } else {
@@ -171,22 +230,24 @@ function stopAudio() {
     }
 }
 
-// --- LOGIKA TOMBOL NAVIGASI ---
+// --- LOGIKA TOMBOL NAVIGASI (TIDAK DIUBAH) ---
 
 function updateNavButtons() {
     const btnPrev = document.getElementById("btn-prev");
     const btnNext = document.getElementById("btn-next");
 
+    if (!btnPrev || !btnNext) return;
+
     // Cek Tombol Prev
     if (currentStoryIndex === 0) {
-        btnPrev.classList.add("disabled"); // Matikan jika cerita pertama
+        btnPrev.classList.add("disabled"); 
     } else {
         btnPrev.classList.remove("disabled");
     }
 
     // Cek Tombol Next
     if (currentStoryIndex === storiesData.length - 1) {
-        btnNext.classList.add("disabled"); // Matikan jika cerita terakhir
+        btnNext.classList.add("disabled"); 
         btnNext.innerHTML = 'Selesai';
     } else {
         btnNext.classList.remove("disabled");
@@ -196,6 +257,7 @@ function updateNavButtons() {
 
 function prevStory() {
     if (currentStoryIndex > 0) {
+        // Ambil ID dari index sebelumnya
         const prevId = storiesData[currentStoryIndex - 1].id;
         openStory(prevId);
     }
@@ -203,6 +265,7 @@ function prevStory() {
 
 function nextStory() {
     if (currentStoryIndex < storiesData.length - 1) {
+        // Ambil ID dari index setelahnya
         const nextId = storiesData[currentStoryIndex + 1].id;
         openStory(nextId);
     }
