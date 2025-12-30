@@ -3,6 +3,7 @@ import { KEYS, SELECTORS } from './constants.js';
 
 const area = document.getElementById(SELECTORS.quizArea);
 
+// --- 1. RENDER QUIZ (PILIHAN GANDA) ---
 export function renderQuiz(state, qNo) {
     area.innerHTML = "";
     const idx = state.current;
@@ -45,6 +46,7 @@ export function renderQuiz(state, qNo) {
     area.appendChild(card);
 }
 
+// --- 2. RENDER HAFALAN (ESSAY + VOICE) ---
 export function renderMem(state, qNo) {
     area.innerHTML = "";
     const idx = state.current;
@@ -53,6 +55,8 @@ export function renderMem(state, qNo) {
     
     const card = document.createElement('div');
     card.className = 'card card-kanji mb-3';
+    
+    // HTML Update: Menambahkan Input Group dengan Tombol Mic
     card.innerHTML = `
       <div class="card-body">
         <div class="d-flex justify-content-between mb-2">
@@ -60,10 +64,17 @@ export function renderMem(state, qNo) {
             <small class="text-muted">No Asli: ${q[KEYS.number] || '-'}</small>
         </div>
         <div class="kanji-big">${escapeHtml(q[KEYS.kanji])}</div>
+        
         <div class="mt-3">
-            <label class="small text-muted">Ketik Romaji (contoh: 'watashi'):</label>
-            <input type="text" id="memInput" class="form-control form-control-lg" autocomplete="off" value="${escapeHtml(val)}">
+            <label class="small text-muted mb-1">Ketik Romaji / Gunakan Suara:</label>
+            <div class="input-group input-group-lg">
+                <input type="text" id="memInput" class="form-control" placeholder="Contoh: watashi" autocomplete="off" value="${escapeHtml(val)}">
+                <button class="btn btn-outline-secondary" type="button" id="btnMic" title="Rekam Suara">
+                    <i class="bi bi-mic-fill"></i>
+                </button>
+            </div>
         </div>
+
         <div class="mt-4 d-flex gap-2 btn-row">
             <button class="btn btn-outline-dark" onclick="window.handlePrev()" ${idx===0?'disabled':''}>Sebelumnya</button>
             <button class="btn btn-lupa" onclick="window.handleLupa()">Lupa</button>
@@ -76,12 +87,77 @@ export function renderMem(state, qNo) {
     `;
     area.appendChild(card);
     
+    // Setup Logic Input & Mic
     const inp = document.getElementById('memInput');
+    const btnMic = document.getElementById('btnMic');
+    
     inp.focus();
     inp.oninput = (e) => window.handleInput(e.target.value);
     inp.onkeydown = (e) => { if(e.key === 'Enter') window.handleNextOrSubmit(); };
+
+    // --- LOGIKA PEREKAM SUARA (Web Speech API) ---
+    // Cek ketersediaan API di browser
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (SpeechRecognition) {
+        const recognition = new SpeechRecognition();
+        // Gunakan 'en-US' atau 'id-ID'. 'en-US' biasanya lebih akurat menangkap alfabet (Romaji)
+        recognition.lang = 'en-US'; 
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+
+        btnMic.onclick = () => {
+            try {
+                recognition.start();
+            } catch (e) {
+                // Jika user klik cepat 2x, stop dulu baru start
+                recognition.stop();
+            }
+        };
+
+        // Saat mulai merekam: Ubah ikon jadi merah/loading
+        recognition.onstart = () => {
+            btnMic.classList.remove('btn-outline-secondary');
+            btnMic.classList.add('btn-danger');
+            btnMic.innerHTML = '<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>';
+        };
+
+        // Saat selesai/berhenti: Kembalikan ikon
+        recognition.onend = () => {
+            btnMic.classList.remove('btn-danger');
+            btnMic.classList.add('btn-outline-secondary');
+            btnMic.innerHTML = '<i class="bi bi-mic-fill"></i>';
+            inp.focus();
+        };
+
+        // Saat dapat hasil suara
+        recognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript;
+            // Bersihkan hasil: lowercase dan hapus spasi (biasanya romaji ditulis sambung)
+            const cleanText = transcript.toLowerCase().trim().replace(/\s+/g, '');
+            
+            inp.value = cleanText;
+            
+            // Simpan ke state global aplikasi
+            window.handleInput(cleanText);
+        };
+
+        recognition.onerror = (event) => {
+            console.error("Speech error:", event.error);
+            btnMic.classList.remove('btn-danger');
+            btnMic.classList.add('btn-outline-secondary');
+            btnMic.innerHTML = '<i class="bi bi-mic-mute-fill"></i>'; // Icon error
+            setTimeout(() => { btnMic.innerHTML = '<i class="bi bi-mic-fill"></i>'; }, 1500);
+        };
+
+    } else {
+        // Jika browser tidak support, sembunyikan tombol
+        btnMic.style.display = 'none';
+        inp.style.borderRadius = '0.5rem'; // Fix border radius input jika button hilang
+    }
 }
 
+// --- 3. RENDER HASIL ---
 export function renderResult(result, isQuiz, wrongIndices = []) {
     area.innerHTML = "";
     const pct = Math.round((result.score / result.total) * 100);
@@ -158,6 +234,8 @@ export function renderResult(result, isQuiz, wrongIndices = []) {
 
 function launchConfetti() {
     const wrap = document.getElementById(SELECTORS.confetti);
+    if (!wrap) return; // Safety check
+    
     for(let i=0; i<40; i++) {
         const el = document.createElement('div');
         el.className = 'confetti';
