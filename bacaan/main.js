@@ -1,6 +1,9 @@
-let storiesData = [];
+let storiesData = [];      // Ini adalah data yang AKTIF digunakan (bisa singkat, bisa panjang)
+let shortStories = [];     // Simpanan data singkat
+let longStories = [];      // Simpanan data panjang
 let currentStoryIndex = 0;
-let activeUtterance = null; // Variabel Global (Wajib untuk PC)
+let activeUtterance = null; 
+let tempSelectedId = null; // Untuk menyimpan ID sementara saat Modal muncul
 
 document.addEventListener("DOMContentLoaded", () => {
     // 1. Tampilan Awal
@@ -9,20 +12,23 @@ document.addEventListener("DOMContentLoaded", () => {
     if (exitBtn) exitBtn.classList.remove('d-none');
     if (headerBackBtn) headerBackBtn.classList.add('d-none');
 
-    // 2. Fetch Data
-    fetchStories();
+    // 2. FETCH KEDUA DATA SEKALIGUS
+    fetchAllData();
 
-    // 3. TRIK PC: Pancing muat suara di background (Sejak awal buka web)
-    // Kita tidak menunggu di tombol, tapi memuatnya sekarang.
+    // 3. Pancing Audio (PC)
     if ('speechSynthesis' in window) {
         window.speechSynthesis.getVoices();
-        // Chrome PC butuh trigger ini agar list suara terisi
         window.speechSynthesis.onvoiceschanged = () => {
-            console.log("Daftar suara berhasil dimuat di background.");
+            console.log("Daftar suara loaded.");
         };
     }
     
     // 4. Listeners Tombol
+    // -- Listener Modal --
+    document.getElementById("btn-pilih-singkat").addEventListener("click", () => selectVersion('short'));
+    document.getElementById("btn-pilih-panjang").addEventListener("click", () => selectVersion('long'));
+
+    // -- Listener Lainnya --
     const btnBack = document.getElementById("header-back-btn");
     if (btnBack) btnBack.addEventListener("click", goBack);
 
@@ -42,30 +48,36 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnNext) btnNext.addEventListener("click", nextStory);
 });
 
-// --- FUNGSI FETCH & RENDER ---
+// --- FUNGSI FETCH BARU (LOAD 2 FILE) ---
 
-function fetchStories() {
+function fetchAllData() {
     const spinner = document.getElementById("loading-spinner");
-    fetch('bacaanlengkap.json')
-        .then(res => {
-            if (!res.ok) throw new Error("Gagal mengambil data.");
-            return res.json();
-        })
-        .then(data => {
-            storiesData = data;
-            renderStories(data);
-            if (spinner) spinner.style.display = 'none';
-        })
-        .catch(err => {
-            console.error(err);
-            if (spinner) spinner.innerHTML = `<div class="alert alert-danger">Gagal memuat data.</div>`;
-        });
+
+    // Kita load kedua file secara bersamaan
+    Promise.all([
+        fetch('data.json').then(res => res.json()),           // Data Singkat
+        fetch('bacaanlengkap.json').then(res => res.json())   // Data Panjang
+    ])
+    .then(([dataSingkat, dataPanjang]) => {
+        shortStories = dataSingkat;
+        longStories = dataPanjang;
+        
+        // Default tampilan awal pakai list dari data singkat (karena judul/icon sama)
+        renderStories(shortStories);
+        
+        if (spinner) spinner.style.display = 'none';
+    })
+    .catch(err => {
+        console.error("Gagal memuat data:", err);
+        if (spinner) spinner.innerHTML = `<div class="alert alert-danger">Gagal memuat data JSON. Cek nama file!</div>`;
+    });
 }
 
 function renderStories(stories) {
     const gridContainer = document.getElementById("story-grid");
     if (!gridContainer) return;
     gridContainer.innerHTML = "";
+    
     stories.forEach(story => {
         const col = document.createElement("div");
         col.className = "col-md-6 col-lg-4 d-flex align-items-stretch";
@@ -78,10 +90,38 @@ function renderStories(stories) {
                     <h5 class="story-title">${story.title}</h5>
                 </div>
             </div>`;
-        col.querySelector('.story-card').addEventListener('click', () => openStory(story.id));
+        
+        // UBAHAN PENTING: Saat diklik, BUKAN openStory, tapi showModal
+        col.querySelector('.story-card').addEventListener('click', () => showVersionModal(story.id));
+        
         gridContainer.appendChild(col);
     });
 }
+
+// --- LOGIKA MODAL & PEMILIHAN VERSI ---
+
+function showVersionModal(id) {
+    tempSelectedId = id; // Simpan ID cerita yang diklik
+    // Panggil Modal Bootstrap
+    const myModal = new bootstrap.Modal(document.getElementById('versionModal'));
+    myModal.show();
+}
+
+function selectVersion(type) {
+    // Tentukan data mana yang akan aktif dipakai
+    if (type === 'short') {
+        storiesData = shortStories;
+        console.log("Mode: Versi Singkat");
+    } else {
+        storiesData = longStories;
+        console.log("Mode: Versi Panjang");
+    }
+
+    // Buka cerita berdasarkan ID yang disimpan tadi
+    openStory(tempSelectedId);
+}
+
+// --- UTILITIES ---
 
 function parseTemplate(text) {
     if (!text) return "";
@@ -90,16 +130,13 @@ function parseTemplate(text) {
     });
 }
 
-// --- LOGIKA AUDIO (MOBILE FRIENDLY) ---
+// --- LOGIKA AUDIO (TETAP) ---
 
 function playAudio() {
     const story = storiesData[currentStoryIndex];
     if (!story) return;
 
-    // 1. Matikan audio sebelumnya
     stopAudio();
-
-    // 2. Bersihkan teks
     const cleanText = story.template.replace(/\[\[(.*?)\|.*?\]\]/g, "$1");
 
     if (!('speechSynthesis' in window)) {
@@ -107,29 +144,19 @@ function playAudio() {
         return;
     }
 
-    // 3. BUAT OBJEK SUARA LANGSUNG (Jangan pakai await/setTimeout di sini!)
-    // HP akan memblokir jika ada delay.
     activeUtterance = new SpeechSynthesisUtterance(cleanText);
-    
-    // 4. Setting Bahasa (Kunci agar HP otomatis pilih suara Jepang)
     activeUtterance.lang = 'ja-JP'; 
     activeUtterance.rate = 0.9;
 
-    // 5. Cek Suara (Opsional untuk PC)
-    // Kita ambil suara yang SUDAH ada saja. Jangan menunggu.
     const voices = window.speechSynthesis.getVoices();
     const japanVoice = voices.find(v => v.lang === 'ja-JP' || v.name.includes('Japan'));
     
-    // Jika ketemu suara spesifik (biasanya di PC), pakai itu.
-    // Jika tidak (biasanya di HP), biarkan default tapi 'lang' sudah diset Jepang.
     if (japanVoice) {
         activeUtterance.voice = japanVoice;
     }
 
-    // 6. EKSEKUSI
     window.speechSynthesis.speak(activeUtterance);
 
-    // Fix Bug iOS/Android kadang perlu 'resume' jika macet
     if (window.speechSynthesis.paused) {
         window.speechSynthesis.resume();
     }
@@ -141,17 +168,19 @@ function stopAudio() {
     }
 }
 
-// --- LOGIKA NAVIGASI ---
+// --- LOGIKA NAVIGASI (TETAP) ---
 
 function openStory(id) {
+    // Cari index berdasarkan ID di dalam storiesData (yang sudah dipilih singkat/panjang)
     currentStoryIndex = storiesData.findIndex(s => s.id === id);
     const story = storiesData[currentStoryIndex];
-    if (!story) return;
+    
+    if (!story) return; // Error handling jika ID beda
 
     stopAudio(); 
-
     updateNavButtons();
     
+    // Setup Header Icon
     const readerImg = document.getElementById("reader-img");
     if (readerImg) readerImg.style.display = 'none';
 
