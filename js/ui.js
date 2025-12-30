@@ -46,7 +46,7 @@ export function renderQuiz(state, qNo) {
     area.appendChild(card);
 }
 
-// --- 2. RENDER HAFALAN (ESSAY + VOICE) ---
+// --- 2. RENDER HAFALAN (ESSAY + VOICE ID-ID) ---
 export function renderMem(state, qNo) {
     area.innerHTML = "";
     const idx = state.current;
@@ -56,7 +56,6 @@ export function renderMem(state, qNo) {
     const card = document.createElement('div');
     card.className = 'card card-kanji mb-3';
     
-    // HTML Update: Menambahkan Input Group dengan Tombol Mic
     card.innerHTML = `
       <div class="card-body">
         <div class="d-flex justify-content-between mb-2">
@@ -69,9 +68,12 @@ export function renderMem(state, qNo) {
             <label class="small text-muted mb-1">Ketik Romaji / Gunakan Suara:</label>
             <div class="input-group input-group-lg">
                 <input type="text" id="memInput" class="form-control" placeholder="Contoh: watashi" autocomplete="off" value="${escapeHtml(val)}">
-                <button class="btn btn-outline-secondary" type="button" id="btnMic" title="Rekam Suara">
+                <button class="btn btn-outline-secondary" type="button" id="btnMic" title="Rekam Suara (Indonesia)">
                     <i class="bi bi-mic-fill"></i>
                 </button>
+            </div>
+            <div class="form-text text-muted" style="font-size: 0.75rem;">
+                *Gunakan pelafalan Indonesia agar akurat (A, I, U, E, O).
             </div>
         </div>
 
@@ -87,7 +89,6 @@ export function renderMem(state, qNo) {
     `;
     area.appendChild(card);
     
-    // Setup Logic Input & Mic
     const inp = document.getElementById('memInput');
     const btnMic = document.getElementById('btnMic');
     
@@ -95,14 +96,16 @@ export function renderMem(state, qNo) {
     inp.oninput = (e) => window.handleInput(e.target.value);
     inp.onkeydown = (e) => { if(e.key === 'Enter') window.handleNextOrSubmit(); };
 
-    // --- LOGIKA PEREKAM SUARA (Web Speech API) ---
-    // Cek ketersediaan API di browser
+    // --- LOGIKA PEREKAM SUARA (PERBAIKAN BAHASA) ---
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
     if (SpeechRecognition) {
         const recognition = new SpeechRecognition();
-        // Gunakan 'en-US' atau 'id-ID'. 'en-US' biasanya lebih akurat menangkap alfabet (Romaji)
-        recognition.lang = 'en-US'; 
+        
+        // PERUBAHAN PENTING DISINI: 
+        // Menggunakan 'id-ID' (Indonesia) karena fonetiknya paling mirip Romaji Jepang.
+        recognition.lang = 'id-ID'; 
+        
         recognition.interimResults = false;
         recognition.maxAlternatives = 1;
 
@@ -110,19 +113,16 @@ export function renderMem(state, qNo) {
             try {
                 recognition.start();
             } catch (e) {
-                // Jika user klik cepat 2x, stop dulu baru start
                 recognition.stop();
             }
         };
 
-        // Saat mulai merekam: Ubah ikon jadi merah/loading
         recognition.onstart = () => {
             btnMic.classList.remove('btn-outline-secondary');
             btnMic.classList.add('btn-danger');
             btnMic.innerHTML = '<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>';
         };
 
-        // Saat selesai/berhenti: Kembalikan ikon
         recognition.onend = () => {
             btnMic.classList.remove('btn-danger');
             btnMic.classList.add('btn-outline-secondary');
@@ -130,15 +130,18 @@ export function renderMem(state, qNo) {
             inp.focus();
         };
 
-        // Saat dapat hasil suara
         recognition.onresult = (event) => {
             const transcript = event.results[0][0].transcript;
-            // Bersihkan hasil: lowercase dan hapus spasi (biasanya romaji ditulis sambung)
-            const cleanText = transcript.toLowerCase().trim().replace(/\s+/g, '');
+            
+            // Bersihkan hasil: 
+            // 1. Lowercase
+            // 2. Hapus tanda baca (titik/koma) di akhir
+            let cleanText = transcript.toLowerCase().trim().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+            
+            // Fix umum pengucapan Indonesia -> Romaji
+            // Contoh: "simas" -> "shimasu" (Optional, bisa ditambah nanti jika perlu)
             
             inp.value = cleanText;
-            
-            // Simpan ke state global aplikasi
             window.handleInput(cleanText);
         };
 
@@ -146,14 +149,13 @@ export function renderMem(state, qNo) {
             console.error("Speech error:", event.error);
             btnMic.classList.remove('btn-danger');
             btnMic.classList.add('btn-outline-secondary');
-            btnMic.innerHTML = '<i class="bi bi-mic-mute-fill"></i>'; // Icon error
+            btnMic.innerHTML = '<i class="bi bi-mic-mute-fill"></i>'; 
             setTimeout(() => { btnMic.innerHTML = '<i class="bi bi-mic-fill"></i>'; }, 1500);
         };
 
     } else {
-        // Jika browser tidak support, sembunyikan tombol
         btnMic.style.display = 'none';
-        inp.style.borderRadius = '0.5rem'; // Fix border radius input jika button hilang
+        inp.style.borderRadius = '0.5rem'; 
     }
 }
 
@@ -234,7 +236,7 @@ export function renderResult(result, isQuiz, wrongIndices = []) {
 
 function launchConfetti() {
     const wrap = document.getElementById(SELECTORS.confetti);
-    if (!wrap) return; // Safety check
+    if (!wrap) return; 
     
     for(let i=0; i<40; i++) {
         const el = document.createElement('div');
