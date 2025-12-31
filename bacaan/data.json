@@ -2,6 +2,7 @@
   {
     "id": "s1",
     "title": "Gunung Fuji (富士山)",
+    "category": "Alam & Wisata",
     "translation": "Ini adalah Gunung Fuji. Gunung Fuji adalah gunung tertinggi di Jepang. Gunung yang sangat besar dan indah. Gunung Fuji sangat terkenal di Jepang. Gunung Fuji adalah simbol Jepang. Banyak orang Jepang dan orang asing pergi untuk melihat Gunung Fuji. Di musim dingin, Gunung Fuji memiliki salju putih dan sangat indah. Di musim panas, ada banyak orang yang mendaki Gunung Fuji. Di sekitar Gunung Fuji terdapat danau dan hutan. Pada hari dengan cuaca bagus, langit biru dan Gunung Fuji terlihat sangat cantik. Saya ingin mendaki Gunung Fuji suatu saat nanti.",
     "template": "これは [[富士山|ふじさん]]です。[[富士山|ふじさん]]は [[日本|にほん]]で [[一番|いちばん]] [[高い|たかい]] [[山|やま]]です。とても [[大きく|おおきく]]て [[綺麗|きれい]]な [[山|やま]]です。[[富士山|ふじさん]]は [[日本|にほん]]で とても [[有名|ゆうめい]]です。[[富士山|ふじさん]]は [[日本|にほん]]の シンボルです。たくさんの [[日本人|にほんじん]]や [[外国人|がいこくじん]]が [[富士山|ふじさん]]を [[見|み]]に [[行き|いき]]ます。[[冬|ふゆ]]の [[富士山|ふじさん]]は [[白い|しろい]] [[雪|ゆき]]が あって、とても [[美しい|うつくしい]]です。[[夏|なつ]]には [[富士山|ふじさん]]に [[登る|のぼる]] [[人|ひと]]が [[沢山|たくさん]] います。[[富士山|ふじさん]]の [[周り|まわり]]には、[[湖|みずうみ]]や [[森|もり]]が あります。[[天気|てんき]]が [[良い|いい]] [[日|ひ]]には、[[空|そら]]が [[青く|あおく]]て、[[富士山|ふじさん]]が とても [[綺麗|きれい]]に [[見え|みえ]]ます。[[私|わたし]]は [[何時か|いつか]] [[富士山|ふじさん]]に [[登りたい|のぼりたい]]です。",
     "icon": "fas fa-mountain",
@@ -10,6 +11,7 @@
   {
     "id": "s2",
     "title": "Kehidupan Anjing (犬の生活)",
+    "category": "Hewan",
     "translation": "Saya adalah Tomo. Saya tinggal di rumah Tuan Santos. Setiap pagi saya pergi jalan-jalan bersama Nyonya. Sekitar jam 8 saya pergi ke sekolah bersama Teresa. Setelah itu saya pulang ke rumah. Lalu, saya pergi berbelanja bersama Nyonya. Sore harinya saya pergi menjemput Teresa di sekolah. Kemudian kami pergi bermain bersama di taman. Pada akhir pekan, sekolah Teresa dan kantor Tuan Santos libur. Keluarga Tuan Santos pergi bermain ke tempat yang jauh dengan mobil. Saya juga ikut pergi bersama. Sangat melelahkan. Di rumah Tuan Santos juga ada kucing. Kucing itu setiap hari tidak melakukan apa-apa. Tidak pergi ke mana pun. Saya sibuk dari pagi sampai malam. Sama sekali tidak ada libur. Saya ingin beristirahat bersama kucing.",
     "template": "[[私|わたし]]は トモです。サントスさんの うちに います。[[私|わたし]]は [[毎朝|まいあさ]] [[奥|おく]]さんと [[散歩|さんぽ]]に [[行|い]]きます。[[8時|はちじ]]ごろ テレーザちゃんと [[学校|がっこう]]へ [[行|い]]きます。それから うちへ [[帰|かえ]]ります。そして、[[奥|おく]]さんと [[買い物|かいもの]]に [[行|い]]きます。[[午後|ごご]] [[学校|がっこう]]へ テレーザちゃんを [[迎|むか]]えに [[行|い]]きます。それから いっしょに [[公園|こうえん]]へ [[遊|あそ]]びに [[行|い]]きます。[[週末|しゅうまつ]]は テレーザちゃんの [[学校|がっこう]]と サントスさんの [[会社|かいしゃ]]は [[休|やす]]みです。サントスさんの [[家族|かぞく]]は [[遠|とお]]い ところへ [[車|くるま]]で [[遊|あそ]]びに [[行|い]]きます。[[私|わたし]]も いっしょに [[行|い]]きます。とても [[疲|つか]]れます。サントスさんの うちに [[猫|ねこ]]も います。[[猫|ねこ]]は [[毎日|まいにち]] なにも しません。どこも [[行|い]]きません。[[私|わたし]]は [[朝|あさ]]から [[晩|ばん]]まで [[忙|いそが]]しいです。[[休|やす]]みが [[全然|ぜんぜん]] ありません。[[私|わたし]]は [[猫|ねこ]]と いっしょに [[休|やす]]みたいです。",
     "icon": "fas fa-dog",
@@ -18,6 +20,7 @@
   {
     "id": "s3",
     "title": "Hari Natal (クリスマス)",
+    "category": "Budaya & Tradisi",
     "translation": "Natal adalah tanggal 24 Desember. Natal adalah hari yang sangat istimewa. Ketika memasuki bulan Desember, cuaca menjadi dingin. Di rumah dan di toko-toko terdapat hiasan Natal. Melihat pohon Natal yang besar itu menyenangkan. Malam harinya, saya makan bersama keluarga. Kami makan kue dan minum jus. Kami mengucapkan 'Selamat Natal' kepada teman-teman. Anak-anak senang mendapatkan hadiah. Natal adalah hari yang sangat menyenangkan. Saya sangat suka Natal.",
     "template": "[[クリスマス|くりすます]]は [[12月|じゅうにがつ]][[24日|にじゅうよっか]]です。[[クリスマス|くりすます]]は とても [[特別|とくべつ]]な [[日|ひ]]です。[[12月|じゅうにがつ]]に なると、[[寒|さむ]]く なります。[[家|いえ]]や [[店|みせ]]に [[クリスマス|くりすます]]の [[飾|かざ]]りが あります。[[大|おお]]きい [[クリスマス|くりすます]]ツリーを [[見|み]]るのは [[楽|たの]]しいです。[[夜|よる]]、[[家族|かぞく]]と [[一緒|いっしょ]]に [[食事|しょくじ]]を します。ケーキを [[食|た]]べて、ジュースを [[飲|の]]みます。[[友達|ともだち]]に「メリークリスマス」と [[言|い]]います。[[子供|こども]]たちは プレゼントを もらって [[嬉|うれ]]しいです。[[クリスマス|くりすます]]は とても [[楽|たの]]しい [[日|ひ]]です。[[私|わたし]]は [[クリスマス|くりすます]]が とても [[好|す]]きです。",
     "icon": "fas fa-tree",
@@ -270,5 +273,29 @@
     "template": "[[僕|ぼく]]の おばあちゃんは 72[[歳|さい]]で [[元気|げんき]]です。[[一人|ひとり]]で [[住|す]]んで います。[[天気|てんき]]が いい [[時|とき]]、おばあちゃんは [[病院|びよういん]]へ [[友達|ともだち]]に [[会|あ]]いに [[行|い]]きます。[[病院|びよういん]]に [[友達|ともだち]]が [[沢山|たくさん]] いますから。[[天気|てんき]]が [[悪|わる]]い [[時|とき]]、[[足|あし]]の 調子が よくないですから、[[出|で]]かけません。おばあちゃんが [[僕|ぼく]]の うちへ [[来|き]]た [[時|とき]]、[[僕|ぼく]]は [[学校|がっこう]]で [[習|なら]]った [[歌|うた]]を [[歌|うた]]って あげます。おばあちゃんは [[僕|ぼく]]に [[古|ふる]]い [[日本|にほん]]の お[[話|はなし]]を してくれます。そして パンや お[[菓子|かし]]を [[作|つく]]って くれます。おばあちゃんが うちへ [[来|く]]ると、うちの [[中|なか]]が とても にぎやかに なります。",
     "icon": "fas fa-user-friends",
     "color": "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)"
+  },
+  {
+    "id": "s35",
+    "title": "Naik Bus (バスに乗る)",
+    "translation": "Di Jepang, naik bus sedikit berbeda dengan kereta. Biasanya kita naik dari pintu belakang dan mengambil tiket kecil. Tiket itu ada nomornya. Saat turun, kita membayar uang di depan supir. Kita harus menekan tombol jika ingin turun. Bus Jepang sangat tepat waktu dan supirnya sangat ramah.",
+    "template": "[[日本|にほん]]では、バスに [[乗|の]]るのは [[電車|でんしゃ]]と [[少|すこ]]し [[違|ちが]]います。たいてい [[後|うし]]ろの ドアから [[乗|の]]って、[[小|ちい]]さい [[切符|きっぷ]]（整理券）を [[取|と]]ります。その [[切符|きっぷ]]に [[番号|ばんごう]]が あります。[[降|お]]りるとき、[[運転手|うんてんしゅ]]さんの [[横|よこ]]で お[[金|かね]]を [[払|はら]]います。[[降|お]]りたいとき、ボタンを [[押|お]]さなければなりません。[[日本|にほん]]の バスは [[時間|じかん]]が [[正確|せいかく]]で、[[運転手|うんてんしゅ]]さんは とても [[親切|しんせつ]]です。",
+    "icon": "fas fa-bus",
+    "color": "linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)"
+  },
+  {
+    "id": "s36",
+    "title": "Demam Serbuk Sari (花粉症)",
+    "translation": "Di musim semi, banyak orang Jepang memakai masker dan kacamata. Ini karena penyakit alergi yang disebut 'Kafunshou' (Demam Serbuk Sari). Serbuk sari dari pohon Cedar beterbangan di udara. Mata menjadi gatal dan hidung meler (ingusan). Ini sangat menyiksa. Saya harus minum obat dan menggunakan tetes mata setiap hari.",
+    "template": "[[春|はる]]に、[[沢山|たくさん]]の [[日本人|にほんじん]]が マスクや 眼鏡を かけます。これは「[[花粉症|かふんしょう]]」という アレルギーの [[病気|びょうき]]だからです。杉の [[木|き]]の [[花粉|かふん]]が [[空気|くうき]]の [[中|なか]]を [[飛|と]]びます。[[目|め]]が [[痒|かゆ]]く なって、[[鼻水|はなみず]]が 出ます。これは とても [[辛|つら]]いです。[[私|わたし]]は [[毎日|まいにち]] [[薬|くすり]]を [[飲|の]]んで、[[目薬|めぐすり]]を [[使|つか]]わなければなりません。",
+    "icon": "fas fa-head-side-mask",
+    "color": "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)"
+  },
+  {
+    "id": "s37",
+    "title": "Pergi ke Karaoke (カラオケ)",
+    "translation": "Karaoke adalah hiburan yang sangat populer di Jepang. Saya sering pergi ke karaoke bersama teman atau rekan kerja setelah pesta minum. Kami menyewa satu ruangan pribadi. Kami bisa bernyanyi sepuasnya sambil minum dan makan. Lagu anime sangat seru dinyanyikan bersama. Karaoke adalah cara terbaik untuk menghilangkan stres.",
+    "template": "カラオケは [[日本|にほん]]で とても [[人気|にんき]]がある 娯楽（エンターテイメント）です。[[私|わたし]]は よく [[飲|の]]み会の あとで、[[友達|ともだち]]や [[同僚|どうりょう]]と カラオケへ [[行|い]]きます。[[私|わたし]]たちは 個室（プライベートな [[部屋|へや]]）を 借ります。[[飲|の]]んだり [[食|た]]べたり しながら、[[思|おも]]い切り [[歌|うた]]うことが できます。アニメの [[歌|うた]]は [[一緒|いっしょ]]に [[歌|うた]]うと [[楽|たの]]しいです。カラオケは ストレスを 解消する [[一番|いちばん]] いい [[方法|ほうほう]]です。",
+    "icon": "fas fa-microphone-alt",
+    "color": "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)"
   }
 ]

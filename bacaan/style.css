@@ -426,3 +426,289 @@ rt {
 .btn-stop:active {
     transform: scale(0.95);
 }
+
+/* --- GAYA TAMPILAN PER KALIMAT (INTERLINEAR) --- */
+
+.sentence-block {
+    margin-bottom: 25px; /* Jarak antar kalimat */
+    padding-bottom: 15px;
+    border-bottom: 1px dashed #eee; /* Garis tipis pemisah antar kalimat */
+}
+
+.jp-sentence {
+    /* Style huruf Jepang */
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1.4rem;
+    line-height: 2.2;
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+.id-translation {
+    /* Style terjemahan di bawahnya */
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    color: #0072FF; /* Warna biru biar kontras */
+    background-color: #f0f8ff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    line-height: 1.6;
+    display: none; /* Default sembunyi */
+    animation: fadeIn 0.3s ease;
+}
+
+/* Class untuk memunculkan terjemahan */
+.show-translation .id-translation {
+    display: block;
+}
+
+/* Class untuk menyembunyikan furigana */
+.hide-furigana rt {
+    opacity: 0;
+}
+
+/* --- MENU MELAYANG (FLOATING DOCK) --- */
+
+.floating-dock-container {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%); /* Agar tepat di tengah */
+    
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    
+    background: rgba(255, 255, 255, 0.9); /* Putih transparan */
+    backdrop-filter: blur(12px); /* Efek blur kaca (Glassmorphism) */
+    -webkit-backdrop-filter: blur(12px);
+    
+    padding: 12px 20px;
+    border-radius: 50px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    z-index: 9999;
+    
+    width: max-content;
+    max-width: 90%;
+}
+
+.dock-btn {
+    border: none;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    color: #555;
+    min-width: 50px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.dock-btn i {
+    font-size: 1.4rem;
+    padding: 8px;
+    border-radius: 50%;
+    background-color: #f5f5f5;
+    transition: all 0.2s;
+}
+
+.dock-btn span {
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+/* Efek Hover & Active */
+.dock-btn:active { transform: scale(0.9); }
+
+.dock-btn:hover i {
+    background-color: #0072FF;
+    color: white;
+    transform: translateY(-3px);
+}
+
+/* Warna khusus tombol Stop */
+.dock-btn.btn-red:hover i {
+    background-color: #ff4757;
+}
+
+/* Status Aktif (Misal Terjemahan Nyala) */
+.dock-btn.active i {
+    background-color: #0072FF;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 114, 255, 0.3);
+}
+
+.dock-btn.active-furigana i {
+    background-color: #9c27b0;
+    color: white;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- GAYA TAMPILAN PER KALIMAT (INTERLINEAR - LEBIH PADAT) --- */
+
+.sentence-block {
+    margin-bottom: 10px; /* Jarak antar blok kalimat diperkecil */
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #f0f0f0; /* Garis pemisah sangat tipis */
+}
+
+/* Hapus garis di kalimat terakhir agar rapi */
+.sentence-block:last-child {
+    border-bottom: none;
+}
+
+.jp-sentence {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1.4rem;
+    line-height: 2.0; /* Sedikit dirapatkan */
+    color: #2c3e50;
+    margin-bottom: 2px; /* Jarak ke terjemahan diperkecil */
+}
+
+.id-translation {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem; /* Ukuran font sedikit dikecilkan agar proporsional */
+    color: #0072FF; 
+    background-color: #f4f9ff; /* Warna background lebih lembut */
+    padding: 5px 10px; /* Padding diperkecil */
+    border-radius: 6px;
+    line-height: 1.4;
+    display: none; 
+    animation: fadeIn 0.3s ease;
+}
+
+.show-translation .id-translation {
+    display: block;
+}
+
+.hide-furigana rt {
+    opacity: 0;
+}
+
+/* --- PAGINATION & DOCK STYLES --- */
+
+#pagination-container {
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.page-nav-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    background: white;
+    color: #0072FF;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    font-weight: bold;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-nav-btn:hover:not(:disabled) {
+    background: #0072FF;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0, 114, 255, 0.2);
+}
+
+.page-nav-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #eee;
+    color: #999;
+}
+
+/* Floating Dock (Menu Melayang) */
+.floating-dock-container {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Jarak antar tombol di menu */
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 10px 25px;
+    border-radius: 50px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0,0,0,0.05);
+    z-index: 9999;
+    width: max-content;
+}
+
+.dock-btn {
+    border: none;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    color: #666;
+    cursor: pointer;
+    min-width: 45px;
+}
+
+.dock-btn i {
+    font-size: 1.3rem;
+    margin-bottom: 2px;
+    transition: 0.2s;
+}
+
+.dock-btn span {
+    font-size: 0.65rem;
+    font-weight: 600;
+}
+
+/* Warna Aktif */
+.dock-btn.active i, .dock-btn:hover i {
+    color: #0072FF;
+    transform: scale(1.1);
+}
+
+.dock-btn.active-furigana i {
+    color: #9c27b0;
+}
+
+.dock-btn.btn-red:hover i {
+    color: #ff4757;
+}
+
+
+/* --- CATEGORY BUTTONS --- */
+.category-btn {
+    border: 1px solid #e0e0e0;
+    background-color: white;
+    color: #555;
+    padding: 8px 20px;
+    border-radius: 50px; /* Bentuk Pil */
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.category-btn:hover {
+    background-color: #f8f9fa;
+    transform: translateY(-2px);
+    border-color: #ccc;
+}
+
+.category-btn.active {
+    background: linear-gradient(135deg, #00C6FF 0%, #0072FF 100%);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 4px 10px rgba(0, 114, 255, 0.3);
+}
