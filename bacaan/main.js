@@ -44,6 +44,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnNext = document.getElementById("btn-next");
     if (btnNext) btnNext.addEventListener("click", nextStory);
 
+    // Filter Button (Memicu Modal)
+    const btnFilter = document.getElementById("btn-filter-category");
+    if (btnFilter) {
+        btnFilter.addEventListener("click", () => {
+            const catModal = new bootstrap.Modal(document.getElementById('categoryModal'));
+            catModal.show();
+        });
+    }
+
     // Dock Buttons
     const btnAudio = document.getElementById("btn-audio");
     if (btnAudio) btnAudio.addEventListener("click", playAudio);
@@ -87,14 +96,14 @@ function fetchAllData() {
         fetch('data.json').then(res => res.json()),           
         fetch('bacaanlengkap.json').then(res => res.json())   
     ]).then(([dataSingkat, dataPanjang]) => {
-        // Simpan Data
-        shortStories = dataSingkat; // Sesuai urutan JSON
+        // Data sesuai urutan asli JSON
+        shortStories = dataSingkat; 
         longStories = dataPanjang;
         
-        // Inisialisasi Filter (Default: Semua)
+        // Inisialisasi Filter
         filteredStories = shortStories;
         
-        // Setup Kategori & Render
+        // Setup Kategori (Dalam Modal) & Render
         setupCategories();
         renderStories(); 
         
@@ -105,40 +114,38 @@ function fetchAllData() {
     });
 }
 
-// --- LOGIKA KATEGORI (BARU) ---
+// --- LOGIKA KATEGORI (MODAL VERSION) ---
 function setupCategories() {
-    const container = document.getElementById("category-filter-container");
+    const container = document.getElementById("modal-category-list");
     if(!container) return;
     container.innerHTML = "";
 
-    // 1. Ambil semua kategori unik dari data
+    // 1. Ambil kategori unik
     const categories = new Set();
     shortStories.forEach(story => {
-        if(story.category) {
-            categories.add(story.category);
-        } else {
-            categories.add("Lainnya");
-        }
+        if(story.category) categories.add(story.category);
+        else categories.add("Lainnya");
     });
 
-    // 2. Buat Array Kategori (Tambahkan 'Semua' di awal)
+    // 2. Buat List + 'Semua'
     const categoryList = ["Semua", ...Array.from(categories)];
 
-    // 3. Render Tombol
+    // 3. Render Tombol ke dalam MODAL
     categoryList.forEach(cat => {
         const btn = document.createElement("button");
-        btn.className = `category-btn ${cat === currentCategory ? 'active' : ''}`;
-        btn.innerText = cat;
+        // Cek apakah ini kategori yang sedang aktif
+        btn.className = `cat-modal-btn ${cat === currentCategory ? 'active' : ''}`;
+        
+        // Tambahkan Ikon Check jika aktif (opsional, biar keren)
+        const checkIcon = cat === currentCategory ? '<i class="fas fa-check"></i>' : '';
+        btn.innerHTML = `<span>${cat}</span> ${checkIcon}`;
         
         btn.addEventListener("click", () => {
-            // Update UI Active State
-            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            // Set Filter Logic
+            // 1. Set Kategori Aktif
             currentCategory = cat;
-            currentPage = 1; // Reset ke halaman 1
+            currentPage = 1;
 
+            // 2. Filter Data
             if (cat === "Semua") {
                 filteredStories = shortStories;
             } else {
@@ -146,26 +153,39 @@ function setupCategories() {
                     (story.category || "Lainnya") === cat
                 );
             }
+
+            // 3. Update Tombol Pemicu Utama (Teksnya diganti)
+            const mainBtnText = document.querySelector("#btn-filter-category span");
+            if(mainBtnText) mainBtnText.innerText = `Kategori: ${cat}`;
+
+            // 4. Render Ulang Modal (biar status active/check icon pindah)
+            setupCategories(); 
+
+            // 5. Render Ulang Cerita
             renderStories();
+
+            // 6. Tutup Modal Otomatis
+            const modalEl = document.getElementById('categoryModal');
+            const modalInstance = bootstrap.Modal.getInstance(modalEl);
+            if(modalInstance) modalInstance.hide();
         });
 
         container.appendChild(btn);
     });
 }
 
-// --- RENDER STORIES (UPDATED DENGAN FILTER) ---
+// --- RENDER STORIES ---
 function renderStories() {
     const gridContainer = document.getElementById("story-grid");
     const paginationContainer = document.getElementById("pagination-container");
     if (!gridContainer) return;
     gridContainer.innerHTML = "";
     
-    // Pagination Logic pada Data yang SUDAH DI-FILTER
     const start = (currentPage - 1) * itemsPerPage;
     const end = start + itemsPerPage;
     const paginatedItems = filteredStories.slice(start, end);
     
-    // Animasi Fade sederhana saat ganti kategori
+    // Animasi Fade
     gridContainer.style.opacity = '0';
     setTimeout(() => { gridContainer.style.opacity = '1'; }, 50);
 
@@ -178,7 +198,6 @@ function renderStories() {
     paginatedItems.forEach(story => {
         const col = document.createElement("div");
         col.className = "col-md-6 col-lg-4 d-flex align-items-stretch";
-        // Inline CSS transition
         col.style.transition = "all 0.3s ease";
         
         col.innerHTML = `
@@ -188,7 +207,7 @@ function renderStories() {
                 </div>
                 <div class="card-body-custom text-center">
                     <h5 class="story-title">${story.title}</h5>
-                    <span class="badge rounded-pill bg-light text-dark mt-2" style="font-weight:normal; font-size:0.7rem;">
+                    <span class="badge rounded-pill bg-light text-dark mt-2" style="font-weight:normal; font-size:0.7rem; border:1px solid #eee;">
                         ${story.category || 'Lainnya'}
                     </span>
                 </div>
@@ -236,8 +255,7 @@ function showVersionModal(id) {
 }
 
 function selectVersion(type) {
-    // Cari data berdasarkan ID, bukan Index (karena index berubah saat difilter)
-    // Ambil dari sumber asli (shortStories/longStories) agar lengkap
+    // Ambil data lengkap (shortStories/longStories) agar tidak terpengaruh filter
     if (type === 'short') {
         storiesData = shortStories;
     } else {
@@ -254,7 +272,6 @@ function parseRuby(text) {
 }
 
 function openStory(id) {
-    // Cari index di database utama berdasarkan ID
     currentStoryIndex = storiesData.findIndex(s => s.id === id);
     const story = storiesData[currentStoryIndex];
     if (!story) return;
@@ -407,8 +424,9 @@ function stopAudio() {
 }
 
 // --- NAVIGASI CERITA ---
-// (Dicari manual di array utama karena filtered list mungkin beda urutan)
 function prevStory() {
+    // Navigasi menggunakan array storiesData (sumber lengkap)
+    // agar saat baca, user bisa next ke cerita lain walau beda kategori
     if (currentStoryIndex > 0) openStory(storiesData[currentStoryIndex - 1].id);
 }
 

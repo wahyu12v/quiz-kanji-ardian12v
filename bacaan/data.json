@@ -29,6 +29,7 @@
   {
     "id": "s4",
     "title": "Santa Claus (サンタクロース)",
+    "category": "Budaya & Tradisi",
     "translation": "Saya adalah Santa Claus. Saya tinggal di tempat yang sangat dingin. Saya suka baju merah. Baju merah itu hangat. Saya hanya bekerja satu hari dalam setahun. Yaitu tanggal 24 Desember. Pada malam tanggal 24 Desember, saya memberikan hadiah yang bagus kepada anak-anak. Saya masih lajang. Saya tidak punya anak, tapi saya suka anak-anak. Semua anak mengenal saya. Dan, pada malam tanggal 24 Desember mereka menunggu hadiah dari saya. Pekerjaan saya sangat menyenangkan.",
     "template": "[[私|わたし]]は サンタクロースです。[[私|わたし]]は とても [[寒|さむ]]い [[所|ところ]]に [[住|す]]んで います。[[私|わたし]]は [[赤|あか]]い [[服|ふく]]が [[好|す]]きです。[[赤|あか]]い [[服|ふく]]は [[暖|あたた]]かいです。[[私|わたし]]は [[1年|いちねん]]に [[一日|いちにち]]だけ [[働|はたら]]きます。[[12月|じゅうにがつ]][[24日|にじゅうよっか]]です。[[12月|じゅうにがつ]][[24日|にじゅうよっか]]の [[夜|よる]] すてきな プレゼントを [[子供|こども]]に あげます。[[私|わたし]]は [[独身|どくしん]]です。[[子供|こども]]が いませんが、[[子供|こども]]が [[好|す]]きです。[[子供|こども]]は みんな [[私|わたし]]を [[知|し]]って います。そして、[[12月|じゅうにがつ]][[24日|にじゅうよっか]]の [[夜|よる]] [[私|わたし]]の プレゼントを [[待|ま]]って います。[[私|わたし]]の [[仕事|しごと]]は とても [[楽|たの]]しいです。",
     "icon": "fas fa-sleigh",
@@ -37,6 +38,7 @@
   {
     "id": "s5",
     "title": "Keluarga Saya (わたしの家族)",
+    "category": "Keluarga",
     "translation": "Keluarga saya ada 5 orang. Ibu, Ayah, Kakak laki-laki, Adik perempuan, dan saya. Ayah adalah pegawai perusahaan. Setiap hari beliau pergi ke kantor pagi-pagi sekali. Ibu ada di rumah. Ibu pandai memasak. Setiap hari beliau membuat masakan yang enak. Kakak laki-laki adalah insinyur. Dia bekerja di perusahaan IT. Adik perempuan adalah siswa SMA. Setiap hari dia belajar. Saya adalah mahasiswa. Setiap hari saya pergi ke universitas. Kami pergi ke taman bersama-sama setiap hari Minggu. Di rumah kami menonton TV dan mengobrol. Malam harinya kami makan malam bersama. Keluarga saya baik hati dan menyenangkan. Saya bahagia saat bersama keluarga. Saya sangat menyayangi keluarga saya.",
     "template": "[[私|わたし]]の [[家族|かぞく]]は [[5人|ごにん]]です。[[母|はは]]と [[父|ちち]]と [[兄|あに]]と [[妹|いもうと]]と [[私|わたし]]です。[[父|ちち]]は [[会社員|かいしゃいん]]です。[[毎日|まいにち]] [[朝|あさ]] [[早|はや]]く [[会社|かいしゃ]]へ [[行|い]]きます。[[母|はは]]は [[家|いえ]]に います。[[母|はは]]は [[料理|りょうり]]が [[上手|じょうず]]です。[[毎日|まいにち]] [[美味|おい]]しい [[料理|りょうり]]を [[作|つく]]ります。[[兄|あに]]は エンジニアです。ITの [[会社|かいしゃ]]で [[働|はたら]]いて います。[[妹|いもうと]]は [[高校生|こうこうせい]]です。[[毎日|まいにち]] [[勉強|べんきょう]]して います。[[私|わたし]]は [[大学生|だいがくせい]]です。[[毎日|まいにち]] [[大学|だいがく]]へ [[行|い]]きます。[[私|わたし]]たちは [[毎週|まいしゅう]]の [[日曜日|にちようび]]に [[一緒|いっしょ]]に [[公園|こうえん]]へ [[行|い]]きます。[[家|いえ]]で テレビを [[見|み]]たり、[[話|はな]]したり します。[[夜|よる]]は [[一緒|いっしょ]]に [[ご飯|ごはん]]を [[食|た]]べます。[[私|わたし]]の [[家族|かぞく]]は やさしくて [[楽|たの]]しいです。[[私|わたし]]は [[家族|かぞく]]と [[一緒|いっしょ]]に いると [[幸|しあわ]]せです。[[私|わたし]]は [[家族|かぞく]]が [[大好き|だいすき]]です。",
     "icon": "fas fa-users",
@@ -45,6 +47,7 @@
   {
     "id": "s6",
     "title": "Hari Sabtu Saya (私の土曜日)",
+    "category": "Kehidupan Sehari-hari",
     "translation": "Hari Sabtu saya sangat menyenangkan. Saya bangun jam 8 pagi. Kemudian, saya makan pagi. Setelah makan pagi, saya membersihkan kamar. Siang harinya saya pergi ke taman bersama teman. Di taman kami berjalan-jalan dan bermain sepak bola. Setelah itu, kami makan kue dan minum kopi di kafe. Sore harinya saya pulang ke rumah lalu membaca buku dan menonton TV. Setelah makan malam, saya masuk ofuro (mandi berendam). Malam harinya sebelum tidur, saya mendengarkan musik. Hari Sabtu adalah hari yang sangat menyenangkan.",
     "template": "[[私|わたし]]の [[土曜日|どようび]]は とても [[楽|たの]]しいです。[[朝|あさ]] [[8時|はちじ]]に [[起|お]]きます。そして、[[朝ご飯|あさごはん]]を [[食|た]]べます。[[朝ご飯|あさごはん]]の [[後|あと]]で、[[部屋|へや]]を そうじします。[[昼|ひる]]は [[友達|ともだち]]と [[公園|こうえん]]へ [[行|い]]きます。[[公園|こうえん]]で [[散歩|さんぽ]]したり、サッカーしたり します。それから、カフェで コーヒーや ケーキを [[食|た]]べます。[[夕方|ゆうがた]]は [[家|いえ]]へ [[帰|かえ]]って [[本|ほん]]を [[読|よ]]んだり、テレビを [[見|み]]たり します。[[晩ご飯|ばんごはん]]を [[食|た]]べてから、お[[風呂|ふろ]]に [[入|はい]]ります。[[夜|よる]]は [[寝|ね]]る [[前|まえ]]に、[[音楽|おんがく]]を [[聞|き]]きます。[[土曜日|どようび]]は とても [[楽|たの]]しい [[日|ひ]]です。",
     "icon": "fas fa-mug-hot",
@@ -53,6 +56,7 @@
   {
     "id": "s7",
     "title": "Musim Semi & Sakura (春と桜)",
+    "category": "Alam & Musim",
     "translation": "Musim semi telah tiba. Di Jepang, bulan April adalah musim semi. Sekarang, bunga sakura sedang mekar. Sakura sangat cantik. Orang Jepang pergi ke taman untuk melihat sakura. Ini disebut 'Hanami'. Kami makan bento dan minum sake di bawah pohon sakura. Cuacanya hangat dan menyenangkan. Angin bertiup pelan dan kelopak sakura berguguran. Pemandangannya seperti mimpi. Saya suka musim semi.",
     "template": "[[春|はる]]が [[来|き]]ました。[[日本|にほん]]では、[[4月|しがつ]]は [[春|はる]]です。[[今|いま]]、[[桜|さくら]]が [[咲|さ]]いて います。[[桜|さくら]]は とても [[綺麗|きれい]]です。[[日本人|にほんじん]]は [[桜|さくら]]を [[見|み]]に [[公園|こうえん]]へ [[行|い]]きます。これは「[[花見|はなみ]]」です。[[私|わたし]]たちは [[桜|さくら]]の [[木|き]]の [[下|した]]で お[[弁当|べんとう]]を [[食|た]]べて、お[[酒|さけ]]を [[飲|の]]みます。[[天気|てんき]]は [[暖|あたた]]かくて、[[気持|きも]]ちが [[良|い]]いです。[[風|かぜ]]が [[吹|ふ]]いて、[[桜|さくら]]の [[花びら|はなびら]]が [[散|ち]]ります。[[景色|けしき]]は [[夢|ゆめ]]の ようです。[[私|わたし]]は [[春|はる]]が [[好|す]]きです。",
     "icon": "fas fa-fan",
@@ -61,6 +65,7 @@
   {
     "id": "s8",
     "title": "Toserba / Konbini (コンビニ)",
+    "category": "Kehidupan Sehari-hari",
     "translation": "Convenience Store (Toserba) Jepang sangat praktis. Buka 24 jam. Di dekat rumah saya ada 7-Eleven dan Lawson. Di konbini, dijual onigiri, bento, roti, dan majalah. Onigiri konbini sangat enak dan murah. Saya sering membelinya untuk makan siang. Bisa juga memfotokopi dokumen dan membayar tagihan listrik di sana. Pelayan toko selalu menyapa 'Irasshaimase!'. Konbini adalah tempat yang penting bagi kehidupan di Jepang.",
     "template": "[[日本|にほん]]の コンビニは とても [[便利|べんり]]です。[[24時間|にじゅうよじかん]] [[開|あ]]いて います。[[私|わたし]]の [[家|いえ]]の [[近|ちか]]くに セブンイレブンと ローソンが あります。コンビニでは、おにぎりや お[[弁当|べんとう]]や パンや [[雑誌|ざっし]]を [[売|う]]って います。コンビニの おにぎりは とても [[美味|おい]]しくて、[[安|やす]]いです。[[私|わたし]]は よく [[昼ご飯|ひるごはん]]に [[買|か]]います。そこで コピーも できますし、[[電気|でんき]]の [[代金|だいきん]]も [[払|はら]]えます。[[店員|てんいん]]さんは いつも「いらっしゃいませ！」と [[言|い]]います。コンビニは [[日本|にほん]]の [[生活|せいかつ]]に [[大切|たいせつ]]な [[場所|ばしょ]]です。",
     "icon": "fas fa-store",
@@ -69,6 +74,7 @@
   {
     "id": "s9",
     "title": "Kereta Jepang (日本の電車)",
+    "category": "Transportasi",
     "translation": "Kereta Jepang sangat tepat waktu. Jarang terlambat. Setiap pagi saya naik kereta ke sekolah. Di dalam kereta, banyak orang membaca buku atau melihat smartphone. Dilarang menelepon di dalam kereta. Harus tenang/diam. Stasiun Shinjuku di Tokyo sangat besar dan rumit. Ada banyak sekali orang. Kereta Shinkansen sangat cepat. Dari Tokyo ke Osaka hanya butuh waktu 2,5 jam. Teknologi Jepang luar biasa.",
     "template": "[[日本|にほん]]の [[電車|でんしゃ]]は [[時間|じかん]]が [[正確|せいかく]]です。あまり [[遅|おく]]れません。[[毎朝|まいあさ]] [[私|わたし]]は [[電車|でんしゃ]]で [[学校|がっこう]]へ [[行|い]]きます。[[電車|でんしゃ]]の [[中|なか]]で、[[沢山|たくさん]]の [[人|ひと]]が [[本|ほん]]を [[読|よ]]んだり、スマホを [[見|み]]たり します。[[電話|でんわ]]は だめです。[[静|しず]]かに しなければなりません。[[東京|とうきょう]]の [[新宿|しんじゅく]][[駅|えき]]は とても [[大|おお]]きくて、[[複雑|ふくざつ]]です。[[人|ひと]]が とても [[多|おお]]いです。[[新幹線|しんかんせん]]は とても [[速|はや]]いです。[[東京|とうきょう]]から [[大阪|おおさか]]まで 2.5[[時間|じかん]]だけ かかります。[[日本|にほん]]の [[技術|ぎじゅつ]]は すばらしいです。",
     "icon": "fas fa-train",
@@ -77,6 +83,7 @@
   {
     "id": "s10",
     "title": "Hobi Saya (私の趣味)",
+    "category": "Hobi & Hiburan",
     "translation": "Hobi saya adalah menonton anime. Saya sangat suka anime Jepang. Karakter favorit saya adalah Naruto. Setiap akhir pekan, saya menonton anime di rumah. Terkadang saya membaca manga juga. Saya sedang belajar bahasa Jepang karena saya ingin mengerti anime tanpa subtitle. Tahun depan, saya ingin pergi ke Akihabara di Tokyo. Di sana ada banyak toko anime dan game. Itu adalah impian saya.",
     "template": "[[私|わたし]]の [[趣味|しゅみ]]は アニメを [[見|み]]ることです。[[私|わたし]]は [[日本|にほん]]の アニメが [[大好|だいす]]きです。[[一番|いちばん]] [[好|す]]きな キャラクターは ナルトです。[[毎週末|まいしゅうまつ]]、[[家|いえ]]で アニメを [[見|み]]ます。ときどき マンガも [[読|よ]]みます。[[字幕|じまく]]なしで アニメが [[分|わ]]かりたいですから、[[今|いま]] [[日本語|にほんご]]を [[勉強|べんきょう]]しています。[[来年|らいねん]]、[[東京|とうきょう]]の [[秋葉原|あきはばら]]へ [[行|い]]きたいです。あそこには アニメや ゲームの [[店|みせ]]が [[沢山|たくさん]] あります。それは [[私|わたし]]の [[夢|ゆめ]]です。",
     "icon": "fas fa-gamepad",
@@ -85,6 +92,7 @@
   {
     "id": "s11",
     "title": "Di Restoran (レストランで)",
+    "category": "Makanan & Minuman",
     "translation": "Siang ini saya pergi ke restoran ramen. Saya membeli tiket makanan di mesin penjual otomatis. Saya memesan Ramen Tonkotsu dan Gyoza. Pelayan bertanya, 'Mienya mau yang keras atau lembut?'. Saya menjawab, 'Yang biasa saja'. Ramennya datang dengan cepat. Supnya panas dan sangat enak. Saya makan dengan lahap. Setelah makan, saya berkata 'Gochisousama deshita' kepada pelayan. Perut saya kenyang dan saya bahagia.",
     "template": "[[今日の午後|きょうのごご]]、ラーメン[[屋|や]]へ [[行|い]]きました。[[券売機|けんばいき]]で [[食券|しょっけん]]を [[買|か]]いました。[[豚骨|とんこつ]]ラーメンと ギョーザを [[注文|ちゅうもん]]しました。[[店員|てんいん]]さんは「[[麺|めん]]は [[固|かた]]いですか、[[柔|やわ]]らかいですか」と [[聞|き]]きました。[[私|わたし]]は「[[普通|ふつう]]で お[[願|ねが]]いします」と [[答|こた]]えました。ラーメンは すぐ [[来|き]]ました。スープは [[熱|あつ]]くて、とても [[美味|おい]]しかったです。[[私|わたし]]は たくさん [[食|た]]べました。[[食|た]]べたあとで、[[店員|てんいん]]さんに「ごちそうさまでした」と [[言|い]]いました。お[[腹|なか]]が いっぱいで、[[幸|しあわ]]せです。",
     "icon": "fas fa-utensils",
@@ -93,6 +101,7 @@
   {
     "id": "s12",
     "title": "Membuang Sampah (ゴミ出し)",
+    "category": "Kehidupan Sehari-hari",
     "translation": "Di Jepang, aturan membuang sampah sangat ketat. Kita harus memisahkan sampah. Sampah yang bisa dibakar dibuang pada hari Senin dan Kamis. Sampah botol plastik dibuang pada hari Rabu. Kita harus memasukkan sampah ke dalam kantong transparan. Jika tidak memisahkan sampah, truk sampah tidak akan mengambilnya. Tetangga juga akan marah. Saya selalu mengecek kalender sampah di dinding dapur. Menjaga kebersihan itu penting.",
     "template": "[[日本|にほん]]では、ゴミの ルールが [[厳|きび]]しいです。ゴミを [[分|わ]]けなければなりません。[[燃|も]]えるゴミは [[月曜日|げつようび]]と [[木曜日|もくようび]]です。ペットボトルは [[水曜日|すいようび]]です。[[透明|とうめい]]な [[袋|ふくろ]]に ゴミを [[入|い]]れなければなりません。ゴミを [[分|わ]]けないと、ゴミ[[収集車|しゅうしゅうしゃ]]は [[持|も]]っていきません。[[近所|きんじょ]]の [[人|ひと]]も [[怒|おこ]]ります。[[私|わたし]]は いつも [[台所|だいどころ]]の [[壁|かべ]]にある ゴミのカレンダーを チェックします。[[綺麗|きれい]]に することは [[大切|たいせつ]]です。",
     "icon": "fas fa-trash-alt",
@@ -101,6 +110,7 @@
   {
     "id": "s13",
     "title": "Belanja di Supermarket (スーパーで買い物)",
+    "category": "Belanja",
     "translation": "Hari ini saya pergi belanja ke supermarket. Saya ingin membuat kari, jadi saya membeli daging, wortel, kentang, dan bawang bombay. Sayuran di supermarket ini segar dan murah. Saya juga membeli susu dan roti untuk sarapan besok. Di kasir, saya membayar menggunakan kartu kredit. Kasir bertanya, 'Apakah butuh kantong plastik?'. Saya menjawab, 'Tidak, saya membawa tas sendiri'. Tas ramah lingkungan (Eco-bag) sangat populer di Jepang.",
     "template": "[[今日|きょう]] スーパーへ [[買い物|かいもの]]に [[行|い]]きました。カレーを [[作|つく]]りたいですから、お[[肉|にく]]と [[人参|にんじん]]と ジャガイモと [[玉|たま]]ねぎを [[買|か]]いました。このスーパーの [[野菜|やさい]]は [[新鮮|しんせん]]で、[[安|やす]]いです。[[明日|あした]]の [[朝ご飯|あさごはん]]のために、[[牛乳|ぎゅうにゅう]]と パンも [[買|か]]いました。レジで クレジットカードで [[払|はら]]いました。[[店員|てんいん]]さんは「レジ[[袋|ぶくろ]]は いりますか」と [[聞|き]]きました。[[私|わたし]]は「いいえ、マイバッグを [[持|も]]っています」と [[答|こた]]えました。エコバッグは [[日本|にほん]]で とても [[人気|にんき]]があります。",
     "icon": "fas fa-shopping-basket",
@@ -109,6 +119,7 @@
   {
     "id": "s14",
     "title": "Pergi ke Dokter (病院へ行く)",
+    "category": "Kesehatan",
     "translation": "Pagi ini kepala saya sakit dan saya demam. Tenggorokan saya juga sakit. Saya tidak pergi bekerja dan pergi ke klinik dekat rumah. Dokter memeriksa saya dan bertanya, 'Sejak kapan sakitnya?'. Saya menjawab, 'Sejak tadi malam'. Dokter berkata ini hanya flu biasa. Saya disuruh minum obat dan banyak tidur. Saya pergi ke apotek untuk mengambil obat. Saya ingin cepat sembuh.",
     "template": "[[今朝|けさ]]、[[頭|あたま]]が [[痛|いた]]くて、[[熱|ねつ]]が ありました。[[喉|のど]]も [[痛|いた]]かったです。[[仕事|しごと]]を [[休|やす]]んで、[[家|いえ]]の [[近|ちか]]くの クリニックへ [[行|い]]きました。お[[医者|いしゃ]]さんは [[私|わたし]]を チェックして、「いつからですか」と [[聞|き]]きました。[[私|わたし]]は「[[昨夜|ゆうべ]]からです」と [[答|こた]]えました。お[[医者|いしゃ]]さんは ただの [[風邪|かぜ]]だと [[言|い]]いました。[[薬|くすり]]を [[飲|の]]んで、たくさん [[寝|ね]]てください。[[薬局|やっきょく]]へ [[薬|くすり]]を もらいに [[行|い]]きました。[[早|はや]]く [[元気|げんき]]に なりたいです。",
     "icon": "fas fa-clinic-medical",
@@ -117,6 +128,7 @@
   {
     "id": "s15",
     "title": "Apartemen Baru (新しいアパート)",
+    "category": "Tempat Tinggal",
     "translation": "Bulan lalu saya pindah ke apartemen baru. Kamarnya ada di lantai 2. Kamarnya tidak luas, tapi bersih dan terang. Ada AC, kulkas, dan mesin cuci. Sewanya 50.000 yen per bulan. Stasiun kereta hanya 5 menit jalan kaki, jadi sangat praktis. Tetangga sebelah orangnya ramah. Kami saling menyapa saat bertemu. Saya sangat suka kamar baru ini. Silakan main ke rumah saya kapan-kapan.",
     "template": "[[先月|せんげつ]] [[新|あたら]]しい アパートに [[引|ひ]]っ[[越|こ]]しました。[[部屋|へや]]は [[2階|にかい]]に あります。[[部屋|へや]]は [[広|ひろ]]くないですが、[[綺麗|きれい]]で [[明|あか]]るいです。エアコンと [[冷蔵庫|れいぞうこ]]と [[洗濯機|せんたくき]]が あります。[[家賃|やちん]]は [[1ヶ月|いっかげつ]] [[5万|ごまん]]円です。[[駅|えき]]まで [[歩|ある]]いて 5分ですから、とても [[便利|べんり]]です。[[隣|となり]]の [[人|ひと]]は [[親切|しんせつ]]です。[[会|あ]]うとき、[[挨拶|あいさつ]]を します。[[私|わたし]]は この [[新|あたら]]しい [[部屋|へや]]が [[大好|だいす]]きです。いつか [[遊|あそ]]びに [[来|き]]てください。",
     "icon": "fas fa-home",
@@ -125,6 +137,7 @@
   {
     "id": "s16",
     "title": "Festival Musim Panas (夏祭り)",
+    "category": "Budaya & Tradisi",
     "translation": "Di musim panas, ada festival di kota saya. Orang-orang memakai Yukata dan pergi ke kuil. Ada banyak kedai makanan (Yatai). Saya makan Takoyaki dan Yakisoba. Rasanya enak sekali. Malam harinya, ada kembang api (Hanabi) yang besar. Kembang api itu berwarna-warni dan indah. Banyak orang berteriak 'Tamaya!'. Festival Jepang sangat meriah dan menyenangkan. Saya pergi bersama teman-teman.",
     "template": "[[夏|なつ]]に、[[町|まち]]で お[[祭|まつ]]りが あります。[[人|ひと]]びとは [[浴衣|ゆかた]]を [[着|き]]て、[[神社|じんじゃ]]へ [[行|い]]きます。[[屋台|やたい]]が [[沢山|たくさん]] あります。[[私|わたし]]は たこ[[焼|や]]きと [[焼|や]]きそばを [[食|た]]べました。とても [[美味|おい]]しかったです。[[夜|よる]]、[[大|おお]]きい [[花火|はなび]]が ありました。[[花火|はなび]]は カラフルで、[[綺麗|きれい]]でした。[[沢山|たくさん]]の [[人|ひと]]が「たまや！」と [[叫|さけ]]びました。[[日本|にほん]]の お[[祭|まつ]]りは とても [[賑|にぎ]]やかで、[[楽|たの]]しいです。[[私|わたし]]は [[友達|ともだち]]と [[一緒|いっしょ]]に [[行|い]]きました。",
     "icon": "fas fa-torii-gate",
@@ -133,6 +146,7 @@
   {
     "id": "s17",
     "title": "Kerja Paruh Waktu (アルバイト)",
+    "category": "Pekerjaan",
     "translation": "Saya bekerja paruh waktu (Arubaito) di sebuah kafe. Kafe itu ada di depan stasiun. Pekerjaan saya dimulai jam 5 sore sampai jam 9 malam. Saya mencuci piring dan mengantar kopi ke pelanggan. Awalnya saya gugup, tapi sekarang sudah terbiasa. Pelanggan di sini ramah. Gaji per jamnya 1000 yen. Saya menabung uang gaji untuk jalan-jalan. Bekerja di Jepang itu sibuk tapi pengalaman yang bagus.",
     "template": "[[私|わたし]]は カフェで アルバイトを しています。カフェは [[駅|えき]]の [[前|まえ]]に あります。[[私|わたし]]の [[仕事|しごと]]は [[午後|ごご]] 5[[時|じ]]から 9[[時|じ]]までです。お[[皿|さら]]を [[洗|あら]]ったり、お[[客|きゃく]]さんに コーヒーを [[運|はこ]]んだり します。[[始|はじ]]めは [[緊張|きんちょう]]しましたが、[[今|いま]]は [[慣|な]]れました。ここの お[[客|きゃく]]さんは [[優|やさ]]しいです。[[時給|じきゅう]]は 1000[[円|えん]]です。[[私|わたし]]は [[給料|きゅうりょう]]を [[貯金|ちょきん]]して、[[旅行|りょこう]]に [[行|い]]きたいです。[[日本|にほん]]で [[働|はたら]]くのは [[忙|いそが]]しいですが、いい [[経験|けいけん]]です。",
     "icon": "fas fa-briefcase",
@@ -141,6 +155,7 @@
   {
     "id": "s18",
     "title": "Latihan Gempa Bumi (地震の練習)",
+    "category": "Pendidikan & Keamanan",
     "translation": "Kemarin di sekolah ada latihan gempa bumi. Di Jepang sering terjadi gempa, jadi latihan ini penting. Ketika sirene berbunyi, kami bersembunyi di bawah meja. Kami harus melindungi kepala. Setelah gempa berhenti, kami pergi ke luar gedung dengan tenang. Tidak boleh lari dan tidak boleh berisik. Guru mengecek jumlah siswa. Kami belajar cara menyelamatkan diri. Saya jadi tahu apa yang harus dilakukan saat gempa.",
     "template": "[[昨日|きのう]]、[[学校|がっこう]]で [[地震|じしん]]の [[練習|れんしゅう]]が ありました。[[日本|にほん]]は [[地震|じしん]]が [[多|おお]]いですから、この [[練習|れんしゅう]]は [[大切|たいせつ]]です。サイレンが [[鳴|な]]ったとき、[[机|つくえ]]の [[下|した]]に [[隠|かく]]れました。[[頭|あたま]]を [[守|まも]]らなければなりません。[[地震|じしん]]が [[止|と]]まったあとで、[[静|しず]]かに [[外|そと]]へ [[出|で]]ました。[[走|はし]]っては いけません。[[話|はな]]しては いけません。[[先生|せんせい]]は [[学生|がくせい]]の [[数|かず]]を チェックしました。[[私|わたし]]たちは [[逃|に]]げる [[方法|ほうほう]]を [[勉強|べんきょう]]しました。[[地震|じしん]]の とき、どうするか [[分|わ]]かりました。",
     "icon": "fas fa-hard-hat",
@@ -149,6 +164,7 @@
   {
     "id": "s19",
     "title": "Pergi ke Onsen (温泉へ行く)",
+    "category": "Pariwisata",
     "translation": "Minggu lalu saya pergi ke Hakone bersama keluarga. Kami menginap di Ryokan (penginapan tradisional). Di sana ada Onsen (pemandian air panas) yang terkenal. Sebelum masuk ke kolam air panas, kita harus mencuci badan sampai bersih. Air onsen sangat panas tapi enak di badan. Lelah saya hilang semua. Setelah mandi, kami memakai Yukata dan makan malam. Sashimi dan Tempura sangat lezat. Onsen adalah budaya Jepang yang luar biasa.",
     "template": "[[先週|せんしゅう]]、[[家族|かぞく]]と [[箱根|はこね]]へ [[行|い]]きました。[[旅館|りょかん]]に [[泊|と]]まりました。そこには [[有名|ゆうめい]]な [[温泉|おんせん]]が あります。お[[湯|ゆ]]に [[入|はい]]る [[前|まえ]]に、[[体|からだ]]を [[綺麗|きれい]]に [[洗|あら]]わなければなりません。[[温泉|おんせん]]の お[[湯|ゆ]]は [[熱|あつ]]いですが、[[気持|きも]]ちが いいです。[[疲|つか]]れが 全部 とれました。お[[風呂|ふろ]]の あとで、[[浴衣|ゆかた]]を [[着|き]]て、[[晩ご飯|ばんごはん]]を [[食|た]]べました。お[[刺身|さしみ]]と 天ぷらは とても [[美味|おい]]しかったです。[[温泉|おんせん]]は すばらしい [[日本|にほん]]の [[文化|ぶんか]]です。",
     "icon": "fas fa-hot-tub",
@@ -157,6 +173,7 @@
   {
     "id": "s20",
     "title": "Datangnya Topan (台風が来る)",
+    "category": "Alam & Cuaca",
     "translation": "Berita cuaca mengatakan topan besar akan datang besok. Angin akan bertiup sangat kencang dan hujan deras. Sekolah dan kantor akan libur. Kereta mungkin akan berhenti beroperasi. Saya pergi ke supermarket untuk membeli air dan mie instan. Saya juga mengisi baterai HP sampai penuh. Saat topan datang, jangan keluar rumah. Berbahaya. Saya akan tinggal di rumah dan membaca buku seharian.",
     "template": "[[天気予報|てんきよほう]]は、[[明日|あした]] [[大|おお]]きい [[台風|たいふう]]が [[来|く]]ると [[言|い]]いました。[[風|かぜ]]が とても [[強|つよ]]くて、[[雨|あめ]]が [[沢山|たくさん]] [[降|ふ]]ります。[[学校|がっこう]]と [[会社|かいしゃ]]は [[休|やす]]みになります。[[電車|でんしゃ]]も [[止|と]]まるかもしれません。[[私|わたし]]は スーパーへ [[水|みず]]と カップラーメンを [[買|か]]いに [[行|い]]きました。スマホの [[充電|じゅうでん]]も しました。[[台風|たいふう]]の とき、[[外|そと]]へ [[出|で]]ないでください。[[危|あぶ]]ないです。[[私|わたし]]は [[一日中|いちにちじゅう]] [[家|いえ]]に いて、[[本|ほん]]を [[読|よ]]みます。",
     "icon": "fas fa-wind",
@@ -165,6 +182,7 @@
   {
     "id": "s21",
     "title": "Membeli Baju (服を買う)",
+    "category": "Belanja",
     "translation": "Saya ingin membeli kemeja putih untuk kerja. Saya pergi ke toko baju di Shibuya. Tokonya sangat besar. Saya menemukan kemeja yang bagus. Saya bertanya kepada pelayan, 'Boleh saya mencobanya?'. Pelayan berkata, 'Silakan, kamar pas ada di sebelah sana'. Ukuran M agak kecil. Saya minta ukuran L. Ukuran L pas sekali. Harganya 3000 yen. Saya membelinya. Saya senang bisa belanja baju baru.",
     "template": "[[仕事|しごと]]の [[白|しろ]]い シャツを [[買|か]]いたいです。[[渋谷|しぶや]]の [[服|ふく]]屋へ [[行|い]]きました。お[[店|みせ]]は とても [[大|おお]]きいです。いい シャツを [[見|み]]つけました。[[店員|てんいん]]さんに「[[試着|しちゃく]]してもいいですか」と [[聞|き]]きました。[[店員|てんいん]]さんは「はい、[[試着室|しちゃくしつ]]は あちらです」と [[言|い]]ました。Mサイズは ちょっと [[小|ちい]]さかったです。Lサイズを お[[願|ねが]]いしました。Lサイズは ちょうど よかったです。[[値段|ねだん]]は 3000[[円|えん]]でした。[[私|わたし]]は それを [[買|か]]いました。[[新|あたら]]しい [[服|ふく]]が [[買|か]]えて、[[嬉|うれ]]しいです。",
     "icon": "fas fa-tshirt",
@@ -173,6 +191,7 @@
   {
     "id": "s22",
     "title": "Di Kantor Pos (郵便局で)",
+    "category": "Layanan Umum",
     "translation": "Saya pergi ke kantor pos untuk mengirim paket ke Indonesia. Di dalam paket ada oleh-oleh makanan Jepang. Pegawai pos menimbang berat paket itu. Beratnya 2 kilogram. Dia bertanya, 'Mau lewat udara (EMS) atau laut?'. Lewat udara cepat tapi mahal. Lewat laut murah tapi butuh 1 bulan. Saya pilih lewat udara karena ada cokelat. Biayanya 4000 yen. Paket akan sampai dalam 5 hari.",
     "template": "[[郵便局|ゆうびんきょく]]へ インドネシアに [[荷物|にもつ]]を [[送|おく]]りに [[行|い]]きました。[[荷物|にもつ]]の [[中|なか]]に [[日本|にほん]]の お[[菓子|かし]]が あります。[[郵便局|ゆうびんきょく]]の [[人|ひと]]は [[重|おも]]さを [[量|はか]]りました。2キロでした。[[彼|かれ]]は「[[航空便|こうくうびん]]ですか、[[船便|ふなびん]]ですか」と [[聞|き]]きました。[[航空便|こうくうびん]]は [[速|はや]]いですが、[[高|たか]]いです。[[船便|ふなびん]]は [[安|やす]]いですが、1ヶ月 かかります。チョコがありますから、[[航空便|こうくうびん]]に しました。4000[[円|えん]]でした。[[荷物|にもつ]]は 5[[日|か]]で [[着|つ]]きます。",
     "icon": "fas fa-box-open",
@@ -181,6 +200,7 @@
   {
     "id": "s23",
     "title": "Bertanya Jalan (道を聞く)",
+    "category": "Transportasi",
     "translation": "Maaf, saya tersesat. Saya ingin pergi ke Museum Seni, tapi saya tidak tahu jalannya. Saya bertanya kepada orang di jalan. 'Permisi, Museum Seni ada di mana?'. Orang itu sangat ramah. Dia berkata, 'Pergilah lurus jalan ini. Lalu belok kanan di lampu merah kedua. Museum ada di sebelah kiri'. Saya mengucapkan terima kasih. Orang Jepang sangat baik membantu orang asing yang tersesat.",
     "template": "すみません、[[道|みち]]に [[迷|まよ]]いました。[[美術館|びじゅつかん]]へ [[行|い]]きたいですが、[[場所|ばしょ]]が [[分|わ]]かりません。[[道|みち]]を [[歩|ある]]いている [[人|ひと]]に [[聞|き]]きました。「すみません、[[美術館|びじゅつかん]]は どこですか」。その[[人|ひと]]は とても [[親切|しんせつ]]でした。「この [[道|みち]]を [[真|ま]]っ[[直|す]]ぐ [[行|い]]ってください。そして、[[二|ふた]]つ[[目|め]]の [[信号|しんごう]]を [[右|みぎ]]に [[曲|ま]]がってください。[[美術館|びじゅつかん]]は [[左|ひだり]]に あります」と [[言|い]]ました。[[私|わたし]]は お[[礼|れい]]を [[言|い]]ました。[[日本人|にほんじん]]は とても [[優|やさ]]しいです。",
     "icon": "fas fa-map-signs",
@@ -189,6 +209,7 @@
   {
     "id": "s24",
     "title": "Pesta Ulang Tahun (誕生日パーティー)",
+    "category": "Perayaan",
     "translation": "Hari ini adalah ulang tahun teman saya, Yuki. Kami mengadakan pesta kejutan di restoran. Kami membeli kue ulang tahun yang besar. Di atas kue ada lilin. Ketika Yuki datang, kami bernyanyi 'Happy Birthday'. Yuki sangat terkejut dan senang. Kami memberikan hadiah. Saya memberi dia buku. Kami makan pizza dan minum jus. Pestanya sangat seru. Yuki berkata ini ulang tahun terbaiknya.",
     "template": "[[今日|きょう]]は [[友達|ともだち]]の ゆきさんの [[誕生日|たんじょうび]]です。[[私|わたし]]たちは レストランで サプライズパーティーを しました。[[大|おお]]きい ケーキを [[買|か]]いました。ケーキの [[上|うえ]]に ローソクが あります。ゆきさんが [[来|き]]たとき、みんなで ハッピーバースデーを [[歌|うた]]いました。ゆきさんは びっくりして、[[喜|よろこ]]びました。[[私|わたし]]たちは プレゼントを あげました。[[私|わたし]]は [[本|ほん]]を あげました。ピザを [[食|た]]べて、ジュースを [[飲|の]]みました。パーティーは とても [[楽|たの]]しかったです。ゆきさんは「[[最高|さいこう]]の [[誕生日|たんじょうび]]だ」と [[言|い]]ました。",
     "icon": "fas fa-birthday-cake",
@@ -197,6 +218,7 @@
   {
     "id": "s25",
     "title": "Belajar Bahasa Jepang (日本語の勉強)",
+    "category": "Pendidikan",
     "translation": "Saya belajar bahasa Jepang setiap hari. Kanji itu sulit, tapi menarik. Setiap pagi saya menghafal 5 kanji baru. Saya juga latihan berbicara dengan teman Jepang. Tujuan saya adalah lulus tes JLPT N4 tahun ini. Jika lulus, saya ingin bekerja di perusahaan Jepang. Saya harus semangat belajar. Jangan menyerah. Bahasa Jepang akan berguna untuk masa depan saya.",
     "template": "[[私|わたし]]は [[毎日|まいにち]] [[日本語|にほんご]]を [[勉強|べんきょう]]します。[[漢字|かんじ]]は [[難|むずか]]しいですが、[[面白|おもしろ]]いです。[[毎朝|まいあさ]] [[新|あたら]]しい [[漢字|かんじ]]を 5つ [[覚|おぼ]]えます。[[日本人|にほんじん]]の [[友達|ともだち]]と [[話|はな]]す [[練習|れんしゅう]]も します。[[私|わたし]]の [[目標|もくひょう]]は [[今年|ことし]] JLPT N4に [[合格|ごうかく]]することです。もし [[合格|ごうかく]]したら、[[日本|にほん]]の [[会社|かいしゃ]]で [[働|はたら]]きたいです。[[頑張|がんば]]らなければなりません。[[諦|あきら]]めないでください。[[日本語|にほんご]]は [[将来|しょうらい]] 役に立ちます。",
     "icon": "fas fa-book-reader",
@@ -205,6 +227,7 @@
   {
     "id": "s26",
     "title": "Cita-cita Saya (私の夢)",
+    "category": "Pribadi & Impian",
     "translation": "Cita-cita saya adalah menjadi penerjemah bahasa Jepang. Saya suka belajar bahasa asing. Sekarang saya belajar kanji setiap hari. Sangat sulit, tapi menyenangkan. Nanti, saya ingin bekerja di Tokyo. Saya ingin berbicara dengan banyak orang Jepang. Saya akan berusaha keras untuk mewujudkan mimpi saya.",
     "template": "[[私|わたし]]の [[夢|ゆめ]]は [[日本語|にほんご]]の [[通訳|つうやく]]に なることです。[[私|わたし]]は [[外国語|がいこくご]]を [[勉強|べんきょう]]するのが [[好|す]]きです。[[今|いま]]、[[毎日|まいにち]] [[漢字|かんじ]]を [[勉強|べんきょう]]しています。とても [[難|むずか]]しいですが、[[楽|たの]]しいです。[[将来|しょうらい]]、[[東京|とうきょう]]で [[働|はたら]]きたいです。[[沢山|たくさん]]の [[日本人|にほんじん]]と [[話|はな]]したいです。[[夢|ゆめ]]を [[叶|かな]]えるために、[[頑張|がんば]]ります。",
     "icon": "fas fa-star",
@@ -213,6 +236,7 @@
   {
     "id": "s27",
     "title": "Adik Saya (私の弟)",
+    "category": "Keluarga",
     "translation": "Saya punya satu adik laki-laki. Namanya Ken. Dia berumur 10 tahun. Dia sangat energik dan lucu. Dia suka bermain sepak bola dan game. Setiap hari setelah sekolah, dia bermain game di rumah. Terkadang kami bertengkar, tapi kami segera berbaikan. Dia suka makan hamburger. Saya sangat menyayangi adik saya.",
     "template": "[[私|わたし]]には [[弟|おとうと]]が [[一人|ひとり]] います。[[名前|なまえ]]は ケンです。[[10歳|じゅっさい]]です。[[彼|かれ]]は とても [[元気|げんき]]で [[可愛|かわい]]いです。サッカーと ゲームが [[好|す]]きです。[[毎日|まいにち]] [[学校|がっこう]]の あとで、[[家|いえ]]で ゲームを します。ときどき [[喧嘩|けんか]]しますが、すぐ [[仲直|なかなお]]りします。[[彼|かれ]]は ハンバーガーが [[好|す]]きです。[[私|わたし]]は [[弟|おとうと]]が [[大好き|だいすき]]です。",
     "icon": "fas fa-child",
@@ -221,6 +245,7 @@
   {
     "id": "s28",
     "title": "Kota Saya (私の町)",
+    "category": "Lingkungan",
     "translation": "Kota saya adalah kota yang tenang. Tidak ada gedung tinggi. Tapi, ada taman yang luas dan indah. Udara di sini bersih. Orang-orangnya ramah. Di dekat stasiun ada supermarket besar, jadi praktis untuk belanja. Di musim semi, bunga sakura mekar di sepanjang sungai. Saya sangat suka tinggal di kota ini.",
     "template": "[[私|わたし]]の [[町|まち]]は [[静|しず]]かな [[町|まち]]です。[[高|たか]]い [[建物|たてもの]]は ありません。でも、[[広|ひろ]]くて [[綺麗|きれい]]な [[公園|こうえん]]が あります。ここの [[空気|くうき]]は [[綺麗|きれい]]です。[[人|ひと]]は [[親切|しんせつ]]です。[[駅|えき]]の [[近|ちか]]くに [[大|おお]]きい スーパーが ありますから、[[買い物|かいもの]]に [[便利|べんり]]です。[[春|はる]]には、[[川|かわ]]の そばで [[桜|さくら]]が [[咲|さ]]きます。[[私|わたし]]は この [[町|まち]]に [[住|す]]むのが [[大好|だいす]]きです。",
     "icon": "fas fa-building",
@@ -229,6 +254,7 @@
   {
     "id": "s29",
     "title": "Olahraga Favorit (好きなスポーツ)",
+    "category": "Olahraga",
     "translation": "Saya sangat suka olahraga. Khususnya sepak bola. Setiap hari Minggu, saya bermain futsal bersama teman kantor. Kami bermain di lapangan dekat sungai. Berlari itu melelahkan, tapi perasaan jadi segar. Setelah berolahraga, kami pergi makan ramen bersama. Itu adalah waktu yang paling menyenangkan dalam satu minggu.",
     "template": "[[私|わたし]]は [[スポーツ|すぽーつ]]が [[大好|だいす]]きです。とくに サッカーです。[[毎週|まいしゅう]] [[日曜日|にちようび]]、[[会社|かいしゃ]]の [[友達|ともだち]]と フットサルを します。[[川|かわ]]の [[近|ちか]]くの コートで します。[[走|はし]]るのは [[疲|つか]]れますが、[[気分|きぶん]]が すっきりします。[[運動|うんどう]]した あとで、[[一緒|いっしょ]]に ラーメンを [[食|た]]べに [[行|い]]きます。それは [[一週間|いっしゅうかん]]で [[一番|いちばん]] [[楽|たの]]しい [[時間|じかん]]です。",
     "icon": "fas fa-futbol",
@@ -237,6 +263,7 @@
   {
     "id": "s30",
     "title": "Musim Hujan (梅雨)",
+    "category": "Alam & Musim",
     "translation": "Di Jepang, bulan Juni adalah musim hujan yang disebut 'Tsuyu'. Setiap hari hujan turun dan udaranya lembab. Saya tidak bisa menjemur pakaian di luar. Sedikit merepotkan. Tapi, di musim ini bunga Ajisai (Hydrangea) mekar dengan cantik. Warnanya biru dan ungu. Melihat bunga itu membuat perasaan saya menjadi tenang. Saya suka berjalan-jalan sambil memegang payung.",
     "template": "[[日本|にほん]]では、[[6月|ろくがつ]]は「[[梅雨|つゆ]]」という [[雨|あめ]]の [[季節|きせつ]]です。[[毎日|まいにち]] [[雨|あめ]]が [[降|ふ]]って、[[蒸|む]]し[[暑|あつ]]いです。[[外|そと]]に [[洗濯物|せんたくもの]]を [[干|ほ]]すことが できません。ちょっと [[大変|たいへん]]です。でも、この [[季節|きせつ]]に アジサイの [[花|はな]]が [[綺麗|きれい]]に [[咲|さ]]きます。[[色|いろ]]は [[青|あお]]や [[紫|むらさき]]です。その [[花|はな]]を [[見|み]]ると、[[気持|きも]]ちが [[落|お]]ち[[着|つ]]きます。[[私|わたし]]は [[傘|かさ]]を さして [[散歩|さんぽ]]するのが [[好|す]]きです。",
     "icon": "fas fa-cloud-rain",
@@ -245,6 +272,7 @@
   {
     "id": "s31",
     "title": "Perkenalan Diri (自己紹介)",
+    "category": "Pribadi",
     "translation": "Senang bertemu dengan Anda. Nama saya Katoriram. Saat ini saya tinggal di Kathmandu, Nepal. Saya lahir pada tanggal 17 April tahun 2000. Sekarang saya berusia 25 tahun. Saya adalah siswa bahasa Jepang. Saya mulai belajar bahasa Jepang sejak bulan Mei tahun ini. Bahasa Jepang itu sulit, tapi saya berjuang keras. Hobi saya adalah traveling. Mohon bantuannya.",
     "template": "はじめまして。[[私|わたし]]の [[名前|なまえ]]は カトリラムです。[[現在|げんざい]] ネパールの カトマンズに [[住|す]]んで います。[[2000年|にせんねん]]の [[4月|しがつ]][[17日|じゅうななにち]]に [[生|う]]まれました。[[今|いま]] 25[[歳|さい]]です。[[私|わたし]]は [[日本語|にほんご]]の [[学生|がくせい]]です。[[今年|ことし]]の [[5月|ごがつ]]から [[日本語|にほんご]]を [[勉強|べんきょう]]して います。[[日本語|にほんご]]は [[難|むずか]]しいですが、[[頑張|がんば]]って います。[[趣味|しゅみ]]は [[旅行|りょこう]]を することです。どうぞ よろしくお[[願|ねが]]いします。",
     "icon": "fas fa-user-circle",
@@ -253,6 +281,7 @@
   {
     "id": "s32",
     "title": "Impian Saya (私の夢)",
+    "category": "Pribadi & Impian",
     "translation": "Impian saya adalah berbisnis. Di masa depan, saya ingin membuat perusahaan sendiri. Meskipun kecil, saya ingin membuat perusahaan yang baik. Saya ingin bekerja dengan banyak orang. Saya ingin berbuat baik kepada pelanggan. Setiap hari, saya ingin bekerja dengan sungguh-sungguh. Saya ingin menggunakan uang dengan benar. Saya ingin membahagiakan keluarga. Untuk itu, sekarang saya banyak belajar. Saya belajar bahasa Jepang dan juga bahasa Inggris. Saya juga membaca buku bisnis. Sulit, tapi saya berjuang. Suatu saat, saya ingin mewujudkan impian saya.",
     "template": "[[私|わたし]]の [[夢|ゆめ]]は ビジネスを することです。[[将来|しょうらい]]、[[自分|じぶん]]の [[会社|かいしゃ]]を [[作|つく]]りたいです。[[小|ちい]]さくても、いい [[会社|かいしゃ]]を [[作|つく]]りたいです。[[沢山|たくさん]]の [[人|ひと]]と [[働|はたら]]きたいです。お[[客|きゃく]]さんに [[優|やさ]]しくしたいです。[[毎日|まいにち]]、[[一生懸命|いっしょうけんめい]] [[働|はたら]]きたいです。お[[金|かね]]を [[正|ただ]]しく [[使|つか]]いたいです。[[家族|かぞく]]を [[大切|たいせつ]]に したいです。そのために、[[今|いま]] [[沢山|たくさん]] [[勉強|べんきょう]]しています。[[日本語|にほんご]]や [[英語|えいご]]も [[勉強|べんきょう]]しています。ビジネスの [[本|ほん]]も [[読|よ]]みます。[[難|むずか]]しいですが、[[頑張|がんば]]って います。[[何時か|いつか]]、[[自分|じぶん]]の [[夢|ゆめ]]を かなえたいです。",
     "icon": "fas fa-briefcase",
@@ -261,6 +290,7 @@
   {
     "id": "s33",
     "title": "Kangguru (カンガルー)",
+    "category": "Hewan",
     "translation": "Apakah Anda tahu nama hewan ini? Ini adalah 'Kangguru'. Ada cerita menarik tentang nama Kangguru. Pada tahun 1770, Kapten Cook dari Inggris pergi ke Australia naik kapal. Kemudian, dia melihat hewan ini untuk pertama kalinya. Cook berkata kepada orang Australia bahwa dia ingin tahu nama hewan ini. Orang Australia menjawab dalam bahasa mereka, 'Kangaroo' (yang artinya 'Saya tidak tahu/tidak paham'). Jadi, Cook mengira nama hewan ini adalah 'Kangaroo'. Sejak saat itu nama hewan ini menjadi 'Kangaroo'. Menarik ya. Apakah menurut Anda itu cerita sungguhan?",
     "template": "この [[動物|どうぶつ]]の [[名前|なまえ]]を [[知|し]]って いますか。「カンガルー」です。カンガルーの [[名前|なまえ]]について [[面白|おもしろ]]い [[話|はなし]]が あります。[[1770年|せんななひゃくななじゅうねん]]に イギリスの キャプテン・クックは [[船|ふね]]で オーストラリアへ [[行|い]]きました。そして、[[初|はじ]]めて この [[動物|どうぶつ]]を [[見|み]]ました。クックは オーストラリアの [[人|ひと]]に この [[動物|どうぶつ]]の [[名前|なまえ]]を [[知|し]]りたいと [[言|い]]ました。オーストラリアの [[人|ひと]]は オーストラリアの [[言葉|ことば]]で「カンガルー（わからない）」と [[言|い]]ました。ですから、クックは この [[動物|どうぶつ]]の [[名前|なまえ]]は「カンガルー」だと [[思|おも]]いました。それから この [[動物|どうぶつ]]の [[名前|なまえ]]は「カンガルー」に なりました。[[面白|おもしろ]]いですね。[[本当|ほんとう]]だと [[思|おも]]いますか。",
     "icon": "fas fa-paw",
@@ -269,6 +299,7 @@
   {
     "id": "s34",
     "title": "Nenek Saya (僕のおばあちゃん)",
+    "category": "Keluarga",
     "translation": "Nenek saya berusia 72 tahun dan sehat. Beliau tinggal sendirian. Saat cuaca bagus, nenek pergi ke rumah sakit untuk bertemu teman-temannya. Karena di rumah sakit ada banyak teman. Saat cuaca buruk, karena kondisi kakinya kurang baik, beliau tidak pergi keluar. Saat nenek datang ke rumah saya, saya menyanyikan lagu yang saya pelajari di sekolah. Nenek menceritakan cerita Jepang zaman dulu kepada saya. Lalu beliau membuatkan roti dan kue. Kalau nenek datang ke rumah, di dalam rumah jadi sangat ramai.",
     "template": "[[僕|ぼく]]の おばあちゃんは 72[[歳|さい]]で [[元気|げんき]]です。[[一人|ひとり]]で [[住|す]]んで います。[[天気|てんき]]が いい [[時|とき]]、おばあちゃんは [[病院|びよういん]]へ [[友達|ともだち]]に [[会|あ]]いに [[行|い]]きます。[[病院|びよういん]]に [[友達|ともだち]]が [[沢山|たくさん]] いますから。[[天気|てんき]]が [[悪|わる]]い [[時|とき]]、[[足|あし]]の 調子が よくないですから、[[出|で]]かけません。おばあちゃんが [[僕|ぼく]]の うちへ [[来|き]]た [[時|とき]]、[[僕|ぼく]]は [[学校|がっこう]]で [[習|なら]]った [[歌|うた]]を [[歌|うた]]って あげます。おばあちゃんは [[僕|ぼく]]に [[古|ふる]]い [[日本|にほん]]の お[[話|はなし]]を してくれます。そして パンや お[[菓子|かし]]を [[作|つく]]って くれます。おばあちゃんが うちへ [[来|く]]ると、うちの [[中|なか]]が とても にぎやかに なります。",
     "icon": "fas fa-user-friends",
@@ -277,6 +308,7 @@
   {
     "id": "s35",
     "title": "Naik Bus (バスに乗る)",
+    "category": "Transportasi",
     "translation": "Di Jepang, naik bus sedikit berbeda dengan kereta. Biasanya kita naik dari pintu belakang dan mengambil tiket kecil. Tiket itu ada nomornya. Saat turun, kita membayar uang di depan supir. Kita harus menekan tombol jika ingin turun. Bus Jepang sangat tepat waktu dan supirnya sangat ramah.",
     "template": "[[日本|にほん]]では、バスに [[乗|の]]るのは [[電車|でんしゃ]]と [[少|すこ]]し [[違|ちが]]います。たいてい [[後|うし]]ろの ドアから [[乗|の]]って、[[小|ちい]]さい [[切符|きっぷ]]（整理券）を [[取|と]]ります。その [[切符|きっぷ]]に [[番号|ばんごう]]が あります。[[降|お]]りるとき、[[運転手|うんてんしゅ]]さんの [[横|よこ]]で お[[金|かね]]を [[払|はら]]います。[[降|お]]りたいとき、ボタンを [[押|お]]さなければなりません。[[日本|にほん]]の バスは [[時間|じかん]]が [[正確|せいかく]]で、[[運転手|うんてんしゅ]]さんは とても [[親切|しんせつ]]です。",
     "icon": "fas fa-bus",
@@ -285,6 +317,7 @@
   {
     "id": "s36",
     "title": "Demam Serbuk Sari (花粉症)",
+    "category": "Kesehatan",
     "translation": "Di musim semi, banyak orang Jepang memakai masker dan kacamata. Ini karena penyakit alergi yang disebut 'Kafunshou' (Demam Serbuk Sari). Serbuk sari dari pohon Cedar beterbangan di udara. Mata menjadi gatal dan hidung meler (ingusan). Ini sangat menyiksa. Saya harus minum obat dan menggunakan tetes mata setiap hari.",
     "template": "[[春|はる]]に、[[沢山|たくさん]]の [[日本人|にほんじん]]が マスクや 眼鏡を かけます。これは「[[花粉症|かふんしょう]]」という アレルギーの [[病気|びょうき]]だからです。杉の [[木|き]]の [[花粉|かふん]]が [[空気|くうき]]の [[中|なか]]を [[飛|と]]びます。[[目|め]]が [[痒|かゆ]]く なって、[[鼻水|はなみず]]が 出ます。これは とても [[辛|つら]]いです。[[私|わたし]]は [[毎日|まいにち]] [[薬|くすり]]を [[飲|の]]んで、[[目薬|めぐすり]]を [[使|つか]]わなければなりません。",
     "icon": "fas fa-head-side-mask",
@@ -293,6 +326,7 @@
   {
     "id": "s37",
     "title": "Pergi ke Karaoke (カラオケ)",
+    "category": "Hiburan",
     "translation": "Karaoke adalah hiburan yang sangat populer di Jepang. Saya sering pergi ke karaoke bersama teman atau rekan kerja setelah pesta minum. Kami menyewa satu ruangan pribadi. Kami bisa bernyanyi sepuasnya sambil minum dan makan. Lagu anime sangat seru dinyanyikan bersama. Karaoke adalah cara terbaik untuk menghilangkan stres.",
     "template": "カラオケは [[日本|にほん]]で とても [[人気|にんき]]がある 娯楽（エンターテイメント）です。[[私|わたし]]は よく [[飲|の]]み会の あとで、[[友達|ともだち]]や [[同僚|どうりょう]]と カラオケへ [[行|い]]きます。[[私|わたし]]たちは 個室（プライベートな [[部屋|へや]]）を 借ります。[[飲|の]]んだり [[食|た]]べたり しながら、[[思|おも]]い切り [[歌|うた]]うことが できます。アニメの [[歌|うた]]は [[一緒|いっしょ]]に [[歌|うた]]うと [[楽|たの]]しいです。カラオケは ストレスを 解消する [[一番|いちばん]] いい [[方法|ほうほう]]です。",
     "icon": "fas fa-microphone-alt",

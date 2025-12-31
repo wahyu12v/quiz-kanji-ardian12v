@@ -712,3 +712,94 @@ rt {
     border-color: transparent;
     box-shadow: 0 4px 10px rgba(0, 114, 255, 0.3);
 }
+
+/* --- CATEGORY SCROLL CONTAINER --- */
+.category-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden; /* Mencegah scrollbar default browser yang jelek */
+}
+
+.category-scroll-container {
+    display: flex;
+    overflow-x: auto;      /* Aktifkan scroll samping */
+    gap: 10px;             /* Jarak antar tombol */
+    padding: 5px 20px;     /* Padding kiri kanan biar tidak mepet layar */
+    white-space: nowrap;   /* Wajib: Jangan turun ke baris baru */
+    -webkit-overflow-scrolling: touch; /* Agar scroll halus di iPhone */
+    
+    /* Sembunyikan Scrollbar (Biar rapi seperti aplikasi native) */
+    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;  /* IE 10+ */
+}
+
+.category-scroll-container::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+
+/* --- TOMBOL KATEGORI --- */
+.category-btn {
+    flex: 0 0 auto; /* PENTING: Agar tombol tidak mengecil/gepeng */
+    border: 1px solid #e0e0e0;
+    background-color: white;
+    color: #555;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.category-btn:hover {
+    background-color: #f8f9fa;
+    border-color: #ccc;
+}
+
+.category-btn.active {
+    background: linear-gradient(135deg, #00C6FF 0%, #0072FF 100%);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 4px 10px rgba(0, 114, 255, 0.3);
+}
+
+/* --- MODAL KATEGORI --- */
+.cat-modal-btn {
+    border: 1px solid #eee;
+    background-color: #f8f9fa;
+    color: #555;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%; /* Agar full width di HP jika mau, atau hapus baris ini biar auto */
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Tampilan di Desktop biar grid */
+@media (min-width: 576px) {
+    .cat-modal-btn {
+        width: auto; /* Balik ke ukuran isi konten */
+        min-width: 120px;
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+.cat-modal-btn:hover {
+    background-color: #e3f2fd;
+    color: #0072FF;
+    border-color: #0072FF;
+}
+
+.cat-modal-btn.active {
+    background: linear-gradient(135deg, #00C6FF 0%, #0072FF 100%);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 4px 10px rgba(0, 114, 255, 0.2);
+}

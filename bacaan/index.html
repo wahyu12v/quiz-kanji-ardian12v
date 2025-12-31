@@ -72,8 +72,19 @@
                 <h3 class="fw-bold" style="color: #2c3e50;">Pilih Cerita untuk Membaca</h3>
             </div>
             
-        <div id="loading-spinner" class="text-center my-5">
+<div id="loading-spinner" class="text-center my-5">
                 </div>
+
+            <div class="d-flex justify-content-center mb-5">
+                <button id="btn-filter-category" class="btn btn-lg btn-white shadow-sm rounded-pill px-4 py-2 d-flex align-items-center gap-2" style="border: 1px solid #ddd; color: #555; font-weight: 600;">
+                    <i class="fas fa-filter text-primary"></i> 
+                    <span>Kategori: Semua</span>
+                    <i class="fas fa-chevron-down small ms-2 text-muted"></i>
+                </button>
+            </div>
+
+            <div class="row g-4 justify-content-center" id="story-grid">
+            </div>   
 
             <div id="category-filter-container" class="d-flex justify-content-center flex-wrap gap-2 mb-4">
                 </div>
@@ -186,6 +197,27 @@
         </div>
 
     </div>
+
+
+    <div class="modal fade" id="categoryModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content" style="border-radius: 20px; border: none;">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold ms-2">Pilih Kategori</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body pt-4">
+                    <div id="modal-category-list" class="d-flex flex-wrap gap-2 justify-content-center">
+                    </div>
+                </div>
+                <div class="modal-footer border-0 justify-content-center pb-4">
+                    <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
     <div class="modal fade" id="versionModal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content rounded-5 border-0 shadow-lg overflow-hidden">
