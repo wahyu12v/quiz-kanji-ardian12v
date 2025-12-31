@@ -194,6 +194,31 @@
                     <span style="font-size: 0.7rem; font-weight: 600; color: #666;">Furigana</span>
                 </button>
             </div>
+
+            </div>
+
+            <button id="btn-scroll-top" title="Kembali ke Atas" style="
+                position: fixed;
+                bottom: 110px; /* Di atas dock menu */
+                right: 20px;
+                z-index: 9990;
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+                background: white;
+                color: #0072FF;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+                border: none;
+                display: none; /* Default sembunyi */
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            " onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                <i class="fas fa-arrow-up"></i>
+            </button>
+
+        </div>
         </div>
     </div>
 
