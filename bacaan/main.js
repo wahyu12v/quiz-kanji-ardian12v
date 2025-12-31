@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnNext = document.getElementById("btn-next");
     if (btnNext) btnNext.addEventListener("click", nextStory);
 
-    // Filter Button (Memicu Modal)
+    // Filter Button (Modal)
     const btnFilter = document.getElementById("btn-filter-category");
     if (btnFilter) {
         btnFilter.addEventListener("click", () => {
@@ -96,14 +96,10 @@ function fetchAllData() {
         fetch('data.json').then(res => res.json()),           
         fetch('bacaanlengkap.json').then(res => res.json())   
     ]).then(([dataSingkat, dataPanjang]) => {
-        // Data sesuai urutan asli JSON
         shortStories = dataSingkat; 
         longStories = dataPanjang;
-        
-        // Inisialisasi Filter
         filteredStories = shortStories;
         
-        // Setup Kategori (Dalam Modal) & Render
         setupCategories();
         renderStories(); 
         
@@ -114,38 +110,31 @@ function fetchAllData() {
     });
 }
 
-// --- LOGIKA KATEGORI (MODAL VERSION) ---
+// --- LOGIKA KATEGORI ---
 function setupCategories() {
     const container = document.getElementById("modal-category-list");
     if(!container) return;
     container.innerHTML = "";
 
-    // 1. Ambil kategori unik
     const categories = new Set();
     shortStories.forEach(story => {
         if(story.category) categories.add(story.category);
         else categories.add("Lainnya");
     });
 
-    // 2. Buat List + 'Semua'
     const categoryList = ["Semua", ...Array.from(categories)];
 
-    // 3. Render Tombol ke dalam MODAL
     categoryList.forEach(cat => {
         const btn = document.createElement("button");
-        // Cek apakah ini kategori yang sedang aktif
         btn.className = `cat-modal-btn ${cat === currentCategory ? 'active' : ''}`;
         
-        // Tambahkan Ikon Check jika aktif (opsional, biar keren)
         const checkIcon = cat === currentCategory ? '<i class="fas fa-check"></i>' : '';
         btn.innerHTML = `<span>${cat}</span> ${checkIcon}`;
         
         btn.addEventListener("click", () => {
-            // 1. Set Kategori Aktif
             currentCategory = cat;
             currentPage = 1;
 
-            // 2. Filter Data
             if (cat === "Semua") {
                 filteredStories = shortStories;
             } else {
@@ -154,17 +143,12 @@ function setupCategories() {
                 );
             }
 
-            // 3. Update Tombol Pemicu Utama (Teksnya diganti)
             const mainBtnText = document.querySelector("#btn-filter-category span");
             if(mainBtnText) mainBtnText.innerText = `Kategori: ${cat}`;
 
-            // 4. Render Ulang Modal (biar status active/check icon pindah)
             setupCategories(); 
-
-            // 5. Render Ulang Cerita
             renderStories();
 
-            // 6. Tutup Modal Otomatis
             const modalEl = document.getElementById('categoryModal');
             const modalInstance = bootstrap.Modal.getInstance(modalEl);
             if(modalInstance) modalInstance.hide();
@@ -185,7 +169,6 @@ function renderStories() {
     const end = start + itemsPerPage;
     const paginatedItems = filteredStories.slice(start, end);
     
-    // Animasi Fade
     gridContainer.style.opacity = '0';
     setTimeout(() => { gridContainer.style.opacity = '1'; }, 50);
 
@@ -246,7 +229,7 @@ function setupPagination(totalItems, container) {
     container.appendChild(nextBtn);
 }
 
-// --- LOGIKA READER (MODE BLOK PARAGRAF + ENTER) ---
+// --- LOGIKA READER ---
 
 function showVersionModal(id) {
     tempSelectedId = id; 
@@ -255,7 +238,6 @@ function showVersionModal(id) {
 }
 
 function selectVersion(type) {
-    // Ambil data lengkap (shortStories/longStories) agar tidak terpengaruh filter
     if (type === 'short') {
         storiesData = shortStories;
     } else {
@@ -325,12 +307,13 @@ function openStory(id) {
     document.getElementById("list-view").style.display = 'none';
     document.getElementById("reader-view").style.display = 'block';
     
+    // Reset Scroll
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     const exitBtn = document.getElementById("exit-btn");
     const backBtn = document.getElementById("header-back-btn");
     if(exitBtn) exitBtn.classList.add('d-none');
     if(backBtn) backBtn.classList.remove('d-none');
-    
-    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function goBack() {
@@ -355,10 +338,55 @@ function resetControls() {
     btnFurigana.querySelector("i").className = "fas fa-eye-slash"; 
 }
 
+// === [FUNGSI UTAMA: TOGGLE ARTI + SCROLL PINTAR] ===
 function toggleTranslation() {
     const container = document.getElementById("interlinear-content");
+    const btn = document.getElementById("toggle-trans-btn");
+
+    // 1. Cari blok mana yang sedang dilihat user SEBELUM toggle
+    // Ini penting agar kita tahu harus kembali ke mana
+    let targetBlock = null;
+    const blocks = document.querySelectorAll('.sentence-block');
+    for (const block of blocks) {
+        const rect = block.getBoundingClientRect();
+        // Cari blok yang bagian atasnya ada di tengah-tengah layar
+        if (rect.top >= -50 && rect.top < window.innerHeight / 2) {
+            targetBlock = block;
+            break; 
+        }
+    }
+    // Fallback: jika belum ketemu, ambil yang paling atas terlihat
+    if (!targetBlock && blocks.length > 0) {
+         for (const block of blocks) {
+            if (block.getBoundingClientRect().bottom > 0) {
+                targetBlock = block;
+                break;
+            }
+         }
+    }
+
+    // 2. Lakukan Toggle (Muncul/Sembunyi)
     container.classList.toggle("show-translation");
-    setButtonStyle("icon-trans", container.classList.contains("show-translation"));
+    const isActive = container.classList.contains("show-translation");
+    setButtonStyle("icon-trans", isActive);
+
+    // 3. LOGIKA SCROLL OTOMATIS
+    if (targetBlock) {
+        if (isActive) {
+            // JIKA MUNCUL: Scroll ke Terjemahan (Indo)
+            setTimeout(() => {
+                const transEl = targetBlock.querySelector('.id-translation');
+                if (transEl) transEl.scrollIntoView({behavior: "smooth", block: "center"});
+            }, 100);
+        } else {
+            // JIKA SEMBUNYI: Scroll BALIK ke Teks Jepang
+            // Agar posisi baca tidak loncat ke atas/bawah saat teks memendek
+            setTimeout(() => {
+                const jpEl = targetBlock.querySelector('.jp-sentence');
+                if (jpEl) jpEl.scrollIntoView({behavior: "smooth", block: "center"});
+            }, 50);
+        }
+    }
 }
 
 function toggleFurigana() {
@@ -425,8 +453,6 @@ function stopAudio() {
 
 // --- NAVIGASI CERITA ---
 function prevStory() {
-    // Navigasi menggunakan array storiesData (sumber lengkap)
-    // agar saat baca, user bisa next ke cerita lain walau beda kategori
     if (currentStoryIndex > 0) openStory(storiesData[currentStoryIndex - 1].id);
 }
 
