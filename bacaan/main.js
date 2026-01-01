@@ -66,22 +66,38 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnFurigana = document.getElementById("toggle-furigana-btn");
     if (btnFurigana) btnFurigana.addEventListener("click", toggleFurigana);
 
-    // [DIKEMBALIKAN] Scroll to Top Listener
+    // Listener Scroll
     window.addEventListener("scroll", handleScrollTopButton);
+    // Panggil sekali saat load untuk memastikan state benar
+    handleScrollTopButton();
 });
 
-// --- FITUR: TOMBOL SCROLL TO TOP ---
+// --- FITUR: SCROLL BUTTON ANIMATION (RAPAT & SMOOTH) ---
 function handleScrollTopButton() {
     const btn = document.getElementById("btn-scroll-top");
     if (!btn) return;
 
-    // Muncul jika scroll lebih dari 300px
+    // Muncul jika scroll > 300px
     if (window.scrollY > 300) {
-        btn.style.display = "flex";
-        setTimeout(() => btn.style.transform = "scale(1)", 10);
+        // STATE: MUNCUL
+        btn.style.width = "45px"; 
+        btn.style.opacity = "1";
+        btn.style.transform = "scale(1)";
+        
+        // Margin 0 artinya ikuti Gap normal (ada jarak 15px)
+        btn.style.marginLeft = "0px"; 
+        
+        btn.style.pointerEvents = "auto";
     } else {
+        // STATE: HILANG
+        btn.style.width = "0px";
+        btn.style.opacity = "0";
         btn.style.transform = "scale(0)";
-        setTimeout(() => btn.style.display = "none", 300);
+        
+        // Margin -15px untuk MENARIK Gap 15px sebelumnya agar hilang
+        btn.style.marginLeft = "-15px"; 
+        
+        btn.style.pointerEvents = "none";
     }
 }
 
@@ -332,6 +348,9 @@ function openStory(id) {
     const backBtn = document.getElementById("header-back-btn");
     if(exitBtn) exitBtn.classList.add('d-none');
     if(backBtn) backBtn.classList.remove('d-none');
+
+    // Cek tombol scroll saat ganti cerita
+    handleScrollTopButton();
 }
 
 function goBack() {
@@ -339,9 +358,13 @@ function goBack() {
     document.getElementById("reader-view").style.display = 'none';
     document.getElementById("list-view").style.display = 'block';
     
-    // Sembunyikan Tombol Scroll saat kembali ke list
+    // Reset tombol scroll
     const scrollBtn = document.getElementById("btn-scroll-top");
-    if(scrollBtn) scrollBtn.style.display = "none";
+    if(scrollBtn) {
+        scrollBtn.style.width = "0px";
+        scrollBtn.style.marginLeft = "-15px";
+        scrollBtn.style.opacity = "0";
+    }
     
     const exitBtn = document.getElementById("exit-btn");
     const backBtn = document.getElementById("header-back-btn");
@@ -360,12 +383,11 @@ function resetControls() {
     btnFurigana.querySelector("i").className = "fas fa-eye-slash"; 
 }
 
-// === [LOGIKA SMART SCROLL + TOGGLE ARTI] ===
 function toggleTranslation() {
     const container = document.getElementById("interlinear-content");
     const btn = document.getElementById("toggle-trans-btn");
 
-    // 1. Cari blok aktif sebelum toggle
+    // Cari blok aktif
     let targetBlock = null;
     const blocks = document.querySelectorAll('.sentence-block');
     for (const block of blocks) {
@@ -384,12 +406,12 @@ function toggleTranslation() {
          }
     }
 
-    // 2. Toggle
+    // Toggle
     container.classList.toggle("show-translation");
     const isActive = container.classList.contains("show-translation");
     setButtonStyle("icon-trans", isActive);
 
-    // 3. Scroll Pintar
+    // Scroll Pintar
     if (targetBlock) {
         if (isActive) {
             setTimeout(() => {

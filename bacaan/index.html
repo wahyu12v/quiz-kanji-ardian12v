@@ -99,7 +99,7 @@
                 </div>
         </div>
 
-    <div id="reader-view" style="display: none;">
+<div id="reader-view" style="display: none;">
             <div class="reader-paper shadow-sm">
                 
                 <div class="reader-hero-container">
@@ -128,95 +128,77 @@
 
             <div style="height: 100px;"></div>
 
-            <div id="floating-dock" style="
+          <div id="floating-dock" style="
                 position: fixed;
                 bottom: 30px;
                 left: 50%;
                 transform: translateX(-50%);
                 display: flex;
                 align-items: center;
-                gap: 20px;
-                background: rgba(255, 255, 255, 0.9);
+                gap: 15px; 
+                background: rgba(255, 255, 255, 0.95);
                 backdrop-filter: blur(15px);
                 -webkit-backdrop-filter: blur(15px);
-                padding: 15px 30px;
+                padding: 12px 25px;
                 border-radius: 50px;
                 box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
                 border: 1px solid rgba(255,255,255,0.5);
                 z-index: 9999;
                 width: max-content;
+                transition: all 0.3s ease; 
             ">
-                <button id="btn-audio" title="Putar Suara" style="border: none; background: none; display: flex; flex-direction: column; align-items: center; gap: 5px; cursor: pointer;">
-                    <div id="icon-audio" style="
-                        width: 50px; height: 50px; border-radius: 50%; 
-                        background: #f0f2f5; color: #555; 
-                        display: flex; align-items: center; justify-content: center; 
-                        font-size: 1.2rem; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-                    ">
+                <button id="btn-audio" class="d-md-none" title="Putar Suara" style="border: none; background: none; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer;">
+                    <div id="icon-audio" style="width: 45px; height: 45px; border-radius: 50%; background: #f0f2f5; color: #555; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; transition: all 0.3s;">
                         <i class="fas fa-play" style="margin-left: 3px;"></i>
                     </div>
-                    <span style="font-size: 0.7rem; font-weight: 600; color: #666;">Dengar</span>
+                    <span style="font-size: 0.65rem; font-weight: 600; color: #666;">Dengar</span>
                 </button>
 
-                <button id="btn-stop" title="Stop Suara" style="border: none; background: none; display: flex; flex-direction: column; align-items: center; gap: 5px; cursor: pointer;">
-                    <div id="icon-stop" style="
-                        width: 50px; height: 50px; border-radius: 50%; 
-                        background: #ffe5e5; color: #ff4757; 
-                        display: flex; align-items: center; justify-content: center; 
-                        font-size: 1.2rem; transition: all 0.3s ease;
-                    ">
+                <button id="btn-stop" class="d-md-none" title="Stop Suara" style="border: none; background: none; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer;">
+                    <div id="icon-stop" style="width: 45px; height: 45px; border-radius: 50%; background: #ffe5e5; color: #ff4757; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; transition: all 0.3s;">
                         <i class="fas fa-stop"></i>
                     </div>
-                    <span style="font-size: 0.7rem; font-weight: 600; color: #666;">Stop</span>
+                    <span style="font-size: 0.65rem; font-weight: 600; color: #666;">Stop</span>
                 </button>
 
-                <button id="toggle-trans-btn" title="Arti" style="border: none; background: none; display: flex; flex-direction: column; align-items: center; gap: 5px; cursor: pointer;">
-                    <div id="icon-trans" style="
-                        width: 50px; height: 50px; border-radius: 50%; 
-                        background: #f0f2f5; color: #555; 
-                        display: flex; align-items: center; justify-content: center; 
-                        font-size: 1.2rem; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-                    ">
+                <button id="toggle-trans-btn" title="Arti" style="border: none; background: none; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer;">
+                    <div id="icon-trans" style="width: 45px; height: 45px; border-radius: 50%; background: #f0f2f5; color: #555; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; transition: all 0.3s;">
                         <i class="fas fa-language"></i>
                     </div>
-                    <span style="font-size: 0.7rem; font-weight: 600; color: #666;">Arti</span>
+                    <span style="font-size: 0.65rem; font-weight: 600; color: #666;">Arti</span>
                 </button>
 
-                <button id="toggle-furigana-btn" title="Furigana" style="border: none; background: none; display: flex; flex-direction: column; align-items: center; gap: 5px; cursor: pointer;">
-                    <div id="icon-furigana" style="
-                        width: 50px; height: 50px; border-radius: 50%; 
-                        background: #f0f2f5; color: #555; 
-                        display: flex; align-items: center; justify-content: center; 
-                        font-size: 1.2rem; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-                    ">
+                <button id="toggle-furigana-btn" title="Furigana" style="border: none; background: none; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer;">
+                    <div id="icon-furigana" style="width: 45px; height: 45px; border-radius: 50%; background: #f0f2f5; color: #555; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; transition: all 0.3s;">
                         <i class="fas fa-eye-slash"></i>
                     </div>
-                    <span style="font-size: 0.7rem; font-weight: 600; color: #666;">Furigana</span>
+                    <span style="font-size: 0.65rem; font-weight: 600; color: #666;">Furigana</span>
                 </button>
-            </div>
+
+                <button id="btn-scroll-top" title="Ke Atas" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" style="
+                    border: none; 
+                    background: none; 
+                    cursor: pointer;
+                    display: flex;      
+                    flex-direction: column; 
+                    align-items: center; 
+                    gap: 4px; 
+                    width: 0px;          
+                    opacity: 0;          
+                    transform: scale(0); 
+                    overflow: hidden;    
+                    margin-left: -15px;   
+                    pointer-events: none; 
+                    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+                ">
+                    <div id="icon-up" style="width: 45px; height: 45px; border-radius: 50%; background: #e3f2fd; color: #0072FF; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;">
+                        <i class="fas fa-arrow-up"></i>
+                    </div>
+                    <span style="font-size: 0.65rem; font-weight: 600; color: #0072FF; white-space: nowrap;">Ke Atas</span>
+                </button>
 
             </div>
-
-            <button id="btn-scroll-top" title="Kembali ke Atas" style="
-                position: fixed;
-                bottom: 110px; /* Di atas dock menu */
-                right: 20px;
-                z-index: 9990;
-                width: 45px;
-                height: 45px;
-                border-radius: 50%;
-                background: white;
-                color: #0072FF;
-                box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-                border: none;
-                display: none; /* Default sembunyi */
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            " onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-                <i class="fas fa-arrow-up"></i>
-            </button>
+        </div>
 
         </div>
         </div>

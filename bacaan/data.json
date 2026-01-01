@@ -88,5 +88,50 @@
     "template": "[[僕|ぼく]]の おばあちゃんは 72[[歳|さい]]で [[元気|げんき]]です。[[一人|ひとり]]で [[住|す]]んで います。[[天気|てんき]]が いい [[時|とき]]、おばあちゃんは [[病院|びよういん]]へ [[友達|ともだち]]に [[会|あ]]いに [[行|い]]きます。[[病院|びよういん]]に [[友達|ともだち]]が たくさん いますから。[[天気|てんき]]が [[悪|わる]]い [[時|とき]]、[[足|あし]]の [[調子|ちょうし]]が よくないですから、[[出|で]]かけません。おばあちゃんが [[僕|ぼく]]の うちへ [[来|き]]た [[時|とき]]、[[僕|ぼく]]は [[学校|がっこう]]で [[習|なら]]った [[歌|うた]]を [[歌|うた]]って あげます。おばあちゃんは [[僕|ぼく]]に [[古|ふる]]い [[日本|にほん]]の お[[話|はなし]]を してくれます。そして [[パン|ぱん]]や お[[菓子|かし]]を [[作|つく]]って くれます。おばあちゃんが うちへ [[来|く]]ると、うちの [[中|なか]]が とても にぎやかに なります。",
     "icon": "fas fa-user-friends",
     "color": "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)"
+  },
+  {
+    "id": "s11",
+    "title": "Pergi ke Salon Rambut (美容院へ行く)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Kemarin saya pergi ke salon rambut. Saya ingin memotong rambut saya menjadi pendek. Penata rambut bertanya, 'Mau model seperti apa?'. Saya memperlihatkan foto dari Instagram. Dia memotongnya dengan sangat hati-hati. Setelah dipotong, dia mencuci rambut saya dengan sampo yang wangi. Saya sangat puas dengan gaya rambut baru saya. Harganya 4000 yen.",
+    "template": "[[昨日|きのう]]、[[私|わたし]]は [[美容院|びよういん]]へ [[行|い]]きました。[[髪|かみ]]を [[短|みじか]]く [[切|き]]りたかったです。[[美容師|びようし]]さんは「どんな [[スタイル|すたいる]]が いいですか」と [[聞|き]]きました。[[私|わたし]]は [[インスタグラム|いんすたぐらむ]]の [[写真|しゃしん]]を [[見|み]]せました。[[彼|かれ]]は とても [[丁寧|ていねい]]に [[切|き]]りました。[[切|き]]った [[後|あと]]、いい [[匂|にお]]いの [[シャンプー|しゃんぷー]]で [[髪|かみ]]を [[洗|あら]]いました。[[私|わたし]]は [[新|あたら]]しい [[ヘアスタイル|へあすたいる]]に とても [[満足|まんぞく]]しています。[[値段|ねだん]]は 4000[[円|えん]]でした。",
+    "icon": "fas fa-cut",
+    "color": "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)"
+  },
+  {
+    "id": "s12",
+    "title": "Aturan Membuang Sampah (ゴミ出しのルール)",
+    "category": "Aturan & Masyarakat",
+    "translation": "Di kota saya, aturan membuang sampah sangat ketat. Sampah yang bisa dibakar dibuang hari Senin dan Kamis. Botol plastik dan kaleng dibuang hari Rabu. Kita harus memasukkan sampah ke dalam kantong plastik yang ditentukan. Kita harus membuangnya sebelum jam 8 pagi. Jika terlambat, truk sampah akan pergi. Saya menempelkan kalender sampah di pintu kulkas agar tidak lupa.",
+    "template": "[[私|わたし]]の [[町|まち]]では、[[ゴミ|ごみ]]出しの [[ルール|るーる]]が とても [[厳|きび]]しいです。[[燃|も]]える [[ゴミ|ごみ]]は [[月曜日|げつようび]]と [[木曜日|もくようび]]です。[[ペットボトル|ぺっとぼとる]]と [[缶|かん]]は [[水曜日|すいようび]]です。[[決|き]]められた [[ビニール|びにーる]]袋に [[ゴミ|ごみ]]を [[入|い]]れなければなりません。[[朝|あさ]] 8[[時|じ]]までに 出さなければなりません。[[遅|おく]]れたら、[[ゴミ|ごみ]]収集車は [[行|い]]ってしまいます。[[忘|わす]]れないように、[[冷蔵庫|れいぞうこ]]の [[ドア|どあ]]に [[ゴミ|ごみ]]の [[カレンダー|かれんだー]]を [[貼|は]]っています。",
+    "icon": "fas fa-trash-alt",
+    "color": "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)"
+  },
+  {
+    "id": "s13",
+    "title": "Makan di Restoran Keluarga (ファミレスで食事)",
+    "category": "Makanan & Minuman",
+    "translation": "Siang ini saya makan di restoran keluarga (Famiresu) bersama teman. Saya memesan Hamburger Steak Keju dan nasi. Teman saya memesan pasta. Kami juga memesan 'Drink Bar'. Dengan Drink Bar, kami bisa minum jus dan kopi sepuasnya. Makanannya enak dan murah. Kami mengobrol lama di sana. Pembayarannya menggunakan mesin kasir otomatis.",
+    "template": "[[今日|きょう]]の [[午後|ごご]]、[[友達|ともだち]]と [[ファミレス|ふぁみれす]]で [[食事|しょくじ]]を しました。[[私|わたし]]は [[チーズハンバーグ|ちーずはんばーぐ]]と ご[[飯|はん]]を [[注文|ちゅうもん]]しました。[[友達|ともだち]]は [[パスタ|ぱすた]]を [[頼|たの]]みました。[[私|わたし]]たちは「[[ドリンクバー|どりんくばー]]」も [[注文|ちゅうもん]]しました。[[ドリンクバー|どりんくばー]]で、[[ジュース|じゅーす]]や [[コーヒー|こーひー]]を [[好|す]]きなだけ [[飲|の]]むことが できます。[[料理|りょうり]]は [[美味|おい]]しくて [[安|やす]]かったです。そこで 長く [[話|はな]]しました。支払いは [[セルフレジ|せるふれじ]]でした。",
+    "icon": "fas fa-utensils",
+    "color": "linear-gradient(135deg, #f6d365 0%, #fda085 100%)"
+  },
+  {
+    "id": "s14",
+    "title": "Berwisata ke Kyoto (京都旅行)",
+    "category": "Pariwisata",
+    "translation": "Minggu lalu, saya pergi ke Kyoto naik Shinkansen. Kyoto adalah kota tua yang terkenal. Saya melihat Kuil Emas (Kinkakuji). Warnanya emas dan sangat indah. Saya juga pergi ke Kuil Kiyomizu. Di sana ada banyak turis. Saya membeli oleh-oleh bernama Yatsuhashi. Itu adalah kue manis khas Kyoto. Saya ingin pergi ke sana lagi musim depan.",
+    "template": "[[先週|せんしゅう]]、[[新幹線|しんかんせん]]で [[京都|きょうと]]へ [[行|い]]きました。[[京都|きょうと]]は [[有名|ゆうめい]]な [[古|ふる]]い [[町|まち]]です。[[私|わたし]]は [[金閣寺|きんかくじ]]を [[見|み]]ました。[[金色|きんいろ]]で、とても きれいでした。[[清水寺|きよみずでら]]へも [[行|い]]きました。そこには たくさんの [[観光客|かんこうきゃく]]が いました。[[私|わたし]]は 八ッ橋という お[[土産|みやげ]]を [[買|か]]いました。それは [[京都|きょうと]]の [[甘|あま]]い お[[菓子|かし]]です。[[次|つぎ]]の [[季節|きせつ]]に また [[行|い]]きたいです。",
+    "icon": "fas fa-torii-gate",
+    "color": "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)"
+  },
+  {
+    "id": "s15",
+    "title": "Pesta Takoyaki (たこ焼きパーティー)",
+    "category": "Kegiatan Sosial",
+    "translation": "Hari Sabtu, teman-teman datang ke rumah saya. Kami mengadakan pesta Takoyaki (Takopa). Kami memotong gurita kecil-kecil. Kami memasukkan adonan ke dalam mesin Takoyaki. Memutar bola takoyaki itu sulit tapi seru. Kami makan takoyaki panas dengan saus dan mayones. Rasanya sangat enak. Kami makan sambil menonton film.",
+    "template": "[[土曜日|どようび]]、[[友達|ともだち]]が うちへ [[来|き]]ました。[[私|わたし]]たちは [[たこ焼き|たこやき]][[パーティー|ぱーてぃー]]（タコパ）を しました。[[タコ|たこ]]を [[小|ちい]]さく [[切|き]]りました。[[たこ焼き|たこやき]]機に 生地を [[入|い]]れました。[[たこ焼き|たこやき]]を 回すのは [[難|むずか]]しいですが、[[面白|おもしろ]]かったです。[[ソース|そーす]]と [[マヨネーズ|まよねーず]]で [[熱|あつ]]い [[たこ焼き|たこやき]]を [[食|た]]べました。とても [[美味|おい]]しかったです。[[映画|えいが]]を [[見|み]]ながら [[食|た]]べました。",
+    "icon": "fas fa-users",
+    "color": "linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%)"
   }
 ]
