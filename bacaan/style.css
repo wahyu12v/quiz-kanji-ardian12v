@@ -803,3 +803,53 @@ rt {
     border-color: transparent;
     box-shadow: 0 4px 10px rgba(0, 114, 255, 0.2);
 }
+
+/* --- VOCABULARY --- */
+.vocab-item {
+    background: white;
+    border: 1px solid #eee;
+    padding: 8px 15px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    min-width: 100px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+}
+.vocab-word {
+    font-weight: bold;
+    color: #333;
+    font-size: 1rem;
+}
+.vocab-meaning {
+    color: #666;
+    font-size: 0.8rem;
+    margin-top: 2px;
+}
+
+/* --- QUIZ STYLES --- */
+.quiz-option-btn {
+    text-align: left;
+    background: white;
+    border: 1px solid #d0e1f0;
+    padding: 12px 20px;
+    border-radius: 12px;
+    transition: all 0.2s;
+    font-weight: 500;
+    color: #444;
+}
+.quiz-option-btn:hover {
+    background: #eef7fc;
+    border-color: #0072FF;
+}
+.quiz-option-btn.correct {
+    background-color: #d4edda !important;
+    border-color: #28a745 !important;
+    color: #155724 !important;
+}
+.quiz-option-btn.wrong {
+    background-color: #f8d7da !important;
+    border-color: #dc3545 !important;
+    color: #721c24 !important;
+    opacity: 0.7;
+}

@@ -1,7 +1,6 @@
 let storiesData = [];      
 let shortStories = [];     
 let longStories = [];
-// Variable Filtering
 let filteredStories = [];       
 let currentCategory = 'Semua';
 
@@ -68,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Listener Scroll
     window.addEventListener("scroll", handleScrollTopButton);
-    // Panggil sekali saat load untuk memastikan state benar
+    // Panggil sekali untuk inisialisasi
     handleScrollTopButton();
 });
 
@@ -79,24 +78,16 @@ function handleScrollTopButton() {
 
     // Muncul jika scroll > 300px
     if (window.scrollY > 300) {
-        // STATE: MUNCUL
         btn.style.width = "45px"; 
         btn.style.opacity = "1";
         btn.style.transform = "scale(1)";
-        
-        // Margin 0 artinya ikuti Gap normal (ada jarak 15px)
         btn.style.marginLeft = "0px"; 
-        
         btn.style.pointerEvents = "auto";
     } else {
-        // STATE: HILANG
         btn.style.width = "0px";
         btn.style.opacity = "0";
         btn.style.transform = "scale(0)";
-        
-        // Margin -15px untuk MENARIK Gap 15px sebelumnya agar hilang
-        btn.style.marginLeft = "-15px"; 
-        
+        btn.style.marginLeft = "-15px"; // Tarik agar gap hilang
         btn.style.pointerEvents = "none";
     }
 }
@@ -349,7 +340,7 @@ function openStory(id) {
     if(exitBtn) exitBtn.classList.add('d-none');
     if(backBtn) backBtn.classList.remove('d-none');
 
-    // Cek tombol scroll saat ganti cerita
+    // Cek tombol scroll
     handleScrollTopButton();
 }
 

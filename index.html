@@ -100,18 +100,10 @@
                           <i class="bi bi-play-fill me-2"></i> Tebak Hiragana
                       </button>
 
-                       <button id="startBtn" class="btn btn-outline-custom btn-lg rounded-pill px-4 py-3" data-bs-toggle="modal" data-bs-target="#storyModal">
-                          <i class="bi bi-clock-fill me-2"></i> Mode Cerita
-                      </button>
-
                       <button id="startBtn" class="btn btn-outline-custom btn-lg rounded-pill px-4 py-3" data-bs-toggle="modal" data-bs-target="#backToHomeModal">
                           <i class="bi bi-book-fill me-2"></i> Bacaan
                       </button>
 
-
-                       <button id="startBtn" class="btn btn-light btn-lg rounded-pill px-5 py-3 text-primary fw-bold shadow-sm" data-bs-toggle="modal" data-bs-target="#startExamModal">
-                          <i class="bi bi-pen-fill me-2"></i> Simulasi  JFT
-                      </button>
                       
                   </div>
 
@@ -157,84 +149,8 @@
 </div>
 
 
-    <div class="modal fade" id="storyModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
-        <div class="modal-content border-0 rounded-4">
-          <div class="modal-header border-0">
-            <h5 class="modal-title fw-bold"><i class="bi bi-translate text-primary me-2"></i> Kotoba Story</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-          </div>
-          <div class="modal-body bg-light-subtle">
-            <div id="story-container"></div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-  <div class="modal fade" id="startExamModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content border-0 rounded-4 shadow-lg">
-      
-      <div class="modal-header bg-primary text-white border-0 rounded-top-4">
-        <h5 class="modal-title fw-bold">
-            <i class="bi bi-grid-fill me-2"></i> Pilih Paket Ujian
-        </h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-      </div>
 
-      <div class="modal-body p-4">
-        <div class="text-center mb-3">
-            <h4 class="fw-bold text-dark">Simulasi JFT-Basic A2</h4>
-            <p class="text-muted small">Silakan pilih paket soal yang ingin dikerjakan</p>
-        </div>
-
-        <div class="mb-4">
-            <label for="examPackageSelect" class="form-label fw-bold">Paket Soal:</label>
-            <select class="form-select form-select-lg border-primary shadow-sm" id="examPackageSelect">
-                <option value="">Paket Ujian 1 </option>
-                <option value="2">Paket Ujian 2</option>
-                <option value="3">Paket Ujian 3</option>
-                <option value="4">Paket Ujian 4</option>
-                <option value="5">Paket Ujian 5</option>
-                <option value="6">Paket Ujian 6</option>
-                <option value="7">Paket Ujian 7</option>
-                <option value="8">Paket Ujian 8</option>
-                <option value="9">Paket Ujian 9</option>
-                <option value="10">Paket Ujian 10</option>
-            </select>
-        </div>
-
-        <div class="alert alert-light border small">
-            <ul class="list-unstyled m-0">
-                <li><i class="bi bi-clock text-danger me-2"></i> Waktu: 60 Menit</li>
-                <li><i class="bi bi-file-earmark-text text-primary me-2"></i> Soal: 60 Butir</li>
-            </ul>
-        </div>
-      </div>
-
-      <div class="modal-footer border-0 p-3 pt-0">
-        <button onclick="startSelectedExam()" class="btn btn-primary btn-lg w-100 fw-bold rounded-3">
-            Mulai Mengerjakan <i class="bi bi-arrow-right ms-2"></i>
-        </button>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<script>
-function startSelectedExam() {
-    // 1. Ambil nilai dari dropdown
-    const selectedPkg = document.getElementById('examPackageSelect').value;
-    
-    // 2. Simpan ke LocalStorage agar bisa dibaca di halaman sebelah
-    // Jika kosong (Paket 1), simpan string kosong
-    localStorage.setItem('jft_package_id', selectedPkg);
-    
-    // 3. Pindah ke halaman ujian
-    window.location.href = 'jft.html';
-}
-</script>
 
     <div class="modal fade" id="daftarRangeModal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -296,39 +212,6 @@ function startSelectedExam() {
     <div id="confetti-wrapper"></div>
 
 
-    <div class="modal fade" id="storyResultModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content border-0 rounded-4 shadow-lg">
-      
-      <div class="modal-header border-0 bg-light rounded-top-4">
-        <h5 class="modal-title fw-bold" id="storyResultTitle">Hasil Latihan</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-
-      <div class="modal-body p-4">
-        <div class="text-center mb-4">
-            <div id="storyResultIcon" style="font-size: 4rem; line-height: 1;">🎉</div>
-            <h3 class="fw-bold mt-2" id="storyResultHeading">Luar Biasa!</h3>
-            <p class="text-muted" id="storyResultSub">Kamu berhasil melengkapi cerita.</p>
-        </div>
-
-        <div class="card bg-light-subtle border-0">
-            <div class="card-body">
-                <div id="storyResultContent" class="d-grid gap-2">
-                    </div>
-            </div>
-        </div>
-      </div>
-
-      <div class="modal-footer border-0 justify-content-center pb-4">
-        <button type="button" class="btn btn-info rounded-pill px-5 fw-bold shadow-sm" data-bs-dismiss="modal">
-            Tutup <i class="bi bi-arrow-right ms-2"></i>
-        </button>
-      </div>
-
-    </div>
-  </div>
-</div>
 
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script type="module" src="js/main.js"></script>
