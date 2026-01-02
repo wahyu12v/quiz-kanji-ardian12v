@@ -1,0 +1,85 @@
+{
+  "packages": [
+    {
+      "id": "paket_jft_01",
+      "title": "JFT-Basic A2 - Paket Simulasi 1",
+      "subtitle": "Latihan Lengkap 50 Soal",
+      "category": "Simulasi Ujian",
+      "color": "linear-gradient(135deg, #00C6FF 0%, #0072FF 100%)",
+      "icon": "fas fa-clipboard-list",
+      "duration": 60,
+      "sections": [
+        {
+          "name": "Script & Vocabulary (Moji/Goi)",
+          "questions": [
+            { "id": "q1", "type": "text", "text": "Pilih bacaan Kanji yang tepat:<br>入口", "options": ["いりぐち (Iriguchi)", "でぐち (Deguchi)", "かえり (Kaeri)", "ひがし (Higashi)"], "answer": 0 },
+            { "id": "q2", "type": "text", "text": "Pilih Kanji yang tepat:<br>Watashi wa 'otouto' ni piano o oshiete imasu.", "options": ["兄", "弟", "妹", "姉"], "answer": 1 },
+            { "id": "q3", "type": "text", "text": "Pilih arti kata yang tepat:<br>びょういん (Byouin)", "options": ["Salon Kecantikan", "Rumah Sakit", "Bank", "Kantor Pos"], "answer": 1 },
+            { "id": "q4", "type": "text", "text": "Lengkapi kalimat:<br>Koko wa toshokan desu kara, ____ shite kudasai.", "options": ["Shizuka ni", "Genki ni", "Kirei ni", "Benri ni"], "answer": 0 },
+            { "id": "q5", "type": "text", "text": "Kanji untuk 'Minum':", "options": ["食べる", "飲む", "読む", "見る"], "answer": 1 },
+            { "id": "q6", "type": "text", "text": "Bacaan yang tepat untuk: 自転車", "options": ["Jidousha", "Densha", "Jitensha", "Chikatetsu"], "answer": 2 },
+            { "id": "q7", "type": "text", "text": "Lawan kata dari 'Takai' (Mahal/Tinggi):", "options": ["Oishii", "Yasui", "Hikui", "Mijikai"], "answer": 1 },
+            { "id": "q8", "type": "text", "text": "Pilih partikel yang tepat:<br>Gohan __ tabemasu.", "options": ["ni", "ga", "o", "de"], "answer": 2 },
+            { "id": "q9", "type": "text", "text": "Bentuk lampau dari 'Samui' (Dingin):", "options": ["Samuikatta", "Samukatta", "Samudeshita", "Samukute"], "answer": 1 },
+            { "id": "q10", "type": "text", "text": "Arti dari: 'Yakusoku'", "options": ["Janji", "Rencana", "Waktu", "Tempat"], "answer": 0 },
+            { "id": "q11", "type": "text", "text": "Pilih Kata:<br>Setiap pagi saya ____ kopi.", "options": ["nomimasu", "tabemasu", "ikimasu", "kimasu"], "answer": 0 },
+            { "id": "q12", "type": "text", "text": "Kanji 'Utara':", "options": ["南", "北", "東", "西"], "answer": 1 },
+            { "id": "q13", "type": "text", "text": "Bacaan: 家族 (Keluarga)", "options": ["Kazoku", "Kyoudai", "Tomodachi", "Kaisha"], "answer": 0 },
+            { "id": "q14", "type": "text", "text": "Pilih yang benar:<br>Kino wa ame deshita ___ kyou wa hare desu.", "options": ["kara", "ga", "node", "dakara"], "answer": 1 },
+            { "id": "q15", "type": "text", "text": "Arti: 'Tanjoubi'", "options": ["Hari Libur", "Ulang Tahun", "Pernikahan", "Tahun Baru"], "answer": 1 }
+          ]
+        },
+        {
+          "name": "Conversation & Expression",
+          "questions": [
+            { "id": "q16", "type": "text", "text": "A: 'Ittekimasu'<br>B: ____", "options": ["Tadaima", "Okaerinasai", "Itterasshai", "Oyasuminasai"], "answer": 2 },
+            { "id": "q17", "type": "text", "text": "Saat menjenguk orang sakit, ucapkan:", "options": ["Omedetou", "Odaijini", "Ki o tsukete", "Ganbatte"], "answer": 1 },
+            { "id": "q18", "type": "text", "text": "A: 'Arigatou gozaimasu'<br>B: ____", "options": ["Douitashimashite", "Gochisousama", "Sumimasen", "Onegaishimasu"], "answer": 0 },
+            { "id": "q19", "type": "text", "text": "Sebelum makan mengucapkan:", "options": ["Gochisousama", "Itadakimasu", "Oishii desu", "Kirei desu"], "answer": 1 },
+            { "id": "q20", "type": "text", "text": "A: 'Sumimasen, toire wa doko desu ka?'<br>B: ____", "options": ["Are desu", "Asoko desu", "Ano desu", "Doko desu"], "answer": 1 },
+            { "id": "q21", "type": "text", "text": "A: 'Hajimemashite. Watashi wa Tanaka desu.'<br>B: ____", "options": ["Sayounara", "Arigatou", "Douzo yoroshiku", "Ogenki desu ka"], "answer": 2 },
+            { "id": "q22", "type": "text", "text": "A: 'Kono hon wa ikura desu ka?'<br>B: ____", "options": ["3-kai desu", "3-ji desu", "300-en desu", "3-ri desu"], "answer": 2 },
+            { "id": "q23", "type": "text", "text": "Masuk ke rumah orang lain:", "options": ["Ojamashimasu", "Tadaima", "Shitsurei shimasu", "Irasshaimase"], "answer": 0 },
+            { "id": "q24", "type": "text", "text": "Pelayan toko menyapa pelanggan:", "options": ["Okaerinasai", "Irasshaimase", "Konnichiwa", "Douzo"], "answer": 1 },
+            { "id": "q25", "type": "text", "text": "Mengajak teman: 'Issho ni ikimasen ka?'", "options": ["Hai, ikimashou", "Hai, ikimasen", "Iie, ikimashou", "Iie, ikimasu"], "answer": 0 }
+          ]
+        },
+        {
+          "name": "Listening (Audio)",
+          "questions": [
+            { "id": "q26", "type": "audio", "script": "Kore wa nan desu ka? ... Sore wa Enpitsu desu.", "text": "Benda apa yang dibicarakan?", "options": ["Buku", "Pensil", "Tas", "Jam"], "answer": 1 },
+            { "id": "q27", "type": "audio", "script": "Ima nan-ji desu ka? ... Kuji han desu.", "text": "Jam berapa sekarang?", "options": ["09:00", "09:30", "10:30", "08:30"], "answer": 1 },
+            { "id": "q28", "type": "audio", "script": "Ashita wa ame desu.", "text": "Bagaimana cuaca besok?", "options": ["Cerah", "Hujan", "Berawan", "Salju"], "answer": 1 },
+            { "id": "q29", "type": "audio", "script": "Sumimasen, eki wa doko desu ka? ... Massugu itte kudasai.", "text": "Ke mana harus pergi?", "options": ["Belok kanan", "Belok kiri", "Lurus", "Putar balik"], "answer": 2 },
+            { "id": "q30", "type": "audio", "script": "Watashi no shumi wa sakkaa desu.", "text": "Apa hobi pembicara?", "options": ["Tenis", "Sepak Bola", "Renang", "Basket"], "answer": 1 },
+            { "id": "q31", "type": "audio", "script": "Kono kaban wa 2000-en desu.", "text": "Berapa harga tas?", "options": ["200 yen", "2000 yen", "20000 yen", "1200 yen"], "answer": 1 },
+            { "id": "q32", "type": "audio", "script": "Nichiyoubi ni eiga o mimashita.", "text": "Apa yang dilakukan hari Minggu?", "options": ["Nonton film", "Belanja", "Tidur", "Belajar"], "answer": 0 },
+            { "id": "q33", "type": "audio", "script": "Kusuri o nonde kudasai.", "text": "Apa instruksinya?", "options": ["Minum obat", "Makan nasi", "Minum air", "Istirahat"], "answer": 0 },
+            { "id": "q34", "type": "audio", "script": "Tanaka-san wa kimasen deshita.", "text": "Siapa yang tidak datang?", "options": ["Yamada", "Tanaka", "Suzuki", "Sato"], "answer": 1 },
+            { "id": "q35", "type": "audio", "script": "Heya ni neko ga imasu.", "text": "Ada apa di kamar?", "options": ["Anjing", "Kucing", "Burung", "Ikan"], "answer": 1 },
+            { "id": "q36", "type": "audio", "script": "Tsugi no kado o migi ni magatte kudasai.", "text": "Arah mana?", "options": ["Kiri", "Kanan", "Lurus", "Berhenti"], "answer": 1 },
+            { "id": "q37", "type": "audio", "script": "Watashi wa mainichi 6-ji ni okimasu.", "text": "Jam berapa bangun?", "options": ["5:00", "6:00", "7:00", "8:00"], "answer": 1 },
+            { "id": "q38", "type": "audio", "script": "Sore wa watashi no kasa desu.", "text": "Benda apa itu?", "options": ["Tas", "Sepatu", "Payung", "Topi"], "answer": 2 },
+            { "id": "q39", "type": "audio", "script": "Kyou wa atsui desu ne.", "text": "Bagaimana udaranya?", "options": ["Dingin", "Sejuk", "Panas", "Hangat"], "answer": 2 },
+            { "id": "q40", "type": "audio", "script": "Gochisousama deshita.", "text": "Kapan ini diucapkan?", "options": ["Sebelum makan", "Sesudah makan", "Saat bertemu", "Saat berpisah"], "answer": 1 }
+          ]
+        },
+        {
+          "name": "Reading (Dokkai)",
+          "questions": [
+            { "id": "q41", "type": "text", "text": "<strong>Bacaan:</strong><br>Watashi wa mainichi 6-ji ni okimasu. Asagohan o tabete, 7-ji ni gakkou e ikimasu.<br><br>Jam berapa dia pergi ke sekolah?", "options": ["Jam 6", "Jam 7", "Jam 8", "Jam 9"], "answer": 1 },
+            { "id": "q42", "type": "text", "text": "<strong>Rambu:</strong><br>Koko de tabako o suwanai de kudasai.<br><br>Apa arti larangan ini?", "options": ["Dilarang makan", "Dilarang merokok", "Dilarang masuk", "Dilarang foto"], "answer": 1 },
+            { "id": "q43", "type": "text", "text": "<strong>Email:</strong><br>To: Ali<br>Ali-san, ashita no paatii wa 7-ji kara desu.<br>From: Yuki<br><br>Siapa pengirim email?", "options": ["Ali", "Yuki", "Tanaka", "Sensei"], "answer": 1 },
+            { "id": "q44", "type": "text", "text": "<strong>Memo:</strong><br>Kaigi: Getsuyoubi, 10-ji, Kaigishitsu A.<br><br>Di mana rapat diadakan?", "options": ["Hari Senin", "Jam 10", "Ruang Rapat A", "Ruang Rapat B"], "answer": 2 },
+            { "id": "q45", "type": "text", "text": "<strong>Menu:</strong><br>Udon: 500 yen<br>Ramen: 700 yen<br><br>Mana yang lebih murah?", "options": ["Udon", "Ramen", "Sama saja", "Tidak tahu"], "answer": 0 },
+            { "id": "q46", "type": "text", "text": "<strong>Teks:</strong><br>Watashi no uchi ni inu ga imasu. Namae wa Pochi desu. Shiroi inu desu.<br><br>Apa warna Pochi?", "options": ["Hitam", "Putih", "Coklat", "Kecil"], "answer": 1 },
+            { "id": "q47", "type": "text", "text": "<strong>Jadwal:</strong><br>Senin-Jumat: Buka<br>Sabtu-Minggu: Libur<br><br>Kapan toko tutup?", "options": ["Senin", "Rabu", "Jumat", "Sabtu"], "answer": 3 },
+            { "id": "q48", "type": "text", "text": "<strong>Pesan:</strong><br>Jus ini sangat manis (amai).<br><br>Bagaimana rasa jus?", "options": ["Pahit", "Manis", "Asam", "Pedas"], "answer": 1 },
+            { "id": "q49", "type": "text", "text": "<strong>Bio:</strong><br>Umur: 20 tahun. Pekerjaan: Mahasiswa.<br><br>Apa pekerjaan orang ini?", "options": ["Guru", "Dokter", "Mahasiswa", "Pegawai"], "answer": 2 },
+            { "id": "q50", "type": "text", "text": "<strong>Surat:</strong><br>Terima kasih atas hadiahnya. Saya sangat senang.<br><br>Perasaan penulis adalah:", "options": ["Sedih", "Marah", "Senang", "Takut"], "answer": 2 }
+          ]
+        }
+      ]
+    }
+  ]
+}

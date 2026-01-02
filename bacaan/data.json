@@ -133,5 +133,52 @@
     "template": "[[土曜日|どようび]]、[[友達|ともだち]]が うちへ [[来|き]]ました。[[私|わたし]]たちは [[たこ焼き|たこやき]][[パーティー|ぱーてぃー]]（タコパ）を しました。[[タコ|たこ]]を [[小|ちい]]さく [[切|き]]りました。[[たこ焼き|たこやき]]機に 生地を [[入|い]]れました。[[たこ焼き|たこやき]]を 回すのは [[難|むずか]]しいですが、[[面白|おもしろ]]かったです。[[ソース|そーす]]と [[マヨネーズ|まよねーず]]で [[熱|あつ]]い [[たこ焼き|たこやき]]を [[食|た]]べました。とても [[美味|おい]]しかったです。[[映画|えいが]]を [[見|み]]ながら [[食|た]]べました。",
     "icon": "fas fa-users",
     "color": "linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%)"
+  },
+  [
+  {
+    "id": "s16",
+    "title": "Melihat Bunga Sakura (お花見)",
+    "category": "Budaya & Musim",
+    "translation": "Musim semi telah tiba. Bunga sakura mekar penuh di taman. Saya pergi melihat bunga (Hanami) bersama teman kantor. Kami menggelar tikar biru di bawah pohon. Kami makan bento dan minum bir. Kelopak bunga sakura berguguran ditiup angin. Sangat indah. Kami mengambil banyak foto dengan kamera.",
+    "template": "[[春|はる]]が [[来|き]]ました。[[公園|こうえん]]で [[桜|さくら]]が [[満開|まんかい]]です。[[私|わたし]]は [[会社|かいしゃ]]の [[友達|ともだち]]と お[[花見|はなみ]]へ [[行|い]]きました。[[木|き]]の [[下|した]]に [[青|あお]]い [[シート|しーと]]を 敷きました。お[[弁当|べんとう]]を [[食|た]]べて、[[ビール|びーる]]を [[飲|の]]みました。[[桜|さくら]]の [[花びら|はなびら]]が [[風|かぜ]]で 散りました。とても きれいでした。[[カメラ|かめら]]で たくさん [[写真|しゃしん]]を [[撮|と]]りました。",
+    "icon": "fas fa-fan",
+    "color": "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)"
+  },
+  {
+    "id": "s17",
+    "title": "Naik Bus (バスに乗る)",
+    "category": "Transportasi",
+    "translation": "Naik bus di Jepang sedikit sulit. Kita naik dari pintu belakang. Saat naik, kita mengambil tiket kecil. Di dalam bus tenang. Sebelum turun, kita harus menekan tombol. Kita membayar uang di kotak di samping supir. Saya tidak punya uang pas, jadi saya menukar uang di mesin penukar. Supirnya sangat ramah.",
+    "template": "[[日本|にほん]]で [[バス|ばす]]に 乗るのは [[少|すこ]]し [[難|むずか]]しいです。[[後|うし]]ろの [[ドア|どあ]]から 乗ります。乗る [[時|とき]]、[[小|ちい]]さい [[チケット|ちけっと]]を 取ります。[[バス|ばす]]の [[中|なか]]は [[静|しず]]かです。降りる [[前|まえ]]に、[[ボタン|ぼたん]]を 押さなければなりません。[[運転手|うんてんしゅ]]さんの [[横|よこ]]にある 箱に お[[金|かね]]を [[払|はら]]います。[[私|わたし]]は 細かい お[[金|かね]]が なかったですから、両替機で 両替しました。[[運転手|うんてんしゅ]]さんは とても [[親切|しんせつ]]でした。",
+    "icon": "fas fa-bus",
+    "color": "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)"
+  },
+  {
+    "id": "s18",
+    "title": "Toko 100 Yen (100円ショップ)",
+    "category": "Belanja",
+    "translation": "Saya suka toko 100 yen seperti Daiso. Di sana, semua barang harganya 100 yen. Murah sekali. Ada alat tulis, piring, dan makanan ringan. Kualitasnya juga bagus. Saya membeli pulpen dan buku catatan untuk belajar. Saya juga membeli oleh-oleh untuk keluarga. Saya sering menghabiskan waktu lama di sana karena barangnya menarik.",
+    "template": "[[私|わたし]]は [[ダイソー|だいそー]]のような 100[[円|えん]][[ショップ|しょっぷ]]が [[好|す]]きです。そこで、全部の 商品が 100[[円|えん]]です。とても [[安|やす]]いです。文房具や お[[皿|さら]]や [[スナック|すなっく]]が あります。[[品質|ひんしつ]]も いいです。[[私|わたし]]は [[勉強|べんきょう]]のために [[ペン|ぺん]]と [[ノート|のーと]]を [[買|か]]いました。[[家族|かぞく]]への お[[土産|みやげ]]も [[買|か]]いました。商品が [[面白|おもしろ]]いですから、よく そこで 長い [[時間|じかん]]を 過ごします。",
+    "icon": "fas fa-store-alt",
+    "color": "linear-gradient(135deg, #fa709a 0%, #fee140 100%)"
+  },
+  {
+    "id": "s19",
+    "title": "Masuk Angin (風邪をひく)",
+    "category": "Kesehatan",
+    "translation": "Kemarin tenggorokan saya sakit dan saya demam. Saya masuk angin. Saya pergi ke klinik. Dokter memeriksa saya. Dia bilang, 'Minum obat ini dan tidurlah'. Saya pergi ke apotek untuk mengambil obat. Hari ini saya tidak pergi kerja. Saya makan bubur dan istirahat di rumah. Saya ingin cepat sembuh.",
+    "template": "[[昨日|きのう]] [[喉|のど]]が [[痛|いた]]くて、[[熱|ねつ]]が ありました。[[風邪|かぜ]]を ひきました。[[クリニック|くりにっく]]へ [[行|い]]きました。お[[医者|いしゃ]]さんは [[私|わたし]]を 診察しました。[[彼|かれ]]は「この [[薬|くすり]]を [[飲|の]]んで、[[寝|ね]]てください」と [[言|い]]ました。[[薬局|やっきょく]]へ [[薬|くすり]]を もらいに [[行|い]]きました。[[今日|きょう]]は [[仕事|しごと]]へ [[行|い]]きません。お粥を [[食|た]]べて、うちで 休みます。[[早|はや]]く [[元気|げんき]]に なりたいです。",
+    "icon": "fas fa-procedures",
+    "color": "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)"
+  },
+  {
+    "id": "s20",
+    "title": "Hari Olahraga (運動会)",
+    "category": "Kegiatan Sosial",
+    "translation": "Bulan Oktober adalah musim olahraga. Di kota saya ada Hari Olahraga (Undoukai). Semua orang berpartisipasi. Ada lomba lari dan tarik tambang. Saya masuk tim merah. Kami berteriak 'Semangat!'. Siang hari kami makan bento bersama di luar. Tim merah menang. Saya lelah tapi sangat senang.",
+    "template": "10[[月|がつ]]は [[スポーツ|すぽーつ]]の [[季節|きせつ]]です。[[私|わたし]]の [[町|まち]]で [[運動会|うんどうかい]]が ありました。みんな 参加しました。[[リレー|りれー]]や 綱引きが ありました。[[私|わたし]]は [[赤|あか]][[チーム|ちーむ]]に 入りました。[[私|わたし]]たちは「[[頑張|がんば]]れ！」と [[叫|さけ]]びました。[[昼|ひる]]に [[外|そと]]で [[一緒|いっしょ]]に お[[弁当|べんとう]]を [[食|た]]べました。[[赤|あか]][[チーム|ちーむ]]が 勝ちました。[[疲|つか]]れましたが、とても [[楽|たの]]しかったです。",
+    "icon": "fas fa-running",
+    "color": "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)"
   }
+]
 ]
