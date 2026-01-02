@@ -1,82 +1,200 @@
 {
   "packages": [
     {
-      "id": "paket_jft_01",
-      "title": "JFT-Basic A2 - Paket Simulasi 1",
-      "subtitle": "Latihan Lengkap 50 Soal",
-      "category": "Simulasi Ujian",
+      "id": "paket_real_01",
+      "title": "JFT-Basic A2 - Paket 1",
+      "subtitle": "Soal Cerita Panjang & Audio Lambat",
+      "category": "Official Bank",
       "color": "linear-gradient(135deg, #00C6FF 0%, #0072FF 100%)",
-      "icon": "fas fa-clipboard-list",
+      "icon": "fas fa-book-reader",
       "duration": 60,
       "sections": [
         {
-          "name": "Script & Vocabulary (Moji/Goi)",
+          "name": "Script & Vocabulary",
           "questions": [
-            { "id": "q1", "type": "text", "text": "Pilih bacaan Kanji yang tepat:<br>入口", "options": ["いりぐち (Iriguchi)", "でぐち (Deguchi)", "かえり (Kaeri)", "ひがし (Higashi)"], "answer": 0 },
-            { "id": "q2", "type": "text", "text": "Pilih Kanji yang tepat:<br>Watashi wa 'otouto' ni piano o oshiete imasu.", "options": ["兄", "弟", "妹", "姉"], "answer": 1 },
-            { "id": "q3", "type": "text", "text": "Pilih arti kata yang tepat:<br>びょういん (Byouin)", "options": ["Salon Kecantikan", "Rumah Sakit", "Bank", "Kantor Pos"], "answer": 1 },
-            { "id": "q4", "type": "text", "text": "Lengkapi kalimat:<br>Koko wa toshokan desu kara, ____ shite kudasai.", "options": ["Shizuka ni", "Genki ni", "Kirei ni", "Benri ni"], "answer": 0 },
-            { "id": "q5", "type": "text", "text": "Kanji untuk 'Minum':", "options": ["食べる", "飲む", "読む", "見る"], "answer": 1 },
-            { "id": "q6", "type": "text", "text": "Bacaan yang tepat untuk: 自転車", "options": ["Jidousha", "Densha", "Jitensha", "Chikatetsu"], "answer": 2 },
-            { "id": "q7", "type": "text", "text": "Lawan kata dari 'Takai' (Mahal/Tinggi):", "options": ["Oishii", "Yasui", "Hikui", "Mijikai"], "answer": 1 },
-            { "id": "q8", "type": "text", "text": "Pilih partikel yang tepat:<br>Gohan __ tabemasu.", "options": ["ni", "ga", "o", "de"], "answer": 2 },
-            { "id": "q9", "type": "text", "text": "Bentuk lampau dari 'Samui' (Dingin):", "options": ["Samuikatta", "Samukatta", "Samudeshita", "Samukute"], "answer": 1 },
-            { "id": "q10", "type": "text", "text": "Arti dari: 'Yakusoku'", "options": ["Janji", "Rencana", "Waktu", "Tempat"], "answer": 0 },
-            { "id": "q11", "type": "text", "text": "Pilih Kata:<br>Setiap pagi saya ____ kopi.", "options": ["nomimasu", "tabemasu", "ikimasu", "kimasu"], "answer": 0 },
-            { "id": "q12", "type": "text", "text": "Kanji 'Utara':", "options": ["南", "北", "東", "西"], "answer": 1 },
-            { "id": "q13", "type": "text", "text": "Bacaan: 家族 (Keluarga)", "options": ["Kazoku", "Kyoudai", "Tomodachi", "Kaisha"], "answer": 0 },
-            { "id": "q14", "type": "text", "text": "Pilih yang benar:<br>Kino wa ame deshita ___ kyou wa hare desu.", "options": ["kara", "ga", "node", "dakara"], "answer": 1 },
-            { "id": "q15", "type": "text", "text": "Arti: 'Tanjoubi'", "options": ["Hari Libur", "Ulang Tahun", "Pernikahan", "Tahun Baru"], "answer": 1 }
+            { "id": "q1", "type": "text", "text": "「自転車」の 読み方は どれですか。", "translation": "Cara baca 自転車 (Sepeda)", "options": ["じてんしゃ", "じどうしゃ", "でんしゃ", "バイク"], "answer": 0, "explanation": "自転車 = じてんしゃ (Jitensha)." },
+            { "id": "q2", "type": "text", "text": "「病院」の 読み方は どれですか。", "translation": "Cara baca 病院 (Rumah Sakit)", "options": ["びよういん", "びょういん", "りはい", "がっこう"], "answer": 1, "explanation": "病院 = びょういん (Byouin)." },
+            { "id": "q3", "type": "text", "text": "「郵便局」の 読み方は どれですか。", "translation": "Cara baca 郵便局 (Kantor Pos)", "options": ["としょかん", "ゆうびんきょく", "はくぶつかん", "ぎんこう"], "answer": 1, "explanation": "郵便局 = ゆうびんきょく (Yuubinkyoku)." },
+            { "id": "q4", "type": "text", "text": "「準備」の 読み方は どれですか。", "translation": "Cara baca 準備 (Persiapan)", "options": ["しんぱい", "じゅんび", "ちゅうい", "しゅみ"], "answer": 1, "explanation": "準備 = じゅんび (Junbi)." },
+            { "id": "q5", "type": "text", "text": "「虫歯で 歯が ________。」", "translation": "Sakit gigi karena gigi berlubang.", "options": ["かゆい", "いたい", "わるい", "せまい"], "answer": 1, "explanation": "Sakit = 痛い (Itai)." },
+            { "id": "q6", "type": "text", "text": "「おしぼり」は 何ですか。", "translation": "Apa itu Oshibori?", "options": ["手をふくもの", "箸 (はし)", "皿 (さら)", "コップ"], "answer": 0, "explanation": "Oshibori = Handuk basah untuk lap tangan." },
+            { "id": "q7", "type": "text", "text": "「小麦粉」の 読み方は どれですか。", "translation": "Cara baca 小麦粉 (Tepung Terigu)", "options": ["こむぎこ", "そばこ", "きなこ", "パンこ"], "answer": 0, "explanation": "小麦粉 = こむぎこ (Komugiko)." },
+            { "id": "q8", "type": "text", "text": "「にぎやか」の 反対 (Hantai) は ________ です。", "translation": "Lawan kata Ramai (Nigiyaka)", "options": ["きれい", "しずか", "べんり", "げんき"], "answer": 1, "explanation": "Lawan Ramai = Sepi/Tenang (Shizuka)." },
+            { "id": "q9", "type": "text", "text": "「駐車場」の 読み方は どれですか。", "translation": "Cara baca 駐車場 (Tempat Parkir)", "options": ["ちゅうりんじょう", "ちゅうしゃじょう", "うんどうじょう", "かいじょう"], "answer": 1, "explanation": "駐車場 = ちゅうしゃじょう (Chuushajou)." },
+            { "id": "q10", "type": "text", "text": "マスクを ________。", "translation": "Memakai masker", "options": ["かけます", "つけます", "しめます", "ぬぎます"], "answer": 1, "explanation": "Memakai masker = Tsukemasu." },
+            { "id": "q11", "type": "text", "text": "ひげを ________。", "translation": "Mencukur jenggot", "options": ["みがきます", "そります", "あらいます", "きります"], "answer": 1, "explanation": "Mencukur = Sorimasu." },
+            { "id": "q12", "type": "text", "text": "「洗濯」の 読み方は どれですか。", "translation": "Cara baca 洗濯 (Mencuci)", "options": ["そうじ", "せんたく", "さんぽ", "れんしゅう"], "answer": 1, "explanation": "洗濯 = せんたく (Sentaku)." },
+            { "id": "q13", "type": "text", "text": "「水泳」の 読み方は どれですか。", "translation": "Cara baca 水泳 (Renang)", "options": ["すいえい", "じゅうどう", "ジョギング", "スキー"], "answer": 0, "explanation": "水泳 = すいえい (Suiei)." },
+            { "id": "q14", "type": "text", "text": "「立入禁止」の 意味は 何ですか。", "translation": "Arti 立入禁止 (Dilarang Masuk)", "options": ["はいってはいけません", "たべてはいけません", "のんではいけません", "すってはいけません"], "answer": 0, "explanation": "立入禁止 = Dilarang Masuk." },
+            { "id": "q15", "type": "text", "text": "「理髪店」の 読み方は どれですか。", "translation": "Cara baca 理髪店 (Tukang Cukur)", "options": ["びよういん", "りはつてん", "びょういん", "コンビニ"], "answer": 1, "explanation": "理髪店 = りはつてん (Rihatsuten)." }
           ]
         },
         {
-          "name": "Conversation & Expression",
+          "name": "Conversation",
           "questions": [
-            { "id": "q16", "type": "text", "text": "A: 'Ittekimasu'<br>B: ____", "options": ["Tadaima", "Okaerinasai", "Itterasshai", "Oyasuminasai"], "answer": 2 },
-            { "id": "q17", "type": "text", "text": "Saat menjenguk orang sakit, ucapkan:", "options": ["Omedetou", "Odaijini", "Ki o tsukete", "Ganbatte"], "answer": 1 },
-            { "id": "q18", "type": "text", "text": "A: 'Arigatou gozaimasu'<br>B: ____", "options": ["Douitashimashite", "Gochisousama", "Sumimasen", "Onegaishimasu"], "answer": 0 },
-            { "id": "q19", "type": "text", "text": "Sebelum makan mengucapkan:", "options": ["Gochisousama", "Itadakimasu", "Oishii desu", "Kirei desu"], "answer": 1 },
-            { "id": "q20", "type": "text", "text": "A: 'Sumimasen, toire wa doko desu ka?'<br>B: ____", "options": ["Are desu", "Asoko desu", "Ano desu", "Doko desu"], "answer": 1 },
-            { "id": "q21", "type": "text", "text": "A: 'Hajimemashite. Watashi wa Tanaka desu.'<br>B: ____", "options": ["Sayounara", "Arigatou", "Douzo yoroshiku", "Ogenki desu ka"], "answer": 2 },
-            { "id": "q22", "type": "text", "text": "A: 'Kono hon wa ikura desu ka?'<br>B: ____", "options": ["3-kai desu", "3-ji desu", "300-en desu", "3-ri desu"], "answer": 2 },
-            { "id": "q23", "type": "text", "text": "Masuk ke rumah orang lain:", "options": ["Ojamashimasu", "Tadaima", "Shitsurei shimasu", "Irasshaimase"], "answer": 0 },
-            { "id": "q24", "type": "text", "text": "Pelayan toko menyapa pelanggan:", "options": ["Okaerinasai", "Irasshaimase", "Konnichiwa", "Douzo"], "answer": 1 },
-            { "id": "q25", "type": "text", "text": "Mengajak teman: 'Issho ni ikimasen ka?'", "options": ["Hai, ikimashou", "Hai, ikimasen", "Iie, ikimashou", "Iie, ikimasu"], "answer": 0 }
+            { "id": "q16", "type": "text", "text": "A: いってきます。<br>B: ________", "translation": "Saya berangkat -> ...", "options": ["ただいま", "おかえりなさい", "いってらっしゃい", "おやすみなさい"], "answer": 2, "explanation": "Jawaban Ittekimasu adalah Itterasshai." },
+            { "id": "q17", "type": "text", "text": "A: ありがとうございます。<br>B: ________", "translation": "Terima kasih -> ...", "options": ["どういたしまして", "ごちそうさま", "すみません", "おねがいします"], "answer": 0, "explanation": "Sama-sama = Douitashimashite." },
+            { "id": "q18", "type": "text", "text": "A: トイレは どこですか。<br>B: ________", "translation": "Toilet di mana?", "options": ["あれです", "あそこです", "あのうです", "どれです"], "answer": 1, "explanation": "Asoko = Di sana (jauh)." },
+            { "id": "q19", "type": "text", "text": "店の人: 「いらっしゃいませ。」<br>客: 「________」", "translation": "Pelayan: Selamat datang. Tamu: ...", "options": ["こんにちは", "ただいま", "すみません", "いただきます"], "answer": 2, "explanation": "Memanggil pelayan = Sumimasen." },
+            { "id": "q20", "type": "text", "text": "A: 天気が いいですね。<br>B: そうですね。________", "translation": "Cuaca bagus ya -> Ya, ...", "options": ["さむいですね", "あたたかいですね", "あめですね", "くもりですね"], "answer": 1, "explanation": "Cuaca bagus biasanya hangat (Atatakai)." },
+            { "id": "q21", "type": "text", "text": "A: いっしょに 映画を 見ませんか。<br>B: ________", "translation": "Maukah nonton film?", "options": ["はい、みましょう", "はい、みません", "いいえ、みます", "いいえ、みましょう"], "answer": 0, "explanation": "Hai, mimashou = Ya, ayo nonton." },
+            { "id": "q22", "type": "text", "text": "A: お先に 失礼します。<br>B: ________", "translation": "Saya pulang duluan -> ...", "options": ["おつかれさまでした", "こんにちは", "おやすみなさい", "どうぞ"], "answer": 0, "explanation": "Otsukaresama = Terima kasih atas kerjanya." },
+            { "id": "q23", "type": "text", "text": "A: もう 12時ですね。<br>B: ええ、そろそろ ________。", "translation": "Sudah jam 12 -> Saatnya tidur.", "options": ["かえりましょう", "たべましょう", "ねましょう", "いきましょう"], "answer": 2, "explanation": "Nemashou = Ayo tidur." },
+            { "id": "q24", "type": "text", "text": "A: どうぞ、食べてください。<br>B: はい、________。", "translation": "Silakan makan -> Ya, (selamat makan).", "options": ["ごちそうさま", "いただきます", "おいしいです", "きれいです"], "answer": 1, "explanation": "Itadakimasu = Diucapkan sebelum makan." },
+            { "id": "q25", "type": "text", "text": "A: お元気ですか。<br>B: ________", "translation": "Apa kabar?", "options": ["はい、元気です", "いいえ、元気です", "元気じゃありません", "どうも"], "answer": 0, "explanation": "Hai, genki desu." },
+            { "id": "q26", "type": "text", "text": "A: プレゼントです。<br>B: わあ、________。", "translation": "Ini hadiah -> Wah, terima kasih.", "options": ["ありがとうございます", "ごめんなさい", "ちがいます", "だめです"], "answer": 0, "explanation": "Arigatou gozaimasu." },
+            { "id": "q27", "type": "text", "text": "A: 趣味は 何ですか。<br>B: ________ です。", "translation": "Hobi apa? -> ...", "options": ["テニス", "日本", "学生", "20歳"], "answer": 0, "explanation": "Tenisu (Tenis) adalah hobi." },
+            { "id": "q28", "type": "text", "text": "A: この ペンは いくらですか。<br>B: ________ です。", "translation": "Berapa harganya?", "options": ["3階", "3時", "300円", "3人"], "answer": 2, "explanation": "Harga menggunakan En (Yen)." },
+            { "id": "q29", "type": "text", "text": "他人の 家に 入る時 (Masuk rumah orang):", "translation": "Saat masuk rumah orang lain", "options": ["おじゃまします", "ただいま", "しつれいします", "いらっしゃいませ"], "answer": 0, "explanation": "Ojamashimasu = Permisi (mengganggu)." },
+            { "id": "q30", "type": "text", "text": "「あけまして おめでとうございます」は いつ 言いますか。", "translation": "Kapan 'Akemashite Omedetou' diucapkan?", "options": ["誕生日", "お正月", "結婚式", "卒業式"], "answer": 1, "explanation": "Oshougatsu (Tahun Baru)." }
           ]
         },
         {
-          "name": "Listening (Audio)",
+          "name": "Listening",
           "questions": [
-            { "id": "q26", "type": "audio", "script": "Kore wa nan desu ka? ... Sore wa Enpitsu desu.", "text": "Benda apa yang dibicarakan?", "options": ["Buku", "Pensil", "Tas", "Jam"], "answer": 1 },
-            { "id": "q27", "type": "audio", "script": "Ima nan-ji desu ka? ... Kuji han desu.", "text": "Jam berapa sekarang?", "options": ["09:00", "09:30", "10:30", "08:30"], "answer": 1 },
-            { "id": "q28", "type": "audio", "script": "Ashita wa ame desu.", "text": "Bagaimana cuaca besok?", "options": ["Cerah", "Hujan", "Berawan", "Salju"], "answer": 1 },
-            { "id": "q29", "type": "audio", "script": "Sumimasen, eki wa doko desu ka? ... Massugu itte kudasai.", "text": "Ke mana harus pergi?", "options": ["Belok kanan", "Belok kiri", "Lurus", "Putar balik"], "answer": 2 },
-            { "id": "q30", "type": "audio", "script": "Watashi no shumi wa sakkaa desu.", "text": "Apa hobi pembicara?", "options": ["Tenis", "Sepak Bola", "Renang", "Basket"], "answer": 1 },
-            { "id": "q31", "type": "audio", "script": "Kono kaban wa 2000-en desu.", "text": "Berapa harga tas?", "options": ["200 yen", "2000 yen", "20000 yen", "1200 yen"], "answer": 1 },
-            { "id": "q32", "type": "audio", "script": "Nichiyoubi ni eiga o mimashita.", "text": "Apa yang dilakukan hari Minggu?", "options": ["Nonton film", "Belanja", "Tidur", "Belajar"], "answer": 0 },
-            { "id": "q33", "type": "audio", "script": "Kusuri o nonde kudasai.", "text": "Apa instruksinya?", "options": ["Minum obat", "Makan nasi", "Minum air", "Istirahat"], "answer": 0 },
-            { "id": "q34", "type": "audio", "script": "Tanaka-san wa kimasen deshita.", "text": "Siapa yang tidak datang?", "options": ["Yamada", "Tanaka", "Suzuki", "Sato"], "answer": 1 },
-            { "id": "q35", "type": "audio", "script": "Heya ni neko ga imasu.", "text": "Ada apa di kamar?", "options": ["Anjing", "Kucing", "Burung", "Ikan"], "answer": 1 },
-            { "id": "q36", "type": "audio", "script": "Tsugi no kado o migi ni magatte kudasai.", "text": "Arah mana?", "options": ["Kiri", "Kanan", "Lurus", "Berhenti"], "answer": 1 },
-            { "id": "q37", "type": "audio", "script": "Watashi wa mainichi 6-ji ni okimasu.", "text": "Jam berapa bangun?", "options": ["5:00", "6:00", "7:00", "8:00"], "answer": 1 },
-            { "id": "q38", "type": "audio", "script": "Sore wa watashi no kasa desu.", "text": "Benda apa itu?", "options": ["Tas", "Sepatu", "Payung", "Topi"], "answer": 2 },
-            { "id": "q39", "type": "audio", "script": "Kyou wa atsui desu ne.", "text": "Bagaimana udaranya?", "options": ["Dingin", "Sejuk", "Panas", "Hangat"], "answer": 2 },
-            { "id": "q40", "type": "audio", "script": "Gochisousama deshita.", "text": "Kapan ini diucapkan?", "options": ["Sebelum makan", "Sesudah makan", "Saat bertemu", "Saat berpisah"], "answer": 1 }
+            { "id": "q31", "type": "audio", "script": "これ は 何 です か。それ は 鉛筆 です。", "text": "話している ものは 何ですか。", "translation": "Apa bendanya? (Enpitsu)", "options": ["本", "鉛筆 (えんぴつ)", "鞄", "時計"], "answer": 1, "explanation": "Enpitsu = Pensil." },
+            { "id": "q32", "type": "audio", "script": "今 何時 です か。九時 半 です。", "text": "今 何時 ですか。", "translation": "Jam berapa? (Kuji han)", "options": ["9:00", "9:30", "10:30", "8:30"], "answer": 1, "explanation": "Kuji han = 9:30." },
+            { "id": "q33", "type": "audio", "script": "明日 は 雨 です。", "text": "明日の 天気は どうですか。", "translation": "Cuaca besok?", "options": ["晴れ", "雨 (あめ)", "曇り", "雪"], "answer": 1, "explanation": "Ame = Hujan." },
+            { "id": "q34", "type": "audio", "script": "駅 は どこ です か。まっすぐ 行って ください。", "text": "男の人は どこへ 行きますか。", "translation": "Ke mana dia pergi?", "options": ["右", "左", "まっすぐ", "うしろ"], "answer": 2, "explanation": "Massugu = Lurus." },
+            { "id": "q35", "type": "audio", "script": "私 の 趣味 は サッカー です。", "text": "趣味は 何ですか。", "translation": "Apa hobinya?", "options": ["テニス", "サッカー", "水泳", "バスケ"], "answer": 1, "explanation": "Sakkaa = Sepak bola." },
+            { "id": "q36", "type": "audio", "script": "この 鞄 は 二千円 です。", "text": "鞄は いくらですか。", "translation": "Harga tas?", "options": ["200円", "2000円", "20000円", "1200円"], "answer": 1, "explanation": "Ni-sen = 2000." },
+            { "id": "q37", "type": "audio", "script": "日曜日 に 映画 を 見ました。", "text": "日曜日に 何を しましたか。", "translation": "Apa kegiatan hari Minggu?", "options": ["映画を見た", "買い物した", "寝た", "勉強した"], "answer": 0, "explanation": "Eiga o mimashita = Nonton film." },
+            { "id": "q38", "type": "audio", "script": "薬 を 飲んで ください。", "text": "医者は 何と 言いましたか。", "translation": "Instruksi dokter?", "options": ["薬を飲んで", "ごはんを食べて", "水を飲んで", "寝て"], "answer": 0, "explanation": "Kusuri = Obat." },
+            { "id": "q39", "type": "audio", "script": "田中さん は 来ません でした。", "text": "だれが 来ませんでしたか。", "translation": "Siapa yang tidak datang?", "options": ["山田さん", "田中さん", "鈴木さん", "佐藤さん"], "answer": 1, "explanation": "Tanaka-san." },
+            { "id": "q40", "type": "audio", "script": "部屋 に 猫 が います。", "text": "部屋に 何が いますか。", "translation": "Ada apa di kamar?", "options": ["犬", "猫 (ねこ)", "鳥", "魚"], "answer": 1, "explanation": "Neko = Kucing." },
+            { "id": "q41", "type": "audio", "script": "次 の 角 を 右 に 曲がって ください。", "text": "どこへ 曲がりますか。", "translation": "Belok ke mana? (Migi)", "options": ["左", "右 (みぎ)", "まっすぐ", "うしろ"], "answer": 1, "explanation": "Migi = Kanan." },
+            { "id": "q42", "type": "audio", "script": "私 は 毎日 六時 に 起きます。", "text": "何時に 起きますか。", "translation": "Bangun jam berapa? (Roku-ji)", "options": ["5時", "6時", "7時", "8時"], "answer": 1, "explanation": "Roku-ji = Jam 6." },
+            { "id": "q43", "type": "audio", "script": "それ は 私 の 傘 です。", "text": "それは 何ですか。", "translation": "Benda apa itu? (Kasa)", "options": ["かばん", "くつ", "かさ", "ぼうし"], "answer": 2, "explanation": "Kasa = Payung." },
+            { "id": "q44", "type": "audio", "script": "今日 は 暑い です ね。", "text": "天気は どうですか。", "translation": "Bagaimana udaranya? (Atsui)", "options": ["さむい", "すずしい", "あつい", "あたたかい"], "answer": 2, "explanation": "Atsui = Panas." },
+            { "id": "q45", "type": "audio", "script": "ごちそうさま でした。", "text": "いつ 言いますか。", "translation": "Kapan diucapkan?", "options": ["食べる前", "食べた後", "会った時", "別れる時"], "answer": 1, "explanation": "Tabeta ato (Setelah makan)." }
           ]
         },
         {
           "name": "Reading (Dokkai)",
           "questions": [
-            { "id": "q41", "type": "text", "text": "<strong>Bacaan:</strong><br>Watashi wa mainichi 6-ji ni okimasu. Asagohan o tabete, 7-ji ni gakkou e ikimasu.<br><br>Jam berapa dia pergi ke sekolah?", "options": ["Jam 6", "Jam 7", "Jam 8", "Jam 9"], "answer": 1 },
-            { "id": "q42", "type": "text", "text": "<strong>Rambu:</strong><br>Koko de tabako o suwanai de kudasai.<br><br>Apa arti larangan ini?", "options": ["Dilarang makan", "Dilarang merokok", "Dilarang masuk", "Dilarang foto"], "answer": 1 },
-            { "id": "q43", "type": "text", "text": "<strong>Email:</strong><br>To: Ali<br>Ali-san, ashita no paatii wa 7-ji kara desu.<br>From: Yuki<br><br>Siapa pengirim email?", "options": ["Ali", "Yuki", "Tanaka", "Sensei"], "answer": 1 },
-            { "id": "q44", "type": "text", "text": "<strong>Memo:</strong><br>Kaigi: Getsuyoubi, 10-ji, Kaigishitsu A.<br><br>Di mana rapat diadakan?", "options": ["Hari Senin", "Jam 10", "Ruang Rapat A", "Ruang Rapat B"], "answer": 2 },
-            { "id": "q45", "type": "text", "text": "<strong>Menu:</strong><br>Udon: 500 yen<br>Ramen: 700 yen<br><br>Mana yang lebih murah?", "options": ["Udon", "Ramen", "Sama saja", "Tidak tahu"], "answer": 0 },
-            { "id": "q46", "type": "text", "text": "<strong>Teks:</strong><br>Watashi no uchi ni inu ga imasu. Namae wa Pochi desu. Shiroi inu desu.<br><br>Apa warna Pochi?", "options": ["Hitam", "Putih", "Coklat", "Kecil"], "answer": 1 },
-            { "id": "q47", "type": "text", "text": "<strong>Jadwal:</strong><br>Senin-Jumat: Buka<br>Sabtu-Minggu: Libur<br><br>Kapan toko tutup?", "options": ["Senin", "Rabu", "Jumat", "Sabtu"], "answer": 3 },
-            { "id": "q48", "type": "text", "text": "<strong>Pesan:</strong><br>Jus ini sangat manis (amai).<br><br>Bagaimana rasa jus?", "options": ["Pahit", "Manis", "Asam", "Pedas"], "answer": 1 },
-            { "id": "q49", "type": "text", "text": "<strong>Bio:</strong><br>Umur: 20 tahun. Pekerjaan: Mahasiswa.<br><br>Apa pekerjaan orang ini?", "options": ["Guru", "Dokter", "Mahasiswa", "Pegawai"], "answer": 2 },
-            { "id": "q50", "type": "text", "text": "<strong>Surat:</strong><br>Terima kasih atas hadiahnya. Saya sangat senang.<br><br>Perasaan penulis adalah:", "options": ["Sedih", "Marah", "Senang", "Takut"], "answer": 2 }
+            {
+              "id": "q46",
+              "type": "text",
+              "text": "<strong>[会話]</strong><br><br>医者「そうですか。川田さん、ばんごはんを 食べすぎませんでしたか。」<br>川田「ああ……。おいしかったから、ごはんを 5はい 食べました。」<br>医者「ああ、それで いたく なったんですよ。」<br><br><strong>質問：</strong> 川田さんは どうして おなかが いたく なりましたか。",
+              "translation": "Kenapa Kawada sakit perut? (Dia makan 5 mangkuk nasi)",
+              "options": ["くすりを 飲んだから", "古い 魚を 食べたから", "ごはんを 食べすぎたから", "おなかを おされたから"],
+              "answer": 2,
+              "explanation": "Tabesugita = Makan terlalu banyak."
+            },
+            {
+              "id": "q47",
+              "type": "text",
+              "text": "<strong>[お知らせ]</strong><br><br>最近、犬や 猫などの ペットと いっしょに 住める アパートが 増えてきています。<br>10年前、ペットと いっしょに 住める アパートを さがすのは 大変でした。<br><br><strong>質問：</strong> このアパートでは 何を 飼っても いいですか。",
+              "translation": "Hewan apa yang boleh dipelihara?",
+              "options": ["犬だけ", "猫だけ", "犬と猫", "だめです"],
+              "answer": 2,
+              "explanation": "Inu ya Neko = Anjing dan Kucing."
+            },
+            {
+              "id": "q48",
+              "type": "text",
+              "text": "<strong>[手紙]</strong><br><br>りーさんへ。<br>10日に 仕事で 大阪に 行く ことに なって、空港に いけなく なって しまいました。<br>それで、妹の よし子に かわりに 迎えに 行って もらう ことに したので、すみませんが、妹の 車で うちまで 来て ください。<br><br><strong>質問：</strong> だれが 空港へ 迎えに 行きますか。",
+              "translation": "Siapa yang menjemput ke bandara?",
+              "options": ["私", "よし子", "りーさん", "タクシー"],
+              "answer": 1,
+              "explanation": "Imouto no Yoshiko (Adik saya Yoshiko) yang akan pergi menjemput."
+            },
+            {
+              "id": "q49",
+              "type": "text",
+              "text": "<strong>[広告]</strong><br><br>たまご 30円引き (5個まで)。<br><br><strong>質問：</strong> たまごは いくつ 買えますか。",
+              "translation": "Berapa banyak telur diskon yang bisa dibeli?",
+              "options": ["3個", "5個", "10個", "いくつでも"],
+              "answer": 1,
+              "explanation": "5-ko made = Sampai 5 buah."
+            },
+            {
+              "id": "q50",
+              "type": "text",
+              "text": "<strong>[お知らせ]</strong><br><br>TF野球チームの みなさんへ。<br>つぎの 練習は 南運動場で 行います。<br>その日、運動場 入口の 駐車場は 使えません。<br>近くの コインパーキング (1時間 200円) を 使ってください。<br><br><strong>質問：</strong> 車で 来る 人は どこに 車を 止めますか。",
+              "translation": "Di mana harus parkir mobil?",
+              "options": ["入口", "道路", "コインパーキング", "運動場の中"],
+              "answer": 2,
+              "explanation": "Chikaku no Coin Parking (Parkir berbayar dekat situ)."
+            },
+            {
+              "id": "q51",
+              "type": "text",
+              "text": "<strong>[メール]</strong><br><br>件名: あけまして おめでとうございます。<br>シンさん、あけまして おめでとうございます。<br>私は 今、福岡の 親の家に 帰っています。<br>今年は 休みが 4日間しか なかったので、旅行には 行きませんでした。<br><br><strong>質問：</strong> 「私」は 今 どこに いますか。",
+              "translation": "Penulis sekarang ada di mana?",
+              "options": ["東京", "大阪", "福岡", "外国"],
+              "answer": 2,
+              "explanation": "Fukuoka no oya no ie (Rumah orang tua di Fukuoka)."
+            },
+            {
+              "id": "q52",
+              "type": "text",
+              "text": "<strong>[文]</strong><br><br>私は 毎日 7時に 学校へ 行きます。<br><br><strong>質問：</strong> 何時に 学校へ 行きますか。",
+              "translation": "Jam berapa ke sekolah?",
+              "options": ["6時", "7時", "8時", "9時"],
+              "answer": 1,
+              "explanation": "7-ji (Jam 7)."
+            },
+            {
+              "id": "q53",
+              "type": "text",
+              "text": "<strong>[看板]</strong><br><br>ここで タバコを 吸わないで ください。<br><br><strong>質問：</strong> どういう 意味ですか。",
+              "translation": "Apa artinya?",
+              "options": ["食べてはいけません", "吸ってはいけません", "入ってはいけません", "飲んではいけません"],
+              "answer": 1,
+              "explanation": "Tabako = Rokok."
+            },
+            {
+              "id": "q54",
+              "type": "text",
+              "text": "<strong>[メール]</strong><br><br>To: アリ<br>From: ユキ<br><br><strong>質問：</strong> だれからの メールですか。",
+              "translation": "Dari siapa?",
+              "options": ["アリ", "ユキ", "田中", "先生"],
+              "answer": 1,
+              "explanation": "From: Yuki."
+            },
+            {
+              "id": "q55",
+              "type": "text", "text": "<strong>[メモ]</strong><br><br>会議： 会議室A。<br><br><strong>質問：</strong> 会議は どこですか。",
+              "translation": "Di mana rapat?",
+              "options": ["月曜日", "10時", "会議室A", "会議室B"],
+              "answer": 2,
+              "explanation": "Kaigishitsu A."
+            },
+            {
+              "id": "q56", "type": "text", "text": "<strong>[メニュー]</strong><br><br>うどん： 500円<br>ラーメン： 700円<br><br><strong>質問：</strong> どちらが 安いですか。",
+              "translation": "Mana yang murah?",
+              "options": ["うどん", "ラーメン", "同じ", "わからない"],
+              "answer": 0,
+              "explanation": "Udon 500 < Ramen 700."
+            },
+            {
+              "id": "q57", "type": "text", "text": "<strong>[文]</strong><br><br>ポチは 白い 犬です。<br><br><strong>質問：</strong> ポチは どんな 犬ですか。",
+              "translation": "Anjing warna apa?",
+              "options": ["黒い", "白い", "茶色い", "小さい"],
+              "answer": 1, "explanation": "Shiroi = Putih."
+            },
+            {
+              "id": "q58", "type": "text", "text": "<strong>[スケジュール]</strong><br><br>土-日： 休み。<br><br><strong>質問：</strong> いつ 休みですか。",
+              "translation": "Kapan libur?",
+              "options": ["月曜日", "水曜日", "金曜日", "土曜日"],
+              "answer": 3,
+              "explanation": "Doyoubi (Sabtu)."
+            },
+            {
+              "id": "q59", "type": "text", "text": "<strong>[メモ]</strong><br><br>この ジュースは 「あまい」です。<br><br><strong>質問：</strong> どんな 味ですか。",
+              "translation": "Rasanya?",
+              "options": ["苦い", "甘い", "酸っぱい", "辛い"],
+              "answer": 1,
+              "explanation": "Amai = Manis."
+            },
+            {
+              "id": "q60", "type": "text", "text": "<strong>[自己紹介]</strong><br><br>仕事： 大学生。<br><br><strong>質問：</strong> 仕事は 何ですか。",
+              "translation": "Pekerjaannya?",
+              "options": ["教師", "医者", "大学生", "会社員"],
+              "answer": 2,
+              "explanation": "Daigakusei (Mahasiswa)."
+            }
           ]
         }
       ]

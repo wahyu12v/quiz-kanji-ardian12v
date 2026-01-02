@@ -1,244 +1,382 @@
+let packages = [];
 let currentPackage = null;
+let currentQuestions = []; 
+let currentQuestionIndex = 0;
+let userAnswers = {}; 
 let timerInterval;
-let userAnswers = {};
-let totalDuration = 0; // dalam detik
+let sectionMap = []; 
 
-// Konstanta Nilai JFT
-const MAX_SCORE = 250;
-const PASS_SCORE = 200;
-
-// 1. LOAD DATA SAAT WEB DIBUKA
+// -- INIT --
 document.addEventListener("DOMContentLoaded", () => {
+    // Pancing suara browser agar load di awal
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.getVoices();
+    }
+
     fetch('soaljft.json')
-        .then(response => response.json())
+        .then(res => res.json())
         .then(data => {
-            renderPackages(data.packages);
+            packages = data.packages;
+            
+            if (document.getElementById('modal-package-list')) {
+                renderPackagesInModal(); 
+            } else if (document.getElementById('question-card-container')) {
+                initExamPage(); 
+            }
         })
-        .catch(err => console.error("Gagal memuat soal:", err));
+        .catch(err => console.error("Gagal load JSON:", err));
 });
 
-// 2. RENDER DAFTAR PAKET DI HOME
-function renderPackages(packages) {
-    const listContainer = document.getElementById('package-list');
-    listContainer.innerHTML = '';
+// ---------------------------------------------
+// LOGIKA AUDIO CANGGIH (Hybrid Offline/Online)
+// ---------------------------------------------
+function playTTS(text) {
+    // 1. Coba Matikan suara sebelumnya
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+    }
+
+    // --- CARA 1: BROWSER NATIVE (Utama) ---
+    if ('speechSynthesis' in window) {
+        const voices = window.speechSynthesis.getVoices();
+        // Cari suara yang mengandung 'ja', 'JP', 'Japan', atau 'Google'
+        const japanVoice = voices.find(v => v.lang.includes('ja') || v.name.includes('Japan') || v.name.includes('Google 日本語'));
+
+        // Jika suara Jepang ditemukan di sistem
+        if (japanVoice) {
+            console.log("Memakai suara sistem: " + japanVoice.name);
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'ja-JP';
+            utterance.rate = 0.7; // Lambat
+            utterance.voice = japanVoice;
+            
+            utterance.onerror = (e) => {
+                console.warn("Sistem gagal, beralih ke online...", e);
+                playOnlineAudio(text); // Fallback jika error
+            };
+            
+            window.speechSynthesis.speak(utterance);
+            return; // Berhenti di sini jika sukses
+        }
+    }
+
+    // --- CARA 2: ONLINE FALLBACK (Jika Cara 1 Gagal) ---
+    // Jika tidak punya suara Jepang, kita "streaming" dari Google Translate
+    console.log("Suara sistem tidak ada, menggunakan mode Online.");
+    playOnlineAudio(text);
+}
+
+function playOnlineAudio(text) {
+    // URL API Google Translate TTS (Gratis/Unofficial)
+    const encodedText = encodeURIComponent(text);
+    const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodedText}&tl=ja&client=tw-ob`;
+    
+    const audio = new Audio(url);
+    audio.playbackRate = 0.75; // Agak lambat (Support di Chrome/Edge)
+    
+    audio.play().catch(error => {
+        alert("Gagal memutar audio. Pastikan koneksi internet lancar karena kamu menggunakan mode Online.");
+        console.error(error);
+    });
+}
+
+// Event Listener agar Chrome memuat voices
+if ('speechSynthesis' in window) {
+    window.speechSynthesis.onvoiceschanged = function() {
+        window.speechSynthesis.getVoices();
+    };
+}
+
+// ---------------------------------------------
+// LOGIKA HOME
+// ---------------------------------------------
+function renderPackagesInModal() {
+    const grid = document.getElementById('modal-package-list');
+    if (!grid) return;
+    grid.innerHTML = '';
 
     packages.forEach(pkg => {
-        // Cek apakah paket punya soal
-        const isDisabled = pkg.sections.length === 0 ? 'style="opacity:0.6; pointer-events:none;"' : '';
-        const btnText = pkg.sections.length === 0 ? 'Segera Hadir' : 'Mulai Ujian';
-
-        const card = `
-            <div class="col-md-5">
-                <div class="package-card" ${isDisabled} onclick="startExam('${pkg.id}')">
-                    <h5>${pkg.title}</h5>
-                    <p class="small mb-2">${pkg.description}</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="badge bg-light text-dark">⏱ ${pkg.duration_minutes} Menit</span>
-                        <span class="fw-bold">▶ ${btnText}</span>
+        const col = document.createElement('div');
+        col.className = 'col-md-6';
+        col.innerHTML = `
+            <div class="package-card h-100 border p-3" style="cursor: pointer; border-radius: 15px; transition: transform 0.2s;" 
+                 onclick="goToExamPage('${pkg.id}')"
+                 onmouseover="this.style.transform='scale(1.02)'; this.style.borderColor='#007bff'"
+                 onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#dee2e6'">
+                <div class="d-flex align-items-center mb-3">
+                    <div style="width: 50px; height: 50px; background: ${pkg.color}; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; margin-right: 15px;">
+                        <i class="${pkg.icon}"></i>
                     </div>
+                    <div>
+                        <h6 class="fw-bold mb-0">${pkg.title}</h6>
+                        <small class="text-muted">${pkg.subtitle}</small>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center small">
+                    <span class="badge bg-light text-dark border">⏱ ${pkg.duration} Menit</span>
+                    <span class="text-primary fw-bold">Mulai <i class="fas fa-arrow-right"></i></span>
                 </div>
             </div>
         `;
-        listContainer.innerHTML += card;
-        
-        // Simpan data paket di window object untuk akses global sementara
-        window[`pkg_${pkg.id}`] = pkg;
+        grid.appendChild(col);
     });
 }
 
-// 3. MULAI UJIAN
-function startExam(packageId) {
-    currentPackage = window[`pkg_${packageId}`];
-    if (!currentPackage) return;
-
-    // UI Switching
-    document.getElementById('home-screen').style.display = 'none';
-    document.getElementById('exam-screen').style.display = 'block';
-    document.getElementById('exam-navbar').style.display = 'flex';
-    document.body.style.backgroundColor = "#f4f6f9"; // Reset background ke abu-abu
-
-    // Render Soal
-    renderQuestions(currentPackage.sections);
-
-    // Start Timer
-    startTimer(currentPackage.duration_minutes);
+function goToExamPage(pkgId) {
+    window.location.href = `ujian.html?packageId=${pkgId}`;
 }
 
-// 4. RENDER SOAL KE LAYAR
-function renderQuestions(sections) {
-    const container = document.getElementById('questions-container');
-    container.innerHTML = '';
+// ---------------------------------------------
+// LOGIKA UJIAN
+// ---------------------------------------------
+function initExamPage() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const pkgId = urlParams.get('packageId');
 
-    sections.forEach((section, sIndex) => {
-        // Judul Bagian (Vocabulary, Listening, dll)
-        container.innerHTML += `<h4 class="section-title">${section.name}</h4>`;
+    if (!pkgId) { alert("Paket tidak ditemukan!"); window.location.href = 'index.html'; return; }
+    const pkg = packages.find(p => p.id === pkgId);
+    if (!pkg) { alert("Data paket error."); window.location.href = 'index.html'; return; }
 
-        section.questions.forEach((q, qIndex) => {
-            let mediaContent = '';
+    currentPackage = pkg;
+    document.getElementById('package-name-display').innerText = pkg.title;
 
-            // Jika Tipe Listening -> Tampilkan Tombol Play (TTS)
-            if (q.type === 'listening') {
-                mediaContent = `
-                    <button class="btn btn-warning btn-sm mb-3" onclick="playAudio('${q.audio_script.replace(/'/g, "\\'")}')">
-                        🔊 Putar Audio
-                    </button>
-                `;
-            }
+    currentQuestions = [];
+    sectionMap = [];
+    let qCounter = 0;
 
-            // Jika Tipe Image -> Tampilkan Placeholder Gambar
-            if (q.type === 'image') {
-                mediaContent = `
-                    <div class="bg-secondary text-white p-4 text-center mb-3 rounded">
-                        ${q.image_placeholder || '[GAMBAR SOAL]'}
-                    </div>
-                `;
-            }
-
-            // Render Opsi Jawaban
-            let optionsHtml = '';
-            q.options.forEach((opt, oIndex) => {
-                optionsHtml += `
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" 
-                               name="q_${sIndex}_${qIndex}" 
-                               id="opt_${sIndex}_${qIndex}_${oIndex}" 
-                               value="${oIndex}"
-                               onchange="saveAnswer('${sIndex}_${qIndex}', ${oIndex})">
-                        <label class="form-check-label" for="opt_${sIndex}_${qIndex}_${oIndex}">
-                            ${opt}
-                        </label>
-                    </div>
-                `;
-            });
-
-            // Kartu Soal Lengkap
-            const questionCard = `
-                <div class="question-card">
-                    <p class="fw-bold mb-2">Soal No. ${qIndex + 1}</p>
-                    ${mediaContent}
-                    <p class="mb-3">${q.question}</p>
-                    <div class="options-group">
-                        ${optionsHtml}
-                    </div>
-                </div>
-            `;
-            container.innerHTML += questionCard;
+    pkg.sections.forEach(sec => {
+        sectionMap.push({ name: sec.name, startIndex: qCounter });
+        sec.questions.forEach(q => {
+            q.sectionName = sec.name; 
+            currentQuestions.push(q);
+            qCounter++;
         });
     });
+
+    renderSectionNav();
+    currentQuestionIndex = 0;
+    userAnswers = {};
+    startTimer(pkg.duration * 60);
+    renderQuestion();
 }
 
-// 5. FITUR: SIMPAN JAWABAN SEMENTARA
-function saveAnswer(questionId, answerIndex) {
-    userAnswers[questionId] = answerIndex;
+function renderSectionNav() {
+    const navContainer = document.getElementById('section-nav');
+    if(!navContainer) return;
+    navContainer.innerHTML = '';
+
+    const shortNames = ["Script", "Conversation", "Listening", "Reading"];
+    const icons = [
+        '<i class="fas fa-font me-1"></i>',       
+        '<i class="fas fa-comments me-1"></i>',   
+        '<i class="fas fa-headphones me-1"></i>', 
+        '<i class="fas fa-book-open me-1"></i>'   
+    ];
+
+    sectionMap.forEach((sec, idx) => {
+        const btn = document.createElement('button');
+        const colorClass = `btn-sect-${idx % 4}`;
+        const displayName = shortNames[idx] || sec.name; 
+        const iconHtml = icons[idx % 4] || '';
+
+        btn.className = `btn btn-sm rounded-pill px-3 py-2 btn-sect ${colorClass}`;
+        btn.innerHTML = `${iconHtml} ${displayName}`;
+        btn.onclick = () => {
+            currentQuestionIndex = sec.startIndex;
+            renderQuestion();
+        };
+        navContainer.appendChild(btn);
+    });
 }
 
-// 6. FITUR: TEXT TO SPEECH (Browser Built-in)
-function playAudio(text) {
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'ja-JP'; // Set bahasa Jepang
-    utterance.rate = 0.9; // Sedikit diperlambat agar jelas
-    window.speechSynthesis.speak(utterance);
+function renderQuestion() {
+    const q = currentQuestions[currentQuestionIndex];
+    const container = document.getElementById('question-card-container');
+    
+    // Highlight Navigasi
+    const navBtns = document.querySelectorAll('#section-nav button');
+    navBtns.forEach(btn => btn.classList.remove('active'));
+    let activeSecIdx = sectionMap.findIndex((s, i) => {
+        const nextS = sectionMap[i+1];
+        return currentQuestionIndex >= s.startIndex && (!nextS || currentQuestionIndex < nextS.startIndex);
+    });
+    if(navBtns[activeSecIdx]) navBtns[activeSecIdx].classList.add('active');
+
+    // Progress
+    const progress = ((currentQuestionIndex + 1) / currentQuestions.length) * 100;
+    document.getElementById('progress-bar').style.width = `${progress}%`;
+    document.getElementById('progress-text').innerText = `${currentQuestionIndex + 1}/${currentQuestions.length}`;
+
+    // Audio Player UI
+    let audioHtml = '';
+    if (q.type === 'audio') {
+        audioHtml = `
+            <div class="text-center mb-4">
+                <button class="btn btn-warning btn-lg rounded-pill shadow-sm px-4" onclick="playTTS('${q.script.replace(/'/g, "\\'")}')">
+                    <i class="fas fa-volume-up me-2"></i> Putar Audio Soal
+                </button>
+                <div class="small text-muted mt-2 fst-italic">*Klik tombol. Jika hening, pastikan internet aktif.</div>
+            </div>
+        `;
+    }
+
+    // Options
+    let optionsHtml = '';
+    q.options.forEach((opt, idx) => {
+        const isSelected = userAnswers[q.id] === idx ? 'selected' : '';
+        optionsHtml += `
+            <button class="quiz-option-btn ${isSelected}" onclick="selectAnswer(${idx})">
+                <div class="opt-label">${String.fromCharCode(65 + idx)}</div>
+                <div class="text-start w-100 fw-medium">${opt}</div>
+            </button>
+        `;
+    });
+
+    container.innerHTML = `
+        <div class="question-card fade-in">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill border border-primary border-opacity-25">
+                    ${q.sectionName}
+                </span>
+                <span class="text-muted small fw-bold">No. ${currentQuestionIndex + 1}</span>
+            </div>
+            ${audioHtml}
+            <div class="question-text mb-4 fs-5" style="line-height: 1.6;">
+                ${q.text}
+            </div>
+            <div class="options-list d-grid gap-2">
+                ${optionsHtml}
+            </div>
+        </div>
+    `;
+
+    document.getElementById('btn-prev').disabled = currentQuestionIndex === 0;
+    
+    if (currentQuestionIndex === currentQuestions.length - 1) {
+        document.getElementById('btn-next').classList.add('hidden');
+        document.getElementById('btn-finish').classList.remove('hidden');
+    } else {
+        document.getElementById('btn-next').classList.remove('hidden');
+        document.getElementById('btn-finish').classList.add('hidden');
+    }
 }
 
-// 7. TIMER LOGIC
-function startTimer(minutes) {
-    totalDuration = minutes * 60;
+function selectAnswer(idx) {
+    const q = currentQuestions[currentQuestionIndex];
+    userAnswers[q.id] = idx;
+    renderQuestion(); 
+}
+
+function nextQuestion() {
+    if (currentQuestionIndex < currentQuestions.length - 1) {
+        currentQuestionIndex++;
+        renderQuestion();
+    }
+}
+
+function prevQuestion() {
+    if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        renderQuestion();
+    }
+}
+
+function showFinishConfirmation() {
+    const modal = new bootstrap.Modal(document.getElementById('giveUpModal'));
+    document.querySelector('#giveUpModal h4').innerText = "Selesai Ujian?";
+    document.querySelector('#giveUpModal p').innerText = "Apakah kamu yakin sudah mengisi semua soal?";
+    const btnAction = document.querySelector('#giveUpModal .btn-danger');
+    btnAction.innerText = "Ya, Selesai";
+    btnAction.classList.replace('btn-danger', 'btn-success');
+    btnAction.onclick = () => finishExam(false);
+    modal.show();
+}
+
+function startTimer(durationSeconds) {
+    let timer = durationSeconds;
     const display = document.getElementById('timer-display');
     
+    clearInterval(timerInterval);
     timerInterval = setInterval(() => {
-        let m = Math.floor(totalDuration / 60);
-        let s = totalDuration % 60;
-        
-        // Format 00:00
-        m = m < 10 ? '0' + m : m;
-        s = s < 10 ? '0' + s : s;
-        
-        display.innerText = `${m}:${s}`;
-        
-        if (totalDuration <= 0) {
-            finishExam(true); // Waktu habis = auto finish
-        } else {
-            totalDuration--;
-        }
+        const m = Math.floor(timer / 60);
+        const s = timer % 60;
+        display.textContent = `${m < 10 ? '0'+m : m}:${s < 10 ? '0'+s : s}`;
+        if (--timer < 0) finishExam(true);
     }, 1000);
 }
 
-// 8. SELESAI UJIAN & HITUNG SKOR (JFT LOGIC)
 function finishExam(isGiveUp) {
+    const giveUpModalEl = document.getElementById('giveUpModal');
+    const giveUpModal = bootstrap.Modal.getInstance(giveUpModalEl);
+    if (giveUpModal) giveUpModal.hide();
+
     clearInterval(timerInterval);
     
-    if (isGiveUp && !confirm("Apakah kamu yakin ingin menyerah? Nilai akan langsung dihitung.")) {
-        startTimer(totalDuration / 60); // Resume timer jika cancel
-        return;
-    }
-
-    // Hitung Skor
-    let totalQuestions = 0;
     let correctCount = 0;
     let reviewHtml = '';
 
-    currentPackage.sections.forEach((section, sIndex) => {
-        section.questions.forEach((q, qIndex) => {
-            totalQuestions++;
-            const qKey = `${sIndex}_${qIndex}`;
-            const userAnswer = userAnswers[qKey];
-            const isCorrect = userAnswer === q.answer;
+    currentQuestions.forEach((q, idx) => {
+        const userAnsIdx = userAnswers[q.id];
+        const isCorrect = userAnsIdx === q.answer;
+        if (isCorrect) correctCount++;
 
-            if (isCorrect) correctCount++;
+        const statusBadge = isCorrect 
+            ? `<span class="badge bg-success"><i class="fas fa-check"></i> Benar</span>` 
+            : `<span class="badge bg-danger"><i class="fas fa-times"></i> Salah</span>`;
 
-            // Buat HTML Pembahasan
-            const statusColor = isCorrect ? 'text-success' : 'text-danger';
-            const statusText = isCorrect ? 'BENAR' : 'SALAH';
-            const userAnsText = userAnswer !== undefined ? q.options[userAnswer] : 'Tidak dijawab';
-            const correctAnsText = q.options[q.answer];
+        const userAnsText = userAnsIdx !== undefined ? q.options[userAnsIdx] : '<span class="text-muted">Tidak dijawab</span>';
+        const correctAnsText = q.options[q.answer];
 
-            reviewHtml += `
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed ${statusColor}" type="button" data-bs-toggle="collapse" data-bs-target="#review_${qKey}">
-                            No. ${qIndex + 1} (${section.name}) - ${statusText}
-                        </button>
-                    </h2>
-                    <div id="review_${qKey}" class="accordion-collapse collapse">
-                        <div class="accordion-body text-start">
-                            <p><strong>Soal:</strong> ${q.question}</p>
-                            <p><strong>Jawaban Kamu:</strong> ${userAnsText}</p>
-                            <p><strong>Kunci Jawaban:</strong> <span class="text-success fw-bold">${correctAnsText}</span></p>
-                            <div class="alert alert-info small">
-                                💡 <strong>Penjelasan:</strong> ${q.explanation || '-'}
+        reviewHtml += `
+            <div class="col-12">
+                <div class="p-3 border rounded bg-light">
+                    <div class="d-flex justify-content-between mb-2">
+                        <strong>No. ${idx + 1} (${q.sectionName})</strong>
+                        ${statusBadge}
+                    </div>
+                    <p class="mb-2 text-dark fw-bold">${q.text}</p>
+                    ${q.translation ? `<p class="mb-2 text-muted small"><i class="fas fa-language"></i> Arti: ${q.translation}</p>` : ''}
+                    <div class="row g-2 mt-3 text-small" style="font-size: 0.9rem;">
+                        <div class="col-md-6">
+                            <div class="p-2 border rounded ${isCorrect ? 'bg-success-subtle border-success' : 'bg-danger-subtle border-danger'}">
+                                <small class="d-block fw-bold mb-1">Jawaban Kamu:</small>
+                                ${userAnsText}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-2 border rounded bg-primary-subtle border-primary">
+                                <small class="d-block fw-bold mb-1">Kunci Jawaban:</small>
+                                ${correctAnsText}
                             </div>
                         </div>
                     </div>
+                    ${q.explanation ? `
+                        <div class="mt-2 p-2 bg-white border rounded small text-muted">
+                            <i class="fas fa-info-circle text-primary"></i> <strong>Penjelasan:</strong> ${q.explanation}
+                        </div>
+                    ` : ''}
                 </div>
-            `;
-        });
+            </div>
+        `;
     });
 
-    // Rumus Konversi Skor ke Skala JFT (0 - 250)
-    // Rumus: (Benar / Total Soal) * 250
-    let finalScore = Math.round((correctCount / totalQuestions) * 250);
+    const finalScore = Math.round((correctCount / currentQuestions.length) * 250);
+    const isPass = finalScore >= 200;
+
+    document.getElementById('final-score').innerText = finalScore;
+    const statusEl = document.getElementById('pass-status');
     
-    // Tampilkan Modal
-    const scoreText = document.getElementById('score-text');
-    const statusBadge = document.getElementById('status-badge');
-    const accordion = document.getElementById('accordionReview');
-
-    scoreText.innerText = finalScore;
-    accordion.innerHTML = reviewHtml;
-
-    if (finalScore >= PASS_SCORE) {
-        scoreText.classList.add('text-success');
-        scoreText.classList.remove('text-danger');
-        statusBadge.className = 'badge bg-success fs-5 mb-3';
-        statusBadge.innerText = 'LULUS (合格)';
+    if (isPass) {
+        statusEl.innerText = "LULUS (合格)";
+        statusEl.className = "fw-bold mb-2 text-success";
+        document.querySelector('.score-circle').style.border = "8px solid #28a745";
     } else {
-        scoreText.classList.add('text-danger');
-        scoreText.classList.remove('text-success');
-        statusBadge.className = 'badge bg-danger fs-5 mb-3';
-        statusBadge.innerText = 'TIDAK LULUS (不合格)';
+        statusEl.innerText = "TIDAK LULUS (不合格)";
+        statusEl.className = "fw-bold mb-2 text-danger";
+        document.querySelector('.score-circle').style.border = "8px solid #dc3545";
     }
 
-    // Tampilkan Modal Bootstrap
+    document.getElementById('exam-review-container').innerHTML = reviewHtml;
     const resultModal = new bootstrap.Modal(document.getElementById('resultModal'));
     resultModal.show();
 }

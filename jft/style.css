@@ -276,3 +276,108 @@ body {
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     border-color: white;
 }
+
+/* --- UPDATE: SECTION NAVIGATION (No Scroll & Distinct Colors) --- */
+/* --- UPDATE: NAVIGASI WARNA-WARNI & WRAP --- */
+
+/* Container Tombol: Pastikan wrap (turun ke bawah) dan rata tengah */
+#section-nav {
+    display: flex;
+    flex-wrap: wrap;       /* KUNCI: Agar turun ke bawah, tidak scroll */
+    justify-content: center; /* Rata tengah */
+    gap: 10px;             /* Jarak antar tombol */
+    overflow: visible !important;
+}
+
+/* Style Dasar Tombol */
+.btn-sect {
+    border-width: 2px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    background: white;
+    font-size: 0.85rem; /* Ukuran font pas */
+    white-space: nowrap;
+}
+
+.btn-sect:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* WARNA 1: Script & Vocab (Biru) */
+.btn-sect-0 {
+    color: #007bff;
+    border-color: #007bff;
+}
+.btn-sect-0:hover { background-color: #f0f7ff; }
+.btn-sect-0.active {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+/* WARNA 2: Conversation (Ungu) */
+.btn-sect-1 {
+    color: #9c27b0;
+    border-color: #9c27b0;
+}
+.btn-sect-1:hover { background-color: #fcf3ff; }
+.btn-sect-1.active {
+    background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 4px 15px rgba(156, 39, 176, 0.3);
+}
+
+/* WARNA 3: Listening (Oranye) */
+.btn-sect-2 {
+    color: #fd7e14;
+    border-color: #fd7e14;
+}
+.btn-sect-2:hover { background-color: #fff4e6; }
+.btn-sect-2.active {
+    background: linear-gradient(135deg, #fd7e14 0%, #e36209 100%);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 4px 15px rgba(253, 126, 20, 0.3);
+}
+
+/* WARNA 4: Reading (Hijau Teal) */
+.btn-sect-3 {
+    color: #009688;
+    border-color: #009688;
+}
+.btn-sect-3:hover { background-color: #e0f2f1; }
+.btn-sect-3.active {
+    background: linear-gradient(135deg, #009688 0%, #00796b 100%);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 4px 15px rgba(0, 150, 136, 0.3);
+}
+/* --- UPDATE: KOTAK ILUSTRASI PENGGANTI GAMBAR (ANTI GAGAL) --- */
+.illustration-box {
+    background-color: #f1f3f5;
+    border: 2px dashed #adb5bd;
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    color: #495057;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.illustration-box i {
+    font-size: 3rem; /* Ukuran ikon besar */
+    margin-bottom: 10px;
+    color: #0d6efd; /* Warna biru */
+}
+
+.illustration-text {
+    font-weight: 600;
+    font-size: 0.9rem;
+    font-family: 'Poppins', sans-serif;
+}
