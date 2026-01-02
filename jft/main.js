@@ -5,13 +5,13 @@ let currentQuestionIndex = 0;
 let userAnswers = {}; 
 let timerInterval;
 let sectionMap = []; 
+let audioQueue = []; // Antrian audio untuk teks panjang
+let currentAudioObj = null; // Audio player aktif
 
 // -- INIT --
 document.addEventListener("DOMContentLoaded", () => {
-    // Pancing suara browser agar load di awal
-    if ('speechSynthesis' in window) {
-        window.speechSynthesis.getVoices();
-    }
+    // Pancing suara browser
+    if ('speechSynthesis' in window) window.speechSynthesis.getVoices();
 
     fetch('soaljft.json')
         .then(res => res.json())
@@ -28,63 +28,120 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ---------------------------------------------
-// LOGIKA AUDIO CANGGIH (Hybrid Offline/Online)
+// LOGIKA AUDIO (V10 - SMART CHUNKING)
 // ---------------------------------------------
-function playTTS(text) {
-    // 1. Coba Matikan suara sebelumnya
-    if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
+function playTTS(text, btnElement) {
+    // 1. Reset State & Stop Audio Lama
+    stopAllAudio();
+    
+    // 2. Visual Feedback
+    let originalText = "";
+    if (btnElement) {
+        originalText = btnElement.innerHTML;
+        btnElement.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memuat...';
+        btnElement.disabled = true;
+        btnElement.classList.remove('btn-warning');
+        btnElement.classList.add('btn-secondary');
     }
 
-    // --- CARA 1: BROWSER NATIVE (Utama) ---
+    const resetButton = () => {
+        if (btnElement) {
+            btnElement.innerHTML = '<i class="fas fa-volume-up"></i> Putar Audio Soal';
+            btnElement.disabled = false;
+            btnElement.classList.remove('btn-secondary');
+            btnElement.classList.add('btn-warning');
+        }
+    };
+
+    // 3. Cek Offline Voice (Prioritas Utama - Paling Mulus)
+    let japanVoice = null;
     if ('speechSynthesis' in window) {
         const voices = window.speechSynthesis.getVoices();
-        // Cari suara yang mengandung 'ja', 'JP', 'Japan', atau 'Google'
-        const japanVoice = voices.find(v => v.lang.includes('ja') || v.name.includes('Japan') || v.name.includes('Google 日本語'));
-
-        // Jika suara Jepang ditemukan di sistem
-        if (japanVoice) {
-            console.log("Memakai suara sistem: " + japanVoice.name);
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'ja-JP';
-            utterance.rate = 0.7; // Lambat
-            utterance.voice = japanVoice;
-            
-            utterance.onerror = (e) => {
-                console.warn("Sistem gagal, beralih ke online...", e);
-                playOnlineAudio(text); // Fallback jika error
-            };
-            
-            window.speechSynthesis.speak(utterance);
-            return; // Berhenti di sini jika sukses
-        }
+        japanVoice = voices.find(v => v.lang.includes('ja') || v.name.includes('Japan'));
     }
 
-    // --- CARA 2: ONLINE FALLBACK (Jika Cara 1 Gagal) ---
-    // Jika tidak punya suara Jepang, kita "streaming" dari Google Translate
-    console.log("Suara sistem tidak ada, menggunakan mode Online.");
-    playOnlineAudio(text);
+    if (japanVoice) {
+        // --- MODE OFFLINE (Sistem) ---
+        console.log("Mode: Offline System");
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'ja-JP';
+        utterance.rate = 0.8; 
+        utterance.voice = japanVoice;
+        utterance.onend = resetButton;
+        utterance.onerror = (e) => {
+            console.warn("Offline gagal, pindah ke Online Chunking");
+            playOnlineSequence(text, resetButton); // Fallback ke teknik potong
+        };
+        window.speechSynthesis.speak(utterance);
+    } else {
+        // --- MODE ONLINE (Chunking / Potong Kalimat) ---
+        console.log("Mode: Online Sequence (Chunking)");
+        playOnlineSequence(text, resetButton);
+    }
 }
 
-function playOnlineAudio(text) {
-    // URL API Google Translate TTS (Gratis/Unofficial)
-    const encodedText = encodeURIComponent(text);
-    const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodedText}&tl=ja&client=tw-ob`;
-    
-    const audio = new Audio(url);
-    audio.playbackRate = 0.75; // Agak lambat (Support di Chrome/Edge)
-    
-    audio.play().catch(error => {
-        alert("Gagal memutar audio. Pastikan koneksi internet lancar karena kamu menggunakan mode Online.");
-        console.error(error);
-    });
+// Fungsi Mematikan Semua Audio
+function stopAllAudio() {
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    if (currentAudioObj) {
+        currentAudioObj.pause();
+        currentAudioObj = null;
+    }
+    audioQueue = []; // Kosongkan antrian
 }
 
-// Event Listener agar Chrome memuat voices
-if ('speechSynthesis' in window) {
-    window.speechSynthesis.onvoiceschanged = function() {
-        window.speechSynthesis.getVoices();
+// Fungsi "Hack" Memotong Teks Panjang & Memutar Berurutan
+function playOnlineSequence(fullText, onComplete) {
+    // 1. Pecah teks berdasarkan tanda baca Jepang (Titik, Tanya, Seru)
+    // Regex ini memisahkan kalimat tapi tetap membawa tanda bacanya
+    const rawChunks = fullText.match(/[^。！？…]+[。！？…]*/g) || [fullText];
+    
+    // Bersihkan spasi berlebih
+    audioQueue = rawChunks.map(s => s.trim()).filter(s => s.length > 0);
+
+    if (audioQueue.length === 0) {
+        if(onComplete) onComplete();
+        return;
+    }
+
+    // Fungsi Rekursif untuk memutar antrian
+    const playNextChunk = () => {
+        if (audioQueue.length === 0) {
+            if(onComplete) onComplete();
+            return;
+        }
+
+        const chunk = audioQueue.shift(); // Ambil kalimat pertama
+        const encodedText = encodeURIComponent(chunk);
+        // URL Google TTS
+        const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodedText}&tl=ja&client=tw-ob&ttsspeed=0.24`;
+
+        currentAudioObj = new Audio(url);
+        
+        // Saat kalimat ini selesai, putar kalimat berikutnya
+        currentAudioObj.onended = () => {
+            playNextChunk();
+        };
+
+        // Jika error, lewati kalimat ini dan lanjut ke berikutnya
+        currentAudioObj.onerror = () => {
+            console.error("Gagal memutar chunk:", chunk);
+            playNextChunk();
+        };
+
+        currentAudioObj.play().catch(e => {
+            console.error("Blokir Browser:", e);
+            alert("Audio diblokir browser. Coba klik lagi.");
+            if(onComplete) onComplete();
+        });
     };
+
+    // Mulai putar potongan pertama
+    playNextChunk();
+}
+
+if ('speechSynthesis' in window) {
+    window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
 }
 
 // ---------------------------------------------
@@ -193,6 +250,9 @@ function renderQuestion() {
     const q = currentQuestions[currentQuestionIndex];
     const container = document.getElementById('question-card-container');
     
+    // Stop Audio Lama saat render ulang
+    stopAllAudio();
+
     // Highlight Navigasi
     const navBtns = document.querySelectorAll('#section-nav button');
     navBtns.forEach(btn => btn.classList.remove('active'));
@@ -202,20 +262,21 @@ function renderQuestion() {
     });
     if(navBtns[activeSecIdx]) navBtns[activeSecIdx].classList.add('active');
 
-    // Progress
-    const progress = ((currentQuestionIndex + 1) / currentQuestions.length) * 100;
-    document.getElementById('progress-bar').style.width = `${progress}%`;
-    document.getElementById('progress-text').innerText = `${currentQuestionIndex + 1}/${currentQuestions.length}`;
+    // Update Progress
+    const answeredCount = Object.keys(userAnswers).length;
+    const totalQuestions = currentQuestions.length;
+    const progressPercent = (answeredCount / totalQuestions) * 100;
+    document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+    document.getElementById('progress-text').innerText = `${answeredCount}/${totalQuestions} Dijawab`;
 
     // Audio Player UI
     let audioHtml = '';
     if (q.type === 'audio') {
         audioHtml = `
             <div class="text-center mb-4">
-                <button class="btn btn-warning btn-lg rounded-pill shadow-sm px-4" onclick="playTTS('${q.script.replace(/'/g, "\\'")}')">
+                <button id="btn-play-audio" class="btn btn-warning btn-lg rounded-pill shadow-sm px-4">
                     <i class="fas fa-volume-up me-2"></i> Putar Audio Soal
                 </button>
-                <div class="small text-muted mt-2 fst-italic">*Klik tombol. Jika hening, pastikan internet aktif.</div>
             </div>
         `;
     }
@@ -225,7 +286,7 @@ function renderQuestion() {
     q.options.forEach((opt, idx) => {
         const isSelected = userAnswers[q.id] === idx ? 'selected' : '';
         optionsHtml += `
-            <button class="quiz-option-btn ${isSelected}" onclick="selectAnswer(${idx})">
+            <button class="quiz-option-btn ${isSelected}" onclick="selectAnswer(${idx})" id="opt-btn-${idx}">
                 <div class="opt-label">${String.fromCharCode(65 + idx)}</div>
                 <div class="text-start w-100 fw-medium">${opt}</div>
             </button>
@@ -250,6 +311,18 @@ function renderQuestion() {
         </div>
     `;
 
+    // Pasang Event Listener Audio
+    if (q.type === 'audio') {
+        setTimeout(() => {
+            const btnPlay = document.getElementById('btn-play-audio');
+            if (btnPlay) {
+                btnPlay.onclick = function() {
+                    playTTS(q.script, this);
+                };
+            }
+        }, 50);
+    }
+
     document.getElementById('btn-prev').disabled = currentQuestionIndex === 0;
     
     if (currentQuestionIndex === currentQuestions.length - 1) {
@@ -263,8 +336,29 @@ function renderQuestion() {
 
 function selectAnswer(idx) {
     const q = currentQuestions[currentQuestionIndex];
-    userAnswers[q.id] = idx;
-    renderQuestion(); 
+    userAnswers[q.id] = idx; 
+
+    // Visual Feedback
+    const allBtns = document.querySelectorAll('.quiz-option-btn');
+    allBtns.forEach((btn, i) => {
+        if (i === idx) btn.classList.add('selected');
+        else btn.classList.remove('selected');
+    });
+
+    // Update Progress
+    const answeredCount = Object.keys(userAnswers).length;
+    const totalQuestions = currentQuestions.length;
+    document.getElementById('progress-bar').style.width = `${(answeredCount / totalQuestions) * 100}%`;
+    document.getElementById('progress-text').innerText = `${answeredCount}/${totalQuestions} Dijawab`;
+
+    // Pindah Cepat
+    if (currentQuestionIndex < currentQuestions.length - 1) {
+        setTimeout(() => {
+            nextQuestion();
+        }, 150); 
+    } else {
+        showFinishConfirmation();
+    }
 }
 
 function nextQuestion() {
@@ -311,6 +405,7 @@ function finishExam(isGiveUp) {
     if (giveUpModal) giveUpModal.hide();
 
     clearInterval(timerInterval);
+    stopAllAudio(); // Pastikan audio mati
     
     let correctCount = 0;
     let reviewHtml = '';
