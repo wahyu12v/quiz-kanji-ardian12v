@@ -21,6 +21,143 @@ body {
     overflow-x: hidden;
 }
 
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hidden { display: none !important; }
+
+/* --- SOAL CARD --- */
+.question-card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.question-text {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #2c3e50;
+    font-family: 'Noto Sans JP', sans-serif; /* Bagus untuk Jepang */
+}
+
+/* --- PILIHAN JAWABAN --- */
+.quiz-option-btn {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background: #fff;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+    text-align: left;
+}
+
+.quiz-option-btn:hover {
+    border-color: #dee2e6;
+    background-color: #f8f9fa;
+}
+
+.quiz-option-btn.selected {
+    border-color: #0d6efd;
+    background-color: #ecf4ff;
+    box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.1);
+}
+
+.opt-label {
+    width: 30px;
+    height: 30px;
+    background: #e9ecef;
+    color: #6c757d;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 15px;
+    flex-shrink: 0;
+    font-size: 0.9rem;
+}
+
+.quiz-option-btn.selected .opt-label {
+    background: #0d6efd;
+    color: white;
+}
+
+/* --- TOMBOL SECTION --- */
+.btn-sect {
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid transparent;
+    transition: 0.2s;
+}
+.btn-sect:hover { transform: translateY(-2px); }
+.btn-sect.active {
+    border-color: #0d6efd !important;
+    background-color: #e7f1ff !important;
+    color: #0d6efd !important;
+}
+/* Warna-warni Section */
+.btn-sect-0 { background: #e3f2fd; color: #0d6efd; }
+.btn-sect-1 { background: #f3e5f5; color: #9c27b0; }
+.btn-sect-2 { background: #fff3e0; color: #ef6c00; }
+.btn-sect-3 { background: #e8f5e9; color: #2e7d32; }
+
+/* --- RESPONSIVE MOBILE (MAX 576px) --- */
+@media (max-width: 576px) {
+    /* Navbar lebih tipis paddingnya */
+    .app-header .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    /* Font judul Navbar */
+    .brand-title { font-size: 1rem; }
+
+    /* Timer lebih kecil */
+    .timer-badge {
+        padding: 4px 10px !important;
+        font-size: 0.8rem !important;
+    }
+
+    /* Tombol Section mengecil */
+    .btn-sect {
+        font-size: 0.75rem !important;
+        padding: 6px 12px !important;
+    }
+
+    /* Teks Soal jangan kegedean */
+    .question-text {
+        font-size: 1.05rem !important;
+    }
+
+    /* Pilihan Jawaban lebih compact */
+    .quiz-option-btn {
+        padding: 10px;
+        font-size: 0.95rem;
+    }
+    .opt-label {
+        width: 26px;
+        height: 26px;
+        font-size: 0.8rem;
+        margin-right: 10px;
+    }
+
+    /* Progress bar lebih tipis */
+    .progress { height: 6px !important; }
+}
+
+
 /* --- Header Styling --- */
 .app-header {
     background: rgba(255, 255, 255, 0.85);
