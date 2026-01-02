@@ -17,7 +17,6 @@
     "icon": "fas fa-home",
     "color": "linear-gradient(135deg, #d299c2 0%, #fef9d7 100%)"
   },
-
   {
     "id": "s3",
     "title": "Dansa dengan Yamada (山田さんとダンス)",
@@ -135,7 +134,6 @@
     "icon": "fas fa-users",
     "color": "linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%)"
   },
-  [
   {
     "id": "s16",
     "title": "Melihat Bunga Sakura (お花見)",
@@ -181,5 +179,4 @@
     "icon": "fas fa-running",
     "color": "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)"
   }
-]
 ]
