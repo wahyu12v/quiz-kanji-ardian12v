@@ -44,15 +44,16 @@
     "icon": "fas fa-apple-alt",
     "color": "linear-gradient(135deg, #ff0844 0%, #ffb199 100%)"
   },
+  
   {
     "id": "s6",
     "title": "Keluarga Saya (わたしの家族)",
     "category": "Cerita Pribadi",
     "translation": "Keluarga saya ada 5 orang. Ibu, Ayah, Kakak laki-laki, Adik perempuan, dan saya. Ayah adalah pegawai perusahaan. Setiap hari beliau pergi ke kantor pagi-pagi sekali. Ibu ada di rumah. Ibu pandai memasak. Setiap hari beliau membuat masakan yang enak. Kakak laki-laki adalah insinyur. Dia bekerja di perusahaan IT. Adik perempuan adalah siswa SMA. Setiap hari dia belajar. Saya adalah mahasiswa. Setiap hari saya pergi ke universitas. Kami pergi ke taman bersama-sama setiap hari Minggu. Di rumah kami menonton TV dan mengobrol. Malam harinya kami makan malam bersama. Keluarga saya baik hati dan menyenangkan. Saya bahagia saat bersama keluarga. Saya sangat menyayangi keluarga saya.",
-    "template": "[[私|わたし]]の [[家族|かぞく]]は 5[[人|にん]]です。[[母|はは]]と [[父|ちち]]と [[兄|あに]]と [[妹|いもうと]]と [[私|わたし]]です。[[父|ちち]]は [[会社員|かいしゃいん]]です。[[毎日|まいにち]] [[朝|あさ]] [[早|はや]]く [[会社|かいしゃ]]へ [[行|い]]きます。[[母|はは]]は [[家|いえ]]に います。[[母|はは]]は [[料理|りょうり]]が [[上手|じょうず]]です。[[毎日|まいにち]] [[美味|おい]]しい [[料理|りょうり]]を [[作|つく]]ります。[[兄|あに]]は [[エンジニア|えんじにあ]]です。[[IT|あいてぃー]]の [[会社|かいしゃ]]で [[働|はたら]]いて います。[[妹|いもうと]]は [[高校生|こうこうせい]]です。[[毎日|まいにち]] [[勉強|べんきょう]]して います。[[私|わたし]]は [[大学生|だいがくせい]]です。[[毎日|まいにち]] [[大学|だいがく]]へ [[行|い]]きます。\n\n[[私|わたし]]たちは [[毎週|まいしゅう]]の [[日曜日|にちようび]]に [[一緒|いっしょ]]に [[公園|こうえん]]へ [[行|い]]きます。[[家|いえ]]で [[テレビ|てれび]]を [[見|み]]たり、[[話|はな]]したり します。[[夜|よる]]は [[一緒|いっしょ]]に ご[[飯|はん]]を [[食|た]]べます。[[私|わたし]]の [[家族|かぞく]]は やさしくて [[楽|たの]]しいです。[[私|わたし]]は [[家族|かぞく]]と [[一緒|いっしょ]]に いると [[幸|しあわ]]せです。[[私|わたし]]は [[家族|かぞく]]が [[大好き|だいすき]]です。",
+    "template": "[[私|わたし]]の [[家族|かぞく]]は 5[[人|にん]]です。[[母|はは]]と [[父|ちち]]と [[兄|あに]]と [[妹|いもうと]]と [[私|わたし]]です。[[父|ちち]]は [[会社員|かいしゃいん]]です。[[毎日|まいにち]] [[朝|あさ]] [[早|はや]]く [[会社|かいしゃ]]へ [[行|い]]きます。[[母|はは]]は [[家|いえ]]に います。[[母|はは]]は [[料理|りょうり]]が [[上手|じょうず]]です。[[毎日|まいにち]] [[美味|おい]]しい [[料理|りょうり]]を [[作|つく]]ります。[[兄|あに]]は [[エンジニア|えんじにあ]]です。[[IT|あいてぃー]]の [[会社|かいしゃ]]で [[働|はたら]]いて います。[[妹|いもうと]]は [[高校生|こうこうせい]]です。[[毎日|まいにち]] [[勉強|べんきょう]]して います。[[私|わたし]]は [[大学生|だいがくせい]]です。[[毎日|まいにち]] [[大学|だいがく]]へ [[行|い]]きます。[[私|わたし]]たちは [[毎週|まいしゅう]]の [[日曜日|にちようび]]に [[一緒|いっしょ]]に [[公園|こうえん]]へ [[行|い]]きます。[[家|いえ]]で [[テレビ|てれび]]を [[見|み]]たり、[[話|はな]]したり します。[[夜|よる]]は [[一緒|いっしょ]]に ご[[飯|はん]]を [[食|た]]べます。[[私|わたし]]の [[家族|かぞく]]は やさしくて [[楽|たの]]しいです。[[私|わたし]]は [[家族|かぞく]]と [[一緒|いっしょ]]に いると [[幸|しあわ]]せです。[[私|わたし]]は [[家族|かぞく]]が [[大好き|だいすき]]です。",
     "icon": "fas fa-users",
     "color": "linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)"
-  },
+  }, 
   {
     "id": "s7",
     "title": "Hobi Saya (私の趣味)",
