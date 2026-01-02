@@ -3,7 +3,7 @@
     {
       "id": "paket_real_01",
       "title": "JFT-Basic A2 - Paket 1",
-      "subtitle": "Simulasi Full: Listening Percakapan & Reading Cerita",
+      "subtitle": "Simulasi Full: Audio Beda Suara (Trik Pitch)",
       "category": "Official Bank",
       "color": "linear-gradient(135deg, #00C6FF 0%, #0072FF 100%)",
       "icon": "fas fa-headphones-alt",
@@ -50,62 +50,62 @@
           ]
         },
         {
-          "name": "Listening (Narrative)",
+          "name": "Listening (Multi-Voice)",
           "questions": [
             {
               "id": "l1",
               "type": "audio",
-              "script": "男の人と 女の人が 話しています。学生は 最後に 何を しなければ なりませんか。... 先生、来週の 発表の 準備は どうですか。... スライドは もう できました。でも、練習は まだです。... そうですか。発表は 月曜日ですよ。... はい、わかっています。... 時間は 10分です。長く なりすぎないように してください。... はい。資料は 印刷しますか。... いいえ、いりません。スライドだけで いいです。... わかりました。... あ、それから。金曜日までに、スライドを メールで 送って ください。... 金曜日までですね。はい、送ります。",
+              "script": "[N]男の人と 女の人が 話しています。学生は 最後に 何を しなければ なりませんか。[F]先生、来週の 発表の 準備は どうですか。[M]スライドは もう できました。でも、練習は まだです。[F]そうですか。発表は 月曜日ですよ。[M]はい、わかっています。[F]時間は 10分です。長く なりすぎないように してください。[M]はい。資料は 印刷しますか。[F]いいえ、いりません。スライドだけで いいです。[M]わかりました。[F]あ、それから。金曜日までに、スライドを メールで 送って ください。[M]金曜日までですね。はい、送ります。",
               "text": "<strong>[学校で]</strong><br>学生は、最後に 何を しなければ なりませんか。",
               "translation": "Siswa harus melakukan apa pada akhirnya?",
               "options": ["資料を 印刷する", "発表を 月曜日にする", "スライドを メールで送る", "練習を たくさんする"],
               "answer": 2,
-              "explanation": "Guru: 'Kinyoubi made ni slide o meeru de okutte kudasai' (Kirim slide via email sblm Jumat). Siswa tidak perlu mencetak (insatsu)."
+              "explanation": "Guru meminta slide dikirim via email. Siswa tidak perlu mencetak."
             },
             {
               "id": "l2",
               "type": "audio",
-              "script": "会社で 上司と 部下が 話しています。部下は 明日 何を しますか。... 佐藤さん、明日の 予定を 確認したいんですが。... はい。... 明日の 午前は 会議が ありますね。... はい、10時からです。... 会議のあと、A社に 行けますか。... すみません。午後は 病院の 予定が あります。... そうですか。じゃあ、A社は 明後日に しましょう。... はい。... じゃあ、明日は 会議のあと、この 資料を 直して ください。... わかりました。いつまでですか。... 明日中で いいです。午後6時までに メールで お願いします。",
+              "script": "[N]会社で 上司と 部下が 話しています。部下は 明日 何を しますか。[M]佐藤さん、明日の 予定を 確認したいんですが。[F]はい。[M]明日の 午前は 会議が ありますね。[F]はい、10時からです。[M]会議のあと、A社に 行けますか。[F]すみません。午後は 病院の 予定が あります。[M]そうですか。じゃあ、A社は 明後日に しましょう。[F]はい。[M]じゃあ、明日は 会議のあと、この 資料を 直して ください。[F]わかりました。いつまでですか。[M]明日中で いいです。午後6時までに メールで お願いします。",
               "text": "<strong>[会社で]</strong><br>部下は、明日 何を しますか。",
               "translation": "Bawahan besok melakukan apa?",
               "options": ["A社に 行く", "病院へ行ってから、会議に出る", "会議のあと、資料を直して送る", "明後日の予定を決める"],
               "answer": 2,
-              "explanation": "Alur: Rapat jam 10 -> Siang tidak bisa ke A社 karena ke RS -> Bos minta 'Kaigi no ato, shiryou o naoshite' (Habis rapat, perbaiki dokumen)."
+              "explanation": "Bos meminta memperbaiki dokumen setelah rapat karena bawahan tidak bisa ke A-sha."
             },
             {
               "id": "l3",
               "type": "audio",
-              "script": "男の人と 女の人が パーティーについて 話しています。二人は これから 何を 買いに行きますか。... 明日の パーティー、食べ物は どうする？... ピザと お寿司は 注文したよ。... じゃあ、飲み物は？... 飲み物は 昨日 スーパーで 買ったから 大丈夫。... そうか。あ、紙コップと お皿は？... あ、忘れてた！ 家に あると 思ったけど、ぜんぜん ないんだ。... じゃあ、それを 買いに行こう。お菓子も 少し 欲しいね。... お菓子は いっぱい あるから いらないよ。... わかった。じゃあ 出かけよう。",
+              "script": "[N]男の人と 女の人が パーティーについて 話しています。二人は これから 何を 買いに行きますか。[M]明日の パーティー、食べ物は どうする？[F]ピザと お寿司は 注文したよ。[M]じゃあ、飲み物は？[F]飲み物は 昨日 スーパーで 買ったから 大丈夫。[M]そうか。あ、紙コップと お皿は？[F]あ、忘れてた！ 家に あると 思ったけど、ぜんぜん ないんだ。[M]じゃあ、それを 買いに行こう。お菓子も 少し 欲しいね。[F]お菓子は いっぱい あるから いらないよ。[M]わかった。じゃあ 出かけよう。",
               "text": "<strong>[パーティーの準備]</strong><br>二人は これから 何を 買いに行きますか。",
               "translation": "Apa yang akan mereka beli sekarang?",
               "options": ["飲み物 と お菓子", "ピザ と お寿司", "紙コップ と お皿", "お菓子 だけ"],
               "answer": 2,
-              "explanation": "Makanan (sudah pesan), Minuman (sudah beli), Snack/Okashi (sudah banyak). Yang lupa adalah 'Kami koppu to Osara' (Gelas kertas & Piring)."
+              "explanation": "Yang lupa dibeli adalah Gelas Kertas (Kami koppu) dan Piring (Osara)."
             },
             {
               "id": "l4",
               "type": "audio",
-              "script": "駅で 女の人と 駅員が 話しています。女の人は どこで 電車に 乗りますか。... すみません、東京行きの 電車は 何番線ですか？... 東京行きは 2番線ですが、今の時間は 工事中なので、使えません。... えっ、そうですか。じゃあ、どこへ 行けば いいですか。... 向こうの 4番線を 使ってください。... 4番線ですね、わかりました。あ、特急は 止まりますか？... いえ、4番線は 普通電車だけです。特急に 乗るなら、隣の 5番線へ 行ってください。... 私は 急いでいますから、特急が いいです。... じゃあ、5番線ですね。",
+              "script": "[N]駅で 女の人と 駅員が 話しています。女の人は どこで 電車に 乗りますか。[F]すみません、東京行きの 電車は 何番線ですか？[M]東京行きは 2番線ですが、今の時間は 工事中なので、使えません。[F]えっ、そうですか。じゃあ、どこへ 行けば いいですか。[M]向こうの 4番線を 使ってください。[F]4番線ですね、わかりました。あ、特急は 止まりますか？[M]いえ、4番線は 普通電車だけです。特急に 乗るなら、隣の 5番線へ 行ってください。[F]私は 急いでいますから、特急が いいです。[M]じゃあ、5番線ですね。",
               "text": "<strong>[駅で]</strong><br>女の人は どこで 電車に 乗りますか。",
               "translation": "Wanita itu naik kereta di jalur berapa?",
               "options": ["2番線", "4番線", "5番線", "6番線"],
               "answer": 2,
-              "explanation": "Jalur 2 (rusak). Jalur 4 (biasa). Wanita ingin cepat (Tokkyu/Express), petugas menyarankan Jalur 5 (Go-bansen)."
+              "explanation": "Wanita ingin cepat (Express), petugas menyarankan Jalur 5."
             },
             {
               "id": "l5",
               "type": "audio",
-              "script": "電話で 男の人と 女の人が 話しています。男の人は 何を持って行きますか。... もしもし、田中です。今から そちらへ 行きます。... あ、田中さん。すみませんが、来る時、コンビニで お弁当を 買ってきてくれませんか。... いいですよ。お茶も 買っていきましょうか。... お茶は ここに ありますから、いいです。あ、でも、コーヒーが 飲みたいです。冷たい コーヒーを お願いします。... わかりました。お弁当と コーヒーですね。今から 行きます。",
+              "script": "[N]電話で 男の人と 女の人が 話しています。男の人は 何を持って行きますか。[M]もしもし、田中です。今から そちらへ 行きます。[F]あ、田中さん。すみませんが、来る時、コンビニで お弁当を 買ってきてくれませんか。[M]いいですよ。お茶も 買っていきましょうか。[F]お茶は ここに ありますから、いいです。あ、でも、コーヒーが 飲みたいです。冷たい コーヒーを お願いします。[M]わかりました。お弁当と コーヒーですね。今から 行きます。",
               "text": "<strong>[電話で]</strong><br>男の人は 何を 持って行きますか。",
               "translation": "Pria itu akan membawa apa?",
               "options": ["お弁当 と お茶", "お弁当 と コーヒー", "コーヒー だけ", "お弁当 だけ"],
               "answer": 1,
-              "explanation": "Wanita minta Obento. Pria tawar Ocha (teh), wanita tolak karena ada. Wanita minta Kohi (kopi). Jadi: Obento + Kohi."
+              "explanation": "Obento dan Kopi. Teh sudah ada."
             },
             {
               "id": "l6",
               "type": "audio",
-              "script": "これ は 何 です か。それ は 鉛筆 です。",
+              "script": "[N]話している ものは 何ですか。[M]これ は 何 です か。[F]それ は 鉛筆 です。",
               "text": "話している ものは 何ですか。",
               "translation": "Apa bendanya? (Enpitsu)",
               "options": ["本", "鉛筆", "鞄", "時計"],
@@ -115,27 +115,25 @@
             {
               "id": "l7",
               "type": "audio",
-              "script": "今 何時 です か。九時 半 です。",
+              "script": "[N]今 何時 ですか。[M]今 何時 です か。[F]九時 半 です。",
               "text": "今 何時 ですか。",
               "translation": "Jam berapa? (Kuji han)",
               "options": ["9:00", "9:30", "10:30", "8:30"],
-              "answer": 1,
-              "explanation": "Kuji han = 9:30."
+              "answer": 1, "explanation": "Kuji han = 9:30."
             },
             {
               "id": "l8",
               "type": "audio",
-              "script": "明日 は 雨 です。",
+              "script": "[N]明日の 天気は どうですか。[F]明日 は 雨 です。",
               "text": "明日の 天気は どうですか。",
               "translation": "Cuaca besok?",
               "options": ["晴れ", "雨", "曇り", "雪"],
-              "answer": 1,
-              "explanation": "Ame = Hujan."
+              "answer": 1, "explanation": "Ame = Hujan."
             },
             {
               "id": "l9",
               "type": "audio",
-              "script": "駅 は どこ です か。まっすぐ 行って ください。",
+              "script": "[N]男の人は どこへ 行きますか。[F]駅 は どこ です か。[M]まっすぐ 行って ください。",
               "text": "男の人は どこへ 行きますか。",
               "translation": "Ke mana dia pergi?",
               "options": ["右", "左", "まっすぐ", "うしろ"],
@@ -145,37 +143,34 @@
             {
               "id": "l10",
               "type": "audio",
-              "script": "私 の 趣味 は サッカー です。",
+              "script": "[N]趣味は 何ですか。[M]私 の 趣味 は サッカー です。",
               "text": "趣味は 何ですか。",
               "translation": "Apa hobinya?",
               "options": ["テニス", "サッカー", "水泳", "バスケ"],
-              "answer": 1,
-              "explanation": "Sakkaa = Sepak bola."
+              "answer": 1, "explanation": "Sakkaa = Sepak bola."
             },
             {
               "id": "l11",
               "type": "audio",
-              "script": "この 鞄 は 二千円 です。",
+              "script": "[N]鞄は いくらですか。[F]この 鞄 は 二千円 です。",
               "text": "鞄は いくらですか。",
               "translation": "Harga tas?",
               "options": ["200円", "2000円", "20000円", "1200円"],
-              "answer": 1,
-              "explanation": "Ni-sen = 2000."
+              "answer": 1, "explanation": "Ni-sen = 2000."
             },
             {
               "id": "l12",
               "type": "audio",
-              "script": "日曜日 に 映画 を 見ました。",
+              "script": "[N]日曜日に 何を しましたか。[M]日曜日 に 映画 を 見ました。",
               "text": "日曜日に 何を しましたか。",
               "translation": "Apa kegiatan hari Minggu?",
               "options": ["映画を見た", "買い物した", "寝た", "勉強した"],
-              "answer": 0,
-              "explanation": "Eiga o mimashita = Nonton film."
+              "answer": 0, "explanation": "Eiga o mimashita = Nonton film."
             },
             {
               "id": "l13",
               "type": "audio",
-              "script": "薬 を 飲んで ください。",
+              "script": "[N]医者は 何と 言いましたか。[F]薬 を 飲んで ください。",
               "text": "医者は 何と 言いましたか。",
               "translation": "Instruksi dokter?",
               "options": ["薬を飲んで", "ごはんを食べて", "水を飲んで", "寝て"],
@@ -184,7 +179,7 @@
             {
               "id": "l14",
               "type": "audio",
-              "script": "田中さん は 来ません でした。",
+              "script": "[N]だれが 来ませんでしたか。[M]田中さん は 来ません でした。",
               "text": "だれが 来ませんでしたか。",
               "translation": "Siapa yang tidak datang?",
               "options": ["山田さん", "田中さん", "鈴木さん", "佐藤さん"],
@@ -193,7 +188,7 @@
             {
               "id": "l15",
               "type": "audio",
-              "script": "部屋 に 猫 が います。",
+              "script": "[N]部屋に 何が いますか。[F]部屋 に 猫 が います。",
               "text": "部屋に 何が いますか。",
               "translation": "Ada apa di kamar?",
               "options": ["犬", "猫", "鳥", "魚"],
@@ -277,8 +272,7 @@
             },
             {
               "id": "r9",
-              "type": "text",
-              "text": "<strong>[メール]</strong><br><br>To: アリ<br>From: ユキ<br><br><strong>質問：</strong> だれからの メールですか。",
+              "type": "text", "text": "<strong>[メール]</strong><br><br>To: アリ<br>From: ユキ<br><br><strong>質問：</strong> だれからの メールですか。",
               "translation": "Dari siapa?",
               "options": ["アリ", "ユキ", "田中", "先生"],
               "answer": 1,

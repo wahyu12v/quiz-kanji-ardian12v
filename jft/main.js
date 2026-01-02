@@ -5,19 +5,19 @@ let currentQuestionIndex = 0;
 let userAnswers = {}; 
 let timerInterval;
 let sectionMap = []; 
-let audioQueue = []; // Antrian audio untuk teks panjang
-let currentAudioObj = null; // Audio player aktif
+let voices = [];
+let audioQueue = []; 
+let isPlaying = false; 
+let currentAudioObj = null;
 
 // -- INIT --
 document.addEventListener("DOMContentLoaded", () => {
-    // Pancing suara browser
-    if ('speechSynthesis' in window) window.speechSynthesis.getVoices();
+    loadSystemVoices();
 
     fetch('soaljft.json')
         .then(res => res.json())
         .then(data => {
             packages = data.packages;
-            
             if (document.getElementById('modal-package-list')) {
                 renderPackagesInModal(); 
             } else if (document.getElementById('question-card-container')) {
@@ -27,125 +27,179 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(err => console.error("Gagal load JSON:", err));
 });
 
-// ---------------------------------------------
-// LOGIKA AUDIO (V10 - SMART CHUNKING)
-// ---------------------------------------------
-function playTTS(text, btnElement) {
-    // 1. Reset State & Stop Audio Lama
-    stopAllAudio();
-    
-    // 2. Visual Feedback
-    let originalText = "";
-    if (btnElement) {
-        originalText = btnElement.innerHTML;
-        btnElement.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memuat...';
-        btnElement.disabled = true;
-        btnElement.classList.remove('btn-warning');
-        btnElement.classList.add('btn-secondary');
-    }
-
-    const resetButton = () => {
-        if (btnElement) {
-            btnElement.innerHTML = '<i class="fas fa-volume-up"></i> Putar Audio Soal';
-            btnElement.disabled = false;
-            btnElement.classList.remove('btn-secondary');
-            btnElement.classList.add('btn-warning');
-        }
-    };
-
-    // 3. Cek Offline Voice (Prioritas Utama - Paling Mulus)
-    let japanVoice = null;
+function loadSystemVoices() {
     if ('speechSynthesis' in window) {
-        const voices = window.speechSynthesis.getVoices();
-        japanVoice = voices.find(v => v.lang.includes('ja') || v.name.includes('Japan'));
-    }
-
-    if (japanVoice) {
-        // --- MODE OFFLINE (Sistem) ---
-        console.log("Mode: Offline System");
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'ja-JP';
-        utterance.rate = 0.8; 
-        utterance.voice = japanVoice;
-        utterance.onend = resetButton;
-        utterance.onerror = (e) => {
-            console.warn("Offline gagal, pindah ke Online Chunking");
-            playOnlineSequence(text, resetButton); // Fallback ke teknik potong
+        voices = window.speechSynthesis.getVoices();
+        window.speechSynthesis.onvoiceschanged = () => {
+            voices = window.speechSynthesis.getVoices();
         };
-        window.speechSynthesis.speak(utterance);
-    } else {
-        // --- MODE ONLINE (Chunking / Potong Kalimat) ---
-        console.log("Mode: Online Sequence (Chunking)");
-        playOnlineSequence(text, resetButton);
     }
 }
 
-// Fungsi Mematikan Semua Audio
-function stopAllAudio() {
+// ---------------------------------------------
+// LOGIKA AUDIO (HYBRID + PITCH TRICK)
+// ---------------------------------------------
+function playTTS(text, btnElement) {
+    stopAudio();
+
+    if (btnElement) {
+        btnElement.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memuat...';
+        btnElement.classList.remove('btn-warning');
+        btnElement.classList.add('btn-secondary');
+        btnElement.disabled = true;
+    }
+
+    const onComplete = () => {
+        if (btnElement) {
+            btnElement.innerHTML = '<i class="fas fa-volume-up"></i> Putar Audio Soal';
+            btnElement.classList.remove('btn-secondary', 'btn-success');
+            btnElement.classList.add('btn-warning');
+            btnElement.disabled = false;
+        }
+        isPlaying = false;
+    };
+
+    const onSpeaking = () => {
+        if (btnElement) {
+            btnElement.innerHTML = '<i class="fas fa-volume-high fa-beat"></i> Sedang Bicara...';
+            btnElement.classList.remove('btn-secondary');
+            btnElement.classList.add('btn-success');
+        }
+    };
+
+    // Parsing [N], [M], [F]
+    const parts = text.split(/(\[[NMF]\])/g).filter(s => s.trim().length > 0);
+    let currentRole = 'N'; 
+    audioQueue = [];
+
+    parts.forEach(part => {
+        if (part === '[N]' || part === '[M]' || part === '[F]') {
+            currentRole = part.replace('[', '').replace(']', '');
+        } else {
+            audioQueue.push({ text: part, role: currentRole });
+        }
+    });
+
+    if (audioQueue.length === 0) audioQueue.push({ text: text, role: 'N' });
+
+    isPlaying = true;
+    onSpeaking();
+
+    // Cek Suara Offline
+    let japanVoice = null;
+    if ('speechSynthesis' in window) {
+        if (voices.length === 0) voices = window.speechSynthesis.getVoices();
+        japanVoice = voices.find(v => v.lang === 'ja-JP' || v.lang === 'ja_JP');
+    }
+
+    if (japanVoice) {
+        console.log("Mode: Offline");
+        playOfflineQueue(japanVoice, onComplete);
+    } else {
+        console.log("Mode: Online (Fake Pitch)");
+        playOnlineQueue(onComplete);
+    }
+}
+
+// OFFLINE PLAYER (Asli)
+function playOfflineQueue(voice, onComplete) {
+    const playNext = () => {
+        if (audioQueue.length === 0 || !isPlaying) {
+            onComplete();
+            return;
+        }
+
+        const item = audioQueue.shift();
+        const utterance = new SpeechSynthesisUtterance(item.text);
+        utterance.voice = voice;
+        utterance.lang = 'ja-JP';
+        
+        // Pitch Control
+        if (item.role === 'M') { utterance.pitch = 0.6; utterance.rate = 0.8; }
+        else if (item.role === 'F') { utterance.pitch = 1.3; utterance.rate = 0.9; }
+        else { utterance.pitch = 1.0; utterance.rate = 0.85; }
+
+        utterance.onend = playNext;
+        utterance.onerror = playNext;
+        window.speechSynthesis.speak(utterance);
+    };
+    playNext();
+}
+
+// ONLINE PLAYER (Fake Pitch via Speed)
+function playOnlineQueue(onComplete) {
+    const playNextChunk = () => {
+        if (audioQueue.length === 0 || !isPlaying) {
+            onComplete();
+            return;
+        }
+
+        const item = audioQueue.shift();
+        
+        // TRIK: Pecah kalimat panjang agar tidak ditolak Google
+        // Tapi kita pertahankan Role-nya
+        const chunks = item.text.match(/[^。！？、]+[。！？、]*/g) || [item.text];
+        
+        let subQueue = chunks.map(c => ({ text: c, role: item.role }));
+        
+        // Fungsi untuk memutar sub-antrian (kalimat per kalimat untuk 1 peran)
+        const playSubQueue = () => {
+            if (subQueue.length === 0) {
+                playNextChunk(); // Pindah ke peran berikutnya
+                return;
+            }
+            
+            const subItem = subQueue.shift();
+            const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(subItem.text)}&tl=ja&client=tw-ob`;
+            
+            currentAudioObj = new Audio(url);
+            
+            // TRIK UTAMA: UBAH PLAYBACK RATE UNTUK EFEK SUARA
+            if (subItem.role === 'M') {
+                currentAudioObj.playbackRate = 0.85; // Berat (Cowok)
+            } else if (subItem.role === 'F') {
+                currentAudioObj.playbackRate = 1.15; // Cempreng (Cewek)
+            } else {
+                currentAudioObj.playbackRate = 1.0; // Normal
+            }
+            // Khusus Chrome/Edge perlu preserversPitch false agar suara berubah
+            if (currentAudioObj.mozPreservesPitch !== undefined) currentAudioObj.mozPreservesPitch = false;
+            if (currentAudioObj.webkitPreservesPitch !== undefined) currentAudioObj.webkitPreservesPitch = false;
+            if (currentAudioObj.preservesPitch !== undefined) currentAudioObj.preservesPitch = false;
+
+            currentAudioObj.onended = playSubQueue;
+            currentAudioObj.onerror = playSubQueue;
+            
+            currentAudioObj.play().catch(e => {
+                console.error("Audio blocked", e);
+                onComplete();
+            });
+        };
+        playSubQueue();
+    };
+    playNextChunk();
+}
+
+function stopAudio() {
+    isPlaying = false;
+    audioQueue = []; 
     if ('speechSynthesis' in window) window.speechSynthesis.cancel();
     if (currentAudioObj) {
         currentAudioObj.pause();
         currentAudioObj = null;
     }
-    audioQueue = []; // Kosongkan antrian
-}
-
-// Fungsi "Hack" Memotong Teks Panjang & Memutar Berurutan
-function playOnlineSequence(fullText, onComplete) {
-    // 1. Pecah teks berdasarkan tanda baca Jepang (Titik, Tanya, Seru)
-    // Regex ini memisahkan kalimat tapi tetap membawa tanda bacanya
-    const rawChunks = fullText.match(/[^。！？…]+[。！？…]*/g) || [fullText];
     
-    // Bersihkan spasi berlebih
-    audioQueue = rawChunks.map(s => s.trim()).filter(s => s.length > 0);
-
-    if (audioQueue.length === 0) {
-        if(onComplete) onComplete();
-        return;
+    const btnPlay = document.getElementById('btn-play-audio');
+    if (btnPlay) {
+        btnPlay.innerHTML = '<i class="fas fa-volume-up"></i> Putar Audio Soal';
+        btnPlay.classList.remove('btn-success', 'btn-secondary');
+        btnPlay.classList.add('btn-warning');
+        btnPlay.disabled = false;
     }
-
-    // Fungsi Rekursif untuk memutar antrian
-    const playNextChunk = () => {
-        if (audioQueue.length === 0) {
-            if(onComplete) onComplete();
-            return;
-        }
-
-        const chunk = audioQueue.shift(); // Ambil kalimat pertama
-        const encodedText = encodeURIComponent(chunk);
-        // URL Google TTS
-        const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodedText}&tl=ja&client=tw-ob&ttsspeed=0.24`;
-
-        currentAudioObj = new Audio(url);
-        
-        // Saat kalimat ini selesai, putar kalimat berikutnya
-        currentAudioObj.onended = () => {
-            playNextChunk();
-        };
-
-        // Jika error, lewati kalimat ini dan lanjut ke berikutnya
-        currentAudioObj.onerror = () => {
-            console.error("Gagal memutar chunk:", chunk);
-            playNextChunk();
-        };
-
-        currentAudioObj.play().catch(e => {
-            console.error("Blokir Browser:", e);
-            alert("Audio diblokir browser. Coba klik lagi.");
-            if(onComplete) onComplete();
-        });
-    };
-
-    // Mulai putar potongan pertama
-    playNextChunk();
-}
-
-if ('speechSynthesis' in window) {
-    window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
 }
 
 // ---------------------------------------------
-// LOGIKA HOME
+// SISA LOGIKA UI
 // ---------------------------------------------
 function renderPackagesInModal() {
     const grid = document.getElementById('modal-package-list');
@@ -183,9 +237,6 @@ function goToExamPage(pkgId) {
     window.location.href = `ujian.html?packageId=${pkgId}`;
 }
 
-// ---------------------------------------------
-// LOGIKA UJIAN
-// ---------------------------------------------
 function initExamPage() {
     const urlParams = new URLSearchParams(window.location.search);
     const pkgId = urlParams.get('packageId');
@@ -250,10 +301,8 @@ function renderQuestion() {
     const q = currentQuestions[currentQuestionIndex];
     const container = document.getElementById('question-card-container');
     
-    // Stop Audio Lama saat render ulang
-    stopAllAudio();
+    stopAudio();
 
-    // Highlight Navigasi
     const navBtns = document.querySelectorAll('#section-nav button');
     navBtns.forEach(btn => btn.classList.remove('active'));
     let activeSecIdx = sectionMap.findIndex((s, i) => {
@@ -262,26 +311,26 @@ function renderQuestion() {
     });
     if(navBtns[activeSecIdx]) navBtns[activeSecIdx].classList.add('active');
 
-    // Update Progress
     const answeredCount = Object.keys(userAnswers).length;
     const totalQuestions = currentQuestions.length;
     const progressPercent = (answeredCount / totalQuestions) * 100;
     document.getElementById('progress-bar').style.width = `${progressPercent}%`;
     document.getElementById('progress-text').innerText = `${answeredCount}/${totalQuestions} Dijawab`;
 
-    // Audio Player UI
     let audioHtml = '';
     if (q.type === 'audio') {
         audioHtml = `
-            <div class="text-center mb-4">
+            <div class="text-center mb-4 d-flex justify-content-center gap-2">
                 <button id="btn-play-audio" class="btn btn-warning btn-lg rounded-pill shadow-sm px-4">
                     <i class="fas fa-volume-up me-2"></i> Putar Audio Soal
+                </button>
+                <button id="btn-stop-audio" class="btn btn-danger btn-lg rounded-pill shadow-sm px-3" title="Berhenti">
+                    <i class="fas fa-stop"></i>
                 </button>
             </div>
         `;
     }
 
-    // Options
     let optionsHtml = '';
     q.options.forEach((opt, idx) => {
         const isSelected = userAnswers[q.id] === idx ? 'selected' : '';
@@ -311,13 +360,18 @@ function renderQuestion() {
         </div>
     `;
 
-    // Pasang Event Listener Audio
     if (q.type === 'audio') {
         setTimeout(() => {
             const btnPlay = document.getElementById('btn-play-audio');
+            const btnStop = document.getElementById('btn-stop-audio');
             if (btnPlay) {
                 btnPlay.onclick = function() {
                     playTTS(q.script, this);
+                };
+            }
+            if (btnStop) {
+                btnStop.onclick = function() {
+                    stopAudio();
                 };
             }
         }, 50);
@@ -338,20 +392,17 @@ function selectAnswer(idx) {
     const q = currentQuestions[currentQuestionIndex];
     userAnswers[q.id] = idx; 
 
-    // Visual Feedback
     const allBtns = document.querySelectorAll('.quiz-option-btn');
     allBtns.forEach((btn, i) => {
         if (i === idx) btn.classList.add('selected');
         else btn.classList.remove('selected');
     });
 
-    // Update Progress
     const answeredCount = Object.keys(userAnswers).length;
     const totalQuestions = currentQuestions.length;
     document.getElementById('progress-bar').style.width = `${(answeredCount / totalQuestions) * 100}%`;
     document.getElementById('progress-text').innerText = `${answeredCount}/${totalQuestions} Dijawab`;
 
-    // Pindah Cepat
     if (currentQuestionIndex < currentQuestions.length - 1) {
         setTimeout(() => {
             nextQuestion();
@@ -405,7 +456,7 @@ function finishExam(isGiveUp) {
     if (giveUpModal) giveUpModal.hide();
 
     clearInterval(timerInterval);
-    stopAllAudio(); // Pastikan audio mati
+    stopAudio();
     
     let correctCount = 0;
     let reviewHtml = '';
