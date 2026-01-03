@@ -333,21 +333,25 @@ function renderPackagesInModal() {
     packages.forEach(pkg => {
         const col = document.createElement('div');
         col.className = 'col-md-6';
+        
+        // Perhatikan bagian div class="pkg-icon-box" di bawah ini
         col.innerHTML = `
             <div class="package-card h-100 border p-3" style="cursor: pointer; border-radius: 15px; transition: transform 0.2s;" 
                  onclick="goToExamPage('${pkg.id}')"
                  onmouseover="this.style.transform='scale(1.02)'; this.style.borderColor='#007bff'"
                  onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#dee2e6'">
+                
                 <div class="d-flex align-items-center mb-3">
-                    <div style="width: 50px; height: 50px; background: ${pkg.color}; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; margin-right: 15px;">
+                    <div class="pkg-icon-box" style="background: ${pkg.color};">
                         <i class="${pkg.icon}"></i>
                     </div>
-                    <div>
-                        <h6 class="fw-bold mb-0">${pkg.title}</h6>
-                        <small class="text-muted">${pkg.subtitle}</small>
+                    
+                    <div style="min-width: 0;"> <h6 class="fw-bold mb-1 text-truncate">${pkg.title}</h6>
+                        <small class="text-muted d-block" style="line-height: 1.4;">${pkg.subtitle}</small>
                     </div>
                 </div>
-                <div class="d-flex justify-content-between align-items-center small">
+
+                <div class="d-flex justify-content-between align-items-center small mt-auto">
                     <span class="badge bg-light text-dark border">⏱ ${pkg.duration} Menit</span>
                     <span class="text-primary fw-bold">Mulai <i class="fas fa-arrow-right"></i></span>
                 </div>

@@ -334,6 +334,1743 @@
           ]
         }
       ]
+    },
+
+
+  {
+      "id": "paket_real_02",
+      "title": "JFT-Basic A2 - Paket 2",
+      "subtitle": "Simulasi Full: Standar JFT A2 (Chokai & Dokkai Panjang)",
+      "category": "Official Bank",
+      "color": "linear-gradient(135deg, #11998e 0%, #38ef7d 100%)",
+      "icon": "fas fa-book-open",
+      "duration": 60,
+      "sections": [
+        {
+          "name": "Script & Vocabulary",
+          "questions": [
+            { "id": "v1", "type": "text", "text": "「台所」の 読み方は どれですか。", "translation": "Cara baca 台所 (Dapur)", "options": ["だいどころ", "たいどころ", "ばしょ", "きんじょ"], "answer": 0, "explanation": "台所 = だいどころ (Daidokoro)." },
+            { "id": "v2", "type": "text", "text": "「夕方」に 雨が 降りました。", "translation": "Hujan turun di sore hari", "options": ["あさ", "ひる", "ゆうがた", "よる"], "answer": 2, "explanation": "夕方 = ゆうがた (Yuugata)." },
+            { "id": "v3", "type": "text", "text": "「地図」を 見て 行きます。", "translation": "Pergi melihat peta", "options": ["ちてつ", "ちず", "じしん", "きせつ"], "answer": 1, "explanation": "地図 = ちず (Chizu)." },
+            { "id": "v4", "type": "text", "text": "「質問」が あります。", "translation": "Ada pertanyaan", "options": ["せつめい", "もんだい", "しつもん", "さくぶん"], "answer": 2, "explanation": "質問 = しつもん (Shitsumon)." },
+            { "id": "v5", "type": "text", "text": "服を 「試着」 しても いいですか。", "translation": "Boleh coba baju?", "options": ["しちゃく", "せんたく", "ちゅうもん", "りょこう"], "answer": 0, "explanation": "試着 = しちゃく (Shichaku/Mencoba pakaian)." },
+            { "id": "v6", "type": "text", "text": "「特急」電車に 乗ります。", "translation": "Naik kereta ekspres", "options": ["ふつう", "きゅうこう", "とっきゅう", "しんかんせん"], "answer": 2, "explanation": "特急 = とっきゅう (Tokkyuu)." },
+            { "id": "v7", "type": "text", "text": "「危険」な 場所。", "translation": "Tempat berbahaya", "options": ["あんぜん", "きけん", "ふべん", "しんぱい"], "answer": 1, "explanation": "危険 = きけん (Kiken)." },
+            { "id": "v8", "type": "text", "text": "部屋を 「片付けます」。", "translation": "Membereskan kamar", "options": ["みつけます", "かたづけます", "つづけます", "きをつけます"], "answer": 1, "explanation": "片付けます = かたづけます (Katazukemasu)." },
+            { "id": "v9", "type": "text", "text": "「病院」の 受付。", "translation": "Resepsionis RS", "options": ["びよういん", "びょういん", "びょうき", "びようし"], "answer": 1, "explanation": "病院 = びょういん (Byouin)." },
+            { "id": "v10", "type": "text", "text": "「不便」の 意味は 何ですか。", "translation": "Arti Fuben (Tidak praktis)", "options": ["便利ではない", "静かではない", "きれいではない", "有名ではない"], "answer": 0, "explanation": "不便 = Tidak praktis / Susah akses." },
+            { "id": "v11", "type": "text", "text": "「彼」の 名前を 知っていますか。", "translation": "Tahu nama dia (laki-laki)?", "options": ["かれ", "かのじょ", "だれ", "われ"], "answer": 0, "explanation": "彼 = かれ (Kare)." },
+            { "id": "v12", "type": "text", "text": "荷物を 「送ります」。", "translation": "Mengirim barang", "options": ["おくります", "つくります", "とります", "かります"], "answer": 0, "explanation": "送ります = おくります (Okurimasu)." },
+            { "id": "v13", "type": "text", "text": "「無理」を しないで ください。", "translation": "Jangan memaksakan diri", "options": ["むり", "む料", "ぶり", "ぶじ"], "answer": 0, "explanation": "無理 = むり (Muri)." },
+            { "id": "v14", "type": "text", "text": "「建物」の 読み方は どれですか。", "translation": "Cara baca 建物 (Bangunan)", "options": ["たべもの", "たてもの", "かいもの", "のりもの"], "answer": 1, "explanation": "建物 = たてもの (Tatemono)." },
+            { "id": "v15", "type": "text", "text": "「貸して」の 反対 (Hantai) は ________ です。", "translation": "Lawan kata Pinjamkan (Kashite)", "options": ["かえして", "かりて", "かいて", "きいて"], "answer": 1, "explanation": "Lawan Kashite (Meminjamkan) = Karite (Meminjam)." }
+          ]
+        },
+        {
+          "name": "Conversation",
+          "questions": [
+            { "id": "c1", "type": "text", "text": "A: 日曜日は 何を しましたか。<br>B: ________", "translation": "Minggu ngapain? -> ...", "options": ["友だちと 映画を 見ました", "友だちと 映画を 見ます", "友だちと 映画を 見たいです", "友だちと 映画を 見ません"], "answer": 0, "explanation": "Pertanyaan lampau (Shimashita) dijawab lampau (Mimashita)." },
+            { "id": "c2", "type": "text", "text": "A: どうぞ、入ってください。<br>B: ________", "translation": "Silakan masuk -> ...", "options": ["いってきます", "ただいま", "おじゃまします", "おかえりなさい"], "answer": 2, "explanation": "Ojamashimasu = Permisi (saat masuk rumah orang)." },
+            { "id": "c3", "type": "text", "text": "A: この ペン、借りても いいですか。<br>B: すみません、________", "translation": "Boleh pinjam pena? -> Maaf, ...", "options": ["いいですよ", "どうぞ", "今 使っています", "ありません"], "answer": 2, "explanation": "Menolak halus: Maaf, sedang saya pakai." },
+            { "id": "c4", "type": "text", "text": "A: 旅行は どうでしたか。<br>B: ________", "translation": "Bagaimana liburannya? -> ...", "options": ["雨でした", "行きました", "とても 楽しかったです", "3日でした"], "answer": 2, "explanation": "Menanyakan kesan (Dou deshita ka)." },
+            { "id": "c5", "type": "text", "text": "A: お茶、もう 一杯 いかがですか。<br>B: いいえ、________", "translation": "Teh lagi? -> Tidak, ...", "options": ["ください", "もう 結構です", "飲みます", "おいしいです"], "answer": 1, "explanation": "Mou kekkou desu = Sudah cukup." },
+            { "id": "c6", "type": "text", "text": "A: 明日の パーティー、何を 持っていきましょうか。<br>B: ________", "translation": "Saya bawa apa besok? -> ...", "options": ["飲み物を お願いします", "飲み物を 飲みます", "はい、持ってきます", "いいえ、いりません"], "answer": 0, "explanation": "Meminta tolong membawa sesuatu." },
+            { "id": "c7", "type": "text", "text": "A: 駅まで どのくらい かかりますか。<br>B: ________", "translation": "Berapa lama sampai stasiun? -> ...", "options": ["300円です", "バスで 行きます", "歩いて 行きます", "10分ぐらいです"], "answer": 3, "explanation": "Donokurai kakarimasu ka = Menanyakan durasi waktu." },
+            { "id": "c8", "type": "text", "text": "A: あのう、すみません。注文を お願いします。<br>B: はい、________", "translation": "Permisi, mau pesan -> Ya, ...", "options": ["何ですか", "どうぞ", "伺います", "食べます"], "answer": 2, "explanation": "Ukagaimasu = Segera melayani/mendengarkan (sopan untuk pelayan)." },
+            { "id": "c9", "type": "text", "text": "A: 日本語が 上手ですね。<br>B: ________", "translation": "Jepangnya jago ya -> ...", "options": ["ありがとうございます", "いいえ、まだまだです", "そうですか", "上手です"], "answer": 1, "explanation": "Merendah: Iie, mada mada desu." },
+            { "id": "c10", "type": "text", "text": "A: 週末、一緒に サッカーを しませんか。<br>B: すみません、週末は ________", "translation": "Main bola yuk? -> Maaf, akhir pekan ...", "options": ["サッカーです", "ちょっと 用事が あります", "いいですね", "行きましょう"], "answer": 1, "explanation": "Menolak halus dengan alasan ada urusan (Youji)." },
+            { "id": "c11", "type": "text", "text": "A: いただきます。<br>B: ________", "translation": "Selamat makan (tamu) -> ... (tuan rumah)", "options": ["ごちそうさま", "召し上がれ", "いらっしゃい", "ありがとう"], "answer": 1, "explanation": "Meshiagare = Silakan makan." },
+            { "id": "c12", "type": "text", "text": "A: 田中さんは いますか。<br>B: あ、田中さんは 今 ________", "translation": "Ada Tanaka? -> Ah, Tanaka sedang ...", "options": ["席を 外して います", "ここに います", "休みです", "帰りました"], "answer": 0, "explanation": "Seki o hazushiteimasu = Sedang tidak di meja/keluar sebentar." },
+            { "id": "c13", "type": "text", "text": "A: 頭が 痛いんです。<br>B: ________", "translation": "Sakit kepala -> ...", "options": ["おめでとう", "おだいじに", "よかったね", "いただきます"], "answer": 1, "explanation": "Odaijini = Semoga lekas sembuh." },
+            { "id": "c14", "type": "text", "text": "A: いつ 日本へ 来ましたか。<br>B: ________", "translation": "Kapan datang ke Jepang? -> ...", "options": ["去年です", "飛行機です", "東京です", "一人です"], "answer": 0, "explanation": "Kyonen = Tahun lalu." },
+            { "id": "c15", "type": "text", "text": "A: お先に 失礼します。<br>B: ________", "translation": "Saya pulang duluan -> ...", "options": ["いってらっしゃい", "おつかれさまでした", "おかえりなさい", "ごちそうさまでした"], "answer": 1, "explanation": "Otsukaresama deshita." }
+          ]
+        },
+        {
+          "name": "Listening (Multi-Voice)",
+          "questions": [
+            {
+              "id": "l1",
+              "type": "audio",
+              "script": "[N]会社で 男の人と 女の人が 会議の 資料について 話しています。女の人は これから 何を しますか。[M]田中さん、明日の 会議の 資料は もう できましたか。[F]はい、これです。全部で 10部 作りました。[M]ありがとう。あ、でも、参加する 人が 2人 増えたから、あと 2部 コピーして おいて くれませんか。[F]わかりました。ホッチキスも しておきましょうか。[M]うん、お願い。それが 終わったら、会議室に 運んでおいて。[F]はい、わかりました。",
+              "text": "<strong>[会社で]</strong><br>女の人は これから 何を しますか。",
+              "translation": "Apa yang dilakukan wanita selanjutnya?",
+              "options": ["資料を 10部 作る", "資料を 2部 コピーする", "会議室へ 行く", "何もしない"],
+              "answer": 1,
+              "explanation": "Pria minta tambah 2 kopi lagi (Ato 2-bu copy shite)."
+            },
+            {
+              "id": "l2",
+              "type": "audio",
+              "script": "[N]電話で 女の人と 男の人が 話しています。二人は 何時に どこで 会いますか。[F]もしもし、一郎くん？ 今日の 映画、何時に する？[M]映画は 4時からだよね。じゃあ、3時半に 駅の 改札口で どう？[F]うーん、3時半だと ちょっと 早くない？ チケットは もう 持ってるし。[M]そうか。じゃあ、映画館の 前に 3時50分は？[F]うん、それが いい。じゃあ、3時50分に 映画館の前でね。[M]わかった。遅れないように するよ。",
+              "text": "<strong>[待ち合わせ]</strong><br>二人は 何時に どこで 会いますか。",
+              "translation": "Jam berapa dan di mana mereka bertemu?",
+              "options": ["3:30 駅の改札口", "3:50 駅の改札口", "3:30 映画館の前", "3:50 映画館の前"],
+              "answer": 3,
+              "explanation": "Sepakat jam 3:50 (San-ji go-juppun) di depan bioskop (Eigakan no mae)."
+            },
+            {
+              "id": "l3",
+              "type": "audio",
+              "script": "[N]店で 客と 店員が 話しています。客は どの ケーキを 買いますか。[F]すみません、ショートケーキを 3つ ください。[M]申し訳ありません。ショートケーキは 今、売り切れて しまいました。[F]えっ、そうですか。残念。じゃあ、チョコレートケーキは ありますか。[M]はい、ございます。チーズケーキも 焼きたてですよ。[F]チーズケーキも おいしそうですね。でも、子どもが チョコが 好きだから、今日は チョコレートケーキを 3つ お願いします。[M]はい、ありがとうございます。",
+              "text": "<strong>[ケーキ屋]</strong><br>客は どの ケーキを 買いますか。",
+              "translation": "Tamu beli kue apa?",
+              "options": ["ショートケーキ", "チョコレートケーキ", "チーズケーキ", "全部"],
+              "answer": 1,
+              "explanation": "Shortcake habis, tergoda Cheesecake, tapi akhirnya beli Chocolate Cake karena anak suka."
+            },
+            {
+              "id": "l4",
+              "type": "audio",
+              "script": "[N]病院で 医者と 男の人が 話しています。男の人は 1日に 何回 薬を 飲みますか。[M]どうしましたか。[F]昨日から 熱が あって、喉が 痛いんです。[M]風邪ですね。薬を 出しておきます。この 白い 薬は 朝と 夜の ご飯の あとに 飲んでください。[F]お昼は 飲まなくても いいですか。[M]はい、お昼は いりません。1日 2回です。[F]わかりました。ありがとうございます。",
+              "text": "<strong>[病院]</strong><br>男の人は 1日に 何回 薬を 飲みますか。",
+              "translation": "Berapa kali sehari minum obat?",
+              "options": ["1回", "2回", "3回", "4回"],
+              "answer": 1,
+              "explanation": "Asa to Yoru (Pagi dan Malam) = 2 kali."
+            },
+            {
+              "id": "l5",
+              "type": "audio",
+              "script": "[N]デパートで 女の人が 店員と 話しています。女の人は 何階へ 行きますか。[F]すみません、子ども服 売り場は どこですか。[M]子ども服は 5階に ございます。[F]あ、そうですか。あと、おもちゃも 見たいんですが。[M]おもちゃ売り場は 6階です。エレベーターは あちらです。[F]わかりました。じゃあ、先に 服を 買いたいので、5階へ 行きます。[M]いってらっしゃいませ。",
+              "text": "<strong>[デパート]</strong><br>女の人は まず 何階へ 行きますか。",
+              "translation": "Pertama kali wanita pergi ke lantai berapa?",
+              "options": ["1階", "5階", "6階", "地下"],
+              "answer": 1,
+              "explanation": "Ingin beli baju dulu (Saki ni fuku o kaitai), baju ada di lantai 5."
+            },
+            {
+              "id": "l6",
+              "type": "audio",
+              "script": "[N]教室で 先生が 学生に 話しています。学生は 明日 何を 持って来なければ なりませんか。[M]明日の 授業について 連絡します。明日は 教科書は 使いませんから、持って来なくても いいです。そのかわり、辞書を 忘れないで ください。それから、鉛筆と 消しゴムも 必ず 持って来てください。[F]先生、ノートは いりますか。[M]ノートは、学校で 配りますから、いりません。[F]わかりました。",
+              "text": "<strong>[学校]</strong><br>学生は 明日 何を 持って来なければ なりませんか。",
+              "translation": "Besok harus bawa apa?",
+              "options": ["教科書と辞書", "辞書と鉛筆と消しゴム", "ノートと鉛筆", "全部"],
+              "answer": 1,
+              "explanation": "Buku paket tidak perlu, Notes dibagikan. Yang wajib: Kamus, Pensil, Penghapus."
+            },
+            {
+              "id": "l7",
+              "type": "audio",
+              "script": "[N]男の人と 女の人が アルバイトについて 話しています。女の人は どの 曜日 に 働いていますか。[M]田中さん、アルバイトは 忙しい？[F]うん、まあまあかな。週に 3日 働いているから。[M]へえ、何曜日？[F]月曜日と 水曜日と 金曜日。土日は 休みだから うれしいよ。[M]そうなんだ。僕は 土日も 働いているよ。[F]えー、大変だね。",
+              "text": "<strong>[アルバイト]</strong><br>女の人は どの 曜日に 働いていますか。",
+              "translation": "Hari apa wanita bekerja?",
+              "options": ["月・水・金", "土・日", "月・火・水", "毎日"],
+              "answer": 0,
+              "explanation": "Getsu, Sui, Kin (Senin, Rabu, Jumat)."
+            },
+            {
+              "id": "l8",
+              "type": "audio",
+              "script": "[N]駅で アナウンスを 聞いています。次の 電車は 何分に 来ますか。[F]お待たせいたしました。次の 電車は 10時 15分発、東京行きです。その次は 10時 30分発です。お急ぎの方は 10時 15分の 電車を ご利用ください。黄色い 線の 内側に 下がって お待ちください。",
+              "text": "<strong>[駅]</strong><br>次の 電車は 何分に 来ますか。",
+              "translation": "Kereta BERIKUTNYA datang jam berapa?",
+              "options": ["10:00", "10:15", "10:30", "10:45"],
+              "answer": 1,
+              "explanation": "Tsugi no densha (kereta berikutnya) 10:15."
+            },
+            {
+              "id": "l9",
+              "type": "audio",
+              "script": "[N]電話で 妻と 夫が 話しています。夫は 帰りに 何を 買いますか。[F]もしもし、今 どこ？[M]今 仕事が 終わったところだよ。これから 帰る。[F]じゃあ、悪いんだけど、スーパーで 牛乳を 買ってきてくれない？[M]牛乳だね。わかった。晩ごはんは 何？[F]カレーだよ。あ、そうだ。卵も お願い。冷蔵庫に なかったから。[M]わかった。牛乳と 卵だね。じゃあ、あとで。",
+              "text": "<strong>[電話]</strong><br>夫は 帰りに 何を 買いますか。",
+              "translation": "Suami beli apa?",
+              "options": ["牛乳だけ", "卵だけ", "牛乳と卵", "カレー"],
+              "answer": 2,
+              "explanation": "Gyuunyuu (Susu) dan Tamago (Telur)."
+            },
+            {
+              "id": "l10",
+              "type": "audio",
+              "script": "[N]男の人と 女の人が 夏休みの 予定を 話しています。男の人は どこへ 行きたいですか。[F]もうすぐ 夏休みだね。どこか 行く？[M]うん、僕は 海へ 行きたいな。沖縄とか。[F]沖縄は いいけど、飛行機が高いよ。山は どう？ 涼しいし。[M]山登りは 疲れるから 嫌だよ。やっぱり 海で 泳ぎたいな。[F]そう？ じゃあ、近くの 海に 行こうか。",
+              "text": "<strong>[夏休み]</strong><br>男の人は どこへ 行きたいですか。",
+              "translation": "Pria INGIN pergi ke mana?",
+              "options": ["山", "川", "海", "外国"],
+              "answer": 2,
+              "explanation": "Pria bersikeras ingin ke Laut (Umi)."
+            },
+            {
+              "id": "l11",
+              "type": "audio",
+              "script": "[N]レストランで 女の人が 注文しています。飲み物は いつ 持ってきますか。[M]いらっしゃいませ。ご注文は お決まりですか。[F]はい。ハンバーグセットを ください。[M]お飲み物は コーヒーと 紅茶、どちらに しますか。[F]ホットコーヒーで お願いします。[M]飲み物は お食事と 一緒に お持ちしますか。[F]いえ、食後で お願いします。デザートと 一緒に。[M]かしこまりました。",
+              "text": "<strong>[レストラン]</strong><br>飲み物は いつ 持ってきますか。",
+              "translation": "Kapan minuman diantar?",
+              "options": ["食事の前", "食事と一緒", "食後", "明日"],
+              "answer": 2,
+              "explanation": "Shokugo (Setelah makan)."
+            },
+            {
+              "id": "l12",
+              "type": "audio",
+              "script": "[N]女の人と 男の人が 引っ越しについて 話しています。男の人は 何を 手伝いますか。[F]来週の 日曜日、引っ越しなんだけど、手伝ってくれない？[M]いいよ。何を すれば いい？[F]重い 荷物を 運んで ほしいの。冷蔵庫とか、洗濯機とか。[M]わかった。部屋の 掃除は？[F]掃除は 昨日 終わったから 大丈夫。荷物運びだけ お願い。[M]了解。頑張るよ。",
+              "text": "<strong>[手伝い]</strong><br>男の人は 何を 手伝いますか。",
+              "translation": "Pria membantu apa?",
+              "options": ["部屋の掃除", "荷物を運ぶ", "買い物", "料理"],
+              "answer": 1,
+              "explanation": "Mengangkut barang berat (Nimotsu o hakobu)."
+            },
+            {
+              "id": "l13",
+              "type": "audio",
+              "script": "[N]天気予報を 聞いています。明日の 天気は どうなりますか。[F]明日の 天気です。午前中は 晴れて 暖かいでしょう。しかし、午後からは 雲が 多くなり、夕方には 雨が 降るでしょう。夜は 風も 強くなりますから、気をつけてください。",
+              "text": "<strong>[天気予報]</strong><br>明日の 夕方の 天気は どうなりますか。",
+              "translation": "Bagaimana cuaca SORE besok?",
+              "options": ["晴れ", "曇り", "雨", "雪"],
+              "answer": 2,
+              "explanation": "Yuugata ni wa ame (Sore hujan)."
+            },
+            {
+              "id": "l14",
+              "type": "audio",
+              "script": "[N]会社で 女の人が 男の人に 話しています。男の人は 書類を どこに 置きますか。[F]田中さん、この 書類、コピー 終わった？[M]はい、終わりました。どこに 置きましょうか。[F]机の 上に 置いておいて。あ、やっぱり 引き出しの 中に 入れておいてくれる？ なくすと 困るから。[M]わかりました。一番上の 引き出しで いいですか。[F]ええ、そこで いいわ。",
+              "text": "<strong>[会社]</strong><br>男の人は 書類を どこに 置きますか。",
+              "translation": "Dokumen ditaruh di mana?",
+              "options": ["机の上", "椅子の上", "引き出しの中", "鞄の中"],
+              "answer": 2,
+              "explanation": "Hikidashi no naka (Di dalam laci)."
+            },
+            {
+              "id": "l15",
+              "type": "audio",
+              "script": "[N]留学生が 日本人の 友達と 話しています。留学生は どうして 日本へ 来ましたか。[M]マリアさんは、どうして 日本へ 来たの？[F]私は 日本のアニメが 大好きなんです。だから、日本語を 勉強して、将来は アニメの 会社で 働きたいんです。[M]へえ、すごいね。どのアニメが 好きなの？[F]「ドラえもん」が 一番 好きです。[M]そうなんだ。夢が 叶うと いいね。",
+              "text": "<strong>[会話]</strong><br>留学生は どうして 日本へ 来ましたか。",
+              "translation": "Kenapa datang ke Jepang?",
+              "options": ["日本料理が好きだから", "アニメが好きだから", "友達がいるから", "お金が欲しいから"],
+              "answer": 1,
+              "explanation": "Anime ga daisuki (Suka anime)."
+            }
+          ]
+        },
+        {
+          "name": "Reading (Dokkai)",
+          "questions": [
+            {
+              "id": "r1",
+              "type": "text",
+              "text": "<strong>[メール]</strong><br><br>件名：週末の予定<br>田中さん、お元気ですか。<br>今度の 土曜日に みんなで バーベキューを しますが、田中さんも 来ませんか。<br>場所は 「さくら公園」です。午前 11時に 駅に 集まって、みんなで スーパーで 買い物をしてから 公園へ 行きます。<br>会費は 2000円です。<br>返事を 待っています。<br>山田より",
+              "translation": "Apa yang dilakukan sebelum ke taman?",
+              "options": ["バーベキューをする", "駅に集まって買い物をする", "2000円を払う", "田中さんに電話する"],
+              "answer": 1,
+              "explanation": "Eki ni atsumatte... kaimono o shite kara (Kumpul di stasiun, belanja, baru pergi)."
+            },
+            {
+              "id": "r2",
+              "type": "text",
+              "text": "<strong>[注意書き]</strong><br><br>この 図書館では、本を 5冊まで 借りる ことができます。<br>借りる 期間は 2週間です。<br>辞書や 雑誌は 借りることが できません。図書館の 中で 読んでください。<br>返すときは、カウンターへ 持ってきてください。",
+              "translation": "Buku apa yang TIDAK boleh dipinjam?",
+              "options": ["小説", "漫画", "辞書と雑誌", "絵本"],
+              "answer": 2,
+              "explanation": "Jisho ya Zasshi wa kariru koto ga dekimasen (Kamus dan Majalah tidak bisa dipinjam)."
+            },
+            {
+              "id": "r3",
+              "type": "text",
+              "text": "<strong>[日記]</strong><br><br>今日は 母の 誕生日でした。<br>私は 母に 赤い セーターを プレゼントしました。<br>母は 「派手な 色だね」と 言って 笑いましたが、すぐに 着てくれました。<br>とても よく 似合っていました。<br>夜は 父が ケーキを 買ってきて、みんなで 食べました。",
+              "translation": "Penulis memberikan apa kepada ibunya?",
+              "options": ["ケーキ", "花", "セーター", "お金"],
+              "answer": 2,
+              "explanation": "Seetaa (Sweater)."
+            },
+            {
+              "id": "r4",
+              "type": "text",
+              "text": "<strong>[案内]</strong><br><br>「夏祭りのお知らせ」<br>日時： 8月15日（土） 午後5時 ～ 9時<br>場所： 小学校の 校庭<br>内容： 盆踊り、屋台（焼きそば、たこ焼きなど）、花火<br>※雨が 降ったら、翌日の 16日に 延期します。<br>みなさん ぜひ 来てください。",
+              "translation": "Jika tanggal 15 hujan, apa yang terjadi?",
+              "options": ["中止になる", "体育館でやる", "16日にやる", "そのままやる"],
+              "answer": 2,
+              "explanation": "16-nichi ni enki shimasu (Ditunda ke tanggal 16)."
+            },
+            {
+              "id": "r5",
+              "type": "text",
+              "text": "<strong>[レシピ]</strong><br><br>～おいしい お茶の 入れ方～<br>1. お湯を 沸かします。<br>2. お湯を カップに 入れて、少し 冷まします（80度くらい）。<br>3. 急須に 茶葉を 入れて、2のお湯を 入れます。<br>4. 1分くらい 待ってから、カップに 注ぎます。",
+              "translation": "Kapan memasukkan air ke teko (kyusu)?",
+              "options": ["沸かしてすぐ", "少し冷ましてから", "茶葉を入れる前", "1分待ってから"],
+              "answer": 1,
+              "explanation": "Sukoshi samashimasu (Dinginkan sedikit) -> baru masukkan ke teko."
+            },
+            {
+              "id": "r6",
+              "type": "text",
+              "text": "<strong>[アパートの掲示板]</strong><br><br>「ゴミの出し方について」<br>最近、ゴミの 出し方が 悪いです。<br>燃えるゴミは 「月曜日」と 「木曜日」の 朝 8時までに 出してください。<br>昨日は 水曜日でしたが、ゴミが たくさん 出ていました。<br>ルールを 守ってください。<br>管理人",
+              "translation": "Masalah apa yang terjadi?",
+              "options": ["ゴミが多すぎる", "ゴミを出す曜日が間違っている", "ゴミ袋が違う", "朝早くゴミを出している"],
+              "answer": 1,
+              "explanation": "Kemarin Rabu (bukan hari sampah), tapi ada sampah keluar. Salah hari."
+            },
+            {
+              "id": "r7",
+              "type": "text",
+              "text": "<strong>[メール]</strong><br><br>件名：明日の待ち合わせ<br>リンさん、ごめん！<br>明日の 待ち合わせ 時間だけど、10時は ちょっと 早くて 間に合わないかも。<br>30分 遅らせて、10時半に してもらえる？<br>場所は そのままで。<br>連絡 待ってるね。<br>マリア",
+              "translation": "Maria ingin bertemu jam berapa?",
+              "options": ["10:00", "10:30", "9:30", "11:00"],
+              "answer": 1,
+              "explanation": "30-pun okurasete (Mundur 30 menit) dari jam 10 -> 10:30."
+            },
+            {
+              "id": "r8",
+              "type": "text",
+              "text": "<strong>[薬の説明書]</strong><br><br>この 薬は、熱を 下げる 薬です。<br>大人は 1回 2錠、1日 3回 食後に 飲んでください。<br>15歳未満の 子どもは 飲んでは いけません。<br>熱が 下がったら、飲むのを やめてください。",
+              "translation": "Siapa yang TIDAK BOLEH minum obat ini?",
+              "options": ["熱がある人", "大人", "15歳未満の子ども", "食事をした人"],
+              "answer": 2,
+              "explanation": "15-sai miman no kodomo (Anak di bawah 15 tahun)."
+            },
+            {
+              "id": "r9",
+              "type": "text",
+              "text": "<strong>[会話]</strong><br><br>Ａ： 「週末は 何を しましたか。」<br>Ｂ： 「京都へ 行きました。お寺を 見たり、美味しい 料理を 食べたり しました。」<br>Ａ： 「いいですね。どうやって 行きましたか。」<br>Ｂ： 「新幹線です。速かったですが、少し 高かったです。」<br><br><strong>質問：</strong> Ｂさんは どうして 新幹線で 行きましたか。",
+              "translation": "Kenapa B naik Shinkansen? (Tersirat dari teks 'Hayakatta')",
+              "options": ["安いから", "速いから", "好きだから", "近いから"],
+              "answer": 1,
+              "explanation": "Hayakatta (Cepat). Meskipun mahal."
+            },
+            {
+              "id": "r10",
+              "type": "text",
+              "text": "<strong>[お店のポスター]</strong><br><br>ランチタイム サービス！<br>11:00 ～ 14:00<br>ハンバーガーセットを 注文した 方に、コーヒー か 紅茶を 無料で 差し上げます。<br>※テイクアウト（持ち帰り）は できません。<br>店内で 食べる 方 限定です。",
+              "translation": "Siapa yang mendapat minuman gratis?",
+              "options": ["ハンバーガーを買って帰る人", "ランチタイムに店で食べる人", "14時過ぎに来た人", "コーヒーだけ注文した人"],
+              "answer": 1,
+              "explanation": "Tennai de taberu kata (Yang makan di dalam toko) saat jam makan siang."
+            },
+            {
+              "id": "r11",
+              "type": "text",
+              "text": "<strong>[作文]</strong><br><br>私の 国では、誕生日に 麺（めん）を 食べる 習慣が あります。<br>麺は 長いので、「長く 生きる（長生きする）」という 意味が あるからです。<br>日本には 誕生日に ケーキを 食べる 習慣が ありますが、私の 国には ありません。<br>でも、最近は 若い 人の間で ケーキも 人気です。",
+              "translation": "Kenapa di negara penulis makan mie saat ulang tahun?",
+              "options": ["美味しいから", "安いから", "長生きする意味があるから", "ケーキが嫌いだから"],
+              "answer": 2,
+              "explanation": "Nagaku ikiru (Hidup panjang/awet muda) artinya."
+            },
+            {
+              "id": "r12",
+              "type": "text",
+              "text": "<strong>[メモ]</strong><br><br>佐藤さんへ<br>お疲れ様です。<br>明日 使う 会議室の 予約を しておきました。<br>第2会議室です。<br>プロジェクターも 借りておきましたので、使ってください。<br>私は 明日 休みますので、よろしくお願いします。<br>鈴木",
+              "translation": "Apa yang dilakukan Suzuki?",
+              "options": ["会議に出る", "会議室を予約した", "プロジェクターを壊した", "明日会社に来る"],
+              "answer": 1,
+              "explanation": "Yoyaku o shite okimashita (Sudah memesan ruang rapat)."
+            },
+            {
+              "id": "r13",
+              "type": "text",
+              "text": "<strong>[求人情報]</strong><br><br>パン屋の アルバイト 募集！<br>仕事： パンを 売る 仕事です（レジ、袋詰め）。<br>時給： 950円 （朝 6時～8時は 1050円）<br>時間： 1日 4時間から。<br>パンが 好きな人、元気な人、待っています！",
+              "translation": "Kapan gaji per jamnya paling tinggi?",
+              "options": ["昼", "夜", "朝", "いつでも同じ"],
+              "answer": 2,
+              "explanation": "Asa 6-ji ~ 8-ji wa 1050-en (Pagi hari lebih mahal)."
+            },
+            {
+              "id": "r14",
+              "type": "text",
+              "text": "<strong>[会話]</strong><br><br>客： 「すみません、この 靴の 黒は ありますか。」<br>店員： 「少々 お待ちください……。すみません、黒は 今 23センチしか ありません。」<br>客： 「私は 24センチなんです。」<br>店員： 「茶色なら 24センチが ございますが。」<br>客： 「うーん、茶色は ちょっと……。じゃあ、いいです。」<br><br><strong>質問：</strong> 客は 靴を 買いましたか。",
+              "translation": "Apakah tamu membeli sepatu?",
+              "options": ["黒を買った", "茶色を買った", "両方買った", "買わなかった"],
+              "answer": 3,
+              "explanation": "Jaa, ii desu (Ya sudah tidak usah/tidak jadi)."
+            },
+            {
+              "id": "r15",
+              "type": "text",
+              "text": "<strong>[自己紹介]</strong><br><br>はじめまして。キムです。<br>私は 1年前に 家族と 日本へ 来ました。<br>今は 日本語学校で 勉強しています。<br>父は 会社員で、母は 英語の 先生を しています。<br>趣味は 写真を 撮ることです。<br>日本の きれいな 風景を たくさん 撮りたいです。<br>よろしくお願いします。",
+              "translation": "Siapa yang bekerja sebagai guru?",
+              "options": ["キムさん", "お父さん", "お母さん", "キムさんの兄弟"],
+              "answer": 2,
+              "explanation": "Haha wa eigo no sensei (Ibu adalah guru bahasa Inggris)."
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "paket_real_03",
+      "title": "JFT-Basic A2 - Paket 3",
+      "subtitle": "Simulasi Full: Fokus Kehidupan Sehari-hari & Pekerjaan",
+      "category": "Official Bank",
+      "color": "linear-gradient(135deg, #FF512F 0%, #DD2476 100%)",
+      "icon": "fas fa-briefcase",
+      "duration": 60,
+      "sections": [
+        {
+          "name": "Script & Vocabulary",
+          "questions": [
+            { "id": "v1", "type": "text", "text": "「銀行」の 読み方は どれですか。", "translation": "Cara baca 銀行 (Bank)", "options": ["ぎんこう", "きんこう", "ぎんごう", "びょういん"], "answer": 0, "explanation": "銀行 = ぎんこう (Ginkou)." },
+            { "id": "v2", "type": "text", "text": "「食堂」で ごはんを 食べます。", "translation": "Makan di kantin", "options": ["しょくどう", "しょくどう", "かいどう", "じどう"], "answer": 0, "explanation": "食堂 = しょくどう (Shokudou)." },
+            { "id": "v3", "type": "text", "text": "「野菜」の 読み方は どれですか。", "translation": "Cara baca 野菜 (Sayur)", "options": ["くだもの", "やさい", "にくい", "さかな"], "answer": 1, "explanation": "野菜 = やさい (Yasai)." },
+            { "id": "v4", "type": "text", "text": "「切符」を 買います。", "translation": "Membeli tiket", "options": ["きっぷ", "きふ", "きんぷ", "しんぶん"], "answer": 0, "explanation": "切符 = きっぷ (Kippu)." },
+            { "id": "v5", "type": "text", "text": "「週末」は 何を しますか。", "translation": "Akhir pekan ngapain?", "options": ["しゅまつ", "しゅうまつ", "せんしゅう", "らいしゅう"], "answer": 1, "explanation": "週末 = しゅうまつ (Shuumatsu)." },
+            { "id": "v6", "type": "text", "text": "「有名」な 人。", "translation": "Orang terkenal", "options": ["ゆうめい", "ゆめい", "ゆうめ", "ゆめ"], "answer": 0, "explanation": "有名 = ゆうめい (Yuumei)." },
+            { "id": "v7", "type": "text", "text": "「広い」の 反対 (Hantai) は ________ です。", "translation": "Lawan kata Luas", "options": ["とおい", "せまい", "ひくい", "みじかい"], "answer": 1, "explanation": "Lawan Luas (Hiroi) = Sempit (Semai)." },
+            { "id": "v8", "type": "text", "text": "ドアを 「開けて」 ください。", "translation": "Buka pintu", "options": ["あけて", "しめて", "つけて", "みせて"], "answer": 0, "explanation": "開けて = あけて (Akete)." },
+            { "id": "v9", "type": "text", "text": "「家族」の 読み方は どれですか。", "translation": "Cara baca 家族 (Keluarga)", "options": ["かぞく", "きょうだい", "かぞっく", "かしょく"], "answer": 0, "explanation": "家族 = かぞく (Kazoku)." },
+            { "id": "v10", "type": "text", "text": "部屋が 「暗い」 です。", "translation": "Kamarnya gelap", "options": ["くらい", "あかるい", "くろい", "あおい"], "answer": 0, "explanation": "暗い = くらい (Kurai)." },
+            { "id": "v11", "type": "text", "text": "「仕事」の 読み方は どれですか。", "translation": "Cara baca 仕事 (Pekerjaan)", "options": ["しこと", "じこと", "しごと", "じごと"], "answer": 2, "explanation": "仕事 = しごと (Shigoto)." },
+            { "id": "v12", "type": "text", "text": "「練習」を します。", "translation": "Berlatih", "options": ["べんきょう", "れんしゅう", "ふくしゅう", "じゅんび"], "answer": 1, "explanation": "練習 = れんしゅう (Renshuu)." },
+            { "id": "v13", "type": "text", "text": "「去年」の 読み方は どれですか。", "translation": "Cara baca 去年 (Tahun lalu)", "options": ["きょねん", "らいねん", "ことし", "さくねん"], "answer": 0, "explanation": "去年 = きょねん (Kyonen)." },
+            { "id": "v14", "type": "text", "text": "ゴミを 「捨てます」。", "translation": "Membuang sampah", "options": ["ひろいます", "すてます", "もえます", "だします"], "answer": 1, "explanation": "捨てます = すてます (Sutemasu)." },
+            { "id": "v15", "type": "text", "text": "「地図」の 読み方は どれですか。", "translation": "Cara baca 地図 (Peta)", "options": ["ちず", "ちてつ", "ちきゅう", "じしん"], "answer": 0, "explanation": "地図 = ちず (Chizu)." }
+          ]
+        },
+        {
+          "name": "Conversation",
+          "questions": [
+            { "id": "c1", "type": "text", "text": "A: 初めまして。田中です。<br>B: ________", "translation": "Perkenalan diri -> ...", "options": ["さようなら", "こちらこそ", "失礼します", "どういたしまして"], "answer": 1, "explanation": "Kochirakoso = Senang berkenalan juga (Saya juga)." },
+            { "id": "c2", "type": "text", "text": "A: 週末、何を しましたか。<br>B: ________", "translation": "Akhir pekan ngapain? -> ...", "options": ["テニスを します", "テニスを しました", "テニスです", "テニスじゃありません"], "answer": 1, "explanation": "Lampau (Shimashita) jawab dengan lampau." },
+            { "id": "c3", "type": "text", "text": "A: この 本を 借りても いいですか。<br>B: はい、________", "translation": "Boleh pinjam buku? -> Ya, ...", "options": ["いけません", "どうぞ", "だめです", "借ります"], "answer": 1, "explanation": "Douzo = Silakan." },
+            { "id": "c4", "type": "text", "text": "A: 駅まで どうやって 行きますか。<br>B: ________", "translation": "Bagaimana cara ke stasiun? -> ...", "options": ["バスで 行きます", "30分です", "駅は あそこです", "はい、行きます"], "answer": 0, "explanation": "Menanyakan cara (Metode transportasi)." },
+            { "id": "c5", "type": "text", "text": "A: 暑いですね。窓を 開けましょうか。<br>B: ええ、________", "translation": "Panas ya, mau dibuka jendelanya? -> Ya, ...", "options": ["開けません", "お願いします", "結構です", "閉めてください"], "answer": 1, "explanation": "Onegaishimasu = Tolong (setuju)." },
+            { "id": "c6", "type": "text", "text": "A: 明日の パーティー、行きますか。<br>B: すみません、用事が あるので ________", "translation": "Pergi ke pesta besok? -> Maaf, ada urusan, jadi ...", "options": ["行きます", "行きたいです", "行けません", "行きましょう"], "answer": 2, "explanation": "Ikemasen = Tidak bisa pergi." },
+            { "id": "c7", "type": "text", "text": "A: これ、京都の お土産です。<br>B: わあ、________", "translation": "Ini oleh-oleh Kyoto -> Wah, ...", "options": ["ごめんなさい", "ありがとうございます", "いただきます", "いりません"], "answer": 1, "explanation": "Terima kasih saat diberi sesuatu." },
+            { "id": "c8", "type": "text", "text": "A: どの スポーツが 好きですか。<br>B: ________", "translation": "Suka olahraga yang mana? -> ...", "options": ["スポーツです", "サッカーが 好きです", "はい、好きです", "上手です"], "answer": 1, "explanation": "Menjawab jenis olahraga spesifik." },
+            { "id": "c9", "type": "text", "text": "A: 日本語が 上手ですね。<br>B: いいえ、________", "translation": "Bahasa Jepangmu bagus -> Tidak, ... (merendah)", "options": ["上手ですよ", "そうですか", "まだまだです", "ありがとうございます"], "answer": 2, "explanation": "Madamada desu = Masih belum (jawaban sopan)." },
+            { "id": "c10", "type": "text", "text": "A: ご注文は？<br>B: ________", "translation": "Mau pesan apa? -> ...", "options": ["カレーを ください", "カレーです", "カレーが あります", "カレーを 食べます"], "answer": 0, "explanation": "...o kudasai (Tolong berikan ...)." },
+            { "id": "c11", "type": "text", "text": "A: この 漢字の 読み方を 教えてください。<br>B: ________", "translation": "Tolong ajarkan cara baca kanji ini -> ...", "options": ["はい、わかります", "はい、いいですよ", "いいえ、教えません", "読み方です"], "answer": 1, "explanation": "Hai, ii desu yo = Ya, boleh/baiklah." },
+            { "id": "c12", "type": "text", "text": "A: いらっしゃいませ。何名様ですか。<br>B: ________", "translation": "Selamat datang. Berapa orang? -> ...", "options": ["2人です", "2回です", "2時です", "2個です"], "answer": 0, "explanation": "Menghitung orang = Nin/Futari." },
+            { "id": "c13", "type": "text", "text": "A: 旅行は どうでしたか。<br>B: ________", "translation": "Bagaimana liburannya? -> ...", "options": ["行きました", "楽しかったです", "楽しみます", "きれいです"], "answer": 1, "explanation": "Dou deshita ka (Lampau) -> Tanoshikatta desu." },
+            { "id": "c14", "type": "text", "text": "A: お国は どちらですか。<br>B: ________", "translation": "Negara Anda di mana? -> ...", "options": ["インドネシアです", "ジャカルタへ行きます", "会社員です", "25歳です"], "answer": 0, "explanation": "Menanyakan asal negara." },
+            { "id": "c15", "type": "text", "text": "A: いただきます。<br>B: ________", "translation": "Saya makan (Itadakimasu) -> ... (yang masak/tuan rumah bilang apa?)", "options": ["ごちそうさま", "召し上がれ", "いらっしゃい", "ありがとう"], "answer": 1, "explanation": "Meshiagare = Silakan makan / Selamat menikmati (oleh tuan rumah)." }
+          ]
+        },
+        {
+          "name": "Listening (Multi-Voice)",
+          "questions": [
+            {
+              "id": "l1",
+              "type": "audio",
+              "script": "[N]会社で 男の人と 女の人が 話しています。男の人は 何を コピーしますか。[M]課長、会議の 資料は これで いいですか。[F]はい。これを 10部 コピーして ください。あ、その前に、この スケジュール表も コピーして ほしいんだけど。[M]わかりました。スケジュール表は 何部ですか。[F]それは 1部だけで いいわ。[M]はい。じゃあ、資料は 10部と、スケジュール表は 1部ですね。[F]お願いね。",
+              "text": "<strong>[会社で]</strong><br>男の人は 何を コピーしますか。",
+              "translation": "Pria mengcopy apa?",
+              "options": ["資料だけ", "スケジュール表だけ", "資料とスケジュール表", "何もコピーしない"],
+              "answer": 2,
+              "explanation": "Shiryou (Dokumen) dan Schedule."
+            },
+            {
+              "id": "l2",
+              "type": "audio",
+              "script": "[N]電話で 女の人と 男の人が 話しています。二人は どこで 会いますか。[F]もしもし、今 駅に着いたよ。どこに いる？[M]僕は 今、本屋に いるよ。[F]駅の 近くの 本屋？[M]そう。駅の 改札を出て、右に ある ビルの 1階。[F]わかった。じゃあ、そっちに 行くね。[M]うん、本屋の 前で 待ってるよ。",
+              "text": "<strong>[待ち合わせ]</strong><br>二人は どこで 会いますか。",
+              "translation": "Mereka bertemu di mana?",
+              "options": ["駅の改札", "本屋の前", "ビルの2階", "駅のホーム"],
+              "answer": 1,
+              "explanation": "Hon'ya no mae (Depan toko buku)."
+            },
+            {
+              "id": "l3",
+              "type": "audio",
+              "script": "[N]レストランで 女の人と 店員が 話しています。女の人は 何を 注文しましたか。[M]ご注文は お決まりですか。[F]はい。Aランチを ひとつ お願いします。[M]Aランチですね。飲み物は コーヒーと 紅茶、どちらに しますか。[F]コーヒーで お願いします。あ、ホットじゃなくて、アイスで。[M]かしこまりました。Aランチと アイスコーヒーですね。",
+              "text": "<strong>[レストラン]</strong><br>女の人は 何を 注文しましたか。",
+              "translation": "Wanita pesan apa?",
+              "options": ["Aランチとホットコーヒー", "Aランチとアイスコーヒー", "Aランチと紅茶", "コーヒーだけ"],
+              "answer": 1,
+              "explanation": "A Lunch + Ice Coffee."
+            },
+            {
+              "id": "l4",
+              "type": "audio",
+              "script": "[N]男の人が 病院の 受付で 話しています。男の人は 次に どうしますか。[F]今日は どうされましたか。[M]朝から お腹が 痛いんです。[F]わかりました。では、この 紙に お名前と 住所を 書いて、そこの 椅子に 座って お待ちください。[M]はい。熱も 測りますか。[F]いいえ、熱は あとで 看護師が 測りますから、今は 書くだけで いいですよ。",
+              "text": "<strong>[病院]</strong><br>男の人は 次に どうしますか。",
+              "translation": "Apa yang dilakukan pria selanjutnya?",
+              "options": ["熱を測る", "医者に会う", "紙に名前を書く", "薬を飲む"],
+              "answer": 2,
+              "explanation": "Isi kertas (nama & alamat) dulu, baru duduk."
+            },
+            {
+              "id": "l5",
+              "type": "audio",
+              "script": "[N]デパートで 女の人と 男の人が プレゼントを 選んでいます。何色の カバンを 買いますか。[F]ねえ、お兄ちゃんの 誕生日プレゼント、この カバン どう？[M]いいんじゃない？ 軽くて 使いやすそうだし。[F]色は 黒と 茶色と 紺が あるけど。[M]兄さんは 黒い カバンは もう 持ってるから、茶色がいいかな。[F]でも、お兄ちゃん、青い色が 好きだよ。紺に しようよ。[M]そうだね。じゃあ、紺に しよう。",
+              "text": "<strong>[買い物]</strong><br>何色の カバンを 買いますか。",
+              "translation": "Beli tas warna apa?",
+              "options": ["黒", "茶色", "紺", "白"],
+              "answer": 2,
+              "explanation": "Kon (Biru tua/Navy) karena kakaknya suka biru."
+            },
+            {
+              "id": "l6",
+              "type": "audio",
+              "script": "[N]教室で 先生が 学生に 話しています。学生は 明日 何を 持ってこなければ なりませんか。[M]明日の 授業では、ハサミと のりを 使いますから、忘れないで 持ってきて ください。[F]先生、色鉛筆は いりますか。[M]色鉛筆は 学校に ありますから、持ってこなくて いいです。あ、教科書も 忘れずに。[F]はい、わかりました。",
+              "text": "<strong>[学校]</strong><br>学生は 明日 何を 持ってきますか。",
+              "translation": "Siswa harus bawa apa besok?",
+              "options": ["ハサミと色鉛筆", "のりと色鉛筆", "ハサミとのりと教科書", "全部"],
+              "answer": 2,
+              "explanation": "Hasami (Gunting), Nori (Lem), Kyoukasho (Buku paket). Pensil warna tidak perlu."
+            },
+            {
+              "id": "l7",
+              "type": "audio",
+              "script": "[N]女の人と 男の人が 映画について 話しています。二人は 何時の 映画を 見ますか。[F]今 10時だね。映画は 何時から？[M]次は 10時半からだよ。[F]えー、10時半？ ごはんを 食べる 時間が ないね。その次は？[M]その次は 1時半だね。[F]じゃあ、先にごはんを 食べて、1時半のを 見ようよ。[M]そうだね。そうしよう。",
+              "text": "<strong>[映画館]</strong><br>二人は 何時の 映画を 見ますか。",
+              "translation": "Nonton film jam berapa?",
+              "options": ["10:00", "10:30", "13:30", "12:00"],
+              "answer": 2,
+              "explanation": "Makan dulu, baru nonton yang jam 1:30 (13:30)."
+            },
+            {
+              "id": "l8",
+              "type": "audio",
+              "script": "[N]留学生の アリさんが 日本人の 学生と 話しています。アリさんは 夏休みに どこへ 行きますか。[F]アリさん、夏休みは 国へ 帰るの？[M]いいえ、帰りたいけど、飛行機の チケットが高いから…。[F]そうなんだ。じゃあ、旅行に 行く？[M]うん、北海道へ 行く つもりだよ。涼しいし、美味しいものが たくさん あるから。[F]いいね。私は 沖縄の 海へ 行きたいな。",
+              "text": "<strong>[夏休み]</strong><br>アリさんは 夏休みに どこへ 行きますか。",
+              "translation": "Ali pergi ke mana?",
+              "options": ["国へ帰る", "北海道", "沖縄", "東京"],
+              "answer": 1,
+              "explanation": "Hokkaido."
+            },
+            {
+              "id": "l9",
+              "type": "audio",
+              "script": "[N]天気予報を 聞いています。明日の 午後の 天気は どうですか。[F]明日の 天気です。朝は 晴れて 暖かいでしょう。しかし、午後からは くもって、夕方には 雨が 降るでしょう。傘を 持って 出かけてください。",
+              "text": "<strong>[天気予報]</strong><br>明日の 午後の 天気は どうですか。",
+              "translation": "Cuaca besok SORE/SIANG ke bawah?",
+              "options": ["ずっと晴れ", "雨のち晴れ", "曇りのち雨", "雪"],
+              "answer": 2,
+              "explanation": "Gogo kara kumotte, yuugata ni wa ame (Mendung lalu hujan)."
+            },
+            {
+              "id": "l10",
+              "type": "audio",
+              "script": "[N]会社で 女の人が 課長に 相談しています。女の人は どうして 休みますか。[F]課長、すみません。明日の 午後、早退しても いいでしょうか。[M]どうしたの？ 具合が 悪いの？[F]いいえ、実は 市役所へ 行かなければ ならないんです。手続きが ありまして。[M]ああ、そう。わかった。いいよ。[F]ありがとうございます。",
+              "text": "<strong>[相談]</strong><br>女の人は どうして 休みますか。",
+              "translation": "Kenapa wanita itu izin pulang cepat?",
+              "options": ["病気だから", "市役所へ行くから", "銀行へ行くから", "遊びに行くから"],
+              "answer": 1,
+              "explanation": "Shiyakusho e iku (Pergi ke balai kota/kantor sipil)."
+            },
+            {
+              "id": "l11",
+              "type": "audio",
+              "script": "[N]男の人が ゴミの 出し方を 聞いています。燃えるゴミは 何曜日ですか。[M]すみません、燃えるゴミの 日は いつですか。[F]燃えるゴミは 毎週 月曜日と 木曜日ですよ。[M]あ、今日は 金曜日だから、次は 月曜日ですね。[F]はい、そうです。朝 8時半までに 出してくださいね。[M]わかりました。",
+              "text": "<strong>[ゴミの日]</strong><br>燃えるゴミは 何曜日ですか。",
+              "translation": "Sampah bakar hari apa?",
+              "options": ["月曜日と金曜日", "月曜日と木曜日", "火曜日と木曜日", "金曜日だけ"],
+              "answer": 1,
+              "explanation": "Getsuyoubi to Mokuyoubi (Senin dan Kamis)."
+            },
+            {
+              "id": "l12",
+              "type": "audio",
+              "script": "[N]駅員が アナウンスを しています。乗客は どうしなければ なりませんか。[M]お知らせいたします。ただいま、地震のため、電車が 止まっています。安全の 確認が 終わるまで、そのまま 車内で お待ちください。ドアは 開きません。",
+              "text": "<strong>[電車]</strong><br>乗客は どうしなければ なりませんか。",
+              "translation": "Penumpang harus apa?",
+              "options": ["外に出る", "車内で待つ", "他の電車に乗る", "歩いて帰る"],
+              "answer": 1,
+              "explanation": "Shanai de omachi kudasai (Tunggu di dalam kereta)."
+            },
+            {
+              "id": "l13",
+              "type": "audio",
+              "script": "[N]男の人と 女の人が 写真を 見ています。田中さんは どの人ですか。[M]この 写真、みんな 楽しそうだね。田中さんは どの人？[F]田中さん？ ああ、この 眼鏡を かけている 人だよ。[M]ああ、この 帽子を かぶって、眼鏡を かけている 人？[F]ううん、帽子は かぶっていないよ。髪が 短い 人。",
+              "text": "<strong>[写真]</strong><br>田中さんは どの人ですか。",
+              "translation": "Tanaka orang yang mana?",
+              "options": ["眼鏡をかけて、帽子をかぶっている人", "眼鏡をかけて、髪が短い人", "眼鏡をかけていない人", "帽子をかぶって、髪が長い人"],
+              "answer": 1,
+              "explanation": "Megane o kakete (pakai kacamata), Boushi wa kabutteinai (tidak pakai topi), Kami ga mijikai (rambut pendek)."
+            },
+            {
+              "id": "l14",
+              "type": "audio",
+              "script": "[N]電話で 女の人が 予約を しています。何時に 予約しましたか。[M]はい、さくら美容院です。[F]あのう、明日の カットの 予約を したいんですが。[M]ありがとうございます。明日は 午前 11時か、午後 4時が 空いていますが。[F]じゃあ、午前中で お願いします。[M]はい、明日 11時ですね。お待ちしております。",
+              "text": "<strong>[予約]</strong><br>何時に 予約しましたか。",
+              "translation": "Booking jam berapa?",
+              "options": ["10:00", "11:00", "16:00", "14:00"],
+              "answer": 1,
+              "explanation": "Gozen-chuu (Pagi hari) yang kosong jam 11."
+            },
+            {
+              "id": "l15",
+              "type": "audio",
+              "script": "[N]スーパーで アナウンスが 流れています。今日は 何が 安いですか。[F]いらっしゃいませ。今日の 特売品は お肉です。豚肉も 鶏肉も 全品 20パーセント引きです。また、野菜コーナーでは トマトが お安くなって おります。ぜひ お買い求めください。",
+              "text": "<strong>[スーパー]</strong><br>今日は 何が 安いですか。",
+              "translation": "Hari ini apa yang murah?",
+              "options": ["魚と野菜", "肉とトマト", "肉と魚", "果物とトマト"],
+              "answer": 1,
+              "explanation": "Niku (Daging) dan Tomato (Tomat)."
+            }
+          ]
+        },
+        {
+          "name": "Reading (Dokkai)",
+          "questions": [
+            {
+              "id": "r1",
+              "type": "text",
+              "text": "<strong>[注意]</strong><br><br>図書館の 中では、飲み物を 飲んでも いいですが、食事は しては いけません。<br>携帯電話は 音が 出ないように してください。<br>通話は ロビーで お願いします。",
+              "translation": "Apa yang BOLEH dilakukan di dalam perpustakaan?",
+              "options": ["お弁当を食べる", "電話で話す", "ジュースを飲む", "大声で歌う"],
+              "answer": 2,
+              "explanation": "Nomimono o nondemo ii (Boleh minum)."
+            },
+            {
+              "id": "r2",
+              "type": "text",
+              "text": "<strong>[メール]</strong><br><br>件名: 日曜日の約束<br>ジョンさん、ごめんなさい。<br>日曜日は 急に 仕事が 入って、行けなく なりました。<br>また 今度 誘ってください。<br>マリア",
+              "translation": "Kenapa Maria mengirim email?",
+              "options": ["時間を変えたいから", "約束を断るから", "場所を聞きたいから", "遅れるから"],
+              "answer": 1,
+              "explanation": "Yakusoku o kotowaru (Menolak janji/membatalkan) karena kerja."
+            },
+            {
+              "id": "r3",
+              "type": "text",
+              "text": "<strong>[薬の説明]</strong><br><br>この 薬は 頭が 痛い 時に 飲んでください。<br>大人は 1回 2錠、子供は 1回 1錠です。<br>1日 3回まで 飲んでも いいです。",
+              "translation": "Orang dewasa minum berapa tablet sekali minum?",
+              "options": ["1錠", "2錠", "3錠", "4錠"],
+              "answer": 1,
+              "explanation": "Otona wa 1-kai 2-jou (Dewasa 2 tablet)."
+            },
+            {
+              "id": "r4",
+              "type": "text",
+              "text": "<strong>[張り紙]</strong><br><br>「エレベーター 点検の お知らせ」<br>10月5日 (金) 13:00 ～ 15:00<br>この 時間は エレベーターが 使えません。<br>階段を 使ってください。",
+              "translation": "Apa yang terjadi pada tanggal 5 Oktober jam 2 siang?",
+              "options": ["エレベーターが使える", "エレベーターが使えない", "階段が使えない", "学校が休み"],
+              "answer": 1,
+              "explanation": "Jam 13-15 tidak bisa pakai elevator (jam 2 siang = 14:00, masuk range)."
+            },
+            {
+              "id": "r5",
+              "type": "text",
+              "text": "<strong>[日記]</strong><br><br>今日は 友達と カフェへ 行きました。<br>私は ケーキを 食べましたが、友達は お腹が すいていなかったので、コーヒーだけ 飲みました。<br>いろいろな 話ができて、よかったです。",
+              "translation": "Teman penulis makan/minum apa?",
+              "options": ["ケーキ", "コーヒー", "ケーキとコーヒー", "何も頼まなかった"],
+              "answer": 1,
+              "explanation": "Teman hanya minum kopi (Coffee dake)."
+            },
+            {
+              "id": "r6",
+              "type": "text",
+              "text": "<strong>[お店のカード]</strong><br><br>レストラン 「さくら」<br>ランチ: 11:30 ～ 14:00<br>ディナー: 18:00 ～ 22:00<br>定休日: 月曜日<br>※日曜日は ディナーのみ 営業します。",
+              "translation": "Hari Minggu, toko buka jam berapa?",
+              "options": ["11:30 ～ 14:00", "11:30 ～ 22:00", "18:00 ～ 22:00", "休み"],
+              "answer": 2,
+              "explanation": "Minggu hanya Dinner (18:00-22:00)."
+            },
+            {
+              "id": "r7",
+              "type": "text",
+              "text": "<strong>[メッセージ]</strong><br><br>田中さん、先に 帰ります。<br>机の 上に 会議の 資料を 置いておきました。<br>明日 見て ください。<br>お疲れ様です。<br>山下",
+              "translation": "Dokumen rapat ada di mana?",
+              "options": ["山下さんの鞄の中", "田中さんの机の上", "会議室", "ゴミ箱"],
+              "answer": 1,
+              "explanation": "Tsukue no ue (Di atas meja)."
+            },
+            {
+              "id": "r8",
+              "type": "text",
+              "text": "<strong>[レシピ]</strong><br><br>おいしい カレーの 作り方<br>1. 肉と 野菜を 切ります。<br>2. 鍋で 肉と 野菜を 炒めます。<br>3. 水を 入れて 煮ます。<br>4. ルーを 入れます。",
+              "translation": "Setelah memotong daging dan sayur, apa yang dilakukan?",
+              "options": ["水を入れます", "食べます", "炒めます", "ルーを入れます"],
+              "answer": 2,
+              "explanation": "No 2: Itamemasu (Tumis/Goreng)."
+            },
+            {
+              "id": "r9",
+              "type": "text",
+              "text": "<strong>[求人情報]</strong><br><br>アルバイト 募集<br>仕事: 店の 掃除 と 皿洗い<br>時給: 1000円<br>時間: 夕方 5時から 9時まで<br>学生さん 大歓迎！",
+              "translation": "Pekerjaannya apa?",
+              "options": ["料理を作る", "掃除と皿洗い", "レジ", "接客"],
+              "answer": 1,
+              "explanation": "Souji to Sara-arai (Bersih-bersih dan cuci piring)."
+            },
+            {
+              "id": "r10",
+              "type": "text",
+              "text": "<strong>[案内]</strong><br><br>次の 電車は 特急です。<br>乗車券の 他に、特急券が 必要です。<br>ホームの 券売機で 買って ください。",
+              "translation": "Untuk naik kereta ini, butuh apa?",
+              "options": ["乗車券だけ", "特急券だけ", "乗車券と特急券", "お金はいらない"],
+              "answer": 2,
+              "explanation": "Joushaken no hoka ni, tokkyuuken ga hitsuyou (Butuh tiket penumpang DAN tiket ekspres)."
+            },
+            {
+              "id": "r11",
+              "type": "text",
+              "text": "<strong>[自己紹介]</strong><br><br>私の 名前は キムです。韓国から 来ました。<br>日本のアニメが 好きで、日本語を 勉強しています。<br>将来は 日本で 働きたいです。",
+              "translation": "Kenapa Kim belajar bahasa Jepang?",
+              "options": ["日本のアニメが好きだから", "日本料理が好きだから", "友達がいるから", "親に言われたから"],
+              "answer": 0,
+              "explanation": "Anime ga suki de (Karena suka anime)."
+            },
+            {
+              "id": "r12",
+              "type": "text",
+              "text": "<strong>[看板]</strong><br><br>工事中<br>危険ですので、中に入らないで ください。<br>ご協力 お願いします。",
+              "translation": "Kenapa tidak boleh masuk?",
+              "options": ["汚いから", "危険だから", "休みだから", "狭いから"],
+              "answer": 1,
+              "explanation": "Kiken (Bahaya)."
+            },
+            {
+              "id": "r13",
+              "type": "text",
+              "text": "<strong>[メモ]</strong><br><br>今日、スーパーで 卵と 牛乳を 買ってきて。<br>冷蔵庫に 何も ないから。<br>晩御飯は カレーだよ。",
+              "translation": "Apa yang harus dibeli?",
+              "options": ["カレー", "卵と牛乳", "冷蔵庫", "何も買わない"],
+              "answer": 1,
+              "explanation": "Tamago to Gyuunyuu (Telur dan Susu)."
+            },
+            {
+              "id": "r14",
+              "type": "text",
+              "text": "<strong>[グラフの説明]</strong><br><br>クラスの 人に 好きな 飲み物を 聞きました。<br>1番 多かったのは コーヒーです。<br>2番目は お茶でした。<br>ジュースが 好き人は 少なかったです。",
+              "translation": "Minuman apa yang paling populer?",
+              "options": ["お茶", "ジュース", "コーヒー", "水"],
+              "answer": 2,
+              "explanation": "1-ban ookatta no wa Koohii (Paling banyak Kopi)."
+            },
+            {
+              "id": "r15",
+              "type": "text",
+              "text": "<strong>[手紙]</strong><br><br>先生へ<br>長い間、お世話に なりました。<br>来週 国へ 帰りますが、先生に 教えてもらった ことは 忘れません。<br>いつか また 日本へ 遊びに 来ます。<br>元気で いてください。",
+              "translation": "Penulis akan melakukan apa?",
+              "options": ["日本で働く", "国へ帰る", "先生になる", "学校へ行く"],
+              "answer": 1,
+              "explanation": "Kuni e kaerimasu (Pulang ke negara asal)."
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "paket_real_04",
+      "title": "JFT-Basic A2 - Paket 4",
+      "subtitle": "Simulasi Full: Pemahaman Kontekstual & Logika",
+      "category": "Official Bank",
+      "color": "linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%)",
+      "icon": "fas fa-brain",
+      "duration": 60,
+      "sections": [
+        {
+          "name": "Script & Vocabulary",
+          "questions": [
+            { "id": "v1", "type": "text", "text": "「入り口」は どこですか。", "translation": "Di mana pintu masuk?", "options": ["いりぐち", "でぐち", "かいさつ", "まどぐち"], "answer": 0, "explanation": "入り口 = いりぐち (Iriguchi)." },
+            { "id": "v2", "type": "text", "text": "自転車を 「直します」。", "translation": "Memperbaiki sepeda", "options": ["なおします", "さがします", "こわします", "なくします"], "answer": 0, "explanation": "直します = なおします (Naoshimasu)." },
+            { "id": "v3", "type": "text", "text": "「趣味」は 読書です。", "translation": "Hobinya membaca", "options": ["きょうみ", "いみ", "しゅみ", "じゅんび"], "answer": 2, "explanation": "趣味 = しゅみ (Shumi)." },
+            { "id": "v4", "type": "text", "text": "パソコンを 「使います」。", "translation": "Menggunakan komputer", "options": ["かいます", "あいます", "つかいます", "ならいます"], "answer": 2, "explanation": "使います = つかいます (Tsukaimasu)." },
+            { "id": "v5", "type": "text", "text": "「近い」の 反対 (Hantai) は ________ です。", "translation": "Lawan kata Dekat", "options": ["とおい", "おもい", "はやい", "ながい"], "answer": 0, "explanation": "Lawan Dekat (Chikai) = Jauh (Tooi)." },
+            { "id": "v6", "type": "text", "text": "ここは 「危険」 です。", "translation": "Di sini berbahaya", "options": ["あんぜん", "きけん", "しずか", "ゆうめい"], "answer": 1, "explanation": "危険 = きけん (Kiken)." },
+            { "id": "v7", "type": "text", "text": "「改札」で 切符を 出します。", "translation": "Mengeluarkan tiket di gerbang tiket", "options": ["かいさつ", "かいだん", "かいぎ", "かいしゃ"], "answer": 0, "explanation": "改札 = かいさつ (Kaisatsu)." },
+            { "id": "v8", "type": "text", "text": "「準備」が 終わりました。", "translation": "Persiapan selesai", "options": ["しんぱい", "じゅんび", "ぜんぶ", "べんきょう"], "answer": 1, "explanation": "準備 = じゅんび (Junbi)." },
+            { "id": "v9", "type": "text", "text": "カバンに 本を 「入れます」。", "translation": "Memasukkan buku ke tas", "options": ["いれます", "だします", "おきます", "きります"], "answer": 0, "explanation": "入れます = いれます (Iremasu)." },
+            { "id": "v10", "type": "text", "text": "「封筒」に 手紙を入れます。", "translation": "Memasukkan surat ke amplop", "options": ["ふうとう", "きって", "はがき", "びんせん"], "answer": 0, "explanation": "封筒 = ふうとう (Fuutou)." },
+            { "id": "v11", "type": "text", "text": "この 部屋は 「狭い」 です。", "translation": "Kamar ini sempit", "options": ["ひろい", "せまい", "くらい", "ふるい"], "answer": 1, "explanation": "狭い = せまい (Semai)." },
+            { "id": "v12", "type": "text", "text": "「両親」と 住んでいます。", "translation": "Tinggal dengan orang tua", "options": ["きょうだい", "りょうしん", "そふ", "そぼ"], "answer": 1, "explanation": "両親 = りょうしん (Ryoushin)." },
+            { "id": "v13", "type": "text", "text": "電気を 「つけて」 ください。", "translation": "Tolong nyalakan lampu", "options": ["けして", "つけて", "あけて", "しめて"], "answer": 1, "explanation": "つけて = Nyalakan (untuk listrik/api)." },
+            { "id": "v14", "type": "text", "text": "「処方箋」 (Resep obat) を 薬局へ 持っていきます。", "translation": "Bawa resep ke apotek", "options": ["しょほせん", "しょほうせん", "しよほうせん", "しょほぜん"], "answer": 1, "explanation": "処方箋 = しょほうせん (Shohousen)." },
+            { "id": "v15", "type": "text", "text": "「野菜」を 食べます。", "translation": "Makan sayur", "options": ["くだもの", "やさい", "こめ", "むぎ"], "answer": 1, "explanation": "野菜 = やさい (Yasai)." }
+          ]
+        },
+        {
+          "name": "Conversation",
+          "questions": [
+            { "id": "c1", "type": "text", "text": "A: 明日、休んでも いいですか。<br>B: ________", "translation": "Besok boleh libur? -> ...", "options": ["いいえ、休みます", "どうしたんですか", "はい、休みです", "元気ですね"], "answer": 1, "explanation": "Bertanya alasan (Kenapa?/Ada apa?) sebelum mengizinkan." },
+            { "id": "c2", "type": "text", "text": "A: もう お昼ですね。一緒に ランチに行きませんか。<br>B: ________", "translation": "Makan siang yuk? -> ...", "options": ["はい、行きましょう", "いいえ、行きましょう", "はい、行きません", "ごちそうさまでした"], "answer": 0, "explanation": "Menerima ajakan: Hai, ikimashou." },
+            { "id": "c3", "type": "text", "text": "A: エレベーターは どこですか。<br>B: ________", "translation": "Elevator di mana? -> ...", "options": ["あちらです", "これです", "階段です", "部屋です"], "answer": 0, "explanation": "Menunjukkan arah: Achira desu (Di sebelah sana)." },
+            { "id": "c4", "type": "text", "text": "(コンビニで)<br>店員: お弁当、温めますか。<br>客: ________", "translation": "Staf: Perlu dipanaskan? Tamu: ...", "options": ["はい、お願いします", "いいえ、温めます", "はい、冷たいです", "お箸です"], "answer": 0, "explanation": "Meminta tolong: Hai, onegaishimasu." },
+            { "id": "c5", "type": "text", "text": "A: この 本、返します。ありがとうございました。<br>B: ________", "translation": "Saya kembalikan bukunya -> ...", "options": ["どういたしまして", "いりません", "読みましたか", "貸しました"], "answer": 2, "explanation": "Yomimashita ka (Apakah sudah dibaca? / Bagaimana bukunya?) - Natural follow-up." },
+            { "id": "c6", "type": "text", "text": "A: その 服、よく 似合っていますね。<br>B: ________", "translation": "Bajunya cocok/bagus -> ...", "options": ["そうですか。ありがとう", "いいえ、似合います", "はい、そうです", "高いです"], "answer": 0, "explanation": "Menerima pujian dengan senang." },
+            { "id": "c7", "type": "text", "text": "A: 週末は どこか 行きましたか。<br>B: ________", "translation": "Akhir pekan pergi ke mana? -> ...", "options": ["どこへも 行きませんでした", "どこかへ 行きました", "はい、行きます", "山へ 行きます"], "answer": 0, "explanation": "Bentuk lampau negatif (Tidak ke mana-mana)." },
+            { "id": "c8", "type": "text", "text": "A: 大阪までの 切符を 2枚 ください。<br>B: ________", "translation": "Minta tiket ke Osaka 2 lembar -> ...", "options": ["はい、2枚ですね", "はい、2人です", "いいえ、違います", "大阪ですね"], "answer": 0, "explanation": "Konfirmasi jumlah: 2-mai desu ne." },
+            { "id": "c9", "type": "text", "text": "(電話で)<br>A: 田中さんは いらっしゃいますか。<br>B: ________", "translation": "Apakah ada Pak Tanaka? -> ...", "options": ["はい、田中です", "今、席を外しております", "いいえ、来ません", "帰りました"], "answer": 1, "explanation": "Seki o hazushite orimasu (Sedang tidak di tempat/keluar sebentar)." },
+            { "id": "c10", "type": "text", "text": "A: つまらないものですが、どうぞ。<br>B: ________", "translation": "Ini (oleh-oleh) sekadarnya, silakan -> ...", "options": ["つまらないですね", "ありがとうございます", "いただきます", "ごちそうさま"], "answer": 1, "explanation": "Menerima hadiah: Arigatou gozaimasu." },
+            { "id": "c11", "type": "text", "text": "A: ここ、空いていますか。<br>B: ________", "translation": "Di sini kosong (boleh duduk)? -> ...", "options": ["はい、どうぞ", "いいえ、空いています", "はい、だめです", "座ってください"], "answer": 0, "explanation": "Memberi izin duduk." },
+            { "id": "c12", "type": "text", "text": "A: 日曜日、映画を 見に行かない？<br>B: ごめん、日曜日は ちょっと……。<br>A: ________", "translation": "Nonton yuk? -> Maaf, Minggu agak... -> ... (Respon pengajak)", "options": ["じゃあ、また今度ね", "どうして行かないの", "行こうよ", "映画だよ"], "answer": 0, "explanation": "Memahami penolakan: Jaa, mata kondo ne (Ya sudah, lain kali saja)." },
+            { "id": "c13", "type": "text", "text": "A: おすすめの 料理は 何ですか。<br>B: ________", "translation": "Menu rekomendasinya apa? -> ...", "options": ["天ぷらが おいしいですよ", "料理です", "何でもいいです", "食べましょう"], "answer": 0, "explanation": "Memberikan rekomendasi spesifik." },
+            { "id": "c14", "type": "text", "text": "A: お久しぶりです。お元気でしたか。<br>B: ________", "translation": "Lama tak jumpa, sehat? -> ...", "options": ["はい、おかげさまで", "はじめまして", "さようなら", "元気です"], "answer": 0, "explanation": "Okagesama de (Berkat doa Anda, saya baik)." },
+            { "id": "c15", "type": "text", "text": "A: お先に 失礼します。<br>B: ________", "translation": "Saya pulang duluan -> ...", "options": ["お疲れ様でした", "いらっしゃいませ", "ごめんください", "お願いします"], "answer": 0, "explanation": "Ucapan salam perpisahan kerja." }
+          ]
+        },
+        {
+          "name": "Listening (Multi-Voice)",
+          "questions": [
+            {
+              "id": "l1",
+              "type": "audio",
+              "script": "[N]会社で 女の人と 男の人が 会議の時間について 話しています。会議は いつに なりましたか。[F]田中さん、来週の 月曜日の 会議のことなんだけど。[M]はい、月曜日の 2時からですね。[F]それがね、社長が 急に 出張することに なって、月曜日は ダメに なったの。[M]そうですか。じゃあ、いつに しますか。[F]火曜日の 午後なら 社長も 空いているから、火曜日の 2時に 変更しても いい？[M]わかりました。火曜日の 2時ですね。みんなに 連絡しておきます。",
+              "text": "<strong>[会社で]</strong><br>会議は いつに なりましたか。",
+              "translation": "Rapatnya jadi kapan?",
+              "options": ["月曜日の2時", "月曜日の午後", "火曜日の2時", "火曜日の午前"],
+              "answer": 2,
+              "explanation": "Berubah dari Senin jam 2 menjadi Selasa jam 2 (Kayoubi no ni-ji)."
+            },
+            {
+              "id": "l2",
+              "type": "audio",
+              "script": "[N]デパートで 女の人と 男の人が お母さんへの プレゼントを 選んでいます。二人は 何を 買いますか。[F]もうすぐ お母さんの 誕生日だね。何を あげようか。[M]母さんは 花が 好きだから、花は どう？[F]花も いいけど、形に 残るものの ほうが よくない？ この スカーフとか、どうかな。[M]きれいな 色だね。でも、母さんは スカーフを あまり 使わないよ。それより、この 財布は？ 今 使っている 財布、古くなっていたから。[F]ああ、それが いいね。じゃあ、この 財布に しよう。",
+              "text": "<strong>[買い物]</strong><br>二人は 何を 買いますか。",
+              "translation": "Mereka beli apa?",
+              "options": ["花", "スカーフ", "財布", "服"],
+              "answer": 2,
+              "explanation": "Bunga dan Syal ditolak, akhirnya memilih Dompet (Saifu)."
+            },
+            {
+              "id": "l3",
+              "type": "audio",
+              "script": "[N]駅で アナウンスが 流れています。東京へ 行く人は、どうしなければ なりませんか。[M]お待たせいたしました。10時発、東京行き 特急電車は、大雨の 影響で、運転を 見合わせて おります。復旧の 見込みは 立っておりません。東京へ お急ぎの お客様は、恐れ入りますが、バス乗り場から 振替輸送の バスを ご利用ください。バスは 10時 10分に 出発します。",
+              "text": "<strong>[駅のアナウンス]</strong><br>東京へ 行く人は、どうしなければ なりませんか。",
+              "translation": "Orang yang mau ke Tokyo harus bagaimana?",
+              "options": ["電車で待つ", "バスに乗る", "タクシーに乗る", "歩いて行く"],
+              "answer": 1,
+              "explanation": "Kereta berhenti, disuruh naik Bus pengganti (Furikae yusou no basu)."
+            },
+            {
+              "id": "l4",
+              "type": "audio",
+              "script": "[N]病院で 医者と 女の人が 話しています。女の人は お風呂に 入っても いいですか。[M]足の 具合は どうですか。[F]まだ 歩くと 痛いです。[M]そうですか。腫れていますね。今日は 足を 冷やして、あまり 歩かないように してください。[F]あのお、お風呂は 入っても いいですか。[M]お風呂に 入ると、血行が よくなって、もっと 痛くなるかもしれません。今日は シャワーだけに して ください。[F]わかりました。",
+              "text": "<strong>[病院]</strong><br>女の人は 今日、お風呂に 入っても いいですか。",
+              "translation": "Bolehkah wanita mandi (berendam) hari ini?",
+              "options": ["はい、入ってもいい", "いいえ、シャワーだけ", "足を温めればいい", "歩けばいい"],
+              "answer": 1,
+              "explanation": "Dokter bilang mandi (berendam) bikin sakit, jadi 'Shower dake' (Hanya shower)."
+            },
+            {
+              "id": "l5",
+              "type": "audio",
+              "script": "[N]男の人と 女の人が パーティーの 食べ物について 話しています。誰が 寿司を 持ってきますか。[M]来週の パーティー、食べ物は どうする？[F]田中さんが ピザを 持ってくるって 言ってたよ。[M]じゃあ、僕は 唐揚げを 作っていくよ。お寿司も 食べたいね。[F]お寿司は 佐藤さんが 買ってきてくれるって。[M]そうか。じゃあ、飲み物は 僕が 買っていくよ。[F]ありがとう。私は サラダと ケーキを 作るね。",
+              "text": "<strong>[パーティー]</strong><br>誰が 寿司を 持ってきますか。",
+              "translation": "Siapa yang bawa sushi?",
+              "options": ["男の人", "女の人", "田中さん", "佐藤さん"],
+              "answer": 3,
+              "explanation": "Osushi wa Satou-san ga..."
+            },
+            {
+              "id": "l6",
+              "type": "audio",
+              "script": "[N]デパートの 案内所で 男の人が 話しています。男の人は 何を 落としましたか。[F]いらっしゃいませ。どうなさいましたか。[M]すみません、落とし物を してしまって。[F]何を 落とされましたか。[M]傘です。黒くて 長い 傘です。[F]持ち手は 何色ですか。[M]持ち手も 黒です。あ、コンビニで 買った ビニール傘じゃなくて、デパートで 買った 布の 傘です。[F]わかりました。お調べします。",
+              "text": "<strong>[案内所]</strong><br>男の人は 何を 落としましたか。",
+              "translation": "Pria menjatuhkan (kehilangan) apa?",
+              "options": ["黒くて長い傘", "ビニール傘", "黒いカバン", "財布"],
+              "answer": 0,
+              "explanation": "Kurokute nagai kasa (Payung panjang hitam), bukan payung vinil."
+            },
+            {
+              "id": "l7",
+              "type": "audio",
+              "script": "[N]ホテルで 男の人と フロントの人が 話しています。男の人は 何を 聞きましたか。[M]すみません、チェックインしたいんですが。[F]はい。ご予約の お名前を お願いします。[M]ジョン・スミスです。[F]はい、スミス様ですね。お部屋は 501号室です。[M]ありがとうございます。あ、Wi-Fiは 使えますか。[F]はい、お部屋で 使えます。パスワードは 机の 上に 書いてあります。[M]そうですか。ありがとう。",
+              "text": "<strong>[ホテル]</strong><br>男の人は 何について 聞きましたか。",
+              "translation": "Pria bertanya tentang apa?",
+              "options": ["朝ごはん", "Wi-Fi", "部屋の番号", "チェックアウトの時間"],
+              "answer": 1,
+              "explanation": "Pria bertanya 'Wi-Fi wa tsukaemasu ka?'."
+            },
+            {
+              "id": "l8",
+              "type": "audio",
+              "script": "[N]道で 男の人が 女の人に 道を 聞いています。男の人は どこで 曲がりますか。[M]すみません、郵便局は どこですか。[F]郵便局ですね。この道を まっすぐ行って、信号を 渡ってください。[M]信号を 渡るんですね。[F]はい。渡ってから、2つ目の 角を 右に 曲がってください。そうすると、左側に あります。[M]2つ目の 角を 右ですね。わかりました。",
+              "text": "<strong>[道案内]</strong><br>男の人は どこで 曲がりますか。",
+              "translation": "Pria belok di mana?",
+              "options": ["信号を渡ってすぐ", "1つ目の角", "2つ目の角", "郵便局の前"],
+              "answer": 2,
+              "explanation": "Futatsume no kado (Sudut kedua) setelah menyeberang lampu merah."
+            },
+            {
+              "id": "l9",
+              "type": "audio",
+              "script": "[N]図書館で 男の人と 係の人が 話しています。男の人は 図書館の中で 何を してもいいですか。[M]すみません、ここで お弁当を 食べても いいですか。[F]申し訳ありません。館内での お食事は ご遠慮ください。[M]そうですか。飲み物は どうですか。[F]ペットボトルなどの 蓋が閉まる 飲み物なら 飲んでも いいですよ。[M]わかりました。じゃあ、この お茶は 大丈夫ですね。[F]はい、どうぞ。",
+              "text": "<strong>[図書館]</strong><br>男の人は 図書館の中で 何を してもいいですか。",
+              "translation": "Apa yang BOLEH dilakukan pria di perpustakaan?",
+              "options": ["お弁当を食べる", "お茶を飲む", "大声で話す", "タバコを吸う"],
+              "answer": 1,
+              "explanation": "Makan tidak boleh, minum (botol tutup) boleh -> Ocha (teh) boleh."
+            },
+            {
+              "id": "l10",
+              "type": "audio",
+              "script": "[N]テレビで 天気予報を しています。洗濯物は いつ 干したほうが いいですか。[F]今週の 天気です。月曜日と 火曜日は よく 晴れるでしょう。洗濯物を 干すのに いい天気です。水曜日からは 曇りや 雨の日が 続くでしょう。特に 木曜日は 風が 強くなります。週末も 雨が 降るでしょう。",
+              "text": "<strong>[天気予報]</strong><br>洗濯物は いつ 干したほうが いいですか。",
+              "translation": "Kapan sebaiknya menjemur cucian?",
+              "options": ["月曜日と火曜日", "水曜日と木曜日", "金曜日", "土曜日と日曜日"],
+              "answer": 0,
+              "explanation": "Senin dan Selasa cerah (Getsu to Ka), cocok untuk menjemur."
+            },
+            {
+              "id": "l11",
+              "type": "audio",
+              "script": "[N]料理番組で 女の人が カレーの 作り方を 説明しています。肉を 炒める前に 何を しますか。[F]今日は おいしい カレーを 作ります。まず、野菜と 肉を 切ります。野菜は 大きく、肉は 小さく 切ってください。切ったら、鍋に 油を 入れて、先に 肉を 炒めます。肉の 色が 変わったら、野菜も 入れて 一緒に 炒めてください。",
+              "text": "<strong>[料理]</strong><br>肉を 炒める前に 何を しますか。",
+              "translation": "Sebelum menumis daging, apa yang dilakukan?",
+              "options": ["野菜を入れる", "肉と野菜を切る", "水を沸かす", "ルーを入れる"],
+              "answer": 1,
+              "explanation": "Mazu, yasai to niku o kirimasu (Pertama, potong sayur dan daging)."
+            },
+            {
+              "id": "l12",
+              "type": "audio",
+              "script": "[N]バス停で 女の人と 運転手が 話しています。女の人は どの バスに 乗りますか。[F]すみません、この バスは 市民病院へ 行きますか。[M]いいえ、この バスは 駅行きです。市民病院へ 行くなら、5番の バスに 乗ってください。[F]5番ですね。あそこに 止まっている バスですか。[M]はい、そうです。あと 2分で 出発しますよ。[F]ありがとうございます。急ぎます。",
+              "text": "<strong>[バス停]</strong><br>女の人は どの バスに 乗りますか。",
+              "translation": "Wanita naik bus nomor berapa?",
+              "options": ["このバス", "駅行きのバス", "5番のバス", "次のバス"],
+              "answer": 2,
+              "explanation": "Sopir bilang ke RS naik bus nomor 5 (Go-ban)."
+            },
+            {
+              "id": "l13",
+              "type": "audio",
+              "script": "[N]学校で 先生が 宿題について 説明しています。学生は 宿題を いつ 出しますか。[M]えー、今日の 宿題は 作文です。「私の 家族」という テーマで 書いてください。来週の 月曜日に 集めますから、忘れないように。メールで 送るのではなく、紙に 書いて 出してくださいね。",
+              "text": "<strong>[学校]</strong><br>学生は 宿題を いつ 出しますか。",
+              "translation": "Kapan PR dikumpulkan?",
+              "options": ["今日", "明日", "来週の月曜日", "来週の金曜日"],
+              "answer": 2,
+              "explanation": "Raishuu no Getsuyoubi (Senin depan)."
+            },
+            {
+              "id": "l14",
+              "type": "audio",
+              "script": "[N]夫婦が 新しい 部屋について 話しています。テーブルは どこに 置きますか。[F]引っ越し、疲れたね。さて、テーブルは どこに 置こうか。[M]窓の 近くが 明るくて いいんじゃない？[F]でも、窓の 近くは テレビを 置くから……。[M]そうか。じゃあ、キッチンの 前は どう？ 料理を 運ぶのが 楽だよ。[F]そうだね。キッチンの 前に しよう。",
+              "text": "<strong>[引っ越し]</strong><br>テーブルは どこに 置きますか。",
+              "translation": "Meja ditaruh di mana?",
+              "options": ["窓の近く", "テレビの前", "キッチンの前", "部屋の真ん中"],
+              "answer": 2,
+              "explanation": "Kitchen no mae (Depan dapur) disetujui."
+            },
+            {
+              "id": "l15",
+              "type": "audio",
+              "script": "[N]レストランで 女の人が 注文しています。女の人は 何が 食べられませんか。[M]ご注文を 繰り返します。ハンバーグセットがおひとつ、サラダは 玉ねぎを 抜くんですね。[F]はい。私、玉ねぎが ダメなんです。あ、トマトは 好きなので、たくさん 入れてください。[M]かしこまりました。玉ねぎなしで、トマト多めですね。",
+              "text": "<strong>[レストラン]</strong><br>女の人は 何が 食べられませんか。",
+              "translation": "Wanita tidak bisa makan apa?",
+              "options": ["ハンバーグ", "サラダ", "玉ねぎ", "トマト"],
+              "answer": 2,
+              "explanation": "Tamanegi ga dame (Bawang bombay tidak bisa/tidak mau)."
+            }
+          ]
+        },
+        {
+          "name": "Reading (Dokkai)",
+          "questions": [
+            {
+              "id": "r1",
+              "type": "text",
+              "text": "<strong>[スポーツジムの 利用規則]</strong><br><br>1. ジムでは 必ず 運動靴（スポーツシューズ）を 履いてください。外で 履いている 靴は 使えません。<br>2. 食べた直後に 運動しないで ください。気分が 悪くなることが あります。<br>3. 使い終わった 道具は、元の 場所に 戻してください。",
+              "translation": "Sepatu apa yang harus dipakai?",
+              "options": ["サンダル", "外で履いている靴", "運動靴", "ブーツ"],
+              "answer": 2,
+              "explanation": "Undou-gutsu (Sepatu olahraga)."
+            },
+            {
+              "id": "r2",
+              "type": "text",
+              "text": "<strong>[メール]</strong><br><br>件名: 遅れます<br>田中さん、すみません。<br>今 バスに 乗っていますが、道が とても 混んでいます。<br>事故が あったようです。<br>約束の 時間に 20分くらい 遅れそうです。<br>先に 店に 入っていて ください。<br>マリア",
+              "translation": "Kenapa Maria terlambat?",
+              "options": ["寝坊したから", "道が混んでいるから", "バスが来ないから", "店がわからないから"],
+              "answer": 1,
+              "explanation": "Michi ga totemo kondeimasu (Jalan sangat macet)."
+            },
+            {
+              "id": "r3",
+              "type": "text",
+              "text": "<strong>[メモ]</strong><br><br>お父さんへ<br>今日は 友達と 晩ごはんを 食べて帰ります。<br>お父さんの 晩ごはんは 冷蔵庫に 入れてあります。<br>レンジで 温めて 食べてください。<br>花子",
+              "translation": "Ayah harus melakukan apa sebelum makan?",
+              "options": ["料理を作る", "買い物に行く", "レンジで温める", "友達を待つ"],
+              "answer": 2,
+              "explanation": "Renji de atatamete (Panaskan di microwave)."
+            },
+            {
+              "id": "r4",
+              "type": "text",
+              "text": "<strong>[広告]</strong><br><br>「靴下 3足 1000円！」<br>通常 1足 400円の 靴下が、3足 まとめて 買うと 1000円に なります。<br>200円も お得です。<br>この チャンスに ぜひ 買って ください。",
+              "translation": "Jika beli 3 pasang, berapa harganya?",
+              "options": ["400円", "800円", "1000円", "1200円"],
+              "answer": 2,
+              "explanation": "3-soku matomete kau to 1000-en (Beli 3 sekaligus jadi 1000 yen)."
+            },
+            {
+              "id": "r5",
+              "type": "text",
+              "text": "<strong>[ブログ]</strong><br><br>先週、富士山に 登りました。<br>頂上まで 行くのは とても 大変でしたが、景色は 最高でした。<br>特に 朝日が 昇るところが きれいでした。<br>足が 痛く なりましたが、また 行きたいです。",
+              "translation": "Bagaimana perasaan penulis?",
+              "options": ["疲れたから二度と行きたくない", "景色が悪かった", "大変だったが楽しかった", "足が痛くて泣いた"],
+              "answer": 2,
+              "explanation": "Taihen deshita ga... mata ikitai (Berat tapi ingin pergi lagi - positif)."
+            },
+            {
+              "id": "r6",
+              "type": "text",
+              "text": "<strong>[薬の注意]</strong><br><br>この 薬を 飲むと、眠くなることが あります。<br>薬を 飲んだあとは、車の 運転を しないで ください。<br>また、お酒と 一緒に 飲まないで ください。",
+              "translation": "Setelah minum obat, apa yang TIDAK BOLEH dilakukan?",
+              "options": ["寝ること", "水を飲むこと", "車の運転", "食事"],
+              "answer": 2,
+              "explanation": "Kuruma no unten o shinaide (Jangan menyetir)."
+            },
+            {
+              "id": "r7",
+              "type": "text",
+              "text": "<strong>[ポスター]</strong><br><br>「日本語スピーチコンテスト」<br>参加者 募集！<br>テーマ： 「私の夢」 または 「日本の好きなところ」<br>時間： 3分以内<br>申し込み： 10月1日までに ウェブサイトから。",
+              "translation": "Tema pidatonya apa?",
+              "options": ["私の家族", "私の国", "私の夢", "私の学校"],
+              "answer": 2,
+              "explanation": "Watashi no Yume (Mimpiku)."
+            },
+            {
+              "id": "r8",
+              "type": "text",
+              "text": "<strong>[メニュー]</strong><br><br>A定食： 魚の フライ （800円）<br>B定食： ハンバーグ （900円）<br>C定食： カレーライス （700円）<br>※全ての 定食に ごはん、味噌汁、サラダが つきます。",
+              "translation": "Set mana yang paling murah?",
+              "options": ["A定食", "B定食", "C定食", "全部同じ"],
+              "answer": 2,
+              "explanation": "C (Kare) 700 yen, paling murah."
+            },
+            {
+              "id": "r9",
+              "type": "text",
+              "text": "<strong>[チャット]</strong><br><br>A: 夏休みの 旅行、北海道に しない？<br>B: いいね。いつ 行く？<br>A: 8月の 最初は どう？<br>B: ごめん、その時は アルバイトが あるんだ。8月の 20日ごろなら 空いてるよ。<br>A: わかった。じゃあ、20日に しよう。",
+              "translation": "Kapan mereka pergi liburan?",
+              "options": ["7月", "8月1日", "8月20日", "9月"],
+              "answer": 2,
+              "explanation": "20-nichi ni shiyou (Sepakat tanggal 20)."
+            },
+            {
+              "id": "r10",
+              "type": "text",
+              "text": "<strong>[ゴミのルール]</strong><br><br>・ペットボトルは、キャップと ラベルを 取ってから 出してください。<br>・キャップと ラベルは 「プラスチックゴミ」です。<br>・ボトルは 水で 洗って ください。",
+              "translation": "Tutup botol (Cap) dibuang sebagai apa?",
+              "options": ["燃えるゴミ", "ペットボトル", "プラスチックゴミ", "燃えないゴミ"],
+              "answer": 2,
+              "explanation": "Cap... wa 'Plastic Gomi' (Sampah plastik)."
+            },
+            {
+              "id": "r11",
+              "type": "text",
+              "text": "<strong>[手紙]</strong><br><br>ホストファミリーの みなさんへ<br>1ヶ月間、ありがとう ございました。<br>日本の 生活は 初めてで 不安でしたが、みなさんが 親切にしてくれたので、とても 楽しかったです。<br>一番の 思い出は、一緒に たこ焼きを 作ったことです。<br>国へ 帰っても、忘れません。",
+              "translation": "Apa kenangan terbaik penulis?",
+              "options": ["旅行に行ったこと", "たこ焼きを作ったこと", "日本語を勉強したこと", "テレビを見たこと"],
+              "answer": 1,
+              "explanation": "Takoyaki o tsukutta koto (Membuat Takoyaki)."
+            },
+            {
+              "id": "r12",
+              "type": "text",
+              "text": "<strong>[履歴書]</strong><br><br>希望する仕事： コンビニの 店員<br>勤務可能な時間： 平日の 午後 5時から 10時まで<br>土日は 働けません。<br>志望動機： 家から 近くて、時給が いいからです。",
+              "translation": "Orang ini bisa bekerja kapan?",
+              "options": ["平日の朝", "平日の夜", "土日の昼", "土日の夜"],
+              "answer": 1,
+              "explanation": "Heijitsu no gogo 5-ji kara (Hari kerja sore/malam)."
+            },
+            {
+              "id": "r13",
+              "type": "text",
+              "text": "<strong>[レシピ]</strong><br><br>「お好み焼き」<br>キャベツを 小さく 切ります。<br>小麦粉と 水と 卵を 混ぜます。<br>そこに キャベツと 肉を 入れて、さらに 混ぜます。<br>フライパンで 両面を 焼きます。",
+              "translation": "Kapan daging dimasukkan?",
+              "options": ["小麦粉と混ぜる前", "焼いたあと", "生地を作ってから", "食べる時"],
+              "answer": 2,
+              "explanation": "Setelah tepung, air, telur dicampur (adonan jadi), baru masukkan kubis dan daging."
+            },
+            {
+              "id": "r14",
+              "type": "text",
+              "text": "<strong>[アンケート]</strong><br><br>「会社まで どうやって 来ますか？」<br>電車： 60%<br>バス： 20%<br>車： 10%<br>自転車： 5%<br>徒歩： 5%",
+              "translation": "Apa transportasi yang paling banyak digunakan?",
+              "options": ["電車", "バス", "車", "自転車"],
+              "answer": 0,
+              "explanation": "Densha (Kereta) 60%, paling banyak."
+            },
+            {
+              "id": "r15",
+              "type": "text",
+              "text": "<strong>[看板]</strong><br><br>「工事中」<br>この先、道路工事を しています。<br>車は 通れません。<br>右の 道へ 回って ください。<br>ご迷惑を おかけします。",
+              "translation": "Mobil harus lewat mana?",
+              "options": ["このまま進む", "左の道", "右の道", "戻る"],
+              "answer": 2,
+              "explanation": "Migi no michi (Jalan kanan)."
+            }
+          ]
+        }
+      ]
+    },
+
+
+    {
+      "id": "paket_real_05",
+      "title": "JFT-Basic A2 - Paket 5",
+      "subtitle": "Simulasi Full: Aplikasi Situasi Nyata",
+      "category": "Official Bank",
+      "color": "linear-gradient(135deg, #FF9966 0%, #FF5E62 100%)",
+      "icon": "fas fa-city",
+      "duration": 60,
+      "sections": [
+        {
+          "name": "Script & Vocabulary",
+          "questions": [
+            { "id": "v1", "type": "text", "text": "「出口」は あちらです。", "translation": "Pintu keluar di sebelah sana", "options": ["でぐち", "いりぐち", "かいさつ", "まどぐち"], "answer": 0, "explanation": "出口 = でぐち (Deguchi)." },
+            { "id": "v2", "type": "text", "text": "「海」へ 行きたいです。", "translation": "Ingin pergi ke laut", "options": ["かわ", "やま", "うみ", "そら"], "answer": 2, "explanation": "海 = うみ (Umi)." },
+            { "id": "v3", "type": "text", "text": "「自分」で 作りました。", "translation": "Membuat sendiri", "options": ["じぶん", "じかん", "じしょ", "じどう"], "answer": 0, "explanation": "自分 = じぶん (Jibun)." },
+            { "id": "v4", "type": "text", "text": "お金を 「払います」。", "translation": "Membayar uang", "options": ["かいます", "ひろいます", "はらいます", "もらいます"], "answer": 2, "explanation": "払います = はらいます (Haraimasu)." },
+            { "id": "v5", "type": "text", "text": "「便利」な 道具。", "translation": "Alat yang praktis", "options": ["ふべん", "ゆうめい", "べんり", "むり"], "answer": 2, "explanation": "便利 = べんり (Benri)." },
+            { "id": "v6", "type": "text", "text": "「住所」を 教えてください。", "translation": "Tolong beritahu alamat", "options": ["ばしょ", "じむしょ", "じゅうしょ", "きんじょ"], "answer": 2, "explanation": "住所 = じゅうしょ (Juusho)." },
+            { "id": "v7", "type": "text", "text": "「強い」 風が 吹いています。", "translation": "Angin kencang bertiup", "options": ["よわい", "つよい", "わるい", "くらい"], "answer": 1, "explanation": "強い = つよい (Tsuyoi)." },
+            { "id": "v8", "type": "text", "text": "車を 「止めます」。", "translation": "Menghentikan/memarkir mobil", "options": ["やめます", "とめます", "しめます", "はじめます"], "answer": 1, "explanation": "止めます = とめます (Tomemasu)." },
+            { "id": "v9", "type": "text", "text": "「毎週」 テニスを します。", "translation": "Setiap minggu main tenis", "options": ["まいにち", "まいしゅう", "まいとし", "まいつき"], "answer": 1, "explanation": "毎週 = まいしゅう (Maishuu)." },
+            { "id": "v10", "type": "text", "text": "「世界」の ニュース。", "translation": "Berita dunia", "options": ["せかい", "せわ", "せいかつ", "せき"], "answer": 0, "explanation": "世界 = せかい (Sekai)." },
+            { "id": "v11", "type": "text", "text": "「黒い」 猫が います。", "translation": "Ada kucing hitam", "options": ["あかい", "しろい", "くろい", "あおい"], "answer": 2, "explanation": "黒い = くろい (Kuroi)." },
+            { "id": "v12", "type": "text", "text": "「夕飯」を 食べます。", "translation": "Makan malam", "options": ["あさごはん", "ひるごはん", "ゆうはん", "ごはん"], "answer": 2, "explanation": "夕飯 = ゆうはん (Yuuhan)." },
+            { "id": "v13", "type": "text", "text": "「急行」に 乗り換えます。", "translation": "Ganti ke kereta ekspres", "options": ["とっきゅう", "きゅうこう", "ふつう", "ちかてつ"], "answer": 1, "explanation": "急行 = きゅうこう (Kyuukou)." },
+            { "id": "v14", "type": "text", "text": "辞書を 「引きます」。", "translation": "Mencari di kamus (Membuka kamus)", "options": ["ひきます", "ききます", "かきます", "おきます"], "answer": 0, "explanation": "辞書を引く = じしょをひく (Jisho o hiku)." },
+            { "id": "v15", "type": "text", "text": "「教室」で 勉強します。", "translation": "Belajar di kelas", "options": ["きょうしつ", "としょかん", "じむしつ", "かいぎしつ"], "answer": 0, "explanation": "教室 = きょうしつ (Kyoushitsu)." }
+          ]
+        },
+        {
+          "name": "Conversation",
+          "questions": [
+            { "id": "c1", "type": "text", "text": "A: お母さんの 病気は どうですか。<br>B: ________", "translation": "Bagaimana penyakit ibumu? -> ...", "options": ["はい、元気です", "おかげさまで よくなりました", "お大事にしてください", "病気です"], "answer": 1, "explanation": "Okagesama de... (Berkat doa Anda, sudah membaik)." },
+            { "id": "c2", "type": "text", "text": "A: この 荷物を 送りたいんですが。<br>B: ________", "translation": "Saya mau kirim paket ini -> ... (Respon petugas pos)", "options": ["はい、どちらまでですか", "いくらですか", "重いですね", "切手を貼ってください"], "answer": 0, "explanation": "Menanyakan tujuan: Hai, dochira made desu ka." },
+            { "id": "c3", "type": "text", "text": "A: すみません、写真を 撮って いただけませんか。<br>B: ________", "translation": "Bisa tolong fotokan kami? -> ...", "options": ["はい、撮りましょう", "はい、いいですよ", "いいえ、撮りません", "写真ですね"], "answer": 1, "explanation": "Menyetujui permintaan: Hai, ii desu yo." },
+            { "id": "c4", "type": "text", "text": "A: 週末、何を する予定ですか。<br>B: ________", "translation": "Apa rencana akhir pekan? -> ...", "options": ["予定です", "買い物に 行こうと 思っています", "行きました", "週末です"], "answer": 1, "explanation": "Menyatakan niat: ...to omotte imasu." },
+            { "id": "c5", "type": "text", "text": "A: 田中さん、お久しぶりです。<br>B: ああ、________", "translation": "Lama tak jumpa -> Ah, ...", "options": ["はじめまして", "さようなら", "しばらくですね", "どういたしまして"], "answer": 2, "explanation": "Shibaraku desu ne = Sudah lama ya (respon natural)." },
+            { "id": "c6", "type": "text", "text": "A: コーヒーと 紅茶と、どちらが いいですか。<br>B: ________", "translation": "Kopi atau teh, mau yang mana? -> ...", "options": ["はい、そうです", "どちらでも いいです", "コーヒーです", "飲みます"], "answer": 1, "explanation": "Dochira demo ii desu = Yang mana saja boleh." },
+            { "id": "c7", "type": "text", "text": "A: どうぞ、たくさん 食べてください。<br>B: はい、________", "translation": "Silakan makan yang banyak -> Ya, ...", "options": ["遠慮なく いただきます", "ごちそうさまでした", "食べません", "おいしいです"], "answer": 0, "explanation": "Enryonaku itadakimasu = Saya makan tanpa sungkan." },
+            { "id": "c8", "type": "text", "text": "A: あの、駅へ行きたいんですが、道が わからなくて。<br>B: あ、私も 駅へ 行きますから、________", "translation": "Saya mau ke stasiun tapi tidak tahu jalan -> Ah, saya juga mau ke sana, jadi ...", "options": ["一緒に行きましょう", "行ってください", "教えません", "遠いですよ"], "answer": 0, "explanation": "Issho ni ikimashou (Ayo pergi bersama)." },
+            { "id": "c9", "type": "text", "text": "A: 昨日の 映画は 面白くなかったですね。<br>B: ええ、________", "translation": "Film kemarin tidak seru ya -> Ya, ... (setuju)", "options": ["とても 面白かったです", "面白かったですね", "あまり 面白くなかったですね", "見ませんでした"], "answer": 2, "explanation": "Menyetujui pendapat negatif: Amari omoshirokunakatta desu ne." },
+            { "id": "c10", "type": "text", "text": "A: 先生、明日 お宅に 伺っても よろしいでしょうか。<br>B: ________", "translation": "Guru, bolehkah saya ke rumah Anda besok? -> ...", "options": ["はい、待っていますよ", "いいえ、行きます", "伺います", "どうぞ 来ました"], "answer": 0, "explanation": "Hai, matteimasu yo (Ya, saya tunggu)." },
+            { "id": "c11", "type": "text", "text": "A: この 料理の 作り方を 教えて くれませんか。<br>B: ________", "translation": "Bisakah ajarkan cara buat masakan ini? -> ...", "options": ["作り方です", "はい、いいですよ", "教えたいです", "料理します"], "answer": 1, "explanation": "Menyetujui permintaan ajar." },
+            { "id": "c12", "type": "text", "text": "A: 雨が 降って きましたね。<br>B: ________", "translation": "Hujan mulai turun ya -> ...", "options": ["傘を 貸しましょうか", "降りませんね", "雨ですね", "いい天気ですね"], "answer": 0, "explanation": "Menawarkan bantuan: Kasa o kashimashou ka (Mau saya pinjamkan payung?)." },
+            { "id": "c13", "type": "text", "text": "A: 日本の 歌を 歌うことが できますか。<br>B: ________", "translation": "Bisa nyanyi lagu Jepang? -> ...", "options": ["はい、歌います", "いいえ、あまり 知りません", "はい、聞きます", "歌うことです"], "answer": 1, "explanation": "Menjawab kemampuan: Tidak, kurang tahu." },
+            { "id": "c14", "type": "text", "text": "A: この 仕事、手伝いましょうか。<br>B: ________", "translation": "Mau dibantu pekerjaan ini? -> ...", "options": ["はい、手伝います", "いいえ、大丈夫です", "手伝ってください", "仕事です"], "answer": 1, "explanation": "Menolak halus: Iie, daijoubu desu (Tidak, saya bisa sendiri)." },
+            { "id": "c15", "type": "text", "text": "A: 明日、暇ですか。<br>B: 明日は ちょっと……。でも、明後日なら ________", "translation": "Besok senggang? -> Besok agak... Tapi kalau lusa ...", "options": ["忙しいです", "暇じゃありません", "空いていますよ", "ダメです"], "answer": 2, "explanation": "Asatte nara aiteimasu yo (Kalau lusa saya kosong)." }
+          ]
+        },
+        {
+          "name": "Listening (Multi-Voice)",
+          "questions": [
+            {
+              "id": "l1",
+              "type": "audio",
+              "script": "[N]男の人と 女の人が 電車の 時間について 話しています。二人は 何時の 電車に 乗りますか。[M]そろそろ 行こうか。電車の 時間、調べた？[F]うん。えっと、今は 10時ちょうどだね。次の 電車は 10時 10分だよ。[M]10分か。駅まで 5分 かかるから、走らないと 間に合わないね。その次は？[F]その次は 10時 25分。[M]それなら ゆっくり 行けるね。駅の コンビニで 飲み物も 買いたいし。[F]わかった。じゃあ、その 電車に しよう。",
+              "text": "<strong>[駅へ行く]</strong><br>二人は 何時の 電車に 乗りますか。",
+              "translation": "Mereka naik kereta jam berapa?",
+              "options": ["10:00", "10:10", "10:25", "10:30"],
+              "answer": 2,
+              "explanation": "Kereta 10:10 terlalu mepet, jadi pilih 10:25 agar santai."
+            },
+            {
+              "id": "l2",
+              "type": "audio",
+              "script": "[N]デパートで 店員と 客が 話しています。客は どの 傘を 買いますか。[M]いらっしゃいませ。[F]すみません、軽い 傘を 探しているんですが。[M]はい。こちらの 傘は いかがですか。とても 軽くて、丈夫ですよ。色は 赤と 青と 黒が ございます。[F]わあ、本当に 軽いですね。赤も かわいいけど、仕事でも 使いたいから、黒の ほうが いいかな。[M]黒ですね。こちらの 黒は デザインも シンプルで 人気ですよ。[F]じゃあ、これを ください。",
+              "text": "<strong>[買い物]</strong><br>客は どの 傘を 買いますか。",
+              "translation": "Tamu beli payung yang mana?",
+              "options": ["赤い傘", "青い傘", "黒い傘", "重い傘"],
+              "answer": 2,
+              "explanation": "Ingin pakai buat kerja, jadi pilih Hitam (Kuro)."
+            },
+            {
+              "id": "l3",
+              "type": "audio",
+              "script": "[N]病院で 医者が 薬について 説明しています。患者は いつ 薬を 飲みますか。[M]この 薬は、痛い時だけ 飲んでください。[F]毎日 飲まなくても いいんですか。[M]はい。痛くない時は 飲まないで ください。ただし、飲む時は 食事の あとに してください。お腹が 空いている 時に 飲むと、胃が 痛くなることが ありますから。[F]わかりました。ご飯を 食べてから、痛い時だけ ですね。",
+              "text": "<strong>[薬]</strong><br>患者は いつ 薬を 飲みますか。",
+              "translation": "Kapan pasien minum obat?",
+              "options": ["毎日 食後", "毎日 寝る前", "痛い時だけ、食事の前", "痛い時だけ、食事の後"],
+              "answer": 3,
+              "explanation": "Itai toki dake (hanya saat sakit) + Shokuji no ato (setelah makan)."
+            },
+            {
+              "id": "l4",
+              "type": "audio",
+              "script": "[N]男の人と 女の人が 会社で 話しています。男の人は まず 何を しますか。[F]田中さん、会議の 準備は できた？[M]はい、資料の コピーは 終わりました。[F]ありがとう。じゃあ、会議室の 椅子を 並べてくれる？[M]はい、わかりました。飲み物は どうしますか。[F]飲み物は 私が 用意するから いいわ。椅子の あとに、エアコンも つけておいてね。[M]はい、わかりました。じゃあ、椅子を 並べてきます。",
+              "text": "<strong>[会社]</strong><br>男の人は まず 何を しますか。",
+              "translation": "Apa yang dilakukan pria PERTAMA kali?",
+              "options": ["資料をコピーする", "椅子を並べる", "飲み物を用意する", "エアコンをつける"],
+              "answer": 1,
+              "explanation": "Copy sudah selesai. Berikutnya susun kursi (Isu o narabete), baru AC."
+            },
+            {
+              "id": "l5",
+              "type": "audio",
+              "script": "[N]留学生が 日本人の 友達と 話しています。留学生は どうして アルバイトを 辞めたいですか。[F]ねえ、ジョンさん、元気ないね。どうしたの？[M]うーん、実は アルバイトを 辞めようと 思っているんだ。[F]えっ、どうして？ 店長が 厳しいの？[M]ううん、店長は 優しいし、時給も いいんだけど…。[F]じゃあ、どうして？[M]来月から 大学の 授業が 忙しくなるんだ。勉強する 時間が なくなりそうで 心配なんだよ。[F]そうか。勉強は 大事だもんね。",
+              "text": "<strong>[相談]</strong><br>留学生は どうして アルバイトを 辞めたいですか。",
+              "translation": "Kenapa ingin berhenti kerja?",
+              "options": ["店長が厳しいから", "時給が安いから", "勉強が忙しくなるから", "病気だから"],
+              "answer": 2,
+              "explanation": "Benkyou suru jikan ga nakunarisou (Takut tidak ada waktu belajar/kuliah sibuk)."
+            },
+            {
+              "id": "l6",
+              "type": "audio",
+              "script": "[N]店で 女の人が 店員と 話しています。女の人は 何を 注文しましたか。[M]いらっしゃいませ。ご注文は お決まりですか。[F]はい。カレーライスを ください。あ、ごはんは 少なめで お願いします。[M]カレーライスの ごはん 少なめですね。辛さは どうしますか。[F]辛いのは 苦手なので、甘口で お願いします。[M]かしこまりました。カレーライス、ごはん少なめ、甘口ですね。",
+              "text": "<strong>[レストラン]</strong><br>女の人は どんな カレーを 注文しましたか。",
+              "translation": "Pesan kare yang bagaimana?",
+              "options": ["ごはん多め、辛口", "ごはん多め、甘口", "ごはん少なめ、辛口", "ごはん少なめ、甘口"],
+              "answer": 3,
+              "explanation": "Gohan sukuname (Nasi sedikit), Amakuchi (Manis/Tidak pedas)."
+            },
+            {
+              "id": "l7",
+              "type": "audio",
+              "script": "[N]電話で 女の人が 美容院の 予約を しています。予約は いつですか。[M]はい、カットハウス 田中です。[F]すみません、カットの 予約を お願いしたいんですが。[M]ありがとうございます。ご希望の 日時は ございますか。[F]明日の 土曜日の 午後は 空いていますか。[M]すみません、明日の 午後は いっぱいです。午前中の 10時なら 空いていますが。[F]そうですか。じゃあ、その時間で お願いします。",
+              "text": "<strong>[予約]</strong><br>予約は いつですか。",
+              "translation": "Kapan reservasinya?",
+              "options": ["土曜日の10時", "土曜日の午後", "日曜日の10時", "日曜日の午後"],
+              "answer": 0,
+              "explanation": "Sore penuh, tapi Sabtu pagi jam 10 kosong -> setuju jam 10."
+            },
+            {
+              "id": "l8",
+              "type": "audio",
+              "script": "[N]男の人と 女の人が 部屋の 掃除について 話しています。男の人は どこを 掃除しますか。[F]もうすぐ お客さんが 来るから、掃除を手伝って。[M]いいよ。どこを やろうか。[F]私は キッチンと トイレを 掃除するから、あなたは お風呂を お願い。[M]お風呂だね。わかった。玄関は？[F]玄関は さっき 私が やったから きれいだよ。[M]了解。じゃあ、お風呂を 磨くよ。",
+              "text": "<strong>[掃除]</strong><br>男の人は どこを 掃除しますか。",
+              "translation": "Pria membersihkan mana?",
+              "options": ["キッチン", "トイレ", "お風呂", "玄関"],
+              "answer": 2,
+              "explanation": "Wanita (Dapur & Toilet), Pria diminta Ofuro (Kamar mandi)."
+            },
+            {
+              "id": "l9",
+              "type": "audio",
+              "script": "[N]学校で 先生が 試験について 説明しています。机の 上に 置いてはいけないものは 何ですか。[M]これから 試験を 始めます。机の 上には、鉛筆と 消しゴムだけ 出してください。筆箱も カバンに しまってください。時計は 見てもいいですが、携帯電話は 時計として 使えません。電源を切って カバンに 入れてください。",
+              "text": "<strong>[試験]</strong><br>机の 上に 置いてはいけないものは 何ですか。",
+              "translation": "Apa yang TIDAK BOLEH ditaruh di meja?",
+              "options": ["鉛筆", "消しゴム", "時計", "筆箱"],
+              "answer": 3,
+              "explanation": "Hance box (Fudebako) harus masuk tas. Pensil, penghapus, jam boleh."
+            },
+            {
+              "id": "l10",
+              "type": "audio",
+              "script": "[N]男の人と 女の人が 旅行の お土産について 話しています。男の人は 誰に お土産を 買いますか。[F]京都旅行、楽しかったね。[M]うん。そろそろ お土産を 買おうか。[F]そうだね。会社の人に お菓子を 買おう。[M]僕は 会社の人には もう 買ったから いいや。それより、妹に 何か 買いたいんだ。[F]妹さん？ じゃあ、この 扇子は？[M]いいね。それにしよう。あ、自分用にも 欲しいな。",
+              "text": "<strong>[お土産]</strong><br>男の人は 誰に お土産を 買いますか。（自分以外で）",
+              "translation": "Pria beli oleh-oleh untuk siapa? (Selain diri sendiri)",
+              "options": ["会社の人", "妹", "両親", "友達"],
+              "answer": 1,
+              "explanation": "Orang kantor sudah, fokus beli untuk Imouto (Adik perempuan)."
+            },
+            {
+              "id": "l11",
+              "type": "audio",
+              "script": "[N]天気予報を 聞いています。傘が 必要なのは いつですか。[F]お天気の 案内です。現在は 晴れていますが、夜になると 雨が 降り出すでしょう。明日の 朝には 止んで、明日の 日中は 良い天気に なるでしょう。今夜 お出かけの方は、傘を お持ちください。",
+              "text": "<strong>[天気予報]</strong><br>傘が 必要なのは いつですか。",
+              "translation": "Kapan butuh payung?",
+              "options": ["今", "今日の夜", "明日の朝", "明日の昼"],
+              "answer": 1,
+              "explanation": "Yoru ni naru to ame ga furidasu (Malam ini akan hujan)."
+            },
+            {
+              "id": "l12",
+              "type": "audio",
+              "script": "[N]会社で 女の人が 男の人に コピーを 頼んでいます。男の人は どんな コピーを しますか。[F]すみません、この 資料を コピーして ください。[M]はい。何部ですか。[F]会議に 使うから、10部 お願い。あ、それから、白黒じゃなくて、カラーで お願いね。グラフが あるから。[M]わかりました。カラーで 10部ですね。[F]あと、ホッチキスは しなくて いいわ。配る時に 分けるから。[M]はい、わかりました。",
+              "text": "<strong>[仕事]</strong><br>男の人は どんな コピーを しますか。",
+              "translation": "Copy yang bagaimana?",
+              "options": ["白黒で10部、ホッチキスあり", "白黒で10部、ホッチキスなし", "カラーで10部、ホッチキスあり", "カラーで10部、ホッチキスなし"],
+              "answer": 3,
+              "explanation": "Color, 10-bu, Stapler tidak perlu (Shinakhute ii)."
+            },
+            {
+              "id": "l13",
+              "type": "audio",
+              "script": "[N]男の人と 女の人が 引っ越しについて 話しています。男の人は どうして 引っ越しますか。[F]田中さん、来月 引っ越すんだって？[M]うん、そうなんだ。[F]今の アパート、駅から 近くて 便利なのに、どうして？[M]うん、便利なんだけど、隣の 部屋の 人が うるさくてね。夜中まで 音楽を 聞いているんだよ。[F]それは 大変だね。[M]それで、もっと 静かな ところに 引っ越すことに したんだ。",
+              "text": "<strong>[引っ越し]</strong><br>男の人は どうして 引っ越しますか。",
+              "translation": "Kenapa pindah?",
+              "options": ["駅から遠いから", "部屋が狭いから", "隣の人がうるさいから", "家賃が高いから"],
+              "answer": 2,
+              "explanation": "Tonari no hito ga urusai (Tetangga berisik)."
+            },
+            {
+              "id": "l14",
+              "type": "audio",
+              "script": "[N]バスの中で アナウンスが 流れています。次は どこに 止まりますか。[M]ご乗車 ありがとう ございます。この バスは 市役所経由、駅前行きです。次は 「本町」、本町です。図書館へ お越しの方は、次で お降りください。その次は 「市民病院前」に 止まります。",
+              "text": "<strong>[バス]</strong><br>次は どこに 止まりますか。",
+              "translation": "Pemberhentian BERIKUTNYA di mana?",
+              "options": ["市役所", "駅前", "本町", "市民病院前"],
+              "answer": 2,
+              "explanation": "Tsugi wa 'Honchou' (Selanjutnya Honchou)."
+            },
+            {
+              "id": "l15",
+              "type": "audio",
+              "script": "[N]デパートで 女の人が 店員と 話しています。靴売り場は 何階ですか。[F]すみません、婦人靴は どこに ありますか。[M]婦人靴は 2階に ございます。[F]紳士靴も 2階ですか。[M]いいえ、紳士靴は 3階です。ちなみに、子供靴は 4階の おもちゃ売り場の 隣に ございます。[F]夫の 靴を 買いたいので、3階ですね。ありがとうございます。",
+              "text": "<strong>[デパート]</strong><br>女の人は 何階へ 行きますか。",
+              "translation": "Wanita pergi ke lantai berapa?",
+              "options": ["1階", "2階", "3階", "4階"],
+              "answer": 2,
+              "explanation": "Ingin beli sepatu suami (Shinshi-gutsu/Sepatu pria) -> Lantai 3."
+            }
+          ]
+        },
+        {
+          "name": "Reading (Dokkai)",
+          "questions": [
+            {
+              "id": "r1",
+              "type": "text",
+              "text": "<strong>[張り紙]</strong><br><br>「自転車置き場の 利用について」<br>ここは アパートの 住人 専用の 自転車置き場です。<br>住んでいる 人 以外の 自転車は 置かないで ください。<br>置くときは、決められた 番号の 場所に 置いてください。<br>カギは 必ず かけてください。",
+              "translation": "Siapa yang boleh parkir di sini?",
+              "options": ["誰でもいい", "アパートに住んでいる人", "近くに住んでいる人", "管理人だけ"],
+              "answer": 1,
+              "explanation": "Apartment no Juunin (Penghuni apartemen)."
+            },
+            {
+              "id": "r2",
+              "type": "text",
+              "text": "<strong>[メール]</strong><br><br>件名: カラオケ<br>山田さん、こんにちは。<br>今週の 金曜日の 夜、みんなで カラオケに 行きませんか。<br>仕事が 終わったあと、6時半に 会社の ロビーに 集まりましょう。<br>都合が 悪かったら 連絡してください。<br>佐藤",
+              "translation": "Kapan mereka pergi karaoke?",
+              "options": ["金曜日の朝", "金曜日の夕方", "土曜日の朝", "土曜日の夕方"],
+              "answer": 1,
+              "explanation": "Kinyoubi no yoru, 6-ji han (Jumat malam/petang)."
+            },
+            {
+              "id": "r3",
+              "type": "text",
+              "text": "<strong>[メモ]</strong><br><br>お母さんへ<br>宿題の ノートが なくなったので、駅前の 本屋へ 買いに 行ってきます。<br>そのあと、図書館で 勉強してくるので、帰りは 6時ごろに なります。<br>晩ごはんは 家で 食べます。<br>たけし",
+              "translation": "Takeshi pergi ke mana saja?",
+              "options": ["本屋と図書館", "本屋と学校", "図書館とスーパー", "本屋だけ"],
+              "answer": 0,
+              "explanation": "Hon'ya (Toko buku) dan Toshokan (Perpustakaan)."
+            },
+            {
+              "id": "r4",
+              "type": "text",
+              "text": "<strong>[薬の袋]</strong><br><br>名前： 田中 太郎 様<br>薬： 風邪薬<br>飲み方： 1日 3回、食後。<br>注意： 水 または ぬるま湯で 飲んでください。<br>牛乳や ジュースで 飲まないで ください。",
+              "translation": "Obat ini tidak boleh diminum dengan apa?",
+              "options": ["水", "ぬるま湯", "お湯", "牛乳"],
+              "answer": 3,
+              "explanation": "Gyuunyuu ya Juice de nomanaide (Jangan dengan susu atau jus)."
+            },
+            {
+              "id": "r5",
+              "type": "text",
+              "text": "<strong>[イベントのお知らせ]</strong><br><br>「フリーマーケット」<br>日時： 11月3日（文化の日） 10:00 ～ 15:00<br>場所： 中央公園<br>雨天中止（雨が 降ったら やりません）。<br>いらなくなった 服や 本などを 売ります。<br>ぜひ 買いに 来てください。",
+              "translation": "Jika hujan, apa yang terjadi?",
+              "options": ["体育館でやる", "次の日にやる", "中止になる", "時間を変える"],
+              "answer": 2,
+              "explanation": "Uten Chuushi (Hujan = Batal)."
+            },
+            {
+              "id": "r6",
+              "type": "text",
+              "text": "<strong>[日記]</strong><br><br>今日、初めて お寿司を 作りました。<br>酢飯（すめし）を 作るのが 難しかったですが、母に 教えてもらって 上手に できました。<br>魚を 切るのは 父が やってくれました。<br>家族 みんなで 食べて、とても 美味しかったです。",
+              "translation": "Siapa yang memotong ikan?",
+              "options": ["私", "母", "父", "妹"],
+              "answer": 2,
+              "explanation": "Sakana o kiru no wa Chichi (Ayah) ga yatte kuremashita."
+            },
+            {
+              "id": "r7",
+              "type": "text",
+              "text": "<strong>[店の案内]</strong><br><br>「パン屋 ヤマダ」<br>焼きたての パンを 毎日 売っています。<br>朝 7時に 開店します。<br>人気の カレーパンは、10時と 15時に 焼き上がります。<br>すぐに 売り切れますから、その時間に 来て ください。",
+              "translation": "Jam berapa Kare-pan matang?",
+              "options": ["7時と10時", "7時と15時", "10時と15時", "いつでも"],
+              "answer": 2,
+              "explanation": "10-ji to 15-ji."
+            },
+            {
+              "id": "r8",
+              "type": "text",
+              "text": "<strong>[チャット]</strong><br><br>A: 明日の テニス、雨みたいだね。<br>B: そうだね。雨だったら どうする？<br>A: 外では できないから、体育館を 借りようか。<br>B: でも、体育館は 予約が いっぱいだよ。<br>A: じゃあ、残念だけど、中止に しよう。<br>B: わかった。みんなに 連絡するね。",
+              "translation": "Besok jika hujan, mereka akan melakukan apa?",
+              "options": ["外でテニスをする", "体育館でテニスをする", "中止にする", "ボウリングに行く"],
+              "answer": 2,
+              "explanation": "Chuushi ni shiyou (Batalkan saja) karena GOR penuh."
+            },
+            {
+              "id": "r9",
+              "type": "text",
+              "text": "<strong>[料理の作り方]</strong><br><br>「野菜炒め」<br>1. 野菜と 肉を 切ります。<br>2. フライパンを 熱して、肉を 炒めます。<br>3. 肉の 色が 変わったら、野菜を 入れます。<br>4. 最後に 塩と コショウを 入れて 味をつけます。",
+              "translation": "Kapan memasukkan sayur?",
+              "options": ["最初", "肉を炒める前", "肉の色が変わったあと", "塩を入れたあと"],
+              "answer": 2,
+              "explanation": "Niku no iro ga kawattara (Setelah warna daging berubah)."
+            },
+            {
+              "id": "r10",
+              "type": "text",
+              "text": "<strong>[求人]</strong><br><br>「カフェ スタッフ 募集」<br>週 3回から 働ける人。<br>土日 働ける人 歓迎。<br>時給 950円（土日は 50円 アップ）。<br>美味しい コーヒーの 入れ方を教えます。",
+              "translation": "Jika bekerja hari Sabtu, berapa gajinya?",
+              "options": ["900円", "950円", "1000円", "1050円"],
+              "answer": 2,
+              "explanation": "950 + 50 = 1000 yen."
+            },
+            {
+              "id": "r11",
+              "type": "text",
+              "text": "<strong>[手紙]</strong><br><br>おばあちゃんへ<br>元気ですか。<br>来週の 連休に、おばあちゃんの 家へ 遊びに 行きます。<br>おばあちゃんの 作る 煮物が 食べたいです。<br>楽しみに しています。<br>みか",
+              "translation": "Mika ingin melakukan apa di rumah nenek?",
+              "options": ["テレビを見たい", "煮物を食べたい", "掃除をしたい", "お小遣いが欲しい"],
+              "answer": 1,
+              "explanation": "Nimono ga tabetai (Ingin makan masakan rebusan nenek)."
+            },
+            {
+              "id": "r12",
+              "type": "text",
+              "text": "<strong>[アンケート結果]</strong><br><br>「休みの日に 何を しますか」<br>1位： 寝る （30人）<br>2位： ゲームをする （25人）<br>3位： 買い物 （20人）<br>4位： スポーツ （10人）",
+              "translation": "Apa kegiatan yang paling sedikit dilakukan?",
+              "options": ["寝る", "ゲーム", "買い物", "スポーツ"],
+              "answer": 3,
+              "explanation": "Sports (10 orang) paling sedikit."
+            },
+            {
+              "id": "r13",
+              "type": "text",
+              "text": "<strong>[アパートのルール]</strong><br><br>ゴミは 回収日の 朝 8時までに 出してください。<br>前日の 夜に 出しては いけません。<br>カラスや 猫が ゴミを 荒らすからです。<br>ご協力を お願いします。",
+              "translation": "Kapan harus membuang sampah?",
+              "options": ["前日の夜", "回収日の朝8時まで", "回収日の昼", "いつでもいい"],
+              "answer": 1,
+              "explanation": "Kaishuubi no asa 8-ji made (Pagi hari H sebelum jam 8)."
+            },
+            {
+              "id": "r14",
+              "type": "text",
+              "text": "<strong>[自己紹介]</strong><br><br>私は アリです。インドネシアから 来ました。<br>日本へ 来て 半年です。<br>今は 寮に 住んでいますが、来月 アパートに 引っ越す つもりです。<br>日本の 料理を 作るのが 好きです。<br>よろしくお願いします。",
+              "translation": "Ali sudah berapa lama di Jepang?",
+              "options": ["1ヶ月", "半年", "1年", "2年"],
+              "answer": 1,
+              "explanation": "Hantoshi (Setengah tahun/6 bulan)."
+            },
+            {
+              "id": "r15",
+              "type": "text",
+              "text": "<strong>[看板]</strong><br><br>「撮影禁止」<br>この 美術館の 中では 写真を 撮らないで ください。<br>カメラや 携帯電話は カバンに しまってください。<br>メモを 取ることは できます。",
+              "translation": "Apa yang BOLEH dilakukan?",
+              "options": ["写真を撮る", "電話をする", "メモを取る", "走る"],
+              "answer": 2,
+              "explanation": "Memo o toru koto wa dekimasu (Mencatat boleh)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "paket_real_06",
+      "title": "JFT-Basic A2 - Paket 6",
+      "subtitle": "Simulasi Full: Logika & Situasi Kompleks",
+      "category": "Official Bank",
+      "color": "linear-gradient(135deg, #1D976C 0%, #93F9B9 100%)",
+      "icon": "fas fa-cogs",
+      "duration": 60,
+      "sections": [
+        {
+          "name": "Script & Vocabulary",
+          "questions": [
+            { "id": "v1", "type": "text", "text": "「荷物」を 持ちます。", "translation": "Membawa barang", "options": ["かぶつ", "にもつ", "なつもの", "くだもの"], "answer": 1, "explanation": "荷物 = にもつ (Nimotsu)." },
+            { "id": "v2", "type": "text", "text": "絵に 「触らないで」 ください。", "translation": "Jangan sentuh lukisan", "options": ["さわらないで", "わらないで", "とらないで", "まわらないで"], "answer": 0, "explanation": "触らないで = さわらないで (Sawaranaide)." },
+            { "id": "v3", "type": "text", "text": "「夫」は 会社員です。", "translation": "Suami saya karyawan", "options": ["おっと", "ちち", "そふ", "おとうと"], "answer": 0, "explanation": "夫 = おっと (Otto)." },
+            { "id": "v4", "type": "text", "text": "「招待」状を 送ります。", "translation": "Mengirim undangan", "options": ["しょうたい", "じゅんび", "しんぱい", "そんけい"], "answer": 0, "explanation": "招待 = しょうたい (Shoutai)." },
+            { "id": "v5", "type": "text", "text": "「静か」な 部屋。", "translation": "Kamar yang tenang", "options": ["きよか", "しずか", "たしか", "あきらか"], "answer": 1, "explanation": "静か = しずか (Shizuka)." },
+            { "id": "v6", "type": "text", "text": "「洗濯機」を 買いました。", "translation": "Membeli mesin cuci", "options": ["せんたっき", "そうじき", "せんぷうき", "じはんき"], "answer": 0, "explanation": "洗濯機 = せんたっき (Sentakki)." },
+            { "id": "v7", "type": "text", "text": "「遅れて」 すみません。", "translation": "Maaf terlambat", "options": ["わすれて", "おくれて", "つかれて", "こわれて"], "answer": 1, "explanation": "遅れて = おくれて (Okurete)." },
+            { "id": "v8", "type": "text", "text": "「空港」へ 行きます。", "translation": "Pergi ke bandara", "options": ["みなと", "くうこう", "ひこうき", "かいじょう"], "answer": 1, "explanation": "空港 = くうこう (Kuukou)." },
+            { "id": "v9", "type": "text", "text": "「禁煙」 席。", "translation": "Area dilarang merokok", "options": ["きんえん", "きつえん", "こうえん", "ていいん"], "answer": 0, "explanation": "禁煙 = きんえん (Kin'en)." },
+            { "id": "v10", "type": "text", "text": "「特別」な 日。", "translation": "Hari spesial", "options": ["とくべつ", "べつべつ", "とっきゅう", "とくに"], "answer": 0, "explanation": "特別 = とくべつ (Tokubetsu)." },
+            { "id": "v11", "type": "text", "text": "「帽子」を かぶります。", "translation": "Memakai topi", "options": ["くつした", "ぼうし", "てぶくろ", "めがね"], "answer": 1, "explanation": "帽子 = ぼうし (Boushi)." },
+            { "id": "v12", "type": "text", "text": "「残念」ですが、行けません。", "translation": "Sayang sekali, tidak bisa pergi", "options": ["あんぜん", "ざんねん", "ぜんぜん", "たぶん"], "answer": 1, "explanation": "残念 = ざんねん (Zannen)." },
+            { "id": "v13", "type": "text", "text": "「遊園地」で 遊びます。", "translation": "Bermain di taman hiburan", "options": ["どうぶつえん", "ゆうえんち", "こうえん", "びじゅつかん"], "answer": 1, "explanation": "遊園地 = ゆうえんち (Yuuenchi)." },
+            { "id": "v14", "type": "text", "text": "「細かい」 お金。", "translation": "Uang receh/kecil", "options": ["ちいさい", "こまかい", "みじかい", "かるい"], "answer": 1, "explanation": "細かい = こまかい (Komakai)." },
+            { "id": "v15", "type": "text", "text": "「支度」を します。", "translation": "Bersiap-siap", "options": ["したく", "じたく", "しごと", "しじ"], "answer": 0, "explanation": "支度 = したく (Shitaku)." }
+          ]
+        },
+        {
+          "name": "Conversation",
+          "questions": [
+            { "id": "c1", "type": "text", "text": "A: お邪魔します。<br>B: ________", "translation": "Permisi (masuk rumah) -> ...", "options": ["いってらっしゃい", "どうぞ お上がりください", "おかえりなさい", "失礼します"], "answer": 1, "explanation": "Douzo oagari kudasai (Silakan masuk/naik)." },
+            { "id": "c2", "type": "text", "text": "A: この ペン、使っても いいですか。<br>B: ________", "translation": "Boleh pakai pena ini? -> ...", "options": ["はい、どうぞ", "いいえ、使います", "はい、借りてください", "ペンです"], "answer": 0, "explanation": "Memberi izin: Hai, douzo." },
+            { "id": "c3", "type": "text", "text": "A: 日本の 食べ物は どうですか。<br>B: ________", "translation": "Bagaimana makanan Jepang? -> ...", "options": ["食べました", "おいしいですが、高いです", "日本料理です", "食べたいです"], "answer": 1, "explanation": "Memberikan pendapat/kesan (Oishii desu ga...)." },
+            { "id": "c4", "type": "text", "text": "A: 明日の 会議、3時に 変更しても いいですか。<br>B: ________", "translation": "Rapat besok boleh diganti jam 3? -> ...", "options": ["3時ですね。わかりました", "いいえ、3時です", "はい、変更しません", "会議があります"], "answer": 0, "explanation": "Menyetujui perubahan: San-ji desu ne. Wakarimashita." },
+            { "id": "c5", "type": "text", "text": "A: 道が 混んでいて、遅れそうです。<br>B: ________", "translation": "Jalan macet, sepertinya terlambat -> ...", "options": ["おめでとうございます", "気をつけて 来てください", "早く 帰ってください", "遅いですね"], "answer": 1, "explanation": "Respon perhatian: Ki o tsukete kite kudasai (Hati-hati di jalan)." },
+            { "id": "c6", "type": "text", "text": "A: 誰に その 話を 聞きましたか。<br>B: ________", "translation": "Dengar cerita itu dari siapa? -> ...", "options": ["田中さんに 聞きました", "田中さんを 聞きました", "田中さんが 聞きました", "田中さんへ 聞きました"], "answer": 0, "explanation": "...ni kikimashita (Mendengar dari ...)." },
+            { "id": "c7", "type": "text", "text": "A: 部屋が 暑いですね。<br>B: じゃあ、________", "translation": "Kamar panas ya -> Kalau begitu, ...", "options": ["窓を 閉めましょう", "エアコンを つけましょう", "電気を 消しましょう", "コートを 着ましょう"], "answer": 1, "explanation": "Menyalakan AC (Air conditioner)." },
+            { "id": "c8", "type": "text", "text": "A: 週末は どこにも 行きませんでした。<br>B: ________", "translation": "Akhir pekan tidak ke mana-mana -> ...", "options": ["それは よかったですね", "それは 残念でしたね", "どこへ 行きましたか", "忙しかったですか"], "answer": 3, "explanation": "Isogashikatta desu ka (Apakah sibuk?) - tebakan logis kenapa tidak pergi." },
+            { "id": "c9", "type": "text", "text": "A: いつ 日本へ 来たんですか。<br>B: ________", "translation": "Kapan datang ke Jepang? -> ...", "options": ["半年前です", "半年かかります", "半年います", "半年後です"], "answer": 0, "explanation": "Hantoshi mae desu (Setengah tahun yang lalu)." },
+            { "id": "c10", "type": "text", "text": "A: 何か 飲みませんか。<br>B: ________", "translation": "Mau minum sesuatu? -> ...", "options": ["はい、飲みましょう", "ええ、そうですね", "喉が渇きましたね", "ありがとうございます"], "answer": 0, "explanation": "Menerima ajakan: Hai, nomimashou." },
+            { "id": "c11", "type": "text", "text": "A: あの 映画、もう 見ましたか。<br>B: いいえ、________", "translation": "Sudah nonton film itu? -> Tidak, ...", "options": ["見ました", "見たいです", "まだです", "見ません"], "answer": 2, "explanation": "Iie, mada desu (Belum)." },
+            { "id": "c12", "type": "text", "text": "A: 駅まで バスで どのくらいですか。<br>B: ________", "translation": "Ke stasiun naik bus berapa lama? -> ...", "options": ["200円です", "15分くらいです", "10キロです", "バス停です"], "answer": 1, "explanation": "Menanyakan durasi: 15-fun kurai desu." },
+            { "id": "c13", "type": "text", "text": "A: どんな 音楽が 好きですか。<br>B: ________", "translation": "Suka musik apa? -> ...", "options": ["音楽は 楽しいです", "静かな 曲が 好きです", "歌を 歌います", "あまり 聞きません"], "answer": 1, "explanation": "Shizuka na kyoku (Lagu yang tenang)." },
+            { "id": "c14", "type": "text", "text": "A: 明日の テスト、頑張ってね。<br>B: ________", "translation": "Semangat tes besok ya -> ...", "options": ["はい、頑張ります", "いいえ、頑張りません", "おめでとう", "どういたしまして"], "answer": 0, "explanation": "Hai, ganbarimasu." },
+            { "id": "c15", "type": "text", "text": "A: すみません、醤油を 取ってください。<br>B: ________", "translation": "Tolong ambilkan kecap asin -> ...", "options": ["はい、どうぞ", "これですね", "醤油です", "ください"], "answer": 0, "explanation": "Hai, douzo (sambil memberikan)." }
+          ]
+        },
+        {
+          "name": "Listening (Multi-Voice)",
+          "questions": [
+            {
+              "id": "l1",
+              "type": "audio",
+              "script": "[N]男の人と 女の人が 電車の中で 話しています。二人は どこで 降りますか。[M]次は 新宿だね。ここで 降りて、映画を 見ようか。[F]えー、新宿は 人が 多いから 嫌だよ。それより、次の 駅の 公園へ 行かない？ 今日は 天気が いいし。[M]公園か。いいね。じゃあ、映画は やめて、散歩しよう。[F]うん。じゃあ、新宿の 次まで 行こう。[M]わかった。降りる 準備を しよう。",
+              "text": "<strong>[電車]</strong><br>二人は どこで 降りますか。",
+              "translation": "Di mana mereka turun?",
+              "options": ["新宿", "新宿の次の駅", "映画館", "公園"],
+              "answer": 1,
+              "explanation": "Shinjuku no tsugi (Setelah Shinjuku) untuk ke taman."
+            },
+            {
+              "id": "l2",
+              "type": "audio",
+              "script": "[N]店で 女の人が 服を 選んでいます。女の人は どの 服を 買いますか。[F]すみません、この 白い シャツを ください。[M]はい。サイズは Mと Lが ございますが。[F]Mサイズを お願いします。あ、待ってください。やっぱり、汚れやすいから、白はやめます。同じ デザインの 青い シャツは ありますか。[M]はい、青も ございます。サイズは Mで よろしいですか。[F]はい、青の Mを ください。",
+              "text": "<strong>[買い物]</strong><br>女の人は どの 服を 買いますか。",
+              "translation": "Wanita beli baju apa?",
+              "options": ["白のMサイズ", "白のLサイズ", "青のMサイズ", "青のLサイズ"],
+              "answer": 2,
+              "explanation": "Berubah pikiran dari putih ke biru (Ao), ukuran tetap M."
+            },
+            {
+              "id": "l3",
+              "type": "audio",
+              "script": "[N]電話で 母親と 息子が 話しています。息子は 今晩 何を しますか。[F]もしもし、たけし？ 今日の 晩ごはん、家で 食べる？[M]ううん、今日は 友達と 食べて帰るから、いらないよ。[F]そう。じゃあ、遅くなるの？[M]うん、カラオケにも 行くから、帰りは 11時ごろに なると思う。[F]わかった。気をつけて 帰ってきなさいよ。鍵は 持ってる？[M]うん、持ってるよ。じゃあね。",
+              "text": "<strong>[電話]</strong><br>息子は 今晩 何を しますか。",
+              "translation": "Apa yang dilakukan anak laki-laki malam ini?",
+              "options": ["家でごはんを食べる", "友達とごはんを食べて、カラオケに行く", "すぐに帰る", "仕事をする"],
+              "answer": 1,
+              "explanation": "Makan dengan teman, lalu karaoke."
+            },
+            {
+              "id": "l4",
+              "type": "audio",
+              "script": "[N]会社で 男の人と 女の人が 話しています。男の人は 昼ごはんに 何を 食べますか。[F]山田さん、もう お昼ですね。一緒に 食堂へ 行きませんか。[M]すみません、僕は まだ 仕事が 終わらないんです。[F]そうですか。じゃあ、何か 買ってきましょうか。パンとか、おにぎりとか。[M]ありがとうございます。じゃあ、サンドイッチと コーヒーを お願いできますか。食べながら 仕事を します。[F]わかりました。",
+              "text": "<strong>[昼ごはん]</strong><br>男の人は 昼ごはんに 何を 食べますか。",
+              "translation": "Pria makan apa untuk makan siang?",
+              "options": ["食堂の定食", "おにぎりとお茶", "サンドイッチとコーヒー", "パンとジュース"],
+              "answer": 2,
+              "explanation": "Sandwich dan Kopi (nitip beli)."
+            },
+            {
+              "id": "l5",
+              "type": "audio",
+              "script": "[N]病院で 受付の人と 男の人が 話しています。男の人は どの 待合室へ 行きますか。[F]田中様、受付が 終わりましたので、2階の 診察室の 前で お待ちください。[M]2階ですね。階段は どこですか。[F]あちらの エレベーターの 横に ございます。内科の 待合室は 3番です。[M]3番ですね。わかりました。[F]お名前を お呼びしますので、そこから 動かないで くださいね。[M]はい。",
+              "text": "<strong>[病院]</strong><br>男の人は どの 待合室へ 行きますか。",
+              "translation": "Pria pergi ke ruang tunggu nomor berapa?",
+              "options": ["1番", "2番", "3番", "4番"],
+              "answer": 2,
+              "explanation": "Ruang tunggu penyakit dalam (Naika) nomor 3."
+            },
+            {
+              "id": "l6",
+              "type": "audio",
+              "script": "[N]教室で 先生が 学生に 話しています。学生は 作文を どのように 出しますか。[M]来週の 月曜日に 作文を 出してください。作文は パソコンで 書いて、メールで 送って ください。手書きは ダメですよ。必ず ワード(Word)の ファイルで 送ること。写真は 貼らなくても いいです。",
+              "text": "<strong>[宿題]</strong><br>学生は 作文を どのように 出しますか。",
+              "translation": "Bagaimana siswa mengumpulkan karangan?",
+              "options": ["紙に書いて出す", "パソコンで書いて印刷して出す", "メールで送る", "写真を貼って出す"],
+              "answer": 2,
+              "explanation": "Mail de okutte kudasai (Kirim via email)."
+            },
+            {
+              "id": "l7",
+              "type": "audio",
+              "script": "[N]女の人と 男の人が 引っ越しの 手伝いについて 話しています。男の人は 何を 持っていきますか。[M]日曜日の 引っ越し、手伝いに行くよ。何か 道具は いる？[F]ありがとう。ドライバーは 持っているから いいんだけど、軍手（ぐんて）が 足りないの。[M]軍手だね。わかった。あと、掃除用の 雑巾（ぞうきん）は？[F]雑巾は たくさん あるから 大丈夫。軍手だけ お願い。[M]了解。買っていくよ。",
+              "text": "<strong>[引っ越し]</strong><br>男の人は 何を 持っていきますか。",
+              "translation": "Pria bawa apa?",
+              "options": ["ドライバー", "軍手", "雑巾", "全部"],
+              "answer": 1,
+              "explanation": "Gunte (Sarung tangan kerja). Obeng dan lap sudah ada."
+            },
+            {
+              "id": "l8",
+              "type": "audio",
+              "script": "[N]交番で 女の人が お巡りさんと 話しています。財布は どこで 見つかりましたか。[F]すみません、落とした 財布が 見つかったと 連絡が あったんですが。[M]お名前は？[F]林です。赤い 財布です。[M]ああ、林さんですね。届いていますよ。公園の ベンチの 下に 落ちていたそうです。[F]公園ですか。よかった。バスの中に 忘れたと 思っていました。[M]散歩している人が 拾ってくれました。",
+              "text": "<strong>[落とし物]</strong><br>財布は どこで 見つかりましたか。",
+              "translation": "Dompet ditemukan di mana?",
+              "options": ["バスの中", "交番の前", "公園のベンチの下", "道の上"],
+              "answer": 2,
+              "explanation": "Kouen no benchi no shita (Di bawah bangku taman)."
+            },
+            {
+              "id": "l9",
+              "type": "audio",
+              "script": "[N]天気予報を 聞いています。明日は どんな 天気に なりますか。[F]明日の 天気です。朝から 昼までは よく 晴れるでしょう。しかし、夕方から 風が 強くなり、夜には 台風が 来る 可能性があります。夜の 外出は 控えてください。雨も 激しく 降るでしょう。",
+              "text": "<strong>[天気予報]</strong><br>明日の 夜は どんな 天気に なりますか。",
+              "translation": "Cuaca MALAM besok bagaimana?",
+              "options": ["晴れ", "曇り", "風が弱くなる", "台風が来る（風と雨）"],
+              "answer": 3,
+              "explanation": "Yoru ni wa taifuu ga kuru (Topan datang malam hari)."
+            },
+            {
+              "id": "l10",
+              "type": "audio",
+              "script": "[N]会社で 女の人が 男の人に 電話を しています。男の人は これから どうしますか。[F]もしもし、田中さん？ 今 どこ？ 会議が 始まるよ。[M]すみません、今 電車が 止まってしまって、動かないんです。[F]えっ、そうなの？ どれくらい 遅れそう？[M]わかりません。まだ しばらく 動きそうに ありません。[F]わかった。じゃあ、今日は 無理しないで、家に 帰って 在宅勤務に 切り替えて。[M]わかりました。戻ります。",
+              "text": "<strong>[電話]</strong><br>男の人は これから どうしますか。",
+              "translation": "Apa yang dilakukan pria?",
+              "options": ["会社へ行く", "家に帰って仕事をする", "駅で待つ", "遊びに行く"],
+              "answer": 1,
+              "explanation": "Ie ni kaette zaitaku kinmu (Pulang dan kerja dari rumah/WFH)."
+            },
+            {
+              "id": "l11",
+              "type": "audio",
+              "script": "[N]レストランで 女の人が デザートを 注文しています。女の人は 何を 頼みましたか。[M]食後の デザートは いかがですか。[F]そうですね。アイスクリームは ありますか。[M]はい、バニラと 抹茶が ございます。[F]じゃあ、バニラを お願いします。あ、やっぱり ケーキセットに します。チーズケーキと 紅茶で。[M]かしこまりました。チーズケーキと 紅茶ですね。",
+              "text": "<strong>[レストラン]</strong><br>女の人は 何を 頼みましたか。",
+              "translation": "Wanita pesan apa?",
+              "options": ["バニラアイス", "抹茶アイス", "チーズケーキと紅茶", "チーズケーキとコーヒー"],
+              "answer": 2,
+              "explanation": "Berubah pikiran dari es krim ke Cake Set (Cheese cake + Teh)."
+            },
+            {
+              "id": "l12",
+              "type": "audio",
+              "script": "[N]男の人と 女の人が 映画館で 話しています。ポップコーンは どの サイズを 買いますか。[M]映画の 前に ポップコーン 買おうよ。[F]いいね。サイズは どうする？ S、M、Lが あるけど。[M]僕は お腹が 空いているから Lが いいな。[F]えー、Lは 大きすぎるよ。食べきれないよ。Mに しようよ。[M]うーん、じゃあ Mで いいよ。そのかわり、飲み物は Lに してね。[F]わかった。",
+              "text": "<strong>[映画館]</strong><br>ポップコーンは どの サイズを 買いますか。",
+              "translation": "Beli popcorn ukuran apa?",
+              "options": ["Sサイズ", "Mサイズ", "Lサイズ", "買わない"],
+              "answer": 1,
+              "explanation": "Sepakat beli M (L terlalu besar)."
+            },
+            {
+              "id": "l13",
+              "type": "audio",
+              "script": "[N]留学生が 先生と 話しています。留学生は どんな アルバイトを 探していますか。[M]先生、アルバイトを 探しているんですが、いい 仕事は ありませんか。[F]どんな 仕事が したいの？[M]日本語を たくさん 使う 仕事が いいです。コンビニとか、レストランとか。[F]工場の 仕事は どう？ 時給が高いよ。[M]工場は 日本語を あまり 使わないので、ちょっと……。やっぱり お客さんと 話す 仕事が したいです。[F]わかった。探してみるね。",
+              "text": "<strong>[相談]</strong><br>留学生は どんな アルバイトを 探していますか。",
+              "translation": "Mencari kerja yang bagaimana?",
+              "options": ["時給が高い仕事", "工場での仕事", "日本語を使って話す仕事", "楽な仕事"],
+              "answer": 2,
+              "explanation": "Nihongo o takusan tsukau... okyakusan to hanasu (Pakai Bhs Jepang, bicara dengan tamu)."
+            },
+            {
+              "id": "l14",
+              "type": "audio",
+              "script": "[N]駅で アナウンスが 流れています。エスカレーターを 利用する 人は どうしなければ なりませんか。[M]お客様に お願いいたします。エスカレーターを ご利用の 際は、黄色い 線の 内側に 立って、手すりに つかまって ください。エスカレーターの上を 歩いたり 走ったり すると 危ないです。小さなお子様とは 手をつないで 乗ってください。",
+              "text": "<strong>[駅]</strong><br>エスカレーターを 利用する 人は どうしなければ なりませんか。",
+              "translation": "Orang yang pakai eskalator harus apa?",
+              "options": ["歩く", "走る", "手すりにつかまる", "黄色い線の外側に立つ"],
+              "answer": 2,
+              "explanation": "Tesuri ni tsukamatte (Pegang handrail/pegangan)."
+            },
+            {
+              "id": "l15",
+              "type": "audio",
+              "script": "[N]男の人と 女の人が 子犬について 話しています。どの子犬を 選びましたか。[F]見て、あの子犬。耳が長くて 可愛い。[M]本当だ。でも、こっちの 耳が立っている 犬も 元気そうで いいよ。[F]うーん、元気すぎるのは 大変だよ。やっぱり さっきの 耳が 垂れている おとなしそうな 子が いいな。目が 茶色い 子。[M]わかった。君が 世話をするんだから、その子に しよう。",
+              "text": "<strong>[ペットショップ]</strong><br>どの子犬を 選びましたか。",
+              "translation": "Pilih anak anjing yang mana?",
+              "options": ["耳が立っていて元気な子", "耳が垂れていておとなしい子", "目が黒い子", "一番大きい子"],
+              "answer": 1,
+              "explanation": "Mimi ga tareteiru (Telinga turun/floppy), otonashisou (terlihat tenang)."
+            }
+          ]
+        },
+        {
+          "name": "Reading (Dokkai)",
+          "questions": [
+            {
+              "id": "r1",
+              "type": "text",
+              "text": "<strong>[注意書き]</strong><br><br>「ゴミの分別にご協力ください」<br>・燃えるゴミ（紙、生ゴミなど）は 赤い袋<br>・プラスチックゴミは 青い袋<br>・ビン、カンは 透明な袋<br>※袋の口は しっかり 縛って 出してください。",
+              "translation": "Plastik dibuang pakai kantong warna apa?",
+              "options": ["赤い袋", "青い袋", "透明な袋", "黒い袋"],
+              "answer": 1,
+              "explanation": "Plastic = Aoi fukuro (Kantong biru)."
+            },
+            {
+              "id": "r2",
+              "type": "text",
+              "text": "<strong>[メール]</strong><br><br>件名: お祝い<br>田中さん、ご結婚 おめでとうございます。<br>式には 出席できなくて 残念です。<br>ささやかですが、お祝いの 品を 送りました。<br>奥様と 一緒に 使ってください。<br>お幸せに。<br>鈴木",
+              "translation": "Suzuki mengirim apa?",
+              "options": ["結婚式の招待状", "お金", "お祝いの品（プレゼント）", "写真"],
+              "answer": 2,
+              "explanation": "Oiwai no shina (Barang hadiah/kado)."
+            },
+            {
+              "id": "r3",
+              "type": "text",
+              "text": "<strong>[日記]</strong><br><br>今日は 日本語の スピーチコンテストでした。<br>とても 緊張しましたが、練習通りに 話すことが できました。<br>結果は 2位でした。<br>優勝できなくて 悔しいですが、来年は もっと 頑張りたいです。",
+              "translation": "Bagaimana perasaan penulis?",
+              "options": ["優勝して嬉しい", "緊張して話せなかった", "2位で悔しいが、来年頑張りたい", "もう出たくない"],
+              "answer": 2,
+              "explanation": "Kuyashii (kesal/kecewa tidak menang 1) tapi ingin Ganbaru (berjuang) tahun depan."
+            },
+            {
+              "id": "r4",
+              "type": "text",
+              "text": "<strong>[レシピ]</strong><br><br>「肉じゃが」<br>1. ジャガイモ、ニンジン、玉ねぎを 切ります。<br>2. 鍋で 肉を 炒めてから、野菜を 入れます。<br>3. 水と 調味料（醤油、砂糖、酒）を 入れて 煮ます。<br>4. ジャガイモが 柔らかくなったら 出来上がりです。",
+              "translation": "Kapan bumbu dimasukkan?",
+              "options": ["一番最初", "肉を炒める前", "野菜を入れたあと（水と一緒に）", "食べる直前"],
+              "answer": 2,
+              "explanation": "Mizu to Choumiryou o irete (Masukkan air dan bumbu) setelah menumis."
+            },
+            {
+              "id": "r5",
+              "type": "text",
+              "text": "<strong>[求人広告]</strong><br><br>「清掃スタッフ募集」<br>ホテルの 部屋を 掃除する 仕事です。<br>時間： 朝 9時 ～ 昼 3時<br>時給： 1,000円 （交通費 全額 支給）<br>※土日 祝日 出勤できる方 優先します。",
+              "translation": "Apa keuntungan (benefit) pekerjaan ini?",
+              "options": ["昼ごはんが出る", "交通費が出る", "ホテルに泊まれる", "ボーナスがある"],
+              "answer": 1,
+              "explanation": "Koutsuuhi zen-gaku shikyuu (Ongkos transport dibayar penuh)."
+            },
+            {
+              "id": "r6",
+              "type": "text",
+              "text": "<strong>[アパートの掲示板]</strong><br><br>「断水のお知らせ」<br>水道管の 工事のため、次の 時間は 水が 使えません。<br>日時： 8月10日（水） 午後 1時 ～ 4時<br>トイレや お風呂も 使えませんので、ご注意ください。<br>飲み水は 前もって 用意して おいてください。",
+              "translation": "Apa yang harus dilakukan sebelum jam 1 siang?",
+              "options": ["水を飲まない", "水を溜めておく（用意する）", "工事を手伝う", "出かける"],
+              "answer": 1,
+              "explanation": "Maemotte youi shite (Siapkan/tampung air sebelumnya)."
+            },
+            {
+              "id": "r7",
+              "type": "text",
+              "text": "<strong>[チャット]</strong><br><br>A: 今度の日曜日、空いてる？<br>B: うん、空いてるよ。どうしたの？<br>A: 新しい カフェが できたから、行ってみない？<br>B: いいね。パンケーキが 美味しい お店だよね？<br>A: そうそう。じゃあ、11時に 駅で 会おう。",
+              "translation": "Apa tujuan mereka bertemu?",
+              "options": ["映画を見る", "パンケーキを食べる（カフェに行く）", "勉強する", "仕事をする"],
+              "answer": 1,
+              "explanation": "Pancake ga oishii omise... Kafe e iku."
+            },
+            {
+              "id": "r8",
+              "type": "text",
+              "text": "<strong>[薬の説明]</strong><br><br>目薬（めぐすり）<br>1回 1滴～2滴、1日 4回 点眼（てんがん）して ください。<br>※コンタクトレンズを つけたまま 使わないで ください。<br>※開封後は 1ヶ月以内に 使い切って ください。",
+              "translation": "Apa peringatan penggunaan obat ini?",
+              "options": ["たくさん入れてもいい", "コンタクトをしたまま使わない", "1年使える", "寝る前に使う"],
+              "answer": 1,
+              "explanation": "Contact lens o tsuketa mama tsukawanaide (Jangan pakai saat menggunakan kontak lens)."
+            },
+            {
+              "id": "r9",
+              "type": "text",
+              "text": "<strong>[アンケート]</strong><br><br>「日本語の 勉強で 何が 一番 難しいですか」<br>1位： 漢字（40%）<br>2位： 敬語（30%）<br>3位： 聴解（20%）<br>4位： 会話（10%）",
+              "translation": "Apa yang paling sulit menurut survei?",
+              "options": ["会話", "聴解", "敬語", "漢字"],
+              "answer": 3,
+              "explanation": "Kanji (40%) paling tinggi."
+            },
+            {
+              "id": "r10",
+              "type": "text",
+              "text": "<strong>[手紙]</strong><br><br>先生へ<br>先日は お見舞い ありがとう ございました。<br>おかげさまで、怪我も 治り、明日 退院できることに なりました。<br>来週からは 学校にも 行けます。<br>休んでいる間の 勉強が 心配ですが、頑張ります。",
+              "translation": "Penulis sekarang ada di mana?",
+              "options": ["学校", "家", "病院", "外国"],
+              "answer": 2,
+              "explanation": "Ashita taiin (Besok keluar RS), berarti sekarang masih di RS (Byouin)."
+            },
+            {
+              "id": "r11",
+              "type": "text",
+              "text": "<strong>[店のお知らせ]</strong><br><br>「臨時休業（りんじきゅうぎょう）」<br>誠に 勝手ながら、店主 病気のため、当分の間 お休みさせていただきます。<br>営業再開の日時は、決まり次第 店頭（てんとう）に 掲示します。<br>ご迷惑を おかけします。",
+              "translation": "Kenapa toko tutup?",
+              "options": ["定休日だから", "店主が病気だから", "改装工事だから", "旅行に行くから"],
+              "answer": 1,
+              "explanation": "Tenshu byouki no tame (Karena pemilik sakit)."
+            },
+            {
+              "id": "r12",
+              "type": "text",
+              "text": "<strong>[作文]</strong><br><br>私の 夢は、自分の 店を 持つことです。<br>日本で 料理の 勉強を して、国へ 帰ったら 日本料理の レストランを 開きたいです。<br>そのために、今は 毎日 レストランで アルバイトを して、お金を 貯めています。",
+              "translation": "Apa yang dilakukan penulis sekarang untuk mimpinya?",
+              "options": ["店を開いた", "国へ帰った", "アルバイトをして貯金している", "料理を教えている"],
+              "answer": 2,
+              "explanation": "Arubaito o shite, okane o tamete imasu (Kerja paruh waktu dan menabung)."
+            },
+            {
+              "id": "r13",
+              "type": "text",
+              "text": "<strong>[スケジュール]</strong><br><br>月： 会議（10:00）<br>火： 出張（大阪）<br>水： デスクワーク<br>木： 客先 訪問（14:00）<br>金： 休み",
+              "translation": "Kapan orang ini pergi ke大阪?",
+              "options": ["月曜日", "火曜日", "水曜日", "木曜日"],
+              "answer": 1,
+              "explanation": "Ka: Shucchou (Osaka) -> Selasa."
+            },
+            {
+              "id": "r14",
+              "type": "text",
+              "text": "<strong>[会話文]</strong><br><br>客： 「すみません、この Ｔシャツは いくらですか。」<br>店員： 「それは 2000円ですが、今日だけ 1000円に なっています。」<br>客： 「安いですね。じゃあ、これを 2枚 ください。」<br>店員： 「ありがとうございます。2000円に なります。」",
+              "translation": "Berapa total yang harus dibayar tamu?",
+              "options": ["1000円", "2000円", "3000円", "4000円"],
+              "answer": 1,
+              "explanation": "1000 yen x 2 lembar = 2000 yen."
+            },
+            {
+              "id": "r15",
+              "type": "text",
+              "text": "<strong>[標識]</strong><br><br>「関係者以外 立入禁止」<br>（かんけいしゃ いがい たちいり きんし）<br>ここは 職員の 部屋です。<br>用事の ある 方は、受付に 声を かけてください。",
+              "translation": "Siapa yang boleh masuk bebas?",
+              "options": ["誰でも", "客", "職員（関係者）", "学生"],
+              "answer": 2,
+              "explanation": "Kankeisha (Pihak terkait/Staf) boleh, selain itu dilarang."
+            }
+          ]
+        }
+      ]
     }
+
   ]
 }
