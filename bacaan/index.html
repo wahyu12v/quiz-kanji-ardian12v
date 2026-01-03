@@ -224,104 +224,60 @@
     </div>
 
     
-    <div class="modal fade" id="versionModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content rounded-5 border-0 shadow-lg overflow-hidden">
-          <div class="modal-body p-5 text-center relative">
-            <button
-              type="button"
-              class="btn-close position-absolute top-0 end-0 m-4"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-              style="z-index: 10"
-            ></button>
+<div class="modal fade" id="versionChoiceModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="border: none; border-radius: 28px; box-shadow: 0 20px 60px rgba(0,0,0,0.15); overflow: hidden;">
+                
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position: absolute; top: 25px; right: 25px; z-index: 10; opacity: 0.5;"></button>
 
-            <div class="modal-hero-icon mb-4">
-              <i class="fas fa-book-reader"></i>
-            </div>
+                <div class="modal-body text-center p-4 p-md-5">
+                    
+                    <div class="mx-auto mb-4 d-flex align-items-center justify-content-center" style="width: 80px; height: 80px; background: #eef7ff; border-radius: 50%; color: #0072FF; font-size: 2rem; box-shadow: 0 0 0 10px rgba(0, 114, 255, 0.05);">
+                        <i class="fas fa-book-reader"></i>
+                    </div>
 
-            <h3 class="fw-bold mb-3" style="color: #2c3e50">
-              Pilih Pengalaman Baca
-            </h3>
-            <p class="text-muted mb-5" style="font-size: 1.1rem">
-              Sesuaikan cerita dengan level membacamu saat ini.
-            </p>
+                    <h4 class="fw-bold mb-2" id="modal-story-title" style="color: #2c3e50; font-weight: 800; letter-spacing: -0.5px;">Pilih Pengalaman Baca</h4>
+                    <p class="text-muted mb-5" style="font-size: 0.95rem; line-height: 1.6; max-width: 90%; margin: 0 auto;">
+                        Sesuaikan cerita dengan level membacamu saat ini.
+                    </p>
+                    
+                    <div class="d-grid gap-3">
+                        
+                        <button id="btn-choice-short" class="btn position-relative" style="
+                            padding: 16px; 
+                            border-radius: 50px; 
+                            border: 2px solid #0072FF; 
+                            background: white; 
+                            color: #0072FF; 
+                            font-weight: 700; 
+                            font-size: 1rem; 
+                            transition: all 0.2s;
+                        ">
+                            <i class="fas fa-seedling me-2"></i> Versi Singkat
+                            <span id="badge-short-missing" class="position-absolute top-50 end-0 translate-middle-y me-3 badge bg-light text-muted" style="display:none; border-radius: 20px; font-weight: normal;">Tidak Ada</span>
+                        </button>
+                        
+                        <button id="btn-choice-long" class="btn position-relative" style="
+                            padding: 16px; 
+                            border-radius: 50px; 
+                            border: none; 
+                            background: linear-gradient(135deg, #00C6FF 0%, #0072FF 100%); 
+                            color: white; 
+                            font-weight: 700; 
+                            font-size: 1rem; 
+                            box-shadow: 0 10px 20px rgba(0, 114, 255, 0.25);
+                            transition: all 0.2s;
+                        ">
+                            <i class="fas fa-book-open me-2"></i> Versi Panjang
+                            <span id="badge-long-missing" class="position-absolute top-50 end-0 translate-middle-y me-3 badge bg-white text-muted" style="display:none; border-radius: 20px; font-weight: normal;">Tidak Ada</span>
+                        </button>
 
-            <div class="d-grid gap-4">
-              <button
-                id="btn-pilih-singkat"
-                class="btn btn-outline-primary btn-lg py-3 rounded-pill fw-bold d-flex align-items-center justify-content-center gap-3 modal-choice-btn"
-                data-bs-dismiss="modal"
-              >
-                <i class="fas fa-seedling fs-4"></i>
-                <div class="text-start">
-                  <div class="fs-5">Versi Singkat</div>
+                    </div>
                 </div>
-              </button>
-
-              <button
-                id="btn-pilih-panjang"
-                class="btn btn-primary-gradient btn-lg py-3 rounded-pill fw-bold d-flex align-items-center justify-content-center gap-3 modal-choice-btn text-white"
-                data-bs-dismiss="modal"
-                style="border: none"
-              >
-                <i class="fas fa-book-open fs-4"></i>
-                <div class="text-start">
-                  <div class="fs-5">Versi Panjang</div>
-                </div>
-              </button>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-    <style>
-      /* --- STYLING MODAL BARU --- */
 
-      /* Membuat sudut modal lebih bulat */
-      .rounded-5 {
-        border-radius: 2rem !important;
-      }
-
-      /* Style untuk Ikon Besar di atas modal */
-      .modal-hero-icon {
-        font-size: 5rem;
-        /* Menggunakan gradient utama aplikasi Anda */
-        background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        /* Efek bayangan halus di bawah ikon */
-        filter: drop-shadow(0 10px 15px rgba(0, 114, 255, 0.2));
-      }
-
-      /* Style tambahan untuk tombol pilihan */
-      .modal-choice-btn {
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-      }
-
-      /* Efek hover agar tombol sedikit naik */
-      .modal-choice-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-      }
-
-      /* Khusus untuk tombol outline saat hover */
-      .btn-outline-primary.modal-choice-btn:hover {
-        background-color: #f0f7ff; /* Warna biru sangat muda */
-        color: var(--primary-color); /* Tetap biru teksnya */
-        box-shadow: 0 10px 20px rgba(0, 114, 255, 0.15);
-      }
-
-      /* Khusus untuk tombol gradient saat hover */
-      .btn-primary-gradient.modal-choice-btn:hover {
-        /* Menggunakan style hover yang sudah ada di CSS Anda sebelumnya, 
-       ditambah shadow yang lebih besar */
-        box-shadow: 0 15px 30px rgba(0, 114, 255, 0.4) !important;
-        color: white !important;
-      }
-    </style>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="main.js"></script>

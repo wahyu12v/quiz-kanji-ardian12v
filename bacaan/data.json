@@ -179,5 +179,96 @@
     "template": "10[[月|がつ]]は [[スポーツ|すぽーつ]]の [[季節|きせつ]]です。[[私|わたし]]の [[町|まち]]で [[運動会|うんどうかい]]が ありました。みんな 参加しました。[[リレー|りれー]]や 綱引きが ありました。[[私|わたし]]は [[赤|あか]][[チーム|ちーむ]]に 入りました。[[私|わたし]]たちは「[[頑張|がんば]]れ！」と [[叫|さけ]]びました。[[昼|ひる]]に [[外|そと]]で [[一緒|いっしょ]]に お[[弁当|べんとう]]を [[食|た]]べました。[[赤|あか]][[チーム|ちーむ]]が 勝ちました。[[疲|つか]]れましたが、とても [[楽|たの]]しかったです。",
     "icon": "fas fa-running",
     "color": "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)"
+  },
+  {
+    "id": "s21",
+    "title": "Kamar Saya (私の部屋)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Kamar saya kecil, tetapi terang dan nyaman. Di dalam kamar ada tempat tidur dan meja belajar. Di atas meja ada komputer dan buku bahasa Jepang. Setiap malam, saya belajar di sini selama satu jam. Pada hari Minggu, saya membersihkan kamar saya agar selalu bersih. Saya sangat suka kamar saya.",
+    "template": "[[私|わたし]]の [[部屋|へや]]は [[狭|せま]]いですが、[[明|あか]]るくて [[快適|かいてき]]です。[[部屋|へや]]の [[中|なか]]に [[ベッド|べっど]]と [[勉強机|べんきょうづくえ]]が あります。[[机|つくえ]]の [[上|うえ]]に [[コンピュータ|こんぴゅーた]]ーと [[日本語|にほんご]]の [[本|ほん]]が あります。[[毎晩|まいばん]]、[[私|わたし]]は ここで 1[[時間|じかん]] [[勉強|べんきょう]]します。[[日曜日|にちようび]]に、いつも [[綺麗|きれい]]にするために [[部屋|へや]]を [[掃除|そうじ]]します。[[私|わたし]]は [[自分|じぶん]]の [[部屋|へや]]が [[大好|だいす]]きです。",
+    "icon": "fas fa-bed",
+    "color": "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)"
+  },
+  {
+    "id": "s22",
+    "title": "Teman Baik (いい友達)",
+    "category": "Cerita Pribadi",
+    "translation": "Saya punya teman bernama Tanaka. Dia adalah mahasiswa universitas yang ramah. Kami sering makan siang bersama di kantin kampus. Tanaka sangat suka tenis. Setiap akhir pekan, kami pergi ke taman untuk bermain tenis bersama. Tanaka bermain tenis dengan sangat pandai. Bermain olahraga bersama teman sangat menyenangkan.",
+    "template": "[[私|わたし]]には [[田中|たなか]]さんという [[友達|ともだち]]が います。[[彼|かれ]]は [[親切|しんせつ]]な [[大学生|だいがくせい]]です。[[私|わたし]]たちは よく [[大学|だいがく]]の [[食堂|しょくどう]]で [[一緒|いっしょ]]に [[昼|ひる]]ご[[飯|はん]]を [[食|た]]べます。[[田中|たなか]]さんは [[テニス|てにす]]が [[大好|だいす]]きです。[[毎週|まいしゅう]][[末|まつ]]、[[私|わたし]]たちは [[公園|こうえん]]へ [[行|い]]って、[[一緒|いっしょ]]に [[テニス|てにす]]を します。[[田中|たなか]]さんは [[テニス|てにす]]が とても [[上手|じょうず]]です。[[友達|ともだち]]と [[スポーツ|すぽーつ]]をするのは とても [[楽|たの]]しいです。",
+    "icon": "fas fa-user-friends",
+    "color": "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)"
+  },
+  {
+    "id": "s23",
+    "title": "Pergi ke Departemen Store (デパートへ行く)",
+    "category": "Belanja",
+    "translation": "Kemarin saya pergi ke departemen store di Shinjuku. Saya ingin membeli tas baru untuk kerja. Di sana ada banyak sekali tas yang bagus. Saya membeli tas berwarna hitam. Harganya 5000 yen. Setelah belanja, saya minum kopi dan makan kue di kafe. Itu adalah hari yang menyenangkan.",
+    "template": "[[昨日|きのう]]、[[私|わたし]]は [[新宿|しんじゅく]]の [[デパート|でぱーと]]へ [[行|い]]きました。[[仕事|しごと]]のために [[新|あたら]]しい [[カバン|かばん]]を [[買|か]]いたかったです。そこには いい [[カバン|かばん]]が たくさん ありました。[[私|わたし]]は [[黒|くろ]]い [[カバン|かばん]]を [[買|か]]いました。[[値段|ねだん]]は 5000[[円|えん]]でした。[[買|か]]い[[物|もの]]の あとで、[[カフェ|かふぇ]]で [[コーヒー|こーひー]]を [[飲|の]]んで、[[ケーキ|けーき]]を [[食|た]]べました。[[楽|たの]]しい [[一日|いちにち]]でした。",
+    "icon": "fas fa-shopping-bag",
+    "color": "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)"
+  },
+  {
+    "id": "s24",
+    "title": "Pergi ke Perpustakaan (図書館へ行く)",
+    "category": "Pendidikan & Budaya",
+    "translation": "Hari Minggu saya pergi ke perpustakaan kota. Perpustakaannya besar dan sepi. Saya meminjam dua buku novel dan satu majalah fashion. Saya membaca buku di kursi dekat jendela. Di sana dilarang berbicara dengan suara keras. Saya suka tempat yang tenang. Saya akan mengembalikan buku itu minggu depan.",
+    "template": "[[日曜日|にちようび]]に [[私|わたし]]は [[市|し]]の [[図書館|としょかん]]へ [[行|い]]きました。[[図書館|としょかん]]は [[大|おお]]きくて [[静|しず]]かでした。[[私|わたし]]は [[小説|しょうせつ]]を 2[[冊|さつ]]と [[ファッション|ふぁっしょん]]の [[雑誌|ざっし]]を 1[[冊|さつ]] [[借|か]]りました。[[窓|まど]]の [[近|ちか]]くの [[椅子|いす]]で [[本|ほん]]を [[読|よ]]みました。そこでは [[大|おお]]きい [[声|こえ]]で [[話|はな]]してはいけません。[[私|わたし]]は [[静|しず]]かな [[場所|ばしょ]]が [[好|す]]きです。[[来週|らいしゅう]] その [[本|ほん]]を [[返|かえ]]します。",
+    "icon": "fas fa-book",
+    "color": "linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)"
+  },
+  {
+    "id": "s25",
+    "title": "Naik Taksi (タクシーに乗る)",
+    "category": "Transportasi",
+    "translation": "Taksi di Jepang sangat praktis tapi sedikit mahal. Pintunya terbuka secara otomatis. Kita tidak perlu membukanya sendiri. Supirnya memakai sarung tangan putih. Saya naik taksi dari stasiun ke rumah sakit karena hujan deras. Saya membayar dengan kartu kredit. Pelayanannya sangat sopan dan baik.",
+    "template": "[[日本|にほん]]の [[タクシー|たくしー]]は とても [[便利|べんり]]ですが、[[少|すこ]]し [[高|たか]]いです。[[ドア|どあ]]は [[自動|じどう]]で [[開|あ]]きます。[[自分|じぶん]]で [[開|あ]]ける [[必要|ひつよう]]が ありません。[[運転手|うんてんしゅ]]さんは [[白|しろ]]い [[手袋|てぶくろ]]を しています。[[雨|あめ]]が ひどかったですから、[[駅|えき]]から [[病院|びよういん]]まで [[タクシー|たくしー]]に [[乗|の]]りました。[[クレジット|くれじっと]][[カード|かーど]]で [[払|はら]]いました。[[サービス|さーびす]]は とても [[丁寧|ていねい]]で よかったです。",
+    "icon": "fas fa-taxi",
+    "color": "linear-gradient(135deg, #f6d365 0%, #fda085 100%)"
+  },
+  {
+    "id": "s26",
+    "title": "Kucing Peliharaan (ペットの猫)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Saya memelihara seekor kucing. Namanya Tama. Tama berwarna putih dan sangat lucu. Setiap pagi, Tama membangunkan saya. Dia sangat suka ikan. Kami bermain bola bersama di kamar. Tama sering tidur di atas tempat tidur saya. Kucing adalah teman yang baik.",
+    "template": "[[私|わたし]]は [[ペット|ぺっと]]の [[猫|ねこ]]を 飼っています。[[名前|なまえ]]は [[タマ|たま]]です。[[タマ|たま]]は [[白|しろ]]くて とても [[可愛|かわ]]いいです。[[毎朝|まいあさ]]、[[タマ|たま]]は [[私|わたし]]を [[起|お]]こします。[[彼|かれ]]は [[魚|さかな]]が [[大好|だいす]]きです。[[私|わたし]]たちは [[部屋|へや]]で [[ボール|ぼーる]]で [[遊|あそ]]びます。[[タマ|たま]]は よく [[私|わたし]]の [[ベッド|べっど]]の [[上|うえ]]で [[寝|ね]]ます。[[猫|ねこ]]は いい [[友達|ともだち]]です。",
+    "icon": "fas fa-cat",
+    "color": "linear-gradient(135deg, #d299c2 0%, #fef9d7 100%)"
+  },
+  {
+    "id": "s27",
+    "title": "Membeli Oleh-oleh (お土産を買う)",
+    "category": "Belanja",
+    "translation": "Minggu lalu saya pergi ke Tokyo. Saya membeli oleh-oleh untuk keluarga di stasiun. Saya membeli kue pisang yang terkenal. Kemasannya kuning dan cantik. Rasanya manis dan enak. Ibu dan adik saya sangat senang. Saya juga membeli gantungan kunci untuk diri sendiri.",
+    "template": "[[先週|せんしゅう]] [[私|わたし]]は [[東京|とうきょう]]へ [[行|い]]きました。[[駅|えき]]で [[家族|かぞく]]に お[[土産|みやげ]]を [[買|か]]いました。[[有名|ゆうめい]]な [[バナナ|ばなな]]の [[ケーキ|けーき]]を [[買|か]]いました。[[パッケージ|ぱっけーじ]]は [[黄色|きいろ]]くて きれいです。[[味|あじ]]は [[甘|あま]]くて [[美味|おい]]しいです。[[母|はは]]と [[妹|いもうと]]は とても [[喜|よろこ]]びました。[[私|わたし]]は [[自分|じぶん]]のために [[キーホルダー|きーほルダー]]も [[買|か]]いました。",
+    "icon": "fas fa-gift",
+    "color": "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)"
+  },
+  {
+    "id": "s28",
+    "title": "Belajar Kanji (漢字の勉強)",
+    "category": "Pendidikan & Budaya",
+    "translation": "Saya belajar bahasa Jepang setiap hari. Kanji itu sulit, tapi menarik. Setiap pagi saya menulis 5 kanji di buku catatan. Saya menggunakan kartu memori untuk menghafal. Guru saya berkata, 'Semangatlah'. Saya ingin membaca koran Jepang suatu hari nanti. Saya akan berusaha.",
+    "template": "[[私|わたし]]は [[毎日|まいにち]] [[日本語|にほんご]]を [[勉強|べんきょう]]します。[[漢字|かんじ]]は [[難|むずか]]しいですが、[[面白|おもしろ]]いです。[[毎朝|まいあさ]] [[ノート|のーと]]に [[漢字|かんじ]]を 5つ [[書|か]]きます。[[覚|おぼ]]えるために [[メモリ|めもり]][[カード|かーど]]を [[使|つか]]います。[[先生|せんせい]]は「[[頑張|がんば]]ってください」と [[言|い]]いました。[[私|わたし]]は いつか [[日本|にほん]]の [[新聞|しんぶん]]を [[読|よ]]みたいです。[[努力|どりょく]]します。",
+    "icon": "fas fa-pen-nib",
+    "color": "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)"
+  },
+  {
+    "id": "s29",
+    "title": "Rutinitas Pagi (朝のルーティン)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Setiap pagi saya bangun jam 6. Saya mencuci muka dan menggosok gigi. Saya makan roti dan minum kopi. Lalu saya pergi ke stasiun. Saya pergi ke kantor naik kereta. Keretanya penuh.",
+    "template": "[[毎朝|まいあさ]]、[[私|わたし]]は 6[[時|じ]]に [[起|お]]きます。[[顔|かお]]を [[洗|あら]]って、[[歯|は]]を [[磨|みが]]きます。[[パン|ぱん]]を [[食|た]]べて、[[コーヒー|こーひー]]を [[飲|の]]みます。それから、[[駅|えき]]へ [[行|い]]きます。[[電車|でんしゃ]]で [[会社|かいしゃ]]へ [[行|い]]きます。[[電車|でんしゃ]]は [[混|こ]]んで います。",
+    "icon": "fas fa-sun",
+    "color": "linear-gradient(135deg, #f6d365 0%, #fda085 100%)"
+  },
+  {
+    "id": "s30",
+    "title": "Hari Minggu (日曜日)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Hari Minggu saya libur kerja. Saya membersihkan kamar dan mencuci baju. Siang hari saya pergi ke supermarket. Saya membeli daging dan sayuran. Malam hari saya menonton TV. Hari Minggu adalah hari yang santai.",
+    "template": "[[日曜日|にちようび]]に [[私|わたし]]は [[仕事|しごと]]を [[休|やす]]みます。[[部屋|へや]]を [[掃除|そうじ]]して、[[服|ふく]]を [[洗濯|せんたく]]します。[[昼|ひる]]に [[スーパー|すーぱー]]へ [[行|い]]きます。お[[肉|にく]]と [[野菜|やさい]]を [[買|か]]います。[[夜|よる]]、[[テレビ|てれび]]を [[見|み]]ます。[[日曜日|にちようび]]は いい [[日|ひ]]です。",
+    "icon": "fas fa-smile",
+    "color": "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)"
   }
+
 ]

@@ -1,10 +1,12 @@
-let storiesData = [];      
-let shortStories = [];     
-let longStories = [];
+// --- VARIABEL GLOBAL ---
+let combinedStories = []; // Daftar Induk (Gabungan Singkat & Panjang)
+let shortStoriesMap = {}; // Peta Data Singkat (Key: ID)
+let longStoriesMap = {};  // Peta Data Panjang (Key: ID)
+
 let filteredStories = [];       
 let currentCategory = 'Semua';
 
-let currentStoryIndex = 0;
+let currentStoryIndex = 0; // Index berdasarkan combinedStories
 let activeUtterance = null; 
 let tempSelectedId = null;  
 
@@ -24,16 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // 3. Init Audio
     if ('speechSynthesis' in window) {
         window.speechSynthesis.getVoices();
-        window.speechSynthesis.onvoiceschanged = () => console.log("Voices loaded");
     }
     
     // --- LISTENERS ---
-    const btnPilihSingkat = document.getElementById("btn-pilih-singkat");
-    if(btnPilihSingkat) btnPilihSingkat.addEventListener("click", () => selectVersion('short'));
-
-    const btnPilihPanjang = document.getElementById("btn-pilih-panjang");
-    if(btnPilihPanjang) btnPilihPanjang.addEventListener("click", () => selectVersion('long'));
-
     const btnBack = document.getElementById("header-back-btn");
     if (btnBack) btnBack.addEventListener("click", goBack);
 
@@ -43,7 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnNext = document.getElementById("btn-next");
     if (btnNext) btnNext.addEventListener("click", nextStory);
 
-    // Filter Button (Modal)
     const btnFilter = document.getElementById("btn-filter-category");
     if (btnFilter) {
         btnFilter.addEventListener("click", () => {
@@ -52,7 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Dock Buttons
     const btnAudio = document.getElementById("btn-audio");
     if (btnAudio) btnAudio.addEventListener("click", playAudio);
 
@@ -65,32 +58,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnFurigana = document.getElementById("toggle-furigana-btn");
     if (btnFurigana) btnFurigana.addEventListener("click", toggleFurigana);
 
-    // Listener Scroll
     window.addEventListener("scroll", handleScrollTopButton);
-    // Panggil sekali untuk inisialisasi
     handleScrollTopButton();
+
+    // Listener Modal Pilihan Versi
+    document.getElementById("btn-choice-short").addEventListener("click", () => openStoryVersion('short'));
+    document.getElementById("btn-choice-long").addEventListener("click", () => openStoryVersion('long'));
 });
-
-// --- FITUR: SCROLL BUTTON ANIMATION (RAPAT & SMOOTH) ---
-function handleScrollTopButton() {
-    const btn = document.getElementById("btn-scroll-top");
-    if (!btn) return;
-
-    // Muncul jika scroll > 300px
-    if (window.scrollY > 300) {
-        btn.style.width = "45px"; 
-        btn.style.opacity = "1";
-        btn.style.transform = "scale(1)";
-        btn.style.marginLeft = "0px"; 
-        btn.style.pointerEvents = "auto";
-    } else {
-        btn.style.width = "0px";
-        btn.style.opacity = "0";
-        btn.style.transform = "scale(0)";
-        btn.style.marginLeft = "-15px"; // Tarik agar gap hilang
-        btn.style.pointerEvents = "none";
-    }
-}
 
 // --- HELPER STYLE ---
 function setButtonStyle(iconId, isActive, colorType = 'blue') {
@@ -114,16 +88,71 @@ function setButtonStyle(iconId, isActive, colorType = 'blue') {
     }
 }
 
-// --- FETCH DATA ---
+// --- SCROLL BUTTON ---
+function handleScrollTopButton() {
+    const btn = document.getElementById("btn-scroll-top");
+    if (!btn) return;
+    if (window.scrollY > 300) {
+        btn.style.width = "45px"; 
+        btn.style.opacity = "1";
+        btn.style.transform = "scale(1)";
+        btn.style.marginLeft = "0px"; 
+        btn.style.pointerEvents = "auto";
+    } else {
+        btn.style.width = "0px";
+        btn.style.opacity = "0";
+        btn.style.transform = "scale(0)";
+        btn.style.marginLeft = "-15px"; 
+        btn.style.pointerEvents = "none";
+    }
+}
+
+// --- FETCH DATA & MERGE LOGIC (Updated) ---
 function fetchAllData() {
     const spinner = document.getElementById("loading-spinner");
     Promise.all([
         fetch('data.json').then(res => res.json()),           
         fetch('bacaanlengkap.json').then(res => res.json())   
     ]).then(([dataSingkat, dataPanjang]) => {
-        shortStories = dataSingkat; 
-        longStories = dataPanjang;
-        filteredStories = shortStories;
+        
+        // 1. Petakan Data (Mapping) berdasarkan ID untuk akses cepat
+        shortStoriesMap = {};
+        dataSingkat.forEach(s => shortStoriesMap[s.id] = s);
+
+        longStoriesMap = {};
+        dataPanjang.forEach(s => longStoriesMap[s.id] = s);
+
+        // 2. Buat Daftar Induk (Gabungan ID Unik)
+        const allIds = new Set([...dataSingkat.map(s => s.id), ...dataPanjang.map(s => s.id)]);
+        combinedStories = [];
+
+        allIds.forEach(id => {
+            // Prioritas Data Tampilan (Judul/Icon/Warna): Ambil dari Short, kalau gak ada ambil Long
+            const shortVer = shortStoriesMap[id];
+            const longVer = longStoriesMap[id];
+            
+            // Minimal salah satu harus ada
+            if(shortVer || longVer) {
+                // Kita buat objek representasi untuk list utama
+                // Menggunakan data short sebagai base tampilan jika ada, jika tidak pakai long
+                const displayData = shortVer ? shortVer : longVer; 
+                
+                combinedStories.push({
+                    id: id,
+                    title: displayData.title,
+                    category: displayData.category,
+                    icon: displayData.icon,
+                    color: displayData.color,
+                    hasShort: !!shortVer, // Boolean: true jika ada versi singkat
+                    hasLong: !!longVer    // Boolean: true jika ada versi panjang
+                });
+            }
+        });
+
+        // Sortir berdasarkan ID (opsional, biar rapi urutannya)
+        combinedStories.sort((a, b) => a.id - b.id);
+
+        filteredStories = combinedStories;
         
         setupCategories();
         renderStories(); 
@@ -131,18 +160,18 @@ function fetchAllData() {
         if (spinner) spinner.style.display = 'none';
     }).catch(err => {
         console.error(err);
-        if (spinner) spinner.innerHTML = `<div class="alert alert-danger">Gagal memuat data JSON.</div>`;
+        if (spinner) spinner.innerHTML = `<div class="alert alert-danger">Gagal memuat data JSON. Cek console.</div>`;
     });
 }
 
-// --- LOGIKA KATEGORI ---
+// --- CATEGORIES ---
 function setupCategories() {
     const container = document.getElementById("modal-category-list");
     if(!container) return;
     container.innerHTML = "";
 
     const categories = new Set();
-    shortStories.forEach(story => {
+    combinedStories.forEach(story => {
         if(story.category) categories.add(story.category);
         else categories.add("Lainnya");
     });
@@ -152,7 +181,6 @@ function setupCategories() {
     categoryList.forEach(cat => {
         const btn = document.createElement("button");
         btn.className = `cat-modal-btn ${cat === currentCategory ? 'active' : ''}`;
-        
         const checkIcon = cat === currentCategory ? '<i class="fas fa-check"></i>' : '';
         btn.innerHTML = `<span>${cat}</span> ${checkIcon}`;
         
@@ -161,9 +189,9 @@ function setupCategories() {
             currentPage = 1;
 
             if (cat === "Semua") {
-                filteredStories = shortStories;
+                filteredStories = combinedStories;
             } else {
-                filteredStories = shortStories.filter(story => 
+                filteredStories = combinedStories.filter(story => 
                     (story.category || "Lainnya") === cat
                 );
             }
@@ -218,9 +246,11 @@ function renderStories() {
                     <span class="badge rounded-pill bg-light text-dark mt-2" style="font-weight:normal; font-size:0.7rem; border:1px solid #eee;">
                         ${story.category || 'Lainnya'}
                     </span>
-                </div>
+                    </div>
             </div>`;
-        col.querySelector('.story-card').addEventListener('click', () => showVersionModal(story.id));
+        
+        // Panggil Modal Pilihan Versi saat diklik
+        col.querySelector('.story-card').addEventListener('click', () => showVersionChoiceModal(story));
         gridContainer.appendChild(col);
     });
 
@@ -254,21 +284,95 @@ function setupPagination(totalItems, container) {
     container.appendChild(nextBtn);
 }
 
-// --- LOGIKA READER ---
+// --- LOGIKA MODAL PILIHAN VERSI (UPDATED STYLE) ---
+function showVersionChoiceModal(storyObj) {
+    tempSelectedId = storyObj.id; // Simpan ID sementara
+    
+    // Set Judul di Modal (Bisa diganti judul cerita atau tetap judul default)
+    // Jika ingin menampilkan judul cerita di modal:
+    // document.getElementById("modal-story-title").innerText = storyObj.title; 
+    // Jika ingin tetap "Pilih Pengalaman Baca" biarkan baris di atas dikomentari.
 
-function showVersionModal(id) {
-    tempSelectedId = id; 
-    const myModal = new bootstrap.Modal(document.getElementById('versionModal'));
+    // === TOMBOL SHORT ===
+    const btnShort = document.getElementById("btn-choice-short");
+    const badgeShort = document.getElementById("badge-short-missing");
+    
+    if (storyObj.hasShort) {
+        // Style Aktif (Normal)
+        btnShort.style.opacity = "1";
+        btnShort.style.cursor = "pointer";
+        btnShort.style.borderColor = "#0072FF";
+        btnShort.style.color = "#0072FF";
+        btnShort.disabled = false;
+        badgeShort.style.display = 'none';
+        
+        btnShort.onclick = () => openStoryVersion('short'); 
+    } else {
+        // Style Tidak Tersedia (Abu-abu)
+        btnShort.style.opacity = "0.5";
+        btnShort.style.cursor = "not-allowed";
+        btnShort.style.borderColor = "#ccc";
+        btnShort.style.color = "#999";
+        btnShort.disabled = true; // Matikan fungsi klik
+        badgeShort.style.display = 'inline-block';
+        btnShort.onclick = null;
+    }
+
+    // === TOMBOL LONG ===
+    const btnLong = document.getElementById("btn-choice-long");
+    const badgeLong = document.getElementById("badge-long-missing");
+
+    if (storyObj.hasLong) {
+        // Style Aktif (Gradient Biru)
+        btnLong.style.opacity = "1";
+        btnLong.style.cursor = "pointer";
+        btnLong.style.background = "linear-gradient(135deg, #00C6FF 0%, #0072FF 100%)";
+        btnLong.disabled = false;
+        badgeLong.style.display = 'none';
+        
+        btnLong.onclick = () => openStoryVersion('long'); 
+    } else {
+        // Style Tidak Tersedia (Abu-abu Flat)
+        btnLong.style.opacity = "0.5";
+        btnLong.style.cursor = "not-allowed";
+        btnLong.style.background = "#e9ecef"; // Jadi abu-abu
+        btnLong.style.color = "#999";
+        btnLong.style.boxShadow = "none";
+        btnLong.disabled = true;
+        badgeLong.style.display = 'inline-block';
+        btnLong.onclick = null;
+    }
+
+    // Tampilkan Modal
+    const myModal = new bootstrap.Modal(document.getElementById('versionChoiceModal'));
     myModal.show();
 }
 
-function selectVersion(type) {
+// --- FUNGSI BUKA CERITA (READER) ---
+function openStoryVersion(type) {
+    // Tutup Modal Pilihan dulu
+    const modalEl = document.getElementById('versionChoiceModal');
+    const modalInstance = bootstrap.Modal.getInstance(modalEl);
+    if(modalInstance) modalInstance.hide();
+
+    // Ambil Data Asli dari Map
+    let storyData = null;
     if (type === 'short') {
-        storiesData = shortStories;
+        storyData = shortStoriesMap[tempSelectedId];
     } else {
-        storiesData = longStories;
+        storyData = longStoriesMap[tempSelectedId];
     }
-    openStory(tempSelectedId);
+
+    // Double Check (Meskipun sudah dicek di tombol)
+    if (!storyData) {
+        alert("Terjadi kesalahan: Data cerita tidak ditemukan.");
+        return;
+    }
+
+    // Update Current Index berdasarkan Combined Stories (untuk navigasi Next/Prev)
+    currentStoryIndex = combinedStories.findIndex(s => s.id == tempSelectedId);
+
+    renderReaderView(storyData);
 }
 
 function parseRuby(text) {
@@ -278,11 +382,7 @@ function parseRuby(text) {
     });
 }
 
-function openStory(id) {
-    currentStoryIndex = storiesData.findIndex(s => s.id === id);
-    const story = storiesData[currentStoryIndex];
-    if (!story) return;
-
+function renderReaderView(story) {
     stopAudio(); 
     resetControls(); 
 
@@ -308,8 +408,11 @@ function openStory(id) {
     const contentContainer = document.getElementById("interlinear-content");
     contentContainer.innerHTML = ""; 
 
-    const jpParagraphs = story.template.split(/\n+/).filter(s => s.trim().length > 0);
-    const idParagraphs = story.translation.split(/\n+/).filter(s => s.trim().length > 0);
+    const templateText = story.template || "";
+    const translationText = story.translation || "";
+
+    const jpParagraphs = templateText.split(/\n+/).filter(s => s.trim().length > 0);
+    const idParagraphs = translationText.split(/\n+/).filter(s => s.trim().length > 0);
     const maxCount = Math.max(jpParagraphs.length, idParagraphs.length);
 
     for (let i = 0; i < maxCount; i++) {
@@ -344,12 +447,12 @@ function openStory(id) {
     handleScrollTopButton();
 }
 
+
 function goBack() {
     stopAudio();
     document.getElementById("reader-view").style.display = 'none';
     document.getElementById("list-view").style.display = 'block';
     
-    // Reset tombol scroll
     const scrollBtn = document.getElementById("btn-scroll-top");
     if(scrollBtn) {
         scrollBtn.style.width = "0px";
@@ -397,7 +500,6 @@ function toggleTranslation() {
          }
     }
 
-    // Toggle
     container.classList.toggle("show-translation");
     const isActive = container.classList.contains("show-translation");
     setButtonStyle("icon-trans", isActive);
@@ -435,19 +537,41 @@ function toggleFurigana() {
 
 // --- AUDIO ---
 function playAudio() {
-    const story = storiesData[currentStoryIndex];
-    if (!story) return;
-    stopAudio();
-    
-    let cleanText = story.template.replace(/\[\[(.*?)\|.*?\]\]/g, "$1");
-    cleanText = cleanText.replace(/\n/g, " ");
+    // Ambil teks dari konten yang sedang dirender di layar, bukan dari data mentah
+    // Karena kita tidak tahu user sedang buka versi Short atau Long
+    const contentContainer = document.getElementById("interlinear-content");
+    if (!contentContainer) return;
+
+    // Ambil semua elemen kalimat Jepang yang sedang tampil
+    const jpSentences = contentContainer.querySelectorAll('.jp-sentence');
+    let fullText = "";
+
+    jpSentences.forEach(el => {
+        // Ambil teks dalam tag <ruby> (Kanji) tapi abaikan <rt> (Furigana)
+        // Cara termudah: ambil innerText browser, biasanya browser pintar misahin
+        // Tapi agar aman, kita ambil textContent dari elemen ruby saja
+        // Atau ambil raw HTML lalu regex
+        
+        // Simpelnya: innerText dari .jp-sentence biasanya sudah gabung kanji+kana
+        // Kita perlu bersihin text yg ada di <rt> agar tidak terbaca ganda
+        
+        // Kloning elemen biar gak ngerusak tampilan
+        const clone = el.cloneNode(true);
+        const rts = clone.querySelectorAll('rt');
+        rts.forEach(rt => rt.remove()); // Hapus furigana buat speech engine
+        fullText += clone.textContent + " ";
+    });
+
+    stopAudio(); 
+
+    if (!fullText.trim()) return;
 
     if (!('speechSynthesis' in window)) {
         alert("Browser tidak mendukung suara.");
         return;
     }
 
-    activeUtterance = new SpeechSynthesisUtterance(cleanText);
+    activeUtterance = new SpeechSynthesisUtterance(fullText);
     activeUtterance.lang = 'ja-JP'; 
     activeUtterance.rate = 0.9;
 
@@ -482,9 +606,18 @@ function stopAudio() {
 
 // --- NAVIGASI CERITA ---
 function prevStory() {
-    if (currentStoryIndex > 0) openStory(storiesData[currentStoryIndex - 1].id);
+    if (currentStoryIndex > 0) {
+        const prevId = combinedStories[currentStoryIndex - 1].id;
+        // Buka modal pilihan versi untuk cerita sebelumnya
+        showVersionChoiceModal(combinedStories[currentStoryIndex - 1]);
+        // Note: Kita tidak bisa langsung buka versi short/long karena belum tau user mau yg mana
+        // Jadi logic "Prev/Next" sekarang akan membuka MODAL PILIHAN dulu.
+    }
 }
 
 function nextStory() {
-    if (currentStoryIndex < storiesData.length - 1) openStory(storiesData[currentStoryIndex + 1].id);
+    if (currentStoryIndex < combinedStories.length - 1) {
+        // Buka modal pilihan versi untuk cerita selanjutnya
+        showVersionChoiceModal(combinedStories[currentStoryIndex + 1]);
+    }
 }
