@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(res => res.json())
         .then(data => {
             packages = data.packages;
+            
             if (document.getElementById('modal-package-list')) {
                 renderPackagesInModal(); 
             } else if (document.getElementById('question-card-container')) {
@@ -37,37 +38,46 @@ function loadSystemVoices() {
 }
 
 // ---------------------------------------------
-// LOGIKA AUDIO (HYBRID + PITCH TRICK)
+// LOGIKA AUDIO PLAYER (MODERN UI + VISUALIZER)
 // ---------------------------------------------
 function playTTS(text, btnElement) {
-    stopAudio();
+    stopAudio(); // Reset dulu
 
-    if (btnElement) {
-        btnElement.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memuat...';
-        btnElement.classList.remove('btn-warning');
-        btnElement.classList.add('btn-secondary');
+    const card = document.getElementById('audio-player-card');
+    const statusText = document.getElementById('audio-status-text');
+    const btnIcon = btnElement ? btnElement.querySelector('i') : null;
+
+    // 1. STATE: LOADING
+    if (btnElement && card) {
         btnElement.disabled = true;
+        if(btnIcon) {
+            btnIcon.className = 'fas fa-spinner fa-spin'; // Icon loading
+        }
+        if(statusText) statusText.innerText = "Memuat...";
     }
 
+    // Fungsi Saat Selesai / Reset UI
     const onComplete = () => {
+        if (card) card.classList.remove('active'); // Matikan animasi
         if (btnElement) {
-            btnElement.innerHTML = '<i class="fas fa-volume-up"></i> Putar Audio Soal';
-            btnElement.classList.remove('btn-secondary', 'btn-success');
-            btnElement.classList.add('btn-warning');
             btnElement.disabled = false;
+            if(btnIcon) btnIcon.className = 'fas fa-play'; // Balik icon play
         }
+        if (statusText) statusText.innerText = "Klik Play";
         isPlaying = false;
     };
 
+    // Fungsi Saat Mulai Bicara (Visualizer On)
     const onSpeaking = () => {
+        if (card) card.classList.add('active'); // Nyalakan animasi gelombang
         if (btnElement) {
-            btnElement.innerHTML = '<i class="fas fa-volume-high fa-beat"></i> Sedang Bicara...';
-            btnElement.classList.remove('btn-secondary');
-            btnElement.classList.add('btn-success');
+            btnElement.disabled = false; 
+            if(btnIcon) btnIcon.className = 'fas fa-volume-high'; // Icon suara
         }
+        if (statusText) statusText.innerText = "Sedang Bicara...";
     };
 
-    // Parsing [N], [M], [F]
+    // --- PARSING TEXT ([N][M][F]) ---
     const parts = text.split(/(\[[NMF]\])/g).filter(s => s.trim().length > 0);
     let currentRole = 'N'; 
     audioQueue = [];
@@ -83,9 +93,9 @@ function playTTS(text, btnElement) {
     if (audioQueue.length === 0) audioQueue.push({ text: text, role: 'N' });
 
     isPlaying = true;
-    onSpeaking();
+    onSpeaking(); // Trigger visual
 
-    // Cek Suara Offline
+    // --- CEK AUDIO ENGINE ---
     let japanVoice = null;
     if ('speechSynthesis' in window) {
         if (voices.length === 0) voices = window.speechSynthesis.getVoices();
@@ -93,15 +103,17 @@ function playTTS(text, btnElement) {
     }
 
     if (japanVoice) {
+        // Mode Offline (Pitch Shift - Suara Asli Beda)
         console.log("Mode: Offline");
         playOfflineQueue(japanVoice, onComplete);
     } else {
-        console.log("Mode: Online (Fake Pitch)");
+        // Mode Online (Speed Trick - Manipulasi Kecepatan)
+        console.log("Mode: Online");
         playOnlineQueue(onComplete);
     }
 }
 
-// OFFLINE PLAYER (Asli)
+// OFFLINE PLAYER
 function playOfflineQueue(voice, onComplete) {
     const playNext = () => {
         if (audioQueue.length === 0 || !isPlaying) {
@@ -120,13 +132,16 @@ function playOfflineQueue(voice, onComplete) {
         else { utterance.pitch = 1.0; utterance.rate = 0.85; }
 
         utterance.onend = playNext;
-        utterance.onerror = playNext;
+        utterance.onerror = (e) => {
+            console.error("Offline Error", e);
+            playNext();
+        };
         window.speechSynthesis.speak(utterance);
     };
     playNext();
 }
 
-// ONLINE PLAYER (Fake Pitch via Speed)
+// ONLINE PLAYER
 function playOnlineQueue(onComplete) {
     const playNextChunk = () => {
         if (audioQueue.length === 0 || !isPlaying) {
@@ -135,17 +150,13 @@ function playOnlineQueue(onComplete) {
         }
 
         const item = audioQueue.shift();
-        
-        // TRIK: Pecah kalimat panjang agar tidak ditolak Google
-        // Tapi kita pertahankan Role-nya
+        // Pecah kalimat panjang agar tidak ditolak Google
         const chunks = item.text.match(/[^。！？、]+[。！？、]*/g) || [item.text];
-        
         let subQueue = chunks.map(c => ({ text: c, role: item.role }));
         
-        // Fungsi untuk memutar sub-antrian (kalimat per kalimat untuk 1 peran)
         const playSubQueue = () => {
             if (subQueue.length === 0) {
-                playNextChunk(); // Pindah ke peran berikutnya
+                playNextChunk();
                 return;
             }
             
@@ -154,21 +165,20 @@ function playOnlineQueue(onComplete) {
             
             currentAudioObj = new Audio(url);
             
-            // TRIK UTAMA: UBAH PLAYBACK RATE UNTUK EFEK SUARA
-            if (subItem.role === 'M') {
-                currentAudioObj.playbackRate = 0.85; // Berat (Cowok)
-            } else if (subItem.role === 'F') {
-                currentAudioObj.playbackRate = 1.15; // Cempreng (Cewek)
-            } else {
-                currentAudioObj.playbackRate = 1.0; // Normal
-            }
-            // Khusus Chrome/Edge perlu preserversPitch false agar suara berubah
+            // Speed Trick untuk beda suara
+            if (subItem.role === 'M') currentAudioObj.playbackRate = 0.85; // Berat
+            else if (subItem.role === 'F') currentAudioObj.playbackRate = 1.15; // Cempreng
+            else currentAudioObj.playbackRate = 1.0;
+
+            // Browser compatibility for pitch preservation
             if (currentAudioObj.mozPreservesPitch !== undefined) currentAudioObj.mozPreservesPitch = false;
-            if (currentAudioObj.webkitPreservesPitch !== undefined) currentAudioObj.webkitPreservesPitch = false;
             if (currentAudioObj.preservesPitch !== undefined) currentAudioObj.preservesPitch = false;
 
             currentAudioObj.onended = playSubQueue;
-            currentAudioObj.onerror = playSubQueue;
+            currentAudioObj.onerror = (e) => {
+                console.warn("Skip chunk error", e);
+                playSubQueue();
+            };
             
             currentAudioObj.play().catch(e => {
                 console.error("Audio blocked", e);
@@ -189,17 +199,131 @@ function stopAudio() {
         currentAudioObj = null;
     }
     
+    // Reset UI ke kondisi awal
+    const card = document.getElementById('audio-player-card');
     const btnPlay = document.getElementById('btn-play-audio');
+    const btnIcon = btnPlay ? btnPlay.querySelector('i') : null;
+    const statusText = document.getElementById('audio-status-text');
+
+    if (card) card.classList.remove('active');
+    if (statusText) statusText.innerText = "Klik Play";
     if (btnPlay) {
-        btnPlay.innerHTML = '<i class="fas fa-volume-up"></i> Putar Audio Soal';
-        btnPlay.classList.remove('btn-success', 'btn-secondary');
-        btnPlay.classList.add('btn-warning');
         btnPlay.disabled = false;
+        if(btnIcon) btnIcon.className = 'fas fa-play';
     }
 }
 
 // ---------------------------------------------
-// SISA LOGIKA UI
+// RENDER & UI
+// ---------------------------------------------
+function renderQuestion() {
+    const q = currentQuestions[currentQuestionIndex];
+    const container = document.getElementById('question-card-container');
+    
+    stopAudio();
+
+    // Highlight Navigasi
+    const navBtns = document.querySelectorAll('#section-nav button');
+    navBtns.forEach(btn => btn.classList.remove('active'));
+    let activeSecIdx = sectionMap.findIndex((s, i) => {
+        const nextS = sectionMap[i+1];
+        return currentQuestionIndex >= s.startIndex && (!nextS || currentQuestionIndex < nextS.startIndex);
+    });
+    if(navBtns[activeSecIdx]) navBtns[activeSecIdx].classList.add('active');
+
+    // Progress Bar
+    const answeredCount = Object.keys(userAnswers).length;
+    const totalQuestions = currentQuestions.length;
+    document.getElementById('progress-bar').style.width = `${(answeredCount / totalQuestions) * 100}%`;
+    document.getElementById('progress-text').innerText = `${answeredCount}/${totalQuestions} Dijawab`;
+
+    // --- RENDER AUDIO PLAYER (MODERN CARD) ---
+    let audioHtml = '';
+    if (q.type === 'audio') {
+        audioHtml = `
+            <div id="audio-player-card" class="audio-player-card mb-4">
+                <button id="btn-play-audio" class="btn-play-modern">
+                    <i class="fas fa-play"></i>
+                </button>
+
+                <div class="audio-info">
+                    <span id="audio-status-text" class="audio-label">Klik Play</span>
+                    <div class="visualizer">
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                    </div>
+                </div>
+
+                <button id="btn-stop-audio" class="btn-stop-modern" title="Stop">
+                    <i class="fas fa-stop"></i>
+                </button>
+            </div>
+        `;
+    }
+
+    let optionsHtml = '';
+    q.options.forEach((opt, idx) => {
+        const isSelected = userAnswers[q.id] === idx ? 'selected' : '';
+        optionsHtml += `
+            <button class="quiz-option-btn ${isSelected}" onclick="selectAnswer(${idx})">
+                <div class="opt-label">${String.fromCharCode(65 + idx)}</div>
+                <div class="text-start w-100 fw-medium">${opt}</div>
+            </button>
+        `;
+    });
+
+    container.innerHTML = `
+        <div class="question-card fade-in">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill border border-primary border-opacity-25">
+                    ${q.sectionName}
+                </span>
+                <span class="text-muted small fw-bold">No. ${currentQuestionIndex + 1}</span>
+            </div>
+            ${audioHtml}
+            <div class="question-text mb-4 fs-5" style="line-height: 1.6;">
+                ${q.text}
+            </div>
+            <div class="options-list d-grid gap-2">
+                ${optionsHtml}
+            </div>
+        </div>
+    `;
+
+    // Pasang Event Listener Audio
+    if (q.type === 'audio') {
+        setTimeout(() => {
+            const btnPlay = document.getElementById('btn-play-audio');
+            const btnStop = document.getElementById('btn-stop-audio');
+            if (btnPlay) {
+                btnPlay.onclick = function() {
+                    playTTS(q.script, this); // 'this' adalah tombol play
+                };
+            }
+            if (btnStop) {
+                btnStop.onclick = function() {
+                    stopAudio();
+                };
+            }
+        }, 50);
+    }
+
+    document.getElementById('btn-prev').disabled = currentQuestionIndex === 0;
+    
+    if (currentQuestionIndex === currentQuestions.length - 1) {
+        document.getElementById('btn-next').classList.add('hidden');
+        document.getElementById('btn-finish').classList.remove('hidden');
+    } else {
+        document.getElementById('btn-next').classList.remove('hidden');
+        document.getElementById('btn-finish').classList.add('hidden');
+    }
+}
+
+// ---------------------------------------------
+// NAVIGATION & SCORING
 // ---------------------------------------------
 function renderPackagesInModal() {
     const grid = document.getElementById('modal-package-list');
@@ -297,112 +421,24 @@ function renderSectionNav() {
     });
 }
 
-function renderQuestion() {
-    const q = currentQuestions[currentQuestionIndex];
-    const container = document.getElementById('question-card-container');
-    
-    stopAudio();
-
-    const navBtns = document.querySelectorAll('#section-nav button');
-    navBtns.forEach(btn => btn.classList.remove('active'));
-    let activeSecIdx = sectionMap.findIndex((s, i) => {
-        const nextS = sectionMap[i+1];
-        return currentQuestionIndex >= s.startIndex && (!nextS || currentQuestionIndex < nextS.startIndex);
-    });
-    if(navBtns[activeSecIdx]) navBtns[activeSecIdx].classList.add('active');
-
-    const answeredCount = Object.keys(userAnswers).length;
-    const totalQuestions = currentQuestions.length;
-    const progressPercent = (answeredCount / totalQuestions) * 100;
-    document.getElementById('progress-bar').style.width = `${progressPercent}%`;
-    document.getElementById('progress-text').innerText = `${answeredCount}/${totalQuestions} Dijawab`;
-
-    let audioHtml = '';
-    if (q.type === 'audio') {
-        audioHtml = `
-            <div class="text-center mb-4 d-flex justify-content-center gap-2">
-                <button id="btn-play-audio" class="btn btn-warning btn-lg rounded-pill shadow-sm px-4">
-                    <i class="fas fa-volume-up me-2"></i> Putar Audio Soal
-                </button>
-                <button id="btn-stop-audio" class="btn btn-danger btn-lg rounded-pill shadow-sm px-3" title="Berhenti">
-                    <i class="fas fa-stop"></i>
-                </button>
-            </div>
-        `;
-    }
-
-    let optionsHtml = '';
-    q.options.forEach((opt, idx) => {
-        const isSelected = userAnswers[q.id] === idx ? 'selected' : '';
-        optionsHtml += `
-            <button class="quiz-option-btn ${isSelected}" onclick="selectAnswer(${idx})" id="opt-btn-${idx}">
-                <div class="opt-label">${String.fromCharCode(65 + idx)}</div>
-                <div class="text-start w-100 fw-medium">${opt}</div>
-            </button>
-        `;
-    });
-
-    container.innerHTML = `
-        <div class="question-card fade-in">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill border border-primary border-opacity-25">
-                    ${q.sectionName}
-                </span>
-                <span class="text-muted small fw-bold">No. ${currentQuestionIndex + 1}</span>
-            </div>
-            ${audioHtml}
-            <div class="question-text mb-4 fs-5" style="line-height: 1.6;">
-                ${q.text}
-            </div>
-            <div class="options-list d-grid gap-2">
-                ${optionsHtml}
-            </div>
-        </div>
-    `;
-
-    if (q.type === 'audio') {
-        setTimeout(() => {
-            const btnPlay = document.getElementById('btn-play-audio');
-            const btnStop = document.getElementById('btn-stop-audio');
-            if (btnPlay) {
-                btnPlay.onclick = function() {
-                    playTTS(q.script, this);
-                };
-            }
-            if (btnStop) {
-                btnStop.onclick = function() {
-                    stopAudio();
-                };
-            }
-        }, 50);
-    }
-
-    document.getElementById('btn-prev').disabled = currentQuestionIndex === 0;
-    
-    if (currentQuestionIndex === currentQuestions.length - 1) {
-        document.getElementById('btn-next').classList.add('hidden');
-        document.getElementById('btn-finish').classList.remove('hidden');
-    } else {
-        document.getElementById('btn-next').classList.remove('hidden');
-        document.getElementById('btn-finish').classList.add('hidden');
-    }
-}
-
 function selectAnswer(idx) {
     const q = currentQuestions[currentQuestionIndex];
     userAnswers[q.id] = idx; 
 
+    // Visual Feedback (Update Class tanpa render ulang)
     const allBtns = document.querySelectorAll('.quiz-option-btn');
     allBtns.forEach((btn, i) => {
         if (i === idx) btn.classList.add('selected');
         else btn.classList.remove('selected');
     });
 
+    // Update Progress Bar
     const answeredCount = Object.keys(userAnswers).length;
     const totalQuestions = currentQuestions.length;
     document.getElementById('progress-bar').style.width = `${(answeredCount / totalQuestions) * 100}%`;
     document.getElementById('progress-text').innerText = `${answeredCount}/${totalQuestions} Dijawab`;
 
+    // Pindah Otomatis (Cepat)
     if (currentQuestionIndex < currentQuestions.length - 1) {
         setTimeout(() => {
             nextQuestion();
@@ -446,7 +482,9 @@ function startTimer(durationSeconds) {
         const m = Math.floor(timer / 60);
         const s = timer % 60;
         display.textContent = `${m < 10 ? '0'+m : m}:${s < 10 ? '0'+s : s}`;
-        if (--timer < 0) finishExam(true);
+        if (--timer < 0) {
+            finishExam(true);
+        }
     }, 1000);
 }
 
@@ -481,7 +519,9 @@ function finishExam(isGiveUp) {
                         ${statusBadge}
                     </div>
                     <p class="mb-2 text-dark fw-bold">${q.text}</p>
+                    
                     ${q.translation ? `<p class="mb-2 text-muted small"><i class="fas fa-language"></i> Arti: ${q.translation}</p>` : ''}
+
                     <div class="row g-2 mt-3 text-small" style="font-size: 0.9rem;">
                         <div class="col-md-6">
                             <div class="p-2 border rounded ${isCorrect ? 'bg-success-subtle border-success' : 'bg-danger-subtle border-danger'}">
@@ -496,6 +536,7 @@ function finishExam(isGiveUp) {
                             </div>
                         </div>
                     </div>
+
                     ${q.explanation ? `
                         <div class="mt-2 p-2 bg-white border rounded small text-muted">
                             <i class="fas fa-info-circle text-primary"></i> <strong>Penjelasan:</strong> ${q.explanation}
