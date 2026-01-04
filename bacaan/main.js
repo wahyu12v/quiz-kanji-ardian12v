@@ -287,11 +287,6 @@ function setupPagination(totalItems, container) {
 // --- LOGIKA MODAL PILIHAN VERSI (UPDATED STYLE) ---
 function showVersionChoiceModal(storyObj) {
     tempSelectedId = storyObj.id; // Simpan ID sementara
-    
-    // Set Judul di Modal (Bisa diganti judul cerita atau tetap judul default)
-    // Jika ingin menampilkan judul cerita di modal:
-    // document.getElementById("modal-story-title").innerText = storyObj.title; 
-    // Jika ingin tetap "Pilih Pengalaman Baca" biarkan baris di atas dikomentari.
 
     // === TOMBOL SHORT ===
     const btnShort = document.getElementById("btn-choice-short");
