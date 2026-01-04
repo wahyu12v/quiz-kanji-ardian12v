@@ -1,12 +1,11 @@
-// --- VARIABEL GLOBAL ---
-let combinedStories = []; // Daftar Induk (Gabungan Singkat & Panjang)
-let shortStoriesMap = {}; // Peta Data Singkat (Key: ID)
-let longStoriesMap = {};  // Peta Data Panjang (Key: ID)
+let combinedStories = []; 
+let shortStoriesMap = {}; 
+let longStoriesMap = {};  
 
 let filteredStories = [];       
 let currentCategory = 'Semua';
 
-let currentStoryIndex = 0; // Index berdasarkan combinedStories
+let currentStoryIndex = 0; 
 let activeUtterance = null; 
 let tempSelectedId = null;  
 
@@ -542,13 +541,6 @@ function playAudio() {
     let fullText = "";
 
     jpSentences.forEach(el => {
-        // Ambil teks dalam tag <ruby> (Kanji) tapi abaikan <rt> (Furigana)
-        // Cara termudah: ambil innerText browser, biasanya browser pintar misahin
-        // Tapi agar aman, kita ambil textContent dari elemen ruby saja
-        // Atau ambil raw HTML lalu regex
-        
-        // Simpelnya: innerText dari .jp-sentence biasanya sudah gabung kanji+kana
-        // Kita perlu bersihin text yg ada di <rt> agar tidak terbaca ganda
         
         // Kloning elemen biar gak ngerusak tampilan
         const clone = el.cloneNode(true);
