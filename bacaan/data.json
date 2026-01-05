@@ -101,15 +101,6 @@
   },
   {
     "id": "s12",
-    "title": "Aturan Membuang Sampah (ゴミ出しのルール)",
-    "category": "Aturan & Masyarakat",
-    "translation": "Di kota saya, aturan membuang sampah sangat ketat. Sampah yang bisa dibakar dibuang hari Senin dan Kamis. Botol plastik dan kaleng dibuang hari Rabu. Kita harus memasukkan sampah ke dalam kantong plastik yang ditentukan. Kita harus membuangnya sebelum jam 8 pagi. Jika terlambat, truk sampah akan pergi. Saya menempelkan kalender sampah di pintu kulkas agar tidak lupa.",
-    "template": "[[私|わたし]]の [[町|まち]]では、[[ゴミ|ごみ]]出しの [[ルール|るーる]]が とても [[厳|きび]]しいです。[[燃|も]]える [[ゴミ|ごみ]]は [[月曜日|げつようび]]と [[木曜日|もくようび]]です。[[ペットボトル|ぺっとぼとる]]と [[缶|かん]]は [[水曜日|すいようび]]です。[[決|き]]められた [[ビニール|びにーる]]袋に [[ゴミ|ごみ]]を [[入|い]]れなければなりません。[[朝|あさ]] 8[[時|じ]]までに 出さなければなりません。[[遅|おく]]れたら、[[ゴミ|ごみ]]収集車は [[行|い]]ってしまいます。[[忘|わす]]れないように、[[冷蔵庫|れいぞうこ]]の [[ドア|どあ]]に [[ゴミ|ごみ]]の [[カレンダー|かれんだー]]を [[貼|は]]っています。",
-    "icon": "fas fa-trash-alt",
-    "color": "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)"
-  },
-  {
-    "id": "s13",
     "title": "Makan di Restoran Keluarga (ファミレスで食事)",
     "category": "Makanan & Minuman",
     "translation": "Siang ini saya makan di restoran keluarga (Famiresu) bersama teman. Saya memesan Hamburger Steak Keju dan nasi. Teman saya memesan pasta. Kami juga memesan 'Drink Bar'. Dengan Drink Bar, kami bisa minum jus dan kopi sepuasnya. Makanannya enak dan murah. Kami mengobrol lama di sana. Pembayarannya menggunakan mesin kasir otomatis.",
@@ -118,7 +109,7 @@
     "color": "linear-gradient(135deg, #f6d365 0%, #fda085 100%)"
   },
   {
-    "id": "s14",
+    "id": "s13",
     "title": "Berwisata ke Kyoto (京都旅行)",
     "category": "Pariwisata",
     "translation": "Minggu lalu, saya pergi ke Kyoto naik Shinkansen. Kyoto adalah kota tua yang terkenal. Saya melihat Kuil Emas (Kinkakuji). Warnanya emas dan sangat indah. Saya juga pergi ke Kuil Kiyomizu. Di sana ada banyak turis. Saya membeli oleh-oleh bernama Yatsuhashi. Itu adalah kue manis khas Kyoto. Saya ingin pergi ke sana lagi musim depan.",
@@ -127,7 +118,7 @@
     "color": "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)"
   },
   {
-    "id": "s15",
+    "id": "s14",
     "title": "Pesta Takoyaki (たこ焼きパーティー)",
     "category": "Kegiatan Sosial",
     "translation": "Hari Sabtu, teman-teman datang ke rumah saya. Kami mengadakan pesta Takoyaki (Takopa). Kami memotong gurita kecil-kecil. Kami memasukkan adonan ke dalam mesin Takoyaki. Memutar bola takoyaki itu sulit tapi seru. Kami makan takoyaki panas dengan saus dan mayones. Rasanya sangat enak. Kami makan sambil menonton film.",
@@ -136,7 +127,7 @@
     "color": "linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%)"
   },
   {
-    "id": "s16",
+    "id": "s15",
     "title": "Melihat Bunga Sakura (お花見)",
     "category": "Budaya & Musim",
     "translation": "Musim semi telah tiba. Bunga sakura mekar penuh di taman. Saya pergi melihat bunga (Hanami) bersama teman kantor. Kami menggelar tikar biru di bawah pohon. Kami makan bento dan minum bir. Kelopak bunga sakura berguguran ditiup angin. Sangat indah. Kami mengambil banyak foto dengan kamera.",
@@ -145,16 +136,7 @@
     "color": "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)"
   },
   {
-    "id": "s17",
-    "title": "Naik Bus (バスに乗る)",
-    "category": "Transportasi",
-    "translation": "Naik bus di Jepang sedikit sulit. Kita naik dari pintu belakang. Saat naik, kita mengambil tiket kecil. Di dalam bus tenang. Sebelum turun, kita harus menekan tombol. Kita membayar uang di kotak di samping supir. Saya tidak punya uang pas, jadi saya menukar uang di mesin penukar. Supirnya sangat ramah.",
-    "template": "[[日本|にほん]]で [[バス|ばす]]に 乗るのは [[少|すこ]]し [[難|むずか]]しいです。[[後|うし]]ろの [[ドア|どあ]]から 乗ります。乗る [[時|とき]]、[[小|ちい]]さい [[チケット|ちけっと]]を 取ります。[[バス|ばす]]の [[中|なか]]は [[静|しず]]かです。降りる [[前|まえ]]に、[[ボタン|ぼたん]]を 押さなければなりません。[[運転手|うんてんしゅ]]さんの [[横|よこ]]にある 箱に お[[金|かね]]を [[払|はら]]います。[[私|わたし]]は 細かい お[[金|かね]]が なかったですから、両替機で 両替しました。[[運転手|うんてんしゅ]]さんは とても [[親切|しんせつ]]でした。",
-    "icon": "fas fa-bus",
-    "color": "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)"
-  },
-  {
-    "id": "s18",
+    "id": "s16",
     "title": "Toko 100 Yen (100円ショップ)",
     "category": "Belanja",
     "translation": "Saya suka toko 100 yen seperti Daiso. Di sana, semua barang harganya 100 yen. Murah sekali. Ada alat tulis, piring, dan makanan ringan. Kualitasnya juga bagus. Saya membeli pulpen dan buku catatan untuk belajar. Saya juga membeli oleh-oleh untuk keluarga. Saya sering menghabiskan waktu lama di sana karena barangnya menarik.",
@@ -163,16 +145,7 @@
     "color": "linear-gradient(135deg, #fa709a 0%, #fee140 100%)"
   },
   {
-    "id": "s19",
-    "title": "Masuk Angin (風邪をひく)",
-    "category": "Kesehatan",
-    "translation": "Kemarin tenggorokan saya sakit dan saya demam. Saya masuk angin. Saya pergi ke klinik. Dokter memeriksa saya. Dia bilang, 'Minum obat ini dan tidurlah'. Saya pergi ke apotek untuk mengambil obat. Hari ini saya tidak pergi kerja. Saya makan bubur dan istirahat di rumah. Saya ingin cepat sembuh.",
-    "template": "[[昨日|きのう]] [[喉|のど]]が [[痛|いた]]くて、[[熱|ねつ]]が ありました。[[風邪|かぜ]]を ひきました。[[クリニック|くりにっく]]へ [[行|い]]きました。お[[医者|いしゃ]]さんは [[私|わたし]]を 診察しました。[[彼|かれ]]は「この [[薬|くすり]]を [[飲|の]]んで、[[寝|ね]]てください」と [[言|い]]ました。[[薬局|やっきょく]]へ [[薬|くすり]]を もらいに [[行|い]]きました。[[今日|きょう]]は [[仕事|しごと]]へ [[行|い]]きません。お粥を [[食|た]]べて、うちで 休みます。[[早|はや]]く [[元気|げんき]]に なりたいです。",
-    "icon": "fas fa-procedures",
-    "color": "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)"
-  },
-  {
-    "id": "s20",
+    "id": "s17",
     "title": "Hari Olahraga (運動会)",
     "category": "Kegiatan Sosial",
     "translation": "Bulan Oktober adalah musim olahraga. Di kota saya ada Hari Olahraga (Undoukai). Semua orang berpartisipasi. Ada lomba lari dan tarik tambang. Saya masuk tim merah. Kami berteriak 'Semangat!'. Siang hari kami makan bento bersama di luar. Tim merah menang. Saya lelah tapi sangat senang.",
@@ -181,7 +154,7 @@
     "color": "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)"
   },
   {
-    "id": "s21",
+    "id": "s18",
     "title": "Kamar Saya (私の部屋)",
     "category": "Kehidupan Sehari-hari",
     "translation": "Kamar saya kecil, tetapi terang dan nyaman. Di dalam kamar ada tempat tidur dan meja belajar. Di atas meja ada komputer dan buku bahasa Jepang. Setiap malam, saya belajar di sini selama satu jam. Pada hari Minggu, saya membersihkan kamar saya agar selalu bersih. Saya sangat suka kamar saya.",
@@ -190,7 +163,7 @@
     "color": "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)"
   },
   {
-    "id": "s22",
+    "id": "s19",
     "title": "Teman Baik (いい友達)",
     "category": "Cerita Pribadi",
     "translation": "Saya punya teman bernama Tanaka. Dia adalah mahasiswa universitas yang ramah. Kami sering makan siang bersama di kantin kampus. Tanaka sangat suka tenis. Setiap akhir pekan, kami pergi ke taman untuk bermain tenis bersama. Tanaka bermain tenis dengan sangat pandai. Bermain olahraga bersama teman sangat menyenangkan.",
@@ -199,7 +172,7 @@
     "color": "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)"
   },
   {
-    "id": "s23",
+    "id": "s20",
     "title": "Pergi ke Departemen Store (デパートへ行く)",
     "category": "Belanja",
     "translation": "Kemarin saya pergi ke departemen store di Shinjuku. Saya ingin membeli tas baru untuk kerja. Di sana ada banyak sekali tas yang bagus. Saya membeli tas berwarna hitam. Harganya 5000 yen. Setelah belanja, saya minum kopi dan makan kue di kafe. Itu adalah hari yang menyenangkan.",
@@ -208,7 +181,7 @@
     "color": "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)"
   },
   {
-    "id": "s24",
+    "id": "s21",
     "title": "Pergi ke Perpustakaan (図書館へ行く)",
     "category": "Pendidikan & Budaya",
     "translation": "Hari Minggu saya pergi ke perpustakaan kota. Perpustakaannya besar dan sepi. Saya meminjam dua buku novel dan satu majalah fashion. Saya membaca buku di kursi dekat jendela. Di sana dilarang berbicara dengan suara keras. Saya suka tempat yang tenang. Saya akan mengembalikan buku itu minggu depan.",
@@ -217,7 +190,7 @@
     "color": "linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)"
   },
   {
-    "id": "s25",
+    "id": "s22",
     "title": "Naik Taksi (タクシーに乗る)",
     "category": "Transportasi",
     "translation": "Taksi di Jepang sangat praktis tapi sedikit mahal. Pintunya terbuka secara otomatis. Kita tidak perlu membukanya sendiri. Supirnya memakai sarung tangan putih. Saya naik taksi dari stasiun ke rumah sakit karena hujan deras. Saya membayar dengan kartu kredit. Pelayanannya sangat sopan dan baik.",
@@ -226,7 +199,7 @@
     "color": "linear-gradient(135deg, #f6d365 0%, #fda085 100%)"
   },
   {
-    "id": "s26",
+    "id": "s23",
     "title": "Kucing Peliharaan (ペットの猫)",
     "category": "Kehidupan Sehari-hari",
     "translation": "Saya memelihara seekor kucing. Namanya Tama. Tama berwarna putih dan sangat lucu. Setiap pagi, Tama membangunkan saya. Dia sangat suka ikan. Kami bermain bola bersama di kamar. Tama sering tidur di atas tempat tidur saya. Kucing adalah teman yang baik.",
@@ -235,7 +208,7 @@
     "color": "linear-gradient(135deg, #d299c2 0%, #fef9d7 100%)"
   },
   {
-    "id": "s27",
+    "id": "s24",
     "title": "Membeli Oleh-oleh (お土産を買う)",
     "category": "Belanja",
     "translation": "Minggu lalu saya pergi ke Tokyo. Saya membeli oleh-oleh untuk keluarga di stasiun. Saya membeli kue pisang yang terkenal. Kemasannya kuning dan cantik. Rasanya manis dan enak. Ibu dan adik saya sangat senang. Saya juga membeli gantungan kunci untuk diri sendiri.",
@@ -244,7 +217,7 @@
     "color": "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)"
   },
   {
-    "id": "s28",
+    "id": "s25",
     "title": "Belajar Kanji (漢字の勉強)",
     "category": "Pendidikan & Budaya",
     "translation": "Saya belajar bahasa Jepang setiap hari. Kanji itu sulit, tapi menarik. Setiap pagi saya menulis 5 kanji di buku catatan. Saya menggunakan kartu memori untuk menghafal. Guru saya berkata, 'Semangatlah'. Saya ingin membaca koran Jepang suatu hari nanti. Saya akan berusaha.",
@@ -253,7 +226,7 @@
     "color": "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)"
   },
   {
-    "id": "s29",
+    "id": "s26",
     "title": "Rutinitas Pagi (朝のルーティン)",
     "category": "Kehidupan Sehari-hari",
     "translation": "Setiap pagi saya bangun jam 6. Saya mencuci muka dan menggosok gigi. Saya makan roti dan minum kopi. Lalu saya pergi ke stasiun. Saya pergi ke kantor naik kereta. Keretanya penuh.",
@@ -262,13 +235,40 @@
     "color": "linear-gradient(135deg, #f6d365 0%, #fda085 100%)"
   },
   {
-    "id": "s30",
+    "id": "s27",
     "title": "Hari Minggu (日曜日)",
     "category": "Kehidupan Sehari-hari",
     "translation": "Hari Minggu saya libur kerja. Saya membersihkan kamar dan mencuci baju. Siang hari saya pergi ke supermarket. Saya membeli daging dan sayuran. Malam hari saya menonton TV. Hari Minggu adalah hari yang santai.",
     "template": "[[日曜日|にちようび]]に [[私|わたし]]は [[仕事|しごと]]を [[休|やす]]みます。[[部屋|へや]]を [[掃除|そうじ]]して、[[服|ふく]]を [[洗濯|せんたく]]します。[[昼|ひる]]に [[スーパー|すーぱー]]へ [[行|い]]きます。お[[肉|にく]]と [[野菜|やさい]]を [[買|か]]います。[[夜|よる]]、[[テレビ|てれび]]を [[見|み]]ます。[[日曜日|にちようび]]は いい [[日|ひ]]です。",
     "icon": "fas fa-smile",
     "color": "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)"
+  },
+  {
+    "id": "s28",
+    "title": "Hujan dan Payung (雨と傘)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Hari ini turun hujan sejak pagi. Saya lupa membawa payung. Di depan stasiun saya membeli payung plastik. Banyak orang juga memakai payung. Jalanan menjadi basah dan dingin. Walaupun hujan, saya tetap pergi bekerja.",
+    "template": "[[今日|きょう]]は [[朝|あさ]]から [[雨|あめ]]が [[降|ふ]]って います。[[私|わたし]]は [[傘|かさ]]を [[忘|わす]]れました。[[駅|えき]]の [[前|まえ]]で [[ビニール|びにーる]]の [[傘|かさ]]を [[買|か]]いました。[[多|おお]]くの [[人|ひと]]も [[傘|かさ]]を [[使|つか]]って います。[[道|みち]]は [[濡|ぬ]]れて [[寒|さむ]]いです。[[雨|あめ]]でも [[仕事|しごと]]へ [[行|い]]きます。",
+    "icon": "fas fa-umbrella",
+    "color": "linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%)"
+  },
+  {
+    "id": "s29",
+    "title": "Belajar di Kafe (カフェで勉強)",
+    "category": "Pendidikan & Kehidupan",
+    "translation": "Saya suka belajar di kafe. Suasananya tenang dan nyaman. Saya memesan kopi dan duduk dekat jendela. Saya belajar bahasa Jepang selama dua jam. Kadang saya mendengarkan musik pelan. Belajar di kafe menyenangkan.",
+    "template": "[[私|わたし]]は [[カフェ|かふぇ]]で [[勉強|べんきょう]]するのが [[好|す]]きです。[[雰囲気|ふんいき]]が [[静|しず]]かで [[快適|かいてき]]です。[[コーヒー|こーひー]]を [[注文|ちゅうもん]]して [[窓|まど]]の [[近|ちか]]くに [[座|すわ]]ります。[[日本語|にほんご]]を 2[[時間|じかん]] [[勉強|べんきょう]]します。[[音楽|おんがく]]を [[小|ちい]]さく [[聞|き]]く [[時|とき]]も あります。[[カフェ|かふぇ]]での [[勉強|べんきょう]]は [[楽|たの]]しいです。",
+    "icon": "fas fa-coffee",
+    "color": "linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)"
+  },
+  {
+    "id": "s30",
+    "title": "Pergi ke Rumah Teman (友達の家へ行く)",
+    "category": "Kegiatan Sosial",
+    "translation": "Hari Sabtu saya pergi ke rumah teman. Kami memasak bersama. Setelah makan, kami berbincang lama. Kami juga menonton film. Saya pulang malam hari. Hari itu sangat menyenangkan.",
+    "template": "[[土曜日|どようび]]に [[友達|ともだち]]の [[家|いえ]]へ [[行|い]]きました。[[一緒|いっしょ]]に [[料理|りょうり]]を しました。[[食事|しょくじ]]の [[後|あと]]、[[長|なが]]く [[話|はな]]しました。[[映画|えいが]]も [[見|み]]ました。[[夜|よる]]に [[家|いえ]]へ [[帰|かえ]]りました。その [[日|ひ]]は とても [[楽|たの]]しかったです。",
+    "icon": "fas fa-home",
+    "color": "linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%)"
   }
 
 ]

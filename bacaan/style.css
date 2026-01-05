@@ -853,3 +853,18 @@ rt {
     color: #721c24 !important;
     opacity: 0.7;
 }
+
+
+/* --- SEARCH BAR STYLE --- */
+#input-cari:focus {
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 0 4px rgba(0, 114, 255, 0.1) !important;
+    outline: none;
+}
+
+/* Responsif di HP agar search bar tidak terlalu lebar */
+@media (max-width: 576px) {
+    .search-wrapper, #input-cari {
+        width: 100%;
+    }
+}

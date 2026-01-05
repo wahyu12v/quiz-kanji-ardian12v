@@ -4,6 +4,7 @@ let longStoriesMap = {};
 
 let filteredStories = [];       
 let currentCategory = 'Semua';
+let currentSearchQuery = ''; // Variabel baru untuk pencarian
 
 let currentStoryIndex = 0; 
 let activeUtterance = null; 
@@ -45,6 +46,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // LISTENER BARU: SEARCH INPUT
+    const searchInput = document.getElementById("input-cari");
+    if (searchInput) {
+        searchInput.addEventListener("input", (e) => {
+            currentSearchQuery = e.target.value.toLowerCase();
+            applyFilters(); // Panggil fungsi filter gabungan
+        });
+    }
+
     const btnAudio = document.getElementById("btn-audio");
     if (btnAudio) btnAudio.addEventListener("click", playAudio);
 
@@ -60,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("scroll", handleScrollTopButton);
     handleScrollTopButton();
 
-    // Listener Modal Pilihan Versi
     document.getElementById("btn-choice-short").addEventListener("click", () => openStoryVersion('short'));
     document.getElementById("btn-choice-long").addEventListener("click", () => openStoryVersion('long'));
 });
@@ -106,7 +115,7 @@ function handleScrollTopButton() {
     }
 }
 
-// --- FETCH DATA & MERGE LOGIC (Updated) ---
+// --- FETCH DATA ---
 function fetchAllData() {
     const spinner = document.getElementById("loading-spinner");
     Promise.all([
@@ -114,43 +123,34 @@ function fetchAllData() {
         fetch('bacaanlengkap.json').then(res => res.json())   
     ]).then(([dataSingkat, dataPanjang]) => {
         
-        // 1. Petakan Data (Mapping) berdasarkan ID untuk akses cepat
         shortStoriesMap = {};
         dataSingkat.forEach(s => shortStoriesMap[s.id] = s);
 
         longStoriesMap = {};
         dataPanjang.forEach(s => longStoriesMap[s.id] = s);
 
-        // 2. Buat Daftar Induk (Gabungan ID Unik)
         const allIds = new Set([...dataSingkat.map(s => s.id), ...dataPanjang.map(s => s.id)]);
         combinedStories = [];
 
         allIds.forEach(id => {
-            // Prioritas Data Tampilan (Judul/Icon/Warna): Ambil dari Short, kalau gak ada ambil Long
             const shortVer = shortStoriesMap[id];
             const longVer = longStoriesMap[id];
             
-            // Minimal salah satu harus ada
             if(shortVer || longVer) {
-                // Kita buat objek representasi untuk list utama
-                // Menggunakan data short sebagai base tampilan jika ada, jika tidak pakai long
                 const displayData = shortVer ? shortVer : longVer; 
-                
                 combinedStories.push({
                     id: id,
                     title: displayData.title,
                     category: displayData.category,
                     icon: displayData.icon,
                     color: displayData.color,
-                    hasShort: !!shortVer, // Boolean: true jika ada versi singkat
-                    hasLong: !!longVer    // Boolean: true jika ada versi panjang
+                    hasShort: !!shortVer,
+                    hasLong: !!longVer
                 });
             }
         });
 
-        // Sortir berdasarkan ID (opsional, biar rapi urutannya)
         combinedStories.sort((a, b) => a.id - b.id);
-
         filteredStories = combinedStories;
         
         setupCategories();
@@ -161,6 +161,28 @@ function fetchAllData() {
         console.error(err);
         if (spinner) spinner.innerHTML = `<div class="alert alert-danger">Gagal memuat data JSON. Cek console.</div>`;
     });
+}
+
+// --- FUNGSI UTAMA: FILTER GABUNGAN (SEARCH + KATEGORI) ---
+function applyFilters() {
+    currentPage = 1; // Reset ke halaman 1
+
+    let result = combinedStories;
+
+    // 1. Filter Kategori
+    if (currentCategory !== "Semua") {
+        result = result.filter(story => (story.category || "Lainnya") === currentCategory);
+    }
+
+    // 2. Filter Search Query
+    if (currentSearchQuery.trim() !== "") {
+        result = result.filter(story => 
+            story.title.toLowerCase().includes(currentSearchQuery)
+        );
+    }
+
+    filteredStories = result;
+    renderStories();
 }
 
 // --- CATEGORIES ---
@@ -185,22 +207,18 @@ function setupCategories() {
         
         btn.addEventListener("click", () => {
             currentCategory = cat;
-            currentPage = 1;
-
-            if (cat === "Semua") {
-                filteredStories = combinedStories;
-            } else {
-                filteredStories = combinedStories.filter(story => 
-                    (story.category || "Lainnya") === cat
-                );
-            }
-
+            
+            // Update Teks Tombol di Halaman Utama
             const mainBtnText = document.querySelector("#btn-filter-category span");
             if(mainBtnText) mainBtnText.innerText = `Kategori: ${cat}`;
 
+            // Panggil filter gabungan
+            applyFilters();
+            
+            // Render ulang modal agar tombol "active" pindah
             setupCategories(); 
-            renderStories();
 
+            // Tutup Modal
             const modalEl = document.getElementById('categoryModal');
             const modalInstance = bootstrap.Modal.getInstance(modalEl);
             if(modalInstance) modalInstance.hide();
@@ -225,7 +243,10 @@ function renderStories() {
     setTimeout(() => { gridContainer.style.opacity = '1'; }, 50);
 
     if (paginatedItems.length === 0) {
-        gridContainer.innerHTML = `<div class="col-12 text-center text-muted py-5">Tidak ada cerita di kategori ini.</div>`;
+        gridContainer.innerHTML = `<div class="col-12 text-center text-muted py-5">
+            <i class="fas fa-search mb-3" style="font-size: 2rem; opacity: 0.3;"></i><br>
+            Tidak ada cerita yang cocok.
+        </div>`;
         paginationContainer.innerHTML = "";
         return;
     }
@@ -241,14 +262,12 @@ function renderStories() {
                     <i class="${story.icon}"></i>
                 </div>
                 <div class="card-body-custom text-center">
-                    <h5 class="story-title">${story.title}</h5>
-                    <span class="badge rounded-pill bg-light text-dark mt-2" style="font-weight:normal; font-size:0.7rem; border:1px solid #eee;">
+                    <h5 class="card-title story-title">${story.title}</h5> <span class="badge rounded-pill bg-light text-dark mt-2" style="font-weight:normal; font-size:0.7rem; border:1px solid #eee;">
                         ${story.category || 'Lainnya'}
                     </span>
                     </div>
             </div>`;
         
-        // Panggil Modal Pilihan Versi saat diklik
         col.querySelector('.story-card').addEventListener('click', () => showVersionChoiceModal(story));
         gridContainer.appendChild(col);
     });
@@ -283,53 +302,45 @@ function setupPagination(totalItems, container) {
     container.appendChild(nextBtn);
 }
 
-// --- LOGIKA MODAL PILIHAN VERSI (UPDATED STYLE) ---
+// --- MODAL PILIHAN VERSI ---
 function showVersionChoiceModal(storyObj) {
-    tempSelectedId = storyObj.id; // Simpan ID sementara
+    tempSelectedId = storyObj.id; 
 
-    // === TOMBOL SHORT ===
     const btnShort = document.getElementById("btn-choice-short");
     const badgeShort = document.getElementById("badge-short-missing");
     
     if (storyObj.hasShort) {
-        // Style Aktif (Normal)
         btnShort.style.opacity = "1";
         btnShort.style.cursor = "pointer";
         btnShort.style.borderColor = "#0072FF";
         btnShort.style.color = "#0072FF";
         btnShort.disabled = false;
         badgeShort.style.display = 'none';
-        
         btnShort.onclick = () => openStoryVersion('short'); 
     } else {
-        // Style Tidak Tersedia (Abu-abu)
         btnShort.style.opacity = "0.5";
         btnShort.style.cursor = "not-allowed";
         btnShort.style.borderColor = "#ccc";
         btnShort.style.color = "#999";
-        btnShort.disabled = true; // Matikan fungsi klik
+        btnShort.disabled = true; 
         badgeShort.style.display = 'inline-block';
         btnShort.onclick = null;
     }
 
-    // === TOMBOL LONG ===
     const btnLong = document.getElementById("btn-choice-long");
     const badgeLong = document.getElementById("badge-long-missing");
 
     if (storyObj.hasLong) {
-        // Style Aktif (Gradient Biru)
         btnLong.style.opacity = "1";
         btnLong.style.cursor = "pointer";
         btnLong.style.background = "linear-gradient(135deg, #00C6FF 0%, #0072FF 100%)";
         btnLong.disabled = false;
         badgeLong.style.display = 'none';
-        
         btnLong.onclick = () => openStoryVersion('long'); 
     } else {
-        // Style Tidak Tersedia (Abu-abu Flat)
         btnLong.style.opacity = "0.5";
         btnLong.style.cursor = "not-allowed";
-        btnLong.style.background = "#e9ecef"; // Jadi abu-abu
+        btnLong.style.background = "#e9ecef"; 
         btnLong.style.color = "#999";
         btnLong.style.boxShadow = "none";
         btnLong.disabled = true;
@@ -337,19 +348,15 @@ function showVersionChoiceModal(storyObj) {
         btnLong.onclick = null;
     }
 
-    // Tampilkan Modal
     const myModal = new bootstrap.Modal(document.getElementById('versionChoiceModal'));
     myModal.show();
 }
 
-// --- FUNGSI BUKA CERITA (READER) ---
 function openStoryVersion(type) {
-    // Tutup Modal Pilihan dulu
     const modalEl = document.getElementById('versionChoiceModal');
     const modalInstance = bootstrap.Modal.getInstance(modalEl);
     if(modalInstance) modalInstance.hide();
 
-    // Ambil Data Asli dari Map
     let storyData = null;
     if (type === 'short') {
         storyData = shortStoriesMap[tempSelectedId];
@@ -357,15 +364,12 @@ function openStoryVersion(type) {
         storyData = longStoriesMap[tempSelectedId];
     }
 
-    // Double Check (Meskipun sudah dicek di tombol)
     if (!storyData) {
         alert("Terjadi kesalahan: Data cerita tidak ditemukan.");
         return;
     }
 
-    // Update Current Index berdasarkan Combined Stories (untuk navigasi Next/Prev)
     currentStoryIndex = combinedStories.findIndex(s => s.id == tempSelectedId);
-
     renderReaderView(storyData);
 }
 
@@ -380,7 +384,6 @@ function renderReaderView(story) {
     stopAudio(); 
     resetControls(); 
 
-    // Header Setup
     const readerImg = document.getElementById("reader-img");
     if (readerImg) readerImg.style.display = 'none';
     let iconWrapper = document.getElementById("reader-icon-wrapper");
@@ -398,7 +401,6 @@ function renderReaderView(story) {
 
     document.getElementById("reader-title").innerText = story.title;
 
-    // === RENDER BLOK PARAGRAF ===
     const contentContainer = document.getElementById("interlinear-content");
     contentContainer.innerHTML = ""; 
 
@@ -429,7 +431,6 @@ function renderReaderView(story) {
     document.getElementById("list-view").style.display = 'none';
     document.getElementById("reader-view").style.display = 'block';
     
-    // Reset Scroll
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     const exitBtn = document.getElementById("exit-btn");
@@ -437,10 +438,8 @@ function renderReaderView(story) {
     if(exitBtn) exitBtn.classList.add('d-none');
     if(backBtn) backBtn.classList.remove('d-none');
 
-    // Cek tombol scroll
     handleScrollTopButton();
 }
-
 
 function goBack() {
     stopAudio();
@@ -473,9 +472,7 @@ function resetControls() {
 
 function toggleTranslation() {
     const container = document.getElementById("interlinear-content");
-    const btn = document.getElementById("toggle-trans-btn");
-
-    // Cari blok aktif
+    
     let targetBlock = null;
     const blocks = document.querySelectorAll('.sentence-block');
     for (const block of blocks) {
@@ -498,7 +495,6 @@ function toggleTranslation() {
     const isActive = container.classList.contains("show-translation");
     setButtonStyle("icon-trans", isActive);
 
-    // Scroll Pintar
     if (targetBlock) {
         if (isActive) {
             setTimeout(() => {
@@ -531,21 +527,16 @@ function toggleFurigana() {
 
 // --- AUDIO ---
 function playAudio() {
-    // Ambil teks dari konten yang sedang dirender di layar, bukan dari data mentah
-    // Karena kita tidak tahu user sedang buka versi Short atau Long
     const contentContainer = document.getElementById("interlinear-content");
     if (!contentContainer) return;
 
-    // Ambil semua elemen kalimat Jepang yang sedang tampil
     const jpSentences = contentContainer.querySelectorAll('.jp-sentence');
     let fullText = "";
 
     jpSentences.forEach(el => {
-        
-        // Kloning elemen biar gak ngerusak tampilan
         const clone = el.cloneNode(true);
         const rts = clone.querySelectorAll('rt');
-        rts.forEach(rt => rt.remove()); // Hapus furigana buat speech engine
+        rts.forEach(rt => rt.remove()); 
         fullText += clone.textContent + " ";
     });
 
@@ -582,7 +573,8 @@ function playAudio() {
 function stopAudio() {
     if ('speechSynthesis' in window) window.speechSynthesis.cancel();
     setButtonStyle("icon-audio", false);
-    document.getElementById("btn-audio").querySelector("i").className = "fas fa-play";
+    const btnAudio = document.getElementById("btn-audio");
+    if(btnAudio) btnAudio.querySelector("i").className = "fas fa-play";
     
     const iconStop = document.getElementById("icon-stop");
     if(iconStop) {
@@ -591,20 +583,14 @@ function stopAudio() {
     }
 }
 
-// --- NAVIGASI CERITA ---
 function prevStory() {
     if (currentStoryIndex > 0) {
-        const prevId = combinedStories[currentStoryIndex - 1].id;
-        // Buka modal pilihan versi untuk cerita sebelumnya
         showVersionChoiceModal(combinedStories[currentStoryIndex - 1]);
-        // Note: Kita tidak bisa langsung buka versi short/long karena belum tau user mau yg mana
-        // Jadi logic "Prev/Next" sekarang akan membuka MODAL PILIHAN dulu.
     }
 }
 
 function nextStory() {
     if (currentStoryIndex < combinedStories.length - 1) {
-        // Buka modal pilihan versi untuk cerita selanjutnya
         showVersionChoiceModal(combinedStories[currentStoryIndex + 1]);
     }
 }
