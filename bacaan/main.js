@@ -1,596 +1,646 @@
-let combinedStories = []; 
-let shortStoriesMap = {}; 
-let longStoriesMap = {};  
+// let combinedStories = []; 
+// let shortStoriesMap = {}; 
+// let longStoriesMap = {};  
 
-let filteredStories = [];       
-let currentCategory = 'Semua';
-let currentSearchQuery = ''; // Variabel baru untuk pencarian
+// let filteredStories = [];       
+// let currentCategory = 'Semua';
+// let currentSearchQuery = ''; // Variabel baru untuk pencarian
 
-let currentStoryIndex = 0; 
-let activeUtterance = null; 
-let tempSelectedId = null;  
+// let currentStoryIndex = 0; 
+// let activeUtterance = null; 
+// let tempSelectedId = null;  
 
-const itemsPerPage = 6; 
-let currentPage = 1;
+// const itemsPerPage = 6; 
+// let currentPage = 1;
 
-document.addEventListener("DOMContentLoaded", () => {
-    // 1. Setup UI
-    const exitBtn = document.getElementById("exit-btn");
-    const headerBackBtn = document.getElementById("header-back-btn");
-    if (exitBtn) exitBtn.classList.remove('d-none');
-    if (headerBackBtn) headerBackBtn.classList.add('d-none');
+// document.addEventListener("DOMContentLoaded", () => {
+//     // 1. Setup UI
+//     const exitBtn = document.getElementById("exit-btn");
+//     const headerBackBtn = document.getElementById("header-back-btn");
+//     if (exitBtn) exitBtn.classList.remove('d-none');
+//     if (headerBackBtn) headerBackBtn.classList.add('d-none');
 
-    // 2. Fetch Data
-    fetchAllData();
+//     // 2. Fetch Data
+//     fetchAllData();
 
-    // 3. Init Audio
-    if ('speechSynthesis' in window) {
-        window.speechSynthesis.getVoices();
-    }
+//     // 3. Init Audio
+//     if ('speechSynthesis' in window) {
+//         window.speechSynthesis.getVoices();
+//     }
     
-    // --- LISTENERS ---
-    const btnBack = document.getElementById("header-back-btn");
-    if (btnBack) btnBack.addEventListener("click", goBack);
+//     // --- LISTENERS ---
+//     const btnBack = document.getElementById("header-back-btn");
+//     if (btnBack) btnBack.addEventListener("click", goBack);
 
-    const btnPrev = document.getElementById("btn-prev");
-    if (btnPrev) btnPrev.addEventListener("click", prevStory);
+//     const btnPrev = document.getElementById("btn-prev");
+//     if (btnPrev) btnPrev.addEventListener("click", prevStory);
 
-    const btnNext = document.getElementById("btn-next");
-    if (btnNext) btnNext.addEventListener("click", nextStory);
+//     const btnNext = document.getElementById("btn-next");
+//     if (btnNext) btnNext.addEventListener("click", nextStory);
 
-    const btnFilter = document.getElementById("btn-filter-category");
-    if (btnFilter) {
-        btnFilter.addEventListener("click", () => {
-            const catModal = new bootstrap.Modal(document.getElementById('categoryModal'));
-            catModal.show();
-        });
-    }
+//     const btnFilter = document.getElementById("btn-filter-category");
+//     if (btnFilter) {
+//         btnFilter.addEventListener("click", () => {
+//             const catModal = new bootstrap.Modal(document.getElementById('categoryModal'));
+//             catModal.show();
+//         });
+//     }
 
-    // LISTENER BARU: SEARCH INPUT
-    const searchInput = document.getElementById("input-cari");
-    if (searchInput) {
-        searchInput.addEventListener("input", (e) => {
-            currentSearchQuery = e.target.value.toLowerCase();
-            applyFilters(); // Panggil fungsi filter gabungan
-        });
-    }
+//     // LISTENER BARU: SEARCH INPUT
+//     const searchInput = document.getElementById("input-cari");
+//     if (searchInput) {
+//         searchInput.addEventListener("input", (e) => {
+//             currentSearchQuery = e.target.value.toLowerCase();
+//             applyFilters(); // Panggil fungsi filter gabungan
+//         });
+//     }
 
-    const btnAudio = document.getElementById("btn-audio");
-    if (btnAudio) btnAudio.addEventListener("click", playAudio);
+//     const btnAudio = document.getElementById("btn-audio");
+//     if (btnAudio) btnAudio.addEventListener("click", playAudio);
 
-    const btnStop = document.getElementById("btn-stop");
-    if (btnStop) btnStop.addEventListener("click", stopAudio);
+//     const btnStop = document.getElementById("btn-stop");
+//     if (btnStop) btnStop.addEventListener("click", stopAudio);
 
-    const btnTrans = document.getElementById("toggle-trans-btn");
-    if (btnTrans) btnTrans.addEventListener("click", toggleTranslation);
+//     const btnTrans = document.getElementById("toggle-trans-btn");
+//     if (btnTrans) btnTrans.addEventListener("click", toggleTranslation);
     
-    const btnFurigana = document.getElementById("toggle-furigana-btn");
-    if (btnFurigana) btnFurigana.addEventListener("click", toggleFurigana);
+//     const btnFurigana = document.getElementById("toggle-furigana-btn");
+//     if (btnFurigana) btnFurigana.addEventListener("click", toggleFurigana);
 
-    window.addEventListener("scroll", handleScrollTopButton);
-    handleScrollTopButton();
+//     window.addEventListener("scroll", handleScrollTopButton);
+//     handleScrollTopButton();
 
-    document.getElementById("btn-choice-short").addEventListener("click", () => openStoryVersion('short'));
-    document.getElementById("btn-choice-long").addEventListener("click", () => openStoryVersion('long'));
-});
+//     document.getElementById("btn-choice-short").addEventListener("click", () => openStoryVersion('short'));
+//     document.getElementById("btn-choice-long").addEventListener("click", () => openStoryVersion('long'));
+// });
 
-// --- HELPER STYLE ---
-function setButtonStyle(iconId, isActive, colorType = 'blue') {
-    const iconEl = document.getElementById(iconId);
-    if (!iconEl) return;
-    if (isActive) {
-        if (colorType === 'blue') {
-            iconEl.style.background = 'linear-gradient(135deg, #00C6FF 0%, #0072FF 100%)';
-            iconEl.style.boxShadow = '0 6px 15px rgba(0, 114, 255, 0.4)';
-        } else if (colorType === 'purple') {
-            iconEl.style.background = 'linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)';
-            iconEl.style.boxShadow = '0 6px 15px rgba(161, 140, 209, 0.4)';
-        }
-        iconEl.style.color = 'white';
-        iconEl.style.transform = 'scale(1.1) translateY(-2px)'; 
-    } else {
-        iconEl.style.background = '#f0f2f5';
-        iconEl.style.color = '#555';
-        iconEl.style.boxShadow = 'none';
-        iconEl.style.transform = 'scale(1) translateY(0)';
-    }
-}
+// // --- HELPER STYLE ---
+// function setButtonStyle(iconId, isActive, colorType = 'blue') {
+//     const iconEl = document.getElementById(iconId);
+//     if (!iconEl) return;
+//     if (isActive) {
+//         if (colorType === 'blue') {
+//             iconEl.style.background = 'linear-gradient(135deg, #00C6FF 0%, #0072FF 100%)';
+//             iconEl.style.boxShadow = '0 6px 15px rgba(0, 114, 255, 0.4)';
+//         } else if (colorType === 'purple') {
+//             iconEl.style.background = 'linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)';
+//             iconEl.style.boxShadow = '0 6px 15px rgba(161, 140, 209, 0.4)';
+//         }
+//         iconEl.style.color = 'white';
+//         iconEl.style.transform = 'scale(1.1) translateY(-2px)'; 
+//     } else {
+//         iconEl.style.background = '#f0f2f5';
+//         iconEl.style.color = '#555';
+//         iconEl.style.boxShadow = 'none';
+//         iconEl.style.transform = 'scale(1) translateY(0)';
+//     }
+// }
 
-// --- SCROLL BUTTON ---
-function handleScrollTopButton() {
-    const btn = document.getElementById("btn-scroll-top");
-    if (!btn) return;
-    if (window.scrollY > 300) {
-        btn.style.width = "45px"; 
-        btn.style.opacity = "1";
-        btn.style.transform = "scale(1)";
-        btn.style.marginLeft = "0px"; 
-        btn.style.pointerEvents = "auto";
-    } else {
-        btn.style.width = "0px";
-        btn.style.opacity = "0";
-        btn.style.transform = "scale(0)";
-        btn.style.marginLeft = "-15px"; 
-        btn.style.pointerEvents = "none";
-    }
-}
+// // --- SCROLL BUTTON ---
+// function handleScrollTopButton() {
+//     const btn = document.getElementById("btn-scroll-top");
+//     if (!btn) return;
+//     if (window.scrollY > 300) {
+//         btn.style.width = "45px"; 
+//         btn.style.opacity = "1";
+//         btn.style.transform = "scale(1)";
+//         btn.style.marginLeft = "0px"; 
+//         btn.style.pointerEvents = "auto";
+//     } else {
+//         btn.style.width = "0px";
+//         btn.style.opacity = "0";
+//         btn.style.transform = "scale(0)";
+//         btn.style.marginLeft = "-15px"; 
+//         btn.style.pointerEvents = "none";
+//     }
+// }
 
-// --- FETCH DATA ---
-function fetchAllData() {
-    const spinner = document.getElementById("loading-spinner");
-    Promise.all([
-        fetch('data.json').then(res => res.json()),           
-        fetch('bacaanlengkap.json').then(res => res.json())   
-    ]).then(([dataSingkat, dataPanjang]) => {
+// // --- FETCH DATA ---
+// function fetchAllData() {
+//     const spinner = document.getElementById("loading-spinner");
+//     Promise.all([
+//         fetch('data.json').then(res => res.json()),           
+//         fetch('bacaanlengkap.json').then(res => res.json())   
+//     ]).then(([dataSingkat, dataPanjang]) => {
         
-        shortStoriesMap = {};
-        dataSingkat.forEach(s => shortStoriesMap[s.id] = s);
+//         shortStoriesMap = {};
+//         dataSingkat.forEach(s => shortStoriesMap[s.id] = s);
 
-        longStoriesMap = {};
-        dataPanjang.forEach(s => longStoriesMap[s.id] = s);
+//         longStoriesMap = {};
+//         dataPanjang.forEach(s => longStoriesMap[s.id] = s);
 
-        const allIds = new Set([...dataSingkat.map(s => s.id), ...dataPanjang.map(s => s.id)]);
-        combinedStories = [];
+//         const allIds = new Set([...dataSingkat.map(s => s.id), ...dataPanjang.map(s => s.id)]);
+//         combinedStories = [];
 
-        allIds.forEach(id => {
-            const shortVer = shortStoriesMap[id];
-            const longVer = longStoriesMap[id];
+//         allIds.forEach(id => {
+//             const shortVer = shortStoriesMap[id];
+//             const longVer = longStoriesMap[id];
             
-            if(shortVer || longVer) {
-                const displayData = shortVer ? shortVer : longVer; 
-                combinedStories.push({
-                    id: id,
-                    title: displayData.title,
-                    category: displayData.category,
-                    icon: displayData.icon,
-                    color: displayData.color,
-                    hasShort: !!shortVer,
-                    hasLong: !!longVer
-                });
-            }
-        });
+//             if(shortVer || longVer) {
+//                 const displayData = shortVer ? shortVer : longVer; 
+//                 combinedStories.push({
+//                     id: id,
+//                     title: displayData.title,
+//                     category: displayData.category,
+//                     icon: displayData.icon,
+//                     color: displayData.color,
+//                     hasShort: !!shortVer,
+//                     hasLong: !!longVer
+//                 });
+//             }
+//         });
 
-        combinedStories.sort((a, b) => a.id - b.id);
-        filteredStories = combinedStories;
+//         combinedStories.sort((a, b) => a.id - b.id);
+//         filteredStories = combinedStories;
         
-        setupCategories();
-        renderStories(); 
+//         setupCategories();
+//         renderStories(); 
         
-        if (spinner) spinner.style.display = 'none';
-    }).catch(err => {
-        console.error(err);
-        if (spinner) spinner.innerHTML = `<div class="alert alert-danger">Gagal memuat data JSON. Cek console.</div>`;
-    });
-}
+//         if (spinner) spinner.style.display = 'none';
+//     }).catch(err => {
+//         console.error(err);
+//         if (spinner) spinner.innerHTML = `<div class="alert alert-danger">Gagal memuat data JSON. Cek console.</div>`;
+//     });
+// }
 
-// --- FUNGSI UTAMA: FILTER GABUNGAN (SEARCH + KATEGORI) ---
-function applyFilters() {
-    currentPage = 1; // Reset ke halaman 1
+// // --- FUNGSI UTAMA: FILTER GABUNGAN (SEARCH + KATEGORI) ---
+// function applyFilters() {
+//     currentPage = 1; // Reset ke halaman 1
 
-    let result = combinedStories;
+//     let result = combinedStories;
 
-    // 1. Filter Kategori
-    if (currentCategory !== "Semua") {
-        result = result.filter(story => (story.category || "Lainnya") === currentCategory);
-    }
+//     // 1. Filter Kategori
+//     if (currentCategory !== "Semua") {
+//         result = result.filter(story => (story.category || "Lainnya") === currentCategory);
+//     }
 
-    // 2. Filter Search Query
-    if (currentSearchQuery.trim() !== "") {
-        result = result.filter(story => 
-            story.title.toLowerCase().includes(currentSearchQuery)
-        );
-    }
+//     // 2. Filter Search Query
+//     if (currentSearchQuery.trim() !== "") {
+//         result = result.filter(story => 
+//             story.title.toLowerCase().includes(currentSearchQuery)
+//         );
+//     }
 
-    filteredStories = result;
-    renderStories();
-}
+//     filteredStories = result;
+//     renderStories();
+// }
 
-// --- CATEGORIES ---
-function setupCategories() {
-    const container = document.getElementById("modal-category-list");
-    if(!container) return;
-    container.innerHTML = "";
+// // --- CATEGORIES ---
+// function setupCategories() {
+//     const container = document.getElementById("modal-category-list");
+//     if(!container) return;
+//     container.innerHTML = "";
 
-    const categories = new Set();
-    combinedStories.forEach(story => {
-        if(story.category) categories.add(story.category);
-        else categories.add("Lainnya");
-    });
+//     const categories = new Set();
+//     combinedStories.forEach(story => {
+//         if(story.category) categories.add(story.category);
+//         else categories.add("Lainnya");
+//     });
 
-    const categoryList = ["Semua", ...Array.from(categories)];
+//     const categoryList = ["Semua", ...Array.from(categories)];
 
-    categoryList.forEach(cat => {
-        const btn = document.createElement("button");
-        btn.className = `cat-modal-btn ${cat === currentCategory ? 'active' : ''}`;
-        const checkIcon = cat === currentCategory ? '<i class="fas fa-check"></i>' : '';
-        btn.innerHTML = `<span>${cat}</span> ${checkIcon}`;
+//     categoryList.forEach(cat => {
+//         const btn = document.createElement("button");
+//         btn.className = `cat-modal-btn ${cat === currentCategory ? 'active' : ''}`;
+//         const checkIcon = cat === currentCategory ? '<i class="fas fa-check"></i>' : '';
+//         btn.innerHTML = `<span>${cat}</span> ${checkIcon}`;
         
-        btn.addEventListener("click", () => {
-            currentCategory = cat;
+//         btn.addEventListener("click", () => {
+//             currentCategory = cat;
             
-            // Update Teks Tombol di Halaman Utama
-            const mainBtnText = document.querySelector("#btn-filter-category span");
-            if(mainBtnText) mainBtnText.innerText = `Kategori: ${cat}`;
+//             // Update Teks Tombol di Halaman Utama
+//             const mainBtnText = document.querySelector("#btn-filter-category span");
+//             if(mainBtnText) mainBtnText.innerText = `Kategori: ${cat}`;
 
-            // Panggil filter gabungan
-            applyFilters();
+//             // Panggil filter gabungan
+//             applyFilters();
             
-            // Render ulang modal agar tombol "active" pindah
-            setupCategories(); 
+//             // Render ulang modal agar tombol "active" pindah
+//             setupCategories(); 
 
-            // Tutup Modal
-            const modalEl = document.getElementById('categoryModal');
-            const modalInstance = bootstrap.Modal.getInstance(modalEl);
-            if(modalInstance) modalInstance.hide();
-        });
+//             // Tutup Modal
+//             const modalEl = document.getElementById('categoryModal');
+//             const modalInstance = bootstrap.Modal.getInstance(modalEl);
+//             if(modalInstance) modalInstance.hide();
+//         });
 
-        container.appendChild(btn);
-    });
-}
+//         container.appendChild(btn);
+//     });
+// }
 
-// --- RENDER STORIES ---
-function renderStories() {
-    const gridContainer = document.getElementById("story-grid");
-    const paginationContainer = document.getElementById("pagination-container");
-    if (!gridContainer) return;
-    gridContainer.innerHTML = "";
+// // --- RENDER STORIES ---
+// function renderStories() {
+//     const gridContainer = document.getElementById("story-grid");
+//     const paginationContainer = document.getElementById("pagination-container");
+//     if (!gridContainer) return;
+//     gridContainer.innerHTML = "";
     
-    const start = (currentPage - 1) * itemsPerPage;
-    const end = start + itemsPerPage;
-    const paginatedItems = filteredStories.slice(start, end);
+//     const start = (currentPage - 1) * itemsPerPage;
+//     const end = start + itemsPerPage;
+//     const paginatedItems = filteredStories.slice(start, end);
     
-    gridContainer.style.opacity = '0';
-    setTimeout(() => { gridContainer.style.opacity = '1'; }, 50);
+//     gridContainer.style.opacity = '0';
+//     setTimeout(() => { gridContainer.style.opacity = '1'; }, 50);
 
-    if (paginatedItems.length === 0) {
-        gridContainer.innerHTML = `<div class="col-12 text-center text-muted py-5">
-            <i class="fas fa-search mb-3" style="font-size: 2rem; opacity: 0.3;"></i><br>
-            Tidak ada cerita yang cocok.
-        </div>`;
-        paginationContainer.innerHTML = "";
-        return;
-    }
+//     if (paginatedItems.length === 0) {
+//         gridContainer.innerHTML = `<div class="col-12 text-center text-muted py-5">
+//             <i class="fas fa-search mb-3" style="font-size: 2rem; opacity: 0.3;"></i><br>
+//             Tidak ada cerita yang cocok.
+//         </div>`;
+//         paginationContainer.innerHTML = "";
+//         return;
+//     }
 
-    paginatedItems.forEach(story => {
-        const col = document.createElement("div");
-        col.className = "col-md-6 col-lg-4 d-flex align-items-stretch";
-        col.style.transition = "all 0.3s ease";
+//     paginatedItems.forEach(story => {
+//         const col = document.createElement("div");
+//         col.className = "col-md-6 col-lg-4 d-flex align-items-stretch";
+//         col.style.transition = "all 0.3s ease";
         
-        col.innerHTML = `
-            <div class="story-card w-100">
-                <div class="card-icon-wrapper" style="background: ${story.color}">
-                    <i class="${story.icon}"></i>
-                </div>
-                <div class="card-body-custom text-center">
-                    <h5 class="card-title story-title">${story.title}</h5> <span class="badge rounded-pill bg-light text-dark mt-2" style="font-weight:normal; font-size:0.7rem; border:1px solid #eee;">
-                        ${story.category || 'Lainnya'}
-                    </span>
-                    </div>
-            </div>`;
+//         col.innerHTML = `
+//             <div class="story-card w-100">
+//                 <div class="card-icon-wrapper" style="background: ${story.color}">
+//                     <i class="${story.icon}"></i>
+//                 </div>
+//                 <div class="card-body-custom text-center">
+//                     <h5 class="card-title story-title">${story.title}</h5> <span class="badge rounded-pill bg-light text-dark mt-2" style="font-weight:normal; font-size:0.7rem; border:1px solid #eee;">
+//                         ${story.category || 'Lainnya'}
+//                     </span>
+//                     </div>
+//             </div>`;
         
-        col.querySelector('.story-card').addEventListener('click', () => showVersionChoiceModal(story));
-        gridContainer.appendChild(col);
+//         col.querySelector('.story-card').addEventListener('click', () => showVersionChoiceModal(story));
+//         gridContainer.appendChild(col);
+//     });
+
+//     setupPagination(filteredStories.length, paginationContainer);
+// }
+
+// function setupPagination(totalItems, container) {
+//     if(!container) return;
+//     container.innerHTML = "";
+//     const totalPages = Math.ceil(totalItems / itemsPerPage);
+//     if (totalPages <= 1) return;
+
+//     const prevBtn = document.createElement("button");
+//     prevBtn.className = "page-nav-btn";
+//     prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+//     prevBtn.disabled = currentPage === 1;
+//     prevBtn.onclick = () => { if (currentPage > 1) { currentPage--; renderStories(); window.scrollTo({ top: 0, behavior: 'smooth' }); }};
+//     container.appendChild(prevBtn);
+
+//     const pageInfo = document.createElement("span");
+//     pageInfo.className = "fw-bold text-muted mx-2";
+//     pageInfo.style.fontSize = "0.9rem";
+//     pageInfo.innerText = `Hal ${currentPage} / ${totalPages}`;
+//     container.appendChild(pageInfo);
+
+//     const nextBtn = document.createElement("button");
+//     nextBtn.className = "page-nav-btn";
+//     nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+//     nextBtn.disabled = currentPage === totalPages;
+//     nextBtn.onclick = () => { if (currentPage < totalPages) { currentPage++; renderStories(); window.scrollTo({ top: 0, behavior: 'smooth' }); }};
+//     container.appendChild(nextBtn);
+// }
+
+// // --- MODAL PILIHAN VERSI ---
+// function showVersionChoiceModal(storyObj) {
+//     tempSelectedId = storyObj.id; 
+
+//     const btnShort = document.getElementById("btn-choice-short");
+//     const badgeShort = document.getElementById("badge-short-missing");
+    
+//     if (storyObj.hasShort) {
+//         btnShort.style.opacity = "1";
+//         btnShort.style.cursor = "pointer";
+//         btnShort.style.borderColor = "#0072FF";
+//         btnShort.style.color = "#0072FF";
+//         btnShort.disabled = false;
+//         badgeShort.style.display = 'none';
+//         btnShort.onclick = () => openStoryVersion('short'); 
+//     } else {
+//         btnShort.style.opacity = "0.5";
+//         btnShort.style.cursor = "not-allowed";
+//         btnShort.style.borderColor = "#ccc";
+//         btnShort.style.color = "#999";
+//         btnShort.disabled = true; 
+//         badgeShort.style.display = 'inline-block';
+//         btnShort.onclick = null;
+//     }
+
+//     const btnLong = document.getElementById("btn-choice-long");
+//     const badgeLong = document.getElementById("badge-long-missing");
+
+//     if (storyObj.hasLong) {
+//         btnLong.style.opacity = "1";
+//         btnLong.style.cursor = "pointer";
+//         btnLong.style.background = "linear-gradient(135deg, #00C6FF 0%, #0072FF 100%)";
+//         btnLong.disabled = false;
+//         badgeLong.style.display = 'none';
+//         btnLong.onclick = () => openStoryVersion('long'); 
+//     } else {
+//         btnLong.style.opacity = "0.5";
+//         btnLong.style.cursor = "not-allowed";
+//         btnLong.style.background = "#e9ecef"; 
+//         btnLong.style.color = "#999";
+//         btnLong.style.boxShadow = "none";
+//         btnLong.disabled = true;
+//         badgeLong.style.display = 'inline-block';
+//         btnLong.onclick = null;
+//     }
+
+//     const myModal = new bootstrap.Modal(document.getElementById('versionChoiceModal'));
+//     myModal.show();
+// }
+
+// function openStoryVersion(type) {
+//     const modalEl = document.getElementById('versionChoiceModal');
+//     const modalInstance = bootstrap.Modal.getInstance(modalEl);
+//     if(modalInstance) modalInstance.hide();
+
+//     let storyData = null;
+//     if (type === 'short') {
+//         storyData = shortStoriesMap[tempSelectedId];
+//     } else {
+//         storyData = longStoriesMap[tempSelectedId];
+//     }
+
+//     if (!storyData) {
+//         alert("Terjadi kesalahan: Data cerita tidak ditemukan.");
+//         return;
+//     }
+
+//     currentStoryIndex = combinedStories.findIndex(s => s.id == tempSelectedId);
+//     renderReaderView(storyData);
+// }
+
+// function parseRuby(text) {
+//     if (!text) return "";
+//     return text.replace(/\[\[(.*?)\|(.*?)\]\]/g, (match, kanji, furigana) => {
+//         return `<ruby>${kanji}<rt>${furigana}</rt></ruby>`;
+//     });
+// }
+
+// function renderReaderView(story) {
+//     stopAudio(); 
+//     resetControls(); 
+
+//     const readerImg = document.getElementById("reader-img");
+//     if (readerImg) readerImg.style.display = 'none';
+//     let iconWrapper = document.getElementById("reader-icon-wrapper");
+//     if (!iconWrapper && readerImg) {
+//         iconWrapper = document.createElement("div");
+//         iconWrapper.id = "reader-icon-wrapper";
+//         iconWrapper.className = "reader-hero-icon";
+//         readerImg.parentNode.insertBefore(iconWrapper, readerImg);
+//     }
+//     if (iconWrapper) {
+//         iconWrapper.style.background = story.color;
+//         iconWrapper.innerHTML = `<i class="${story.icon}"></i>`;
+//         iconWrapper.style.display = 'flex';
+//     }
+
+//     document.getElementById("reader-title").innerText = story.title;
+
+//     const contentContainer = document.getElementById("interlinear-content");
+//     contentContainer.innerHTML = ""; 
+
+//     const templateText = story.template || "";
+//     const translationText = story.translation || "";
+
+//     const jpParagraphs = templateText.split(/\n+/).filter(s => s.trim().length > 0);
+//     const idParagraphs = translationText.split(/\n+/).filter(s => s.trim().length > 0);
+//     const maxCount = Math.max(jpParagraphs.length, idParagraphs.length);
+
+//     for (let i = 0; i < maxCount; i++) {
+//         let jpText = jpParagraphs[i] || "";
+//         let idText = idParagraphs[i] || "";
+
+//         if (jpText || idText) {
+//             const block = document.createElement("div");
+//             block.className = "sentence-block"; 
+//             block.style.marginBottom = "30px"; 
+
+//             block.innerHTML = `
+//                 <div class="jp-sentence" style="text-align: justify;">${parseRuby(jpText)}</div>
+//                 <div class="id-translation" style="text-align: justify; margin-top: 10px;">${idText}</div>
+//             `;
+//             contentContainer.appendChild(block);
+//         }
+//     }
+
+//     document.getElementById("list-view").style.display = 'none';
+//     document.getElementById("reader-view").style.display = 'block';
+    
+//     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+//     const exitBtn = document.getElementById("exit-btn");
+//     const backBtn = document.getElementById("header-back-btn");
+//     if(exitBtn) exitBtn.classList.add('d-none');
+//     if(backBtn) backBtn.classList.remove('d-none');
+
+//     handleScrollTopButton();
+// }
+
+// function goBack() {
+//     stopAudio();
+//     document.getElementById("reader-view").style.display = 'none';
+//     document.getElementById("list-view").style.display = 'block';
+    
+//     const scrollBtn = document.getElementById("btn-scroll-top");
+//     if(scrollBtn) {
+//         scrollBtn.style.width = "0px";
+//         scrollBtn.style.marginLeft = "-15px";
+//         scrollBtn.style.opacity = "0";
+//     }
+    
+//     const exitBtn = document.getElementById("exit-btn");
+//     const backBtn = document.getElementById("header-back-btn");
+//     if(exitBtn) exitBtn.classList.remove('d-none');
+//     if(backBtn) backBtn.classList.add('d-none');
+// }
+
+// // --- CONTROLS ---
+// function resetControls() {
+//     const container = document.getElementById("interlinear-content");
+//     container.classList.remove("show-translation");
+//     container.classList.remove("hide-furigana");
+//     setButtonStyle("icon-trans", false);
+//     setButtonStyle("icon-furigana", false);
+//     const btnFurigana = document.getElementById("toggle-furigana-btn");
+//     btnFurigana.querySelector("i").className = "fas fa-eye-slash"; 
+// }
+
+// function toggleTranslation() {
+//     const container = document.getElementById("interlinear-content");
+    
+//     let targetBlock = null;
+//     const blocks = document.querySelectorAll('.sentence-block');
+//     for (const block of blocks) {
+//         const rect = block.getBoundingClientRect();
+//         if (rect.top >= -50 && rect.top < window.innerHeight / 2) {
+//             targetBlock = block;
+//             break; 
+//         }
+//     }
+//     if (!targetBlock && blocks.length > 0) {
+//          for (const block of blocks) {
+//             if (block.getBoundingClientRect().bottom > 0) {
+//                 targetBlock = block;
+//                 break;
+//             }
+//          }
+//     }
+
+//     container.classList.toggle("show-translation");
+//     const isActive = container.classList.contains("show-translation");
+//     setButtonStyle("icon-trans", isActive);
+
+//     if (targetBlock) {
+//         if (isActive) {
+//             setTimeout(() => {
+//                 const transEl = targetBlock.querySelector('.id-translation');
+//                 if (transEl) transEl.scrollIntoView({behavior: "smooth", block: "center"});
+//             }, 100);
+//         } else {
+//             setTimeout(() => {
+//                 const jpEl = targetBlock.querySelector('.jp-sentence');
+//                 if (jpEl) jpEl.scrollIntoView({behavior: "smooth", block: "center"});
+//             }, 50);
+//         }
+//     }
+// }
+
+// function toggleFurigana() {
+//     const container = document.getElementById("interlinear-content");
+//     const btn = document.getElementById("toggle-furigana-btn");
+//     const icon = btn.querySelector("i");
+    
+//     container.classList.toggle("hide-furigana");
+//     if(container.classList.contains("hide-furigana")) {
+//         setButtonStyle("icon-furigana", true, 'purple');
+//         icon.className = "fas fa-eye"; 
+//     } else {
+//         setButtonStyle("icon-furigana", false);
+//         icon.className = "fas fa-eye-slash"; 
+//     }
+// }
+
+// // --- AUDIO ---
+// function playAudio() {
+//     const contentContainer = document.getElementById("interlinear-content");
+//     if (!contentContainer) return;
+
+//     const jpSentences = contentContainer.querySelectorAll('.jp-sentence');
+//     let fullText = "";
+
+//     jpSentences.forEach(el => {
+//         const clone = el.cloneNode(true);
+//         const rts = clone.querySelectorAll('rt');
+//         rts.forEach(rt => rt.remove()); 
+//         fullText += clone.textContent + " ";
+//     });
+
+//     stopAudio(); 
+
+//     if (!fullText.trim()) return;
+
+//     if (!('speechSynthesis' in window)) {
+//         alert("Browser tidak mendukung suara.");
+//         return;
+//     }
+
+//     activeUtterance = new SpeechSynthesisUtterance(fullText);
+//     activeUtterance.lang = 'ja-JP'; 
+//     activeUtterance.rate = 0.9;
+
+//     const voices = window.speechSynthesis.getVoices();
+//     const japanVoice = voices.find(v => v.lang === 'ja-JP' || v.name.includes('Japan'));
+//     if (japanVoice) activeUtterance.voice = japanVoice;
+
+//     setButtonStyle("icon-audio", true); 
+//     const btnAudio = document.getElementById("btn-audio");
+//     btnAudio.querySelector("i").className = "fas fa-volume-up";
+
+//     activeUtterance.onend = () => {
+//         setButtonStyle("icon-audio", false); 
+//         btnAudio.querySelector("i").className = "fas fa-play";
+//     };
+
+//     window.speechSynthesis.speak(activeUtterance);
+//     if (window.speechSynthesis.paused) window.speechSynthesis.resume();
+// }
+
+// function stopAudio() {
+//     if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+//     setButtonStyle("icon-audio", false);
+//     const btnAudio = document.getElementById("btn-audio");
+//     if(btnAudio) btnAudio.querySelector("i").className = "fas fa-play";
+    
+//     const iconStop = document.getElementById("icon-stop");
+//     if(iconStop) {
+//         iconStop.style.transform = "scale(0.9)";
+//         setTimeout(() => iconStop.style.transform = "scale(1)", 150);
+//     }
+// }
+
+// function prevStory() {
+//     if (currentStoryIndex > 0) {
+//         showVersionChoiceModal(combinedStories[currentStoryIndex - 1]);
+//     }
+// }
+
+// function nextStory() {
+//     if (currentStoryIndex < combinedStories.length - 1) {
+//         showVersionChoiceModal(combinedStories[currentStoryIndex + 1]);
+//     }
+// }
+
+
+
+// main.js - Loader
+
+const scriptsToLoad = [
+    'js/variables.js',
+    'js/utils.js',
+    'js/data.js',
+    'js/ui-list.js',
+    'js/ui-reader.js',
+    'js/init.js' 
+];
+
+function loadScript(url) {
+    return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = url;
+        script.onload = () => resolve();
+        script.onerror = () => {
+            console.error(`Gagal memuat: ${url} - Pastikan file ada di folder js/`);
+            reject();
+        };
+        document.body.appendChild(script);
     });
-
-    setupPagination(filteredStories.length, paginationContainer);
 }
 
-function setupPagination(totalItems, container) {
-    if(!container) return;
-    container.innerHTML = "";
-    const totalPages = Math.ceil(totalItems / itemsPerPage);
-    if (totalPages <= 1) return;
-
-    const prevBtn = document.createElement("button");
-    prevBtn.className = "page-nav-btn";
-    prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
-    prevBtn.disabled = currentPage === 1;
-    prevBtn.onclick = () => { if (currentPage > 1) { currentPage--; renderStories(); window.scrollTo({ top: 0, behavior: 'smooth' }); }};
-    container.appendChild(prevBtn);
-
-    const pageInfo = document.createElement("span");
-    pageInfo.className = "fw-bold text-muted mx-2";
-    pageInfo.style.fontSize = "0.9rem";
-    pageInfo.innerText = `Hal ${currentPage} / ${totalPages}`;
-    container.appendChild(pageInfo);
-
-    const nextBtn = document.createElement("button");
-    nextBtn.className = "page-nav-btn";
-    nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
-    nextBtn.disabled = currentPage === totalPages;
-    nextBtn.onclick = () => { if (currentPage < totalPages) { currentPage++; renderStories(); window.scrollTo({ top: 0, behavior: 'smooth' }); }};
-    container.appendChild(nextBtn);
-}
-
-// --- MODAL PILIHAN VERSI ---
-function showVersionChoiceModal(storyObj) {
-    tempSelectedId = storyObj.id; 
-
-    const btnShort = document.getElementById("btn-choice-short");
-    const badgeShort = document.getElementById("badge-short-missing");
-    
-    if (storyObj.hasShort) {
-        btnShort.style.opacity = "1";
-        btnShort.style.cursor = "pointer";
-        btnShort.style.borderColor = "#0072FF";
-        btnShort.style.color = "#0072FF";
-        btnShort.disabled = false;
-        badgeShort.style.display = 'none';
-        btnShort.onclick = () => openStoryVersion('short'); 
-    } else {
-        btnShort.style.opacity = "0.5";
-        btnShort.style.cursor = "not-allowed";
-        btnShort.style.borderColor = "#ccc";
-        btnShort.style.color = "#999";
-        btnShort.disabled = true; 
-        badgeShort.style.display = 'inline-block';
-        btnShort.onclick = null;
-    }
-
-    const btnLong = document.getElementById("btn-choice-long");
-    const badgeLong = document.getElementById("badge-long-missing");
-
-    if (storyObj.hasLong) {
-        btnLong.style.opacity = "1";
-        btnLong.style.cursor = "pointer";
-        btnLong.style.background = "linear-gradient(135deg, #00C6FF 0%, #0072FF 100%)";
-        btnLong.disabled = false;
-        badgeLong.style.display = 'none';
-        btnLong.onclick = () => openStoryVersion('long'); 
-    } else {
-        btnLong.style.opacity = "0.5";
-        btnLong.style.cursor = "not-allowed";
-        btnLong.style.background = "#e9ecef"; 
-        btnLong.style.color = "#999";
-        btnLong.style.boxShadow = "none";
-        btnLong.disabled = true;
-        badgeLong.style.display = 'inline-block';
-        btnLong.onclick = null;
-    }
-
-    const myModal = new bootstrap.Modal(document.getElementById('versionChoiceModal'));
-    myModal.show();
-}
-
-function openStoryVersion(type) {
-    const modalEl = document.getElementById('versionChoiceModal');
-    const modalInstance = bootstrap.Modal.getInstance(modalEl);
-    if(modalInstance) modalInstance.hide();
-
-    let storyData = null;
-    if (type === 'short') {
-        storyData = shortStoriesMap[tempSelectedId];
-    } else {
-        storyData = longStoriesMap[tempSelectedId];
-    }
-
-    if (!storyData) {
-        alert("Terjadi kesalahan: Data cerita tidak ditemukan.");
-        return;
-    }
-
-    currentStoryIndex = combinedStories.findIndex(s => s.id == tempSelectedId);
-    renderReaderView(storyData);
-}
-
-function parseRuby(text) {
-    if (!text) return "";
-    return text.replace(/\[\[(.*?)\|(.*?)\]\]/g, (match, kanji, furigana) => {
-        return `<ruby>${kanji}<rt>${furigana}</rt></ruby>`;
-    });
-}
-
-function renderReaderView(story) {
-    stopAudio(); 
-    resetControls(); 
-
-    const readerImg = document.getElementById("reader-img");
-    if (readerImg) readerImg.style.display = 'none';
-    let iconWrapper = document.getElementById("reader-icon-wrapper");
-    if (!iconWrapper && readerImg) {
-        iconWrapper = document.createElement("div");
-        iconWrapper.id = "reader-icon-wrapper";
-        iconWrapper.className = "reader-hero-icon";
-        readerImg.parentNode.insertBefore(iconWrapper, readerImg);
-    }
-    if (iconWrapper) {
-        iconWrapper.style.background = story.color;
-        iconWrapper.innerHTML = `<i class="${story.icon}"></i>`;
-        iconWrapper.style.display = 'flex';
-    }
-
-    document.getElementById("reader-title").innerText = story.title;
-
-    const contentContainer = document.getElementById("interlinear-content");
-    contentContainer.innerHTML = ""; 
-
-    const templateText = story.template || "";
-    const translationText = story.translation || "";
-
-    const jpParagraphs = templateText.split(/\n+/).filter(s => s.trim().length > 0);
-    const idParagraphs = translationText.split(/\n+/).filter(s => s.trim().length > 0);
-    const maxCount = Math.max(jpParagraphs.length, idParagraphs.length);
-
-    for (let i = 0; i < maxCount; i++) {
-        let jpText = jpParagraphs[i] || "";
-        let idText = idParagraphs[i] || "";
-
-        if (jpText || idText) {
-            const block = document.createElement("div");
-            block.className = "sentence-block"; 
-            block.style.marginBottom = "30px"; 
-
-            block.innerHTML = `
-                <div class="jp-sentence" style="text-align: justify;">${parseRuby(jpText)}</div>
-                <div class="id-translation" style="text-align: justify; margin-top: 10px;">${idText}</div>
-            `;
-            contentContainer.appendChild(block);
+async function initApp() {
+    try {
+        // Muat file satu per satu
+        for (const url of scriptsToLoad) {
+            await loadScript(url);
         }
-    }
+        
+        console.log("Semua script siap.");
 
-    document.getElementById("list-view").style.display = 'none';
-    document.getElementById("reader-view").style.display = 'block';
-    
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    const exitBtn = document.getElementById("exit-btn");
-    const backBtn = document.getElementById("header-back-btn");
-    if(exitBtn) exitBtn.classList.add('d-none');
-    if(backBtn) backBtn.classList.remove('d-none');
-
-    handleScrollTopButton();
-}
-
-function goBack() {
-    stopAudio();
-    document.getElementById("reader-view").style.display = 'none';
-    document.getElementById("list-view").style.display = 'block';
-    
-    const scrollBtn = document.getElementById("btn-scroll-top");
-    if(scrollBtn) {
-        scrollBtn.style.width = "0px";
-        scrollBtn.style.marginLeft = "-15px";
-        scrollBtn.style.opacity = "0";
-    }
-    
-    const exitBtn = document.getElementById("exit-btn");
-    const backBtn = document.getElementById("header-back-btn");
-    if(exitBtn) exitBtn.classList.remove('d-none');
-    if(backBtn) backBtn.classList.add('d-none');
-}
-
-// --- CONTROLS ---
-function resetControls() {
-    const container = document.getElementById("interlinear-content");
-    container.classList.remove("show-translation");
-    container.classList.remove("hide-furigana");
-    setButtonStyle("icon-trans", false);
-    setButtonStyle("icon-furigana", false);
-    const btnFurigana = document.getElementById("toggle-furigana-btn");
-    btnFurigana.querySelector("i").className = "fas fa-eye-slash"; 
-}
-
-function toggleTranslation() {
-    const container = document.getElementById("interlinear-content");
-    
-    let targetBlock = null;
-    const blocks = document.querySelectorAll('.sentence-block');
-    for (const block of blocks) {
-        const rect = block.getBoundingClientRect();
-        if (rect.top >= -50 && rect.top < window.innerHeight / 2) {
-            targetBlock = block;
-            break; 
-        }
-    }
-    if (!targetBlock && blocks.length > 0) {
-         for (const block of blocks) {
-            if (block.getBoundingClientRect().bottom > 0) {
-                targetBlock = block;
-                break;
-            }
-         }
-    }
-
-    container.classList.toggle("show-translation");
-    const isActive = container.classList.contains("show-translation");
-    setButtonStyle("icon-trans", isActive);
-
-    if (targetBlock) {
-        if (isActive) {
-            setTimeout(() => {
-                const transEl = targetBlock.querySelector('.id-translation');
-                if (transEl) transEl.scrollIntoView({behavior: "smooth", block: "center"});
-            }, 100);
+        // EKSEKUSI MANUAL SETELAH SELESAI LOAD
+        if (typeof mulaiAplikasi === "function") {
+            mulaiAplikasi(); // <--- INI KUNCINYA
         } else {
-            setTimeout(() => {
-                const jpEl = targetBlock.querySelector('.jp-sentence');
-                if (jpEl) jpEl.scrollIntoView({behavior: "smooth", block: "center"});
-            }, 50);
+            console.error("Fungsi mulaiAplikasi tidak ditemukan di init.js");
         }
+
+    } catch (error) {
+        console.error("Terjadi kesalahan saat memuat script:", error);
     }
 }
 
-function toggleFurigana() {
-    const container = document.getElementById("interlinear-content");
-    const btn = document.getElementById("toggle-furigana-btn");
-    const icon = btn.querySelector("i");
-    
-    container.classList.toggle("hide-furigana");
-    if(container.classList.contains("hide-furigana")) {
-        setButtonStyle("icon-furigana", true, 'purple');
-        icon.className = "fas fa-eye"; 
-    } else {
-        setButtonStyle("icon-furigana", false);
-        icon.className = "fas fa-eye-slash"; 
-    }
-}
-
-// --- AUDIO ---
-function playAudio() {
-    const contentContainer = document.getElementById("interlinear-content");
-    if (!contentContainer) return;
-
-    const jpSentences = contentContainer.querySelectorAll('.jp-sentence');
-    let fullText = "";
-
-    jpSentences.forEach(el => {
-        const clone = el.cloneNode(true);
-        const rts = clone.querySelectorAll('rt');
-        rts.forEach(rt => rt.remove()); 
-        fullText += clone.textContent + " ";
-    });
-
-    stopAudio(); 
-
-    if (!fullText.trim()) return;
-
-    if (!('speechSynthesis' in window)) {
-        alert("Browser tidak mendukung suara.");
-        return;
-    }
-
-    activeUtterance = new SpeechSynthesisUtterance(fullText);
-    activeUtterance.lang = 'ja-JP'; 
-    activeUtterance.rate = 0.9;
-
-    const voices = window.speechSynthesis.getVoices();
-    const japanVoice = voices.find(v => v.lang === 'ja-JP' || v.name.includes('Japan'));
-    if (japanVoice) activeUtterance.voice = japanVoice;
-
-    setButtonStyle("icon-audio", true); 
-    const btnAudio = document.getElementById("btn-audio");
-    btnAudio.querySelector("i").className = "fas fa-volume-up";
-
-    activeUtterance.onend = () => {
-        setButtonStyle("icon-audio", false); 
-        btnAudio.querySelector("i").className = "fas fa-play";
-    };
-
-    window.speechSynthesis.speak(activeUtterance);
-    if (window.speechSynthesis.paused) window.speechSynthesis.resume();
-}
-
-function stopAudio() {
-    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-    setButtonStyle("icon-audio", false);
-    const btnAudio = document.getElementById("btn-audio");
-    if(btnAudio) btnAudio.querySelector("i").className = "fas fa-play";
-    
-    const iconStop = document.getElementById("icon-stop");
-    if(iconStop) {
-        iconStop.style.transform = "scale(0.9)";
-        setTimeout(() => iconStop.style.transform = "scale(1)", 150);
-    }
-}
-
-function prevStory() {
-    if (currentStoryIndex > 0) {
-        showVersionChoiceModal(combinedStories[currentStoryIndex - 1]);
-    }
-}
-
-function nextStory() {
-    if (currentStoryIndex < combinedStories.length - 1) {
-        showVersionChoiceModal(combinedStories[currentStoryIndex + 1]);
-    }
-}
+// Jalankan
+initApp();
