@@ -146,41 +146,50 @@ function resetControls() {
     if(btnFurigana) btnFurigana.querySelector("i").className = "fas fa-eye-slash"; 
 }
 
+// --- FUNGSI SCROLL PINTAR (FINAL FIX) ---
 function toggleTranslation() {
     const container = document.getElementById("interlinear-content");
+    
+    // 1. KUNCI TARGET DULU SEBELUM LAYOUT BERUBAH
+    // Cari blok mana yang "Paling Banyak Terlihat" (Dominan) di layar saat ini.
+    const blocks = document.querySelectorAll('.sentence-block');
+    let targetBlock = null;
+    let maxVisibleHeight = 0;
+    const viewHeight = window.innerHeight;
+
+    blocks.forEach(block => {
+        const rect = block.getBoundingClientRect();
+        
+        // Hitung berapa pixel tinggi blok ini yang nampil di layar
+        const visibleTop = Math.max(0, rect.top);
+        const visibleBottom = Math.min(viewHeight, rect.bottom);
+        const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+
+        // Siapa yang paling banyak tampil, dialah yang kita kunci
+        if (visibleHeight > maxVisibleHeight) {
+            maxVisibleHeight = visibleHeight;
+            targetBlock = block;
+        }
+    });
+
+    // 2. BARU UBAH TAMPILAN (Expand/Collapse)
     container.classList.toggle("show-translation");
     const isActive = container.classList.contains("show-translation");
     setButtonStyle("icon-trans", isActive);
 
-    // --- LOGIKA SCROLL PERBAIKAN ---
-    if (isActive) {
-        // Cari kalimat yang sedang terlihat di layar (yang paling atas tapi belum lewat)
-        const blocks = document.querySelectorAll('.sentence-block');
-        let targetBlock = null;
-
-        for (const block of blocks) {
-            const rect = block.getBoundingClientRect();
-            // Jika bagian bawah elemen masih terlihat di layar (bottom > 0)
-            // Dan bagian atasnya kurang dari setengah layar (biar gak scroll ke yang paling bawah banget)
-            if (rect.bottom > 0 && rect.top < window.innerHeight / 1.5) {
-                targetBlock = block;
-                break;
-            }
-        }
-
-        if (targetBlock) {
-            const transEl = targetBlock.querySelector('.id-translation');
-            if (transEl) {
-                // Jeda sedikit biar transisi CSS selesai dulu
-                setTimeout(() => {
-                    transEl.scrollIntoView({ behavior: "smooth", block: "center" });
-                    
-                    // Highlight efek
-                    transEl.style.transition = "background-color 0.5s";
-                    transEl.style.backgroundColor = "#fff3cd"; // Kuning tipis
-                    setTimeout(() => { transEl.style.backgroundColor = "#f0f8ff"; }, 1000); // Balik ke biru
-                }, 100);
-            }
+    // 3. JIKA ADA TARGET TADI, KEJAR DIA!
+    if (isActive && targetBlock) {
+        const transEl = targetBlock.querySelector('.id-translation');
+        if (transEl) {
+            // Kasih jeda sedikit agar layout selesai render dulu
+            setTimeout(() => {
+                transEl.scrollIntoView({ behavior: "smooth", block: "center" });
+                
+                // Efek Highlight
+                transEl.style.transition = "background-color 0.5s";
+                transEl.style.backgroundColor = "#fffde7"; // Kuning lembut
+                setTimeout(() => { transEl.style.backgroundColor = "#f4f9ff"; }, 800);
+            }, 100); 
         }
     }
 }

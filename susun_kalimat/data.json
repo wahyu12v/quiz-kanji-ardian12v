@@ -111,5 +111,653 @@
         "translation": "Yoru ni nemasu"
       }
     ]
-  }
+  },
+  {
+  "id": "story_restaurant",
+  "title": "Di Restoran",
+  "description": "Latihan menyusun kalimat kompleks saat makan di restoran.",
+  "icon": "fa-utensils",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Saya masuk ke restoran karena lapar.",
+      "correct_sentence": "おなかがすいたのでレストランにはいります",
+      "parts": ["おなかがすいたので", "レストランに", "はいります", "たべます", "を"],
+      "translation": "Onaka ga suita node resutoran ni hairimasu"
+    },
+    {
+      "id": 2,
+      "question": "Restorannya ramai tetapi bersih.",
+      "correct_sentence": "レストランはにぎやかですがきれいです",
+      "parts": ["レストランは", "にぎやかですが", "きれいです", "しずかです", "を"],
+      "translation": "Resutoran wa nigiyaka desu ga kirei desu"
+    },
+    {
+      "id": 3,
+      "question": "Saya duduk di kursi dekat jendela.",
+      "correct_sentence": "まどのちかくのいすにすわります",
+      "parts": ["まどのちかくの", "いすに", "すわります", "たちます", "で"],
+      "translation": "Mado no chikaku no isu ni suwarimasu"
+    },
+    {
+      "id": 4,
+      "question": "Saya melihat menu dengan pelan-pelan.",
+      "correct_sentence": "ゆっくりメニューをみます",
+      "parts": ["ゆっくり", "メニューを", "みます", "よみます", "に"],
+      "translation": "Yukkuri menyuu o mimasu"
+    },
+    {
+      "id": 5,
+      "question": "Karena bingung, saya bertanya pada staf.",
+      "correct_sentence": "こまったのでスタッフにききます",
+      "parts": ["こまったので", "スタッフに", "ききます", "いいます", "を"],
+      "translation": "Komatta node sutaffu ni kikimasu"
+    },
+    {
+      "id": 6,
+      "question": "Saya memesan makanan yang paling populer.",
+      "correct_sentence": "いちばんにんきのあるりょうりをたのみます",
+      "parts": ["いちばんにんきのある", "りょうりを", "たのみます", "たべます", "が"],
+      "translation": "Ichiban ninki no aru ryouri o tanomimasu"
+    },
+    {
+      "id": 7,
+      "question": "Saya juga memesan minuman dingin.",
+      "correct_sentence": "つめたいのみものもたのみます",
+      "parts": ["つめたい", "のみものも", "たのみます", "のみます", "を"],
+      "translation": "Tsumetai nomimono mo tanomimasu"
+    },
+    {
+      "id": 8,
+      "question": "Makanannya datang lebih cepat dari yang saya kira.",
+      "correct_sentence": "おもったよりはやくりょうりがきました",
+      "parts": ["おもったより", "はやく", "りょうりが", "きました", "を"],
+      "translation": "Omotta yori hayaku ryouri ga kimashita"
+    },
+    {
+      "id": 9,
+      "question": "Rasanya enak dan porsinya besar.",
+      "correct_sentence": "あじもよくてりょうもおおきいです",
+      "parts": ["あじも", "よくて", "りょうも", "おおきいです", "すくないです"],
+      "translation": "Aji mo yokute ryou mo ookii desu"
+    },
+    {
+      "id": 10,
+      "question": "Saya makan sambil berbicara dengan teman.",
+      "correct_sentence": "ともだちとはなしながらたべます",
+      "parts": ["ともだちと", "はなしながら", "たべます", "のみます", "で"],
+      "translation": "Tomodachi to hanashi nagara tabemasu"
+    },
+    {
+      "id": 11,
+      "question": "Saya sangat kenyang.",
+      "correct_sentence": "とてもおなかがいっぱいです",
+      "parts": ["とても", "おなかが", "いっぱいです", "すきです", "を"],
+      "translation": "Totemo onaka ga ippai desu"
+    },
+    {
+      "id": 12,
+      "question": "Saya membayar dengan kartu.",
+      "correct_sentence": "カードではらいます",
+      "parts": ["カードで", "はらいます", "もらいます", "を", "に"],
+      "translation": "Kaado de haraimasu"
+    },
+    {
+      "id": 13,
+      "question": "Pelayan mengucapkan terima kasih.",
+      "correct_sentence": "てんいんさんがありがとうといいます",
+      "parts": ["てんいんさんが", "ありがとうと", "いいます", "ききます", "を"],
+      "translation": "Tenin-san ga arigatou to iimasu"
+    },
+    {
+      "id": 14,
+      "question": "Saya merasa puas setelah makan.",
+      "correct_sentence": "たべおわってまんぞくしました",
+      "parts": ["たべおわって", "まんぞくしました", "つかれました", "に", "を"],
+      "translation": "Tabe owatte manzoku shimashita"
+    },
+    {
+      "id": 15,
+      "question": "Saya keluar dari restoran dengan senyum.",
+      "correct_sentence": "えがおでレストランをでます",
+      "parts": ["えがおで", "レストランを", "でます", "はいります", "に"],
+      "translation": "Egao de resutoran o demasu"
+    }
+  ]
+},
+{
+  "id": "story_trip",
+  "title": "Perjalanan",
+  "description": "Latihan menyusun kalimat tentang perjalanan dan pengalaman.",
+  "icon": "fa-plane",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Saya pergi liburan bersama keluarga.",
+      "correct_sentence": "かぞくといっしょにりょこうへいきます",
+      "parts": ["かぞくと", "いっしょに", "りょこうへ", "いきます", "で"],
+      "translation": "Kazoku to issho ni ryokou e ikimasu"
+    },
+    {
+      "id": 2,
+      "question": "Kami berangkat pagi-pagi sekali.",
+      "correct_sentence": "あさはやくしゅっぱつしました",
+      "parts": ["あさはやく", "しゅっぱつしました", "つきました", "に", "を"],
+      "translation": "Asa hayaku shuppatsu shimashita"
+    },
+    {
+      "id": 3,
+      "question": "Kami naik kereta yang cepat.",
+      "correct_sentence": "はやいでんしゃにのりました",
+      "parts": ["はやい", "でんしゃに", "のりました", "のります", "で"],
+      "translation": "Hayai densha ni norimashita"
+    },
+    {
+      "id": 4,
+      "question": "Di dalam kereta kami berbicara banyak.",
+      "correct_sentence": "でんしゃのなかでたくさんはなしました",
+      "parts": ["でんしゃのなかで", "たくさん", "はなしました", "たべました", "を"],
+      "translation": "Densha no naka de takusan hanashimashita"
+    },
+    {
+      "id": 5,
+      "question": "Kami tiba di kota tujuan.",
+      "correct_sentence": "もくてきのまちにつきました",
+      "parts": ["もくてきの", "まちに", "つきました", "いきました", "を"],
+      "translation": "Mokuteki no machi ni tsukimashita"
+    },
+    {
+      "id": 6,
+      "question": "Cuacanya cerah dan hangat.",
+      "correct_sentence": "てんきははれていてあたたかいです",
+      "parts": ["てんきは", "はれていて", "あたたかいです", "さむいです", "を"],
+      "translation": "Tenki wa harete ite atatakai desu"
+    },
+    {
+      "id": 7,
+      "question": "Kami berjalan sambil melihat pemandangan.",
+      "correct_sentence": "けしきをみながらあるきました",
+      "parts": ["けしきを", "みながら", "あるきました", "はしりました", "で"],
+      "translation": "Keshiki o mi nagara arukimashita"
+    },
+    {
+      "id": 8,
+      "question": "Saya mengambil banyak foto.",
+      "correct_sentence": "しゃしんをたくさんとりました",
+      "parts": ["しゃしんを", "たくさん", "とりました", "みました", "に"],
+      "translation": "Shashin o takusan torimashita"
+    },
+    {
+      "id": 9,
+      "question": "Kami makan makanan khas daerah.",
+      "correct_sentence": "そのちいきのりょうりをたべました",
+      "parts": ["そのちいきの", "りょうりを", "たべました", "のみました", "で"],
+      "translation": "Sono chiiki no ryouri o tabemashita"
+    },
+    {
+      "id": 10,
+      "question": "Rasanya berbeda dari biasanya.",
+      "correct_sentence": "いつもとちがうあじでした",
+      "parts": ["いつもと", "ちがう", "あじでした", "おなじです", "を"],
+      "translation": "Itsumo to chigau aji deshita"
+    },
+    {
+      "id": 11,
+      "question": "Kami sangat menikmati perjalanan ini.",
+      "correct_sentence": "このりょこうをとてもたのしみました",
+      "parts": ["このりょこうを", "とても", "たのしみました", "すきです", "に"],
+      "translation": "Kono ryokou o totemo tanoshimimashita"
+    },
+    {
+      "id": 12,
+      "question": "Waktu terasa cepat berlalu.",
+      "correct_sentence": "じかんがあっというまにすぎました",
+      "parts": ["じかんが", "あっというまに", "すぎました", "ありました", "を"],
+      "translation": "Jikan ga atto iu ma ni sugimashita"
+    },
+    {
+      "id": 13,
+      "question": "Kami pulang dengan perasaan senang.",
+      "correct_sentence": "うれしいきもちでかえりました",
+      "parts": ["うれしい", "きもちで", "かえりました", "いきました", "に"],
+      "translation": "Ureshii kimochi de kaerimashita"
+    },
+    {
+      "id": 14,
+      "question": "Saya ingin pergi lagi lain kali.",
+      "correct_sentence": "またいきたいとおもいます",
+      "parts": ["また", "いきたいと", "おもいます", "いきます", "を"],
+      "translation": "Mata ikitai to omoimasu"
+    },
+    {
+      "id": 15,
+      "question": "Perjalanan ini menjadi kenangan indah.",
+      "correct_sentence": "このりょこうはいいおもいでになりました",
+      "parts": ["このりょこうは", "いい", "おもいでに", "なりました", "です"],
+      "translation": "Kono ryokou wa ii omoide ni narimashita"
+    }
+  ]
+},
+{
+  "id": "story_trip",
+  "title": "Perjalanan",
+  "description": "Latihan menyusun kalimat tentang perjalanan dan pengalaman.",
+  "icon": "fa-plane",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Saya pergi liburan bersama keluarga.",
+      "correct_sentence": "かぞくといっしょにりょこうへいきます",
+      "parts": ["かぞくと", "いっしょに", "りょこうへ", "いきます", "で"],
+      "translation": "Kazoku to issho ni ryokou e ikimasu"
+    },
+    {
+      "id": 2,
+      "question": "Kami berangkat pagi-pagi sekali.",
+      "correct_sentence": "あさはやくしゅっぱつしました",
+      "parts": ["あさはやく", "しゅっぱつしました", "つきました", "に", "を"],
+      "translation": "Asa hayaku shuppatsu shimashita"
+    },
+    {
+      "id": 3,
+      "question": "Kami naik kereta yang cepat.",
+      "correct_sentence": "はやいでんしゃにのりました",
+      "parts": ["はやい", "でんしゃに", "のりました", "のります", "で"],
+      "translation": "Hayai densha ni norimashita"
+    },
+    {
+      "id": 4,
+      "question": "Di dalam kereta kami berbicara banyak.",
+      "correct_sentence": "でんしゃのなかでたくさんはなしました",
+      "parts": ["でんしゃのなかで", "たくさん", "はなしました", "たべました", "を"],
+      "translation": "Densha no naka de takusan hanashimashita"
+    },
+    {
+      "id": 5,
+      "question": "Kami tiba di kota tujuan.",
+      "correct_sentence": "もくてきのまちにつきました",
+      "parts": ["もくてきの", "まちに", "つきました", "いきました", "を"],
+      "translation": "Mokuteki no machi ni tsukimashita"
+    },
+    {
+      "id": 6,
+      "question": "Cuacanya cerah dan hangat.",
+      "correct_sentence": "てんきははれていてあたたかいです",
+      "parts": ["てんきは", "はれていて", "あたたかいです", "さむいです", "を"],
+      "translation": "Tenki wa harete ite atatakai desu"
+    },
+    {
+      "id": 7,
+      "question": "Kami berjalan sambil melihat pemandangan.",
+      "correct_sentence": "けしきをみながらあるきました",
+      "parts": ["けしきを", "みながら", "あるきました", "はしりました", "で"],
+      "translation": "Keshiki o mi nagara arukimashita"
+    },
+    {
+      "id": 8,
+      "question": "Saya mengambil banyak foto.",
+      "correct_sentence": "しゃしんをたくさんとりました",
+      "parts": ["しゃしんを", "たくさん", "とりました", "みました", "に"],
+      "translation": "Shashin o takusan torimashita"
+    },
+    {
+      "id": 9,
+      "question": "Kami makan makanan khas daerah.",
+      "correct_sentence": "そのちいきのりょうりをたべました",
+      "parts": ["そのちいきの", "りょうりを", "たべました", "のみました", "で"],
+      "translation": "Sono chiiki no ryouri o tabemashita"
+    },
+    {
+      "id": 10,
+      "question": "Rasanya berbeda dari biasanya.",
+      "correct_sentence": "いつもとちがうあじでした",
+      "parts": ["いつもと", "ちがう", "あじでした", "おなじです", "を"],
+      "translation": "Itsumo to chigau aji deshita"
+    },
+    {
+      "id": 11,
+      "question": "Kami sangat menikmati perjalanan ini.",
+      "correct_sentence": "このりょこうをとてもたのしみました",
+      "parts": ["このりょこうを", "とても", "たのしみました", "すきです", "に"],
+      "translation": "Kono ryokou o totemo tanoshimimashita"
+    },
+    {
+      "id": 12,
+      "question": "Waktu terasa cepat berlalu.",
+      "correct_sentence": "じかんがあっというまにすぎました",
+      "parts": ["じかんが", "あっというまに", "すぎました", "ありました", "を"],
+      "translation": "Jikan ga atto iu ma ni sugimashita"
+    },
+    {
+      "id": 13,
+      "question": "Kami pulang dengan perasaan senang.",
+      "correct_sentence": "うれしいきもちでかえりました",
+      "parts": ["うれしい", "きもちで", "かえりました", "いきました", "に"],
+      "translation": "Ureshii kimochi de kaerimashita"
+    },
+    {
+      "id": 14,
+      "question": "Saya ingin pergi lagi lain kali.",
+      "correct_sentence": "またいきたいとおもいます",
+      "parts": ["また", "いきたいと", "おもいます", "いきます", "を"],
+      "translation": "Mata ikitai to omoimasu"
+    },
+    {
+      "id": 15,
+      "question": "Perjalanan ini menjadi kenangan indah.",
+      "correct_sentence": "このりょこうはいいおもいでになりました",
+      "parts": ["このりょこうは", "いい", "おもいでに", "なりました", "です"],
+      "translation": "Kono ryokou wa ii omoide ni narimashita"
+    }
+  ]
+},
+{
+  "id": "story_workday",
+  "title": "Hari Kerja",
+  "description": "Latihan menyusun kalimat panjang tentang kehidupan sehari-hari.",
+  "icon": "fa-briefcase",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Karena besok hari kerja, saya tidur lebih awal.",
+      "correct_sentence": "あしたはしごとがあるのでよるはやくねます",
+      "parts": ["あしたは", "しごとがあるので", "よる", "はやく", "ねます", "おきます"],
+      "translation": "Ashita wa shigoto ga aru node yoru hayaku nemasu"
+    },
+    {
+      "id": 2,
+      "question": "Pagi hari saya bangun sebelum jam enam.",
+      "correct_sentence": "あさろくじまえにおきます",
+      "parts": ["あさ", "ろくじまえに", "おきます", "ねます", "よるに"],
+      "translation": "Asa rokuji mae ni okimasu"
+    },
+    {
+      "id": 3,
+      "question": "Setelah bangun, saya langsung mencuci muka dan menggosok gigi.",
+      "correct_sentence": "おきてすぐかおをあらってはをみがきます",
+      "parts": ["おきてすぐ", "かおを", "あらって", "はを", "みがきます", "たべます"],
+      "translation": "Okite sugu kao o aratte ha o migakimasu"
+    },
+    {
+      "id": 4,
+      "question": "Karena tidak punya banyak waktu, saya tidak sarapan.",
+      "correct_sentence": "じかんがないのであさごはんをたべません",
+      "parts": ["じかんがないので", "あさごはんを", "たべません", "たべます", "のみます"],
+      "translation": "Jikan ga nai node asagohan o tabemasen"
+    },
+    {
+      "id": 5,
+      "question": "Saya keluar rumah sambil melihat jam.",
+      "correct_sentence": "とけいをみながらいえをでます",
+      "parts": ["とけいを", "みながら", "いえを", "でます", "はいります"],
+      "translation": "Tokei o mi nagara ie o demasu"
+    },
+    {
+      "id": 6,
+      "question": "Karena hujan deras, saya naik bus.",
+      "correct_sentence": "あめがつよかったのでバスにのりました",
+      "parts": ["あめがつよかったので", "バスに", "のりました", "あるきました", "で"],
+      "translation": "Ame ga tsuyokatta node basu ni norimashita"
+    },
+    {
+      "id": 7,
+      "question": "Bus penuh sehingga saya berdiri lama.",
+      "correct_sentence": "バスがこんでいたのでながくたちました",
+      "parts": ["バスがこんでいたので", "ながく", "たちました", "すわりました", "で"],
+      "translation": "Basu ga konde ita node nagaku tachimashita"
+    },
+    {
+      "id": 8,
+      "question": "Saya tiba di kantor sedikit terlambat.",
+      "correct_sentence": "すこしかいしゃにつくのおくれました",
+      "parts": ["すこし", "かいしゃに", "つくの", "おくれました", "はやかったです"],
+      "translation": "Sukoshi kaisha ni tsuku no okuremashita"
+    },
+    {
+      "id": 9,
+      "question": "Atasan memberi saya banyak pekerjaan.",
+      "correct_sentence": "じょうしからしごとをたくさんもらいました",
+      "parts": ["じょうしから", "しごとを", "たくさん", "もらいました", "しました"],
+      "translation": "Joushi kara shigoto o takusan moraimashita"
+    },
+    {
+      "id": 10,
+      "question": "Karena pekerjaannya sulit, saya merasa stres.",
+      "correct_sentence": "しごとがむずかしくてストレスをかんじました",
+      "parts": ["しごとが", "むずかしくて", "ストレスを", "かんじました", "たのしみました"],
+      "translation": "Shigoto ga muzukashikute sutoresu o kanjimashita"
+    },
+    {
+      "id": 11,
+      "question": "Saya bekerja sambil minum kopi.",
+      "correct_sentence": "コーヒーをのみながらはたらきます",
+      "parts": ["コーヒーを", "のみながら", "はたらきます", "ねます", "で"],
+      "translation": "Koohii o nomi nagara hatarakimasu"
+    },
+    {
+      "id": 12,
+      "question": "Saya pulang ke rumah setelah matahari terbenam.",
+      "correct_sentence": "たいようがしずんだあといえへかえります",
+      "parts": ["たいようがしずんだあと", "いえへ", "かえります", "いきます", "まえ"],
+      "translation": "Taiyou ga shizunda ato ie e kaerimasu"
+    },
+    {
+      "id": 13,
+      "question": "Saya merasa sangat lelah tetapi puas.",
+      "correct_sentence": "とてもつかれましたがまんぞくしています",
+      "parts": ["とても", "つかれましたが", "まんぞくしています", "かなしいです", "を"],
+      "translation": "Totemo tsukaremashita ga manzoku shite imasu"
+    },
+    {
+      "id": 14,
+      "question": "Saya mandi lama untuk menghilangkan lelah.",
+      "correct_sentence": "つかれをとるためにながくおふろにはいります",
+      "parts": ["つかれをとるために", "ながく", "おふろに", "はいります", "でます"],
+      "translation": "Tsukare o toru tame ni nagaku ofuro ni hairimasu"
+    },
+    {
+      "id": 15,
+      "question": "Setelah itu saya langsung tertidur.",
+      "correct_sentence": "そのあとすぐねてしまいました",
+      "parts": ["そのあと", "すぐ", "ねてしまいました", "おきました", "を"],
+      "translation": "Sono ato sugu nete shimaimashita"
+    }
+  ]
+},
+{
+  "id": "story_study",
+  "title": "Belajar Bahasa Jepang",
+  "description": "Latihan menyusun kalimat kompleks tentang proses belajar.",
+  "icon": "fa-book",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Saya mulai belajar bahasa Jepang sejak tahun lalu.",
+      "correct_sentence": "きょねんからにほんごをべんきょうしはじめました",
+      "parts": ["きょねんから", "にほんごを", "べんきょうし", "はじめました", "おわりました"],
+      "translation": "Kyonen kara nihongo o benkyou shi hajimemashita"
+    },
+    {
+      "id": 2,
+      "question": "Awalnya saya hampir tidak mengerti apa pun.",
+      "correct_sentence": "はじめはほとんどなにもわかりませんでした",
+      "parts": ["はじめは", "ほとんど", "なにも", "わかりませんでした", "しりました"],
+      "translation": "Hajime wa hotondo nani mo wakarimasen deshita"
+    },
+    {
+      "id": 3,
+      "question": "Huruf dan pengucapan terasa sangat sulit.",
+      "correct_sentence": "もじとはつおんがとてもむずかしくかんじました",
+      "parts": ["もじと", "はつおんが", "とても", "むずかしく", "かんじました", "たのしかったです"],
+      "translation": "Moji to hatsuon ga totemo muzukashiku kanjimashita"
+    },
+    {
+      "id": 4,
+      "question": "Namun saya tidak menyerah dan terus belajar.",
+      "correct_sentence": "でもあきらめないでべんきょうをつづけました",
+      "parts": ["でも", "あきらめないで", "べんきょうを", "つづけました", "やめました"],
+      "translation": "Demo akiramenai de benkyou o tsuzukemashita"
+    },
+    {
+      "id": 5,
+      "question": "Setiap hari saya meluangkan waktu meskipun sedikit.",
+      "correct_sentence": "まいにちすこしでもじかんをつくりました",
+      "parts": ["まいにち", "すこしでも", "じかんを", "つくりました", "なくしました"],
+      "translation": "Mainichi sukoshi demo jikan o tsukurimashita"
+    },
+    {
+      "id": 6,
+      "question": "Saya belajar sambil mendengarkan musik Jepang.",
+      "correct_sentence": "にほんのおんがくをききながらべんきょうします",
+      "parts": ["にほんの", "おんがくを", "ききながら", "べんきょうします", "ねます"],
+      "translation": "Nihon no ongaku o kiki nagara benkyou shimasu"
+    },
+    {
+      "id": 7,
+      "question": "Kadang-kadang saya merasa malas.",
+      "correct_sentence": "ときどきやるきがでないときもあります",
+      "parts": ["ときどき", "やるきがでない", "ときも", "あります", "いきます"],
+      "translation": "Tokidoki yaruki ga denai toki mo arimasu"
+    },
+    {
+      "id": 8,
+      "question": "Namun saya ingat tujuan saya.",
+      "correct_sentence": "でもじぶんのもくひょうをおもいだします",
+      "parts": ["でも", "じぶんの", "もくひょうを", "おもいだします", "わすれます"],
+      "translation": "Demo jibun no mokuhyou o omoidasu"
+    },
+    {
+      "id": 9,
+      "question": "Saya ingin bisa berbicara dengan orang Jepang.",
+      "correct_sentence": "にほんじんとはなせるようになりたいです",
+      "parts": ["にほんじんと", "はなせるように", "なりたいです", "はなします", "を"],
+      "translation": "Nihonjin to hanaseru you ni naritai desu"
+    },
+    {
+      "id": 10,
+      "question": "Karena itu saya terus berusaha sampai sekarang.",
+      "correct_sentence": "だからいままでもずっとがんばっています",
+      "parts": ["だから", "いままでも", "ずっと", "がんばっています", "やすんでいます"],
+      "translation": "Dakara ima made mo zutto ganbatte imasu"
+    }
+  ]
+},
+{
+  "id": "story_opinion_jft",
+  "title": "Pendapat tentang Belajar Bahasa Jepang",
+  "description": "Latihan soal susun kalimat tingkat N4 dengan opini dan partikel jebakan.",
+  "icon": "fa-graduation-cap",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Saya pikir belajar bahasa Jepang itu penting.",
+      "correct_sentence": "にほんごをべんきょうすることはたいせつだとおもいます",
+      "parts": ["にほんごを", "べんきょうすることは", "たいせつだと", "おもいます", "べんきょうします"],
+      "translation": "Nihongo o benkyou suru koto wa taisetsu da to omoimasu"
+    },
+    {
+      "id": 2,
+      "question": "Karena saya ingin bekerja di Jepang, saya belajar bahasa Jepang.",
+      "correct_sentence": "にほんではたらきたいからにほんごをべんきょうしています",
+      "parts": ["にほんで", "はたらきたいから", "にほんごを", "べんきょうしています", "はたらきます"],
+      "translation": "Nihon de hatarakitai kara nihongo o benkyou shite imasu"
+    },
+    {
+      "id": 3,
+      "question": "Bahasa Jepang tidak mudah, tetapi menarik.",
+      "correct_sentence": "にほんごはかんたんではありませんがおもしろいです",
+      "parts": ["にほんごは", "かんたんではありませんが", "おもしろいです", "むずかしいです", "を"],
+      "translation": "Nihongo wa kantan de wa arimasen ga omoshiroi desu"
+    },
+    {
+      "id": 4,
+      "question": "Banyak orang berhenti belajar karena sulit.",
+      "correct_sentence": "むずかしいのでべんきょうをやめるひともおおいです",
+      "parts": ["むずかしいので", "べんきょうを", "やめる", "ひとも", "おおいです"],
+      "translation": "Muzukashii node benkyou o yameru hito mo ooidesu"
+    },
+    {
+      "id": 5,
+      "question": "Saya berusaha untuk tidak menyerah.",
+      "correct_sentence": "あきらめないようにがんばっています",
+      "parts": ["あきらめないように", "がんばっています", "やすんでいます", "あきらめます"],
+      "translation": "Akiramenai you ni ganbatte imasu"
+    },
+    {
+      "id": 6,
+      "question": "Setiap hari saya belajar meskipun hanya sedikit.",
+      "correct_sentence": "まいにちすこしでもべんきょうするようにしています",
+      "parts": ["まいにち", "すこしでも", "べんきょうするように", "しています", "しません"],
+      "translation": "Mainichi sukoshi demo benkyou suru you ni shite imasu"
+    },
+    {
+      "id": 7,
+      "question": "Jika tidak mengulang, saya akan segera lupa.",
+      "correct_sentence": "ふくしゅうしないとすぐわすれてしまいます",
+      "parts": ["ふくしゅうしないと", "すぐ", "わすれてしまいます", "おぼえます", "に"],
+      "translation": "Fukushuu shinai to sugu wasurete shimaimasu"
+    },
+    {
+      "id": 8,
+      "question": "Itulah sebabnya saya mengulang setiap hari.",
+      "correct_sentence": "だからまいにちふくしゅうしています",
+      "parts": ["だから", "まいにち", "ふくしゅうしています", "べんきょうしました", "を"],
+      "translation": "Dakara mainichi fukushuu shite imasu"
+    },
+    {
+      "id": 9,
+      "question": "Saya belajar bukan hanya dari buku, tetapi juga dari video.",
+      "correct_sentence": "ほんだけではなくどうがからもべんきょうします",
+      "parts": ["ほんだけではなく", "どうがからも", "べんきょうします", "みます", "で"],
+      "translation": "Hon dake de wa naku douga kara mo benkyou shimasu"
+    },
+    {
+      "id": 10,
+      "question": "Menurut saya, mendengar itu sangat penting.",
+      "correct_sentence": "わたしはきくことがとてもだいじだとおもいます",
+      "parts": ["わたしは", "きくことが", "とても", "だいじだと", "おもいます"],
+      "translation": "Watashi wa kiku koto ga totemo daiji da to omoimasu"
+    },
+    {
+      "id": 11,
+      "question": "Jika terbiasa dengan suara, berbicara menjadi lebih mudah.",
+      "correct_sentence": "おとになれるとはなすのがかんたんになります",
+      "parts": ["おとに", "なれると", "はなすのが", "かんたんに", "なります"],
+      "translation": "Oto ni nareru to hanasu no ga kantan ni narimasu"
+    },
+    {
+      "id": 12,
+      "question": "Saya masih sering membuat kesalahan.",
+      "correct_sentence": "いまでもまちがいをよくします",
+      "parts": ["いまでも", "まちがいを", "よく", "します", "しません"],
+      "translation": "Ima demo machigai o yoku shimasu"
+    },
+    {
+      "id": 13,
+      "question": "Namun kesalahan juga penting untuk belajar.",
+      "correct_sentence": "でもまちがいもべんきょうのためにひつようです",
+      "parts": ["でも", "まちがいも", "べんきょうのために", "ひつようです", "だめです"],
+      "translation": "Demo machigai mo benkyou no tame ni hitsuyou desu"
+    },
+    {
+      "id": 14,
+      "question": "Saya ingin bisa berbicara dengan percaya diri.",
+      "correct_sentence": "じしんをもってはなせるようになりたいです",
+      "parts": ["じしんをもって", "はなせるように", "なりたいです", "はなします", "を"],
+      "translation": "Jishin o motte hanaseru you ni naritai desu"
+    },
+    {
+      "id": 15,
+      "question": "Untuk itu, saya akan terus belajar ke depannya.",
+      "correct_sentence": "そのためにこれからもべんきょうをつづけます",
+      "parts": ["そのために", "これからも", "べんきょうを", "つづけます", "やめます"],
+      "translation": "Sono tame ni kore kara mo benkyou o tsuzukemasu"
+    }
+  ]
+}
+
+
+
+
+
 ]
