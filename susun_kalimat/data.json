@@ -644,7 +644,7 @@
 },
 {
   "id": "story_opinion_jft",
-  "title": "Pendapat tentang Belajar Bahasa Jepang",
+  "title": "Tentang Bahasa Jepang",
   "description": "Latihan soal susun kalimat tingkat N4 dengan opini dan partikel jebakan.",
   "icon": "fa-graduation-cap",
   "questions": [
@@ -754,7 +754,121 @@
       "translation": "Sono tame ni kore kara mo benkyou o tsuzukemasu"
     }
   ]
+},
+{
+  "id": "story_bunpou_jft",
+  "title": "Pemahaman Tata Bahasa",
+  "description": "Latihan bunpou tingkat N4 dengan fokus partikel dan pola kalimat.",
+  "icon": "fa-language",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Saya belajar bahasa Jepang setiap hari agar tidak lupa.",
+      "correct_sentence": "わすれないようにまいにちにほんごをべんきょうしています",
+      "parts": ["わすれないように", "まいにち", "にほんごを", "べんきょうしています", "べんきょうします"],
+      "translation": "Wasurenai you ni mainichi nihongo o benkyou shite imasu"
+    },
+    {
+      "id": 2,
+      "question": "Saya belajar tata bahasa untuk bisa membuat kalimat.",
+      "correct_sentence": "ぶんぽうをつかえるようになるためにべんきょうしています",
+      "parts": ["ぶんぽうを", "つかえるように", "なるために", "べんきょうしています", "なります"],
+      "translation": "Bunpou o tsukaeru you ni naru tame ni benkyou shite imasu"
+    },
+    {
+      "id": 3,
+      "question": "Karena tata bahasanya sulit, saya perlu waktu.",
+      "correct_sentence": "ぶんぽうがむずかしいのでじかんがひつようです",
+      "parts": ["ぶんぽうが", "むずかしいので", "じかんが", "ひつようです", "たのしいです"],
+      "translation": "Bunpou ga muzukashii node jikan ga hitsuyou desu"
+    },
+    {
+      "id": 4,
+      "question": "Jika saya tidak mengulang, saya langsung lupa.",
+      "correct_sentence": "ふくしゅうしないとすぐわすれてしまいます",
+      "parts": ["ふくしゅうしないと", "すぐ", "わすれてしまいます", "おぼえます", "に"],
+      "translation": "Fukushuu shinai to sugu wasurete shimaimasu"
+    },
+    {
+      "id": 5,
+      "question": "Saya mengulang sambil membaca contoh kalimat.",
+      "correct_sentence": "れいぶんをよみながらふくしゅうします",
+      "parts": ["れいぶんを", "よみながら", "ふくしゅうします", "かきます", "で"],
+      "translation": "Reibun o yomi nagara fukushuu shimasu"
+    },
+    {
+      "id": 6,
+      "question": "Saya tidak hanya belajar dari buku.",
+      "correct_sentence": "ほんだけではなくべんきょうしています",
+      "parts": ["ほんだけではなく", "べんきょうしています", "ほんだけ", "を", "で"],
+      "translation": "Hon dake de wa naku benkyou shite imasu"
+    },
+    {
+      "id": 7,
+      "question": "Saya juga belajar dari video dan aplikasi.",
+      "correct_sentence": "どうがやアプリからもべんきょうします",
+      "parts": ["どうがや", "アプリからも", "べんきょうします", "みます", "で"],
+      "translation": "Douga ya apuri kara mo benkyou shimasu"
+    },
+    {
+      "id": 8,
+      "question": "Saya punya waktu belajar hanya satu jam.",
+      "correct_sentence": "べんきょうのじかんはいちじかんしかありません",
+      "parts": ["べんきょうのじかんは", "いちじかんしか", "ありません", "あります", "まで"],
+      "translation": "Benkyou no jikan wa ichijikan shika arimasen"
+    },
+    {
+      "id": 9,
+      "question": "Meski sibuk, saya tetap belajar.",
+      "correct_sentence": "いそがしくてもべんきょうをつづけます",
+      "parts": ["いそがしくても", "べんきょうを", "つづけます", "やめます", "で"],
+      "translation": "Isogashikute mo benkyou o tsuzukemasu"
+    },
+    {
+      "id": 10,
+      "question": "Menurut saya, partikel adalah bagian yang paling sulit.",
+      "correct_sentence": "わたしはじょしがいちばんむずかしいとおもいます",
+      "parts": ["わたしは", "じょしが", "いちばん", "むずかしいと", "おもいます"],
+      "translation": "Watashi wa joshi ga ichiban muzukashii to omoimasu"
+    },
+    {
+      "id": 11,
+      "question": "Jika salah partikel, arti kalimat berubah.",
+      "correct_sentence": "じょしをまちがえるといみがかわります",
+      "parts": ["じょしを", "まちがえると", "いみが", "かわります", "かわりません"],
+      "translation": "Joshi o machigaeru to imi ga kawarimasu"
+    },
+    {
+      "id": 12,
+      "question": "Karena itu, saya memperhatikan partikel dengan baik.",
+      "correct_sentence": "だからじょしをよくちゅういします",
+      "parts": ["だから", "じょしを", "よく", "ちゅういします", "つかいます"],
+      "translation": "Dakara joshi o yoku chuui shimasu"
+    },
+    {
+      "id": 13,
+      "question": "Saya mencoba membuat kalimat sendiri.",
+      "correct_sentence": "じぶんでぶんをつくってみます",
+      "parts": ["じぶんで", "ぶんを", "つくってみます", "よみます", "に"],
+      "translation": "Jibun de bun o tsukutte mimasu"
+    },
+    {
+      "id": 14,
+      "question": "Walaupun salah, saya tidak terlalu khawatir.",
+      "correct_sentence": "まちがえてもあまりしんぱいしません",
+      "parts": ["まちがえても", "あまり", "しんぱいしません", "します", "で"],
+      "translation": "Machigaete mo amari shinpai shimasen"
+    },
+    {
+      "id": 15,
+      "question": "Dengan belajar terus-menerus, saya jadi lebih percaya diri.",
+      "correct_sentence": "べんきょうをつづけるとじしんがでてきます",
+      "parts": ["べんきょうを", "つづけると", "じしんが", "でてきます", "なくなります"],
+      "translation": "Benkyou o tsuzukeru to jishin ga detekimasu"
+    }
+  ]
 }
+
 
 
 
