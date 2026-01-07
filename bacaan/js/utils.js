@@ -1,12 +1,24 @@
 // --- AUDIO SYSTEM ---
+let isPlaying = false; // Status audio
+
 function playAudio() {
+    const btnAudio = document.getElementById("btn-audio");
+    const icon = btnAudio ? btnAudio.querySelector("i") : null;
+    const label = document.getElementById("label-audio");
+
+    // 1. LOGIKA TOGGLE: Jika sedang bicara, maka STOP.
+    if (isPlaying || window.speechSynthesis.speaking) {
+        stopAudio();
+        return; 
+    }
+
+    // 2. Jika tidak, maka PUTAR.
     const contentContainer = document.getElementById("interlinear-content");
     if (!contentContainer) return;
 
     const jpSentences = contentContainer.querySelectorAll('.jp-sentence');
     let fullText = "";
 
-    // Ambil teks bersih tanpa furigana
     jpSentences.forEach(el => {
         const clone = el.cloneNode(true);
         const rts = clone.querySelectorAll('rt');
@@ -14,14 +26,15 @@ function playAudio() {
         fullText += clone.textContent + " ";
     });
 
-    stopAudio(); 
-
     if (!fullText.trim()) return;
 
     if (!('speechSynthesis' in window)) {
         alert("Browser tidak mendukung suara.");
         return;
     }
+
+    // Reset sebelum mulai
+    window.speechSynthesis.cancel();
 
     activeUtterance = new SpeechSynthesisUtterance(fullText);
     activeUtterance.lang = 'ja-JP'; 
@@ -31,33 +44,44 @@ function playAudio() {
     const japanVoice = voices.find(v => v.lang === 'ja-JP' || v.name.includes('Japan'));
     if (japanVoice) activeUtterance.voice = japanVoice;
 
-    setButtonStyle("icon-audio", true); 
-    const btnAudio = document.getElementById("btn-audio");
-    if(btnAudio) btnAudio.querySelector("i").className = "fas fa-volume-up";
+    // -- UPDATE TAMPILAN JADI TOMBOL STOP (Tanpa ubah CSS aneh-aneh) --
+    isPlaying = true;
+    setButtonStyle("icon-audio", true); // Pakai style aktif yang lama
+    
+    if (icon) {
+        icon.className = "fas fa-stop"; // Ganti ikon jadi kotak
+        icon.style.marginLeft = "0";
+    }
+    if (label) label.innerText = "Stop"; // Ganti teks jadi Stop
 
     activeUtterance.onend = () => {
-        setButtonStyle("icon-audio", false); 
-        if(btnAudio) btnAudio.querySelector("i").className = "fas fa-play";
+        stopAudio(); // Reset otomatis kalau selesai
     };
 
     window.speechSynthesis.speak(activeUtterance);
-    if (window.speechSynthesis.paused) window.speechSynthesis.resume();
 }
 
 function stopAudio() {
     if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-    setButtonStyle("icon-audio", false);
-    const btnAudio = document.getElementById("btn-audio");
-    if(btnAudio) btnAudio.querySelector("i").className = "fas fa-play";
     
-    const iconStop = document.getElementById("icon-stop");
-    if(iconStop) {
-        iconStop.style.transform = "scale(0.9)";
-        setTimeout(() => iconStop.style.transform = "scale(1)", 150);
+    // -- KEMBALIKAN TAMPILAN JADI TOMBOL PLAY --
+    isPlaying = false;
+    setButtonStyle("icon-audio", false); // Matikan style aktif
+    
+    const btnAudio = document.getElementById("btn-audio");
+    const label = document.getElementById("label-audio");
+    
+    if(btnAudio) {
+        const icon = btnAudio.querySelector("i");
+        if(icon) {
+            icon.className = "fas fa-play"; // Balik jadi segitiga
+            icon.style.marginLeft = "3px";
+        }
     }
+    if(label) label.innerText = "Dengar";
 }
 
-// --- HELPER STYLES ---
+// --- HELPER STYLES (TIDAK DIUBAH, SESUAI ASLINYA) ---
 function setButtonStyle(iconId, isActive, colorType = 'blue') {
     const iconEl = document.getElementById(iconId);
     if (!iconEl) return;
