@@ -1,0 +1,61 @@
+[
+  {
+    "id": "story_1",
+    "title": "Perkenalan Diri",
+    "description": "Belajar cara memperkenalkan diri dan hobi.",
+    "icon": "fa-user",
+    "questions": [
+        {
+            "id": 1,
+            "question": "Hobi saya adalah bermain sepak bola.",
+            "correct_sentence": "しゅみはサッカーをすることです",
+            "parts": ["しゅみ", "は", "サッカー", "を", "すること", "です", "み"],
+            "translation": "Shumi wa sakkaa o suru koto desu"
+        },
+        {
+            "id": 2,
+            "question": "Senang bertemu dengan Anda.",
+            "correct_sentence": "どうぞよろしくおねがいします",
+            "parts": ["どうぞ", "よろしく", "おねがい", "します", "です"],
+            "translation": "Douzo yoroshiku onegaishimasu"
+        }
+    ]
+  },
+  {
+    "id": "story_2",
+    "title": "Di Restoran",
+    "description": "Memesan makanan dan meminta tolong.",
+    "icon": "fa-utensils",
+    "questions": [
+        {
+            "id": 1,
+            "question": "Tolong jangan makan di sini.",
+            "correct_sentence": "ここでたべないでください",
+            "parts": ["ここで", "たべないで", "ください", "たべて", "は"],
+            "translation": "Koko de tabenaide kudasai"
+        },
+        {
+            "id": 2,
+            "question": "Permisi, minta air.",
+            "correct_sentence": "すみませんみずをください",
+            "parts": ["すみません", "みず", "を", "ください", "ある"],
+            "translation": "Sumimasen, mizu o kudasai"
+        }
+    ]
+  },
+  {
+    "id": "story_3",
+    "title": "Perjalanan",
+    "description": "Bercerita pengalaman liburan.",
+    "icon": "fa-plane",
+    "questions": [
+        {
+            "id": 1,
+            "question": "Apakah kamu pernah pergi ke Jepang?",
+            "correct_sentence": "にほんへいったことがありますか",
+            "parts": ["にほん", "へ", "いった", "こと", "が", "あります", "か", "いる"],
+            "translation": "Nihon e itta koto ga arimasu ka"
+        }
+    ]
+  }
+]
