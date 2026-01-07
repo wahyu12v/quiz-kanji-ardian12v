@@ -457,55 +457,67 @@ body {
     font-size: 1rem;
 }
 
+/* ... (Kode lama di atas biarkan saja) ... */
 
-/* --- FURIGANA & TEXT STYLES --- */
+/* --- TAMBAHAN BARU UNTUK FITUR BARU --- */
+
+/* Furigana Styling */
 ruby {
-    display: inline-flex;
-    flex-direction: column-reverse;
-    align-items: center;
-    line-height: 1; /* Rapatkan baris */
+    font-family: 'Noto Sans JP', sans-serif;
+    ruby-align: center;
 }
 rt {
-    font-size: 0.6em; /* Ukuran furigana */
-    line-height: 1.2;
-    margin-bottom: -5px; /* Dekatkan ke kanji */
+    font-size: 0.6em;
+    color: rgba(255,255,255,0.9); /* Warna furigana agak transparan */
     user-select: none;
-    color: var(--primary-blue);
-    font-weight: 600;
 }
 
-/* --- HINT & FEEDBACK STYLES --- */
-.hint-badge {
-    background-color: #e3f2fd;
-    color: #0d47a1;
-    border: 1px solid #bbdefb;
-    padding: 8px 15px;
+/* Feedback Box (Muncul saat benar/salah) */
+.feedback-box {
+    margin: 15px 0;
+    padding: 15px;
     border-radius: 12px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    margin-bottom: 15px;
-    display: inline-block;
-    animation: fadeIn 0.5s ease;
-}
-
-.feedback-msg {
-    margin-top: 15px;
-    padding: 12px;
-    border-radius: 10px;
-    font-size: 0.95rem;
-    font-weight: 600;
     text-align: center;
-}
-
-.feedback-wrong {
-    background-color: #ffebee;
-    color: #c62828;
-    border: 1px solid #ffcdd2;
-    animation: shake 0.4s;
+    font-weight: bold;
+    animation: fadeIn 0.3s ease;
+    display: none; /* Default hidden */
 }
 
 .feedback-correct {
-    background-color: #e8f5e9;
-    color: #2e7d32;
-    border: 1px solid #c8e6c9;
+    background-color: #d1e7dd;
+    color: #0f5132;
+    border: 1px solid #badbcc;
 }
+
+.feedback-wrong {
+    background-color: #f8d7da;
+    color: #842029;
+    border: 1px solid #f5c2c7;
+    animation: shake 0.4s;
+}
+
+/* Clue Box */
+.clue-box {
+    background-color: #fff3cd;
+    color: #664d03;
+    border: 1px dashed #ffecb5;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 0.9rem;
+    display: none;
+}
+
+/* Animasi */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hidden { display: none !important; }

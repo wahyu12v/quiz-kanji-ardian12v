@@ -263,3 +263,4 @@ function finishGame() {
     // Tampilkan Modal Hasil
     resultModalInstance.show();
 }
+

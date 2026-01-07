@@ -1,61 +1,115 @@
 [
   {
-    "id": "story_1",
-    "title": "Perkenalan Diri",
-    "description": "Belajar cara memperkenalkan diri dan hobi.",
-    "icon": "fa-user",
+    "id": "story_daily",
+    "title": "Kegiatan Harian",
+    "description": "Latihan menyusun kalimat Jepang tanpa kanji.",
+    "icon": "fa-calendar-check",
     "questions": [
-        {
-            "id": 1,
-            "question": "Hobi saya adalah bermain sepak bola.",
-            "correct_sentence": "しゅみはサッカーをすることです",
-            "parts": ["しゅみ", "は", "サッカー", "を", "すること", "です", "み"],
-            "translation": "Shumi wa sakkaa o suru koto desu"
-        },
-        {
-            "id": 2,
-            "question": "Senang bertemu dengan Anda.",
-            "correct_sentence": "どうぞよろしくおねがいします",
-            "parts": ["どうぞ", "よろしく", "おねがい", "します", "です"],
-            "translation": "Douzo yoroshiku onegaishimasu"
-        }
-    ]
-  },
-  {
-    "id": "story_2",
-    "title": "Di Restoran",
-    "description": "Memesan makanan dan meminta tolong.",
-    "icon": "fa-utensils",
-    "questions": [
-        {
-            "id": 1,
-            "question": "Tolong jangan makan di sini.",
-            "correct_sentence": "ここでたべないでください",
-            "parts": ["ここで", "たべないで", "ください", "たべて", "は"],
-            "translation": "Koko de tabenaide kudasai"
-        },
-        {
-            "id": 2,
-            "question": "Permisi, minta air.",
-            "correct_sentence": "すみませんみずをください",
-            "parts": ["すみません", "みず", "を", "ください", "ある"],
-            "translation": "Sumimasen, mizu o kudasai"
-        }
-    ]
-  },
-  {
-    "id": "story_3",
-    "title": "Perjalanan",
-    "description": "Bercerita pengalaman liburan.",
-    "icon": "fa-plane",
-    "questions": [
-        {
-            "id": 1,
-            "question": "Apakah kamu pernah pergi ke Jepang?",
-            "correct_sentence": "にほんへいったことがありますか",
-            "parts": ["にほん", "へ", "いった", "こと", "が", "あります", "か", "いる"],
-            "translation": "Nihon e itta koto ga arimasu ka"
-        }
+      {
+        "id": 1,
+        "question": "Saya bangun pagi",
+        "correct_sentence": "あさにおきます",
+        "parts": ["あさに", "おきます", "ねます", "ひるに"],
+        "translation": "Asa ni okimasu"
+      },
+      {
+        "id": 2,
+        "question": "Saya mencuci muka",
+        "correct_sentence": "かおをあらいます",
+        "parts": ["かおを", "あらいます", "みます", "てを"],
+        "translation": "Kao o araimasu"
+      },
+      {
+        "id": 3,
+        "question": "Saya menggosok gigi",
+        "correct_sentence": "はをみがきます",
+        "parts": ["はを", "みがきます", "あらいます", "かおを"],
+        "translation": "Ha o migakimasu"
+      },
+      {
+        "id": 4,
+        "question": "Saya makan pagi di rumah",
+        "correct_sentence": "いえであさごはんをたべます",
+        "parts": ["いえで", "あさごはんを", "たべます", "のみます", "がっこう"],
+        "translation": "Ie de asagohan o tabemasu"
+      },
+      {
+        "id": 5,
+        "question": "Saya minum kopi",
+        "correct_sentence": "コーヒーをのみます",
+        "parts": ["コーヒーを", "のみます", "たべます", "みずを"],
+        "translation": "Koohii o nomimasu"
+      },
+      {
+        "id": 6,
+        "question": "Saya pergi ke stasiun",
+        "correct_sentence": "えきへいきます",
+        "parts": ["えきへ", "いきます", "きます", "いえへ"],
+        "translation": "Eki e ikimasu"
+      },
+      {
+        "id": 7,
+        "question": "Saya pergi ke kantor naik kereta",
+        "correct_sentence": "でんしゃでかいしゃへいきます",
+        "parts": ["でんしゃで", "かいしゃへ", "いきます", "あるきます", "いえへ"],
+        "translation": "Densha de kaisha e ikimasu"
+      },
+      {
+        "id": 8,
+        "question": "Saya bekerja di kantor",
+        "correct_sentence": "かいしゃではたらきます",
+        "parts": ["かいしゃで", "はたらきます", "やすみます", "いえで"],
+        "translation": "Kaisha de hatarakimasu"
+      },
+      {
+        "id": 9,
+        "question": "Saya makan siang",
+        "correct_sentence": "ひるごはんをたべます",
+        "parts": ["ひるごはんを", "たべます", "のみます", "あさごはんを"],
+        "translation": "Hirugohan o tabemasu"
+      },
+      {
+        "id": 10,
+        "question": "Saya pulang ke rumah sore hari",
+        "correct_sentence": "ゆうがたにいえへかえります",
+        "parts": ["ゆうがたに", "いえへ", "かえります", "いきます", "よるに"],
+        "translation": "Yuugata ni ie e kaerimasu"
+      },
+      {
+        "id": 11,
+        "question": "Saya mandi",
+        "correct_sentence": "おふろにはいります",
+        "parts": ["おふろに", "はいります", "でます", "いえに"],
+        "translation": "Ofuro ni hairimasu"
+      },
+      {
+        "id": 12,
+        "question": "Saya makan malam",
+        "correct_sentence": "ばんごはんをたべます",
+        "parts": ["ばんごはんを", "たべます", "のみます", "ひるごはんを"],
+        "translation": "Bangohan o tabemasu"
+      },
+      {
+        "id": 13,
+        "question": "Saya menonton televisi",
+        "correct_sentence": "テレビをみます",
+        "parts": ["テレビを", "みます", "ききます", "ほんを"],
+        "translation": "Terebi o mimasu"
+      },
+      {
+        "id": 14,
+        "question": "Saya belajar bahasa Jepang",
+        "correct_sentence": "にほんごをべんきょうします",
+        "parts": ["にほんごを", "べんきょうします", "しごとします", "えいごを"],
+        "translation": "Nihongo o benkyou shimasu"
+      },
+      {
+        "id": 15,
+        "question": "Saya tidur malam",
+        "correct_sentence": "よるにねます",
+        "parts": ["よるに", "ねます", "おきます", "あさに"],
+        "translation": "Yoru ni nemasu"
+      }
     ]
   }
 ]
