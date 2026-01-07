@@ -26,15 +26,15 @@
     "icon": "fas fa-music",
     "color": "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)"
   },
-  {
-    "id": "s4",
-    "title": "Perkenalan Diri (自己紹介)",
-    "category": "Cerita Pribadi",
-    "translation": "Senang bertemu dengan Anda. Nama saya Katoriram. Saat ini saya tinggal di Kathmandu, Nepal. Saya lahir pada tanggal 17 April tahun 2000. Sekarang saya berusia 25 tahun. Saya adalah siswa bahasa Jepang. Saya mulai belajar bahasa Jepang sejak bulan Mei tahun ini. Bahasa Jepang itu sulit, tapi saya berjuang keras. Hobi saya adalah traveling. Mohon bantuannya.",
-    "template": "はじめまして。[[私|わたし]]の [[名前|なまえ]]は [[カトリラム|かとりらむ]]です。[[現在|げんざい]] [[ネパール|ねぱーる]]の [[カトマンズ|かとまんず]]に [[住|す]]んで います。2000[[年|ねん]]の 4[[月|がつ]]の 17[[日|にち]]に [[生|う]]まれました。[[今|いま]] 25[[歳|さい]]です。[[私|わたし]]は [[日本語|にほんご]]の [[学生|がくせい]]です。[[今年|ことし]]の 5[[月|がつ]]から [[日本語|にほんご]]を [[勉強|べんきょう]]して います。[[日本語|にほんご]]は [[難|むずか]]しいですが、[[頑張|がんば]]って います。[[趣味|しゅみ]]は [[旅行|りょこう]]を することです。どうぞ よろしくお[[願|ねが]]いします。",
-    "icon": "fas fa-user-circle",
-    "color": "linear-gradient(135deg, #fccb90 0%, #d57eeb 100%)"
-  },
+{
+  "id": "s4",
+  "title": "Perkenalan Diri (自己紹介)",
+  "category": "Cerita Pribadi",
+  "translation": "Senang bertemu dengan Anda. Nama saya Andi. Saya berasal dari Indonesia dan sekarang tinggal di Jakarta. Umur saya 24 tahun. Saya bekerja di sebuah perusahaan. Saya mulai belajar bahasa Jepang tahun lalu. Bahasa Jepang sulit tapi menarik. Setiap hari saya belajar sedikit demi sedikit. Hobi saya adalah mendengarkan musik dan traveling. Saya ingin bekerja sama dengan orang Jepang di masa depan. Mohon bantuannya.",
+  "template": "はじめまして。[[私|わたし]]の [[名前|なまえ]]は [[アンディ|あんでぃ]]です。[[インドネシア|いんどねしあ]]から [[来|き]]ました。[[今|いま]]は [[ジャカルタ|じゃかるた]]に [[住|す]]んで います。[[年齢|ねんれい]]は 24[[歳|さい]]です。[[会社|かいしゃ]]で [[働|はたら]]いて います。[[去年|きょねん]]から [[日本語|にほんご]]を [[勉強|べんきょう]]して います。[[日本語|にほんご]]は [[難|むずか]]しいですが、[[面白|おもしろ]]いです。[[毎日|まいにち]] [[少|すこ]]しずつ [[勉強|べんきょう]]して います。[[趣味|しゅみ]]は [[音楽|おんがく]]を [[聞|き]]く ことと [[旅行|りょこう]]です。[[将来|しょうらい]]、[[日本人|にほんじん]]と [[一緒|いっしょ]]に [[仕事|しごと]]を したいです。どうぞ よろしく お[[願|ねが]]いします。",
+  "icon": "fas fa-user-circle",
+  "color": "linear-gradient(135deg, #fccb90 0%, #d57eeb 100%)"
+},
   {
     "id": "s5",
     "title": "Buah Kesukaan Saya (私の好きな果物)",
