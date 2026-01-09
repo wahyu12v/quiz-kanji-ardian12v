@@ -127,7 +127,7 @@ function loadNextQuestion() {
     currentWords = [];
     gameState = 'CHECK';
     
-    // RESET TAMPILAN WORD BANK AGAR MUNCUL LAGI
+    // RESET TAMPILAN WORD BANK
     elements.wordBank.style.display = 'flex';
     elements.wordBank.style.removeProperty('margin');
     elements.wordBank.style.removeProperty('padding');
@@ -149,6 +149,10 @@ function loadNextQuestion() {
         btn.className = 'word-chip';
         btn.dataset.raw = word; 
         btn.innerHTML = parseFurigana(word);
+        
+        // Pastikan tombol terlihat saat awal load
+        btn.style.display = ''; 
+        
         btn.onclick = () => moveToAnswer(word, btn);
         elements.wordBank.appendChild(btn);
     });
@@ -173,8 +177,11 @@ function moveToAnswer(word, bankBtn) {
         const idx = currentWords.indexOf(word);
         if (idx > -1) currentWords.splice(idx, 1);
         
+        // KEMBALIKAN TOMBOL KE WORD BANK
         bankBtn.classList.remove('used');
-        checkWordBankStatus(); // Cek lagi jika tombol kembali
+        bankBtn.style.display = ''; // Munculkan kembali di layout (flex/block)
+        
+        checkWordBankStatus(); // Cek ulang layout bank
         
         if (currentWords.length === 0) {
             elements.answerArea.innerHTML = '<div class="placeholder-text">Klik kata di bawah untuk menyusun...</div>';
@@ -182,16 +189,21 @@ function moveToAnswer(word, bankBtn) {
     };
 
     elements.answerArea.appendChild(ansChip);
+    
+    // SEMBUNYIKAN TOMBOL DARI WORD BANK (Force Layout Shrink)
     bankBtn.classList.add('used');
+    bankBtn.style.display = 'none'; // Ini kuncinya agar slot mengecil
+    
     currentWords.push(word);
     
-    checkWordBankStatus(); // Cek status setelah klik
+    checkWordBankStatus(); 
 }
 
-// FUNGSI INI MEMBUAT SLOT KATA HILANG TOTAL JIKA KOSONG
+// Fungsi ini mengatur wadah utama (padding/margin) jika benar-benar kosong
 function checkWordBankStatus() {
     const bankButtons = Array.from(elements.wordBank.children);
-    const allUsed = bankButtons.every(btn => btn.classList.contains('used'));
+    // Kita cek apakah semua tombol memiliki style display 'none' atau class 'used'
+    const allUsed = bankButtons.every(btn => btn.classList.contains('used') || btn.style.display === 'none');
     
     if (allUsed) {
         elements.wordBank.style.display = 'none';

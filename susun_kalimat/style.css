@@ -209,7 +209,9 @@ body {
 
 .word-chip:hover { transform: translateY(-2px); }
 .word-chip:active { transform: translateY(2px); box-shadow: none; }
-.word-chip.used { opacity: 0; pointer-events: none; }
+.word-chip.used {
+    display: none; /* INI KUNCINYA: Hilang dari layout, bukan cuma transparan */
+}
 
 .btn-white-action {
     background: white;
