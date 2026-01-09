@@ -1,27 +1,39 @@
-
-import { fetchData, shuffleArray } from './js/utils.js';
+import { fetchData, shuffleArray, parseFurigana } from './js/utils.js';
 
 // --- VARIABLES ---
 let allStories = [];
+let questionQueue = [];
+let currentQIndex = 0;
 let currentQuestions = [];
-let currentIndex = 0;
 let currentWords = []; 
-let userAnswers = []; 
+let lives = 20;
+let answeredHistory = [];
+
+let gameState = 'CHECK'; // 'CHECK' atau 'NEXT'
 let storyModalInstance, giveUpModalInstance, resultModalInstance;
 
 // --- DOM ELEMENTS ---
 const elements = {
     startView: document.getElementById('start-view'),
     gameView: document.getElementById('game-view'),
+    navBackBtn: document.getElementById('nav-back-btn'),
     
-    // Navbar Back Button (PERBAIKAN)
-    navBackBtn: document.getElementById('nav-back-btn'), 
-
-    // Buttons Game
+    // Header
+    livesCount: document.getElementById('lives-count'),
+    progressBar: document.getElementById('progress-bar'),
+    
+    // Game
+    questionText: document.getElementById('question-text'),
+    answerArea: document.getElementById('answer-area'),
+    wordBank: document.getElementById('word-bank'),
+    feedbackArea: document.getElementById('feedback-area'),
+    feedbackTitle: document.getElementById('feedback-title'),
+    feedbackContent: document.getElementById('feedback-content'),
+    
+    // Buttons
+    actionBtn: document.getElementById('action-btn'),
     btnQuit: document.getElementById('btn-quit'),
     btnConfirmQuit: document.getElementById('btn-confirm-quit'),
-    nextBtn: document.getElementById('next-btn'),
-    prevBtn: document.getElementById('prev-btn'),
 
     // Modals
     storyListContainer: document.getElementById('story-list-container'),
@@ -29,18 +41,11 @@ const elements = {
     giveUpModal: document.getElementById('giveUpModal'),
     resultModal: document.getElementById('resultModal'),
     
-    // Game UI
-    qCurrent: document.getElementById('q-current'),
-    qTotal: document.getElementById('q-total'),
-    totalQBadge: document.getElementById('total-q-badge'),
-    progressBar: document.getElementById('progress-bar'),
-    questionText: document.getElementById('question-text'),
-    answerArea: document.getElementById('answer-area'),
-    wordBank: document.getElementById('word-bank'),
-    
-    // Result UI
-    finalScore: document.getElementById('final-score'),
-    reviewContainer: document.getElementById('exam-review-container')
+    // Result
+    finalLives: document.getElementById('final-lives'),
+    reviewContainer: document.getElementById('exam-review-container'),
+    resultTitle: document.getElementById('result-title'),
+    totalQBadge: document.getElementById('total-q-badge')
 };
 
 // --- INIT ---
@@ -76,12 +81,16 @@ function renderStoryList() {
     });
 }
 
-// --- START GAME LOGIC ---
+// --- GAME LOGIC ---
 window.selectStory = function(index) {
     const selectedStory = allStories[index];
     currentQuestions = selectedStory.questions;
     
     if (!currentQuestions || currentQuestions.length === 0) return alert("Soal kosong.");
+    
+    questionQueue = currentQuestions.map((_, i) => i);
+    lives = 20;
+    answeredHistory = [];
     
     storyModalInstance.hide();
     startGame();
@@ -92,210 +101,231 @@ function startGame() {
     elements.gameView.classList.remove('d-none');
     elements.gameView.classList.add('fade-in');
     
-    // PERBAIKAN: Sembunyikan tombol kembali di Navbar saat game mulai
-    if(elements.navBackBtn) {
-        elements.navBackBtn.style.display = 'none';
-    }
+    if(elements.navBackBtn) elements.navBackBtn.style.display = 'none';
 
-    currentIndex = 0;
-    userAnswers = new Array(currentQuestions.length).fill(null);
-    
-    elements.qTotal.textContent = currentQuestions.length;
-    loadQuestion();
+    updateHeaderUI();
+    loadNextQuestion();
 }
 
-function loadQuestion() {
-    const data = currentQuestions[currentIndex];
-    
-    if (userAnswers[currentIndex]) {
-        currentWords = [...userAnswers[currentIndex].words];
-    } else {
-        currentWords = [];
+function updateHeaderUI() {
+    elements.livesCount.textContent = lives;
+    const totalStart = currentQuestions.length;
+    const correctCount = answeredHistory.filter(a => a.isCorrect).length;
+    const progress = (correctCount / totalStart) * 100;
+    elements.progressBar.style.width = `${progress}%`;
+}
+
+function loadNextQuestion() {
+    if (questionQueue.length === 0) {
+        finishGame(true);
+        return;
     }
     
-    elements.qCurrent.textContent = currentIndex + 1;
-    elements.questionText.innerHTML = data.question; 
+    currentQIndex = questionQueue[0]; 
+    const data = currentQuestions[currentQIndex];
     
-    const progress = ((currentIndex) / currentQuestions.length) * 100;
-    elements.progressBar.style.width = `${progress}%`;
+    currentWords = [];
+    gameState = 'CHECK';
+    
+    // RESET TAMPILAN WORD BANK AGAR MUNCUL LAGI
+    elements.wordBank.style.display = 'flex';
+    elements.wordBank.style.removeProperty('margin');
+    elements.wordBank.style.removeProperty('padding');
 
-    renderAnswerArea();
+    elements.actionBtn.textContent = "PERIKSA";
+    elements.actionBtn.style.background = "white";
+    elements.actionBtn.style.color = "#0d6efd";
+    
+    elements.feedbackArea.style.display = 'none';
+    elements.answerArea.innerHTML = '<div class="placeholder-text">Klik kata di bawah untuk menyusun...</div>';
+    
+    elements.questionText.innerHTML = parseFurigana(data.question);
 
     elements.wordBank.innerHTML = '';
-    let partsToRender = data.parts; 
-    const shuffledParts = shuffleArray([...partsToRender]); 
+    const shuffledParts = shuffleArray(data.parts); 
 
     shuffledParts.forEach((word) => {
         const btn = document.createElement('button');
         btn.className = 'word-chip';
-        btn.textContent = word;
+        btn.dataset.raw = word; 
+        btn.innerHTML = parseFurigana(word);
         btn.onclick = () => moveToAnswer(word, btn);
         elements.wordBank.appendChild(btn);
     });
     
-    syncBankStatus();
-
-    elements.prevBtn.disabled = (currentIndex === 0);
-    
-    if (currentIndex === currentQuestions.length - 1) {
-        elements.nextBtn.innerHTML = 'Simpan & Selesai <i class="fas fa-check-circle ms-2"></i>';
-    } else {
-        elements.nextBtn.innerHTML = 'Simpan & Lanjut <i class="fas fa-chevron-right ms-2"></i>';
-    }
-}
-
-function syncBankStatus() {
-    const bankButtons = Array.from(elements.wordBank.children);
-    bankButtons.forEach(b => b.classList.remove('used'));
-    
-    const tempWords = [...currentWords];
-    tempWords.forEach(word => {
-        const targetBtn = bankButtons.find(b => b.textContent === word && !b.classList.contains('used'));
-        if (targetBtn) {
-            targetBtn.classList.add('used');
-        }
-    });
-}
-
-function renderAnswerArea() {
-    elements.answerArea.innerHTML = '';
-    
-    if (currentWords.length === 0) {
-        elements.answerArea.innerHTML = '<div class="placeholder-text">Klik kata di bawah untuk menyusun...</div>';
-        return;
-    }
-
-    currentWords.forEach(word => {
-        const ansChip = document.createElement('button');
-        ansChip.className = 'word-chip';
-        ansChip.textContent = word;
-        ansChip.onclick = () => {
-            const idx = currentWords.indexOf(word);
-            if (idx > -1) currentWords.splice(idx, 1);
-            
-            renderAnswerArea();
-            syncBankStatus();
-        };
-        elements.answerArea.appendChild(ansChip);
-    });
+    checkWordBankStatus();
 }
 
 function moveToAnswer(word, bankBtn) {
-    if (bankBtn.classList.contains('used')) return;
+    if (gameState !== 'CHECK') return;
 
-    currentWords.push(word);
-    bankBtn.classList.add('used');
-    renderAnswerArea();
-}
+    const placeholder = elements.answerArea.querySelector('.placeholder-text');
+    if (placeholder) placeholder.remove();
 
-// --- NAVIGATION & FINISH ---
-
-function saveCurrentAnswer() {
-    const data = currentQuestions[currentIndex];
-    const userSentence = currentWords.join(''); 
-    const isCorrect = (userSentence === data.correct_sentence);
-
-    userAnswers[currentIndex] = {
-        id: data.id,
-        words: [...currentWords], 
-        userAns: userSentence,
-        correctAns: data.correct_sentence,
-        translation: data.translation,
-        isCorrect: isCorrect
-    };
-}
-
-elements.nextBtn.addEventListener('click', () => {
-    saveCurrentAnswer();
-    if (currentIndex < currentQuestions.length - 1) {
-        currentIndex++;
-        loadQuestion();
-    } else {
-        finishGame();
-    }
-});
-
-elements.prevBtn.addEventListener('click', () => {
-    saveCurrentAnswer(); 
-    if (currentIndex > 0) {
-        currentIndex--;
-        loadQuestion();
-    }
-});
-
-elements.btnQuit.addEventListener('click', () => {
-    giveUpModalInstance.show();
-});
-
-elements.btnConfirmQuit.addEventListener('click', () => {
-    giveUpModalInstance.hide();
-    saveCurrentAnswer(); 
-    finishGame();
-});
-
-function finishGame() {
-    let score = 0;
-    elements.reviewContainer.innerHTML = '';
-
-    currentQuestions.forEach((q, index) => {
-        const answer = userAnswers[index];
+    const ansChip = document.createElement('button');
+    ansChip.className = 'word-chip';
+    ansChip.innerHTML = parseFurigana(word);
+    
+    ansChip.onclick = () => {
+        if (gameState !== 'CHECK') return;
+        ansChip.remove();
         
-        let userText = "(Tidak dijawab)";
-        let isCorrect = false;
-        let cardClass = "review-card wrong"; 
-        let icon = "fa-times-circle text-danger fs-3";
-        let userBoxClass = "bg-danger-subtle";
+        const idx = currentWords.indexOf(word);
+        if (idx > -1) currentWords.splice(idx, 1);
+        
+        bankBtn.classList.remove('used');
+        checkWordBankStatus(); // Cek lagi jika tombol kembali
+        
+        if (currentWords.length === 0) {
+            elements.answerArea.innerHTML = '<div class="placeholder-text">Klik kata di bawah untuk menyusun...</div>';
+        }
+    };
 
-        if (answer) {
-            userText = answer.userAns || "(Kosong)";
-            if (answer.isCorrect) {
-                isCorrect = true;
-                score++;
-                cardClass = "review-card correct";
-                icon = "fa-check-circle text-success fs-3";
-                userBoxClass = "bg-success-subtle";
+    elements.answerArea.appendChild(ansChip);
+    bankBtn.classList.add('used');
+    currentWords.push(word);
+    
+    checkWordBankStatus(); // Cek status setelah klik
+}
+
+// FUNGSI INI MEMBUAT SLOT KATA HILANG TOTAL JIKA KOSONG
+function checkWordBankStatus() {
+    const bankButtons = Array.from(elements.wordBank.children);
+    const allUsed = bankButtons.every(btn => btn.classList.contains('used'));
+    
+    if (allUsed) {
+        elements.wordBank.style.display = 'none';
+        elements.wordBank.style.margin = '0';
+        elements.wordBank.style.padding = '0';
+    } else {
+        elements.wordBank.style.display = 'flex';
+        elements.wordBank.style.removeProperty('margin');
+        elements.wordBank.style.removeProperty('padding');
+    }
+}
+
+elements.actionBtn.addEventListener('click', () => {
+    if (gameState === 'CHECK') {
+        checkAnswer();
+    } else {
+        loadNextQuestion();
+    }
+});
+
+function checkAnswer() {
+    if (currentWords.length === 0) return;
+
+    const data = currentQuestions[currentQIndex];
+    const cleanCorrect = data.correct_sentence.replace(/\[\[(.*?)\|(.*?)\]\]/g, '$1').replace(/\s+/g, '');
+    const cleanUser = currentWords.join('').replace(/\[\[(.*?)\|(.*?)\]\]/g, '$1').replace(/\s+/g, '');
+    const isCorrect = (cleanUser === cleanCorrect);
+    
+    elements.feedbackArea.style.display = 'block';
+    
+    if (isCorrect) {
+        elements.feedbackArea.style.backgroundColor = '#d1e7dd';
+        elements.feedbackArea.style.color = '#0f5132';
+        elements.feedbackTitle.innerHTML = '<i class="fas fa-check-circle me-2"></i>Benar!';
+        elements.feedbackContent.innerHTML = `Arti: <i>"${data.translation}"</i>`;
+        
+        elements.actionBtn.textContent = "LANJUT";
+        elements.actionBtn.style.background = "#198754";
+        elements.actionBtn.style.color = "white";
+        
+        questionQueue.shift(); 
+        
+        answeredHistory.push({
+            q: data.question,
+            ans: currentWords.join(''),
+            correct: data.correct_sentence,
+            translation: data.translation,
+            isCorrect: true
+        });
+
+    } else {
+        lives--;
+        updateHeaderUI();
+        
+        elements.feedbackArea.style.backgroundColor = '#f8d7da';
+        elements.feedbackArea.style.color = '#842029';
+        elements.feedbackTitle.innerHTML = '<i class="fas fa-times-circle me-2"></i>Salah!';
+        elements.feedbackContent.innerHTML = `Jawaban benar: <b>${parseFurigana(data.correct_sentence)}</b>`;
+        
+        elements.actionBtn.textContent = "LANJUT";
+        elements.actionBtn.style.background = "#dc3545";
+        elements.actionBtn.style.color = "white";
+        
+        const currentQ = questionQueue.shift();
+        questionQueue.push(currentQ);
+        
+        answeredHistory.push({
+            q: data.question,
+            ans: currentWords.join(''),
+            correct: data.correct_sentence,
+            translation: data.translation,
+            isCorrect: false
+        });
+        
+        if (lives <= 0) {
+            finishGame(false);
+            return;
+        }
+    }
+    gameState = 'NEXT';
+    updateHeaderUI();
+}
+
+function finishGame(isWin) {
+    if (isWin) {
+        elements.resultTitle.textContent = "Latihan Selesai! 🎉";
+        elements.resultTitle.className = "modal-title fw-bold text-success";
+    } else {
+        elements.resultTitle.textContent = "Nyawa Habis! 💔";
+        elements.resultTitle.className = "modal-title fw-bold text-danger";
+    }
+    
+    elements.finalLives.textContent = lives;
+    elements.reviewContainer.innerHTML = '';
+    
+    currentQuestions.forEach((q) => {
+        const lastEntry = answeredHistory.filter(h => h.q === q.question).pop();
+        let statusClass = "review-card";
+        let statusIcon = "fa-minus text-secondary";
+        let userAnsText = "(Belum dijawab)";
+        
+        if (lastEntry) {
+            if (lastEntry.isCorrect) {
+                statusClass += " correct";
+                statusIcon = "fa-check-circle text-success";
+                userAnsText = parseFurigana(lastEntry.ans);
+            } else {
+                statusClass += " wrong";
+                statusIcon = "fa-times-circle text-danger";
+                userAnsText = parseFurigana(lastEntry.ans);
             }
+        } else {
+            statusClass += " wrong";
         }
 
         const item = document.createElement('div');
-        item.className = cardClass;
+        item.className = statusClass;
         item.innerHTML = `
-            <div class="d-flex justify-content-between align-items-start mb-4">
-                <div>
-                    <span class="badge bg-light text-secondary mb-2">Soal ${index + 1}</span>
-                    <h6 class="fw-bold text-dark mb-0" style="line-height: 1.4;">"${q.question}"</h6>
-                </div>
-                <div class="ms-3"><i class="fas ${icon}"></i></div>
+            <div class="d-flex justify-content-between align-items-start mb-2">
+                <h6 class="fw-bold text-dark mb-0">${parseFurigana(q.question)}</h6>
+                <i class="fas ${statusIcon} fs-4"></i>
             </div>
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <span class="answer-label">Jawaban Kamu</span>
-                    <div class="answer-box ${userBoxClass}">
-                        ${userText}
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <span class="answer-label">Kunci Jawaban</span>
-                    <div class="answer-box bg-light text-dark border">
-                        ${q.correct_sentence}
-                    </div>
-                    <div class="mt-2 small text-muted d-flex align-items-start gap-2">
-                        <i class="fas fa-language mt-1"></i>
-                        <span class="fst-italic">${q.translation}</span>
-                    </div>
-                </div>
-            </div>
+            <div class="small text-muted mb-2">Jawaban Kamu: <span class="fw-bold text-dark">${userAnsText}</span></div>
+            <div class="small text-muted">Kunci: <span class="fw-bold text-primary">${parseFurigana(q.correct_sentence)}</span></div>
+            <div class="small text-secondary fst-italic mt-1">${q.translation}</div>
         `;
         elements.reviewContainer.appendChild(item);
     });
 
-    const finalScoreVal = Math.round((score / currentQuestions.length) * 100);
-    elements.finalScore.textContent = finalScoreVal;
-    
-    elements.finalScore.classList.remove('text-primary', 'text-success', 'text-danger');
-    if(finalScoreVal >= 80) elements.finalScore.classList.add('text-success');
-    else if(finalScoreVal < 60) elements.finalScore.classList.add('text-danger');
-    else elements.finalScore.classList.add('text-primary');
-    
     resultModalInstance.show();
 }
+
+elements.btnQuit.addEventListener('click', () => giveUpModalInstance.show());
+elements.btnConfirmQuit.addEventListener('click', () => {
+    giveUpModalInstance.hide();
+    finishGame(false);
+});
