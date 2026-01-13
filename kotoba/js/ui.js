@@ -3,7 +3,7 @@ import { KEYS, SELECTORS } from './constants.js';
 
 const area = document.getElementById(SELECTORS.quizArea);
 
-// --- 1. RENDER QUIZ (PILIHAN GANDA - ARTI) ---
+// --- 1. RENDER QUIZ (TEBAK HIRAGANA) ---
 export function renderQuiz(state, qNo) {
     area.innerHTML = "";
     const idx = state.current;
@@ -11,6 +11,11 @@ export function renderQuiz(state, qNo) {
     const choices = state.choicesPerQ[idx];
     const isLupa = state.answers[idx] === 'Lupa';
     
+    // Logika Furigana (Tampil jika Kanji beda dengan Hiragana)
+    const kanjiTxt = String(q[KEYS.kanji] || '').trim();
+    const hiraTxt  = String(q[KEYS.hiragana] || '').trim();
+    const showFurigana = kanjiTxt !== hiraTxt;
+
     let choicesHtml = '<div class="row g-2">';
     choices.forEach((c, i) => {
         const isSelected = state.answers[idx] === i ? 'choice-selected' : '';
@@ -32,11 +37,12 @@ export function renderQuiz(state, qNo) {
             <small class="text-muted">No Asli: ${q[KEYS.number] || '-'}</small>
         </div>
         
-        <div class="kanji-big mb-0 pb-0" style="padding-bottom: 0px !important;">${escapeHtml(q[KEYS.kanji])}</div>
-        
-        <div class="text-center mb-4" style="font-size: 1.8rem; color: #64748b; font-weight: 600;">
-            ${escapeHtml(q[KEYS.hiragana])}
-        </div>
+        <div class="kanji-big mb-0 pb-0">${escapeHtml(kanjiTxt)}</div>
+
+        ${showFurigana 
+            ? `<div class="text-center mb-4 text-muted fw-bold fs-3">${escapeHtml(hiraTxt)}</div>`
+            : `<div class="mb-4"></div>`
+        }
 
         ${choicesHtml}
         
@@ -53,13 +59,18 @@ export function renderQuiz(state, qNo) {
     area.appendChild(card);
 }
 
-// --- 2. RENDER HAFALAN (KETIK ROMAJI) ---
+// --- 2. RENDER HAFALAN (TULIS ARTI) ---
 export function renderMem(state, qNo) {
     area.innerHTML = "";
     const idx = state.current;
     const q = state.batch[idx];
     const val = state.answers[idx] === 'Lupa' ? '' : (state.answers[idx] || '');
     
+    // Logika Furigana
+    const kanjiTxt = String(q[KEYS.kanji] || '').trim();
+    const hiraTxt  = String(q[KEYS.hiragana] || '').trim();
+    const showFurigana = kanjiTxt !== hiraTxt;
+
     const card = document.createElement('div');
     card.className = 'card card-kanji mb-3';
     
@@ -70,15 +81,23 @@ export function renderMem(state, qNo) {
             <small class="text-muted">No Asli: ${q[KEYS.number] || '-'}</small>
         </div>
         
-        <div class="kanji-big">${escapeHtml(q[KEYS.kanji])}</div>
+        <div class="kanji-big mb-0 pb-0">${escapeHtml(kanjiTxt)}</div>
+        
+        ${showFurigana 
+            ? `<div class="text-center mb-4 text-muted fw-bold fs-3">${escapeHtml(hiraTxt)}</div>`
+            : `<div class="mb-4"></div>`
+        }
         
         <div class="mt-3">
-            <label class="small text-muted mb-1">Ketik Romaji (Cara Baca):</label>
+            <label class="small text-muted mb-1">Ketik Arti (Indonesia):</label>
             <div class="input-group input-group-lg">
-                <input type="text" id="memInput" class="form-control" placeholder="Contoh: watashi" autocomplete="off" value="${escapeHtml(val)}">
+                <input type="text" id="memInput" class="form-control" placeholder="Contoh: Saya" autocomplete="off" value="${escapeHtml(val)}">
                 <button class="btn btn-outline-secondary" type="button" id="btnMic" title="Rekam Suara">
                     <i class="bi bi-mic-fill"></i>
                 </button>
+            </div>
+            <div class="form-text text-muted" style="font-size: 0.75rem;">
+                *Jawab salah satu arti jika ada banyak.
             </div>
         </div>
 
@@ -101,12 +120,12 @@ export function renderMem(state, qNo) {
     inp.oninput = (e) => window.handleInput(e.target.value);
     inp.onkeydown = (e) => { if(e.key === 'Enter') window.handleNextOrSubmit(); };
 
-    // --- FITUR SUARA (Speech to Text) ---
+    // --- FITUR SUARA (BAHASA INDONESIA) ---
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
     if (SpeechRecognition) {
         const recognition = new SpeechRecognition();
-        recognition.lang = 'ja-JP'; 
+        recognition.lang = 'id-ID'; // Set ke Indonesia
         recognition.interimResults = false;
         recognition.maxAlternatives = 1;
 
@@ -127,8 +146,9 @@ export function renderMem(state, qNo) {
 
         recognition.onresult = (event) => {
             const transcript = event.results[0][0].transcript;
-            inp.value = transcript;
-            window.handleInput(transcript);
+            const cleanText = transcript.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+            inp.value = cleanText;
+            window.handleInput(cleanText);
         };
     } else {
         btnMic.style.display = 'none';
@@ -136,17 +156,20 @@ export function renderMem(state, qNo) {
     }
 }
 
-// --- 3. RENDER HASIL ---
+// --- 3. RENDER HASIL (DIPERBAIKI AGAR TIDAK ERROR) ---
 export function renderResult(result, isQuiz, wrongIndices = []) {
     area.innerHTML = "";
-    const pct = Math.round((result.score / result.total) * 100);
-    const history = JSON.parse(localStorage.getItem("kotoba_app_history") || "[]");
+    
+    // Pencegahan Error Pembagian Nol
+    const pct = result.total > 0 ? Math.round((result.score / result.total) * 100) : 0;
+    
+    const history = JSON.parse(localStorage.getItem("kanji_app_history") || "[]");
     const lastHistory = history.slice(0, 3);
 
     let html = `
     <div class="card shadow-sm border-0 mb-4"><div class="card-body">
       <div class="text-center mb-4">
-        <h4 class="fw-bold">Hasil ${isQuiz?'Quiz Arti':'Tes Romaji'}</h4>
+        <h4 class="fw-bold">Hasil ${isQuiz?'Quiz':'Tes Hafalan'}</h4>
         <h1 class="display-3 fw-bold ${pct>60?'text-success':'text-danger'}">${pct}%</h1>
         <p class="text-muted">Skor: ${result.score} / ${result.total}</p>
       </div>
@@ -187,27 +210,40 @@ export function renderResult(result, isQuiz, wrongIndices = []) {
       </div>
     `;
     
-    result.details.forEach((d, i) => {
-        const color = d.isCorrect ? 'text-success' : 'text-danger';
-        const label = d.isCorrect ? 'Benar' : 'Salah';
-        const userTxt = isQuiz 
-            ? (d.userAns === 'Lupa' ? 'Lupa' : (d.userAns ? d.userAns : '(Kosong)')) 
-            : (d.userAns || '(Kosong)');
+    // Loop detail hasil dengan pengecekan aman
+    if (result.details && result.details.length > 0) {
+        result.details.forEach((d, i) => {
+            const color = d.isCorrect ? 'text-success' : 'text-danger';
+            const label = d.isCorrect ? 'Benar' : 'Salah';
+            const userTxt = isQuiz 
+                ? (d.userAns === 'Lupa' ? 'Lupa' : (d.userAns ? d.userAns : '(Kosong)')) 
+                : (d.userAns || '(Kosong)');
             
-        html += `
-        <div class="border-top py-2">
-           <div class="d-flex justify-content-between">
-              <strong class="text-primary fs-5">${escapeHtml(d.q[KEYS.kanji])}</strong>
-              <span class="${color} fw-bold small">${label}</span>
-           </div>
-           <div class="fw-bold text-dark mb-1">${escapeHtml(d.realHira)}</div>
-           
-           <div class="small text-muted">
-             Arti: <b>${escapeHtml(d.realMean)}</b> | Romaji: ${d.romTrue}
-           </div>
-           <div class="small mt-1">Jawaban Kamu: <strong>${escapeHtml(userTxt)}</strong></div>
-        </div>`;
-    });
+            // Cek apakah data tersedia sebelum akses properti
+            const kanji = d.q ? (d.q[KEYS.kanji] || '?') : '?';
+            const hira = d.realHira || '';
+            const mean = d.realMean || '';
+            const showFuriganaResult = kanji !== hira;
+
+            html += `
+            <div class="border-top py-2">
+               <div class="d-flex justify-content-between">
+                  <strong class="text-primary fs-5">${escapeHtml(kanji)}</strong>
+                  <span class="${color} fw-bold small">${label}</span>
+               </div>
+               
+               ${showFuriganaResult 
+                 ? `<div class="fw-bold text-dark mb-1">${escapeHtml(hira)}</div>` 
+                 : ''
+               }
+               
+               <div class="small text-muted">
+                 Arti: <b>${escapeHtml(mean)}</b>
+               </div>
+               <div class="small mt-1">Jawaban Kamu: <strong>${escapeHtml(userTxt)}</strong></div>
+            </div>`;
+        });
+    }
     
     html += `</div></div>`;
     area.innerHTML = html;

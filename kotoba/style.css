@@ -124,15 +124,15 @@ body {
   box-shadow: var(--shadow-md); overflow: hidden;
 }
 
-/* PERUBAHAN UTAMA: Agar Kotoba yang panjang muat */
+/* UPDATE: Font dinamis agar Kotoba panjang muat tapi tetap besar */
 .kanji-big {
-  /* Font size dinamis: minimal 2rem, idealnya 8vw, maksimal 5rem */
-  font-size: clamp(2rem, 8vw, 5rem); 
+  /* Minimal 40px, Idealnya 18% lebar layar, Maksimal 90px */
+  font-size: clamp(40px, 18vw, 90px); 
   text-align: center; 
-  padding: 40px 10px;
-  font-weight: 800; 
+  padding: 30px 10px 10px 10px; /* Padding bawah dikurangi biar deket sama furigana */
+  font-weight: 900; 
   color: var(--text-dark);
-  line-height: 1.3;
+  line-height: 1.2;
   word-wrap: break-word; /* Agar tidak bablas keluar layar */
   background: var(--primary-gradient); 
   -webkit-background-clip: text; 

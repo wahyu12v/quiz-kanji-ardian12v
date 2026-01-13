@@ -1,30 +1,28 @@
 import { KEYS } from './constants.js';
-import { shuffleArray, normalizeRomaji } from './utils.js';
+import { shuffleArray, normalizeRomaji, hiraToRomaji } from './utils.js';
 
 /**
- * Membangun Pilihan Ganda (Tebak Arti)
- * Mengambil distractors (pengecoh) dari arti soal lain.
+ * Membangun Pilihan Ganda (Arti Indonesia)
+ * PERBAIKAN: Mengambil 'KEYS.meaning' (Arti), bukan Hiragana.
  */
 export function buildChoices(orderIndices, allQuestions) {
   return orderIndices.map(idx => {
     const q = allQuestions[idx];
     
-    // Jawaban Benar (Arti Bahasa Indonesia)
-    const correctMeaning = String(q[KEYS.meaning] || '').trim();
-    const correctOption = { meaning: correctMeaning }; 
+    // AMBIL ARTI (Indo) SEBAGAI KUNCI
+    // Pastikan field ini sesuai dengan JSON (misal: "Arti" atau "arti")
+    const correctMean = String(q[KEYS.meaning] || q['arti'] || '').trim();
+    const correctOption = { meaning: correctMean }; 
 
-    // 1. KUMPULKAN KANDIDAT PENGECOH
+    // AMBIL PENGECOH DARI ARTI SOAL LAIN
     let allCandidates = allQuestions
-        .map(item => String(item[KEYS.meaning] || '').trim())
-        .filter(m => m !== "" && m !== correctMeaning);
+        .map(item => String(item[KEYS.meaning] || item['arti'] || '').trim())
+        .filter(m => m !== "" && m !== correctMean);
 
-    // 2. ACAK KANDIDAT
     internalShuffle(allCandidates);
 
-    // 3. PILIH 3 PENGECOH UNIK
     const distractors = [];
     const seen = new Set();
-
     for (const m of allCandidates) {
         if (!seen.has(m)) {
             seen.add(m);
@@ -33,61 +31,65 @@ export function buildChoices(orderIndices, allQuestions) {
         if (distractors.length >= 3) break;
     }
 
-    // 4. GABUNGKAN (1 Benar + 3 Salah)
     const finalChoices = [correctOption, ...distractors];
-
-    // 5. ACAK POSISI
     return internalShuffle(finalChoices);
   });
 }
 
 /**
- * Fungsi Penilaian
- * Quiz: Cocokkan Arti
- * Essay: Cocokkan Romaji
+ * Fungsi Penilaian (Grading)
+ * Quiz: Cek Arti vs Pilihan
+ * Essay: Cek Arti vs Ketikan User
  */
 export function gradeSession(state, allQuestions) {
     let correctCount = 0;
     const results = state.batch.map((q, i) => {
         // Data Kunci
-        const soal = String(q[KEYS.kanji] || '').trim(); 
-        const arti = String(q[KEYS.meaning] || '').trim();
-        const kana = String(q[KEYS.hiragana] || '').trim();
-        const kunciRomaji = String(q[KEYS.romaji] || '').trim();
+        const hira = String(q[KEYS.hiragana] || '').trim(); 
+        const mean = String(q[KEYS.meaning] || q['arti'] || '').trim(); 
         
         let isCorrect = false;
         let userAnsStr = "Lupa";
 
         if (state.sessionType === 'quiz') {
+            // --- MODE QUIZ (PILIHAN GANDA) ---
             const choiceIdx = state.answers[i];
             const choices = state.choicesPerQ[i];
             
             if (choiceIdx !== null && choiceIdx !== 'Lupa') {
                 const choice = choices[choiceIdx];
-                // Cek apakah arti yang dipilih benar
-                if (choice && choice.meaning === arti) {
+                
+                // PERBAIKAN: Bandingkan Pilihan User dengan ARTI yang benar
+                if (choice && choice.meaning === mean) {
                     isCorrect = true;
                 }
                 userAnsStr = choice ? choice.meaning : "Lupa";
             }
         } else {
-            // Mode Essay (Ketik Romaji)
+            // --- MODE HAFALAN (ESSAY/KETIK) ---
             const raw = state.answers[i] || '';
-            const normUser = normalizeRomaji(raw);
-            const normTrue = normalizeRomaji(kunciRomaji);
+            const userAns = raw.toLowerCase().trim();
             
-            if (raw && raw !== 'Lupa' && normUser === normTrue) isCorrect = true;
+            // Logika Cek Arti: Pisahkan dengan "/" atau "," jika ada banyak arti
+            const validAnswers = mean.toLowerCase().split(/[\/,]/).map(s => s.trim());
+            
+            if (raw && raw !== 'Lupa') {
+                if (validAnswers.includes(userAns)) {
+                    isCorrect = true;
+                }
+            }
             userAnsStr = raw;
         }
 
         if (isCorrect) correctCount++;
+        
         return { 
             q, 
             isCorrect, 
             userAns: userAnsStr, 
-            realHira: kana, // Ditampilkan di hasil
-            realMean: arti, 
-            romTrue: kunciRomaji 
+            realHira: hira, 
+            realMean: mean, 
+            romTrue: hiraToRomaji(hira) 
         };
     });
     
