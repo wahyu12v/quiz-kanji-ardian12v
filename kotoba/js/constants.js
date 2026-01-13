@@ -1,12 +1,11 @@
-// BATCH_SIZE DIHAPUS KARENA KITA PAKAI SISTEM BAB DINAMIS
+export const BATCH_SIZE = 20;
 
 export const KEYS = {
-  kanji: "jepang",
-  meaning: "indo",
-  hiragana: "kana",
-  romaji: "romaji",
+  kanji: "jepang",    // Soal (Huruf Jepang)
+  meaning: "indo",    // Jawaban (Arti Indonesia)
+  hiragana: "kana",   // Furigana (Cara Baca)
   number: "no",
-  bab: "bab" // Tambahan key baru
+  bab: "bab"
 };
 
 export const SELECTORS = {
