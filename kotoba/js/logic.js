@@ -3,18 +3,13 @@ import { shuffleArray, normalizeRomaji, hiraToRomaji } from './utils.js';
 
 /**
  * Membangun Pilihan Ganda (Arti Indonesia)
- * PERBAIKAN: Mengambil 'KEYS.meaning' (Arti), bukan Hiragana.
  */
 export function buildChoices(orderIndices, allQuestions) {
   return orderIndices.map(idx => {
     const q = allQuestions[idx];
-    
-    // AMBIL ARTI (Indo) SEBAGAI KUNCI
-    // Pastikan field ini sesuai dengan JSON (misal: "Arti" atau "arti")
     const correctMean = String(q[KEYS.meaning] || q['arti'] || '').trim();
     const correctOption = { meaning: correctMean }; 
 
-    // AMBIL PENGECOH DARI ARTI SOAL LAIN
     let allCandidates = allQuestions
         .map(item => String(item[KEYS.meaning] || item['arti'] || '').trim())
         .filter(m => m !== "" && m !== correctMean);
@@ -38,13 +33,11 @@ export function buildChoices(orderIndices, allQuestions) {
 
 /**
  * Fungsi Penilaian (Grading)
- * Quiz: Cek Arti vs Pilihan
- * Essay: Cek Arti vs Ketikan User
+ * PERBAIKAN: Menggunakan pencocokan parsial agar jawaban tidak lengkap tetap benar.
  */
 export function gradeSession(state, allQuestions) {
     let correctCount = 0;
     const results = state.batch.map((q, i) => {
-        // Data Kunci
         const hira = String(q[KEYS.hiragana] || '').trim(); 
         const mean = String(q[KEYS.meaning] || q['arti'] || '').trim(); 
         
@@ -52,14 +45,11 @@ export function gradeSession(state, allQuestions) {
         let userAnsStr = "Lupa";
 
         if (state.sessionType === 'quiz') {
-            // --- MODE QUIZ (PILIHAN GANDA) ---
             const choiceIdx = state.answers[i];
             const choices = state.choicesPerQ[i];
             
             if (choiceIdx !== null && choiceIdx !== 'Lupa') {
                 const choice = choices[choiceIdx];
-                
-                // PERBAIKAN: Bandingkan Pilihan User dengan ARTI yang benar
                 if (choice && choice.meaning === mean) {
                     isCorrect = true;
                 }
@@ -70,13 +60,16 @@ export function gradeSession(state, allQuestions) {
             const raw = state.answers[i] || '';
             const userAns = raw.toLowerCase().trim();
             
-            // Logika Cek Arti: Pisahkan dengan "/" atau "," jika ada banyak arti
+            // Pisahkan kunci jawaban (misal: "makan / memakan" menjadi ["makan", "memakan"])
             const validAnswers = mean.toLowerCase().split(/[\/,]/).map(s => s.trim());
             
-            if (raw && raw !== 'Lupa') {
-                if (validAnswers.includes(userAns)) {
-                    isCorrect = true;
-                }
+            if (raw && raw !== 'Lupa' && userAns !== "") {
+                // LOGIKA BARU: Cek apakah jawaban user ada di dalam salah satu kunci 
+                // ATAU salah satu kunci mengandung jawaban user.
+                // Contoh: Kunci "Sapaan akrab", User jawab "Sapaan" -> BENAR.
+                isCorrect = validAnswers.some(key => 
+                    key.includes(userAns) || userAns.includes(key)
+                );
             }
             userAnsStr = raw;
         }
