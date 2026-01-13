@@ -2,16 +2,19 @@ import { KEYS } from './constants.js';
 import { shuffleArray, normalizeRomaji, hiraToRomaji } from './utils.js';
 
 /**
- * Membangun Pilihan Ganda (Arti Indonesia)
+ * Membangun Pilihan Ganda (Menggunakan Arti Indonesia)
  */
 export function buildChoices(orderIndices, allQuestions) {
   return orderIndices.map(idx => {
     const q = allQuestions[idx];
-    const correctMean = String(q[KEYS.meaning] || q['arti'] || '').trim();
+    
+    // Ambil Arti (Cek berbagai kemungkinan key agar aman)
+    const correctMean = String(q[KEYS.meaning] || q['arti'] || q['Arti'] || '').trim();
     const correctOption = { meaning: correctMean }; 
 
+    // Ambil Pengecoh dari Arti soal lain
     let allCandidates = allQuestions
-        .map(item => String(item[KEYS.meaning] || item['arti'] || '').trim())
+        .map(item => String(item[KEYS.meaning] || item['arti'] || item['Arti'] || '').trim())
         .filter(m => m !== "" && m !== correctMean);
 
     internalShuffle(allCandidates);
@@ -33,18 +36,20 @@ export function buildChoices(orderIndices, allQuestions) {
 
 /**
  * Fungsi Penilaian (Grading)
- * PERBAIKAN: Menggunakan pencocokan parsial agar jawaban tidak lengkap tetap benar.
+ * PERBAIKAN: Logika "Tidak Lengkap Tetap Benar" (Partial Match)
  */
 export function gradeSession(state, allQuestions) {
     let correctCount = 0;
     const results = state.batch.map((q, i) => {
-        const hira = String(q[KEYS.hiragana] || '').trim(); 
-        const mean = String(q[KEYS.meaning] || q['arti'] || '').trim(); 
+        // Data Kunci
+        const hira = String(q[KEYS.hiragana] || q['hiragana'] || '').trim(); 
+        const mean = String(q[KEYS.meaning] || q['arti'] || q['Arti'] || '').trim(); 
         
         let isCorrect = false;
         let userAnsStr = "Lupa";
 
         if (state.sessionType === 'quiz') {
+            // --- MODE QUIZ (PILIHAN GANDA) ---
             const choiceIdx = state.answers[i];
             const choices = state.choicesPerQ[i];
             
@@ -56,20 +61,27 @@ export function gradeSession(state, allQuestions) {
                 userAnsStr = choice ? choice.meaning : "Lupa";
             }
         } else {
-            // --- MODE HAFALAN (ESSAY/KETIK) ---
+            // --- MODE HAFALAN (TULIS ARTI) ---
             const raw = state.answers[i] || '';
             const userAns = raw.toLowerCase().trim();
             
-            // Pisahkan kunci jawaban (misal: "makan / memakan" menjadi ["makan", "memakan"])
+            // 1. Pisahkan kunci jawaban berdasarkan "/" atau "," 
+            //    Contoh: "Sapaan / Panggilan" -> ["sapaan", "panggilan"]
             const validAnswers = mean.toLowerCase().split(/[\/,]/).map(s => s.trim());
             
-            if (raw && raw !== 'Lupa' && userAns !== "") {
-                // LOGIKA BARU: Cek apakah jawaban user ada di dalam salah satu kunci 
-                // ATAU salah satu kunci mengandung jawaban user.
-                // Contoh: Kunci "Sapaan akrab", User jawab "Sapaan" -> BENAR.
-                isCorrect = validAnswers.some(key => 
-                    key.includes(userAns) || userAns.includes(key)
-                );
+            if (raw && raw !== 'Lupa' && userAns.length > 0) {
+                // LOGIKA BARU: FLEXIBLE MATCHING
+                isCorrect = validAnswers.some(key => {
+                    // Jika kunci jawaban pendek (<3 huruf), harus sama persis biar aman
+                    if (key.length < 3) return key === userAns;
+
+                    // Jika jawaban user terlalu pendek (<2 huruf), harus sama persis (cegah "a" dianggap benar)
+                    if (userAns.length < 2) return key === userAns;
+
+                    // Cek: Apakah Jawaban User ada di dalam Kunci? 
+                    // ATAU Apakah Kunci ada di dalam Jawaban User?
+                    return key.includes(userAns) || userAns.includes(key);
+                });
             }
             userAnsStr = raw;
         }
