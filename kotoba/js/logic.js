@@ -8,7 +8,7 @@ export function buildChoices(orderIndices, allQuestions) {
   return orderIndices.map(idx => {
     const q = allQuestions[idx];
     
-    // AMBIL ARTI (Cek huruf besar/kecil agar aman)
+    // AMBIL ARTI (Cek berbagai variasi nama kolom di JSON agar aman)
     // Prioritas: KEYS.meaning ("Arti") -> "arti" -> "indo"
     const correctMean = String(q[KEYS.meaning] || q['arti'] || q['indo'] || '').trim();
     const correctOption = { meaning: correctMean }; 
