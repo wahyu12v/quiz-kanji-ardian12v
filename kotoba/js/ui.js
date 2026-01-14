@@ -11,6 +11,7 @@ export function renderQuiz(state, qNo) {
     const choices = state.choicesPerQ[idx];
     const isLupa = state.answers[idx] === 'Lupa';
     
+    // Logika Sembunyikan Furigana
     const kanjiTxt = String(q[KEYS.kanji] || '').trim();
     const hiraTxt  = String(q[KEYS.hiragana] || '').trim();
     const showFurigana = kanjiTxt !== hiraTxt;
@@ -65,6 +66,7 @@ export function renderMem(state, qNo) {
     const q = state.batch[idx];
     const val = state.answers[idx] === 'Lupa' ? '' : (state.answers[idx] || '');
     
+    // Logika Sembunyikan Furigana
     const kanjiTxt = String(q[KEYS.kanji] || '').trim();
     const hiraTxt  = String(q[KEYS.hiragana] || '').trim();
     const showFurigana = kanjiTxt !== hiraTxt;
@@ -225,8 +227,8 @@ export function renderResult(result, isQuiz, wrongIndices = []) {
                 ? (d.userAns === 'Lupa' ? 'Lupa' : (d.userAns ? d.userAns : '(Kosong)')) 
                 : (d.userAns || '(Kosong)');
             
-            const kanji = d.q ? (d.q[KEYS.kanji] || '?') : '?';
-            const hira = d.realHira || '';
+            const kanji = (d.q[KEYS.kanji] || '').trim();
+            const hira = (d.realHira || '').trim();
             const mean = d.realMean || '';
             const showFuriganaResult = kanji !== hira;
 

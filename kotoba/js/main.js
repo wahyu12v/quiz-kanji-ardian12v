@@ -12,10 +12,8 @@ async function init() {
     try {
         setupModals();
         
-        // 1. TOMBOL KEMBALI: MUNCUL DI HOME
         toggleMainBackButton(true); 
         
-        // 2. LOAD DATA
         const uniqueUrl = 'data/data.json?v=' + new Date().getTime();
         const response = await fetch(uniqueUrl);
         
@@ -140,6 +138,7 @@ function generateCheckboxes(containerId, prefix) {
     });
 }
 
+// --- FUNGSI RENDER DAFTAR KOTOBA (DIPERBAIKI) ---
 function renderDaftarList() {
     const indices = getCheckedIndices('rangeListDaftar');
     if(indices.length === 0) return alert("Pilih minimal satu paket.");
@@ -155,14 +154,22 @@ function renderDaftarList() {
             const item = QUESTIONS[idx];
             if(!item) return;
             
+            // Logika Cek Duplikat
+            const kanji = (item.jepang || '?').trim();
+            const kana = (item.kana || '-').trim();
+            const showKana = kanji !== kana; // Hanya tampilkan Kana jika beda dengan Kanji
+
             const card = document.createElement('div');
             card.className = 'kanji-card-small shadow-sm text-center p-2'; 
             
             card.innerHTML = `
                 <div class="mb-1"><span class="badge bg-light text-dark border">${item.bab || '-'}</span></div>
-                <div class="k-char fw-bold text-primary">${item.jepang || '?'}</div>
+                
+                <div class="k-char fw-bold text-primary">${kanji}</div>
+                
                 <div class="k-info">
-                    <div class="k-read text-dark fw-bold">${item.kana || '-'}</div>
+                    ${showKana ? `<div class="k-read text-dark fw-bold">${kana}</div>` : ''}
+                    
                     <div class="k-romaji text-danger fw-bold" style="font-size: 0.9rem; margin: 2px 0;">
                         ${item.romaji || '-'}
                     </div>
@@ -234,11 +241,7 @@ window.handleBack = () => { Storage.clearTemp(); window.location.href = 'index.h
 function finishSession() {
     const result = Logic.gradeSession(state, QUESTIONS);
     
-    // --- PERBAIKAN: Ambil daftar Bab yang dikerjakan ---
-    // Mengambil nilai unik dari 'bab' di dalam batch soal saat ini
     const usedBabs = [...new Set(state.batch.map(item => item.bab || "Paket Default"))].join(', ');
-
-    // Simpan ke storage dengan parameter bab
     Storage.saveToHistory(result.score, result.total, state.sessionType, usedBabs);
     
     const wrongIndices = [];
