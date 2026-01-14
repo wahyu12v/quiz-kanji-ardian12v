@@ -46,12 +46,12 @@ export function renderQuiz(state, qNo) {
 
         ${choicesHtml}
         
-        <div class="mt-4 d-flex gap-2 btn-row">
-            <button class="btn btn-outline-secondary px-4 fw-bold" onclick="window.handlePrev()" ${idx===0?'disabled':''}>Sebelumnya</button>
-            <button class="btn btn-outline-warning px-4 fw-bold" onclick="window.handleLupa()">${isLupa ? 'Ditandai Lupa' : 'Lupa'}</button>
+        <div class="mt-4 d-flex gap-2 w-100">
+            <button class="btn btn-outline-secondary fw-bold flex-grow-1" onclick="window.handlePrev()" ${idx===0?'disabled':''}>Sebelumnya</button>
+            <button class="btn btn-outline-warning fw-bold flex-grow-1" onclick="window.handleLupa()">${isLupa ? 'Ditandai' : 'Lupa'}</button>
             ${ idx < state.batch.length - 1 
-               ? `<button class="btn btn-outline-primary ms-auto px-4 fw-bold" onclick="window.handleNext()">Berikutnya</button>` 
-               : `<button class="btn btn-primary ms-auto px-4 fw-bold" onclick="window.handleConfirm()">Selesai</button>`
+               ? `<button class="btn btn-outline-primary fw-bold flex-grow-1" onclick="window.handleNext()">Berikutnya</button>` 
+               : `<button class="btn btn-primary fw-bold flex-grow-1" onclick="window.handleConfirm()">Selesai</button>`
             }
         </div>
       </div>
@@ -66,7 +66,6 @@ export function renderMem(state, qNo) {
     const q = state.batch[idx];
     const val = state.answers[idx] === 'Lupa' ? '' : (state.answers[idx] || '');
     
-    // Logika Sembunyikan Furigana
     const kanjiTxt = String(q[KEYS.kanji] || '').trim();
     const hiraTxt  = String(q[KEYS.hiragana] || '').trim();
     const showFurigana = kanjiTxt !== hiraTxt;
@@ -101,12 +100,12 @@ export function renderMem(state, qNo) {
             </div>
         </div>
 
-        <div class="mt-4 d-flex gap-2 btn-row">
-            <button class="btn btn-outline-secondary px-4 fw-bold" onclick="window.handlePrev()" ${idx===0?'disabled':''}>Sebelumnya</button>
-            <button class="btn btn-outline-warning px-4 fw-bold" onclick="window.handleLupa()">Lupa</button>
+        <div class="mt-4 d-flex gap-2 w-100">
+            <button class="btn btn-outline-secondary fw-bold flex-grow-1" onclick="window.handlePrev()" ${idx===0?'disabled':''}>Sebelumnya</button>
+            <button class="btn btn-outline-warning fw-bold flex-grow-1" onclick="window.handleLupa()">Lupa</button>
             ${ idx < state.batch.length - 1 
-               ? `<button class="btn btn-outline-primary ms-auto px-4 fw-bold" onclick="window.handleNext()">Berikutnya</button>` 
-               : `<button class="btn btn-success ms-auto px-4 fw-bold" onclick="window.handleConfirm()">Selesai</button>`
+               ? `<button class="btn btn-outline-primary fw-bold flex-grow-1" onclick="window.handleNext()">Berikutnya</button>` 
+               : `<button class="btn btn-success fw-bold flex-grow-1" onclick="window.handleConfirm()">Selesai</button>`
             }
         </div>
       </div>

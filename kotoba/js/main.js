@@ -138,7 +138,6 @@ function generateCheckboxes(containerId, prefix) {
     });
 }
 
-// --- FUNGSI RENDER DAFTAR KOTOBA (DIPERBAIKI) ---
 function renderDaftarList() {
     const indices = getCheckedIndices('rangeListDaftar');
     if(indices.length === 0) return alert("Pilih minimal satu paket.");
@@ -150,33 +149,45 @@ function renderDaftarList() {
     
     if(listContainer) {
         listContainer.innerHTML = '';
+        listContainer.className = 'row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3'; 
+
         indices.forEach(idx => {
             const item = QUESTIONS[idx];
             if(!item) return;
             
-            // Logika Cek Duplikat
-            const kanji = (item.jepang || '?').trim();
-            const kana = (item.kana || '-').trim();
-            const showKana = kanji !== kana; // Hanya tampilkan Kana jika beda dengan Kanji
+            const kanji = String(item.jepang || '?').trim();
+            const kana = String(item.kana || '-').trim();
+            const showKana = kanji !== kana;
 
-            const card = document.createElement('div');
-            card.className = 'kanji-card-small shadow-sm text-center p-2'; 
-            
-            card.innerHTML = `
-                <div class="mb-1"><span class="badge bg-light text-dark border">${item.bab || '-'}</span></div>
-                
-                <div class="k-char fw-bold text-primary">${kanji}</div>
-                
-                <div class="k-info">
-                    ${showKana ? `<div class="k-read text-dark fw-bold">${kana}</div>` : ''}
-                    
-                    <div class="k-romaji text-danger fw-bold" style="font-size: 0.9rem; margin: 2px 0;">
-                        ${item.romaji || '-'}
+            let fontSizeKanji = '2rem';
+            if (kanji.length > 5) fontSizeKanji = '1.4rem';
+            if (kanji.length > 9) fontSizeKanji = '1.1rem';
+
+            const colDiv = document.createElement('div');
+            colDiv.className = 'col';
+
+            colDiv.innerHTML = `
+                <div class="card h-100 shadow-sm border-0" style="border-radius: 12px; background: #fff;">
+                    <div class="card-body p-2 d-flex flex-column text-center align-items-center justify-content-center">
+                        <div class="mb-1 w-100">
+                            <span class="badge bg-light text-secondary border fw-normal" style="font-size: 0.7rem;">${item.bab || '-'}</span>
+                        </div>
+                        <div class="k-char fw-bold text-primary mb-1 text-break w-100" style="font-size: ${fontSizeKanji}; line-height: 1.2;">
+                             ${kanji}
+                        </div>
+                        <div class="k-info w-100">
+                            ${showKana ? `<div class="k-read text-dark fw-bold text-break" style="font-size: 0.9rem;">${kana}</div>` : ''}
+                            <div class="k-romaji text-danger fw-bold text-truncate px-1" style="font-size: 0.85rem; margin: 2px 0;">
+                                ${item.romaji || '-'}
+                            </div>
+                            <div class="k-mean text-secondary border-top pt-2 mt-1 w-100 d-flex align-items-center justify-content-center" 
+                                 style="font-size: 0.8rem; min-height: 40px; line-height: 1.2;">
+                                ${item.indo || ''}
+                            </div>
+                        </div>
                     </div>
-                    <div class="k-mean text-secondary small border-top pt-1 mt-1">${item.indo || ''}</div>
                 </div>`;
-            
-            listContainer.appendChild(card);
+            listContainer.appendChild(colDiv);
         });
     }
     setTimeout(() => { daftarListModal?.show(); }, 300);
@@ -241,8 +252,14 @@ window.handleBack = () => { Storage.clearTemp(); window.location.href = 'index.h
 function finishSession() {
     const result = Logic.gradeSession(state, QUESTIONS);
     
-    const usedBabs = [...new Set(state.batch.map(item => item.bab || "Paket Default"))].join(', ');
-    Storage.saveToHistory(result.score, result.total, state.sessionType, usedBabs);
+    // --- AMBIL LIST BAB YANG DIPAKAI & URUTKAN ---
+    // Menggunakan Set untuk mengambil unik, lalu sort agar rapi
+    const uniqueBabs = [...new Set(state.batch.map(item => item.bab || "Default"))].sort();
+    
+    // Simpan dalam bentuk string rapi
+    const packagesStr = uniqueBabs.join(', ');
+
+    Storage.saveToHistory(result.score, result.total, state.sessionType, packagesStr);
     
     const wrongIndices = [];
     result.details.forEach((item, i) => {
