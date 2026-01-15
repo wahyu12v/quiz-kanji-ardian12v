@@ -8,17 +8,17 @@ let QUESTIONS = [];
 let state = null; 
 let quizModal, memModal, confirmModal, daftarRangeModal, daftarListModal;
 
+// Modal Wrapper untuk Fitur Baru (Kita pakai modal yang ada, cuma ganti Trigger)
+// Agar simple, kita pakai 'quizModal' untuk semua Pilihan Ganda, dan 'memModal' untuk semua Essay.
+
 async function init() {
     try {
         setupModals();
-        
         toggleMainBackButton(true); 
         
         const uniqueUrl = 'data/data.json?v=' + new Date().getTime();
         const response = await fetch(uniqueUrl);
-        
         if(!response.ok) throw new Error("Gagal memuat data/data.json");
-        
         QUESTIONS = await response.json();
         
         const totalEl = document.getElementById('totalCount');
@@ -65,27 +65,46 @@ function setupModals() {
     
     const daftarEl = document.getElementById('daftarHafalanModal');
     if(daftarEl) {
-        daftarEl.addEventListener('hidden.bs.modal', () => {
-            toggleMainBackButton(true);
-        });
+        daftarEl.addEventListener('hidden.bs.modal', () => { toggleMainBackButton(true); });
     }
 }
 
+// --- VARIABEL UNTUK MENYIMPAN TIPE SESI SAAT KLIK TOMBOL ---
+let pendingSessionType = 'quiz'; 
+
 function setupEventListeners() {
-    const bindClick = (id, modal) => {
+    const bindClick = (id, modal, type) => {
         const btn = document.getElementById(id);
-        if(btn) btn.onclick = () => modal?.show();
+        if(btn) btn.onclick = () => {
+            pendingSessionType = type; // Simpan tipe sesi yang dipilih
+            
+            // Ubah Judul Modal agar user tau
+            if(id === 'startBtn') document.querySelector('#quizModal .modal-title').innerText = "Mulai Tebak Arti";
+            if(id === 'btnTebakHiragana') document.querySelector('#quizModal .modal-title').innerText = "Mulai Tebak Hiragana";
+            if(id === 'memorizeBtn') document.querySelector('#memModal .modal-title').innerText = "Mulai Tulis Arti";
+            if(id === 'btnTulisRomaji') document.querySelector('#memModal .modal-title').innerText = "Mulai Tulis Romaji";
+
+            modal?.show();
+        };
     };
 
-    bindClick('startBtn', quizModal);       
-    bindClick('memorizeBtn', memModal);     
-    bindClick('daftarHafalanBtn', daftarRangeModal); 
+    // 1. Tebak Arti (Standard)
+    bindClick('startBtn', quizModal, 'quiz');
+    // 2. Tulis Arti (Standard)
+    bindClick('memorizeBtn', memModal, 'mem');
+    // 3. Tebak Hiragana (Baru) -> Pakai Modal Quiz
+    bindClick('btnTebakHiragana', quizModal, 'quiz_hiragana');
+    // 4. Tulis Romaji (Baru) -> Pakai Modal Mem
+    bindClick('btnTulisRomaji', memModal, 'write_romaji');
+
+    bindClick('daftarHafalanBtn', daftarRangeModal, null); 
     
     setupCheckboxHelpers('selectAllQuiz', 'clearAllQuiz', 'rangeListQuiz');
     setupCheckboxHelpers('selectAllMem', 'clearAllMem', 'rangeListMem');
     setupCheckboxHelpers('btnDaftarSelectAll', 'btnDaftarReset', 'rangeListDaftar');
 
-    const handleForm = (id, type, listId, modal) => {
+    // Handler Form (Generic)
+    const handleForm = (id, listId, modal) => {
         const form = document.getElementById(id);
         if(form) {
             form.onsubmit = (e) => {
@@ -97,14 +116,15 @@ function setupEventListeners() {
                 showStopButton(); 
 
                 setTimeout(() => {
-                    startSession(type, indices);
+                    // Gunakan pendingSessionType yang tadi disimpan saat klik tombol
+                    startSession(pendingSessionType, indices);
                 }, 100);
             };
         }
     };
 
-    handleForm('quizForm', 'quiz', 'rangeListQuiz', quizModal);
-    handleForm('memForm', 'mem', 'rangeListMem', memModal);
+    handleForm('quizForm', 'rangeListQuiz', quizModal);
+    handleForm('memForm', 'rangeListMem', memModal);
 
     const btnShowList = document.getElementById('btnShowList');
     if(btnShowList) btnShowList.onclick = () => renderDaftarList();
@@ -141,12 +161,10 @@ function generateCheckboxes(containerId, prefix) {
 function renderDaftarList() {
     const indices = getCheckedIndices('rangeListDaftar');
     if(indices.length === 0) return alert("Pilih minimal satu paket.");
-    
     daftarRangeModal?.hide();
     toggleMainBackButton(false);
 
     const listContainer = document.getElementById('daftarList');
-    
     if(listContainer) {
         listContainer.innerHTML = '';
         listContainer.className = 'row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3'; 
@@ -154,36 +172,24 @@ function renderDaftarList() {
         indices.forEach(idx => {
             const item = QUESTIONS[idx];
             if(!item) return;
-            
             const kanji = String(item.jepang || '?').trim();
             const kana = String(item.kana || '-').trim();
             const showKana = kanji !== kana;
-
             let fontSizeKanji = '2rem';
             if (kanji.length > 5) fontSizeKanji = '1.4rem';
             if (kanji.length > 9) fontSizeKanji = '1.1rem';
 
             const colDiv = document.createElement('div');
             colDiv.className = 'col';
-
             colDiv.innerHTML = `
                 <div class="card h-100 shadow-sm border-0" style="border-radius: 12px; background: #fff;">
                     <div class="card-body p-2 d-flex flex-column text-center align-items-center justify-content-center">
-                        <div class="mb-1 w-100">
-                            <span class="badge bg-light text-secondary border fw-normal" style="font-size: 0.7rem;">${item.bab || '-'}</span>
-                        </div>
-                        <div class="k-char fw-bold text-primary mb-1 text-break w-100" style="font-size: ${fontSizeKanji}; line-height: 1.2;">
-                             ${kanji}
-                        </div>
+                        <div class="mb-1 w-100"><span class="badge bg-light text-secondary border fw-normal" style="font-size: 0.7rem;">${item.bab || '-'}</span></div>
+                        <div class="k-char fw-bold text-primary mb-1 text-break w-100" style="font-size: ${fontSizeKanji}; line-height: 1.2;">${kanji}</div>
                         <div class="k-info w-100">
                             ${showKana ? `<div class="k-read text-dark fw-bold text-break" style="font-size: 0.9rem;">${kana}</div>` : ''}
-                            <div class="k-romaji text-danger fw-bold text-truncate px-1" style="font-size: 0.85rem; margin: 2px 0;">
-                                ${item.romaji || '-'}
-                            </div>
-                            <div class="k-mean text-secondary border-top pt-2 mt-1 w-100 d-flex align-items-center justify-content-center" 
-                                 style="font-size: 0.8rem; min-height: 40px; line-height: 1.2;">
-                                ${item.indo || ''}
-                            </div>
+                            <div class="k-romaji text-danger fw-bold text-truncate px-1" style="font-size: 0.85rem; margin: 2px 0;">${item.romaji || '-'}</div>
+                            <div class="k-mean text-secondary border-top pt-2 mt-1 w-100 d-flex align-items-center justify-content-center" style="font-size: 0.8rem; min-height: 40px; line-height: 1.2;">${item.indo || ''}</div>
                         </div>
                     </div>
                 </div>`;
@@ -204,26 +210,32 @@ window.getCheckedIndices = function(containerId) {
     const checkedBoxes = document.querySelectorAll(`#${containerId} input[type=checkbox]:checked`);
     let allIndices = [];
     const selectedBabs = Array.from(checkedBoxes).map(cb => cb.getAttribute('data-name'));
-
     QUESTIONS.forEach((item, index) => {
         const itemBab = item.bab || "Paket Default";
         if (selectedBabs.includes(itemBab)) allIndices.push(index);
     });
-
     return allIndices;
 }
 
 function startSession(type, indices) {
+    // Logic.buildChoices sekarang menerima parameter 'type' untuk membedakan mode
     state = { sessionType: type, orderIndices: shuffleArray(indices), current: 0, answers: Array(indices.length).fill(null), choicesPerQ: null };
     state.batch = state.orderIndices.map(i => QUESTIONS[i]);
-    if(type === 'quiz') state.choicesPerQ = Logic.buildChoices(state.orderIndices, QUESTIONS);
+    
+    // Jika mode adalah salah satu Quiz (Arti atau Hiragana), bangun pilihan ganda
+    if(type === 'quiz' || type === 'quiz_hiragana') {
+        state.choicesPerQ = Logic.buildChoices(state.orderIndices, QUESTIONS, type);
+    }
     renderCurrent();
 }
 
 function renderCurrent() {
     if(!state) return;
-    if(state.sessionType === 'quiz') UI.renderQuiz(state, state.current);
-    else UI.renderMem(state, state.current);
+    if(state.sessionType === 'quiz' || state.sessionType === 'quiz_hiragana') {
+        UI.renderQuiz(state, state.current);
+    } else {
+        UI.renderMem(state, state.current);
+    }
 }
 
 window.handleAnswer = (idx) => { state.answers[state.current] = idx; Storage.saveTemp(state); setTimeout(() => { if(state.current < state.batch.length - 1) { state.current++; renderCurrent(); } }, 200); };
@@ -251,12 +263,7 @@ window.handleBack = () => { Storage.clearTemp(); window.location.href = 'index.h
 
 function finishSession() {
     const result = Logic.gradeSession(state, QUESTIONS);
-    
-    // --- AMBIL LIST BAB YANG DIPAKAI & URUTKAN ---
-    // Menggunakan Set untuk mengambil unik, lalu sort agar rapi
     const uniqueBabs = [...new Set(state.batch.map(item => item.bab || "Default"))].sort();
-    
-    // Simpan dalam bentuk string rapi
     const packagesStr = uniqueBabs.join(', ');
 
     Storage.saveToHistory(result.score, result.total, state.sessionType, packagesStr);
@@ -269,7 +276,7 @@ function finishSession() {
     });
 
     Storage.clearTemp();
-    UI.renderResult(result, state.sessionType === 'quiz', wrongIndices);
+    UI.renderResult(result, state.sessionType.includes('quiz'), wrongIndices);
     
     const btnStop = document.getElementById('btn-stop-quiz');
     if(btnStop) btnStop.classList.add('d-none'); 
