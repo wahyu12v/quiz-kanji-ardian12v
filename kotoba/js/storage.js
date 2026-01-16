@@ -2,16 +2,29 @@
 const HISTORY_KEY = 'kotoba_apps_history';
 const TEMP_KEY = 'kotoba_apps_temp';
 
-// PERBAIKAN: Menambah parameter 'babList' untuk menyimpan nama paket
 export function saveToHistory(score, total, type, babList) {
     const history = getHistory();
+    
+    // --- PERBAIKAN LOGIKA LABEL ---
+    // Menerjemahkan kode sistem menjadi Teks Bahasa Indonesia yang benar
+    let labelType = type; // Default fallback
+
+    if (type === 'quiz') {
+        labelType = 'Tebak Arti';
+    } else if (type === 'quiz_hiragana') {
+        labelType = 'Tebak Hiragana';
+    } else if (type === 'mem') {
+        labelType = 'Tulis Arti';
+    } else if (type === 'write_romaji') {
+        labelType = 'Tulis Romaji';
+    }
     
     const entry = {
         date: new Date().toLocaleString('id-ID', { day: 'numeric', month: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
         score: score,
         total: total,
-        type: type === 'quiz' ? 'Tebak Arti' : 'Tulis Arti',
-        packages: babList || '-', // Simpan nama bab/paket disini
+        type: labelType, // Simpan label yang sudah diterjemahkan
+        packages: babList || '-', 
         percentage: total > 0 ? Math.round((score / total) * 100) : 0
     };
     

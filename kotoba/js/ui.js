@@ -3,6 +3,27 @@ import { KEYS, SELECTORS } from './constants.js';
 
 const area = document.getElementById(SELECTORS.quizArea);
 
+// --- INJECT CSS ANIMASI (Agar tidak perlu edit file CSS terpisah) ---
+// Ini membuat tombol terasa "hidup" dan tidak kaku
+const style = document.createElement('style');
+style.innerHTML = `
+    .choice-card-anim {
+        transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, background-color 0.2s, border-color 0.2s !important;
+    }
+    /* Efek saat Hover (Mouse diatas) */
+    .choice-card-anim:hover {
+        transform: translateY(-5px); /* Naik sedikit */
+        box-shadow: 0 10px 20px rgba(13, 110, 253, 0.15) !important; /* Bayangan halus */
+        border-color: #0d6efd !important; /* Border biru */
+        z-index: 2;
+    }
+    /* Efek saat Diklik */
+    .choice-card-anim:active {
+        transform: scale(0.98) translateY(-2px); /* Mengecil sedikit */
+    }
+`;
+document.head.appendChild(style);
+
 // --- HELPER: SMART FURIGANA ---
 function formatRuby(kanji, hira) {
     kanji = String(kanji || '').trim();
@@ -23,7 +44,7 @@ function formatRuby(kanji, hira) {
     return `<ruby style="font-weight: bold; color: #0d6efd;">${escapeHtml(kTemp)}<rt style="font-size: 0.45em; color: #6c757d; font-weight: normal; margin-bottom: 0px; letter-spacing: 1px;">${escapeHtml(hTemp)}</rt></ruby><span style="font-weight: bold; color: #0d6efd;">${escapeHtml(suffix)}</span>`;
 }
 
-// --- 1. RENDER QUIZ (SUPPORT TEBAK ARTI & TEBAK HIRAGANA) ---
+// --- 1. RENDER QUIZ (SOLID STYLE + ANIMASI) ---
 export function renderQuiz(state, qNo) {
     area.innerHTML = "";
     const idx = state.current;
@@ -35,16 +56,11 @@ export function renderQuiz(state, qNo) {
     const hiraTxt  = String(q[KEYS.hiragana] || '').trim();
     const meanTxt  = String(q[KEYS.meaning] || '').trim();
 
-    // TENTUKAN APA YANG DITAMPILKAN DI TENGAH (Soal)
+    // Soal
     let displayHtml = '';
-    
     if (state.sessionType === 'quiz_hiragana') {
-        // Mode Tebak Hiragana: SOAL = BAHASA INDONESIA
-        // PERBAIKAN: Ubah mb-0 menjadi mb-5 agar ada jarak yang JAUH dengan tombol
         displayHtml = `<div class="kanji-big mb-5 pb-2 text-primary fw-bold text-break" style="font-size: 2.5rem; text-align:center;">${escapeHtml(meanTxt)}</div>`;
     } else {
-        // Mode Tebak Arti: SOAL = KANJI + FURIGANA
-        // PERBAIKAN: Ubah min-height dan margin agar konsisten leganya
         displayHtml = `
             <div class="text-center mb-5" style="font-size: 3.8rem; min-height: 90px; display: flex; align-items: end; justify-content: center;">
                 <div style="line-height: 1;">${formatRuby(kanjiTxt, hiraTxt)}</div>
@@ -53,13 +69,30 @@ export function renderQuiz(state, qNo) {
 
     let choicesHtml = '<div class="row g-3">';
     choices.forEach((c, i) => {
-        const isSelected = state.answers[idx] === i ? 'choice-selected' : '';
-        const textClass = state.sessionType === 'quiz_hiragana' ? 'text-primary' : 'text-dark';
+        const isSelected = state.answers[idx] === i;
+        
+        // --- LOGIKA TAMPILAN SOLID ---
+        let cardClass = "p-3 shadow-sm border rounded-3 fw-bold choice-card-anim"; // Tambah class animasi
+        let textClass = "";
+        let style = "cursor: pointer; position: relative;";
+
+        if (isSelected) {
+            // JIKA DIPILIH: Biru Solid + Teks Putih
+            style += "background-color: #0d6efd; border-color: #0d6efd; color: #ffffff !important;";
+            textClass = "text-white"; 
+        } else {
+            // JIKA BELUM: Putih
+            style += "background-color: #fff;";
+            textClass = state.sessionType === 'quiz_hiragana' ? 'text-primary' : 'text-dark';
+        }
         
         choicesHtml += `
           <div class="col-12"> 
-            <div class="choice-card ${isSelected} p-3 shadow-sm border" role="button" onclick="window.handleAnswer(${i})" style="border-radius: 8px; transition: all 0.2s;">
-              <div class="fw-bold ${textClass}" style="font-size: 1.1rem;">${escapeHtml(c.text)}</div>
+            <div class="${cardClass}" 
+                 role="button" 
+                 onclick="window.handleAnswer(${i})" 
+                 style="${style}">
+              <div class="${textClass}" style="font-size: 1.1rem;">${escapeHtml(c.text)}</div>
             </div>
           </div>`;
     });
@@ -91,7 +124,7 @@ export function renderQuiz(state, qNo) {
     area.appendChild(card);
 }
 
-// --- 2. RENDER MEMORY (SUPPORT TULIS ARTI & TULIS ROMAJI) ---
+// --- 2. RENDER MEMORY ---
 export function renderMem(state, qNo) {
     area.innerHTML = "";
     const idx = state.current;
@@ -107,13 +140,10 @@ export function renderMem(state, qNo) {
     let labelTxt = '';
 
     if (state.sessionType === 'write_romaji') {
-        // Mode Tulis Romaji
-        // PERBAIKAN: Tambah mb-5 agar lega
         displayHtml = `<div class="kanji-big mb-5 pb-2 text-primary fw-bold text-break" style="font-size: 2.8rem; text-align:center;">${escapeHtml(meanTxt)}</div>`;
         placeholderTxt = "Ketik Romaji (tanpa simbol)";
         labelTxt = "Ketik Romaji:";
     } else {
-        // Mode Tulis Arti
         displayHtml = `
             <div class="text-center mb-5" style="font-size: 4.2rem; min-height: 100px; display: flex; align-items: end; justify-content: center;">
                 <div style="line-height: 1;">${formatRuby(kanjiTxt, hiraTxt)}</div>
