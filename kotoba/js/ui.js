@@ -22,23 +22,26 @@ style.innerHTML = `
     .c-orange { color: #fd7e14; } .bg-orange { background-color: #fd7e14; }
     .c-red { color: #dc3545; } .bg-red { background-color: #dc3545; }
     .bab-done { border: 2px solid #198754; background-color: #f0fff4; }
+
+    /* RESULT DETAIL STYLE (BARU) */
+    .res-item { background: #fff; padding: 15px; border-radius: 12px; border: 1px solid #f0f0f0; margin-bottom: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.03); }
+    .res-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px dashed #eee; }
+    
+    .res-box { padding: 10px; border-radius: 8px; font-size: 0.9rem; margin-top: 5px; position: relative; }
+    .res-box-wrong { background-color: #fff2f0; border: 1px solid #ffccc7; color: #cf1322; }
+    .res-box-correct { background-color: #f6ffed; border: 1px solid #b7eb8f; color: #389e0d; }
+    
+    .res-label { font-size: 0.7rem; text-transform: uppercase; font-weight: bold; display: block; margin-bottom: 2px; opacity: 0.8; }
 `;
 document.head.appendChild(style);
 
-// --- HELPER: FORMAT TAMPILAN (HANYA HIRAGANA) ---
+// --- HELPER: FORMAT TAMPILAN ---
 function formatDisplay(kanji, hira) {
-    // KITA ABAIKAN KANJI SEKARANG.
-    // Fokus ambil Hiragana. Jika Hiragana kosong (jaga-jaga), baru ambil Kanji.
     const textToShow = String(hira || kanji || '').trim();
-
-    return `
-        <div class="d-flex align-items-center justify-content-center" style="min-height: 120px;">
-            <span class="fw-bold text-primary text-center" style="font-size: 4rem; line-height: 1.2;">${escapeHtml(textToShow)}</span>
-        </div>
-    `;
+    return `<div class="d-flex align-items-center justify-content-center" style="min-height: 120px;"><span class="fw-bold text-primary text-center" style="font-size: 4rem; line-height: 1.2;">${escapeHtml(textToShow)}</span></div>`;
 }
 
-// --- 1. RENDER QUIZ ---
+// --- 1. RENDER QUIZ (HIRAGANA ONLY) ---
 export function renderQuiz(state, qNo) {
     area.innerHTML = "";
     const idx = state.current;
@@ -53,10 +56,8 @@ export function renderQuiz(state, qNo) {
     let displayHtml = '';
     
     if (state.sessionType === 'quiz_hiragana') {
-        // Mode Tebak Hiragana: Soal BAHASA INDONESIA
         displayHtml = `<div class="mb-5 pb-2 text-primary fw-bold text-break text-center" style="font-size: 2.5rem;">${escapeHtml(meanTxt)}</div>`;
     } else {
-        // Mode Tebak Arti: Soal HIRAGANA SAJA
         displayHtml = formatDisplay(kanjiTxt, hiraTxt);
     }
 
@@ -123,12 +124,10 @@ export function renderMem(state, qNo) {
     let labelTxt = '';
 
     if (state.sessionType === 'write_romaji') {
-        // Soal: BAHASA INDONESIA
         displayHtml = `<div class="mb-5 pb-2 text-primary fw-bold text-break text-center" style="font-size: 2.8rem;">${escapeHtml(meanTxt)}</div>`;
         placeholderTxt = "Ketik Romaji (tanpa simbol)";
         labelTxt = "Ketik Romaji:";
     } else {
-        // Soal: HIRAGANA SAJA
         displayHtml = formatDisplay(kanjiTxt, hiraTxt);
         placeholderTxt = "Contoh: Saya";
         labelTxt = "Ketik Arti (Indonesia):";
@@ -200,7 +199,7 @@ export function renderMem(state, qNo) {
     } else { btnMic.style.display = 'none'; inp.style.borderRadius = '0.5rem'; }
 }
 
-// --- 3. RENDER RESULT & PROGRESS (GUNAKAN KODE TERAKHIR YANG SUDAH JELAS) ---
+// --- 3. RENDER RESULT & PROGRESS (DENGAN TAMPILAN DETAIL YANG JELAS) ---
 export function renderResult(result, isQuiz, wrongIndices = []) {
     area.innerHTML = "";
     const pct = result.total > 0 ? Math.round((result.score / result.total) * 100) : 0;
@@ -209,13 +208,78 @@ export function renderResult(result, isQuiz, wrongIndices = []) {
     let modeLabel = isQuiz ? 'Hasil Quiz' : 'Hasil Tes';
 
     let html = `<div class="card shadow-sm border-0 mb-4"><div class="card-body"><div class="text-center mb-4"><h4 class="fw-bold">${modeLabel}</h4><h1 class="display-3 fw-bold ${pct>60?'text-success':'text-danger'}">${pct}%</h1><p class="text-muted">Skor: ${result.score} / ${result.total}</p></div><div class="d-grid gap-2 mb-4"><div class="row g-2"><div class="col-6"><button class="btn btn-outline-primary w-100 fw-bold py-2" onclick="window.handleRetry()">Ulangi Semua</button></div><div class="col-6"><button class="btn btn-dark w-100 fw-bold py-2" onclick="window.handleBack()">Menu Utama</button></div></div>${wrongIndices.length > 0 ? `<button class="btn btn-danger btn-lg shadow-sm fw-bold mt-2" onclick="window.handleRetryWrong([${wrongIndices}])"><i class="bi bi-arrow-counterclockwise me-2"></i> Perbaiki ${wrongIndices.length} Soal Salah</button>` : `<div class="alert alert-success text-center py-2 fw-bold"><i class="bi bi-stars me-2"></i>Sempurna!</div>`}</div><div class="bg-light p-3 rounded-3 mb-4"><h6 class="fw-bold mb-3 small text-uppercase text-secondary"><i class="bi bi-clock-history me-2"></i>Riwayat Terakhir</h6><div class="table-responsive"><table class="table table-sm table-borderless mb-0 align-middle" style="font-size: 0.9rem;"><thead class="text-muted small border-bottom"><tr><td width="30%">Waktu</td><td width="50%">Info</td><td width="20%" class="text-end">Skor</td></tr></thead><tbody>${lastHistory.length > 0 ? lastHistory.map(h => `<tr><td class="text-secondary small py-2">${h.date.split(' ')[0]} <br> <span style="font-size:0.8em">${h.date.split(' ')[1] || ''}</span></td><td><div class="fw-bold text-dark">${formatModeName(h.type)}</div><div class="text-muted small text-truncate" style="max-width: 150px;" title="${h.packages || '-'}">${h.packages || '-'}</div></td><td class="text-end fw-bold ${h.percentage >= 60 ? 'text-success' : 'text-danger'}">${h.percentage}%</td></tr>`).join('') : '<tr><td colspan="3" class="text-center text-muted py-3">Belum ada riwayat</td></tr>'}</tbody></table></div></div>`;
+    
+    // --- RENDER DETAIL JAWABAN (YANG DIPERBAIKI) ---
     if (result.details && result.details.length > 0) {
+        html += `<h6 class="fw-bold mb-3 mt-4 text-dark"><i class="bi bi-list-check me-2"></i>Detail Jawaban</h6>`;
+        
         result.details.forEach((d, i) => {
-            const color = d.isCorrect ? 'text-success' : 'text-danger'; const label = d.isCorrect ? 'Benar' : 'Salah'; const userTxt = d.userAns === 'Lupa' ? 'Lupa' : (d.userAns || '(Kosong)');
-            const kanji = (d.q[KEYS.kanji] || '').trim(); const hira = (d.realHira || '').trim(); const mean = d.realMean || ''; const romaji = d.realRomaji || '-';
-            html += `<div class="border-top py-2"><div class="d-flex justify-content-between"><strong class="text-primary fs-5">${escapeHtml(kanji)}</strong><span class="${color} fw-bold small">${label}</span></div><div class="fw-bold text-dark mb-1">${escapeHtml(hira)} <span class="text-danger small ms-2">${escapeHtml(romaji)}</span></div><div class="small text-muted">Arti: <b>${escapeHtml(mean)}</b></div><div class="small mt-1">Jawaban Kamu: <strong>${escapeHtml(userTxt)}</strong></div></div>`;
+            const isCorrect = d.isCorrect;
+            const badge = isCorrect ? '<span class="badge bg-success">BENAR</span>' : '<span class="badge bg-danger">SALAH</span>';
+            const userTxt = d.userAns === 'Lupa' ? 'Lupa (Tidak dijawab)' : (d.userAns || '(Kosong)');
+            
+            // Data Soal
+            const kanji = (d.q[KEYS.kanji] || '').trim();
+            const hira = (d.realHira || '').trim();
+            const mean = d.realMean || '';
+            const romaji = d.realRomaji || '-';
+            
+            // Tampilan Utama Soal (Hiragana/Kanji)
+            const mainText = hira || kanji; 
+            
+            // Tentukan Jawaban Benar (Kunci)
+            let correctAnswerKey = "";
+            if (result.details[0].q[KEYS.meaning]) { 
+                // Jika mode tebak arti, kuncinya adalah Arti
+                correctAnswerKey = mean;
+            } else {
+                // Jika mode tebak hiragana/romaji, sesuaikan
+                correctAnswerKey = hira;
+            }
+            
+            // TAPI, kita tampilkan informasi lengkap di "Info Soal"
+            
+            html += `
+            <div class="res-item">
+               <div class="res-header">
+                  <div class="fw-bold text-primary fs-5">${escapeHtml(mainText)}</div>
+                  <div>${badge}</div>
+               </div>
+               
+               <div class="text-muted small mb-2">
+                 <div>Arti: <strong>${escapeHtml(mean)}</strong></div>
+                 ${romaji !== '-' ? `<div>Romaji: <span class="fst-italic">${escapeHtml(romaji)}</span></div>` : ''}
+               </div>
+
+               ${isCorrect 
+                 ? `
+                    <div class="res-box res-box-correct">
+                        <span class="res-label">✅ Jawaban Anda Benar</span>
+                        ${escapeHtml(userTxt)}
+                    </div>
+                   `
+                 : `
+                    <div class="res-box res-box-wrong mb-1">
+                        <span class="res-label">❌ Jawaban Kamu</span>
+                        ${escapeHtml(userTxt)}
+                    </div>
+                    <div class="res-box res-box-correct">
+                        <span class="res-label">✅ Seharusnya (Kunci Jawaban)</span>
+                        ${ isQuiz ? 
+                            // Jika Quiz Pilihan Ganda, tampilkan teks pilihan benar (bisa Arti atau Hiragana)
+                            (d.userAns === 'Lupa' ? 'Lihat Arti/Info di atas' : 'Lihat Arti/Info di atas') 
+                            : 
+                            // Jika Essay, tampilkan kunci jawaban text
+                            (d.romTrue ? d.romTrue : mean) 
+                        }
+                        ${ d.q[KEYS.meaning] ? `(${d.q[KEYS.meaning]})` : '' }
+                    </div>
+                   `
+               }
+            </div>`;
         });
     }
+    
     html += `</div></div>`; area.innerHTML = html; if(pct >= 60) launchConfetti();
 }
 
