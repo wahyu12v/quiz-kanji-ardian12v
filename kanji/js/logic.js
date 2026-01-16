@@ -1,160 +1,158 @@
 import { KEYS } from './constants.js';
-import { shuffleArray, normalizeRomaji, hiraToRomaji } from './utils.js';
+import { hiraToRomaji } from './utils.js';
+import { getMastery } from './storage.js'; 
 
-/**
- * Membangun Pilihan Ganda (Hiragana) dengan Logika "NO MERCY SUFFIX"
- * Prioritas Mutlak: Akhiran (Suffix) HARUS SAMA jika stok kata tersedia.
- */
-export function buildChoices(orderIndices, allQuestions) {
-  return orderIndices.map(idx => {
-    const q = allQuestions[idx];
-    
-    // 1. Jawaban Benar
-    const correctHira = String(q[KEYS.hiragana] || '').trim();
-    const correctOption = { meaning: correctHira }; 
-    
-    // Identifikasi Pola Kunci
-    const correctSuffix = correctHira.slice(-1); // Huruf terakhir
-    const hasTilde = correctHira.includes('～');
-
-    // 2. SIAPKAN POOL KANDIDAT
-    let rawCandidates = allQuestions
-        .map(item => String(item[KEYS.hiragana] || '').trim())
-        .filter(h => h !== "" && h !== correctHira);
-    
-    const uniquePool = [...new Set(rawCandidates)];
-
-    // 3. PISAHKAN KANDIDAT MENJADI 2 KELOMPOK
-    let primaryPool = [];   // Kelompok Prioritas (Akhiran Sama)
-    let secondaryPool = []; // Kelompok Cadangan (Akhiran Beda)
-
-    uniquePool.forEach(candidate => {
-        let isMatch = false;
-
-        // Aturan Tilde "～"
-        if (hasTilde) {
-            isMatch = candidate.includes('～');
-        } 
-        // Aturan Suffix Biasa (bi, i, su, dll)
-        else {
-            isMatch = candidate.endsWith(correctSuffix);
-        }
-
-        if (isMatch) primaryPool.push(candidate);
-        else secondaryPool.push(candidate);
-    });
-
-    // 4. FUNGSI SCORING KEMIRIPAN (Dipakai untuk memilih yang terbaik dari pool)
-    const calculateEvilScore = (candidate) => {
-        let score = 0;
-        // Panjang Karakter (Makin mirip makin tinggi)
-        const lenDiff = Math.abs(candidate.length - correctHira.length);
-        if (lenDiff === 0) score += 40;       // Panjang sama persis (+40)
-        else if (lenDiff === 1) score += 15;  // Beda 1 huruf (+15)
-        else score -= 10;
-
-        // Huruf Depan Sama
-        if (candidate[0] === correctHira[0]) score += 20;
-
-        // Overlap Karakter Tengah
-        const minLen = Math.min(candidate.length, correctHira.length);
-        for (let i = 0; i < minLen; i++) {
-            if (candidate[i] === correctHira[i]) score += 5;
-        }
-        return score;
-    };
-
-    // 5. SELEKSI PENGECOH
-    let finalDistractors = [];
-
-    // SKENARIO A: Stok "Akhiran Sama" Cukup (>= 3 kata)
-    // Kita HANYA akan mengambil dari Primary Pool. Pengecoh yang akhirannya beda DIBUANG.
-    if (primaryPool.length >= 3) {
-        // Urutkan berdasarkan skor kemiripan (Cari yang paling mirip di antara yang akhirannya sama)
-        const scoredPrimary = primaryPool.map(c => ({ word: c, score: calculateEvilScore(c) }));
-        scoredPrimary.sort((a, b) => b.score - a.score);
-        
-        // Ambil 10 teratas (agar variatif saat diacak), lalu pilih 3
-        let topSelection = scoredPrimary.slice(0, 10).map(i => i.word);
-        internalShuffle(topSelection);
-        finalDistractors = topSelection.slice(0, 3);
-    } 
-    
-    // SKENARIO B: Stok "Akhiran Sama" Kurang (< 3 kata)
-    // Terpaksa ambil semua yang ada di Primary, sisanya ambil dari Secondary yang paling mirip.
-    else {
-        finalDistractors = [...primaryPool]; // Ambil semua yang akhirannya sama
-
-        // Cari tambahan dari Secondary Pool
-        const scoredSecondary = secondaryPool.map(c => ({ word: c, score: calculateEvilScore(c) }));
-        scoredSecondary.sort((a, b) => b.score - a.score); // Cari yang paling mirip visualnya
-
-        const needed = 3 - finalDistractors.length;
-        // Ambil kandidat terbaik dari secondary
-        let bestBackups = scoredSecondary.slice(0, 15).map(i => i.word);
-        internalShuffle(bestBackups);
-        
-        finalDistractors = [...finalDistractors, ...bestBackups.slice(0, needed)];
-    }
-
-    // 6. FINALISASI
-    const selectedChoices = finalDistractors.slice(0, 3).map(h => ({ meaning: h }));
-    const finalChoices = [correctOption, ...selectedChoices];
-    return internalShuffle(finalChoices);
-  });
-}
-
-/**
- * Fungsi Penilaian (Grading)
- */
-export function gradeSession(state, allQuestions) {
-    let correctCount = 0;
-    const results = state.batch.map((q, i) => {
-        const hira = String(q[KEYS.hiragana] || '').trim(); 
-        const mean = String(q[KEYS.meaning] || '').trim().toLowerCase();
-        
-        let isCorrect = false;
-        let userAnsStr = "Lupa";
-
-        if (state.sessionType === 'quiz') {
-            const choiceIdx = state.answers[i];
-            const choices = state.choicesPerQ[i];
-            
-            if (choiceIdx !== null && choiceIdx !== 'Lupa') {
-                const choice = choices[choiceIdx];
-                if (choice && choice.meaning === hira) {
-                    isCorrect = true;
-                }
-                userAnsStr = choice ? choice.meaning : "Lupa";
-            }
-        } else {
-            // Mode Essay (Romaji)
-            const raw = state.answers[i] || '';
-            const normUser = normalizeRomaji(raw);
-            const normTrue = normalizeRomaji(hiraToRomaji(hira));
-            if (raw && raw !== 'Lupa' && normUser === normTrue) isCorrect = true;
-            userAnsStr = raw;
-        }
-
-        if (isCorrect) correctCount++;
-        return { 
-            q, 
-            isCorrect, 
-            userAns: userAnsStr, 
-            realHira: hira, 
-            realMean: mean, 
-            romTrue: hiraToRomaji(hira) 
-        };
-    });
-    
-    return { score: correctCount, total: state.batch.length, details: results };
-}
-
-// Fungsi Pengacak Internal
 function internalShuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
   return array;
+}
+
+function getSimilarityScore(target, candidate) {
+    if (!target || !candidate) return 0;
+    let score = 0;
+    const lenDiff = Math.abs(target.length - candidate.length);
+    if (lenDiff === 0) score += 30; else if (lenDiff === 1) score += 10; else score -= 50;
+    if (target[0] === candidate[0]) score += 25;
+    if (target.slice(-1) === candidate.slice(-1)) score += 15;
+    if (target.length > 1 && candidate.length > 1 && target[1] === candidate[1]) score += 10;
+    let sharedChars = 0;
+    for (let char of candidate) { if (target.includes(char)) sharedChars++; }
+    score += (sharedChars * 2);
+    return score;
+}
+
+export function buildChoices(orderIndices, allQuestions, mode = 'quiz') {
+  return orderIndices.map(idx => {
+    const q = allQuestions[idx];
+    let correctVal;
+    if (mode === 'quiz_hiragana') correctVal = String(q[KEYS.hiragana] || q['kana'] || '').trim();
+    else correctVal = String(q[KEYS.meaning] || q['arti'] || q['indo'] || '').trim();
+
+    const correctOption = { text: correctVal, isCorrect: true }; 
+    let rawPool = allQuestions.map(item => {
+        if (mode === 'quiz_hiragana') return String(item[KEYS.hiragana] || item['kana'] || '').trim();
+        return String(item[KEYS.meaning] || item['arti'] || item['indo'] || '').trim();
+    });
+    let uniquePool = [...new Set(rawPool)];
+    let pool = uniquePool.filter(val => val !== "" && val !== correctVal);
+    let scoredPool = pool.map(candidate => ({ text: candidate, score: getSimilarityScore(correctVal, candidate) }));
+    scoredPool.sort((a, b) => b.score - a.score);
+    let topDistractors = scoredPool.slice(0, 3).map(item => ({ text: item.text, isCorrect: false }));
+    
+    if (topDistractors.length < 3) {
+        const needed = 3 - topDistractors.length;
+        const usedTexts = topDistractors.map(d => d.text);
+        const leftovers = pool.filter(p => !usedTexts.includes(p));
+        internalShuffle(leftovers);
+        leftovers.slice(0, needed).forEach(t => topDistractors.push({ text: t, isCorrect: false }));
+    }
+    const finalChoices = [correctOption, ...topDistractors];
+    return internalShuffle(finalChoices);
+  });
+}
+
+export function gradeSession(state, allQuestions) {
+    let correctCount = 0;
+    const results = state.batch.map((q, i) => {
+        const originalIndex = allQuestions.indexOf(q); 
+
+        const hira = String(q[KEYS.hiragana] || q['kana'] || '').trim(); 
+        const mean = String(q[KEYS.meaning] || q['indo'] || '').trim(); 
+        const romajiDB = String(q['romaji'] || '').trim(); 
+        
+        let isCorrect = false;
+        let userAnsStr = "Lupa";
+
+        if (state.sessionType.includes('quiz')) {
+            const choiceIdx = state.answers[i];
+            const choices = state.choicesPerQ[i];
+            if (choiceIdx !== null && choiceIdx !== 'Lupa') {
+                const choice = choices[choiceIdx];
+                if (choice && choice.isCorrect) isCorrect = true;
+                userAnsStr = choice ? choice.text : "Lupa";
+            }
+        } else {
+            const raw = state.answers[i] || '';
+            if (raw && raw !== 'Lupa') {
+                if (state.sessionType === 'write_romaji') {
+                    const cleanRomaji = (text) => text ? text.toLowerCase().replace(/\[.*?\]/g, '').replace(/[~～]/g, '').trim() : "";
+                    if (cleanRomaji(romajiDB) === cleanRomaji(raw)) isCorrect = true;
+                } else {
+                    const userAns = raw.toLowerCase().trim();
+                    const validAnswers = mean.toLowerCase().split(/[\/,]/).map(s => s.trim());
+                    isCorrect = validAnswers.some(key => {
+                        if (key.length < 3) return key === userAns;
+                        if (userAns.length < 2) return key === userAns;
+                        return key.includes(userAns) || userAns.includes(key);
+                    });
+                }
+            }
+            userAnsStr = raw;
+        }
+
+        if (isCorrect) correctCount++;
+        
+        return { 
+            q, isCorrect, userAns: userAnsStr, 
+            realHira: hira, realMean: mean, realRomaji: romajiDB, 
+            romTrue: hiraToRomaji(hira),
+            originalIndex: originalIndex
+        };
+    });
+    
+    return { score: correctCount, total: state.batch.length, details: results };
+}
+
+// --- UPDATE: PROGRESS PER PAKET 20 KANJI ---
+export function calculateProgress(allQuestions) {
+    const mastery = getMastery();
+    const babStats = {};
+    const chunkSize = 20; // Aturan 20 item
+
+    allQuestions.forEach((q, idx) => {
+        // Hitung Paket ke berapa (1, 2, 3...)
+        const chunkIndex = Math.floor(idx / chunkSize) + 1;
+        const babName = `Paket ${chunkIndex}`;
+
+        if (!babStats[babName]) {
+            babStats[babName] = { totalWords: 0, modes: { quiz:0, quiz_hiragana:0, mem:0, write_romaji:0 } };
+        }
+        babStats[babName].totalWords++;
+
+        if (mastery[idx]) {
+            if (mastery[idx].quiz) babStats[babName].modes.quiz++;
+            if (mastery[idx].quiz_hiragana) babStats[babName].modes.quiz_hiragana++;
+            if (mastery[idx].mem) babStats[babName].modes.mem++;
+            if (mastery[idx].write_romaji) babStats[babName].modes.write_romaji++;
+        }
+    });
+
+    const finalReport = Object.keys(babStats).map(bab => {
+        const data = babStats[bab];
+        const totalSlots = data.totalWords * 4; 
+        
+        const sumMastered = data.modes.quiz + data.modes.quiz_hiragana + data.modes.mem + data.modes.write_romaji;
+        const totalPct = Math.round((sumMastered / totalSlots) * 100);
+
+        const getContrib = (val) => Math.round((val / totalSlots) * 100);
+
+        return {
+            bab: bab,
+            totalPct: totalPct,
+            detail: {
+                tebakArti: getContrib(data.modes.quiz),
+                tebakHiragana: getContrib(data.modes.quiz_hiragana),
+                tulisArti: getContrib(data.modes.mem),
+                tulisRomaji: getContrib(data.modes.write_romaji)
+            }
+        };
+    });
+    
+    // Sort agar Paket 1, 2, 3 berurutan
+    return finalReport.sort((a, b) => {
+        return parseInt(a.bab.replace('Paket ', '')) - parseInt(b.bab.replace('Paket ', ''));
+    });
 }

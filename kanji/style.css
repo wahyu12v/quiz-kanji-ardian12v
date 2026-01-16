@@ -1,0 +1,292 @@
+/* --- VARIABLES & GLOBAL --- */
+:root {
+  /* PALET WARNA (KOTOBA STYLE - SAMA DENGAN KANJI) */
+  --primary: #0ea5e9;
+  --primary-gradient: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+  --primary-light: #e0f2fe;
+  --secondary-bg: #f1f5f9;
+  
+  --text-dark: #0f172a;
+  --text-muted: #64748b;
+  --text-light: #ffffff;
+  --surface: #ffffff;
+
+  --shadow-sm: 0 2px 4px rgba(148, 163, 184, 0.1);
+  --shadow-md: 0 6px 12px -2px rgba(148, 163, 184, 0.15), 0 3px 7px -3px rgba(148, 163, 184, 0.1);
+  --shadow-lg: 0 20px 25px -5px rgba(148, 163, 184, 0.1), 0 10px 10px -5px rgba(148, 163, 184, 0.04);
+  --shadow-primary: 0 10px 20px -5px rgba(14, 165, 233, 0.4);
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--secondary-bg);
+  color: var(--text-dark);
+  display: flex; flex-direction: column; min-height: 100vh;
+  background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* --- NAVBAR --- */
+#main-nav {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.5);
+  box-shadow: var(--shadow-sm);
+}
+.brand-title { font-size: 18px; color: var(--text-dark); letter-spacing: -0.5px; }
+.brand-subtitle { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+
+/* --- HERO SECTION --- */
+.hero-card {
+    background: var(--primary-gradient);
+    color: var(--text-light);
+    border: none;
+    box-shadow: var(--shadow-lg);
+    transition: transform 0.3s ease;
+}
+.hero-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-primary); }
+
+.hero-bg-kanji {
+    position: absolute; top: -40px; right: -30px;
+    font-size: 220px; font-weight: 900;
+    color: var(--text-light); opacity: 0.1;
+    pointer-events: none; z-index: 1; transform: rotate(10deg);
+}
+
+.hero-card .text-dark { color: white !important; }
+.hero-card .text-muted { color: rgba(255,255,255,0.8) !important; }
+
+/* --- BUTTONS --- */
+/* --- TOMBOL MODERN --- */
+.btn-primary-custom {
+    background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+    color: white; 
+    border: none;
+    font-weight: 700; 
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    
+    /* Padding Pas (Tidak Gemuk) */
+    padding: 10px 28px; 
+    
+    border-radius: 50px; 
+    transition: all 0.3s ease;
+    
+    /* Bayangan Tombol */
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+}
+
+.btn-primary-custom:hover { 
+    background-size: 150%; 
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.5); /* Glow lebih kuat saat hover */
+    color: white;
+}
+
+.btn-primary-custom:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 5px rgba(37, 99, 235, 0.3);
+}
+
+.btn-primary-custom:hover { 
+    background-size: 150%; 
+    color: white; 
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px -3px rgba(14, 165, 233, 0.5);
+}
+
+/* Hapus outline saat klik agar lebih rapi */
+.btn-primary-custom:focus {
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.3);
+}
+.btn-primary-custom:hover { 
+    background-size: 150%; color: white; transform: translateY(-2px);
+    box-shadow: var(--shadow-primary);
+}
+
+.btn-outline-custom {
+    color: var(--primary); border: 2px solid var(--primary-light); background: transparent; font-weight: 600;
+}
+.btn-outline-custom:hover { 
+    background-color: var(--primary-light); border-color: var(--primary); color: var(--primary-dark); 
+}
+
+.hero-card .btn-outline-custom {
+    color: white; border: 2px solid rgba(255,255,255,0.6);
+}
+.hero-card .btn-outline-custom:hover {
+    background: white; color: var(--primary); border-color: white;
+}
+
+/* --- QUIZ AREA --- */
+.card-kanji {
+  border-radius: 24px; border: none; background: var(--surface);
+  box-shadow: var(--shadow-md); overflow: hidden;
+}
+
+/* UPDATE: Font dinamis agar Kotoba panjang muat tapi tetap besar */
+.kanji-big {
+  /* Minimal 40px, Idealnya 18% lebar layar, Maksimal 90px */
+  font-size: clamp(40px, 18vw, 90px); 
+  text-align: center; 
+  padding: 30px 10px 10px 10px; /* Padding bawah dikurangi biar deket sama furigana */
+  font-weight: 900; 
+  color: var(--text-dark);
+  line-height: 1.2;
+  word-wrap: break-word; /* Agar tidak bablas keluar layar */
+  background: var(--primary-gradient); 
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent;
+}
+
+/* --- PILIHAN GANDA --- */
+.choice-card {
+  border-radius: 16px; 
+  padding: 18px 24px;
+  background: #ffffff;
+  border: 2px solid #e2e8f0; 
+  box-shadow: var(--shadow-sm); 
+  color: var(--text-dark); 
+  font-weight: 600;
+  cursor: pointer; 
+  display: flex; align-items: center; min-height: 75px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative; z-index: 1;
+}
+
+.choice-card:hover {
+    background-color: var(--primary-light); 
+    border-color: var(--primary);           
+    color: var(--primary-dark);             
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: var(--shadow-md);
+}
+
+.choice-selected {
+  background-image: var(--primary-gradient) !important; 
+  background-color: var(--primary) !important; 
+  color: #ffffff !important; 
+  border-color: transparent !important;
+  box-shadow: 0 8px 20px -4px rgba(14, 165, 233, 0.5) !important;
+  transform: scale(1.02) !important; 
+  font-weight: 700;
+}
+
+/* --- MODALS & GRID --- */
+.modal-content { border: none; border-radius: 24px; box-shadow: var(--shadow-lg); }
+.modal-header { border-bottom: 1px solid var(--secondary-bg); }
+/* --- GRID CONTAINER (LEBIH COMPACT) --- */
+.range-grid-container {
+    display: grid; 
+    /* Ubah ukuran minimal dari 145px ke 110px agar kartu lebih kecil */
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); 
+    gap: 10px; /* Jarak antar kartu dirapatkan sedikit */
+    padding: 5px; 
+    max-height: 400px; 
+    overflow-y: auto;
+    overflow-x: hidden; 
+}
+
+/* Reset Container Bawaan Bootstrap */
+.range-grid-container .form-check { 
+    padding-left: 0 !important; 
+    margin: 0; 
+}
+
+/* Sembunyikan Checkbox Asli */
+.range-grid-container .form-check-input { 
+    display: none; 
+}
+
+/* --- DESAIN KARTU (LEBIH RAMPING) --- */
+.range-grid-container .form-check-label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; /* Rata Kiri */
+    
+    width: 100%;
+    min-height: 70px; /* Tinggi dikurangi (sebelumnya 90px) */
+    padding: 12px 14px; /* Padding dikurangi agar tidak "gemuk" */
+    
+    background-color: #ffffff;
+    border: 2px solid #f1f5f9; 
+    border-radius: 16px;       /* Sudut disesuaikan sedikit */
+    
+    cursor: pointer; 
+    position: relative;
+    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1); 
+}
+
+/* Typography Judul (Paket X) */
+.range-grid-container .form-check-label strong {
+    font-size: 0.9rem; /* Font dikecilkan sedikit */
+    font-weight: 700;  
+    color: #334155;    
+    margin-bottom: 2px;
+    display: block;
+    line-height: 1.2;
+}
+
+/* Typography Sub-judul (No X-Y) */
+.range-grid-container .form-check-label .small, 
+.range-grid-container .form-check-label span {
+    font-size: 0.75rem; /* Font info dikecilkan */
+    color: #94a3b8 !important; 
+    font-weight: 500;
+}
+
+/* --- EFEK HOVER --- */
+.range-grid-container .form-check-label:hover { 
+    border-color: #bae6fd; 
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.1); 
+}
+
+/* --- DESAIN SAAT DIPILIH (CHECKED) --- */
+.range-grid-container .form-check-input:checked + .form-check-label {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    border-color: transparent;
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.4); 
+    transform: translateY(-1px);
+}
+
+.range-grid-container .form-check-input:checked + .form-check-label strong {
+    color: #ffffff !important;
+}
+
+.range-grid-container .form-check-input:checked + .form-check-label .small,
+.range-grid-container .form-check-input:checked + .form-check-label span { 
+    color: rgba(255, 255, 255, 0.85) !important; 
+}
+
+/* --- DAFTAR KOTOBA GRID --- */
+.kanji-list-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
+    gap: 16px; padding: 8px;
+}
+.kanji-card-small {
+    background: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: default;
+}
+.kanji-card-small:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border-color: #cfe2ff;
+}
+.k-char {
+    font-size: 1.8rem; /* Sedikit lebih kecil dari Kanji */
+    font-weight: 700;
+    color: #0d6efd;
+    margin-bottom: 5px;
+    line-height: 1.2;
+    word-break: break-word;
+}
+
+

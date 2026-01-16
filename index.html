@@ -3,364 +3,226 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Hafalan Kanji — Modern</title>
-
+    <title>Hafalan Kanji — Dashboard HUD</title>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="asset/logo2-removebg.png?v=2" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
    
-    <nav class="navbar sticky-top navbar-light bg-white py-3 shadow-sm" id="main-nav">
-      <div class="container d-flex justify-content-between align-items-center">
+    <div class="dashboard-container fade-in-up">
         
-        <a href="index.html" class="navbar-brand d-flex align-items-center gap-3 m-0">
-          <img src="/asset/logo2-removebg.png" alt="Logo" style="height: 42px; width: auto;" class="brand-logo" onerror="this.style.display='none'"/>
-          <div class="d-flex flex-column lh-1">
-            <span class="fw-bold brand-title fs-5">Hafalan Kanji</span>
-            <small class="brand-subtitle text-muted" style="font-size: 0.75rem;">by Ardian Wahyu Saputra</small>
-          </div>
-        </a>
-
-      <button id="btn-stop-quiz" class="btn btn-outline-danger btn-sm rounded-pill px-3 fw-bold d-none" data-bs-toggle="modal" data-bs-target="#stopQuizModal">
-          <i class="bi bi-stop-circle-fill me-1"></i> Berhenti
-      </button>
-
-      </div>
-
-      
-    </nav>
-
-    <div class="modal fade" id="stopQuizModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-sm"> <div class="modal-content border-0 shadow-lg rounded-4 text-center p-4">
-      
-      <div class="modal-body p-0">
-        <div class="mb-3 text-warning">
-            <i class="bi bi-exclamation-circle-fill" style="font-size: 3.5rem;"></i>
-        </div>
-        
-        <h5 class="fw-bold mb-2">Hentikan Ujian?</h5>
-        <p class="text-muted small mb-4">
-            Progress saat ini akan langsung dinilai.<br>Anda tidak bisa melanjutkan lagi.
-        </p>
-        
-        <div class="d-grid gap-2">
-            <button type="button" class="btn btn-danger rounded-pill fw-bold shadow-sm" onclick="executeStopQuiz()">
-                Ya, Selesai Sekarang
-            </button>
-            <button type="button" class="btn btn-light rounded-pill fw-medium text-muted" data-bs-dismiss="modal">
-                Batal
-            </button>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-    <main class="container my-5 d-flex flex-column justify-content-center" style="min-height: 70vh;">
-      <div class="row g-4 justify-content-center">
-        <div id="quiz-area" class="col-md-10 col-lg-8">
+        <header class="app-header">
+            <div class="brand-section">
+                <div class="d-flex align-items-center gap-3">
+                    <img src="asset/logo2-removebg.png" alt="Logo" style="height: 55px; width: auto; filter: drop-shadow(0 0 10px rgba(56,189,248,0.5));">
+                    <div>
+                        <h1>Hafalan Kanji</h1>
+                        <p>by Ardian Wahyu Saputra</p>
+                    </div>
+                </div>
+            </div>
             
-            <div class="text-center hero-card p-5 rounded-5 position-relative overflow-hidden text-white">
-                <div class="hero-bg-kanji">学</div>
-                
-                <div style="position: relative; z-index: 2;">
-                    <div class="mb-4">
-                        <div class="d-inline-flex align-items-center justify-content-center rounded-circle p-4" style="background: rgba(255,255,255,0.2); backdrop-filter: blur(5px);">
-                            <i class="bi bi-journal-bookmark-fill fs-1 text-white"></i>
-                        </div>
-                    </div>
+            <div>
+                 <button id="btn-stop-quiz" class="btn btn-danger rounded-pill px-4 fw-bold d-none shadow-lg" data-bs-toggle="modal" data-bs-target="#stopQuizModal">
+                    <i class="bi bi-stop-circle-fill me-2"></i> Berhenti Ujian
+                </button>
+            </div>
+        </header>
 
-                    <h1 class="display-5 fw-bolder mb-3">準備はいいですか？</h1>
-                    <p class="lead mb-5 px-3 opacity-75">
-                        クイズ、暗記、またはリストからモードを選んで、<br>今日の練習を始めましょう。
-                        <br><small style="font-size: 0.7em;">(Sudah siap? Pilih mode Tulis Romanji, Tebak Hiragana, Simulasi Ujian atau Daftar untuk mulai latihan hari ini.)</small>
-                    </p>
-                    
-                    <div class="d-inline-flex align-items-center gap-2 px-4 py-2 rounded-pill bg-white bg-opacity-10 border border-white border-opacity-25 mb-5 shadow-sm">
-                        <i class="bi bi-database-fill"></i>
-                        <span>Total: <strong id="totalCount">...</strong> Kanji</span>
-                    </div>
-
-                    <div class="d-grid gap-3 d-sm-flex justify-content-center flex-wrap">
-                      <button id="daftarHafalanBtn" class="btn btn-outline-custom btn-lg rounded-pill px-4 py-3">
-                          <i class="bi bi-list-task me-2"></i> Daftar Kanji
-                      </button>
-                      
-                      <button id="memorizeBtn" class="btn btn-outline-custom btn-lg rounded-pill px-4 py-3">
-                          <i class="bi bi-pencil-fill me-2"></i> Tulis Romanji
-                      </button>
-
-                       <button id="startBtn" class="btn btn-outline-custom btn-lg rounded-pill px-4 py-3">
-                          <i class="bi bi-play-fill me-2"></i> Tebak Hiragana
-                      </button>
-
-                        <button id="startBtn" class="btn btn-outline-custom btn-lg rounded-pill px-4 py-3" data-bs-toggle="modal" data-bs-target="#ujianModal">
-                          <i class="bi bi-pen-fill me-2"></i> Simulasi Ujian
-                      </button>
-
-                      <button id="startBtn" class="btn btn-outline-custom btn-lg rounded-pill px-4 py-3" data-bs-toggle="modal" data-bs-target="#backToHomeModal">
-                          <i class="bi bi-book-fill me-2"></i> Bacaan
-                      </button>
-
-                      <button id="starBtn" class="btn btn-outline-custom btn-lg rounded-pill px-4 py-3" data-bs-toggle="modal" data-bs-target="#susunKalimatModal">
-                        <i class="bi bi-arrow-down-up me-2"></i> Susun Kalimat
-                    </button>
-
-                    <button id="starBtn" class="btn btn-outline-custom btn-lg rounded-pill px-4 py-3" data-bs-toggle="modal" data-bs-target="#hafalankotobaModal">
-                        <i class="bi bi-bookmark-fill me-2"></i> hafalan Kotoba
-                    </button>
-
-                      
-                  </div>
-
+        <div class="grid-menu">
+            
+            <div class="hud-card col-wide theme-blue" data-bs-toggle="modal" data-bs-target="#ujianModal">
+                <i class="bi bi-pencil-square bg-icon"></i> <div class="card-content">
+                    <div class="icon-badge"><i class="bi bi-pencil-square"></i></div>
+                    <h3 class="card-title">Simulasi Ujian JFT</h3>
+                    <p class="card-desc">Mode ujian asli dengan timer, skor otomatis, dan format sesuai standar JFT/JLPT.</p>
+                    <div class="card-arrow">Mulai Ujian <i class="bi bi-arrow-right"></i></div>
                 </div>
             </div>
 
-        </div>
-      </div>
-    </main>
-
-
-    <div class="modal fade" id="hafalankotobaModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true" style="backdrop-filter: blur(4px);">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content" style="border: none; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); overflow: hidden; background: white;">
-      
-      <div style="height: 6px; background: linear-gradient(90deg, #00C6FF 0%, #0072FF 100%); width: 100%;"></div>
-
-      <div class="modal-body text-center px-4 py-5">
-        
-        <h4 style="font-weight: 800; color: #2c3e50; margin-bottom: 12px; letter-spacing: -0.5px; font-size: 1.5rem;">
-            Ke Halaman Hafal Kotoba?
-        </h4>
-        
-        <p style="color: #64748b; font-size: 1rem; margin-bottom: 30px; line-height: 1.6;">
-            Anda akan diarahkan <b>ke</b> Halaman Hafalan Kosakata Bahasa Jepang<br>
-            <span style="color: #0072FF; font-weight: 600; background: rgba(0, 114, 255, 0.08); padding: 2px 8px; border-radius: 6px; font-size: 0.9em;">
-              Minna no Nihongo JLPT N5 & N4
-            </span>
-        </p>
-
-        <div class="d-flex justify-content-center gap-3">
-            <button type="button" class="btn" data-bs-dismiss="modal"
-              style="min-width: 100px; border-radius: 50px; padding: 10px 24px; border: 1.5px solid #e2e8f0; color: #64748b; font-weight: 600; background: transparent; transition: all 0.2s;"
-              onmouseover="this.style.background='#f1f5f9'; this.style.borderColor='#cbd5e1';"
-              onmouseout="this.style.background='transparent'; this.style.borderColor='#e2e8f0';">
-                Batal
-            </button>
-            
-            <a href="/kotoba/index.html" class="btn"
-              style="min-width: 100px; border-radius: 50px; padding: 10px 24px; background: linear-gradient(90deg, #00C6FF 0%, #0072FF 100%); border: none; color: white; font-weight: 600; box-shadow: 0 4px 12px rgba(0, 114, 255, 0.25); transition: all 0.2s;"
-              onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 15px rgba(0, 114, 255, 0.35)';"
-              onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0, 114, 255, 0.25)';">
-                Ya, Mulai Hafalan
-            </a>
-        </div>
-
-      </div>
-
-    </div>
-  </div>
-</div>
-
-
-
-    <div class="modal fade" id="ujianModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true" style="backdrop-filter: blur(4px);">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content" style="border: none; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); overflow: hidden; background: white;">
-      
-      <div style="height: 6px; background: linear-gradient(90deg, #00C6FF 0%, #0072FF 100%); width: 100%;"></div>
-
-      <div class="modal-body text-center px-4 py-5">
-        
-        <h4 style="font-weight: 800; color: #2c3e50; margin-bottom: 12px; letter-spacing: -0.5px; font-size: 1.5rem;">
-            Ke Halaman Simulasi Ujian Jft?
-        </h4>
-        
-        <p style="color: #64748b; font-size: 1rem; margin-bottom: 30px; line-height: 1.6;">
-            Anda akan diarahkan <b>ke</b> Halaman Home Paket Ujian Jft<br>
-            <span style="color: #0072FF; font-weight: 600; background: rgba(0, 114, 255, 0.08); padding: 2px 8px; border-radius: 6px; font-size: 0.9em;">Hiragana / Katakana / Kanji</span>
-        </p>
-
-        <div class="d-flex justify-content-center gap-3">
-            <button type="button" class="btn" data-bs-dismiss="modal" style="min-width: 100px; border-radius: 50px; padding: 10px 24px; border: 1.5px solid #e2e8f0; color: #64748b; font-weight: 600; background: transparent; transition: all 0.2s;" onmouseover="this.style.background='#f1f5f9'; this.style.borderColor='#cbd5e1';" onmouseout="this.style.background='transparent'; this.style.borderColor='#e2e8f0';">
-                Batal
-            </button>
-            
-            <a href="/jft/index.html" class="btn" style="min-width: 100px; border-radius: 50px; padding: 10px 24px; background: linear-gradient(90deg, #00C6FF 0%, #0072FF 100%); border: none; color: white; font-weight: 600; box-shadow: 0 4px 12px rgba(0, 114, 255, 0.25); transition: all 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 15px rgba(0, 114, 255, 0.35)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0, 114, 255, 0.25)';">
-                Ya, Lanjutkan
-            </a>
-        </div>
-
-      </div>
-
-    </div>
-  </div>
-</div>
-
-
-
-
-    <div class="modal fade" id="susunKalimatModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true" style="backdrop-filter: blur(4px);">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content" style="border: none; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); overflow: hidden; background: white;">
-      
-      <!-- Accent Bar -->
-      <div style="height: 6px; background: linear-gradient(90deg, #00C6FF 0%, #0072FF 100%); width: 100%;"></div>
-
-      <div class="modal-body text-center px-4 py-5">
-        
-        <!-- Title -->
-        <h4 style="font-weight: 800; color: #2c3e50; margin-bottom: 12px; letter-spacing: -0.5px; font-size: 1.5rem;">
-            Ke Mode Susun Kalimat?
-        </h4>
-        
-        <!-- Description -->
-        <p style="color: #64748b; font-size: 1rem; margin-bottom: 30px; line-height: 1.6;">
-            Anda akan diarahkan ke halaman latihan<br>
-            <span style="color: #0072FF; font-weight: 600; background: rgba(0, 114, 255, 0.08); padding: 3px 10px; border-radius: 8px; font-size: 0.95em;">
-               Susun Kalimat
-            </span><br>
-        </p>
-
-        <!-- Actions -->
-        <div class="d-flex justify-content-center gap-3">
-            <!-- Cancel -->
-            <button type="button" class="btn"
-              data-bs-dismiss="modal"
-              style="min-width: 110px; border-radius: 50px; padding: 10px 26px;
-                     border: 1.5px solid #e2e8f0; color: #64748b;
-                     font-weight: 600; background: transparent; transition: all 0.2s;"
-              onmouseover="this.style.background='#f1f5f9'; this.style.borderColor='#cbd5e1';"
-              onmouseout="this.style.background='transparent'; this.style.borderColor='#e2e8f0';">
-                Batal
-            </button>
-            
-            <!-- Confirm -->
-            <a href="/susun_kalimat/index.html" class="btn"
-              style="min-width: 150px; border-radius: 50px; padding: 10px 26px;
-                     background: linear-gradient(90deg, #00C6FF 0%, #0072FF 100%);
-                     border: none; color: white; font-weight: 600;
-                     box-shadow: 0 4px 12px rgba(0, 114, 255, 0.25);
-                     transition: all 0.2s;"
-              onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 15px rgba(0, 114, 255, 0.35)';"
-              onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0, 114, 255, 0.25)';">
-                Ya, Lanjutkan
-            </a>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-<div class="modal fade" id="backToHomeModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true" style="backdrop-filter: blur(4px);">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content" style="border: none; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); overflow: hidden; background: white;">
-      
-      <div style="height: 6px; background: linear-gradient(90deg, #00C6FF 0%, #0072FF 100%); width: 100%;"></div>
-
-      <div class="modal-body text-center px-4 py-5">
-        
-        <h4 style="font-weight: 800; color: #2c3e50; margin-bottom: 12px; letter-spacing: -0.5px; font-size: 1.5rem;">
-            Ke Halaman Bacaan?
-        </h4>
-        
-        <p style="color: #64748b; font-size: 1rem; margin-bottom: 30px; line-height: 1.6;">
-            Anda akan diarahkan <b>ke</b> daftar bacaan<br>
-            <span style="color: #0072FF; font-weight: 600; background: rgba(0, 114, 255, 0.08); padding: 2px 8px; border-radius: 6px; font-size: 0.9em;">vocabulary / Listening / Reading</span>
-        </p>
-
-        <div class="d-flex justify-content-center gap-3">
-            <button type="button" class="btn" data-bs-dismiss="modal" style="min-width: 100px; border-radius: 50px; padding: 10px 24px; border: 1.5px solid #e2e8f0; color: #64748b; font-weight: 600; background: transparent; transition: all 0.2s;" onmouseover="this.style.background='#f1f5f9'; this.style.borderColor='#cbd5e1';" onmouseout="this.style.background='transparent'; this.style.borderColor='#e2e8f0';">
-                Batal
-            </button>
-            
-            <a href="/bacaan/index.html" class="btn" style="min-width: 100px; border-radius: 50px; padding: 10px 24px; background: linear-gradient(90deg, #00C6FF 0%, #0072FF 100%); border: none; color: white; font-weight: 600; box-shadow: 0 4px 12px rgba(0, 114, 255, 0.25); transition: all 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 15px rgba(0, 114, 255, 0.35)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0, 114, 255, 0.25)';">
-                Ya, Lanjutkan
-            </a>
-        </div>
-
-      </div>
-
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-    <div class="modal fade" id="daftarRangeModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content px-3 py-2">
-          <div class="modal-header border-0 pb-0">
-            <div>
-                <h4 class="modal-title fw-bold">Pilih Paket Hafalan</h4>
-                <p class="text-muted small mb-0">Pilih paket kanji yang ingin ditampilkan di daftar.</p>
+            <div class="hud-card col-wide theme-green" data-bs-toggle="modal" data-bs-target="#bacaanModal">
+                <i class="bi bi-book-half bg-icon"></i> <div class="card-content">
+                    <div class="icon-badge"><i class="bi bi-book-half"></i></div>
+                    <h3 class="card-title">Materi Bacaan</h3>
+                    <p class="card-desc">Tingkatkan pemahaman konteks (Dokkai) dengan kumpulan artikel dan kosakata.</p>
+                    <div class="card-arrow">Buka Materi <i class="bi bi-arrow-right"></i></div>
+                </div>
             </div>
-            <button type="button" class="btn-close bg-light rounded-circle p-2" data-bs-dismiss="modal"></button>
-          </div>
-          <div class="modal-body pt-4">
-            <div id="rangeListDaftar" class="range-grid-container"></div>
-            <div class="mt-4 pt-3 border-top d-flex gap-2">
-                <button id="btnDaftarSelectAll" class="btn btn-sm btn-light border px-3 rounded-pill fw-medium">Pilih Semua</button>
-                <button id="btnDaftarReset" class="btn btn-sm btn-light border px-3 rounded-pill fw-medium">Reset</button>
+
+            <div class="hud-card col-std theme-yellow" data-bs-toggle="modal" data-bs-target="#susunKalimatModal">
+                <i class="bi bi-sort-alpha-down bg-icon"></i>
+                <div class="card-content">
+                    <div class="icon-badge"><i class="bi bi-sort-alpha-down"></i></div>
+                    <h3 class="card-title">Susun Kalimat</h3>
+                    <p class="card-desc">Latih logika struktur Bunpou.</p>
+                    <div class="card-arrow">Latihan <i class="bi bi-arrow-right"></i></div>
+                </div>
             </div>
-          </div>
-          <div class="modal-footer border-0 pt-0 pb-4">
-            <button type="button" class="btn btn-light text-muted fw-medium rounded-pill px-4 py-2" data-bs-dismiss="modal">Batal</button>
-            <button id="btnShowList" type="button" class="btn btn-primary-custom rounded-pill px-5 py-3 shadow-sm">
-                Tampilkan <i class="bi bi-arrow-right ms-2"></i>
-            </button>
-          </div>
+
+            <div class="hud-card col-std theme-pink" data-bs-toggle="modal" data-bs-target="#hafalankotobaModal">
+                <i class="bi bi-translate bg-icon"></i>
+                <div class="card-content">
+                    <div class="icon-badge"><i class="bi bi-translate"></i></div>
+                    <h3 class="card-title">Hafalan Kotoba</h3>
+                    <p class="card-desc">Flashcard Minna no Nihongo.</p>
+                    <div class="card-arrow">Hafalkan <i class="bi bi-arrow-right"></i></div>
+                </div>
+            </div>
+
+            <div class="hud-card col-std theme-purple" data-bs-toggle="modal" data-bs-target="#hafalankanjiModal">
+                <i class="bi bi-grid-3x3-gap-fill bg-icon"></i>
+                <div class="card-content">
+                    <div class="icon-badge"><i class="bi bi-grid-3x3-gap-fill"></i></div>
+                    <h3 class="card-title">Hafalan Kanji</h3>
+                    <p class="card-desc">Tulis & ingat Kanji.</p>
+                    <div class="card-arrow">Hafalkan <i class="bi bi-arrow-right"></i></div>
+                </div>
+            </div>
+
+        </div> <div id="quiz-area"></div>
+
+    </div>
+
+    <div class="modal fade" id="hafalankanjiModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content overflow-hidden">
+                <div style="height: 5px; background: var(--neon-purple); box-shadow: 0 0 10px var(--neon-purple);"></div>
+                <div class="modal-body text-center px-4 py-5">
+                    <h4 class="fw-bold mb-3">Ke Halaman Hafal Kanji?</h4>
+                    <p class="text-secondary mb-4">Masuk ke folder <b>kanji</b>.</p>
+                    <div class="d-flex justify-content-center gap-2">
+                        <button type="button" class="btn btn-outline-light rounded-pill px-4" data-bs-dismiss="modal">Batal</button>
+                        <a href="kanji/index.html" class="btn btn-primary rounded-pill px-4 fw-bold" style="background: var(--neon-purple); border:none;">Ya, Mulai</a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+    </div>
+
+    <div class="modal fade" id="hafalankotobaModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content overflow-hidden">
+                <div style="height: 5px; background: var(--neon-pink); box-shadow: 0 0 10px var(--neon-pink);"></div>
+                <div class="modal-body text-center px-4 py-5">
+                    <h4 class="fw-bold mb-3">Ke Halaman Hafal Kotoba?</h4>
+                    <p class="text-secondary mb-4">Masuk ke folder <b>kotoba</b>.</p>
+                    <div class="d-flex justify-content-center gap-2">
+                        <button type="button" class="btn btn-outline-light rounded-pill px-4" data-bs-dismiss="modal">Batal</button>
+                        <a href="kotoba/index.html" class="btn btn-primary rounded-pill px-4 fw-bold" style="background: var(--neon-pink); border:none;">Ya, Mulai</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="ujianModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content overflow-hidden">
+                <div style="height: 5px; background: var(--neon-blue); box-shadow: 0 0 10px var(--neon-blue);"></div>
+                <div class="modal-body text-center px-4 py-5">
+                    <h4 class="fw-bold mb-3">Mulai Simulasi Ujian?</h4>
+                    <p class="text-secondary mb-4">Masuk ke folder <b>jft</b>.</p>
+                    <div class="d-flex justify-content-center gap-2">
+                        <button type="button" class="btn btn-outline-light rounded-pill px-4" data-bs-dismiss="modal">Batal</button>
+                        <a href="jft/index.html" class="btn btn-primary rounded-pill px-4 fw-bold" style="background: var(--neon-blue); border:none; color: #000;">Lanjutkan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="bacaanModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content overflow-hidden">
+                <div style="height: 5px; background: var(--neon-green); box-shadow: 0 0 10px var(--neon-green);"></div>
+                <div class="modal-body text-center px-4 py-5">
+                    <h4 class="fw-bold mb-3">Ke Halaman Bacaan?</h4>
+                    <p class="text-secondary mb-4">Masuk ke folder <b>bacaan</b>.</p>
+                    <div class="d-flex justify-content-center gap-2">
+                        <button type="button" class="btn btn-outline-light rounded-pill px-4" data-bs-dismiss="modal">Batal</button>
+                        <a href="bacaan/index.html" class="btn btn-primary rounded-pill px-4 fw-bold" style="background: var(--neon-green); border:none; color: #000;">Lanjutkan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="susunKalimatModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content overflow-hidden">
+                <div style="height: 5px; background: var(--neon-yellow); box-shadow: 0 0 10px var(--neon-yellow);"></div>
+                <div class="modal-body text-center px-4 py-5">
+                    <h4 class="fw-bold mb-3">Susun Kalimat?</h4>
+                    <p class="text-secondary mb-4">Masuk ke folder <b>susun_kalimat</b>.</p>
+                    <div class="d-flex justify-content-center gap-2">
+                        <button type="button" class="btn btn-outline-light rounded-pill px-4" data-bs-dismiss="modal">Batal</button>
+                        <a href="susun_kalimat/index.html" class="btn btn-primary rounded-pill px-4 fw-bold" style="background: var(--neon-yellow); border:none; color: #000;">Lanjutkan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="stopQuizModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content border-0 text-center p-4">
+                <div class="modal-body p-0">
+                    <div class="mb-3 text-warning"><i class="bi bi-exclamation-circle-fill" style="font-size: 3.5rem;"></i></div>
+                    <h5 class="fw-bold mb-2">Hentikan Ujian?</h5>
+                    <div class="d-grid gap-2 mt-4">
+                        <button type="button" class="btn btn-danger rounded-pill fw-bold" onclick="executeStopQuiz()">Ya, Selesai</button>
+                        <button type="button" class="btn btn-outline-light rounded-pill fw-medium" data-bs-dismiss="modal">Batal</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="modal fade" id="daftarHafalanModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
-        <div class="modal-content px-0 overflow-hidden">
-          <div class="modal-header border-bottom-0 pb-0 pt-4 px-4 bg-white">
-            <div>
-                <h4 class="modal-title fw-bold text-dark">Daftar Kanji Terpilih</h4>
-                <p class="text-muted small mb-0">Menampilkan hasil dari paket yang dipilih.</p>
+        <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0 pb-0 pt-4 px-4 bg-transparent">
+                    <h4 class="modal-title fw-bold">Daftar Kanji</h4>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body px-4 pt-4 bg-transparent">
+                    <div id="daftarList" class="kanji-list-grid pb-5 pt-2"></div>
+                </div>
+                <div class="modal-footer bg-transparent">
+                    <button class="btn btn-outline-light rounded-pill" data-bs-target="#daftarRangeModal" data-bs-toggle="modal">Ganti Paket</button>
+                </div>
             </div>
-            <button type="button" class="btn-close bg-light rounded-circle p-2" data-bs-dismiss="modal"></button>
-          </div>
-
-          <div class="modal-body px-4 pt-4 bg-light-subtle">
-             <div id="daftarList" class="kanji-list-grid pb-5 pt-2"></div>
-          </div>
-          
-          <div class="modal-footer bg-white border-top p-4">
-              <button class="btn btn-outline-custom rounded-pill py-2 px-4 fw-medium" data-bs-target="#daftarRangeModal" data-bs-toggle="modal">
-                  <i class="bi bi-arrow-left me-2"></i> Ganti Paket
-              </button>
-          </div>
-
         </div>
-      </div>
     </div>
 
-    <div class="modal fade" id="quizModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-lg"><form id="quizForm" class="modal-content px-3 py-2"><div class="modal-header border-0 pb-0"><div><h4 class="modal-title fw-bold">Pilih Materi Quiz</h4><p class="text-muted small mb-0">Siap menguji kemampuanmu?</p></div><button type="button" class="btn-close bg-light rounded-circle p-2" data-bs-dismiss="modal"></button></div><div class="modal-body pt-4"><div id="rangeListQuiz" class="range-grid-container"></div><div class="mt-4 pt-3 border-top d-flex gap-2"><button type="button" id="selectAllQuiz" class="btn btn-sm btn-light border px-3 rounded-pill fw-medium">Pilih Semua</button><button type="button" id="clearAllQuiz" class="btn btn-sm btn-light border px-3 rounded-pill fw-medium">Reset</button></div></div><div class="modal-footer border-0 pt-0 pb-4"><button type="button" class="btn btn-light text-muted fw-medium rounded-pill px-4 py-2" data-bs-dismiss="modal">Batal</button><button type="submit" class="btn btn-primary-custom rounded-pill px-5 py-3 shadow-sm">Mulai Quiz</button></div></form></div></div>
-    <div class="modal fade" id="memModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-lg"><form id="memForm" class="modal-content px-3 py-2"><div class="modal-header border-0 pb-0"><div><h4 class="modal-title fw-bold">Pilih Materi Hafalan</h4><p class="text-muted small mb-0">Uji ingatanmu dengan menulis.</p></div><button type="button" class="btn-close bg-light rounded-circle p-2" data-bs-dismiss="modal"></button></div><div class="modal-body pt-4"><div id="rangeListMem" class="range-grid-container"></div><div class="mt-4 pt-3 border-top d-flex gap-2"><button type="button" id="selectAllMem" class="btn btn-sm btn-light border px-3 rounded-pill fw-medium">Pilih Semua</button><button type="button" id="clearAllMem" class="btn btn-sm btn-light border px-3 rounded-pill fw-medium">Reset</button></div></div><div class="modal-footer border-0 pt-0 pb-4"><button type="button" class="btn btn-light text-muted fw-medium rounded-pill px-4 py-2" data-bs-dismiss="modal">Batal</button><button type="submit" class="btn btn-primary-custom rounded-pill px-5 py-3 shadow-sm">Mulai Tes</button></div></form></div></div>
-
-    <div class="modal fade" id="confirmModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-sm"><div class="modal-content border-0 shadow-lg rounded-4 text-center p-4"><div class="modal-body p-2"><div class="mb-3 text-primary"><i class="bi bi-check-circle-fill" style="font-size: 3rem;"></i></div><h4 class="fw-bold mb-2">Selesai Mengerjakan?</h4><div id="confirmSummary" class="text-muted mb-4"></div><div class="d-flex gap-2 justify-content-center"><button type="button" class="btn btn-light rounded-pill px-4 py-2 fw-medium" data-bs-dismiss="modal">Batal</button><button id="confirmSend" type="button" class="btn btn-primary-custom rounded-pill px-4 py-2 shadow-sm">Ya, Nilai</button></div></div></div></div></div>
+     <div class="modal fade" id="daftarRangeModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content px-3 py-2">
+                <div class="modal-header border-0 pb-0 bg-transparent">
+                    <div><h4 class="modal-title fw-bold">Pilih Paket Hafalan</h4></div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body pt-4 bg-transparent">
+                    <div id="rangeListDaftar" class="range-grid-container"></div>
+                    <div class="mt-4 pt-3 border-top border-secondary d-flex gap-2">
+                        <button id="btnDaftarSelectAll" class="btn btn-sm btn-outline-light border rounded-pill">Pilih Semua</button>
+                        <button id="btnDaftarReset" class="btn btn-sm btn-outline-light border rounded-pill">Reset</button>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 bg-transparent">
+                     <button type="button" class="btn btn-outline-light rounded-pill" data-bs-dismiss="modal">Batal</button>
+                     <button id="btnShowList" type="button" class="btn btn-primary rounded-pill fw-bold" style="background: var(--neon-blue); border:none; color:black;">Tampilkan</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div id="confetti-wrapper"></div>
-
-
-
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script type="module" src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="js/main.js"></script>
   </body>
 </html>
