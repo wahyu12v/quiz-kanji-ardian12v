@@ -3,48 +3,42 @@ import { KEYS, SELECTORS } from './constants.js';
 
 const area = document.getElementById(SELECTORS.quizArea);
 
-// --- INJECT CSS ANIMASI (Agar tidak perlu edit file CSS terpisah) ---
-// Ini membuat tombol terasa "hidup" dan tidak kaku
+// --- CSS INJECT ---
 const style = document.createElement('style');
 style.innerHTML = `
-    .choice-card-anim {
-        transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, background-color 0.2s, border-color 0.2s !important;
-    }
-    /* Efek saat Hover (Mouse diatas) */
-    .choice-card-anim:hover {
-        transform: translateY(-5px); /* Naik sedikit */
-        box-shadow: 0 10px 20px rgba(13, 110, 253, 0.15) !important; /* Bayangan halus */
-        border-color: #0d6efd !important; /* Border biru */
-        z-index: 2;
-    }
-    /* Efek saat Diklik */
-    .choice-card-anim:active {
-        transform: scale(0.98) translateY(-2px); /* Mengecil sedikit */
-    }
+    .choice-card-anim { transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s, border-color 0.2s !important; }
+    .choice-card-anim:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(13, 110, 253, 0.15) !important; border-color: #0d6efd !important; z-index: 2; }
+    .choice-card-anim:active { transform: scale(0.98) translateY(-2px); }
+    
+    /* PROGRESS STYLE */
+    .prog-card { background: #fff; border-radius: 12px; padding: 15px; border: 1px solid #dee2e6; box-shadow: 0 2px 4px rgba(0,0,0,0.02); height: 100%; display: flex; flex-direction: column; }
+    .prog-item { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+    .prog-label { font-size: 0.75rem; color: #6c757d; display: flex; align-items: center; gap: 6px; font-weight: 600; }
+    .prog-pct { font-size: 0.75rem; font-weight: bold; }
+    .prog-track { flex-grow: 1; height: 6px; background-color: #f1f3f5; border-radius: 3px; margin: 0 8px; overflow: hidden; }
+    .prog-fill { height: 100%; border-radius: 3px; }
+    .c-blue { color: #0d6efd; } .bg-blue { background-color: #0d6efd; }
+    .c-green { color: #198754; } .bg-green { background-color: #198754; }
+    .c-orange { color: #fd7e14; } .bg-orange { background-color: #fd7e14; }
+    .c-red { color: #dc3545; } .bg-red { background-color: #dc3545; }
+    .bab-done { border: 2px solid #198754; background-color: #f0fff4; }
 `;
 document.head.appendChild(style);
 
-// --- HELPER: SMART FURIGANA ---
-function formatRuby(kanji, hira) {
-    kanji = String(kanji || '').trim();
-    hira  = String(hira || '').trim();
-    if (!kanji || !hira || kanji === hira) return `<span class="fw-bold text-primary">${escapeHtml(kanji)}</span>`;
-    let suffix = "";
-    let kTemp = kanji;
-    let hTemp = hira;
-    while (kTemp.length > 0 && hTemp.length > 0) {
-        const kLast = kTemp.slice(-1);
-        const hLast = hTemp.slice(-1);
-        if (kLast === hLast) {
-            suffix = kLast + suffix;
-            kTemp = kTemp.slice(0, -1);
-            hTemp = hTemp.slice(0, -1);
-        } else { break; }
-    }
-    return `<ruby style="font-weight: bold; color: #0d6efd;">${escapeHtml(kTemp)}<rt style="font-size: 0.45em; color: #6c757d; font-weight: normal; margin-bottom: 0px; letter-spacing: 1px;">${escapeHtml(hTemp)}</rt></ruby><span style="font-weight: bold; color: #0d6efd;">${escapeHtml(suffix)}</span>`;
+// --- HELPER: FORMAT TAMPILAN (HANYA HIRAGANA) ---
+function formatDisplay(kanji, hira) {
+    // KITA ABAIKAN KANJI SEKARANG.
+    // Fokus ambil Hiragana. Jika Hiragana kosong (jaga-jaga), baru ambil Kanji.
+    const textToShow = String(hira || kanji || '').trim();
+
+    return `
+        <div class="d-flex align-items-center justify-content-center" style="min-height: 120px;">
+            <span class="fw-bold text-primary text-center" style="font-size: 4rem; line-height: 1.2;">${escapeHtml(textToShow)}</span>
+        </div>
+    `;
 }
 
-// --- 1. RENDER QUIZ (SOLID STYLE + ANIMASI) ---
+// --- 1. RENDER QUIZ ---
 export function renderQuiz(state, qNo) {
     area.innerHTML = "";
     const idx = state.current;
@@ -56,42 +50,34 @@ export function renderQuiz(state, qNo) {
     const hiraTxt  = String(q[KEYS.hiragana] || '').trim();
     const meanTxt  = String(q[KEYS.meaning] || '').trim();
 
-    // Soal
     let displayHtml = '';
+    
     if (state.sessionType === 'quiz_hiragana') {
-        displayHtml = `<div class="kanji-big mb-5 pb-2 text-primary fw-bold text-break" style="font-size: 2.5rem; text-align:center;">${escapeHtml(meanTxt)}</div>`;
+        // Mode Tebak Hiragana: Soal BAHASA INDONESIA
+        displayHtml = `<div class="mb-5 pb-2 text-primary fw-bold text-break text-center" style="font-size: 2.5rem;">${escapeHtml(meanTxt)}</div>`;
     } else {
-        displayHtml = `
-            <div class="text-center mb-5" style="font-size: 3.8rem; min-height: 90px; display: flex; align-items: end; justify-content: center;">
-                <div style="line-height: 1;">${formatRuby(kanjiTxt, hiraTxt)}</div>
-            </div>`;
+        // Mode Tebak Arti: Soal HIRAGANA SAJA
+        displayHtml = formatDisplay(kanjiTxt, hiraTxt);
     }
 
     let choicesHtml = '<div class="row g-3">';
     choices.forEach((c, i) => {
         const isSelected = state.answers[idx] === i;
-        
-        // --- LOGIKA TAMPILAN SOLID ---
-        let cardClass = "p-3 shadow-sm border rounded-3 fw-bold choice-card-anim"; // Tambah class animasi
+        let cardClass = "p-3 shadow-sm border rounded-3 fw-bold choice-card-anim"; 
         let textClass = "";
         let style = "cursor: pointer; position: relative;";
 
         if (isSelected) {
-            // JIKA DIPILIH: Biru Solid + Teks Putih
             style += "background-color: #0d6efd; border-color: #0d6efd; color: #ffffff !important;";
             textClass = "text-white"; 
         } else {
-            // JIKA BELUM: Putih
             style += "background-color: #fff;";
             textClass = state.sessionType === 'quiz_hiragana' ? 'text-primary' : 'text-dark';
         }
         
         choicesHtml += `
           <div class="col-12"> 
-            <div class="${cardClass}" 
-                 role="button" 
-                 onclick="window.handleAnswer(${i})" 
-                 style="${style}">
+            <div class="${cardClass}" role="button" onclick="window.handleAnswer(${i})" style="${style}">
               <div class="${textClass}" style="font-size: 1.1rem;">${escapeHtml(c.text)}</div>
             </div>
           </div>`;
@@ -106,11 +92,8 @@ export function renderQuiz(state, qNo) {
             <h5 class="fw-bold">Soal ${idx + 1} / ${state.batch.length}</h5>
             <small class="text-muted">No Asli: ${q[KEYS.number] || '-'}</small>
         </div>
-        
-        ${displayHtml}
-
+        ${displayHtml} 
         ${choicesHtml}
-        
         <div class="mt-4 d-flex gap-2 w-100">
             <button class="btn btn-outline-secondary fw-bold flex-grow-1" onclick="window.handlePrev()" ${idx===0?'disabled':''}>Sebelumnya</button>
             <button class="btn btn-outline-warning fw-bold flex-grow-1" onclick="window.handleLupa()">${isLupa ? 'Ditandai' : 'Lupa'}</button>
@@ -140,14 +123,13 @@ export function renderMem(state, qNo) {
     let labelTxt = '';
 
     if (state.sessionType === 'write_romaji') {
-        displayHtml = `<div class="kanji-big mb-5 pb-2 text-primary fw-bold text-break" style="font-size: 2.8rem; text-align:center;">${escapeHtml(meanTxt)}</div>`;
+        // Soal: BAHASA INDONESIA
+        displayHtml = `<div class="mb-5 pb-2 text-primary fw-bold text-break text-center" style="font-size: 2.8rem;">${escapeHtml(meanTxt)}</div>`;
         placeholderTxt = "Ketik Romaji (tanpa simbol)";
         labelTxt = "Ketik Romaji:";
     } else {
-        displayHtml = `
-            <div class="text-center mb-5" style="font-size: 4.2rem; min-height: 100px; display: flex; align-items: end; justify-content: center;">
-                <div style="line-height: 1;">${formatRuby(kanjiTxt, hiraTxt)}</div>
-            </div>`;
+        // Soal: HIRAGANA SAJA
+        displayHtml = formatDisplay(kanjiTxt, hiraTxt);
         placeholderTxt = "Contoh: Saya";
         labelTxt = "Ketik Arti (Indonesia):";
     }
@@ -161,9 +143,7 @@ export function renderMem(state, qNo) {
             <h5 class="fw-bold">Hafalan ${idx + 1} / ${state.batch.length}</h5>
             <small class="text-muted">No Asli: ${q[KEYS.number] || '-'}</small>
         </div>
-        
         ${displayHtml}
-        
         <div class="mt-3">
             <label class="fw-bold text-muted mb-2">${labelTxt}</label>
             <div class="input-group input-group-lg">
@@ -220,112 +200,51 @@ export function renderMem(state, qNo) {
     } else { btnMic.style.display = 'none'; inp.style.borderRadius = '0.5rem'; }
 }
 
-// --- 3. RENDER HASIL & RIWAYAT ---
+// --- 3. RENDER RESULT & PROGRESS (GUNAKAN KODE TERAKHIR YANG SUDAH JELAS) ---
 export function renderResult(result, isQuiz, wrongIndices = []) {
     area.innerHTML = "";
     const pct = result.total > 0 ? Math.round((result.score / result.total) * 100) : 0;
     const history = JSON.parse(localStorage.getItem("kotoba_apps_history") || "[]");
     const lastHistory = history.slice(0, 5); 
+    let modeLabel = isQuiz ? 'Hasil Quiz' : 'Hasil Tes';
 
-    let modeLabel = 'Hasil Tes';
-    if(isQuiz) modeLabel = 'Hasil Quiz';
-
-    let html = `
-    <div class="card shadow-sm border-0 mb-4"><div class="card-body">
-      <div class="text-center mb-4">
-        <h4 class="fw-bold">${modeLabel}</h4>
-        <h1 class="display-3 fw-bold ${pct>60?'text-success':'text-danger'}">${pct}%</h1>
-        <p class="text-muted">Skor: ${result.score} / ${result.total}</p>
-      </div>
-
-      <div class="d-grid gap-2 mb-4">
-        <div class="row g-2">
-            <div class="col-6">
-                <button class="btn btn-outline-primary w-100 fw-bold py-2" onclick="window.handleRetry()">Ulangi Semua</button>
-            </div>
-            <div class="col-6">
-                <button class="btn btn-dark w-100 fw-bold py-2" onclick="window.handleBack()">Menu Utama</button>
-            </div>
-        </div>
-        ${wrongIndices.length > 0 ? `
-            <button class="btn btn-danger btn-lg shadow-sm fw-bold mt-2" onclick="window.handleRetryWrong([${wrongIndices}])">
-                <i class="bi bi-arrow-counterclockwise me-2"></i> Perbaiki ${wrongIndices.length} Soal Salah
-            </button>
-        ` : `<div class="alert alert-success text-center py-2 fw-bold"><i class="bi bi-stars me-2"></i>Sempurna!</div>`}
-      </div>
-
-      <div class="bg-light p-3 rounded-3 mb-4">
-        <h6 class="fw-bold mb-3 small text-uppercase text-secondary"><i class="bi bi-clock-history me-2"></i>Riwayat Terakhir</h6>
-        <div class="table-responsive">
-            <table class="table table-sm table-borderless mb-0 align-middle" style="font-size: 0.9rem;">
-                <thead class="text-muted small border-bottom">
-                    <tr><td width="30%">Waktu</td><td width="50%">Info</td><td width="20%" class="text-end">Skor</td></tr>
-                </thead>
-                <tbody>
-                ${lastHistory.length > 0 ? lastHistory.map(h => `
-                    <tr>
-                        <td class="text-secondary small py-2">${h.date.split(' ')[0]} <br> <span style="font-size:0.8em">${h.date.split(' ')[1] || ''}</span></td>
-                        <td>
-                            <div class="fw-bold text-dark">${formatModeName(h.type)}</div>
-                            <div class="text-muted small text-truncate" style="max-width: 150px;" title="${h.packages || '-'}">${h.packages || '-'}</div>
-                        </td>
-                        <td class="text-end fw-bold ${h.percentage >= 60 ? 'text-success' : 'text-danger'}">${h.percentage}%</td>
-                    </tr>
-                `).join('') : '<tr><td colspan="3" class="text-center text-muted py-3">Belum ada riwayat</td></tr>'}
-                </tbody>
-            </table>
-        </div>
-      </div>
-    `;
-    
+    let html = `<div class="card shadow-sm border-0 mb-4"><div class="card-body"><div class="text-center mb-4"><h4 class="fw-bold">${modeLabel}</h4><h1 class="display-3 fw-bold ${pct>60?'text-success':'text-danger'}">${pct}%</h1><p class="text-muted">Skor: ${result.score} / ${result.total}</p></div><div class="d-grid gap-2 mb-4"><div class="row g-2"><div class="col-6"><button class="btn btn-outline-primary w-100 fw-bold py-2" onclick="window.handleRetry()">Ulangi Semua</button></div><div class="col-6"><button class="btn btn-dark w-100 fw-bold py-2" onclick="window.handleBack()">Menu Utama</button></div></div>${wrongIndices.length > 0 ? `<button class="btn btn-danger btn-lg shadow-sm fw-bold mt-2" onclick="window.handleRetryWrong([${wrongIndices}])"><i class="bi bi-arrow-counterclockwise me-2"></i> Perbaiki ${wrongIndices.length} Soal Salah</button>` : `<div class="alert alert-success text-center py-2 fw-bold"><i class="bi bi-stars me-2"></i>Sempurna!</div>`}</div><div class="bg-light p-3 rounded-3 mb-4"><h6 class="fw-bold mb-3 small text-uppercase text-secondary"><i class="bi bi-clock-history me-2"></i>Riwayat Terakhir</h6><div class="table-responsive"><table class="table table-sm table-borderless mb-0 align-middle" style="font-size: 0.9rem;"><thead class="text-muted small border-bottom"><tr><td width="30%">Waktu</td><td width="50%">Info</td><td width="20%" class="text-end">Skor</td></tr></thead><tbody>${lastHistory.length > 0 ? lastHistory.map(h => `<tr><td class="text-secondary small py-2">${h.date.split(' ')[0]} <br> <span style="font-size:0.8em">${h.date.split(' ')[1] || ''}</span></td><td><div class="fw-bold text-dark">${formatModeName(h.type)}</div><div class="text-muted small text-truncate" style="max-width: 150px;" title="${h.packages || '-'}">${h.packages || '-'}</div></td><td class="text-end fw-bold ${h.percentage >= 60 ? 'text-success' : 'text-danger'}">${h.percentage}%</td></tr>`).join('') : '<tr><td colspan="3" class="text-center text-muted py-3">Belum ada riwayat</td></tr>'}</tbody></table></div></div>`;
     if (result.details && result.details.length > 0) {
         result.details.forEach((d, i) => {
-            const color = d.isCorrect ? 'text-success' : 'text-danger';
-            const label = d.isCorrect ? 'Benar' : 'Salah';
-            const userTxt = d.userAns === 'Lupa' ? 'Lupa' : (d.userAns || '(Kosong)');
-            const kanji = (d.q[KEYS.kanji] || '').trim();
-            const hira = (d.realHira || '').trim();
-            const mean = d.realMean || '';
-            const romaji = d.realRomaji || '-';
-
-            html += `
-            <div class="border-top py-2">
-               <div class="d-flex justify-content-between">
-                  <strong class="text-primary fs-5">${escapeHtml(kanji)}</strong>
-                  <span class="${color} fw-bold small">${label}</span>
-               </div>
-               <div class="fw-bold text-dark mb-1">${escapeHtml(hira)} <span class="text-danger small ms-2">${escapeHtml(romaji)}</span></div>
-               <div class="small text-muted">Arti: <b>${escapeHtml(mean)}</b></div>
-               <div class="small mt-1">Jawaban Kamu: <strong>${escapeHtml(userTxt)}</strong></div>
-            </div>`;
+            const color = d.isCorrect ? 'text-success' : 'text-danger'; const label = d.isCorrect ? 'Benar' : 'Salah'; const userTxt = d.userAns === 'Lupa' ? 'Lupa' : (d.userAns || '(Kosong)');
+            const kanji = (d.q[KEYS.kanji] || '').trim(); const hira = (d.realHira || '').trim(); const mean = d.realMean || ''; const romaji = d.realRomaji || '-';
+            html += `<div class="border-top py-2"><div class="d-flex justify-content-between"><strong class="text-primary fs-5">${escapeHtml(kanji)}</strong><span class="${color} fw-bold small">${label}</span></div><div class="fw-bold text-dark mb-1">${escapeHtml(hira)} <span class="text-danger small ms-2">${escapeHtml(romaji)}</span></div><div class="small text-muted">Arti: <b>${escapeHtml(mean)}</b></div><div class="small mt-1">Jawaban Kamu: <strong>${escapeHtml(userTxt)}</strong></div></div>`;
         });
     }
-    
-    html += `</div></div>`;
-    area.innerHTML = html;
-    if(pct >= 60) launchConfetti();
+    html += `</div></div>`; area.innerHTML = html; if(pct >= 60) launchConfetti();
+}
+
+export function renderProgressModal(stats) {
+    const list = document.getElementById('progressList');
+    if(!list) return;
+    list.innerHTML = '';
+    const gridDiv = document.createElement('div');
+    gridDiv.className = "row g-3"; 
+    stats.forEach(item => {
+        const pctTotal = item.totalPct;
+        const p1 = item.detail.tebakArti; const p2 = item.detail.tebakHiragana;
+        const p3 = item.detail.tulisArti; const p4 = item.detail.tulisRomaji;
+        const isDone = pctTotal === 100;
+        const cardClass = isDone ? "prog-card bab-done" : "prog-card";
+        const titleColor = isDone ? "text-success" : "text-dark";
+        const col = document.createElement('div');
+        col.className = "col-12 col-md-6"; 
+        col.innerHTML = `<div class="${cardClass}"><div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom"><span class="fw-bold ${titleColor}" style="font-size: 1.1rem;">${item.bab}</span><span class="badge ${isDone?'bg-success':'bg-dark'} rounded-pill" style="font-size: 0.9rem;">Total: ${pctTotal}%</span></div><div class="prog-item"><div class="prog-label c-blue"><i class="bi bi-eye-fill"></i> Tebak Arti</div><div class="prog-track"><div class="prog-fill bg-blue" style="width:${p1}%"></div></div><div class="prog-pct c-blue">${p1}%</div></div><div class="prog-item"><div class="prog-label c-green"><i class="bi bi-translate"></i> Tebak Hira</div><div class="prog-track"><div class="prog-fill bg-green" style="width:${p2}%"></div></div><div class="prog-pct c-green">${p2}%</div></div><div class="prog-item"><div class="prog-label c-orange"><i class="bi bi-pencil-fill"></i> Tulis Arti</div><div class="prog-track"><div class="prog-fill bg-orange" style="width:${p3}%"></div></div><div class="prog-pct c-orange">${p3}%</div></div><div class="prog-item"><div class="prog-label c-red"><i class="bi bi-keyboard-fill"></i> Tulis Romaji</div><div class="prog-track"><div class="prog-fill bg-red" style="width:${p4}%"></div></div><div class="prog-pct c-red">${p4}%</div></div></div>`;
+        gridDiv.appendChild(col);
+    });
+    list.appendChild(gridDiv);
 }
 
 function formatModeName(type) {
-    if(type === 'quiz') return 'Tebak Arti';
-    if(type === 'quiz_hiragana') return 'Tebak Hiragana';
-    if(type === 'mem') return 'Tulis Arti';
-    if(type === 'write_romaji') return 'Tulis Romaji';
-    return type;
+    if(type === 'quiz') return 'Tebak Arti'; if(type === 'quiz_hiragana') return 'Tebak Hiragana'; if(type === 'mem') return 'Tulis Arti'; if(type === 'write_romaji') return 'Tulis Romaji'; return type;
 }
 
 function launchConfetti() {
-    const wrap = document.getElementById(SELECTORS.confetti);
-    if (!wrap) return; 
-    for(let i=0; i<40; i++) {
-        const el = document.createElement('div');
-        el.className = 'confetti';
-        el.style.left = Math.random()*100 + 'vw';
-        el.style.backgroundColor = ['#f00','#0f0','#00f','#ff0'][Math.floor(Math.random()*4)];
-        el.style.width='8px'; el.style.height='8px';
-        el.style.position = 'fixed'; el.style.top = '-10px'; 
-        el.style.animation = `drop ${1+Math.random()*2}s linear forwards`;
-        wrap.appendChild(el);
-        setTimeout(()=>el.remove(), 3000);
-    }
+    const wrap = document.getElementById(SELECTORS.confetti); if (!wrap) return; 
+    for(let i=0; i<40; i++) { const el = document.createElement('div'); el.className = 'confetti'; el.style.left = Math.random()*100 + 'vw'; el.style.backgroundColor = ['#f00','#0f0','#00f','#ff0'][Math.floor(Math.random()*4)]; el.style.width='8px'; el.style.height='8px'; el.style.position = 'fixed'; el.style.top = '-10px'; el.style.animation = `drop ${1+Math.random()*2}s linear forwards`; wrap.appendChild(el); setTimeout(()=>el.remove(), 3000); }
 }

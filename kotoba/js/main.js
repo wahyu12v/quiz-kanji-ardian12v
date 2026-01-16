@@ -6,10 +6,8 @@ import * as UI from './ui.js';
 
 let QUESTIONS = [];
 let state = null; 
-let quizModal, memModal, confirmModal, daftarRangeModal, daftarListModal;
-
-// Modal Wrapper untuk Fitur Baru (Kita pakai modal yang ada, cuma ganti Trigger)
-// Agar simple, kita pakai 'quizModal' untuk semua Pilihan Ganda, dan 'memModal' untuk semua Essay.
+let quizModal, memModal, confirmModal, daftarRangeModal, daftarListModal, progressModal; // Tambah progressModal
+let pendingSessionType = 'quiz'; 
 
 async function init() {
     try {
@@ -62,48 +60,53 @@ function setupModals() {
     confirmModal = getModal('confirmModal');
     daftarRangeModal = getModal('daftarRangeModal');
     daftarListModal = getModal('daftarHafalanModal');
+    progressModal = getModal('progressModal'); // Init modal progress
     
     const daftarEl = document.getElementById('daftarHafalanModal');
     if(daftarEl) {
         daftarEl.addEventListener('hidden.bs.modal', () => { toggleMainBackButton(true); });
     }
+    // Handle back button for Progress Modal too
+    const progEl = document.getElementById('progressModal');
+    if(progEl) {
+        progEl.addEventListener('hidden.bs.modal', () => { toggleMainBackButton(true); });
+    }
 }
-
-// --- VARIABEL UNTUK MENYIMPAN TIPE SESI SAAT KLIK TOMBOL ---
-let pendingSessionType = 'quiz'; 
 
 function setupEventListeners() {
     const bindClick = (id, modal, type) => {
         const btn = document.getElementById(id);
         if(btn) btn.onclick = () => {
-            pendingSessionType = type; // Simpan tipe sesi yang dipilih
-            
-            // Ubah Judul Modal agar user tau
+            pendingSessionType = type; 
             if(id === 'startBtn') document.querySelector('#quizModal .modal-title').innerText = "Mulai Tebak Arti";
             if(id === 'btnTebakHiragana') document.querySelector('#quizModal .modal-title').innerText = "Mulai Tebak Hiragana";
             if(id === 'memorizeBtn') document.querySelector('#memModal .modal-title').innerText = "Mulai Tulis Arti";
             if(id === 'btnTulisRomaji') document.querySelector('#memModal .modal-title').innerText = "Mulai Tulis Romaji";
-
             modal?.show();
         };
     };
 
-    // 1. Tebak Arti (Standard)
     bindClick('startBtn', quizModal, 'quiz');
-    // 2. Tulis Arti (Standard)
     bindClick('memorizeBtn', memModal, 'mem');
-    // 3. Tebak Hiragana (Baru) -> Pakai Modal Quiz
     bindClick('btnTebakHiragana', quizModal, 'quiz_hiragana');
-    // 4. Tulis Romaji (Baru) -> Pakai Modal Mem
     bindClick('btnTulisRomaji', memModal, 'write_romaji');
-
     bindClick('daftarHafalanBtn', daftarRangeModal, null); 
+    
+    // BUTTON BARU: LIHAT PROGRESS
+    const btnProg = document.getElementById('btnCekProgress');
+    if(btnProg) {
+        btnProg.onclick = () => {
+            toggleMainBackButton(false);
+            const stats = Logic.calculateProgress(QUESTIONS);
+            UI.renderProgressModal(stats);
+            progressModal?.show();
+        };
+    }
     
     setupCheckboxHelpers('selectAllQuiz', 'clearAllQuiz', 'rangeListQuiz');
     setupCheckboxHelpers('selectAllMem', 'clearAllMem', 'rangeListMem');
     setupCheckboxHelpers('btnDaftarSelectAll', 'btnDaftarReset', 'rangeListDaftar');
 
-    // Handler Form (Generic)
     const handleForm = (id, listId, modal) => {
         const form = document.getElementById(id);
         if(form) {
@@ -116,7 +119,6 @@ function setupEventListeners() {
                 showStopButton(); 
 
                 setTimeout(() => {
-                    // Gunakan pendingSessionType yang tadi disimpan saat klik tombol
                     startSession(pendingSessionType, indices);
                 }, 100);
             };
@@ -146,7 +148,6 @@ function generateCheckboxes(containerId, prefix) {
         const count = QUESTIONS.filter(q => (q.bab || "Paket Default") === babName).length;
         const div = document.createElement('div');
         div.className = 'form-check position-relative'; 
-        
         div.innerHTML = `
             <input class="form-check-input" type="checkbox" value="${index}" id="${prefix}_${index}" data-name="${babName}">
             <label class="form-check-label w-100 stretched-link" for="${prefix}_${index}">
@@ -218,11 +219,8 @@ window.getCheckedIndices = function(containerId) {
 }
 
 function startSession(type, indices) {
-    // Logic.buildChoices sekarang menerima parameter 'type' untuk membedakan mode
     state = { sessionType: type, orderIndices: shuffleArray(indices), current: 0, answers: Array(indices.length).fill(null), choicesPerQ: null };
     state.batch = state.orderIndices.map(i => QUESTIONS[i]);
-    
-    // Jika mode adalah salah satu Quiz (Arti atau Hiragana), bangun pilihan ganda
     if(type === 'quiz' || type === 'quiz_hiragana') {
         state.choicesPerQ = Logic.buildChoices(state.orderIndices, QUESTIONS, type);
     }
@@ -238,7 +236,18 @@ function renderCurrent() {
     }
 }
 
-window.handleAnswer = (idx) => { state.answers[state.current] = idx; Storage.saveTemp(state); setTimeout(() => { if(state.current < state.batch.length - 1) { state.current++; renderCurrent(); } }, 200); };
+window.handleAnswer = (idx) => { 
+    state.answers[state.current] = idx; 
+    Storage.saveTemp(state);
+    renderCurrent(); 
+    setTimeout(() => { 
+        if(state.current < state.batch.length - 1) { 
+            state.current++; 
+            renderCurrent(); 
+        } 
+    }, 200); 
+};
+
 window.handleInput = (val) => { state.answers[state.current] = val; Storage.saveTemp(state); };
 window.handleNext = () => { if(state.current < state.batch.length - 1) { state.current++; renderCurrent(); } };
 window.handlePrev = () => { if(state.current > 0) { state.current--; renderCurrent(); } };
@@ -263,6 +272,10 @@ window.handleBack = () => { Storage.clearTemp(); window.location.href = 'index.h
 
 function finishSession() {
     const result = Logic.gradeSession(state, QUESTIONS);
+    
+    // --- SIMPAN PROGRESS MASTERY (BARU) ---
+    Storage.saveMastery(result.details, state.sessionType);
+
     const uniqueBabs = [...new Set(state.batch.map(item => item.bab || "Default"))].sort();
     const packagesStr = uniqueBabs.join(', ');
 
