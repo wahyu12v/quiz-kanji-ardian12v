@@ -273,7 +273,7 @@ window.handleBack = () => { Storage.clearTemp(); window.location.href = 'index.h
 function finishSession() {
     const result = Logic.gradeSession(state, QUESTIONS);
     
-    // --- SIMPAN PROGRESS MASTERY (BARU) ---
+    // Simpan Mastery
     Storage.saveMastery(result.details, state.sessionType);
 
     const uniqueBabs = [...new Set(state.batch.map(item => item.bab || "Default"))].sort();
@@ -289,7 +289,10 @@ function finishSession() {
     });
 
     Storage.clearTemp();
-    UI.renderResult(result, state.sessionType.includes('quiz'), wrongIndices);
+    
+    // --- PERUBAHAN DISINI ---
+    // Kita kirim 'state.sessionType' (string penuh), bukan boolean
+    UI.renderResult(result, state.sessionType, wrongIndices);
     
     const btnStop = document.getElementById('btn-stop-quiz');
     if(btnStop) btnStop.classList.add('d-none'); 
