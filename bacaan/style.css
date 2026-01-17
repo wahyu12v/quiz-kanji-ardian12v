@@ -2,55 +2,69 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Poppins:wght@400;500;600;700&display=swap');
 
 :root {
-    /* Color Palette dari Referensi */
-    --primary-gradient: linear-gradient(135deg, #00C6FF 0%, #0072FF 100%);
-    --primary-color: #0072FF;
-    --text-dark: #2c3e50;
-    --text-muted: #6c757d;
-    --bg-dots: #f4f7f6;
-    --dot-color: #e0e0e0;
+    /* --- PALET WARNA DARK NEON GREEN --- */
+    /* Ubah warna dasar ke Gelap (Midnight Blue) */
+    --bg-main: #020617; 
+    --bg-card: rgba(30, 41, 59, 0.7);
+    --bg-glass: rgba(15, 23, 42, 0.9);
+    
+    /* GANTI INI: Warna Aksen Utama (HIJAU NEON) */
+    --primary-gradient: linear-gradient(135deg, #4ade80 0%, #16a34a 100%); /* Hijau */
+    --primary-color: #4ade80; /* Hijau Neon Terang */
+    
+    /* Warna Teks */
+    --text-dark: #f8fafc; /* Putih Terang */
+    --text-muted: #94a3b8; /* Abu-abu Slate */
+    
+    /* Pattern Background */
+    --bg-dots: var(--bg-main);
+    --dot-color: rgba(74, 222, 128, 0.15); /* Dot Hijau Samar */
+    
+    --border-color: rgba(255, 255, 255, 0.1);
 }
 
 body {
     background-color: var(--bg-dots);
-    /* Background titik-titik sesuai referensi */
+    /* Pattern Dot Halus */
     background-image: radial-gradient(var(--dot-color) 1px, transparent 1px);
     background-size: 20px 20px;
     font-family: 'Poppins', sans-serif;
     color: var(--text-dark);
     min-height: 100vh;
-    overflow-x: hidden;
+    overflow-x: hidden; /* Mencegah scroll samping */
 }
 
-/* --- Header Styling --- */
+/* --- Header Styling (DARK GLASS) --- */
 .app-header {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: var(--bg-glass); /* Gelap Transparan */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     padding: 15px 0;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4); /* Shadow lebih kuat */
     position: sticky;
     top: 0;
     z-index: 1000;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .brand-icon {
     width: 40px;
     height: 40px;
-    background: var(--primary-gradient);
+    background: rgba(14, 165, 233, 0.15); /* Biru Transparan */
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: var(--primary-color);
     font-size: 1.2rem;
-    box-shadow: 0 4px 10px rgba(0, 114, 255, 0.2);
+    box-shadow: 0 0 15px rgba(14, 165, 233, 0.3); /* Efek Glow */
+    border: 1px solid rgba(14, 165, 233, 0.3);
 }
 
 .brand-title {
     font-family: 'Poppins', sans-serif;
-    color: var(--primary-color);
+    color: white; /* Judul Putih */
+    font-weight: 700;
 }
 
 /* --- Buttons --- */
@@ -64,20 +78,23 @@ body {
 
 .btn-primary-gradient:hover, .btn-primary-gradient:active {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 114, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 114, 255, 0.5); /* Glow lebih kuat */
     color: white !important;
 }
 
 .btn-back-header {
-    border: 2px solid var(--primary-color);
-    color: var(--primary-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
     font-weight: 600;
+    background: rgba(255,255,255,0.05);
     transition: all 0.2s;
 }
 
 .btn-back-header:hover {
     background: var(--primary-color);
-    color: white;
+    color: black;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px rgba(14, 165, 233, 0.5);
 }
 
 .btn-back-floating {
@@ -94,14 +111,14 @@ body {
     z-index: 999;
 }
 
-/* --- Card Styling (List View) --- */
+/* --- Card Styling (List View) - DARK MODE --- */
 .story-card {
-    border: none;
+    border: 1px solid var(--border-color);
     border-radius: 24px;
-    background: white;
+    background: var(--bg-card); /* Background Kartu Gelap */
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     height: 100%;
     cursor: pointer;
     position: relative;
@@ -110,14 +127,15 @@ body {
 
 .story-card:hover {
     top: -8px;
-    box-shadow: 0 20px 40px rgba(0, 114, 255, 0.15);
+    border-color: var(--primary-color);
+    box-shadow: 0 15px 30px rgba(0, 114, 255, 0.2);
 }
 
 .card-img-wrapper {
     height: 220px;
     overflow: hidden;
     position: relative;
-    background-color: #eee; /* Placeholder color */
+    background-color: #1e293b; /* Placeholder gelap */
 }
 
 .card-img-top {
@@ -132,64 +150,97 @@ body {
 }
 
 .card-body-custom {
-    padding: 20px 25px;
-    background: white;
-    position: relative;
+    padding: 10px 20px 20px 20px; /* <--- GANTI INI (Sebelumnya 25px 20px) */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    text-align: center;
+    background: transparent !important;
 }
 
 .story-title {
     font-size: 1.1rem;
     font-weight: 700;
-    color: var(--text-dark);
+    color: white; /* Judul Cerita Putih */
     margin-bottom: 0;
     font-family: 'Noto Sans JP', sans-serif;
 }
 
-/* Update lebar kertas agar muat 2 kolom */
+/* --- ICON STYLE (CARD LIST) - UNIFORM COLOR FIX --- */
+/* Override warna JS dengan !important agar seragam */
+.card-icon-wrapper {
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    color: var(--primary-color) !important; /* Paksa Icon Biru Neon */
+    
+    /* Paksa Background Gelap Seragam */
+    background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%) !important;
+    
+    text-shadow: 0 0 20px rgba(14, 165, 233, 0.4);
+    border-bottom: 1px solid var(--border-color);
+    transition: transform 0.5s ease;
+}
+
+.story-card:hover .card-icon-wrapper {
+    transform: scale(1.05);
+    background: rgba(14, 165, 233, 0.1) !important; /* Efek hover halus */
+}
+
+.story-card:hover .card-icon-wrapper i {
+    transform: scale(1.2) rotate(5deg);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    color: white !important; /* Icon jadi putih saat hover */
+}
+
+/* --- READER PAPER (DARK MODE) --- */
 .reader-paper {
-    max-width: 800px; /* Lebar awal */
+    max-width: 800px;
     margin: 0 auto;
-    background: white;
+    background: #0f172a; /* Kertas Gelap */
+    border: 1px solid var(--border-color);
     border-radius: 30px;
     overflow: hidden;
     position: relative;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
-    transition: max-width 0.5s ease; /* Animasi melebar */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
+    transition: max-width 0.5s ease;
 }
 
-/* Class tambahan saat mode split (2 kolom) aktif */
 .reader-paper.wide-mode {
-    max-width: 1100px; /* Melebar jadi 1100px */
+    max-width: 1100px;
 }
 
-/* Garis pemisah vertikal antar kolom */
 .separator-line {
-    border-right: 2px dashed #e0e0e0;
+    border-right: 2px dashed rgba(255,255,255,0.1);
     height: 100%;
 }
 
-/* Styling Box Terjemahan di sisi kanan */
 .translation-side {
-    background-color: #f8fbff;
+    background-color: rgba(255,255,255,0.02);
     padding: 30px;
     border-radius: 20px;
     height: 100%;
     font-size: 1.1rem;
     line-height: 1.8;
-    color: #555;
-    border: 1px solid #e1f0ff;
+    color: #cbd5e1;
+    border: 1px solid rgba(255,255,255,0.05);
 }
 
-/* Agar animasi grid halus */
 .col-transition {
     transition: all 0.5s ease;
 }
 
+/* --- Reader Content --- */
 .japanese-content {
     font-family: 'Noto Sans JP', sans-serif;
     font-size: 1.6rem;
-    line-height: 2.6; /* Spasi baris agar furigana jelas */
-    color: #333;
+    line-height: 2.6;
+    color: #e2e8f0; /* Teks Jepang Putih Gading */
     text-align: justify;
 }
 
@@ -198,136 +249,23 @@ ruby {
 }
 rt {
     font-size: 0.6em;
-    color: var(--primary-color);
+    color: var(--primary-color); /* Furigana Biru Neon */
     font-weight: normal;
     user-select: none;
 }
 
 .translation-box {
-    background-color: #f0f7ff;
-    border-left: 5px solid var(--primary-color); /* Garis biru di kiri */
+    background-color: rgba(14, 165, 233, 0.1); /* Biru sangat transparan */
+    border-left: 5px solid var(--primary-color);
     padding: 25px;
     border-radius: 8px;
     font-size: 1.1rem;
     line-height: 1.8;
-    color: #555;
+    color: #e2e8f0; /* Teks Terjemahan Terang */
     margin-top: 20px;
 }
 
-/* --- ICON STYLE (CARD LIST) --- */
-.card-icon-wrapper {
-    height: 180px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 4rem;
-    color: white;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    transition: transform 0.5s ease;
-}
-
-.story-card:hover .card-icon-wrapper {
-    transform: scale(1.05);
-}
-
-.story-card:hover .card-icon-wrapper i {
-    transform: scale(1.2) rotate(5deg);
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-/* Hapus skeleton loading */
-.skeleton { animation: none; background: none; }
-
-/* Responsif Mobile */
-@media (max-width: 768px) {
-    .card-icon-wrapper { height: 150px; font-size: 3rem; }
-    .reader-hero-icon { height: 200px; font-size: 4rem; }
-    .japanese-content { font-size: 1.3rem; line-height: 2.2; }
-    .reader-main-title { font-size: 1.5rem; }
-    .reader-body { padding: 30px 20px; }
-}
-
-.japanese-content {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 1.5rem;
-    line-height: 2.4;
-    color: #333;
-    text-align: justify;
-}
-
-/* Styling Furigana (Ruby) */
-ruby {
-    ruby-position: over;
-}
-rt {
-    font-size: 0.6em;
-    color: var(--primary-color); /* Menggunakan warna biru utama */
-    font-weight: normal;
-    user-select: none;
-}
-
-.translation-box {
-    background-color: #f8fbff;
-    border: 2px dashed #cce5ff;
-    padding: 25px;
-    border-radius: 20px;
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #555;
-}
-
-/* --- Utilities --- */
-/* Skeleton loading effect untuk gambar */
-.skeleton {
-    animation: skeleton-loading 1s linear infinite alternate;
-}
-
-@keyframes skeleton-loading {
-    0% { background-color: #e0e0e0; }
-    100% { background-color: #f5f5f5; }
-}
-
-/* Responsif untuk mobile */
-@media (max-width: 768px) {
-    .card-img-wrapper {
-        height: 180px;
-    }
-    .reader-hero-container {
-        height: 250px;
-    }
-    .japanese-content {
-        font-size: 1.3rem;
-        line-height: 2.2;
-    }
-    .reader-main-title {
-        font-size: 1.5rem;
-    }
-}
-
-
-/* --- ICON STYLE PENGGANTI GAMBAR --- */
-
-.card-icon-wrapper {
-    height: 180px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 4rem; /* Ukuran Ikon Besar */
-    color: white;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    transition: transform 0.5s ease;
-}
-
-.story-card:hover .card-icon-wrapper {
-    transform: scale(1.05);
-}
-
-.story-card:hover .card-icon-wrapper i {
-    transform: scale(1.2) rotate(5deg);
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-/* Style untuk Header di Mode Baca */
+/* Header di Mode Baca */
 .reader-hero-icon {
     width: 100%;
     height: 300px;
@@ -335,231 +273,93 @@ rt {
     align-items: center;
     justify-content: center;
     font-size: 6rem;
-    color: white;
-    border-radius: 30px 30px 0 0; /* Lengkung atas saja */
-    text-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    color: var(--primary-color);
+    border-radius: 30px 30px 0 0;
+    text-shadow: 0 0 30px rgba(14, 165, 233, 0.4);
+    background: linear-gradient(180deg, rgba(14, 165, 233, 0.1) 0%, rgba(15, 23, 42, 0) 100%) !important; /* Gradient Gelap */
 }
 
-/* Sembunyikan skeleton loading karena kita tidak pakai gambar lagi */
-.skeleton {
-    animation: none;
-    background: none;
+.skeleton { animation: none; background: none; }
+
+/* Responsif Mobile */
+@media (max-width: 768px) {
+    .card-icon-wrapper { height: 150px; font-size: 3rem; }
+    .reader-hero-icon { height: 200px; font-size: 4rem; }
+    .japanese-content { font-size: 1.3rem; line-height: 2.2; }
+    .reader-main-title { font-size: 1.5rem; color: white; }
+    .reader-body { padding: 30px 20px; }
 }
 
-
-
-/* Container agar tombol sejajar dan rapi */
+/* --- TOMBOL READER ACTIONS --- */
 .reader-actions {
     display: flex;
-    justify-content: center; /* Posisi tengah */
-    gap: 15px; /* Jarak antar tombol */
+    justify-content: center;
+    gap: 15px;
     margin: 20px 0;
-    flex-wrap: wrap; /* Agar aman di HP layar kecil */
+    flex-wrap: wrap;
 }
 
-/* Style Dasar Tombol */
 .custom-btn {
     padding: 12px 25px;
-    border-radius: 50px; /* Membuat bentuk kapsul/bulat */
+    border-radius: 50px;
     font-size: 16px;
     font-family: sans-serif;
     font-weight: 600;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 10px; /* Jarak ikon dan teks */
+    gap: 10px;
     transition: all 0.3s ease;
     border: none;
     outline: none;
 }
 
-/* Style Tombol Audio (Putih dengan Garis Biru) */
 .btn-outline {
-    background-color: white;
-    border: 1px solid #2b7af1; /* Warna biru border */
-    color: #2b7af1; /* Warna teks biru */
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
 }
 
 .btn-outline:hover {
-    background-color: #f0f8ff; /* Warna background saat disentuh */
+    background-color: var(--primary-color);
+    color: black;
+    box-shadow: 0 0 15px rgba(14, 165, 233, 0.4);
 }
 
 .btn-outline:active {
-    transform: scale(0.95); /* Efek tekan */
-}
-
-/* Style Tombol Terjemahan (Gradient Biru Muda ke Biru Tua) */
-.btn-gradient {
-    /* Gradient persis seperti di gambar */
-    background: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%); 
-    color: white;
-    box-shadow: 0 4px 15px rgba(0, 114, 255, 0.3); /* Bayangan halus */
-}
-
-.btn-gradient:hover {
-    background: linear-gradient(90deg, #0072ff 0%, #00c6ff 100%); /* Balik warna saat hover */
-    box-shadow: 0 6px 20px rgba(0, 114, 255, 0.4);
-}
-
-.btn-gradient:active {
     transform: scale(0.95);
 }
 
-/* Ikon sedikit diperbesar */
-.custom-btn i {
-    font-size: 18px;
+.btn-gradient {
+    background: var(--primary-gradient);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 114, 255, 0.3);
 }
 
-/* Style Tombol Stop (Merah) */
+.btn-gradient:hover {
+    background: linear-gradient(90deg, #0072ff 0%, #00c6ff 100%);
+    box-shadow: 0 0 20px rgba(0, 114, 255, 0.6);
+}
+
 .btn-stop {
-    background-color: white;
+    background-color: transparent;
     border: 1px solid #ff4757;
     color: #ff4757;
 }
 
 .btn-stop:hover {
-    background-color: #ffe0e3; /* Merah muda pudar saat di-hover */
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(255, 71, 87, 0.2);
-}
-
-.btn-stop:active {
-    transform: scale(0.95);
-}
-
-/* --- GAYA TAMPILAN PER KALIMAT (INTERLINEAR) --- */
-
-.sentence-block {
-    margin-bottom: 25px; /* Jarak antar kalimat */
-    padding-bottom: 15px;
-    border-bottom: 1px dashed #eee; /* Garis tipis pemisah antar kalimat */
-}
-
-.jp-sentence {
-    /* Style huruf Jepang */
-    font-family: 'Noto Sans JP', sans-serif;
-    font-size: 1.4rem;
-    line-height: 2.2;
-    color: #2c3e50;
-    margin-bottom: 8px;
-}
-
-.id-translation {
-    /* Style terjemahan di bawahnya */
-    font-family: 'Poppins', sans-serif;
-    font-size: 1rem;
-    color: #0072FF; /* Warna biru biar kontras */
-    background-color: #f0f8ff;
-    padding: 8px 12px;
-    border-radius: 8px;
-    line-height: 1.6;
-    display: none; /* Default sembunyi */
-    animation: fadeIn 0.3s ease;
-}
-
-/* Class untuk memunculkan terjemahan */
-.show-translation .id-translation {
-    display: block;
-}
-
-/* Class untuk menyembunyikan furigana */
-.hide-furigana rt {
-    opacity: 0;
-}
-
-/* --- MENU MELAYANG (FLOATING DOCK) --- */
-
-.floating-dock-container {
-    position: fixed;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%); /* Agar tepat di tengah */
-    
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    
-    background: rgba(255, 255, 255, 0.9); /* Putih transparan */
-    backdrop-filter: blur(12px); /* Efek blur kaca (Glassmorphism) */
-    -webkit-backdrop-filter: blur(12px);
-    
-    padding: 12px 20px;
-    border-radius: 50px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    z-index: 9999;
-    
-    width: max-content;
-    max-width: 90%;
-}
-
-.dock-btn {
-    border: none;
-    background: transparent;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    color: #555;
-    min-width: 50px;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.dock-btn i {
-    font-size: 1.4rem;
-    padding: 8px;
-    border-radius: 50%;
-    background-color: #f5f5f5;
-    transition: all 0.2s;
-}
-
-.dock-btn span {
-    font-size: 0.7rem;
-    font-weight: 600;
-}
-
-/* Efek Hover & Active */
-.dock-btn:active { transform: scale(0.9); }
-
-.dock-btn:hover i {
-    background-color: #0072FF;
-    color: white;
-    transform: translateY(-3px);
-}
-
-/* Warna khusus tombol Stop */
-.dock-btn.btn-red:hover i {
     background-color: #ff4757;
-}
-
-/* Status Aktif (Misal Terjemahan Nyala) */
-.dock-btn.active i {
-    background-color: #0072FF;
     color: white;
-    box-shadow: 0 4px 10px rgba(0, 114, 255, 0.3);
+    box-shadow: 0 0 15px rgba(255, 71, 87, 0.4);
 }
 
-.dock-btn.active-furigana i {
-    background-color: #9c27b0;
-    color: white;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-5px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* --- GAYA TAMPILAN PER KALIMAT (INTERLINEAR - LEBIH PADAT) --- */
-
+/* --- INTERLINEAR STYLE --- */
 .sentence-block {
-    margin-bottom: 10px; /* Jarak antar blok kalimat diperkecil */
+    margin-bottom: 10px;
     padding-bottom: 10px;
-    border-bottom: 1px dashed #f0f0f0; /* Garis pemisah sangat tipis */
+    border-bottom: 1px dashed rgba(255,255,255,0.1); /* Garis tipis */
 }
 
-/* Hapus garis di kalimat terakhir agar rapi */
 .sentence-block:last-child {
     border-bottom: none;
 }
@@ -567,21 +367,22 @@ rt {
 .jp-sentence {
     font-family: 'Noto Sans JP', sans-serif;
     font-size: 1.4rem;
-    line-height: 2.0; /* Sedikit dirapatkan */
-    color: #2c3e50;
-    margin-bottom: 2px; /* Jarak ke terjemahan diperkecil */
+    line-height: 2.0;
+    color: #f1f5f9; /* Putih */
+    margin-bottom: 2px;
 }
 
 .id-translation {
     font-family: 'Poppins', sans-serif;
-    font-size: 0.95rem; /* Ukuran font sedikit dikecilkan agar proporsional */
-    color: #0072FF; 
-    background-color: #f4f9ff; /* Warna background lebih lembut */
-    padding: 5px 10px; /* Padding diperkecil */
+    font-size: 0.95rem;
+    color: #86efac; /* Hijau Pastel (Nyaman dibaca di gelap) */
+    background-color: rgba(255,255,255,0.05);
+    padding: 5px 10px;
     border-radius: 6px;
     line-height: 1.4;
-    display: none; 
+    display: none;
     animation: fadeIn 0.3s ease;
+    border-left: 3px solid #4ade80;
 }
 
 .show-translation .id-translation {
@@ -592,8 +393,7 @@ rt {
     opacity: 0;
 }
 
-/* --- PAGINATION & DOCK STYLES --- */
-
+/* --- PAGINATION --- */
 #pagination-container {
     margin-top: 30px;
     margin-bottom: 50px;
@@ -603,10 +403,9 @@ rt {
     width: 45px;
     height: 45px;
     border-radius: 50%;
-    border: none;
-    background: white;
-    color: #0072FF;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    border: 1px solid var(--border-color);
+    background: rgba(255,255,255,0.05);
+    color: white;
     font-weight: bold;
     transition: all 0.3s;
     display: flex;
@@ -615,20 +414,21 @@ rt {
 }
 
 .page-nav-btn:hover:not(:disabled) {
-    background: #0072FF;
-    color: white;
+    background: var(--primary-color);
+    color: black;
     transform: translateY(-2px);
-    box-shadow: 0 8px 15px rgba(0, 114, 255, 0.2);
+    box-shadow: 0 0 15px rgba(14, 165, 233, 0.5);
+    border-color: var(--primary-color);
 }
 
 .page-nav-btn:disabled {
-    opacity: 0.5;
+    opacity: 0.3;
     cursor: not-allowed;
-    background: #eee;
-    color: #999;
+    background: rgba(255,255,255,0.02);
+    color: #666;
 }
 
-/* Floating Dock (Menu Melayang) */
+/* --- FLOATING DOCK (MENU BAWAH) - DARK GLASS --- */
 .floating-dock-container {
     position: fixed;
     bottom: 30px;
@@ -636,14 +436,16 @@ rt {
     transform: translateX(-50%);
     display: flex;
     align-items: center;
-    gap: 15px; /* Jarak antar tombol di menu */
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    gap: 15px;
+    
+    background: rgba(15, 23, 42, 0.9); /* Gelap */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    
     padding: 10px 25px;
     border-radius: 50px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-    border: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     z-index: 9999;
     width: max-content;
 }
@@ -656,14 +458,18 @@ rt {
     align-items: center;
     justify-content: center;
     gap: 2px;
-    color: #666;
+    color: #94a3b8; /* Text default */
     cursor: pointer;
     min-width: 45px;
+    transition: all 0.2s;
 }
 
 .dock-btn i {
     font-size: 1.3rem;
     margin-bottom: 2px;
+    padding: 8px;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.05); /* Lingkaran icon transparan */
     transition: 0.2s;
 }
 
@@ -672,28 +478,29 @@ rt {
     font-weight: 600;
 }
 
-/* Warna Aktif */
-.dock-btn.active i, .dock-btn:hover i {
-    color: #0072FF;
-    transform: scale(1.1);
+/* Active / Hover States */
+.dock-btn.active i {
+    background-color: var(--primary-color);
+    color: black;
+    box-shadow: 0 0 10px rgba(14, 165, 233, 0.5);
+}
+.dock-btn.active span {
+    color: var(--primary-color);
 }
 
-.dock-btn.active-furigana i {
-    color: #9c27b0;
+.dock-btn:hover i {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+    transform: translateY(-3px);
 }
-
-.dock-btn.btn-red:hover i {
-    color: #ff4757;
-}
-
 
 /* --- CATEGORY BUTTONS --- */
 .category-btn {
-    border: 1px solid #e0e0e0;
-    background-color: white;
-    color: #555;
+    border: 1px solid var(--border-color);
+    background-color: rgba(255,255,255,0.05);
+    color: #cbd5e1;
     padding: 8px 20px;
-    border-radius: 50px; /* Bentuk Pil */
+    border-radius: 50px;
     font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
@@ -701,90 +508,65 @@ rt {
 }
 
 .category-btn:hover {
-    background-color: #f8f9fa;
-    transform: translateY(-2px);
-    border-color: #ccc;
+    background-color: rgba(255,255,255,0.1);
+    border-color: white;
+    color: white;
 }
 
 .category-btn.active {
-    background: linear-gradient(135deg, #00C6FF 0%, #0072FF 100%);
+    background: var(--primary-gradient);
     color: white;
     border-color: transparent;
-    box-shadow: 0 4px 10px rgba(0, 114, 255, 0.3);
-}
-
-/* --- CATEGORY SCROLL CONTAINER --- */
-.category-wrapper {
-    position: relative;
-    width: 100%;
-    overflow: hidden; /* Mencegah scrollbar default browser yang jelek */
+    box-shadow: 0 0 15px rgba(0, 114, 255, 0.4);
 }
 
 .category-scroll-container {
     display: flex;
-    overflow-x: auto;      /* Aktifkan scroll samping */
-    gap: 10px;             /* Jarak antar tombol */
-    padding: 5px 20px;     /* Padding kiri kanan biar tidak mepet layar */
-    white-space: nowrap;   /* Wajib: Jangan turun ke baris baru */
-    -webkit-overflow-scrolling: touch; /* Agar scroll halus di iPhone */
-    
-    /* Sembunyikan Scrollbar (Biar rapi seperti aplikasi native) */
-    scrollbar-width: none;  /* Firefox */
-    -ms-overflow-style: none;  /* IE 10+ */
+    overflow-x: auto;
+    gap: 10px;
+    padding: 5px 20px;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
+.category-scroll-container::-webkit-scrollbar { display: none; }
 
-.category-scroll-container::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
-}
-
-/* --- TOMBOL KATEGORI --- */
-.category-btn {
-    flex: 0 0 auto; /* PENTING: Agar tombol tidak mengecil/gepeng */
-    border: 1px solid #e0e0e0;
-    background-color: white;
-    color: #555;
-    padding: 8px 20px;
-    border-radius: 50px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.category-btn:hover {
-    background-color: #f8f9fa;
-    border-color: #ccc;
-}
-
-.category-btn.active {
-    background: linear-gradient(135deg, #00C6FF 0%, #0072FF 100%);
+/* --- MODAL (DARK MODE) --- */
+.modal-content {
+    background-color: #1e293b; /* Slate Dark */
     color: white;
-    border-color: transparent;
-    box-shadow: 0 4px 10px rgba(0, 114, 255, 0.3);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+.modal-header, .modal-footer {
+    border-color: rgba(255,255,255,0.05);
+}
+.btn-close {
+    filter: invert(1);
+    opacity: 0.7;
 }
 
-/* --- MODAL KATEGORI --- */
 .cat-modal-btn {
-    border: 1px solid #eee;
-    background-color: #f8f9fa;
-    color: #555;
+    border: 1px solid var(--border-color);
+    background-color: rgba(255,255,255,0.03);
+    color: #cbd5e1;
     padding: 10px 20px;
     border-radius: 12px;
     font-size: 0.95rem;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s;
-    width: 100%; /* Agar full width di HP jika mau, atau hapus baris ini biar auto */
+    width: 100%;
     text-align: left;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-/* Tampilan di Desktop biar grid */
 @media (min-width: 576px) {
     .cat-modal-btn {
-        width: auto; /* Balik ke ukuran isi konten */
+        width: auto;
         min-width: 120px;
         justify-content: center;
         text-align: center;
@@ -792,37 +574,36 @@ rt {
 }
 
 .cat-modal-btn:hover {
-    background-color: #e3f2fd;
-    color: #0072FF;
-    border-color: #0072FF;
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+    border-color: var(--primary-color);
 }
 
 .cat-modal-btn.active {
-    background: linear-gradient(135deg, #00C6FF 0%, #0072FF 100%);
+    background: var(--primary-gradient);
     color: white;
     border-color: transparent;
-    box-shadow: 0 4px 10px rgba(0, 114, 255, 0.2);
+    box-shadow: 0 0 15px rgba(0, 114, 255, 0.4);
 }
 
 /* --- VOCABULARY --- */
 .vocab-item {
-    background: white;
-    border: 1px solid #eee;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border-color);
     padding: 8px 15px;
     border-radius: 12px;
     font-size: 0.9rem;
     display: flex;
     flex-direction: column;
     min-width: 100px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.03);
 }
 .vocab-word {
     font-weight: bold;
-    color: #333;
+    color: white;
     font-size: 1rem;
 }
 .vocab-meaning {
-    color: #666;
+    color: #94a3b8;
     font-size: 0.8rem;
     margin-top: 2px;
 }
@@ -830,41 +611,127 @@ rt {
 /* --- QUIZ STYLES --- */
 .quiz-option-btn {
     text-align: left;
-    background: white;
-    border: 1px solid #d0e1f0;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border-color);
     padding: 12px 20px;
     border-radius: 12px;
     transition: all 0.2s;
     font-weight: 500;
-    color: #444;
+    color: #e2e8f0;
 }
 .quiz-option-btn:hover {
-    background: #eef7fc;
-    border-color: #0072FF;
+    background: rgba(255,255,255,0.1);
+    border-color: var(--primary-color);
 }
 .quiz-option-btn.correct {
-    background-color: #d4edda !important;
+    background-color: rgba(40, 167, 69, 0.2) !important;
     border-color: #28a745 !important;
-    color: #155724 !important;
+    color: #81c784 !important;
 }
 .quiz-option-btn.wrong {
-    background-color: #f8d7da !important;
+    background-color: rgba(220, 53, 69, 0.2) !important;
     border-color: #dc3545 !important;
-    color: #721c24 !important;
-    opacity: 0.7;
+    color: #e57373 !important;
+    opacity: 0.8;
 }
-
 
 /* --- SEARCH BAR STYLE --- */
+.search-wrapper input {
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid var(--border-color);
+    color: white;
+}
+.search-wrapper input::placeholder {
+    color: #64748b;
+}
 #input-cari:focus {
+    background: #1e293b;
     border-color: var(--primary-color) !important;
-    box-shadow: 0 0 0 4px rgba(0, 114, 255, 0.1) !important;
+    box-shadow: 0 0 15px rgba(0, 114, 255, 0.3) !important;
     outline: none;
+    color: white;
 }
 
-/* Responsif di HP agar search bar tidak terlalu lebar */
 @media (max-width: 576px) {
     .search-wrapper, #input-cari {
         width: 100%;
     }
+}
+
+
+/* --- FIX: JARAK ICON & JUDUL (OVERRIDE) --- */
+
+/* 1. Pendekkan area header icon */
+.reader-hero-container {
+    height: 180px !important; 
+    min-height: 180px !important;
+}
+
+/* 2. Pas kan ukuran icon di dalamnya */
+.reader-hero-icon {
+    height: 100% !important;
+    font-size: 4rem !important; /* Ukuran icon pas */
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important; /* Hapus background dobel jika ada */
+}
+
+/* 3. Naikkan area judul (Kurangi padding atas) */
+.reader-body {
+    padding-top: 5px !important; /* Jarak atas sangat tipis */
+    padding-bottom: 40px !important;
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+}
+
+/* 4. Pastikan judul tidak punya margin atas berlebih */
+.reader-main-title {
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
+
+/* ==================================================================
+   FORCE GREEN FIX (TEMPEL DI PALING BAWAH STYLE.CSS)
+   ================================================================== */
+
+/* 1. Paksa Ikon Buku di Tengah Modal jadi Hijau */
+#versionChoiceModal .mx-auto {
+    background: rgba(74, 222, 128, 0.15) !important;
+    color: #4ade80 !important; /* Hijau Neon */
+    box-shadow: 0 0 0 10px rgba(74, 222, 128, 0.05) !important;
+}
+
+/* 2. Paksa Tombol Versi Singkat (Outline) jadi Hijau */
+#btn-choice-short {
+    border: 2px solid #4ade80 !important; /* Border Hijau */
+    color: #4ade80 !important; /* Teks Hijau */
+    background: transparent !important;
+}
+#btn-choice-short:hover {
+    background: rgba(74, 222, 128, 0.1) !important;
+}
+#btn-choice-short i {
+    color: #4ade80 !important;
+}
+
+/* 3. Paksa Tombol Versi Lengkap (Solid) jadi Gradient Hijau */
+#btn-choice-long {
+    background: linear-gradient(135deg, #4ade80 0%, #16a34a 100%) !important; /* Gradient Hijau */
+    border: none !important;
+    color: #020617 !important; /* Teks Hitam (supaya terbaca) */
+    box-shadow: 0 10px 20px rgba(74, 222, 128, 0.25) !important;
+}
+#btn-choice-long:hover {
+    box-shadow: 0 15px 30px rgba(74, 222, 128, 0.4) !important;
+    transform: translateY(-2px) !important;
+}
+#btn-choice-long i {
+    color: #020617 !important;
+}
+
+/* 4. Hapus Badge 'Tidak Ada' background putih jika ada */
+#versionChoiceModal .badge {
+    background: rgba(255,255,255,0.1) !important;
+    color: #94a3b8 !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
 }

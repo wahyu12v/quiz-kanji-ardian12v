@@ -95,7 +95,7 @@ function renderReaderView(story) {
             block.style.marginBottom = "30px"; 
             block.innerHTML = `
                 <div class="jp-sentence" style="text-align: justify;">${parseRuby(jpText)}</div>
-                <div class="id-translation" style="text-align: justify; margin-top: 10px;">${idText}</div>
+                <div class="id-translation" style="text-align: justify;">${idText}</div>
             `;
             contentContainer.appendChild(block);
         }
@@ -187,8 +187,8 @@ function toggleTranslation() {
                 
                 // Efek Highlight
                 transEl.style.transition = "background-color 0.5s";
-                transEl.style.backgroundColor = "#fffde7"; // Kuning lembut
-                setTimeout(() => { transEl.style.backgroundColor = "#f4f9ff"; }, 800);
+                transEl.style.backgroundColor = "rgba(15, 23, 42, 0.9)"; // Kuning lembut
+                setTimeout(() => { transEl.style.backgroundColor = "rgba(15, 23, 42, 0.9);"; }, 800);
             }, 100); 
         }
     }
