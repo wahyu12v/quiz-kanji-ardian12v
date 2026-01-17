@@ -1,4 +1,4 @@
-// logic.js - Logika Ujian & Scoring
+// js/logic.js
 import { state } from './state.js';
 import { renderQuestion } from './ui.js';
 import { stopAudio } from './audio.js';
@@ -7,7 +7,7 @@ export function selectAnswer(idx) {
     const q = state.currentQuestions[state.currentQuestionIndex];
     state.userAnswers[q.id] = idx; 
 
-    // Update UI Visual (Biar gak render ulang full satu halaman)
+    // UI Feedback Cepat tanpa render ulang
     const allBtns = document.querySelectorAll('.quiz-option-btn');
     allBtns.forEach((btn, i) => {
         if (i === idx) btn.classList.add('selected');
@@ -18,11 +18,11 @@ export function selectAnswer(idx) {
     const answeredCount = Object.keys(state.userAnswers).length;
     const totalQuestions = state.currentQuestions.length;
     document.getElementById('progress-bar').style.width = `${(answeredCount / totalQuestions) * 100}%`;
-    document.getElementById('progress-text').innerText = `${answeredCount}/${totalQuestions} Dijawab`;
+    document.getElementById('progress-text').innerText = `${answeredCount}/${totalQuestions}`;
 
     // Auto Next
     if (state.currentQuestionIndex < state.currentQuestions.length - 1) {
-        setTimeout(() => { nextQuestion(); }, 150); 
+        setTimeout(() => { nextQuestion(); }, 200); 
     } else {
         showFinishConfirmation();
     }
@@ -50,7 +50,6 @@ export function showFinishConfirmation() {
 export function startTimer(durationSeconds) {
     let timer = durationSeconds;
     const display = document.getElementById('timer-display');
-    
     clearInterval(state.timerInterval);
     state.timerInterval = setInterval(() => {
         const m = Math.floor(timer / 60);
@@ -64,9 +63,10 @@ export function startTimer(durationSeconds) {
 
 export function finishExam(isGiveUp) {
     const giveUpModalEl = document.getElementById('giveUpModal');
-    const giveUpModal = bootstrap.Modal.getInstance(giveUpModalEl);
-    if (giveUpModal) giveUpModal.hide();
-
+    if (giveUpModalEl) {
+        const giveUpModal = bootstrap.Modal.getInstance(giveUpModalEl);
+        if (giveUpModal) giveUpModal.hide();
+    }
     clearInterval(state.timerInterval);
     stopAudio();
     
@@ -77,57 +77,38 @@ export function finishExam(isGiveUp) {
         const userAnsIdx = state.userAnswers[q.id];
         const isCorrect = userAnsIdx === q.answer;
         if (isCorrect) correctCount++;
-
-        const statusBadge = isCorrect 
-            ? `<span class="badge bg-success"><i class="fas fa-check"></i> Benar</span>` 
-            : `<span class="badge bg-danger"><i class="fas fa-times"></i> Salah</span>`;
-
-        const userAnsText = userAnsIdx !== undefined ? q.options[userAnsIdx] : '<span class="text-muted">Tidak dijawab</span>';
+        const statusBadge = isCorrect ? `<span class="badge bg-success">Benar</span>` : `<span class="badge bg-danger">Salah</span>`;
+        const userAnsText = userAnsIdx !== undefined ? q.options[userAnsIdx] : 'Tidak dijawab';
         const correctAnsText = q.options[q.answer];
 
+        // TAMPILAN REVIEW GELAP
         reviewHtml += `
             <div class="col-12">
-                <div class="p-3 border rounded bg-light">
-                    <div class="d-flex justify-content-between mb-2">
-                        <strong>No. ${idx + 1} (${q.sectionName})</strong>
+                <div class="p-4 rounded-4 mb-4" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+                    <div class="d-flex justify-content-between mb-3">
+                        <strong class="text-info">No. ${idx + 1}</strong>
                         ${statusBadge}
                     </div>
-                    <p class="mb-2 text-dark fw-bold">${q.text}</p>
-                    ${q.translation ? `<p class="mb-2 text-muted small"><i class="fas fa-language"></i> Arti: ${q.translation}</p>` : ''}
-                    <div class="row g-2 mt-3 text-small" style="font-size: 0.9rem;">
-                        <div class="col-md-6">
-                            <div class="p-2 border rounded ${isCorrect ? 'bg-success-subtle border-success' : 'bg-danger-subtle border-danger'}">
-                                <small class="d-block fw-bold mb-1">Jawaban Kamu:</small>
-                                ${userAnsText}
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="p-2 border rounded bg-primary-subtle border-primary">
-                                <small class="d-block fw-bold mb-1">Kunci Jawaban:</small>
-                                ${correctAnsText}
-                            </div>
-                        </div>
+                    <p class="mb-3 text-white fw-bold">${q.text}</p>
+                    <div class="row g-3 small text-white">
+                        <div class="col-md-6"><div class="p-2 rounded border border-danger bg-danger bg-opacity-10">Jawab: ${userAnsText}</div></div>
+                        <div class="col-md-6"><div class="p-2 rounded border border-info bg-info bg-opacity-10">Kunci: ${correctAnsText}</div></div>
                     </div>
-                    ${q.explanation ? `<div class="mt-2 p-2 bg-white border rounded small text-muted"><i class="fas fa-info-circle text-primary"></i> <strong>Penjelasan:</strong> ${q.explanation}</div>` : ''}
                 </div>
-            </div>
-        `;
+            </div>`;
     });
 
     const finalScore = Math.round((correctCount / state.currentQuestions.length) * 250);
     const isPass = finalScore >= 200;
-
     document.getElementById('final-score').innerText = finalScore;
     const statusEl = document.getElementById('pass-status');
     
     if (isPass) {
         statusEl.innerText = "LULUS (合格)";
         statusEl.className = "fw-bold mb-2 text-success";
-        document.querySelector('.score-circle').style.border = "8px solid #28a745";
     } else {
         statusEl.innerText = "TIDAK LULUS (不合格)";
         statusEl.className = "fw-bold mb-2 text-danger";
-        document.querySelector('.score-circle').style.border = "8px solid #dc3545";
     }
 
     document.getElementById('exam-review-container').innerHTML = reviewHtml;

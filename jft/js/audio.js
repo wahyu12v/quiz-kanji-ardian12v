@@ -1,7 +1,6 @@
-// audio.js - Logika Audio Canggih
+// js/audio.js
 import { state } from './state.js';
 
-// --- INIT VOICES ---
 export function loadSystemVoices() {
     if ('speechSynthesis' in window) {
         state.voices = window.speechSynthesis.getVoices();
@@ -11,7 +10,14 @@ export function loadSystemVoices() {
     }
 }
 
-// --- MAIN PLAY FUNCTION ---
+export function playCurrentAudio(btnElement) {
+    const q = state.currentQuestions[state.currentQuestionIndex];
+    if (q && q.type === 'audio') {
+        const text = q.script || q.text; // Fallback ke text jika script kosong
+        playTTS(text, btnElement);
+    }
+}
+
 export function playTTS(text, btnElement) {
     stopAudio(); 
 
@@ -19,14 +25,12 @@ export function playTTS(text, btnElement) {
     const statusText = document.getElementById('audio-status-text');
     const btnIcon = btnElement ? btnElement.querySelector('i') : null;
 
-    // 1. STATE: LOADING
     if (btnElement && card) {
         btnElement.disabled = true;
         if(btnIcon) btnIcon.className = 'fas fa-spinner fa-spin';
         if(statusText) statusText.innerText = "Memuat...";
     }
 
-    // Callback: Selesai
     const onComplete = () => {
         if (card) card.classList.remove('active'); 
         if (btnElement) {
@@ -37,7 +41,6 @@ export function playTTS(text, btnElement) {
         state.isPlaying = false;
     };
 
-    // Callback: Bicara
     const onSpeaking = () => {
         if (card) card.classList.add('active'); 
         if (btnElement) {
@@ -47,7 +50,7 @@ export function playTTS(text, btnElement) {
         if (statusText) statusText.innerText = "Sedang Bicara...";
     };
 
-    // Parsing Text
+    // Parsing [N][M][F]
     const parts = text.split(/(\[[NMF]\])/g).filter(s => s.trim().length > 0);
     let currentRole = 'N'; 
     state.audioQueue = [];
@@ -65,7 +68,7 @@ export function playTTS(text, btnElement) {
     state.isPlaying = true;
     onSpeaking(); 
 
-    // Cek Engine
+    // ENGINE SELECTION
     let japanVoice = null;
     if ('speechSynthesis' in window) {
         if (state.voices.length === 0) state.voices = window.speechSynthesis.getVoices();
@@ -73,39 +76,12 @@ export function playTTS(text, btnElement) {
     }
 
     if (japanVoice) {
-        console.log("Mode: Offline");
         playOfflineQueue(japanVoice, onComplete);
     } else {
-        console.log("Mode: Online");
         playOnlineQueue(onComplete);
     }
 }
 
-// --- OFFLINE PLAYER ---
-function playOfflineQueue(voice, onComplete) {
-    const playNext = () => {
-        if (state.audioQueue.length === 0 || !state.isPlaying) {
-            onComplete();
-            return;
-        }
-
-        const item = state.audioQueue.shift();
-        const utterance = new SpeechSynthesisUtterance(item.text);
-        utterance.voice = voice;
-        utterance.lang = 'ja-JP';
-        
-        if (item.role === 'M') { utterance.pitch = 0.6; utterance.rate = 0.8; }
-        else if (item.role === 'F') { utterance.pitch = 1.3; utterance.rate = 0.9; }
-        else { utterance.pitch = 1.0; utterance.rate = 0.85; }
-
-        utterance.onend = playNext;
-        utterance.onerror = (e) => { console.error("Offline Error", e); playNext(); };
-        window.speechSynthesis.speak(utterance);
-    };
-    playNext();
-}
-
-// --- ONLINE PLAYER ---
 function playOnlineQueue(onComplete) {
     const playNextChunk = () => {
         if (state.audioQueue.length === 0 || !state.isPlaying) {
@@ -114,36 +90,43 @@ function playOnlineQueue(onComplete) {
         }
 
         const item = state.audioQueue.shift();
-        const chunks = item.text.match(/[^。！？、]+[。！？、]*/g) || [item.text];
-        let subQueue = chunks.map(c => ({ text: c, role: item.role }));
+        const cleanText = item.text.replace(/<[^>]*>/g, ''); 
+        // PAKE SERVER GTX (LEBIH STABIL)
+        const url = `https://translate.googleapis.com/translate_tts?client=gtx&ie=UTF-8&tl=ja&q=${encodeURIComponent(cleanText)}`;
         
-        const playSubQueue = () => {
-            if (subQueue.length === 0) {
-                playNextChunk();
-                return;
-            }
-            
-            const subItem = subQueue.shift();
-            const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(subItem.text)}&tl=ja&client=tw-ob`;
-            
-            state.currentAudioObj = new Audio(url);
-            
-            if (subItem.role === 'M') state.currentAudioObj.playbackRate = 0.85; 
-            else if (subItem.role === 'F') state.currentAudioObj.playbackRate = 1.15; 
-            else state.currentAudioObj.playbackRate = 1.0;
+        state.currentAudioObj = new Audio(url);
+        
+        if (item.role === 'M') state.currentAudioObj.playbackRate = 0.85; 
+        else if (item.role === 'F') state.currentAudioObj.playbackRate = 1.2; 
+        else state.currentAudioObj.playbackRate = 1.0;
 
-            if (state.currentAudioObj.mozPreservesPitch !== undefined) state.currentAudioObj.mozPreservesPitch = false;
-            state.currentAudioObj.onended = playSubQueue;
-            state.currentAudioObj.onerror = (e) => { console.warn("Skip chunk", e); playSubQueue(); };
-            
-            state.currentAudioObj.play().catch(e => { console.error("Audio blocked", e); onComplete(); });
-        };
-        playSubQueue();
+        state.currentAudioObj.onended = playNextChunk;
+        state.currentAudioObj.onerror = (e) => { console.warn("Audio Error", e); playNextChunk(); };
+        state.currentAudioObj.play().catch(e => { console.error("Blocked", e); onComplete(); });
     };
     playNextChunk();
 }
 
-// --- STOP ---
+function playOfflineQueue(voice, onComplete) {
+    const playNext = () => {
+        if (state.audioQueue.length === 0 || !state.isPlaying) {
+            onComplete();
+            return;
+        }
+        const item = state.audioQueue.shift();
+        const utterance = new SpeechSynthesisUtterance(item.text);
+        utterance.voice = voice;
+        utterance.lang = 'ja-JP';
+        if (item.role === 'M') { utterance.pitch = 0.6; utterance.rate = 0.8; }
+        else if (item.role === 'F') { utterance.pitch = 1.3; utterance.rate = 0.9; }
+        else { utterance.pitch = 1.0; utterance.rate = 0.85; }
+        utterance.onend = playNext;
+        utterance.onerror = playNext;
+        window.speechSynthesis.speak(utterance);
+    };
+    playNext();
+}
+
 export function stopAudio() {
     state.isPlaying = false;
     state.audioQueue = []; 
@@ -152,17 +135,14 @@ export function stopAudio() {
         state.currentAudioObj.pause();
         state.currentAudioObj = null;
     }
-    
     // Reset UI
     const card = document.getElementById('audio-player-card');
     const btnPlay = document.getElementById('btn-play-audio');
-    const btnIcon = btnPlay ? btnPlay.querySelector('i') : null;
     const statusText = document.getElementById('audio-status-text');
-
     if (card) card.classList.remove('active');
     if (statusText) statusText.innerText = "Klik Play";
     if (btnPlay) {
         btnPlay.disabled = false;
-        if(btnIcon) btnIcon.className = 'fas fa-play';
+        btnPlay.innerHTML = '<i class="fas fa-play"></i>';
     }
 }

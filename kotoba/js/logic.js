@@ -1,8 +1,7 @@
 import { KEYS } from './constants.js';
 import { hiraToRomaji } from './utils.js';
-import { getMastery } from './storage.js'; // Import getMastery
+import { getMastery } from './storage.js'; 
 
-// --- FUNGSI ACAK ---
 function internalShuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -11,7 +10,6 @@ function internalShuffle(array) {
   return array;
 }
 
-// --- HELPER SKOR KEMIRIPAN ---
 function getSimilarityScore(target, candidate) {
     if (!target || !candidate) return 0;
     let score = 0;
@@ -26,7 +24,6 @@ function getSimilarityScore(target, candidate) {
     return score;
 }
 
-// --- BUILD CHOICES ---
 export function buildChoices(orderIndices, allQuestions, mode = 'quiz') {
   return orderIndices.map(idx => {
     const q = allQuestions[idx];
@@ -57,15 +54,10 @@ export function buildChoices(orderIndices, allQuestions, mode = 'quiz') {
   });
 }
 
-// --- GRADE SESSION (Update: Sertakan Original Index) ---
 export function gradeSession(state, allQuestions) {
     let correctCount = 0;
     const results = state.batch.map((q, i) => {
-        // Ambil index asli dari pertanyaan ini di database utama (allQuestions)
-        // Kita cari berdasarkan referensi object atau ID jika ada. 
-        // Karena 'q' adalah referensi dari allQuestions, kita bisa pakai indexOf
         const originalIndex = allQuestions.indexOf(q); 
-
         const hira = String(q[KEYS.hiragana] || q['kana'] || '').trim(); 
         const mean = String(q[KEYS.meaning] || q['indo'] || '').trim(); 
         const romajiDB = String(q['romaji'] || '').trim(); 
@@ -99,34 +91,25 @@ export function gradeSession(state, allQuestions) {
             }
             userAnsStr = raw;
         }
-
         if (isCorrect) correctCount++;
-        
-        return { 
-            q, isCorrect, userAns: userAnsStr, 
-            realHira: hira, realMean: mean, realRomaji: romajiDB, 
-            romTrue: hiraToRomaji(hira),
-            originalIndex: originalIndex // PENTING UNTUK SAVE PROGRESS
-        };
+        return { q, isCorrect, userAns: userAnsStr, realHira: hira, realMean: mean, realRomaji: romajiDB, romTrue: hiraToRomaji(hira), originalIndex: originalIndex };
     });
-    
     return { score: correctCount, total: state.batch.length, details: results };
 }
 
-// --- NEW: HITUNG PROGRESS PER BAB ---
+// --- PERBAIKAN LOGIKA PROGRESS (SISTEM BAB) ---
 export function calculateProgress(allQuestions) {
     const mastery = getMastery();
     const babStats = {};
 
-    // 1. Kelompokkan Data per Bab
+    // 1. Hitung Data per Bab
     allQuestions.forEach((q, idx) => {
-        const babName = q.bab || "Lainnya";
+        const babName = q.bab || "Lainnya"; // Pakai Key BAB
         if (!babStats[babName]) {
             babStats[babName] = { totalWords: 0, modes: { quiz:0, quiz_hiragana:0, mem:0, write_romaji:0 } };
         }
         babStats[babName].totalWords++;
 
-        // Cek status mastery untuk kata ini (idx)
         if (mastery[idx]) {
             if (mastery[idx].quiz) babStats[babName].modes.quiz++;
             if (mastery[idx].quiz_hiragana) babStats[babName].modes.quiz_hiragana++;
@@ -135,27 +118,25 @@ export function calculateProgress(allQuestions) {
         }
     });
 
-    // 2. Hitung Persentase
-    // Total slot per bab = totalWords * 4 (karena ada 4 mode)
     const finalReport = Object.keys(babStats).map(bab => {
         const data = babStats[bab];
-        const totalSlots = data.totalWords * 4; // 100% jika semua mode benar
+        const totalWords = data.totalWords;
+        const totalSlots = totalWords * 4; // Total untuk progress BAR (Gabungan)
         
         const sumMastered = data.modes.quiz + data.modes.quiz_hiragana + data.modes.mem + data.modes.write_romaji;
-        const totalPct = Math.round((sumMastered / totalSlots) * 100);
+        const totalPct = totalSlots > 0 ? Math.round((sumMastered / totalSlots) * 100) : 0;
 
-        // Hitung Kontribusi per Mode (Sesuai request user: total semua mode = 100%)
-        // Rumus: (Jumlah Benar Mode X / Total Slot Semua Mode) * 100
-        const getContrib = (val) => Math.round((val / totalSlots) * 100);
+        // PERBAIKAN RUMUS: Dibagi 'totalWords' bukan 'totalSlots'
+        const getModePct = (val) => totalWords > 0 ? Math.round((val / totalWords) * 100) : 0;
 
         return {
             bab: bab,
             totalPct: totalPct,
             detail: {
-                tebakArti: getContrib(data.modes.quiz),
-                tebakHiragana: getContrib(data.modes.quiz_hiragana),
-                tulisArti: getContrib(data.modes.mem),
-                tulisRomaji: getContrib(data.modes.write_romaji)
+                tebakArti: getModePct(data.modes.quiz),
+                tebakHiragana: getModePct(data.modes.quiz_hiragana),
+                tulisArti: getModePct(data.modes.mem),
+                tulisRomaji: getModePct(data.modes.write_romaji)
             }
         };
     });

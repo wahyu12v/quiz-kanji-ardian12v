@@ -25,39 +25,36 @@ style.innerHTML = `
 
     /* RESULT STYLES (MINIMALIS) */
     .res-item { background: #fff; padding: 12px 15px; border-radius: 10px; border: 1px solid #eee; margin-bottom: 10px; }
-    
-    /* Header Kanji di Result */
     .res-kanji-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
     .res-kanji-main { font-size: 1.8rem; font-weight: bold; color: #212529; line-height: 1; }
-    
-    /* Kotak Jawaban Simple */
     .res-compare { display: flex; flex-direction: column; gap: 6px; }
-    .res-line { 
-        padding: 8px 12px; 
-        border-radius: 6px; 
-        font-size: 0.95rem; 
-        display: flex; 
-        align-items: center; 
-        justify-content: space-between;
-        font-weight: 500;
-    }
-    
-    /* Warna Status */
+    .res-line { padding: 8px 12px; border-radius: 6px; font-size: 0.95rem; display: flex; align-items: center; justify-content: space-between; font-weight: 500; }
     .res-wrong { background-color: #ffe3e3; color: #c92a2a; border: 1px solid #ffc9c9; }
     .res-correct { background-color: #d3f9d8; color: #2b8a3e; border: 1px solid #b2f2bb; }
-    
-    /* Label Kecil (Kamu / Benar) */
     .res-tag { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.7; margin-right: 8px; font-weight: 700; }
     .res-val { flex-grow: 1; text-align: right; }
-
-    /* Info Tambahan (Kecil di bawah) */
     .res-meta { font-size: 0.75rem; color: #868e96; margin-top: 6px; text-align: right; }
+
+    /* --- UPDATE: FONT RESPONSIF UNTUK SOAL --- */
+    .q-text-responsive {
+        /* Rumus clamp(MIN, IDEAL, MAX) */
+        /* HP: 1.8rem (Cukup kecil agar muat), Laptop: 3.5rem (Besar & Jelas) */
+        font-size: clamp(1.8rem, 5vw, 3.5rem); 
+        line-height: 1.3;
+        font-weight: bold;
+        color: #0d6efd;
+        text-align: center;
+        word-wrap: break-word; /* Agar kata panjang turun ke bawah, tidak nabrak */
+        width: 100%;
+    }
 `;
 document.head.appendChild(style);
 
-// --- HELPER: FORMAT TAMPILAN SOAL (KANJI ONLY) ---
-function formatQuestion(kanji) {
-    return `<div class="d-flex align-items-center justify-content-center" style="min-height: 120px;"><span class="fw-bold text-primary text-center" style="font-size: 5rem; line-height: 1;">${escapeHtml(kanji)}</span></div>`;
+// --- HELPER: FORMAT TAMPILAN SOAL (PAKAI CLASS RESPONSIF) ---
+function formatQuestion(text) {
+    return `<div class="d-flex align-items-center justify-content-center px-2" style="min-height: 120px;">
+                <span class="q-text-responsive">${escapeHtml(text)}</span>
+            </div>`;
 }
 
 // --- 1. RENDER QUIZ ---
@@ -68,8 +65,24 @@ export function renderQuiz(state, qNo) {
     const choices = state.choicesPerQ[idx];
     const isLupa = state.answers[idx] === 'Lupa';
     
+    // Ambil Text Utama (Kanji/Hira/Arti)
     const kanjiTxt = String(q[KEYS.kanji] || '').trim();
-    let displayHtml = formatQuestion(kanjiTxt);
+    const meanTxt = String(q[KEYS.meaning] || '').trim();
+    const hiraTxt = String(q[KEYS.hiragana] || '').trim();
+
+    let displayHtml = '';
+    
+    // Tentukan apa yang ditampilkan sebagai SOAL berdasarkan mode
+    if (state.sessionType === 'quiz_hiragana') {
+        // Mode Tebak Bacaan -> Soal: ARTI (Bisa panjang)
+        // Jika Arti kosong, fallback ke Hiragana
+        displayHtml = formatQuestion(meanTxt || hiraTxt);
+    } else {
+        // Mode Tebak Arti -> Soal: KANJI / HIRAGANA
+        // Jika Kanji kosong (undefined/string kosong), pakai Hiragana
+        const textToShow = kanjiTxt || hiraTxt;
+        displayHtml = formatQuestion(textToShow);
+    }
 
     let choicesHtml = '<div class="row g-3">';
     choices.forEach((c, i) => {
@@ -123,15 +136,23 @@ export function renderMem(state, qNo) {
     const idx = state.current;
     const q = state.batch[idx];
     const val = state.answers[idx] === 'Lupa' ? '' : (state.answers[idx] || '');
+    
     const kanjiTxt = String(q[KEYS.kanji] || '').trim();
+    const meanTxt = String(q[KEYS.meaning] || '').trim();
+    const hiraTxt = String(q[KEYS.hiragana] || '').trim();
 
-    let displayHtml = formatQuestion(kanjiTxt);
+    let displayHtml = '';
     let placeholderTxt = '', labelTxt = '';
 
     if (state.sessionType === 'write_romaji') {
+        // Mode Tulis Bacaan -> Soal: ARTI (Bisa panjang)
+        displayHtml = formatQuestion(meanTxt || hiraTxt);
         placeholderTxt = "Ketik Cara Baca (Romaji/Kana)";
         labelTxt = "Ketik Bacaan:";
     } else {
+        // Mode Tulis Arti -> Soal: KANJI / HIRAGANA
+        const textToShow = kanjiTxt || hiraTxt;
+        displayHtml = formatQuestion(textToShow);
         placeholderTxt = "Contoh: Ikan, Air";
         labelTxt = "Ketik Arti (Indonesia):";
     }
@@ -179,7 +200,7 @@ export function renderMem(state, qNo) {
     } else { btnMic.style.display = 'none'; inp.style.borderRadius = '0.5rem'; }
 }
 
-// --- 3. RENDER RESULT (BERSIH & TO-THE-POINT) ---
+// --- 3. RENDER RESULT ---
 export function renderResult(result, sessionType, wrongIndices = []) {
     area.innerHTML = "";
     const pct = result.total > 0 ? Math.round((result.score / result.total) * 100) : 0;
@@ -201,24 +222,24 @@ export function renderResult(result, sessionType, wrongIndices = []) {
             const hira = (d.realHira || '').trim();
             const mean = d.realMean || '';
             
-            // Tentukan Kunci Jawaban & Info Tambahan
             let keyAnswer = "";
             let extraInfo = "";
 
             if (sessionType === 'quiz_hiragana' || sessionType === 'write_romaji') {
-                // Mode Tebak Bacaan -> Kunci = Hiragana
                 keyAnswer = hira;
-                extraInfo = mean; // Arti sebagai info tambahan
+                extraInfo = mean; 
             } else {
-                // Mode Tebak Arti -> Kunci = Arti
                 keyAnswer = mean;
-                extraInfo = hira; // Bacaan sebagai info tambahan
+                extraInfo = hira;
             }
+
+            // Fallback tampilan Kanji jika kosong
+            const displayKanji = kanji || hira;
 
             html += `
             <div class="res-item">
                <div class="res-kanji-row">
-                  <div class="res-kanji-main">${escapeHtml(kanji)}</div>
+                  <div class="res-kanji-main">${escapeHtml(displayKanji)}</div>
                   ${isCorrect ? 
                     '<i class="bi bi-check-circle-fill text-success fs-4"></i>' : 
                     '<i class="bi bi-x-circle-fill text-danger fs-4"></i>'}

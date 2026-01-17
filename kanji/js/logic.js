@@ -58,7 +58,6 @@ export function gradeSession(state, allQuestions) {
     let correctCount = 0;
     const results = state.batch.map((q, i) => {
         const originalIndex = allQuestions.indexOf(q); 
-
         const hira = String(q[KEYS.hiragana] || q['kana'] || '').trim(); 
         const mean = String(q[KEYS.meaning] || q['indo'] || '').trim(); 
         const romajiDB = String(q['romaji'] || '').trim(); 
@@ -92,28 +91,20 @@ export function gradeSession(state, allQuestions) {
             }
             userAnsStr = raw;
         }
-
         if (isCorrect) correctCount++;
-        
-        return { 
-            q, isCorrect, userAns: userAnsStr, 
-            realHira: hira, realMean: mean, realRomaji: romajiDB, 
-            romTrue: hiraToRomaji(hira),
-            originalIndex: originalIndex
-        };
+        return { q, isCorrect, userAns: userAnsStr, realHira: hira, realMean: mean, realRomaji: romajiDB, romTrue: hiraToRomaji(hira), originalIndex: originalIndex };
     });
-    
     return { score: correctCount, total: state.batch.length, details: results };
 }
 
-// --- UPDATE: PROGRESS PER PAKET 20 KANJI ---
+// --- PERBAIKAN LOGIKA PROGRESS (SISTEM PAKET 20) ---
 export function calculateProgress(allQuestions) {
     const mastery = getMastery();
     const babStats = {};
-    const chunkSize = 20; // Aturan 20 item
+    const chunkSize = 20; // 20 Items per Paket
 
+    // 1. Hitung Data per Paket 20
     allQuestions.forEach((q, idx) => {
-        // Hitung Paket ke berapa (1, 2, 3...)
         const chunkIndex = Math.floor(idx / chunkSize) + 1;
         const babName = `Paket ${chunkIndex}`;
 
@@ -132,21 +123,23 @@ export function calculateProgress(allQuestions) {
 
     const finalReport = Object.keys(babStats).map(bab => {
         const data = babStats[bab];
-        const totalSlots = data.totalWords * 4; 
+        const totalWords = data.totalWords;
+        const totalSlots = totalWords * 4; // Total untuk progress BAR (Gabungan)
         
         const sumMastered = data.modes.quiz + data.modes.quiz_hiragana + data.modes.mem + data.modes.write_romaji;
-        const totalPct = Math.round((sumMastered / totalSlots) * 100);
+        const totalPct = totalSlots > 0 ? Math.round((sumMastered / totalSlots) * 100) : 0;
 
-        const getContrib = (val) => Math.round((val / totalSlots) * 100);
+        // PERBAIKAN RUMUS: Dibagi 'totalWords' bukan 'totalSlots'
+        const getModePct = (val) => totalWords > 0 ? Math.round((val / totalWords) * 100) : 0;
 
         return {
             bab: bab,
             totalPct: totalPct,
             detail: {
-                tebakArti: getContrib(data.modes.quiz),
-                tebakHiragana: getContrib(data.modes.quiz_hiragana),
-                tulisArti: getContrib(data.modes.mem),
-                tulisRomaji: getContrib(data.modes.write_romaji)
+                tebakArti: getModePct(data.modes.quiz),
+                tebakHiragana: getModePct(data.modes.quiz_hiragana),
+                tulisArti: getModePct(data.modes.mem),
+                tulisRomaji: getModePct(data.modes.write_romaji)
             }
         };
     });
