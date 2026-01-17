@@ -191,7 +191,7 @@ function speakSystem(item, voice, callback) {
     window.speechSynthesis.speak(utterance);
 }
 
-// --- STOP ---
+// --- STOP  ---
 export function stopAudio() {
     state.isPlaying = false;
     state.audioQueue = []; 
