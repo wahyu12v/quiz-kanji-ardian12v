@@ -25,5 +25,23 @@
     "template": "[[東京|とうきょう]]では、たくさんの [[人|ひと]]が [[電車|でんしゃ]]を [[使|つか]]って [[学校|がっこう]]や [[会社|かいしゃ]]へ [[行|い]]きます。[[日本|にほん]]の [[電車|でんしゃ]]は [[時間|じかん]]が とても [[正確|せいかく]]です。もし [[予定|よてい]]が 7[[時|じ]]なら、[[電車|でんしゃ]]は 7[[時|じ]]ちょうどに [[来|き]]ます。しかし、[[朝|あさ]]の [[電車|でんしゃ]]は とても [[満員|まんいん]]です。ときどき [[座|すわ]]ることが できなくて、ずっと [[立|た]]っていなければなりません。\n\n[[電車|でんしゃ]]に [[乗|の]]る [[時|とき]]、[[マナー|まなー]]を [[守|まも]]らなければなりません。[[電車|でんしゃ]]の [[中|なか]]で [[電話|でんわ]]をしてはいけません。[[携帯|けいたい]][[電話|でんわ]]を [[マナーモード|まなーもーど]]に しなければなりません。それに、お[[年寄|としよ]]りや [[妊婦|にんぷ]]さんのために [[優先|ゆうせん]][[席|せき]]が あります。[[私|わたし]]たちは [[彼|かれ]]らに [[席|せき]]を [[譲|ゆず]]らなければなりません。[[電車|でんしゃ]]に [[乗|の]]るのは、[[東京|とうきょう]]を [[回|ま]]わる [[一番|いちばん]] いい [[方法|ほうほう]]です。",
     "icon": "fas fa-train",
     "color": "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)"
+  },
+  {
+    "id": "s4",
+    "title": "Membuat Kari (カレーを作る)",
+    "category": "Makanan & Minuman",
+    "translation": "Kemarin, saya membuat Kari Rice di rumah. Saya pergi ke supermarket untuk membeli daging, wortel, bawang bombay, dan kentang. Saya juga membeli bumbu kari (Roux). Pertama, saya memotong sayuran dan daging. Kemudian, saya menumisnya di dalam panci besar.\n\nSetelah itu, saya memasukkan air dan merebusnya selama 20 menit. Terakhir, saya memasukkan bumbu kari. Baunya sangat harum. Saya memakannya bersama nasi putih yang panas. Rasanya sangat lezat. Saya makan dua piring.",
+    "template": "[[昨日|きのう]]、[[私|わたし]]は [[家|いえ]]で [[カレーライス|かれーらいす]]を [[作|つく]]りました。[[私|わたし]]は [[スーパー|すーぱー]]へ [[肉|にく]]と [[人参|にんじん]]と [[玉|たま]]ねぎと [[ジャガイモ|じゃがいも]]を [[買|か]]いに [[行|い]]きました。[[カレールー|かれーるー]]も [[買|か]]いました。[[最初|さいしょ]]に、[[野菜|やさい]]と [[肉|にく]]を [[切|き]]りました。それから、[[大|おお]]きい [[鍋|なべ]]で [[炒|いた]]めました。\n\nその[[後|あと]]、[[水|みず]]を [[入|い]]れて、20[[分|ぷん]]ぐらい [[煮|に]]ました。[[最後|さいご]]に、[[カレールー|かれーるー]]を [[入|い]]れました。[[匂|にお]]いは とても いいです。[[熱|あつ]]い [[白|しろ]]い ご[[飯|はん]]と [[一緒|いっしょ]]に [[食|た]]べました。[[味|あじ]]は とても [[美味|おい]]しかったです。[[私|わたし]]は 2[[皿|さら]] [[食|た]]べました。",
+    "icon": "fas fa-utensils",
+    "color": "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)"
+  },
+  {
+    "id": "s5",
+    "title": "Mendaki Gunung Takao (高尾山ハイキング)",
+    "category": "Alam & Wisata",
+    "translation": "Minggu lalu, saya pergi hiking ke Gunung Takao. Gunung Takao ada di dekat Tokyo. Banyak orang pergi ke sana karena mudah didaki. Saya naik kereta gantung (Cable Car) sampai ke tengah gunung. Pemandangannya sangat indah.\n\nDari tengah, saya berjalan kaki sampai ke puncak. Di jalan, saya melihat patung Tengu di kuil. Di puncak gunung, saya makan mie Soba. Udaranya segar dan enak. Saya bisa melihat Gunung Fuji dari jauh. Itu adalah hari yang menyenangkan.",
+    "template": "[[先週|せんしゅう]]、[[私|わたし]]は [[高尾山|たかおさん]]へ [[ハイキング|はいきんぐ]]に [[行|い]]きました。[[高尾山|たかおさん]]は [[東京|とうきょう]]の [[近|ちか]]くに あります。[[登|のぼ]]りやすいですから、たくさんの [[人|ひと]]が [[行|い]]きます。[[私|わたし]]は [[山|やま]]の [[真|ま]]ん[[中|なか]]まで [[ケーブルカー|けーぶるかー]]に [[乗|の]]りました。[[景色|けしき]]は とても きれいでした。\n\n[[真|ま]]ん[[中|なか]]から、[[頂上|ちょうじょう]]まで [[歩|ある]]きました。[[道|みち]]で、お[[寺|てら]]の [[天狗|てんぐ]]の [[像|ぞう]]を [[見|み]]ました。[[山|やま]]の [[頂上|ちょうじょう]]で、[[私|わたし]]は そばを [[食|た]]べました。[[空気|くうき]]は [[新鮮|しんせん]]で よかったです。[[遠|とお]]くに [[富士山|ふじさん]]を [[見|み]]ることが できました。それは [[楽|たの]]しい [[一日|いちにち]]でした。",
+    "icon": "fas fa-hiking",
+    "color": "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)"
   }
 ]
