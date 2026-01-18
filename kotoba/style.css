@@ -1,152 +1,159 @@
-/* --- VARIABLES & GLOBAL --- */
+/* --- VARIABLES & GLOBAL (NEON PINK THEME) --- */
 :root {
-  /* PALET WARNA (KOTOBA STYLE - SAMA DENGAN KANJI) */
-  --primary: #0ea5e9;
-  --primary-gradient: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
-  --primary-light: #e0f2fe;
-  --secondary-bg: #f1f5f9;
+  /* PALET WARNA (KOTOBA STYLE - PINK) */
+  --primary: #f472b6; /* Neon Pink */
+  --primary-dark: #be185d;
+  --primary-gradient: linear-gradient(135deg, #f472b6 0%, #db2777 100%);
+  --primary-glow: rgba(244, 114, 182, 0.5);
   
-  --text-dark: #0f172a;
-  --text-muted: #64748b;
-  --text-light: #ffffff;
-  --surface: #ffffff;
+  /* DARK MODE PALETTE */
+  --bg-dark: #0f172a;      /* Latar Belakang Utama */
+  --secondary-bg: #1e293b; /* Latar Belakang Sekunder */
+  --surface: #1e293b;      /* Warna Kartu/Modal */
+  --border-color: rgba(244, 114, 182, 0.2); /* Border tipis pink */
 
-  --shadow-sm: 0 2px 4px rgba(148, 163, 184, 0.1);
-  --shadow-md: 0 6px 12px -2px rgba(148, 163, 184, 0.15), 0 3px 7px -3px rgba(148, 163, 184, 0.1);
-  --shadow-lg: 0 20px 25px -5px rgba(148, 163, 184, 0.1), 0 10px 10px -5px rgba(148, 163, 184, 0.04);
-  --shadow-primary: 0 10px 20px -5px rgba(14, 165, 233, 0.4);
+  /* TEXT COLORS */
+  --text-main: #f8fafc;    /* Putih Terang */
+  --text-muted: #94a3b8;   /* Abu-abu */
+  --text-light: #ffffff;
+
+  /* SHADOWS (PINK GLOW) */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 6px 12px -2px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+  --shadow-primary: 0 8px 25px -5px var(--primary-glow);
 }
 
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background-color: var(--secondary-bg);
-  color: var(--text-dark);
+  background-color: var(--bg-dark);
+  color: var(--text-main);
   display: flex; flex-direction: column; min-height: 100vh;
-  background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+  /* Pattern titik-titik halus */
+  background-image: radial-gradient(#334155 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
 /* --- NAVBAR --- */
 #main-nav {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(15, 23, 42, 0.85); /* Transparan Gelap */
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255,255,255,0.5);
+  border-bottom: 1px solid var(--border-color);
   box-shadow: var(--shadow-sm);
 }
-.brand-title { font-size: 18px; color: var(--text-dark); letter-spacing: -0.5px; }
+.brand-title { font-size: 18px; color: var(--primary); letter-spacing: -0.5px; text-shadow: 0 0 10px rgba(244, 114, 182, 0.3); }
 .brand-subtitle { font-size: 12px; color: var(--text-muted); font-weight: 500; }
 
 /* --- HERO SECTION --- */
 .hero-card {
-    background: var(--primary-gradient);
-    color: var(--text-light);
-    border: none;
-    box-shadow: var(--shadow-lg);
-    transition: transform 0.3s ease;
+  background: linear-gradient(135deg, rgba(244, 114, 182, 0.15) 0%, rgba(15, 23, 42, 1) 100%);
+  color: var(--text-light);
+  border: 1px solid var(--primary);
+  box-shadow: 0 0 40px rgba(244, 114, 182, 0.15); /* Glow Area */
+  transition: transform 0.3s ease;
 }
 .hero-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-primary); }
 
 .hero-bg-kanji {
-    position: absolute; top: -40px; right: -30px;
-    font-size: 220px; font-weight: 900;
-    color: var(--text-light); opacity: 0.1;
-    pointer-events: none; z-index: 1; transform: rotate(10deg);
+  position: absolute; top: -40px; right: -30px;
+  font-size: 220px; font-weight: 900;
+  color: var(--primary); opacity: 0.05;
+  pointer-events: none; z-index: 1; transform: rotate(10deg);
 }
 
+/* Override text colors inside hero for readability */
 .hero-card .text-dark { color: white !important; }
-.hero-card .text-muted { color: rgba(255,255,255,0.8) !important; }
+.hero-card .text-muted { color: rgba(255,255,255,0.7) !important; }
 
 /* --- BUTTONS --- */
-/* --- TOMBOL MODERN --- */
+/* --- TOMBOL UTAMA (PINK NEON) --- */
 .btn-primary-custom {
-    background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
-    color: white; 
-    border: none;
-    font-weight: 700; 
-    font-size: 1rem;
-    letter-spacing: 0.5px;
-    
-    /* Padding Pas (Tidak Gemuk) */
-    padding: 10px 28px; 
-    
-    border-radius: 50px; 
-    transition: all 0.3s ease;
-    
-    /* Bayangan Tombol */
-    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+  background: var(--primary-gradient);
+  color: white; 
+  border: none;
+  font-weight: 700; 
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  padding: 10px 28px; 
+  border-radius: 50px; 
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(219, 39, 119, 0.4);
 }
 
 .btn-primary-custom:hover { 
-    background-size: 150%; 
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.5); /* Glow lebih kuat saat hover */
-    color: white;
+  background-size: 150%; 
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px var(--primary-glow); /* Glow kuat saat hover */
+  color: white;
 }
 
 .btn-primary-custom:active {
-    transform: translateY(1px);
-    box-shadow: 0 2px 5px rgba(37, 99, 235, 0.3);
+  transform: translateY(1px);
+  box-shadow: 0 2px 5px rgba(219, 39, 119, 0.3);
 }
 
-.btn-primary-custom:hover { 
-    background-size: 150%; 
-    color: white; 
-    transform: translateY(-1px);
-    box-shadow: 0 6px 15px -3px rgba(14, 165, 233, 0.5);
-}
-
-/* Hapus outline saat klik agar lebih rapi */
 .btn-primary-custom:focus {
-    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.3);
-}
-.btn-primary-custom:hover { 
-    background-size: 150%; color: white; transform: translateY(-2px);
-    box-shadow: var(--shadow-primary);
+  box-shadow: 0 0 0 3px rgba(244, 114, 182, 0.3);
 }
 
+/* --- TOMBOL OUTLINE (PINK BORDER) --- */
 .btn-outline-custom {
-    color: var(--primary); border: 2px solid var(--primary-light); background: transparent; font-weight: 600;
+  color: var(--primary); 
+  border: 2px solid var(--primary); 
+  background: transparent; 
+  font-weight: 600;
+  box-shadow: 0 0 10px rgba(244, 114, 182, 0.1);
 }
 .btn-outline-custom:hover { 
-    background-color: var(--primary-light); border-color: var(--primary); color: var(--primary-dark); 
+  background-color: var(--primary); 
+  border-color: var(--primary); 
+  color: #0f172a; /* Teks jadi gelap saat hover biar kontras */
+  box-shadow: 0 0 20px var(--primary-glow);
 }
 
+/* Tombol khusus di dalam Hero Card */
 .hero-card .btn-outline-custom {
-    color: white; border: 2px solid rgba(255,255,255,0.6);
+  color: white; border: 2px solid rgba(255,255,255,0.3);
 }
 .hero-card .btn-outline-custom:hover {
-    background: white; color: var(--primary); border-color: white;
+  background: var(--primary); color: white; border-color: var(--primary);
+  box-shadow: 0 0 20px var(--primary-glow);
 }
 
 /* --- QUIZ AREA --- */
 .card-kanji {
-  border-radius: 24px; border: none; background: var(--surface);
-  box-shadow: var(--shadow-md); overflow: hidden;
+  border-radius: 24px; 
+  border: 1px solid var(--border-color); 
+  background: var(--surface);
+  box-shadow: var(--shadow-lg); 
+  overflow: hidden;
+  color: var(--text-main);
 }
 
-/* UPDATE: Font dinamis agar Kotoba panjang muat tapi tetap besar */
+/* FONT SOAL (RESPONSIF) */
 .kanji-big {
-  /* Minimal 40px, Idealnya 18% lebar layar, Maksimal 90px */
   font-size: clamp(40px, 18vw, 90px); 
   text-align: center; 
-  padding: 30px 10px 10px 10px; /* Padding bawah dikurangi biar deket sama furigana */
+  padding: 30px 10px 10px 10px;
   font-weight: 900; 
-  color: var(--text-dark);
+  color: var(--text-main);
   line-height: 1.2;
-  word-wrap: break-word; /* Agar tidak bablas keluar layar */
+  word-wrap: break-word;
+  /* Efek Text Gradient Pink */
   background: var(--primary-gradient); 
   -webkit-background-clip: text; 
   -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 15px rgba(244, 114, 182, 0.3));
 }
 
 /* --- PILIHAN GANDA --- */
 .choice-card {
   border-radius: 16px; 
   padding: 18px 24px;
-  background: #ffffff;
-  border: 2px solid #e2e8f0; 
+  background: var(--secondary-bg); /* Gelap */
+  border: 1px solid rgba(255, 255, 255, 0.1); 
   box-shadow: var(--shadow-sm); 
-  color: var(--text-dark); 
+  color: var(--text-main); 
   font-weight: 600;
   cursor: pointer; 
   display: flex; align-items: center; min-height: 75px;
@@ -155,11 +162,11 @@ body {
 }
 
 .choice-card:hover {
-    background-color: var(--primary-light); 
-    border-color: var(--primary);           
-    color: var(--primary-dark);             
-    transform: translateY(-2px) scale(1.01);
-    box-shadow: var(--shadow-md);
+  background-color: rgba(244, 114, 182, 0.1); /* Pink transparan */
+  border-color: var(--primary); 
+  color: var(--primary); 
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 0 15px rgba(244, 114, 182, 0.2);
 }
 
 .choice-selected {
@@ -167,126 +174,1138 @@ body {
   background-color: var(--primary) !important; 
   color: #ffffff !important; 
   border-color: transparent !important;
-  box-shadow: 0 8px 20px -4px rgba(14, 165, 233, 0.5) !important;
+  box-shadow: 0 0 25px var(--primary-glow) !important;
   transform: scale(1.02) !important; 
   font-weight: 700;
 }
 
 /* --- MODALS & GRID --- */
-.modal-content { border: none; border-radius: 24px; box-shadow: var(--shadow-lg); }
-.modal-header { border-bottom: 1px solid var(--secondary-bg); }
-/* --- GRID CONTAINER (LEBIH COMPACT) --- */
+.modal-content { 
+  background-color: var(--surface); 
+  border: 1px solid var(--border-color); 
+  border-radius: 24px; 
+  box-shadow: var(--shadow-lg); 
+  color: var(--text-main);
+}
+.modal-header { border-bottom: 1px solid rgba(255,255,255,0.1); }
+.modal-footer { border-top: 1px solid rgba(255,255,255,0.1) !important; }
+.btn-close { filter: invert(1); } /* Tombol close jadi putih */
+
+/* --- GRID CONTAINER (COMPACT) --- */
 .range-grid-container {
-    display: grid; 
-    /* Ubah ukuran minimal dari 145px ke 110px agar kartu lebih kecil */
-    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); 
-    gap: 10px; /* Jarak antar kartu dirapatkan sedikit */
-    padding: 5px; 
-    max-height: 400px; 
-    overflow-y: auto;
-    overflow-x: hidden; 
+  display: grid; 
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); 
+  gap: 10px; 
+  padding: 5px; 
+  max-height: 400px; 
+  overflow-y: auto;
+  overflow-x: hidden; 
 }
 
-/* Reset Container Bawaan Bootstrap */
-.range-grid-container .form-check { 
-    padding-left: 0 !important; 
-    margin: 0; 
-}
+.range-grid-container .form-check { padding-left: 0 !important; margin: 0; }
+.range-grid-container .form-check-input { display: none; }
 
-/* Sembunyikan Checkbox Asli */
-.range-grid-container .form-check-input { 
-    display: none; 
-}
-
-/* --- DESAIN KARTU (LEBIH RAMPING) --- */
+/* --- DESAIN KARTU CHECKBOX --- */
 .range-grid-container .form-check-label {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start; /* Rata Kiri */
-    
-    width: 100%;
-    min-height: 70px; /* Tinggi dikurangi (sebelumnya 90px) */
-    padding: 12px 14px; /* Padding dikurangi agar tidak "gemuk" */
-    
-    background-color: #ffffff;
-    border: 2px solid #f1f5f9; 
-    border-radius: 16px;       /* Sudut disesuaikan sedikit */
-    
-    cursor: pointer; 
-    position: relative;
-    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1); 
+  display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+  width: 100%; min-height: 70px; padding: 12px 14px;
+  
+  background-color: var(--secondary-bg); /* Gelap */
+  border: 1px solid rgba(255,255,255,0.1); 
+  border-radius: 16px; 
+  cursor: pointer; position: relative;
+  transition: all 0.2s ease; 
 }
 
-/* Typography Judul (Paket X) */
 .range-grid-container .form-check-label strong {
-    font-size: 0.9rem; /* Font dikecilkan sedikit */
-    font-weight: 700;  
-    color: #334155;    
-    margin-bottom: 2px;
-    display: block;
-    line-height: 1.2;
+  font-size: 0.9rem; font-weight: 700; color: var(--text-main);
+  margin-bottom: 2px; display: block; line-height: 1.2;
 }
 
-/* Typography Sub-judul (No X-Y) */
 .range-grid-container .form-check-label .small, 
 .range-grid-container .form-check-label span {
-    font-size: 0.75rem; /* Font info dikecilkan */
-    color: #94a3b8 !important; 
-    font-weight: 500;
+  font-size: 0.75rem; color: var(--text-muted) !important; font-weight: 500;
 }
 
-/* --- EFEK HOVER --- */
 .range-grid-container .form-check-label:hover { 
-    border-color: #bae6fd; 
-    transform: translateY(-2px); 
-    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.1); 
+  border-color: var(--primary); 
+  box-shadow: 0 0 10px rgba(244, 114, 182, 0.2);
+  transform: translateY(-2px); 
 }
 
-/* --- DESAIN SAAT DIPILIH (CHECKED) --- */
+/* --- SAAT DIPILIH (CHECKED) --- */
 .range-grid-container .form-check-input:checked + .form-check-label {
-    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-    border-color: transparent;
-    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.4); 
-    transform: translateY(-1px);
+  background: var(--primary-gradient);
+  border-color: transparent;
+  box-shadow: 0 0 15px var(--primary-glow);
+  transform: translateY(-1px);
 }
 
 .range-grid-container .form-check-input:checked + .form-check-label strong {
-    color: #ffffff !important;
+  color: #ffffff !important;
 }
-
-.range-grid-container .form-check-input:checked + .form-check-label .small,
-.range-grid-container .form-check-input:checked + .form-check-label span { 
-    color: rgba(255, 255, 255, 0.85) !important; 
+.range-grid-container .form-check-input:checked + .form-check-label .small { 
+  color: rgba(255, 255, 255, 0.8) !important; 
 }
 
 /* --- DAFTAR KOTOBA GRID --- */
 .kanji-list-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
-    gap: 16px; padding: 8px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
+  gap: 16px; padding: 8px;
 }
 .kanji-card-small {
-    background: #fff;
-    border: 1px solid #e9ecef;
-    border-radius: 12px;
-    padding: 15px;
-    text-align: center;
-    transition: transform 0.2s, box-shadow 0.2s;
-    cursor: default;
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  color: var(--text-main);
 }
 .kanji-card-small:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-    border-color: #cfe2ff;
+  transform: translateY(-3px);
+  box-shadow: 0 0 15px rgba(244, 114, 182, 0.15);
+  border-color: var(--primary);
 }
 .k-char {
-    font-size: 1.8rem; /* Sedikit lebih kecil dari Kanji */
-    font-weight: 700;
-    color: #0d6efd;
-    margin-bottom: 5px;
-    line-height: 1.2;
-    word-break: break-word;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary); /* Karakter jadi Pink */
+  margin-bottom: 5px;
+  line-height: 1.2;
+  word-break: break-word;
+  text-shadow: 0 0 10px rgba(244, 114, 182, 0.3);
+}
+.k-read { color: var(--text-main) !important; }
+.k-mean { color: var(--text-muted) !important; border-top: 1px solid rgba(255,255,255,0.1) !important; }
+
+/* UTILS Colors overrides for Bootstrap classes */
+.text-primary { color: var(--primary) !important; }
+.text-dark { color: var(--text-main) !important; }
+.bg-light { background-color: var(--surface) !important; }
+.bg-light-subtle { background-color: var(--bg-dark) !important; }
+
+/* ========================================================
+   FIX FINAL: PAKSA NAVBAR GELAP & TOMBOL PINK
+   (Tempel di baris paling bawah style.css)
+   ======================================================== */
+
+/* 1. Hapus Background Putih Navbar */
+nav#main-nav, 
+.navbar.bg-white {
+    background-color: rgba(2, 6, 23, 0.9) !important; /* Warna Gelap */
+    background-image: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5) !important;
+}
+
+/* 2. Ubah Warna Teks Judul & Subjudul jadi Putih */
+#main-nav .brand-title {
+    color: #ffffff !important;
+}
+#main-nav .brand-subtitle {
+    color: #94a3b8 !important; /* Abu-abu terang */
+}
+
+/* 3. Perbaiki Tombol Kembali (Hapus Biru -> Jadi Pink) */
+#btn-main-back {
+    background: transparent !important;
+    border: 2px solid #f472b6 !important; /* Border Pink */
+    color: #f472b6 !important;            /* Teks Pink */
+    box-shadow: none !important;
+}
+
+/* Efek Hover Tombol Kembali */
+#btn-main-back:hover {
+    background-color: #f472b6 !important; /* Blok Pink */
+    color: #000000 !important;            /* Teks Hitam */
+    box-shadow: 0 0 15px rgba(244, 114, 182, 0.6) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Pastikan Ikon Panah di tombol ikut warna Pink */
+#btn-main-back i {
+    color: inherit !important;
+    -webkit-text-stroke: 0 !important;
+}
+
+/* ========================================================
+   FIX UKURAN KARTU (AGAR RAMPING SEPERTI CONTOH)
+   ======================================================== */
+
+/* 1. Perkecil Lebar Kartu Utama */
+.hero-card {
+    max-width: 680px !important;   /* Lebar maksimal dibatasi (Ramping) */
+    width: 100% !important;        /* Tetap responsif di HP */
+    margin: 0 auto !important;     /* Posisi Tengah */
+    padding: 40px 30px !important; /* Padding pas, tidak kegedean */
+}
+
+/* 2. Ubah Susunan Tombol jadi Grid 2 Kolom (Biar Rapi & Compact) */
+/* Kita target div pembungkus tombol di dalam hero-card */
+.hero-card .d-grid, 
+.hero-card .d-sm-flex {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important; /* 2 Kolom rata */
+    gap: 12px !important;       /* Jarak antar tombol rapat */
+    justify-content: stretch !important;
+}
+
+/* 3. Rapikan Ukuran Tombolnya */
+.hero-card button, 
+.hero-card .btn-outline-custom {
+    width: 100% !important;     /* Lebar penuh mengikuti kolom */
+    margin: 0 !important;       /* Hapus margin aneh */
+    padding: 12px 10px !important; /* Padding tombol */
+    font-size: 0.9rem !important;  /* Ukuran font pas */
+    min-width: 0 !important;    /* Hapus min-width lama biar tidak maksa lebar */
+}
+
+/* KHUSUS TAMPILAN HP (LAYAR KECIL) */
+@media (max-width: 576px) {
+    .hero-card .d-grid, 
+    .hero-card .d-sm-flex {
+        grid-template-columns: 1fr !important; /* Balik ke 1 kolom di HP */
+    }
+}
+
+/* ========================================================
+   FIX FINAL: MEMPERCANTIK MODAL PILIH PAKET (DARK PINK)
+   ======================================================== */
+
+/* 1. UBAH TOMBOL PUTIH (Pilih Semua, Reset, Batal) JADI GELAP */
+/* Kita target semua tombol yang pakai class .btn-light di dalam modal */
+.modal-body .btn-light,
+.modal-footer .btn-light {
+    background-color: rgba(255, 255, 255, 0.05) !important; /* Transparan Gelap */
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;  /* Garis Tipis */
+    color: #94a3b8 !important;                              /* Teks Abu-abu */
+    transition: all 0.2s ease !important;
+}
+
+/* Efek saat tombol-tombol ini disentuh (Hover) */
+.modal-body .btn-light:hover,
+.modal-footer .btn-light:hover {
+    background-color: rgba(244, 114, 182, 0.1) !important; /* Pink Transparan */
+    border-color: #f472b6 !important;                      /* Garis Pink */
+    color: #f472b6 !important;                             /* Teks Pink */
+    transform: translateY(-1px);
+}
+
+/* 2. PERCANTIK SCROLLBAR (PENGGULUNG) */
+/* Agar tidak putih tebal jelek di sebelah kanan */
+.range-grid-container::-webkit-scrollbar {
+    width: 6px; /* Lebih ramping */
+}
+.range-grid-container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2); /* Jalur scroll gelap */
+    border-radius: 4px;
+}
+.range-grid-container::-webkit-scrollbar-thumb {
+    background: #334155; /* Batang scroll abu tua */
+    border-radius: 4px;
+}
+.range-grid-container::-webkit-scrollbar-thumb:hover {
+    background: #f472b6; /* Jadi Pink saat dipegang */
+}
+
+/* 3. POLES KARTU PILIHAN BAB */
+.range-grid-container .form-check-label {
+    background: linear-gradient(145deg, #1e293b, #0f172a) !important; /* Gradient halus biar gak flat */
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+/* Saat Kartu Dipilih (Aktif) */
+.range-grid-container .form-check-input:checked + .form-check-label {
+    background: linear-gradient(135deg, #f472b6 0%, #db2777 100%) !important; /* Pink Gradient */
+    box-shadow: 0 0 15px rgba(244, 114, 182, 0.4) !important;
+    border: none !important;
+}
+
+/* Pastikan Teks Putih Jelas saat dipilih */
+.range-grid-container .form-check-input:checked + .form-check-label span,
+.range-grid-container .form-check-input:checked + .form-check-label strong {
+    color: white !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+/* 4. PERBAIKI TOMBOL TAMPILKAN (PINK) */
+.modal-footer .btn-primary-custom {
+    box-shadow: 0 4px 15px rgba(244, 114, 182, 0.3) !important;
+}
+
+/* ========================================================
+   FIX FINAL: MEMPERCANTIK TOMBOL SILANG (CLOSE) MODAL
+   ======================================================== */
+
+/* Target tombol close di header modal */
+.modal-header .btn-close {
+    /* 1. Ubah warna ikon 'X' jadi putih terang bersih */
+    filter: invert(1) grayscale(100%) brightness(200%) !important;
+    opacity: 0.7 !important; /* Agak transparan saat diam */
+
+    /* 2. Bikin bentuk lingkaran yang modern */
+    width: 36px;   /* Lebar fix */
+    height: 36px;  /* Tinggi fix biar bulat sempurna */
+    padding: 0 !important; /* Reset padding bawaan jelek */
+    /* Atur posisi biar pas di pojok kanan atas */
+    margin: -2px -2px 0 auto !important; 
+    
+    border-radius: 50%; /* Bentuk lingkaran */
+    background-size: 16px auto !important; /* Ukuran ikon X di dalamnya */
+    background-position: center !important;
+    background-color: rgba(255, 255, 255, 0.05) !important; /* Background lingkaran transparan gelap */
+    border: 1px solid transparent; /* Siapkan border */
+    
+    /* Animasi halus */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* 3. Efek saat mouse mendekat (Hover) - JADI NEON PINK BERPUTAR */
+.modal-header .btn-close:hover {
+    opacity: 1 !important;
+    /* Background Pink Transparan */
+    background-color: rgba(244, 114, 182, 0.15) !important; 
+    /* Border Pink menyala */
+    border-color: #f472b6 !important; 
+    /* Efek Glow Neon Pink */
+    box-shadow: 0 0 15px rgba(244, 114, 182, 0.6) !important; 
+    /* Efek putar 90 derajat dan sedikit membesar */
+    transform: rotate(90deg) scale(1.1) !important; 
+}
+
+/* Hapus kotak fokus jelek saat diklik di HP/Keyboard */
+.modal-header .btn-close:focus {
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+/* ========================================================
+   FIX FINAL: DAFTAR KOTOBA/KANJI (DARK NEON THEME)
+   ======================================================== */
+
+/* 1. UBAH BACKGROUND MODAL JADI GELAP TOTAL */
+/* Kita paksa semua bagian modal (header, body, footer) jadi gelap */
+#daftarHafalanModal .modal-content,
+#daftarHafalanModal .modal-header,
+#daftarHafalanModal .modal-body,
+#daftarHafalanModal .modal-footer {
+    background-color: #0f172a !important; /* Warna Dark Slate */
+    border-color: rgba(255,255,255,0.05) !important; /* Garis pemisah tipis */
+    color: #ffffff !important; /* Semua teks jadi putih */
+}
+
+/* 2. PERBAIKI KARTU KOTOBA (KOTAK-KOTAK KECIL) */
+#daftarHafalanModal .kanji-card-small {
+    background-color: #1e293b !important; /* Background Kartu (Lebih terang dikit dari modal) */
+    border: 1px solid rgba(255,255,255,0.08) !important; /* Border tipis */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3) !important;    /* Bayangan gelap */
+    color: #e2e8f0 !important;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+/* Efek Hover pada Kartu */
+#daftarHafalanModal .kanji-card-small:hover {
+    transform: translateY(-3px); /* Naik dikit */
+    border-color: #f472b6 !important; /* Border jadi PINK */
+    box-shadow: 0 0 15px rgba(244, 114, 182, 0.2) !important; /* Glow Pink tipis */
+}
+
+/* 3. PERCANTIK TEKS DI DALAM KARTU */
+/* Huruf Jepang Utama (Kanji/Kana) */
+#daftarHafalanModal .k-char {
+    color: #f472b6 !important; /* Neon Pink */
+    text-shadow: 0 0 10px rgba(244, 114, 182, 0.4); /* Efek Cahaya */
+    margin-bottom: 8px;
+}
+
+/* Teks Arti & Cara Baca */
+#daftarHafalanModal .kanji-card-small div,
+#daftarHafalanModal .kanji-card-small span {
+    color: #cbd5e1 !important; /* Abu-abu terang agar mudah dibaca */
+}
+
+/* 4. PERBAIKI LABEL "BAB 1" (BADGE DI ATAS KARTU) */
+#daftarHafalanModal .badge {
+    background-color: rgba(244, 114, 182, 0.15) !important; /* Pink Transparan */
+    color: #f472b6 !important; /* Teks Pink */
+    border: 1px solid rgba(244, 114, 182, 0.3) !important;
+}
+
+/* 5. HILANGKAN BACKGROUND SELEKSI BIRU PADA JUDUL */
+/* Di gambar terlihat judul 'Daftar Kosakata' terblok biru, kita hapus itu */
+::selection {
+    background: #f472b6; /* Warna blok teks jadi Pink */
+    color: white;
+}
+
+/* ========================================================
+   FIX FINAL: MATIKAN KARTU PUTIH -> JADI DARK NEON
+   (Tempel di baris paling bawah style.css)
+   ======================================================== */
+
+/* 1. UBAH BACKGROUND KARTU JADI GELAP */
+/* Kita tembak langsung class-nya agar warna putih hilang */
+.kanji-card-small {
+    background-color: #1e293b !important;   /* Dark Slate (Abu Gelap) */
+    background: #1e293b !important;         /* Pastikan tidak ada putih */
+    border: 1px solid rgba(244, 114, 182, 0.3) !important; /* Garis Pinggir Pink Tipis */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4) !important;   /* Bayangan Gelap */
+}
+
+/* 2. ATUR WARNA TEKS DI DALAM KARTU */
+/* Huruf Jepang (Kanji) -> JADI PINK MENYALA */
+.kanji-card-small .k-char {
+    color: #f472b6 !important; 
+    text-shadow: 0 0 10px rgba(244, 114, 182, 0.2); /* Efek Cahaya */
+}
+
+/* Arti (Bahasa Indonesia) & Penjelasan -> JADI PUTIH ABU */
+.kanji-card-small .text-muted, 
+.kanji-card-small p, 
+.kanji-card-small span {
+    color: #cbd5e1 !important; /* Abu-abu terang agar mudah dibaca */
+}
+
+/* Romaji / Cara Baca -> JADI PUTIH TERANG */
+.kanji-card-small .text-primary,
+.kanji-card-small h5 {
+    color: #ffffff !important; 
+    font-weight: 600;
+}
+
+/* 3. PERCANTIK LABEL BAB (BADGE DI ATAS) */
+.kanji-card-small .badge {
+    background-color: rgba(244, 114, 182, 0.15) !important; /* Pink Transparan */
+    color: #f472b6 !important; /* Teks Pink */
+    border: 1px solid rgba(244, 114, 182, 0.3) !important;
+}
+
+/* 4. GELAPKAN SCROLLBAR (PENGGULUNG DI KANAN) */
+/* Agar tidak ada batang putih di sebelah kanan */
+#daftarHafalanModal .modal-body::-webkit-scrollbar {
+    width: 8px;
+}
+#daftarHafalanModal .modal-body::-webkit-scrollbar-track {
+    background: #0f172a; /* Jalur scroll gelap */
+}
+#daftarHafalanModal .modal-body::-webkit-scrollbar-thumb {
+    background-color: #334155; /* Batang scroll abu tua */
+    border-radius: 10px;
+    border: 2px solid #0f172a;
 }
 
 
+/* ==================================================================
+   FIX FINAL: MEMPERBAIKI TAMPILAN JS (DAFTAR KOSAKATA)
+   (Kode ini menimpa style bawaan dari main.js)
+   ================================================================== */
+
+/* 1. Paksa Latar Belakang Kartu jadi Gelap (Menimpa background: #fff di JS) */
+#daftarList .card {
+    background: #1e293b !important;       /* Dark Slate (Abu Gelap) */
+    border: 1px solid rgba(244, 114, 182, 0.4) !important; /* Border Pink */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4) !important;
+}
+
+/* 2. Ubah Warna Kanji (Huruf Jepang Besar) - Menimpa .text-primary */
+#daftarList .k-char {
+    color: #f472b6 !important; /* Neon Pink */
+    text-shadow: 0 0 10px rgba(244, 114, 182, 0.3); /* Glow */
+}
+
+/* 3. Ubah Warna Cara Baca (Kana) - Menimpa .text-dark */
+#daftarList .k-read {
+    color: #ffffff !important; /* Jadi Putih */
+}
+
+/* 4. Ubah Warna Arti (Indo) - Menimpa .text-secondary */
+#daftarList .k-mean {
+    color: #cbd5e1 !important; /* Abu Terang */
+    border-top-color: rgba(255, 255, 255, 0.1) !important; /* Garis pemisah tipis */
+}
+
+/* 5. Ubah Romaji (Teks Merah Kecil) - Menimpa .text-danger */
+#daftarList .k-romaji {
+    color: #fca5a5 !important; /* Merah muda pastel (biar terbaca di gelap) */
+}
+
+/* 6. Ubah Badge/Label Bab di atas - Menimpa .bg-light */
+#daftarList .badge {
+    background-color: rgba(244, 114, 182, 0.1) !important; /* Pink Transparan */
+    color: #f472b6 !important; /* Teks Pink */
+    border: 1px solid rgba(244, 114, 182, 0.3) !important;
+}
+
+/* 7. Efek Hover pada Kartu (Biar interaktif) */
+#daftarList .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(244, 114, 182, 0.25) !important; /* Glow lebih terang */
+    border-color: #f472b6 !important;
+}
+
+
+/* ==================================================================
+   FIX FINAL: MODE TULIS ARTI & QUIZ (DARK NEON PINK)
+   (Menimpa style bawaan ui.js)
+   ================================================================== */
+
+/* 1. UBAH WARNA SOAL (KANJI/HURUF BESAR) JADI PINK */
+/* Kita target class khusus yang dibuat di ui.js */
+.q-text-responsive {
+    color: #f472b6 !important; /* Neon Pink */
+    text-shadow: 0 0 20px rgba(244, 114, 182, 0.4); /* Glow effect */
+}
+
+/* 2. UBAH KOLOM INPUT JADI GELAP */
+#memInput {
+    background-color: #0f172a !important;   /* Darker Background */
+    border: 2px solid rgba(244, 114, 182, 0.3) !important; /* Border Pink Tipis */
+    color: #ffffff !important;              /* Teks Putih saat ngetik */
+    box-shadow: none !important;
+}
+/* Saat input diklik (Focus) */
+#memInput:focus {
+    background-color: #0f172a !important;
+    border-color: #f472b6 !important;       /* Border Pink Terang */
+    box-shadow: 0 0 15px rgba(244, 114, 182, 0.3) !important;
+}
+
+/* 3. UBAH TOMBOL MIKROFON */
+#btnMic {
+    background-color: #1e293b !important;
+    border: 2px solid rgba(244, 114, 182, 0.3) !important;
+    color: #f472b6 !important;
+    border-left: none !important; /* Biar nyatu sama input */
+}
+#btnMic:hover {
+    background-color: rgba(244, 114, 182, 0.1) !important;
+}
+
+/* 4. PERBAIKI TOMBOL NAVIGASI (SEBELUMNYA, LUPA, BERIKUTNYA) */
+/* Tombol 'Sebelumnya' */
+.card-kanji .btn-outline-secondary {
+    color: #94a3b8 !important;
+    border-color: rgba(255,255,255,0.1) !important;
+    background: transparent !important;
+}
+.card-kanji .btn-outline-secondary:hover {
+    color: #fff !important;
+    background: rgba(255,255,255,0.1) !important;
+}
+
+/* Tombol 'Lupa' */
+.card-kanji .btn-outline-warning {
+    color: #fbbf24 !important; /* Kuning Emas */
+    border-color: rgba(251, 191, 36, 0.3) !important;
+    background: transparent !important;
+}
+.card-kanji .btn-outline-warning:hover {
+    background: rgba(251, 191, 36, 0.1) !important;
+    box-shadow: 0 0 10px rgba(251, 191, 36, 0.2);
+}
+
+/* Tombol 'Berikutnya' / 'Selesai' (Primary) */
+.card-kanji .btn-outline-primary, 
+.card-kanji .btn-primary,
+.card-kanji .btn-success {
+    background-color: rgba(244, 114, 182, 0.1) !important; /* Pink Transparan */
+    border: 1px solid #f472b6 !important;
+    color: #f472b6 !important;
+}
+.card-kanji .btn-outline-primary:hover,
+.card-kanji .btn-primary:hover,
+.card-kanji .btn-success:hover {
+    background-color: #f472b6 !important; /* Pink Solid */
+    color: #000 !important;               /* Teks Hitam */
+    box-shadow: 0 0 15px rgba(244, 114, 182, 0.5);
+}
+
+/* 5. PERBAIKI LABEL & JUDUL DI KARTU */
+.card-kanji h5.fw-bold {
+    color: #fff !important; /* Judul "Hafalan 1/29" jadi Putih */
+}
+.card-kanji small.text-muted {
+    color: #64748b !important; /* No Asli jadi abu-abu */
+}
+.card-kanji label {
+    color: #cbd5e1 !important; /* Label "Ketik Arti" jadi abu terang */
+}
+
+/* ==================================================================
+   FIX FINAL: MEMPERCANTIK INPUT & UKURAN KARTU (TULIS ARTI)
+   ================================================================== */
+
+/* 1. PERJELAS PLACEHOLDER (TEKS SAMAR) */
+#memInput::placeholder {
+    color: #94a3b8 !important; /* Abu-abu terang (Slate-400) */
+    font-style: italic;
+    opacity: 0.8 !important;   /* Pastikan tidak transparan */
+}
+
+/* 2. PERBESAR UKURAN KARTU (BIAR LEBIH LEGA) */
+.card-kanji {
+    padding: 3rem 2.5rem !important; /* Tambah jarak dalam (atas-bawah kiri-kanan) */
+    min-height: 480px !important;    /* Tinggi minimal agar kartu terlihat besar/gagah */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;         /* Konten di tengah vertikal */
+}
+
+/* Perbesar Kanji Utama */
+.q-text-responsive {
+    font-size: 4rem !important; /* Kanji jadi RAKSASA */
+    margin-bottom: 1.5rem !important;
+}
+
+/* 3. STYLE INPUT YANG LEBIH MEWAH (MENYATU) */
+/* Kita bungkus Input & Tombol Mic dalam satu kotak styling */
+.card-kanji .input-group {
+    background-color: #0f172a !important; /* Background Gelap */
+    border: 2px solid rgba(244, 114, 182, 0.4) !important; /* Border Pink */
+    border-radius: 16px !important;       /* Sudut membulat */
+    padding: 5px !important;              /* Jarak antara border dan isi */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3) !important;
+    transition: all 0.3s ease;
+}
+
+/* Efek Glow saat Input Diklik/Fokus */
+.card-kanji .input-group:focus-within {
+    border-color: #f472b6 !important;
+    box-shadow: 0 0 25px rgba(244, 114, 182, 0.3) !important;
+    transform: translateY(-2px);
+}
+
+/* Reset Style Input Asli (Biar ikut parent-nya) */
+#memInput {
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: #ffffff !important;
+    font-size: 1.4rem !important; /* Teks ketikan besar */
+    height: 60px !important;      /* Input lebih tinggi */
+    padding-left: 15px !important;
+}
+
+/* Tombol Mic yang Menyatu */
+#btnMic {
+    border: none !important;
+    background: transparent !important;
+    color: #f472b6 !important;
+    font-size: 1.4rem !important;
+    padding-right: 20px !important;
+    padding-left: 20px !important;
+    border-radius: 0 12px 12px 0 !important;
+}
+
+#btnMic:hover {
+    background: rgba(244, 114, 182, 0.1) !important;
+    cursor: pointer;
+}
+
+
+/* ==================================================================
+   FIX FINAL: REDESIGN TOTAL "TULIS ARTI" (PREMIUM NEON LOOK)
+   ================================================================== */
+
+/* 1. UPGRADE KARTU UTAMA (EFEK GRADASI & KACA) */
+.card-kanji {
+    /* Background Gradient Gelap Halus */
+    background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important; /* Border putih tipis */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 
+                0 0 0 1px rgba(244, 114, 182, 0.1) !important; /* Glow tipis luar */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hiasan Latar Belakang (Cahaya Pink Samar di Pojok) */
+.card-kanji::before {
+    content: '';
+    position: absolute;
+    top: -50px; right: -50px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(244, 114, 182, 0.15) 0%, transparent 70%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* 2. TYPOGRAPHY KANJI (LEBIH MENYALA & BESAR) */
+.q-text-responsive {
+    font-size: 5rem !important; /* Perbesar lagi */
+    font-weight: 800 !important;
+    letter-spacing: 2px;
+    margin-bottom: 2rem !important;
+    position: relative; z-index: 1;
+    
+    /* Efek Neon Ganda */
+    text-shadow: 
+        0 0 10px rgba(244, 114, 182, 0.6),
+        0 0 30px rgba(244, 114, 182, 0.4),
+        0 0 60px rgba(244, 114, 182, 0.2) !important;
+}
+
+/* 3. INPUT FIELD "CAPSULE" (BENTUK PIL/LONJONG) */
+.card-kanji .input-group {
+    border-radius: 50px !important; /* Bentuk Bulat Lonjong */
+    background-color: rgba(0, 0, 0, 0.3) !important; /* Latar lebih gelap */
+    border: 2px solid rgba(255, 255, 255, 0.1) !important;
+    padding: 5px 10px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Efek Fokus Input (Border Pink Menyala) */
+.card-kanji .input-group:focus-within {
+    border-color: #f472b6 !important;
+    box-shadow: 0 0 25px rgba(244, 114, 182, 0.25) !important;
+    transform: scale(1.02); /* Sedikit membesar */
+}
+
+/* Teks Input */
+#memInput {
+    height: 55px !important;
+    font-size: 1.3rem !important;
+    padding-left: 20px !important;
+    color: white !important;
+}
+
+/* Placeholder (Teks Contoh) */
+#memInput::placeholder {
+    color: rgba(255, 255, 255, 0.3) !important;
+    font-style: normal !important;
+    font-weight: 400;
+}
+
+/* Tombol Mic (Bulat di ujung kanan) */
+#btnMic {
+    border-radius: 50% !important; /* Bulat sempurna */
+    width: 50px !important;
+    height: 50px !important;
+    margin: auto 5px !important;
+    padding: 0 !important;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+#btnMic:hover {
+    background: #f472b6 !important; /* Pink Solid saat hover */
+    color: white !important;
+    transform: rotate(15deg); /* Efek miring dikit */
+}
+
+/* 4. TOMBOL NAVIGASI YANG LEBIH JELAS (HIERARKI) */
+.card-kanji .d-flex.gap-2 {
+    gap: 15px !important; /* Jarak antar tombol diperlebar */
+    margin-top: 2rem !important;
+}
+
+/* Tombol "Berikutnya" (UTAMA - SOLID PINK GRADIENT) */
+.card-kanji .btn-outline-primary, 
+.card-kanji .btn-primary,
+.card-kanji .btn-success {
+    background: linear-gradient(135deg, #f472b6 0%, #db2777 100%) !important;
+    border: none !important;
+    color: white !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px;
+    border-radius: 50px !important;
+    padding: 12px 0 !important;
+    box-shadow: 0 4px 15px rgba(219, 39, 119, 0.4) !important;
+}
+.card-kanji .btn-outline-primary:hover,
+.card-kanji .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(219, 39, 119, 0.6) !important;
+}
+
+/* Tombol "Lupa" (KEDUA - OUTLINE KUNING) */
+.card-kanji .btn-outline-warning {
+    border: 2px solid rgba(251, 191, 36, 0.5) !important;
+    color: #fbbf24 !important;
+    border-radius: 50px !important;
+    font-weight: 600 !important;
+}
+.card-kanji .btn-outline-warning:hover {
+    background: rgba(251, 191, 36, 0.1) !important;
+    border-color: #fbbf24 !important;
+}
+
+/* Tombol "Sebelumnya" (KETIGA - HANYA TEKS) */
+.card-kanji .btn-outline-secondary {
+    border: 2px solid transparent !important; /* Tanpa border */
+    color: #64748b !important;
+    border-radius: 50px !important;
+}
+.card-kanji .btn-outline-secondary:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: white !important;
+}
+
+/* ========================================================
+   FIX FINAL: TOMBOL NAVIGASI RAMPING & BORDER JELAS
+   (Menggantikan style tombol sebelumnya)
+   ======================================================== */
+
+/* 1. PERKECIL UKURAN SEMUA TOMBOL NAVIGASI (Sebelumnya, Lupa, Berikutnya) */
+/* Kita target div pembungkus tombol di dalam kartu */
+.card-kanji .d-flex .btn {
+    padding: 10px 0 !important;   /* Padding atas-bawah dikurangi biar ramping */
+    font-size: 0.95rem !important; /* Ukuran font pas */
+    height: auto !important;       /* Tinggi menyesuaikan isi */
+    min-height: 48px !important;   /* Tinggi minimal fix (tidak kegedean) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 2. FIX TOMBOL "SEBELUMNYA" (KASIH BORDER) */
+.card-kanji .btn-outline-secondary {
+    /* Tambahkan border abu-abu transparan agar terlihat batasnya */
+    border: 1px solid rgba(255, 255, 255, 0.2) !important; 
+    color: #94a3b8 !important; /* Teks abu-abu */
+    background: transparent !important;
+}
+
+/* Efek Hover Tombol "Sebelumnya" */
+.card-kanji .btn-outline-secondary:hover {
+    border-color: #cbd5e1 !important; /* Border jadi terang */
+    color: #ffffff !important;        /* Teks jadi putih */
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* 3. RAPOHKAN TOMBOL "LUPA" & "BERIKUTNYA" AGAR SEIMBANG */
+.card-kanji .btn-outline-warning,
+.card-kanji .btn-primary, 
+.card-kanji .btn-success {
+    border-width: 1px !important; /* Samakan ketebalan border */
+}
+
+/* Pastikan input tidak terlalu mepet dengan tombol */
+.card-kanji .input-group {
+    margin-bottom: 2rem !important; /* Jarak antara input dan tombol */
+}
+
+/* ==================================================================
+   FIX FINAL: MODAL PERINGATAN & HALAMAN HASIL (DARK NEON)
+   ================================================================== */
+
+/* --- 1. PERBAIKI MODAL "HENTIKAN SESI" --- */
+
+/* Ubah Background Modal jadi Gelap */
+#stopQuizModal .modal-content {
+    background: #0f172a !important; /* Dark Slate */
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Perbaiki Ikon Peringatan (Segitiga/Lingkaran Seru) */
+#stopQuizModal .text-warning, 
+#stopQuizModal .bi-exclamation-circle-fill {
+    color: #fbbf24 !important; /* Kuning Emas */
+    text-shadow: 0 0 20px rgba(251, 191, 36, 0.4); /* Glow Kuning */
+    filter: drop-shadow(0 0 5px rgba(251, 191, 36, 0.5));
+}
+
+/* Perbaiki Teks Judul & Deskripsi */
+#stopQuizModal h5 {
+    color: #ffffff !important; /* Judul Putih */
+    font-weight: 800 !important;
+}
+#stopQuizModal p.text-muted {
+    color: #94a3b8 !important; /* Teks abu-abu terang */
+    background: transparent !important; /* Hapus background aneh jika ada */
+}
+
+/* Tombol "Ya, Selesai" (Merah Neon) */
+#stopQuizModal .btn-danger {
+    background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%) !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4) !important;
+}
+#stopQuizModal .btn-danger:hover {
+    box-shadow: 0 0 25px rgba(239, 68, 68, 0.6) !important;
+    transform: scale(1.02);
+}
+
+/* Tombol "Batal" (Ghost) */
+#stopQuizModal .btn-light {
+    background: transparent !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: #cbd5e1 !important;
+}
+#stopQuizModal .btn-light:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: white !important;
+}
+
+
+/* --- 2. PERBAIKI HALAMAN HASIL (RESULT SCREEN) --- */
+
+/* Kartu Utama Hasil (Wadah Besar) */
+#quiz-area .card {
+    background-color: #0f172a !important; /* Background Gelap */
+    border: 1px solid rgba(244, 114, 182, 0.3) !important; /* Border Pink Tipis */
+    color: white !important;
+}
+
+/* Judul & Skor Besar */
+#quiz-area h4.fw-bold { color: #ffffff !important; } /* "Hasil Tes" */
+#quiz-area .display-3 { 
+    font-weight: 900 !important;
+    text-shadow: 0 0 30px currentColor; /* Efek Glow sesuai warna skor */
+}
+
+/* Tombol-Tombol Aksi (Ulangi, Menu Utama, Perbaiki) */
+#quiz-area .btn-outline-primary {
+    color: #f472b6 !important; border-color: #f472b6 !important;
+}
+#quiz-area .btn-outline-primary:hover {
+    background: #f472b6 !important; color: #000 !important;
+}
+#quiz-area .btn-dark {
+    background: #1e293b !important; border: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+/* Tabel Riwayat Terakhir (Yang tadinya putih) */
+#quiz-area .bg-light {
+    background-color: #1e293b !important; /* Ganti jadi Dark Slate */
+    border: 1px solid rgba(255,255,255,0.05);
+}
+#quiz-area .text-secondary, #quiz-area .text-muted, #quiz-area .text-dark {
+    color: #cbd5e1 !important; /* Teks tabel jadi terang */
+}
+#quiz-area td {
+    border-bottom-color: rgba(255,255,255,0.05) !important;
+}
+
+/* --- DETAIL JAWABAN (ITEM LIST) --- */
+
+/* Kartu Item Jawaban (.res-item) */
+.res-item {
+    background-color: #1e293b !important; /* Gelap */
+    border: 1px solid rgba(255,255,255,0.08) !important;
+    margin-bottom: 12px;
+}
+
+/* Huruf Kanji di Hasil */
+.res-kanji-main {
+    color: #f472b6 !important; /* Pink Neon */
+    text-shadow: 0 0 10px rgba(244, 114, 182, 0.3);
+}
+
+/* Baris Jawaban SALAH (Merah Gelap, bukan pink muda) */
+.res-wrong {
+    background-color: rgba(239, 68, 68, 0.1) !important; /* Merah Transparan */
+    border: 1px solid rgba(239, 68, 68, 0.3) !important;
+    color: #fca5a5 !important; /* Teks Merah Muda */
+}
+
+/* Baris Jawaban BENAR (Hijau Gelap, bukan hijau muda) */
+.res-correct {
+    background-color: rgba(34, 197, 94, 0.1) !important; /* Hijau Transparan */
+    border: 1px solid rgba(34, 197, 94, 0.3) !important;
+    color: #86efac !important; /* Teks Hijau Muda */
+}
+
+/* Label Tag (KAMU / BENAR) */
+.res-tag {
+    color: rgba(255,255,255,0.7) !important;
+    font-weight: 800 !important;
+}
+
+/* Ikon Centang/Silang */
+.bi-check-circle-fill { color: #4ade80 !important; text-shadow: 0 0 10px rgba(74, 222, 128, 0.5); }
+.bi-x-circle-fill { color: #ef4444 !important; text-shadow: 0 0 10px rgba(239, 68, 68, 0.5); }
+
+/* ==================================================================
+   FIX FINAL: TABEL RIWAYAT TERAKHIR (CLEAN DARK LOOK)
+   ================================================================== */
+
+/* 1. UBAH KONTAINER TABEL (HILANGKAN BACKGROUND PUTIH) */
+/* Kita menimpa class .bg-light yang ada di Javascript */
+#quiz-area .bg-light {
+    background-color: #0f172a !important;   /* Dark Slate (Senada dengan kartu) */
+    border: 1px solid rgba(255, 255, 255, 0.08) !important; /* Border tipis */
+    border-radius: 16px !important;
+    box-shadow: none !important;            /* Hilangkan shadow aneh */
+}
+
+/* 2. PERCANTIK JUDUL "RIWAYAT TERAKHIR" */
+#quiz-area h6.text-secondary {
+    color: #f472b6 !important;  /* Judul jadi Pink Neon */
+    font-size: 0.85rem !important;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(244, 114, 182, 0.2); /* Garis bawah pink tipis */
+    padding-bottom: 12px !important;
+    margin-bottom: 12px !important;
+}
+/* Ikon Jam di sebelah judul */
+#quiz-area h6 i {
+    color: #f472b6 !important;
+}
+
+/* 3. STYLE HEADER TABEL (Waktu, Info, Skor) */
+#quiz-area thead td {
+    color: #64748b !important;  /* Abu-abu gelap (Slate-500) */
+    font-weight: 700 !important;
+    font-size: 0.75rem !important;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+/* 4. STYLE ISI TABEL (BARIS) */
+#quiz-area tbody tr {
+    transition: background 0.2s;
+}
+#quiz-area tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.02) !important; /* Efek highlight saat mouse lewat */
+}
+
+/* Kolom WAKTU (Kiri) */
+#quiz-area tbody td.text-secondary {
+    color: #94a3b8 !important;  /* Tanggal jadi abu terang */
+    font-size: 0.85rem !important;
+}
+#quiz-area tbody td span { 
+    color: #475569 !important;  /* Jam (kecil) jadi abu gelap */
+}
+
+/* Kolom INFO (Tengah) */
+/* Judul Mode (Tulis Arti, Tebak Arti, dll) */
+#quiz-area .fw-bold.text-dark {
+    color: #ffffff !important;  /* WAJIB PUTIH biar terbaca */
+    font-size: 0.95rem !important;
+}
+/* Nama Bab/Paket */
+#quiz-area .text-muted.small {
+    color: #cbd5e1 !important;  /* Abu terang */
+}
+
+/* Kolom SKOR (Kanan) */
+#quiz-area tbody td.text-end {
+    font-family: monospace;     /* Font angka biar rapi */
+    font-size: 1rem !important;
+    vertical-align: middle;
+}
+
+/* Skor Merah (Gagal) -> Jadi Merah Terang */
+#quiz-area .text-danger {
+    color: #fca5a5 !important; 
+    text-shadow: 0 0 5px rgba(248, 113, 113, 0.4);
+}
+/* Skor Hijau (Sukses) -> Jadi Hijau Terang */
+#quiz-area .text-success {
+    color: #86efac !important;
+    text-shadow: 0 0 5px rgba(74, 222, 128, 0.4);
+}
+
+/* Garis Pemisah Antar Baris */
+#quiz-area tbody td {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    padding: 12px 0 !important;
+}
+
+/* ==================================================================
+   FIX FINAL JS: TABEL RIWAYAT (CLEAN CODE)
+   ================================================================== */
+
+/* 1. KOTAK PEMBUNGKUS (Pengganti bg-light) */
+.res-history-box {
+    background-color: #0f172a !important;   /* Dark Slate */
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2); /* Shadow ke dalam biar rapi */
+}
+
+/* 2. JUDUL "RIWAYAT TERAKHIR" */
+.res-history-title {
+    color: #f472b6 !important; /* Pink Neon */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+}
+.res-history-title i {
+    color: #f472b6 !important;
+}
+
+/* 3. HEADER TABEL (Waktu, Info, Skor) */
+.res-history-head td {
+    color: #94a3b8 !important; /* Abu Terang */
+    font-weight: 700;
+}
+
+/* 4. ISI TABEL - TANGGAL */
+.res-date {
+    color: #cbd5e1 !important; /* Putih Abu */
+}
+
+/* 5. ISI TABEL - INFO PAKET (Bab 1, Bab 2...) */
+.res-pkg {
+    color: #f472b6 !important; /* Pink */
+    opacity: 0.8;
+}
+
+/* 6. GARIS PEMISAH ANTAR BARIS */
+.res-history-row {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    transition: background 0.2s;
+}
+.res-history-row:last-child {
+    border-bottom: none !important;
+}
+.res-history-row:hover {
+    background: rgba(255, 255, 255, 0.03) !important;
+}
+
+/* 7. SKOR WARNA NEON */
+.text-success {
+    color: #4ade80 !important; /* Hijau Neon */
+    text-shadow: 0 0 8px rgba(74, 222, 128, 0.3);
+}
+.text-danger {
+    color: #f87171 !important; /* Merah Neon */
+    text-shadow: 0 0 8px rgba(248, 113, 113, 0.3);
+}
+
+/* ==================================================================
+   FIX FINAL: TAMPILAN QUIZ / TEBAK ARTI (DARK NEON BUTTONS)
+   ================================================================== */
+
+/* 1. KARTU PILIHAN (DEFAULT: GELAP) */
+.choice-option {
+    background-color: rgba(30, 41, 59, 0.6) !important; /* Dark Slate Transparan */
+    border: 1px solid rgba(255, 255, 255, 0.1) !important; /* Garis tipis */
+    color: #e2e8f0 !important; /* Teks Putih Abu */
+    font-weight: 600;
+    padding: 15px 20px;
+    border-radius: 16px !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* 2. EFEK HOVER (SAAT MOUSE LEWAT) */
+.choice-option:hover {
+    border-color: #f472b6 !important; /* Border jadi Pink */
+    background-color: rgba(244, 114, 182, 0.1) !important; /* Pink sangat tipis */
+    color: #fff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* 3. EFEK SELECTED (SAAT DIPILIH) - JADI PINK NEON */
+.choice-selected {
+    background: linear-gradient(135deg, #f472b6 0%, #db2777 100%) !important; /* Gradasi Pink */
+    border-color: transparent !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 20px rgba(244, 114, 182, 0.4) !important; /* Glow Pink */
+    transform: scale(1.02);
+    z-index: 2;
+}
+
+/* 4. PERBAIKI TEKS JUDUL SOAL */
+.card-kanji h5 {
+    color: #ffffff !important; /* "Soal 1/29" jadi Putih */
+}
+.card-kanji small {
+    color: #64748b !important; /* "No Asli" jadi abu gelap */
+}
