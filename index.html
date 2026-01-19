@@ -53,7 +53,7 @@
                 </div>
             </div>
 
-            <div class="hud-card col-wide theme-yellow" data-bs-toggle="modal" data-bs-target="#susunKalimatModal">
+            <div class="hud-card col-std theme-yellow" data-bs-toggle="modal" data-bs-target="#susunKalimatModal">
                 <i class="bi bi-sort-alpha-down bg-icon"></i>
                 <div class="card-content">
                     <div class="icon-badge"><i class="bi bi-sort-alpha-down"></i></div>
@@ -63,7 +63,7 @@
                 </div>
             </div>
 
-            <!-- <div class="hud-card col-std theme-pink" data-bs-toggle="modal" data-bs-target="#hafalankotobaModal">
+            <div class="hud-card col-std theme-pink" data-bs-toggle="modal" data-bs-target="#hafalankotobaModal">
                 <i class="bi bi-translate bg-icon"></i>
                 <div class="card-content">
                     <div class="icon-badge"><i class="bi bi-translate"></i></div>
@@ -71,9 +71,9 @@
                     <p class="card-desc">Flashcard Minna no Nihongo.</p>
                     <div class="card-arrow">Hafalkan <i class="bi bi-arrow-right"></i></div>
                 </div>
-            </div> -->
+            </div>
 
-            <div class="hud-card col-wide theme-purple" data-bs-toggle="modal" data-bs-target="#hafalankanjiModal">
+            <div class="hud-card col-std theme-purple" data-bs-toggle="modal" data-bs-target="#perbaikanModal">
                 <i class="bi bi-grid-3x3-gap-fill bg-icon"></i>
                 <div class="card-content">
                     <div class="icon-badge"><i class="bi bi-grid-3x3-gap-fill"></i></div>
@@ -86,6 +86,39 @@
         </div> <div id="quiz-area"></div>
 
     </div>
+
+    <!-- Maintenance Modal -->
+     <div class="modal fade" id="perbaikanModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content overflow-hidden">
+            <!-- Top accent merah -->
+            <div style="height: 5px; background: #dc3545; box-shadow: 0 0 10px #dc3545;"></div>
+
+            <div class="modal-body text-center px-4 py-5">
+                <h4 class="fw-bold mb-3 text-danger">
+                    Sistem Sedang Diperbaiki
+                </h4>
+
+                <p class="text-secondary mb-4">
+                    Halaman <b>ini</b> sementara tidak dapat diakses.<br>
+                    Silakan coba lagi nanti.
+                </p>
+
+                <div class="d-flex justify-content-center gap-2">
+                    <button 
+                        type="button" 
+                        class="btn btn-outline-danger rounded-pill px-4"
+                        data-bs-dismiss="modal">
+                        Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- End Maintenance Modal -->
+
+
 
     <div class="modal fade" id="hafalankanjiModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">

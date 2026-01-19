@@ -50,13 +50,28 @@ style.innerHTML = `
 document.head.appendChild(style);
 
 // --- HELPER: FORMAT TAMPILAN SOAL (PAKAI CLASS RESPONSIF) ---
+// --- HELPER: FORMAT TAMPILAN SOAL (AUTO SIZE) ---
 function formatQuestion(text) {
-  return `<div class="d-flex align-items-center justify-content-center px-2" style="min-height: 120px;">
-                <span class="q-text-responsive">${escapeHtml(text)}</span>
+    const len = text.length;
+    let fontSize = "5rem"; // Ukuran Default (untuk Kanji/Kata Pendek)
+
+    // Logika Pintar: Makin panjang teks, makin kecil font-nya
+    if (len > 30) {
+        fontSize = "1.8rem"; // Kalimat sangat panjang
+    } else if (len > 15) {
+        fontSize = "2.5rem"; // Kalimat sedang (contoh: "Penting / Berharga")
+    } else if (len > 6) {
+        fontSize = "3.5rem"; // Kata agak panjang (Hiragana majemuk)
+    }
+
+    return `<div class="d-flex align-items-center justify-content-center px-2" style="min-height: 120px;">
+                <span class="q-text-responsive" style="font-size: ${fontSize} !important; line-height: 1.2;">
+                    ${escapeHtml(text)}
+                </span>
             </div>`;
 }
 
-// --- 1. RENDER QUIZ ---
+// --- 1. RENDER QUIZ (UPDATE: TEMA DARK NEON) ---
 export function renderQuiz(state, qNo) {
   area.innerHTML = "";
   const idx = state.current;
@@ -64,44 +79,36 @@ export function renderQuiz(state, qNo) {
   const choices = state.choicesPerQ[idx];
   const isLupa = state.answers[idx] === "Lupa";
 
-  // Ambil Text Utama (Kanji/Hira/Arti)
+  // Ambil Text Utama
   const kanjiTxt = String(q[KEYS.kanji] || "").trim();
   const meanTxt = String(q[KEYS.meaning] || "").trim();
   const hiraTxt = String(q[KEYS.hiragana] || "").trim();
 
   let displayHtml = "";
 
-  // Tentukan apa yang ditampilkan sebagai SOAL berdasarkan mode
+  // Tentukan Soal
   if (state.sessionType === "quiz_hiragana") {
     displayHtml = formatQuestion(meanTxt || hiraTxt);
   } else {
-    const textToShow = kanjiTxt || hiraTxt;
-    displayHtml = formatQuestion(textToShow);
+    displayHtml = formatQuestion(kanjiTxt || hiraTxt);
   }
 
-  let choicesHtml = '<div class="row g-3">';
+  // --- BAGIAN PILIHAN GANDA (UPDATED) ---
+  let choicesHtml = '<div class="d-grid gap-3">'; // Pakai Grid Gap biar rapi
+  
   choices.forEach((c, i) => {
     const isSelected = state.answers[idx] === i;
-    let cardClass = "p-3 shadow-sm border rounded-3 fw-bold choice-card-anim";
-    let textClass = "";
-    let style = "cursor: pointer; position: relative;";
-
-    if (isSelected) {
-      style +=
-        "background-color: #0d6efd; border-color: #0d6efd; color: #ffffff !important;";
-      textClass = "text-white";
-    } else {
-      style += "background-color: #fff;";
-      textClass =
-        state.sessionType === "quiz_hiragana" ? "text-primary" : "text-dark";
-    }
-
+    
+    // Logika Class: Kalau dipilih pakai 'choice-selected', kalau tidak pakai 'choice-option'
+    let btnClass = isSelected ? "choice-option choice-selected" : "choice-option";
+    
     choicesHtml += `
-          <div class="col-12"> 
-            <div class="${cardClass}" role="button" onclick="window.handleAnswer(${i})" style="${style}">
-              <div class="${textClass}" style="font-size: 1.1rem;">${escapeHtml(c.text)}</div>
-            </div>
-          </div>`;
+        <div class="${btnClass} shadow-sm d-flex align-items-center justify-content-center text-center" 
+             role="button" 
+             onclick="window.handleAnswer(${i})"
+             style="min-height: 60px; cursor: pointer;">
+          <div style="font-size: 1.1rem;">${escapeHtml(c.text)}</div>
+        </div>`;
   });
   choicesHtml += "</div>";
 
@@ -109,18 +116,24 @@ export function renderQuiz(state, qNo) {
   card.className = "card card-kanji mb-3 border-0 shadow-sm";
   card.innerHTML = `
       <div class="card-body p-4">
-        <div class="d-flex justify-content-between mb-3">
-            <h5 class="fw-bold">Soal ${idx + 1} / ${state.batch.length}</h5>
-            <small class="text-muted">No Asli: ${q[KEYS.number] || "-"}</small>
+        <div class="d-flex justify-content-between mb-3 align-items-center">
+            <h5 class="fw-bold m-0">Soal ${idx + 1} / ${state.batch.length}</h5>
+            <small class="text-muted" style="font-size: 0.8rem;">No Asli: ${q[KEYS.number] || "-"}</small>
         </div>
-        ${displayHtml} ${choicesHtml}
-        <div class="mt-4 d-flex gap-2 w-100">
+        
+        ${displayHtml} 
+        
+        <div class="mb-4">
+            ${choicesHtml}
+        </div>
+
+        <div class="d-flex gap-2 w-100 mt-2">
             <button class="btn btn-outline-secondary fw-bold flex-grow-1" onclick="window.handlePrev()" ${idx === 0 ? "disabled" : ""}>Sebelumnya</button>
             <button class="btn btn-outline-warning fw-bold flex-grow-1" onclick="window.handleLupa()">${isLupa ? "Ditandai" : "Lupa"}</button>
             ${
               idx < state.batch.length - 1
-                ? `<button class="btn btn-outline-primary fw-bold flex-grow-1" onclick="window.handleNext()">Berikutnya</button>`
-                : `<button class="btn btn-primary fw-bold flex-grow-1" onclick="window.handleConfirm()">Selesai</button>`
+                ? `<button class="btn btn-primary fw-bold flex-grow-1" onclick="window.handleNext()">Berikutnya</button>`
+                : `<button class="btn btn-success fw-bold flex-grow-1" onclick="window.handleConfirm()">Selesai</button>`
             }
         </div>
       </div>
@@ -128,102 +141,104 @@ export function renderQuiz(state, qNo) {
   area.appendChild(card);
 }
 
-// --- 2. RENDER MEMORY ---
+
+// --- 2. RENDER MEMORY (UPDATE: TAMPILAN KAPSUL MODERN) ---
 export function renderMem(state, qNo) {
   area.innerHTML = "";
   const idx = state.current;
   const q = state.batch[idx];
   const val = state.answers[idx] === "Lupa" ? "" : state.answers[idx] || "";
 
+  // Ambil Text Utama
   const kanjiTxt = String(q[KEYS.kanji] || "").trim();
   const meanTxt = String(q[KEYS.meaning] || "").trim();
   const hiraTxt = String(q[KEYS.hiragana] || "").trim();
 
   let displayHtml = "";
-  let placeholderTxt = "",
-    labelTxt = "";
+  let placeholderTxt = "", labelTxt = "";
 
+  // Logic Text
   if (state.sessionType === "write_romaji") {
     displayHtml = formatQuestion(meanTxt || hiraTxt);
-    placeholderTxt = "Ketik Cara Baca (Romaji/Kana)";
-    labelTxt = "Ketik Bacaan:";
+    placeholderTxt = "Ketik bacaan...";
+    labelTxt = "TERJEMAHKAN KE ROMAJI / KANA";
   } else {
     const textToShow = kanjiTxt || hiraTxt;
     displayHtml = formatQuestion(textToShow);
-    placeholderTxt = "Contoh: Ikan, Air";
-    labelTxt = "Ketik Arti (Indonesia):";
+    placeholderTxt = "Contoh: Ikan, Air...";
+    labelTxt = "TERJEMAHKAN KE INDONESIA";
   }
 
   const card = document.createElement("div");
   card.className = "card card-kanji mb-3 border-0 shadow-sm";
+  
+  // Hapus class 'form-control' dari input di bawah ini dan tambah spellcheck="false"
   card.innerHTML = `
-      <div class="card-body p-4">
-        <div class="d-flex justify-content-between mb-3">
-            <h5 class="fw-bold">Hafalan ${idx + 1} / ${state.batch.length}</h5>
-            <small class="text-muted">No Asli: ${q[KEYS.number] || "-"}</small>
+      <div class="card-body p-4 d-flex flex-column h-100 justify-content-center">
+        
+        <div class="d-flex justify-content-between mb-2 align-items-center w-100">
+            <h5 class="fw-bold m-0 text-white">Hafalan ${idx + 1} / ${state.batch.length}</h5>
+            <small class="text-muted" style="font-size: 0.8rem;">No Asli: ${q[KEYS.number] || "-"}</small>
         </div>
-        ${displayHtml}
-        <div class="mt-3">
-            <label class="fw-bold text-muted mb-2">${labelTxt}</label>
-            <div class="input-group input-group-lg">
-                <input type="text" id="memInput" class="form-control border-secondary" placeholder="${placeholderTxt}" autocomplete="off" value="${escapeHtml(val)}" style="font-size: 1.3rem;">
-                <button class="btn btn-outline-secondary" type="button" id="btnMic" title="Rekam Suara"><i class="bi bi-mic-fill"></i></button>
+        
+        <div class="flex-grow-1 d-flex align-items-center justify-content-center my-3">
+            ${displayHtml}
+        </div>
+
+        <div class="mb-4 w-100 text-center">
+            <div class="mem-label mb-2" style="color:#94a3b8; font-size:0.8rem; letter-spacing:1px; font-weight:700;">${labelTxt}</div>
+            
+            <div class="mem-input-box">
+                <input type="text" id="memInput" 
+                       placeholder="${placeholderTxt}" 
+                       autocomplete="off" 
+                       spellcheck="false" 
+                       value="${escapeHtml(val)}">
+                
+                <div id="btnMic" role="button" title="Rekam Suara">
+                    <i class="bi bi-mic-fill fs-5"></i>
+                </div>
             </div>
         </div>
-        <div class="mt-4 d-flex gap-2 w-100">
+
+        <div class="d-flex gap-2 w-100 mt-auto">
             <button class="btn btn-outline-secondary fw-bold flex-grow-1" onclick="window.handlePrev()" ${idx === 0 ? "disabled" : ""}>Sebelumnya</button>
             <button class="btn btn-outline-warning fw-bold flex-grow-1" onclick="window.handleLupa()">Lupa</button>
-            ${idx < state.batch.length - 1 ? `<button class="btn btn-outline-primary fw-bold flex-grow-1" onclick="window.handleNext()">Berikutnya</button>` : `<button class="btn btn-success fw-bold flex-grow-1" onclick="window.handleConfirm()">Selesai</button>`}
+            ${
+              idx < state.batch.length - 1
+                ? `<button class="btn btn-primary fw-bold flex-grow-1" onclick="window.handleNext()">Berikutnya</button>`
+                : `<button class="btn btn-success fw-bold flex-grow-1" onclick="window.handleConfirm()">Selesai</button>`
+            }
         </div>
       </div>
     `;
   area.appendChild(card);
 
+  // Logic Input & Mic (Tetap sama)
   const inp = document.getElementById("memInput");
   const btnMic = document.getElementById("btnMic");
   inp.focus();
   inp.oninput = (e) => window.handleInput(e.target.value);
-  inp.onkeydown = (e) => {
-    if (e.key === "Enter") window.handleNextOrSubmit();
-  };
+  inp.onkeydown = (e) => { if (e.key === "Enter") window.handleNextOrSubmit(); };
 
-  const SpeechRecognition =
-    window.SpeechRecognition || window.webkitSpeechRecognition;
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (SpeechRecognition) {
     const recognition = new SpeechRecognition();
     recognition.lang = state.sessionType === "write_romaji" ? "ja-JP" : "id-ID";
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
-    btnMic.onclick = () => {
-      try {
-        recognition.start();
-      } catch (e) {
-        recognition.stop();
-      }
-    };
-    recognition.onstart = () => {
-      btnMic.classList.remove("btn-outline-secondary");
-      btnMic.classList.add("btn-danger");
-      btnMic.innerHTML =
-        '<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>';
-    };
-    recognition.onend = () => {
-      btnMic.classList.remove("btn-danger");
-      btnMic.classList.add("btn-outline-secondary");
-      btnMic.innerHTML = '<i class="bi bi-mic-fill"></i>';
-      inp.focus();
-    };
+
+    btnMic.onclick = () => { try { recognition.start(); } catch (e) { recognition.stop(); } };
+    recognition.onstart = () => { btnMic.classList.add("recording"); };
+    recognition.onend = () => { btnMic.classList.remove("recording"); inp.focus(); };
     recognition.onresult = (event) => {
       let transcript = event.results[0][0].transcript;
-      const cleanText = transcript
-        .toLowerCase()
-        .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
+      const cleanText = transcript.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
       inp.value = cleanText;
       window.handleInput(cleanText);
     };
   } else {
     btnMic.style.display = "none";
-    inp.style.borderRadius = "0.5rem";
   }
 }
 

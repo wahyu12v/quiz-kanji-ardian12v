@@ -1309,3 +1309,248 @@ nav#main-nav,
 .card-kanji small {
     color: #64748b !important; /* "No Asli" jadi abu gelap */
 }
+
+/* ==================================================================
+   FIX FINAL: TAMPILAN QUIZ / TEBAK ARTI (DARK NEON BUTTONS)
+   ================================================================== */
+
+/* 1. KARTU PILIHAN (DEFAULT: GELAP) */
+.choice-option {
+    background-color: rgba(30, 41, 59, 0.6) !important; /* Dark Slate Transparan */
+    border: 1px solid rgba(255, 255, 255, 0.1) !important; /* Garis tipis */
+    color: #e2e8f0 !important; /* Teks Putih Abu */
+    font-weight: 600;
+    padding: 15px 20px;
+    border-radius: 16px !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* 2. EFEK HOVER (SAAT MOUSE LEWAT) */
+.choice-option:hover {
+    border-color: #f472b6 !important; /* Border jadi Pink */
+    background-color: rgba(244, 114, 182, 0.1) !important; /* Pink sangat tipis */
+    color: #fff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* 3. EFEK SELECTED (SAAT DIPILIH) - JADI PINK NEON */
+.choice-selected {
+    background: linear-gradient(135deg, #f472b6 0%, #db2777 100%) !important; /* Gradasi Pink */
+    border-color: transparent !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 20px rgba(244, 114, 182, 0.4) !important; /* Glow Pink */
+    transform: scale(1.02);
+    z-index: 2;
+}
+
+/* 4. PERBAIKI TEKS JUDUL SOAL */
+.card-kanji h5 {
+    color: #ffffff !important; /* "Soal 1/29" jadi Putih */
+}
+.card-kanji small {
+    color: #64748b !important; /* "No Asli" jadi abu gelap */
+}
+
+/* ==================================================================
+   FIX FINAL: TAMPILAN TULIS ARTI & ROMAJI (GLASS CAPSULE)
+   ================================================================== */
+
+/* 1. LABEL DI ATAS INPUT (DIBUAT RATA TENGAH & RAPI) */
+.mem-label {
+    text-align: center;
+    color: #94a3b8 !important; /* Abu Terang */
+    font-size: 0.8rem;
+    text-transform: uppercase; /* Huruf Kapital Semua */
+    letter-spacing: 1.5px;     /* Jarak antar huruf renggang */
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+/* 2. WADAH INPUT (KAPSUL) */
+
+
+/* ==================================================================
+   FIX FINAL: PERFECT INPUT CAPSULE (Sangat Rapi)
+   ================================================================== */
+
+/* 1. WADAH UTAMA (KAPSUL) */
+.mem-input-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    /* Background & Border Awal (Abu Gelap) */
+    background: #1e293b !important; 
+    border: 2px solid #334155 !important; 
+    
+    border-radius: 50px !important; /* Bulat Lonjong Sempurna */
+    padding: 8px 8px 8px 25px !important; /* Padding pas */
+    width: 100%;
+    max-width: 600px; /* Batasi lebar biar tidak kepanjangan */
+    margin: 0 auto;   /* Tengah */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* 2. EFEK SAAT DIKLIK (GLOW PINK) */
+.mem-input-box:focus-within {
+    border-color: #f472b6 !important; /* Border Pink */
+    background: #0f172a !important;   /* Latar jadi lebih gelap */
+    box-shadow: 0 0 25px rgba(244, 114, 182, 0.4) !important; /* Glow Neon */
+    transform: scale(1.02);
+}
+
+/* 3. INPUT TEKS (BERSIH TOTAL) */
+#memInput {
+    flex: 1; /* Isi sisa ruang */
+    background: transparent !important; /* Transparan */
+    border: none !important;            /* Tanpa garis */
+    outline: none !important;           /* Tanpa kotak fokus biru */
+    box-shadow: none !important;
+    
+    color: #ffffff !important;          /* Teks Putih */
+    font-size: 1.25rem !important;      /* Huruf Besar */
+    font-weight: 600 !important;
+    padding: 0 !important;
+    margin-right: 15px !important;
+}
+
+/* Placeholder (Teks Contoh) */
+#memInput::placeholder {
+    color: rgba(255, 255, 255, 0.3) !important;
+    font-weight: 400;
+}
+
+/* Matikan Background Kuning/Biru AutoFill Browser */
+#memInput:-webkit-autofill,
+#memInput:-webkit-autofill:hover, 
+#memInput:-webkit-autofill:focus {
+    -webkit-text-fill-color: white;
+    -webkit-box-shadow: 0 0 0px 1000px #1e293b inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* 4. TOMBOL MIC (BULAT DI KANAN) */
+#btnMic {
+    width: 48px; height: 48px; /* Ukuran Fix */
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05); /* Agak terang dikit */
+    color: #f472b6; /* Ikon Pink */
+    
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: 0.2s;
+    flex-shrink: 0; /* Jangan penyok */
+}
+
+/* Hover Mic */
+#btnMic:hover {
+    background: #f472b6; 
+    color: #fff;
+    transform: scale(1.1) rotate(10deg);
+    box-shadow: 0 0 15px rgba(244, 114, 182, 0.5);
+}
+
+/* Saat Merekam (Animasi) */
+#btnMic.recording {
+    background: #ef4444; color: white;
+    animation: pulseMic 1s infinite;
+}
+@keyframes pulseMic {
+    0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+    100% { box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); }
+}
+
+@keyframes pulse-red {
+    0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+
+
+/* ==================================================================
+   FIX FINAL: PROGRESS HAFALAN (DARK NEON THEME)
+   ================================================================== */
+
+/* 1. UBAH MODAL JADI GELAP */
+#progressModal .modal-content {
+    background-color: #0f172a !important; /* Dark Slate */
+    border: 1px solid rgba(244, 114, 182, 0.2) !important;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5) !important;
+}
+
+#progressModal .modal-header {
+    background-color: #0f172a !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+#progressModal .modal-title {
+    color: #ffffff !important;
+}
+
+#progressModal .text-muted {
+    color: #94a3b8 !important; /* Abu terang */
+}
+
+/* 2. UBAH KARTU PROGRESS (YANG TADINYA PUTIH) */
+.prog-card {
+    background-color: #1e293b !important; /* Background Gelap */
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2) !important;
+    color: #ffffff !important; /* Teks jadi putih */
+}
+
+/* Judul Bab (Bab 1, Bab 2, dst) */
+.prog-card span.fw-bold {
+    color: #f472b6 !important; /* Pink Neon */
+    font-size: 1.2rem !important;
+}
+
+/* Badge Total % di pojok kanan kartu */
+.prog-card .badge {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: #fff !important;
+}
+
+/* 3. UBAH LABEL ITEM (Tebak Arti, Tulis Arti, dll) */
+.prog-label {
+    color: #cbd5e1 !important; /* Abu Putih */
+}
+
+/* Ikon pada label */
+.prog-label i {
+    opacity: 0.8;
+}
+
+/* Angka Persen di kanan */
+.prog-pct {
+    color: #fff !important;
+}
+
+/* 4. PROGRESS BAR (JALUR & ISI) */
+.prog-track {
+    background-color: #334155 !important; /* Jalur gelap */
+    height: 8px !important;
+}
+
+/* Warna-warni Bar (Override biar menyala) */
+.prog-fill.bg-blue { background-color: #3b82f6 !important; box-shadow: 0 0 10px rgba(59, 130, 246, 0.4); }
+.prog-fill.bg-green { background-color: #22c55e !important; box-shadow: 0 0 10px rgba(34, 197, 94, 0.4); }
+.prog-fill.bg-orange { background-color: #f97316 !important; box-shadow: 0 0 10px rgba(249, 115, 22, 0.4); }
+.prog-fill.bg-red { background-color: #ef4444 !important; box-shadow: 0 0 10px rgba(239, 68, 68, 0.4); }
+
+/* 5. JIKA BAB SUDAH SELESAI (100%) */
+.prog-card.bab-done {
+    border: 1px solid #22c55e !important; /* Border Hijau */
+    background: rgba(34, 197, 94, 0.05) !important; /* Hijau sangat tipis */
+}
+.prog-card.bab-done .badge {
+    background-color: #22c55e !important;
+    border-color: #22c55e !important;
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
+}
