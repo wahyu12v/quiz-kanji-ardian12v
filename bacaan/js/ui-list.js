@@ -11,15 +11,17 @@ function renderStories() {
     
     gridContainer.style.opacity = '0';
     setTimeout(() => { gridContainer.style.opacity = '1'; }, 50);
-
     if (paginatedItems.length === 0) {
-        gridContainer.innerHTML = `<div class="col-12 text-center text-muted py-5">
-            <i class="fas fa-search mb-3" style="font-size: 2rem; opacity: 0.3;"></i><br>
+    gridContainer.innerHTML = `
+        <div class="col-12 text-center py-5" style="color: #fff;">
+            <i class="fas fa-search mb-3" style="font-size: 2rem; color: #fff; opacity: 0.6;"></i><br>
             Tidak ada cerita yang cocok.
-        </div>`;
-        paginationContainer.innerHTML = "";
-        return;
-    }
+        </div>
+    `;
+    paginationContainer.innerHTML = "";
+    return;
+}
+
 
     paginatedItems.forEach(story => {
         const col = document.createElement("div");
@@ -60,9 +62,9 @@ function setupPagination(totalItems, container) {
     container.appendChild(prevBtn);
 
     const pageInfo = document.createElement("span");
-    pageInfo.className = "fw-bold text-muted mx-2";
+    pageInfo.className = "fw-bold text-white mx-2";
     pageInfo.style.fontSize = "0.9rem";
-    pageInfo.innerText = `Hal ${currentPage} / ${totalPages}`;
+    pageInfo.innerText = `Halaman ${currentPage} / ${totalPages}`;
     container.appendChild(pageInfo);
 
     const nextBtn = document.createElement("button");
@@ -89,7 +91,7 @@ function setupCategories() {
     categoryList.forEach(cat => {
         const btn = document.createElement("button");
         btn.className = `cat-modal-btn ${cat === currentCategory ? 'active' : ''}`;
-        const checkIcon = cat === currentCategory ? '<i class="fas fa-check"></i>' : '';
+        const checkIcon = cat === currentCategory ? '' : '';
         btn.innerHTML = `<span>${cat}</span> ${checkIcon}`;
         
         btn.addEventListener("click", () => {

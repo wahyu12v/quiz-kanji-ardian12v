@@ -1,1081 +1,222 @@
-/* --- VARIABLES & GLOBAL --- */
+/* --- VARIABLES & PALETTE --- */
 :root {
-  /* PALET WARNA (BIRU AZURE GRADIENT) */
-  --primary: #0ea5e9;
-  --primary-gradient: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
-  --primary-light: #e0f2fe;
-  --secondary-bg: #f1f5f9;
+  --bg-main: #020617; /* Lebih gelap (Midnight) */
+  --bg-card: rgba(15, 23, 42, 0.6); 
+  --border-color: rgba(255, 255, 255, 0.08);
   
-  --text-dark: #0f172a;
-  --text-muted: #64748b;
-  --text-light: #ffffff;
-  --surface: #ffffff;
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
+  
+  /* NEON ACCENTS */
+  --neon-blue: #38bdf8;
+  --neon-green: #4ade80;
+  --neon-yellow: #facc15;
+  --neon-pink: #f472b6;
+  --neon-purple: #c084fc;
 
-  /* SHADOWS (Soft & Modern) */
-  --shadow-sm: 0 2px 4px rgba(148, 163, 184, 0.1);
-  --shadow-md: 0 6px 12px -2px rgba(148, 163, 184, 0.15), 0 3px 7px -3px rgba(148, 163, 184, 0.1);
-  --shadow-lg: 0 20px 25px -5px rgba(148, 163, 184, 0.1), 0 10px 10px -5px rgba(148, 163, 184, 0.04);
-  --shadow-primary: 0 10px 20px -5px rgba(14, 165, 233, 0.4);
+  --glow-strong: 0 0 20px;
 }
 
 body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background-color: var(--secondary-bg);
-  color: var(--text-dark);
-  display: flex; flex-direction: column; min-height: 100vh;
-  /* Background Pattern Halus */
-  background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
-  background-size: 24px 24px;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  /* Background Mesh Gradient yang lebih subtle */
+  background-image: 
+    radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(192, 132, 252, 0.15) 0%, transparent 50%);
+  background-attachment: fixed;
+  margin: 0;
+  height: 100vh;
+  overflow: hidden; /* Tetap no-scroll, tapi layout kita center */
+  display: flex;
+  align-items: center; /* KUNCI: Center Vertikal */
+  justify-content: center; /* KUNCI: Center Horizontal */
 }
 
-/* --- NAVBAR --- */
-#main-nav {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255,255,255,0.5);
-  box-shadow: var(--shadow-sm);
-}
-.brand-title { font-size: 18px; color: var(--text-dark); letter-spacing: -0.5px; }
-.brand-subtitle { font-size: 12px; color: var(--text-muted); font-weight: 500; }
-.progress-bar { background: var(--primary-gradient) !important; }
-
-
-/* --- HERO SECTION --- */
-.hero-card {
-    background: var(--primary-gradient);
-    color: var(--text-light);
-    border: none;
-    box-shadow: var(--shadow-lg);
-    transition: transform 0.3s ease;
-}
-.hero-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-primary); }
-
-.hero-bg-kanji {
-    position: absolute; top: -40px; right: -30px;
-    font-size: 220px; font-weight: 900;
-    color: var(--text-light); opacity: 0.1;
-    pointer-events: none; z-index: 1; transform: rotate(10deg);
+/* --- WRAPPER UTAMA --- */
+.dashboard-container {
+    width: 100%;
+    max-width: 1200px; /* Batasi lebar agar tidak melar */
+    padding: 20px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
-/* Override Text Colors in Hero */
-.hero-card .text-dark { color: white !important; }
-.hero-card .text-muted { color: rgba(255,255,255,0.8) !important; }
-.hero-card .bg-white { background: rgba(255,255,255,0.15) !important; border: 1px solid rgba(255,255,255,0.2) !important; color: white; }
-.hero-card .text-primary-custom { color: white !important; }
-
-
-/* --- BUTTONS --- */
-.btn-primary-custom {
-    background-image: var(--primary-gradient); color: white; border: none;
-    font-weight: 600; padding: 12px 30px; transition: all 0.2s;
-}
-.btn-primary-custom:hover { 
-    background-size: 150%; color: white; transform: translateY(-2px);
-    box-shadow: var(--shadow-primary);
+/* --- HEADER --- */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 20px;
+    margin-bottom: 10px;
 }
 
-.btn-outline-custom {
-    color: var(--primary); border: 2px solid var(--primary-light); background: transparent; font-weight: 600;
-}
-.btn-outline-custom:hover { 
-    background-color: var(--primary-light); border-color: var(--primary); color: var(--primary-dark); 
-}
-
-/* Hero specific buttons (Outline Putih) */
-.hero-card .btn-outline-custom {
-    color: white; border: 2px solid rgba(255,255,255,0.6);
-}
-.hero-card .btn-outline-custom:hover {
-    background: white; color: var(--primary); border-color: white;
-}
-
-
-/* --- QUIZ AREA --- */
-.card-kanji {
-  border-radius: 24px; border: none; background: var(--surface);
-  box-shadow: var(--shadow-md); overflow: hidden;
-}
-.kanji-big {
-  font-size: 110px; text-align: center; padding: 40px 10px;
-  font-weight: 900; color: var(--text-dark);
-  background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}
-@media (max-width: 576px) { .kanji-big { font-size: 80px; padding: 30px 10px; } }
-
-/* --- PILIHAN GANDA (Update agar lebih jelas) --- */
-.choice-card {
-  border-radius: 16px; 
-  padding: 18px 24px;
-  background: #ffffff; /* Warna dasar putih */
-  
-  /* Tambahkan border abu tipis agar batas tombol terlihat jelas di HP */
-  border: 2px solid #e2e8f0; 
-  
-  box-shadow: var(--shadow-sm); 
-  color: var(--text-dark); 
-  font-weight: 600;
-  cursor: pointer; 
-  display: flex; align-items: center; min-height: 75px;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative; z-index: 1;
-}
-
-/* SAAT DISENTUH / DI-HOVER: Berubah warna & border */
-.choice-card:hover {
-    background-color: var(--primary-light); /* Background jadi biru muda */
-    border-color: var(--primary);           /* Border jadi biru cerah */
-    color: var(--primary-dark);             /* Teks jadi biru tua */
-    transform: translateY(-2px) scale(1.01); /* Sedikit membesar */
-    box-shadow: var(--shadow-md);
-}
-
-/* SAAT DIPILIH (SELECTED): Warna Penuh & Kontras */
-.choice-selected {
-  /* Pakai gradient biru kuat */
-  background-image: var(--primary-gradient) !important; 
-  background-color: var(--primary) !important; /* Fallback */
-  
-  color: #ffffff !important; /* Teks Putih */
-  border-color: transparent !important;
-  
-  /* Efek 'Pop-up' */
-  box-shadow: 0 8px 20px -4px rgba(14, 165, 233, 0.5) !important;
-  transform: scale(1.02) !important; 
-  font-weight: 700;
-}
-
-/* --- MODALS & CHECKBOX --- */
-.modal-content { border: none; border-radius: 24px; box-shadow: var(--shadow-lg); }
-.modal-header { border-bottom: 1px solid var(--secondary-bg); }
-
-/* Range Grid */
-.range-grid-container {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 12px; padding: 8px; max-height: 350px; overflow-y: auto;
-}
-.range-grid-container .form-check { padding: 0; margin: 0; }
-.range-grid-container .form-check-input { position: absolute; opacity: 0; }
-
-.range-grid-container .form-check-label {
-    display: block; padding: 16px; background: var(--surface);
-    border: 2px solid var(--secondary-bg); border-radius: 16px;
-    cursor: pointer; transition: all 0.2s; box-shadow: var(--shadow-sm);
-}
-.range-grid-container .form-check-label:hover { border-color: var(--primary); transform: translateY(-2px); }
-.range-grid-container .form-check-input:checked + .form-check-label {
-    background-image: var(--primary-gradient); border-color: transparent;
-    color: white; box-shadow: var(--shadow-primary);
-}
-.range-grid-container .form-check-input:checked + .form-check-label .text-muted { color: rgba(255,255,255,0.8) !important; }
-
-
-/* --- KANJI LIST GRID (VERTICAL CARD) --- */
-.kanji-list-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
-    gap: 16px; padding: 8px;
-}
-
-/* Kartu Daftar (Layout Baru) */
-.kanji-list-card {
-    background: var(--surface);
-    border-radius: 20px; 
-    padding: 20px 16px;
-    display: flex; 
-    flex-direction: column; /* Vertikal */
-    align-items: center; 
-    justify-content: center;
-    transition: all 0.2s ease;
-    box-shadow: var(--shadow-sm); 
-    border: 1px solid rgba(0,0,0,0.05);
-    height: 100%;
-}
-.kanji-list-card:hover {
-    transform: translateY(-4px); 
-    box-shadow: var(--shadow-md);
-    border-color: var(--primary-light);
-}
-
-/* Style Kanji Besar di Daftar */
-.kanji-display {
-    font-size: 42px; 
+.brand-section h1 {
+    font-size: 2.5rem;
     font-weight: 800;
-    color: var(--text-dark);
-    line-height: 1.2;
-    background: var(--primary-gradient);
+    margin: 0;
+    line-height: 1;
+    background: linear-gradient(to right, #fff, #94a3b8);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-
-/* Input Pencarian */
-.search-box-custom {
-    background: var(--secondary-bg); border: 2px solid transparent;
-    border-radius: 50px; padding-left: 45px;
-    transition: all 0.2s;
-}
-.search-box-custom:focus {
-    background: #fff; border-color: var(--primary);
-    box-shadow: 0 0 0 4px var(--primary-light);
-}
-.search-icon-pos { left: 18px; top: 50%; transform: translateY(-50%); font-size: 1.1rem; }
-
-
-/* --- JFT SIMULATION STYLES --- */
-body.jft-mode {
-    background-color: #f3f4f6; /* Abu-abu lembut agar mata tidak lelah */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Header Ujian */
-.cbt-header {
-    background: #ffffff;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    padding: 15px 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.timer-badge {
-    font-size: 1.2rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    background-color: #ffe5e5;
-    color: #d63384;
-    border: 1px solid #ffb3b3;
-}
-
-/* Kartu Soal */
-.question-card {
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    background: white;
-    padding: 40px;
-    min-height: 450px;
-    transition: all 0.3s ease;
-}
-
-.section-badge {
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 15px;
-    display: inline-block;
-    padding: 5px 12px;
-    border-radius: 20px;
-    background-color: #e7f1ff;
-    color: #0d6efd;
-}
-
-/* Teks Soal */
-#questionText {
-    font-size: 1.35rem;
-    font-weight: 600;
-    color: #2c3e50;
-    line-height: 1.6;
-}
-
-/* Tombol Pilihan Jawaban */
-.choice-btn {
-    border: 2px solid #e9ecef;
-    border-radius: 12px;
-    background-color: #fff;
-    color: #495057;
-    font-size: 1.1rem;
-    padding: 15px 20px;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-}
-
-.choice-btn:hover {
-    background-color: #f8f9fa;
-    border-color: #dee2e6;
-    transform: translateY(-2px);
-}
-
-.choice-btn.selected {
-    border-color: #0d6efd;
-    background-color: #e7f1ff; /* Biru sangat muda */
-    color: #0d6efd;
-    font-weight: bold;
-    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.15);
-}
-
-.choice-mark {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    margin-right: 15px;
-    background: #f1f3f5;
-    font-weight: bold;
-    color: #adb5bd;
-    transition: all 0.2s;
-}
-
-.choice-btn.selected .choice-mark {
-    background: #0d6efd;
-    color: white;
-}
-
-/* Animasi Listening */
-.listening-pulse {
-    width: 80px;
-    height: 80px;
-    background-color: #0d6efd;
-    border-radius: 50%;
-    margin: 0 auto 20px;
-    animation: pulse-animation 1.5s infinite;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 2rem;
-}
-
-@keyframes pulse-animation {
-    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(13, 110, 253, 0.7); }
-    70% { transform: scale(1); box-shadow: 0 0 0 20px rgba(13, 110, 253, 0); }
-    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(13, 110, 253, 0); }
-}
-
-/* Modal Hasil */
-.score-circle {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    background: conic-gradient(#0d6efd 0% 0%, #e9ecef 0% 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 20px;
-    font-size: 3rem;
-    font-weight: bold;
-    color: #0d6efd;
-    position: relative;
-}
-.score-circle::before {
-    content: '';
-    position: absolute;
-    width: 130px;
-    height: 130px;
-    background: white;
-    border-radius: 50%;
-}
-.score-text {
-    position: relative;
-    z-index: 1;
-}
-
-
-/* --- MOBILE OPTIMIZATION --- */
-@media (max-width: 768px) {
-    .cbt-header {
-        padding: 10px 0;
-    }
-    .cbt-header h5 {
-        font-size: 1rem;
-    }
-    .timer-badge {
-        font-size: 1rem;
-        padding: 5px 10px;
-    }
-    /* Grid Tombol Section di HP (2 kolom) */
-    .section-nav-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
-    }
-    .question-card {
-        padding: 20px;
-        min-height: auto;
-    }
-    #questionText {
-        font-size: 1.1rem;
-    }
-    /* Tombol Navigasi Bawah Sticky di HP */
-    .nav-buttons-container {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: white;
-        padding: 15px;
-        box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
-        z-index: 99;
-    }
-    main {
-        padding-bottom: 80px; /* Spacer biar konten gak ketutup tombol */
-    }
-}
-
-/* Tampilan Desktop Default */
-.section-nav-grid {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-}
-
-/* --- REVIEW MODE (PEMBAHASAN) --- */
-.review-item {
-    text-align: left;
-    background: #fff;
-    border: 1px solid #e9ecef;
-    border-radius: 10px;
-    padding: 15px;
-    margin-bottom: 15px;
-    position: relative;
-}
-
-.review-item.correct {
-    border-left: 5px solid #198754; /* Garis Hijau */
-    background-color: #f8fffb;
-}
-
-.review-item.wrong {
-    border-left: 5px solid #dc3545; /* Garis Merah */
-    background-color: #fff8f8;
-}
-
-.review-question {
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.review-badge {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 0.8rem;
-}
-
-
-/* --- STYLE UNTUK MODAL DAFTAR KANJI --- */
-
-/* Container Grid */
-.kanji-list-grid {
-    display: grid;
-    /* Grid Responsif: Otomatis menyesuaikan jumlah kolom */
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    gap: 15px;
-    padding-bottom: 20px;
-}
-
-/* Kartu Kecil Kanji */
-.kanji-card-small {
-    background: #fff;
-    border: 1px solid #e9ecef;
-    border-radius: 12px;
-    padding: 15px;
-    text-align: center;
-    transition: transform 0.2s, box-shadow 0.2s;
-    cursor: default;
-}
-
-.kanji-card-small:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-    border-color: #cfe2ff;
-}
-
-/* Teks di dalam Kartu */
-.k-char {
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: #0d6efd; /* Warna Biru Utama */
-    margin-bottom: 5px;
-    line-height: 1;
-}
-
-.k-info {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.k-read {
+.brand-section p {
+    margin: 5px 0 0 0;
+    color: var(--text-secondary);
     font-size: 0.9rem;
-    font-weight: 600;
-    color: #212529;
+    letter-spacing: 1px;
 }
 
-.k-mean {
-    font-size: 0.8rem;
-    color: #6c757d;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-
-/* =========================================================
-   STORY MODE COMPLETE STYLES (MENU + GAMEPLAY)
-   ========================================================= */
-
-/* --- BAGIAN 1: MENU PILIH CERITA (GRID CARD) --- */
-/* Ini yang hilang sebelumnya, makanya tampilan jadi list biasa */
-
-.story-list-grid {
+/* --- GRID LAYOUT --- */
+.grid-menu {
     display: grid;
-    /* Grid Responsif: Minimal lebar 250px, sisanya menyesuaikan */
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    /* Grid 3 Kolom Presisi */
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto; /* Tinggi otomatis sesuai konten */
     gap: 20px;
-    padding: 10px 5px;
 }
 
-.story-card-item {
-    background-color: #fff;
-    border: 1px solid #e2e8f0;
-    border-radius: 16px;
-    padding: 20px;
-    cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 200px; /* Tinggi seragam */
-    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-}
-
-.story-card-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-    border-color: #3b82f6;
-}
-
-.card-icon-wrapper {
-    width: 45px;
-    height: 45px;
-    background: linear-gradient(135deg, #eff6ff, #dbeafe);
-    color: #2563eb;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    margin-bottom: 15px;
-}
-
-.story-card-title {
-    font-weight: 700;
-    color: #1e293b;
-    font-size: 1.1rem;
-    margin-bottom: 8px;
-    line-height: 1.3;
-}
-
-.story-card-desc {
-    font-size: 0.85rem;
-    color: #64748b;
-    margin-bottom: 20px;
-    line-height: 1.5;
-    /* Batasi teks panjang */
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-.story-card-footer-action {
-    margin-top: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px dashed #e2e8f0;
-    padding-top: 12px;
-}
-
-
-/* --- BAGIAN 2: GAMEPLAY (DUOLINGO STYLE) --- */
-/* Ini style agar Furigana rapi & Bank Kata tidak mengecil */
-
-/* Container Game */
-.story-card-container {
-    background-color: #fff;
+/* --- CARD STYLES (Style Baru) --- */
+.hud-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: 20px;
-    box-shadow: 0 8px 0 #e5e7eb, 0 15px 20px rgba(0,0,0,0.05); /* Efek 3D Tebal */
-    border: 2px solid #e5e7eb;
-    overflow: hidden;
-    margin-bottom: 25px;
+    padding: 25px;
+    position: relative;
+    overflow: hidden; /* Agar icon background terpotong rapi */
+    backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    min-height: 180px; /* Tinggi minimal pas, tidak raksasa */
 }
 
-.story-card-header {
-    background: #fff;
-    color: #4b5563;
-    padding: 15px 25px;
-    font-weight: 700;
-    font-size: 1rem;
-    border-bottom: 2px solid #f3f4f6;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+/* Hover Effects */
+.hud-card:hover {
+    transform: translateY(-5px);
+    background: rgba(30, 41, 59, 0.8);
+    border-color: rgba(255,255,255,0.2);
 }
 
-/* Area Teks Cerita (Scrollable) */
-.story-card-body {
-    padding: 30px;
-    font-size: 1.5rem; 
-    line-height: 2.8;  /* Jarak renggang untuk Tile */
-    color: #374151;
-    background-color: #fff;
-    
-    max-height: 45vh; /* Batas tinggi scroll */
-    overflow-y: auto;
-    text-align: center; /* Teks rata tengah */
-}
-
-.story-card-footer {
-    background-color: #f9fafb;
-    border-top: 2px solid #f3f4f6;
-    padding: 10px 20px;
-    text-align: center;
-}
-
-/* SLOT KOSONG (Target) */
-.story-slot {
-    display: inline-flex;
-    vertical-align: middle;
-    width: 80px;
-    height: 50px;
-    margin: 0 6px;
-    background-color: #e5e7eb;
-    border-radius: 12px;
-    border-bottom: 4px solid #d1d5db; /* Efek 3D Kosong */
-    cursor: pointer;
-    transition: all 0.1s;
-}
-
-.active-slot {
-    background-color: #bfdbfe !important;
-    border-color: #60a5fa !important;
-    border-bottom-color: #3b82f6 !important;
-    transform: translateY(2px);
-}
-
-/* SLOT TERISI (TILE) - FLEXBOX UNTUK FURIGANA */
-.filled-slot {
-    display: inline-flex;
-    flex-direction: column; /* Susun Atas-Bawah */
-    justify-content: center;
-    align-items: center;
-    
-    background-color: #fff !important;
-    border: 2px solid #e5e7eb;
-    border-bottom: 4px solid #e5e7eb; /* Efek 3D */
-    border-radius: 12px;
-    
-    padding: 4px 12px;
-    min-width: 80px;
-    height: auto;
-    
-    vertical-align: middle;
-    margin: 0 4px;
-    cursor: pointer;
-    transform: translateY(-8px); /* Geser naik agar sejajar teks */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-
-/* Teks Hiragana (Kecil) */
-.tile-furigana {
-    font-size: 0.7rem;
-    color: #6b7280;
-    font-weight: 600;
-    line-height: 1;
-    margin-bottom: 2px;
-}
-
-/* Teks Kanji (Besar) */
-.tile-kanji {
-    font-size: 1.3rem;
-    color: #111827;
-    font-weight: 800;
-    line-height: 1;
-}
-
-/* Hover Effect (Lepas) */
-.filled-slot:hover {
-    background-color: #fee2e2 !important;
-    border-color: #fca5a5 !important;
-    border-bottom-color: #f87171 !important;
-}
-.filled-slot:hover .tile-kanji, 
-.filled-slot:hover .tile-furigana { color: #ef4444; }
-
-/* BANK KATA (ANTI KEMPOT) */
-.bank-container {
-    min-height: 200px; /* Tinggi dikunci agar tidak mengecil */
-    background-color: #fff;
-    border: 2px dashed #e5e7eb;
-    border-radius: 16px;
-    padding: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    justify-content: center;
-    align-content: flex-start;
-}
-
-/* Tombol Pilihan */
-.choice-chip {
-    background: #fff;
-    border: 2px solid #e5e7eb;
-    border-bottom: 4px solid #e5e7eb; /* Efek 3D */
-    border-radius: 14px;
-    padding: 8px 16px;
-    min-width: 80px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.1s;
-    height: fit-content;
-}
-
-.choice-chip:active {
-    transform: translateY(4px);
-    border-bottom-width: 0px;
-    margin-bottom: 4px;
-}
-
-.choice-chip .lead {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #374151;
-    margin: 0;
-    line-height: 1.2;
-}
-.choice-chip small {
-    font-size: 0.75rem;
-    color: #9ca3af;
-    font-weight: 600;
-}
-
-/* Hide Used Words (Invisible but takes space if needed, 
-   OR use display:none if layout shift is okay inside bank) */
-.choice-chip.used {
-    visibility: hidden; 
+/* DEKORASI: Icon Raksasa di Background */
+.hud-card i.bg-icon {
+    position: absolute;
+    right: -20px;
+    bottom: -20px;
+    font-size: 8rem; /* Sangat besar */
+    opacity: 0.05; /* Sangat transparan */
+    transform: rotate(-15deg);
+    transition: all 0.4s ease;
     pointer-events: none;
 }
-
-
-/* --- UPDATE BANK KATA (Agar Mengecil) --- */
-
-.bank-container {
-    min-height: 60px; /* Tinggi minimal kecil saja */
-    background-color: #fff;
-    border: 2px dashed #e5e7eb;
-    border-radius: 16px;
-    padding: 20px;
-    
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-    align-content: flex-start;
-    
-    /* Transisi halus saat ukurannya berubah */
-    transition: all 0.3s ease;
+.hud-card:hover i.bg-icon {
+    opacity: 0.1;
+    transform: rotate(0deg) scale(1.1);
 }
 
-/* KATA YANG SUDAH DIPAKAI -> HILANG TOTAL */
-.choice-chip.used {
-    display: none !important; /* Ini yang membuat bank kata menyusut */
-}
-
-/* --- UPDATE WARNA VALIDASI (MERAH/HIJAU) --- */
-/* Class ini akan ditambahkan lewat JS saat tombol Cek ditekan */
-
-.slot-correct {
-    background-color: #d1e7dd !important; /* Hijau Muda */
-    border-color: #198754 !important;
-    border-bottom-color: #198754 !important;
-    color: #0f5132 !important;
-}
-.slot-correct .tile-kanji { color: #0f5132 !important; }
-.slot-correct .tile-furigana { color: #0f5132 !important; }
-
-.slot-wrong {
-    background-color: #f8d7da !important; /* Merah Muda */
-    border-color: #dc3545 !important;
-    border-bottom-color: #dc3545 !important;
-    color: #842029 !important;
-    animation: shake 0.4s; /* Efek getar */
-}
-.slot-wrong .tile-kanji { color: #842029 !important; }
-.slot-wrong .tile-furigana { color: #842029 !important; }
-
-@keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  50% { transform: translateX(5px); }
-  75% { transform: translateX(-5px); }
-  100% { transform: translateX(0); }
-}
-
-
-/* --- RESULT AREA (IN-PAGE) --- */
-
-.correction-box {
-    background-color: #fff;
-    border-left: 5px solid #dc3545;
-    border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    text-align: left; /* Agar teks koreksi rata kiri */
-}
-
-.result-container {
-    animation: fadeIn 0.5s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* --- RESULT AREA: CORRECTION GRID (CARD STYLE) --- */
-
-/* Wadah Grid: Otomatis mengatur kolom (responsif) */
-.correction-list-grid {
-    display: grid;
-    /* Lebar minimal kartu 240px, sisanya menyesuaikan layar */
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); 
-    gap: 15px;
-    margin-top: 15px;
-}
-
-/* Desain Kartu Koreksi */
-.correction-card {
-    background-color: #fff;
-    border: 1px solid #e2e8f0;
-    border-left: 5px solid #dc3545; /* Garis merah penanda salah */
-    border-radius: 12px;
-    padding: 15px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.03);
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    height: 100%; /* Agar tinggi kartu seragam */
-    transition: transform 0.2s;
-}
-
-.correction-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(220, 53, 69, 0.1);
-}
-
-/* Header Kartu */
-.corr-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    padding-bottom: 8px;
-    border-bottom: 1px dashed #f1f5f9;
-}
-
-.corr-label {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: #dc3545;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-/* =========================================
-   PERBAIKAN TAMPILAN FURIGANA SOAL (FINAL)
-   ========================================= */
-
-/* 1. Container Teks Cerita
-   Kita sesuaikan line-height agar baris tidak terlalu renggang
-   gara-gara ada furigana di atasnya. */
-.story-card-body {
-    line-height: 2.4 !important; /* Jarak baris yang pas dan nyaman */
-}
-
-
-
-/* --- STORY IMAGE STYLE --- */
-
-.story-image-wrapper {
-    width: 100%;
-    margin: 0 auto 25px auto; /* Jarak bawah ke teks */
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    background-color: #f1f5f9; /* Placeholder color loading */
-    max-width: 500px; /* Lebar maksimal agar tidak raksasa di PC */
-}
-
-.story-image-wrapper img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
-    transition: transform 0.3s;
-}
-
-.story-image-wrapper:hover img {
-    transform: scale(1.02); /* Efek zoom dikit saat hover */
-}
-
-
-/* =========================================
-   LAYOUT SPLIT VIEW (ANTI-SCROLL)
-   ========================================= */
-
-/* =========================================
-   LAYOUT SPLIT VIEW (FLUID + STICKY)
-   ========================================= */
-
-.game-layout-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-@media (min-width: 992px) {
-    .game-layout-wrapper {
-        flex-direction: row; 
-        align-items: flex-start; /* KUNCI: Agar kolom kanan bisa sticky */
-        /* height: 70vh; <--- HAPUS INI agar tidak membatasi tinggi */
-    }
-
-    /* KOLOM KIRI: CERITA */
-    .game-col-story {
-        flex: 7;
-        /* Hapus overflow & scrollbar internal */
-        overflow: visible; 
-    }
-
-    /* KOLOM KANAN: BANK KATA (STICKY) */
-    .game-col-interaction {
-        flex: 3;
-        
-        /* Agar dia diam/nempel saat kiri discroll */
-        position: sticky; 
-        top: 0; 
-        z-index: 10;
-        
-        background-color: #f8fafc;
-        border-radius: 16px;
-        border: 1px dashed #cbd5e1;
-        padding: 20px;
-        
-        /* Agar tingginya pas dengan layar */
-        max-height: 80vh; 
-        overflow-y: auto; /* Scroll cuma di bank kata jika layar terlalu pendek */
-    }
-}
-
-/* --- LOADING SKELETON ANIMATION --- */
-
-.story-image-wrapper {
-    /* Placeholder awal: kotak abu-abu */
-    background-color: #e2e8f0; 
-    min-height: 200px; 
+/* Content Layout */
+.card-content {
     position: relative;
-    /* Animasi denyut */
-    animation: pulse-bg 1.5s infinite ease-in-out;
+    z-index: 2;
 }
 
-/* Gambar disembunyikan dulu (opacity 0) */
-.story-image-wrapper img {
-    opacity: 0; 
-    transition: opacity 0.5s ease; /* Fade-in effect */
+.icon-badge {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
 }
 
-/* Class 'loaded' ditambahkan via JS saat gambar selesai download */
-.story-image-wrapper img.loaded {
-    opacity: 1;
+.card-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text-primary);
 }
 
-/* Keyframes untuk efek denyut */
-@keyframes pulse-bg {
-    0% { background-color: #e2e8f0; }
-    50% { background-color: #cbd5e1; }
-    100% { background-color: #e2e8f0; }
+.card-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    max-width: 90%;
 }
 
-/* Tweak Bank Kata di Kolom Kanan */
-.game-col-interaction .bank-container {
-    border: none; /* Hilangkan border ganda */
-    background: transparent;
-    padding: 0;
-    min-height: auto;
+.card-arrow {
+    align-self: flex-start;
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 50px;
+    background: rgba(255,255,255,0.05);
+    transition: all 0.3s;
 }
 
+/* --- PENGATURAN GRID SPESIFIK --- */
 
-/* =========================================
-   PERBAIKAN FURIGANA (NATURAL FLOW)
-   ========================================= */
+/* Kartu Atas (Ujian & Bacaan) -> Lebar 1.5 kolom (Makan 2 baris grid jadi 3 kolom) 
+   Solusi: Baris 1: 2 Kartu Besar (span 1.5? Grid css susah 1.5).
+   Kita pakai span:
+   Row 1: Ujian (span 2), Bacaan (span 1) -> Kurang imbang.
+   Solusi Terbaik: Row 1 = 2 Kolom Lebar. Row 2 = 3 Kolom Biasa.
+*/
 
-/* 1. Kembalikan ke display native (agar menyatu dengan okurigana) */
-.story-card-body ruby {
-    display: ruby;       /* Gunakan standar browser modern */
-    ruby-position: over; /* Paksa furigana di atas */
-    margin: 0;           /* Hapus jarak aneh */
-    padding: 0 1px;      /* Sedikit napas kiri-kanan */
-    vertical-align: baseline; /* KUNCI: Sejajar garis dengan hiragana sebelahnya */
-    line-height: 1.5;    /* Jarak baris normal */
+.grid-menu {
+    grid-template-columns: repeat(6, 1fr); /* Bagi jadi 6 grid kecil biar fleksibel */
 }
 
-/* 2. Styling Teks Furigana (Hiragana Kecil) */
-.story-card-body rt {
-    font-size: 0.55em;   /* Ukuran pas */
-    color: #94a3b8;      /* Abu-abu soft */
-    text-align: center;
-    font-weight: normal;
-    
-    /* Geser sedikit ke atas agar tidak nempel Kanji */
-    transform: translateY(-2px); 
-    
-    /* Agar tidak bisa diseleksi (biar rapi saat copy-paste) */
-    user-select: none;   
+/* Baris 1: Dua kartu besar (masing-masing makan 3 grid) */
+.col-wide {
+    grid-column: span 3;
+    min-height: 220px; /* Sedikit lebih tinggi */
 }
 
-/* Tweak khusus jika browser tidak support 'display: ruby' sempurna */
-@supports not (display: ruby) {
-    .story-card-body ruby {
-        display: inline-block;
-        text-align: center;
-    }
+/* Baris 2: Tiga kartu sedang (masing-masing makan 2 grid) */
+.col-std {
+    grid-column: span 2;
 }
 
 
-/* --- FIX: HAPUS RUANG KOSONG DI BAWAH CERITA --- */
+/* --- WARNA TEMA (GLOW BORDER SAAT HOVER) --- */
+.theme-blue:hover { box-shadow: 0 0 20px rgba(56, 189, 248, 0.3); border-color: var(--neon-blue); }
+.theme-blue .icon-badge, .theme-blue .card-arrow { color: var(--neon-blue); }
 
-@media (min-width: 992px) {
-    /* Reset batasan tinggi yang lama */
-    .story-card-body {
-        max-height: none !important; /* Biarkan memanjang natural */
-        overflow: visible !important; /* Matikan scroll internal yang dobel */
-        height: auto !important;
-    }
+.theme-green:hover { box-shadow: 0 0 20px rgba(74, 222, 128, 0.3); border-color: var(--neon-green); }
+.theme-green .icon-badge, .theme-green .card-arrow { color: var(--neon-green); }
 
-    /* Pastikan container mengikuti tinggi konten, bukan dipaksa 100% */
-    .game-col-story .story-card-container {
-        height: auto !important; 
-        min-height: 100%; /* Minimal setinggi kolom, tapi bisa lebih */
-        background-color: transparent !important; /* Hilangkan background putih yang sisa */
-        box-shadow: none !important;
-        border: none !important;
-    }
-    
-    /* Pindahkan background putih ke body agar pas dengan teks */
-    .game-col-story .story-card-body {
-        background-color: #fff;
-        border-radius: 16px;
-        min-height: 100%; /* Agar tetap terlihat penuh */
-    }
+.theme-yellow:hover { box-shadow: 0 0 20px rgba(250, 204, 21, 0.3); border-color: var(--neon-yellow); }
+.theme-yellow .icon-badge, .theme-yellow .card-arrow { color: var(--neon-yellow); }
+
+.theme-pink:hover { box-shadow: 0 0 20px rgba(244, 114, 182, 0.3); border-color: var(--neon-pink); }
+.theme-pink .icon-badge, .theme-pink .card-arrow { color: var(--neon-pink); }
+
+.theme-purple:hover { box-shadow: 0 0 20px rgba(192, 132, 252, 0.3); border-color: var(--neon-purple); }
+.theme-purple .icon-badge, .theme-purple .card-arrow { color: var(--neon-purple); }
+
+/* --- RESPONSIVE UNTUK HP --- */
+@media (max-width: 991px) {
+    body { height: auto; overflow-y: auto; display: block; }
+    .dashboard-container { padding: 20px 15px; max-width: 100%; margin-top: 0; }
+    .app-header { flex-direction: column; align-items: center; text-align: center; gap: 15px; }
+    .grid-menu { display: flex; flex-direction: column; gap: 15px; }
+    .hud-card { min-height: auto; }
 }
 
+/* Modal Styles */
+.modal-content { background: #1e293b; color: white; border: 1px solid rgba(255,255,255,0.1); }
+.btn-close { filter: invert(1); }

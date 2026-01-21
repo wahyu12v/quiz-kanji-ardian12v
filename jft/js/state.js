@@ -1,4 +1,4 @@
-// state.js - Pusat Penyimpanan Data
+// js/state.js
 export const state = {
     packages: [],
     currentPackage: null,

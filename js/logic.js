@@ -1,61 +1,115 @@
-
 import { KEYS } from './constants.js';
 import { shuffleArray, normalizeRomaji, hiraToRomaji } from './utils.js';
 
-// KITA HAPUS MANUAL_THEMES AGAR MURNI DARI DATASET JSON
-
 /**
- * Membangun Pilihan Ganda (Hiragana)
- * Mengambil distractors secara acak langsung dari dataset JSON
+ * Membangun Pilihan Ganda (Hiragana) dengan Logika "NO MERCY SUFFIX"
+ * Prioritas Mutlak: Akhiran (Suffix) HARUS SAMA jika stok kata tersedia.
  */
 export function buildChoices(orderIndices, allQuestions) {
   return orderIndices.map(idx => {
     const q = allQuestions[idx];
-    // Jawaban Benar (Kunci)
-    const correctHira = String(q[KEYS.hiragana] || '').trim();
     
-    // Format objek jawaban benar
+    // 1. Jawaban Benar
+    const correctHira = String(q[KEYS.hiragana] || '').trim();
     const correctOption = { meaning: correctHira }; 
+    
+    // Identifikasi Pola Kunci
+    const correctSuffix = correctHira.slice(-1); // Huruf terakhir
+    const hasTilde = correctHira.includes('～');
 
-    // 1. KUMPULKAN KANDIDAT DARI DATASET JSON
-    // Ambil semua hiragana dari soal lain, kecuali soal ini
-    let allCandidates = allQuestions
+    // 2. SIAPKAN POOL KANDIDAT
+    let rawCandidates = allQuestions
         .map(item => String(item[KEYS.hiragana] || '').trim())
         .filter(h => h !== "" && h !== correctHira);
+    
+    const uniquePool = [...new Set(rawCandidates)];
 
-    // 2. ACAK KANDIDAT (SHUFFLE)
-    internalShuffle(allCandidates);
+    // 3. PISAHKAN KANDIDAT MENJADI 2 KELOMPOK
+    let primaryPool = [];   // Kelompok Prioritas (Akhiran Sama)
+    let secondaryPool = []; // Kelompok Cadangan (Akhiran Beda)
 
-    // 3. PILIH 3 PENGECOH UNIK
-    // Gunakan Set untuk mencegah ada hiragana kembar jika di JSON ada duplikat
-    const distractors = [];
-    const seen = new Set();
+    uniquePool.forEach(candidate => {
+        let isMatch = false;
 
-    for (const hira of allCandidates) {
-        if (!seen.has(hira)) {
-            seen.add(hira);
-            distractors.push({ meaning: hira });
+        // Aturan Tilde "～"
+        if (hasTilde) {
+            isMatch = candidate.includes('～');
+        } 
+        // Aturan Suffix Biasa (bi, i, su, dll)
+        else {
+            isMatch = candidate.endsWith(correctSuffix);
         }
-        // Berhenti jika sudah dapat 3 pengecoh
-        if (distractors.length >= 3) break;
+
+        if (isMatch) primaryPool.push(candidate);
+        else secondaryPool.push(candidate);
+    });
+
+    // 4. FUNGSI SCORING KEMIRIPAN (Dipakai untuk memilih yang terbaik dari pool)
+    const calculateEvilScore = (candidate) => {
+        let score = 0;
+        // Panjang Karakter (Makin mirip makin tinggi)
+        const lenDiff = Math.abs(candidate.length - correctHira.length);
+        if (lenDiff === 0) score += 40;       // Panjang sama persis (+40)
+        else if (lenDiff === 1) score += 15;  // Beda 1 huruf (+15)
+        else score -= 10;
+
+        // Huruf Depan Sama
+        if (candidate[0] === correctHira[0]) score += 20;
+
+        // Overlap Karakter Tengah
+        const minLen = Math.min(candidate.length, correctHira.length);
+        for (let i = 0; i < minLen; i++) {
+            if (candidate[i] === correctHira[i]) score += 5;
+        }
+        return score;
+    };
+
+    // 5. SELEKSI PENGECOH
+    let finalDistractors = [];
+
+    // SKENARIO A: Stok "Akhiran Sama" Cukup (>= 3 kata)
+    // Kita HANYA akan mengambil dari Primary Pool. Pengecoh yang akhirannya beda DIBUANG.
+    if (primaryPool.length >= 3) {
+        // Urutkan berdasarkan skor kemiripan (Cari yang paling mirip di antara yang akhirannya sama)
+        const scoredPrimary = primaryPool.map(c => ({ word: c, score: calculateEvilScore(c) }));
+        scoredPrimary.sort((a, b) => b.score - a.score);
+        
+        // Ambil 10 teratas (agar variatif saat diacak), lalu pilih 3
+        let topSelection = scoredPrimary.slice(0, 10).map(i => i.word);
+        internalShuffle(topSelection);
+        finalDistractors = topSelection.slice(0, 3);
+    } 
+    
+    // SKENARIO B: Stok "Akhiran Sama" Kurang (< 3 kata)
+    // Terpaksa ambil semua yang ada di Primary, sisanya ambil dari Secondary yang paling mirip.
+    else {
+        finalDistractors = [...primaryPool]; // Ambil semua yang akhirannya sama
+
+        // Cari tambahan dari Secondary Pool
+        const scoredSecondary = secondaryPool.map(c => ({ word: c, score: calculateEvilScore(c) }));
+        scoredSecondary.sort((a, b) => b.score - a.score); // Cari yang paling mirip visualnya
+
+        const needed = 3 - finalDistractors.length;
+        // Ambil kandidat terbaik dari secondary
+        let bestBackups = scoredSecondary.slice(0, 15).map(i => i.word);
+        internalShuffle(bestBackups);
+        
+        finalDistractors = [...finalDistractors, ...bestBackups.slice(0, needed)];
     }
 
-    // 4. GABUNGKAN (1 Benar + 3 Salah)
-    const finalChoices = [correctOption, ...distractors];
-
-    // 5. ACAK POSISI TOMBOL
+    // 6. FINALISASI
+    const selectedChoices = finalDistractors.slice(0, 3).map(h => ({ meaning: h }));
+    const finalChoices = [correctOption, ...selectedChoices];
     return internalShuffle(finalChoices);
   });
 }
 
 /**
  * Fungsi Penilaian (Grading)
- * Mencocokkan Pilihan User (Hiragana) vs Kunci Jawaban (Hiragana)
  */
 export function gradeSession(state, allQuestions) {
     let correctCount = 0;
     const results = state.batch.map((q, i) => {
-        // Data Kunci
         const hira = String(q[KEYS.hiragana] || '').trim(); 
         const mean = String(q[KEYS.meaning] || '').trim().toLowerCase();
         
@@ -68,15 +122,13 @@ export function gradeSession(state, allQuestions) {
             
             if (choiceIdx !== null && choiceIdx !== 'Lupa') {
                 const choice = choices[choiceIdx];
-                
-                // CEK JAWABAN: Bandingkan Hiragana pilihan user dengan Hiragana soal
                 if (choice && choice.meaning === hira) {
                     isCorrect = true;
                 }
                 userAnsStr = choice ? choice.meaning : "Lupa";
             }
         } else {
-            // Mode Essay (Tetap pakai Romaji untuk mengetik)
+            // Mode Essay (Romaji)
             const raw = state.answers[i] || '';
             const normUser = normalizeRomaji(raw);
             const normTrue = normalizeRomaji(hiraToRomaji(hira));
@@ -98,8 +150,7 @@ export function gradeSession(state, allQuestions) {
     return { score: correctCount, total: state.batch.length, details: results };
 }
 
-// Fungsi Pengacak Internal (Fisher-Yates Shuffle)
-// Biar tidak tergantung file utils.js jika ada error di sana
+// Fungsi Pengacak Internal
 function internalShuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));

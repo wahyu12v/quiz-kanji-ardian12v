@@ -97,14 +97,17 @@ export function gradeSession(state, allQuestions) {
     return { score: correctCount, total: state.batch.length, details: results };
 }
 
-// --- PERBAIKAN LOGIKA PROGRESS (SISTEM BAB) ---
+// --- PERBAIKAN LOGIKA PROGRESS (SISTEM PAKET 20) ---
 export function calculateProgress(allQuestions) {
     const mastery = getMastery();
     const babStats = {};
+    const chunkSize = 20; // 20 Items per Paket
 
-    // 1. Hitung Data per Bab
+    // 1. Hitung Data per Paket 20
     allQuestions.forEach((q, idx) => {
-        const babName = q.bab || "Lainnya"; // Pakai Key BAB
+        const chunkIndex = Math.floor(idx / chunkSize) + 1;
+        const babName = `Paket ${chunkIndex}`;
+
         if (!babStats[babName]) {
             babStats[babName] = { totalWords: 0, modes: { quiz:0, quiz_hiragana:0, mem:0, write_romaji:0 } };
         }
@@ -140,6 +143,9 @@ export function calculateProgress(allQuestions) {
             }
         };
     });
-
-    return finalReport;
+    
+    // Sort agar Paket 1, 2, 3 berurutan
+    return finalReport.sort((a, b) => {
+        return parseInt(a.bab.replace('Paket ', '')) - parseInt(b.bab.replace('Paket ', ''));
+    });
 }

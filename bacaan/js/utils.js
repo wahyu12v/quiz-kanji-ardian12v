@@ -82,23 +82,25 @@ function stopAudio() {
 }
 
 // --- HELPER STYLES (TIDAK DIUBAH, SESUAI ASLINYA) ---
-function setButtonStyle(iconId, isActive, colorType = 'blue') {
+// --- HELPER STYLES (FIX WARNA HIJAU NEON) ---
+function setButtonStyle(iconId, isActive, colorType = 'green') {
     const iconEl = document.getElementById(iconId);
     if (!iconEl) return;
+
     if (isActive) {
-        if (colorType === 'blue') {
-            iconEl.style.background = 'linear-gradient(135deg, #00C6FF 0%, #0072FF 100%)';
-            iconEl.style.boxShadow = '0 6px 15px rgba(0, 114, 255, 0.4)';
-        } else if (colorType === 'purple') {
-            iconEl.style.background = 'linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)';
-            iconEl.style.boxShadow = '0 6px 15px rgba(161, 140, 209, 0.4)';
-        }
-        iconEl.style.color = 'white';
+        // KONDISI AKTIF: Hijau Neon + Glow
+        // Menggunakan rgba(74, 222, 128, ...) yang sama dengan tema CSS
+        iconEl.style.background = 'rgba(74, 222, 128, 0.2)'; 
+        iconEl.style.color = '#4ade80'; 
+        iconEl.style.boxShadow = '0 0 15px rgba(74, 222, 128, 0.5)';
+        iconEl.style.border = '1px solid #4ade80';
         iconEl.style.transform = 'scale(1.1) translateY(-2px)'; 
     } else {
-        iconEl.style.background = '#f0f2f5';
-        iconEl.style.color = '#555';
+        // KONDISI MATI: Transparan Gelap (Agar masuk ke tema Dark Mode)
+        iconEl.style.background = 'rgba(255, 255, 255, 0.1)';
+        iconEl.style.color = '#ccc'; // Abu-abu terang
         iconEl.style.boxShadow = 'none';
+        iconEl.style.border = '1px solid transparent';
         iconEl.style.transform = 'scale(1) translateY(0)';
     }
 }

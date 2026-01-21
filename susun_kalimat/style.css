@@ -1,27 +1,53 @@
-/* GLOBAL SETTINGS */
-:root {
-    --primary-blue: #0072FF;
-    --light-blue: #00C6FF;
-    --bg-dots: #f4f6f9;
+/* =========================================
+   1. GLOBAL VARIABLES & DARK THEME
+   ========================================= */
+   :root {
+    --bg-main: #020617;
+    --bg-card: rgba(15, 23, 42, 0.7);
+    --bg-glass: rgba(15, 23, 42, 0.85);
+    
+    --border-color: rgba(255, 255, 255, 0.08);
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    
+    /* THEME COLORS */
+    --neon-yellow: #fbbf24;
+    --neon-yellow-glow: rgba(251, 191, 36, 0.4);
+    
+    --neon-blue: #00d2ff;
+    --neon-green: #4ade80;
+    --neon-red: #f43f5e;
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: var(--bg-dots);
-    /* Pattern Dot Halus */
-    background-image: radial-gradient(#dce1e6 1.5px, transparent 1.5px);
-    background-size: 24px 24px;
+    font-family: 'Inter', 'Poppins', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    background-image: 
+        radial-gradient(circle at 15% 15%, rgba(251, 191, 36, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(0, 210, 255, 0.05) 0%, transparent 40%);
+    background-attachment: fixed;
+    background-size: cover;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden; /* Mencegah scroll samping */
+    margin: 0;
 }
 
-/* NAVBAR */
+/* Scrollbar Modern */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-main); }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+
+.fade-in { animation: fadeIn 0.5s ease-out forwards; opacity: 0; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* =========================================
+   2. NAVBAR GLASS
+   ========================================= */
 .app-navbar {
-    background: white;
     height: 70px;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.04);
+    background: var(--bg-glass);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
     position: fixed;
     top: 0;
     width: 100%;
@@ -29,501 +55,249 @@ body {
 }
 
 .brand-icon {
-    width: 35px;
-    height: 35px;
-    background-color: var(--primary-blue);
+    width: 38px; height: 38px;
+    background: rgba(251, 191, 36, 0.15);
+    color: var(--neon-yellow);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    box-shadow: 0 0 10px var(--neon-yellow-glow);
+}
+
+.brand-title { font-size: 1rem; font-weight: 700; color: var(--text-primary); }
+.brand-subtitle { font-size: 0.75rem; color: var(--text-secondary); }
+
+.btn-back {
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    background: rgba(255,255,255,0.05);
+    transition: 0.3s;
+}
+.btn-back:hover {
+    background: rgba(255,255,255,0.1);
     color: white;
-    border-radius: 8px;
+    border-color: white;
+}
+
+/* =========================================
+   3. MAIN CONTAINER
+   ========================================= */
+.main-container {
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.brand-title {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #333;
-    line-height: 1.2;
-}
-
-.brand-subtitle {
-    font-size: 0.7rem;
-    color: #888;
-    font-weight: 500;
-}
-
-.btn-back {
-    border: 2px solid #0d6efd;
-    color: #0d6efd;
-    font-weight: 600;
-    padding: 6px 20px;
-    font-size: 0.9rem;
-    transition: all 0.3s;
-}
-
-.btn-back:hover {
-    background-color: #0d6efd;
-    color: white;
-}
-
-/* MAIN CONTAINER & HERO CARD */
-.main-container {
-    /* PERBAIKAN POSISI: */
-    /* Menggunakan padding-top agar jarak dari atas konsisten (tidak terlalu kebawah) */
-    padding-top: 130px; 
-    padding-bottom: 50px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    /* align-items: center; <- Dihapus agar tidak memaksa ke tengah vertikal */
+    padding-top: 70px; 
+    padding-bottom: 50px; 
 }
 
 .hero-card {
-    background: linear-gradient(135deg, var(--light-blue) 0%, var(--primary-blue) 100%);
-    
-    /* PERBAIKAN LEBAR: */
-    width: 90%;          /* Mengambil 90% layar */
-    max-width: 1100px;   /* Maksimal lebar diperbesar agar tidak kotak kecil */
-    
-    min-height: 500px;
-    border-radius: 30px;
-    box-shadow: 0 20px 50px rgba(0, 114, 255, 0.25);
-    padding: 60px 40px; /* Padding dalam diperbesar sedikit */
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 50px 40px;
+    width: 100%;
+    max-width: 800px; 
     position: relative;
     overflow: hidden;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
     text-align: center;
 }
 
-/* Start View Elements */
+.hero-card::before {
+    content: '\f5d2';
+    font-family: "Font Awesome 6 Free"; font-weight: 900;
+    position: absolute;
+    top: -30px; right: -30px;
+    font-size: 15rem;
+    color: var(--neon-yellow);
+    opacity: 0.03;
+    transform: rotate(15deg);
+    pointer-events: none;
+}
+
 .hero-icon {
-    font-size: 4.5rem;
-    color: white;
-    opacity: 0.95;
-    margin-bottom: 20px;
+    font-size: 4rem; margin-bottom: 25px;
+    color: var(--neon-yellow);
+    filter: drop-shadow(0 0 20px var(--neon-yellow-glow));
 }
-
 .hero-title-main {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-weight: 800; /* Lebih tebal */
-    font-size: 2.8rem; /* Font diperbesar */
+    font-weight: 800; font-size: 2.2rem;
+    background: linear-gradient(to right, #fff, var(--neon-yellow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     margin-bottom: 0.5rem;
-    letter-spacing: -1px;
 }
-
-.hero-title-sub {
-    font-weight: 600;
-    opacity: 0.9;
-    font-size: 1.4rem;
-    margin-bottom: 1.5rem;
-}
-
-.hero-desc {
-    max-width: 700px; /* Lebar teks deskripsi diperluas */
-    font-size: 1.1rem;
-    line-height: 1.7;
-    opacity: 0.9;
-    margin-bottom: 40px;
-}
-
-/* Info Badges */
-.info-badge-container {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 50px;
-}
+.hero-title-sub { color: var(--text-secondary); margin-bottom: 1.5rem; font-weight: 600; font-size: 1.2rem; }
+.hero-desc { color: var(--text-secondary); max-width: 600px; margin: 0 auto 35px auto; line-height: 1.6; font-size: 1rem; }
 
 .info-badge {
-    background-color: rgba(255, 255, 255, 0.2);
-    padding: 10px 25px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 8px 20px;
     border-radius: 50px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-    backdrop-filter: blur(5px);
+    font-size: 0.9rem;
+    display: inline-flex; align-items: center; gap: 8px;
 }
 
-/* Tombol Mulai */
 .btn-start-hero {
-    border: 3px solid white; /* Border lebih tebal */
-    color: white;
-    background: transparent;
-    padding: 15px 60px;
+    background: rgba(251, 191, 36, 0.1);
+    color: var(--neon-yellow);
+    border: 1px solid var(--neon-yellow);
+    padding: 12px 40px;
     font-weight: 700;
-    font-size: 1.2rem;
-    transition: all 0.3s;
-}
-
-.btn-start-hero:hover {
-    background: white;
-    color: var(--primary-blue);
-    transform: translateY(-4px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-}
-
-/* --- GAME VIEW STYLES --- */
-.answer-area {
-    background-color: rgba(255, 255, 255, 0.15);
-    border: 2px dashed rgba(255, 255, 255, 0.4);
-    border-radius: 16px;
-    min-height: 120px;
-    padding: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    justify-content: center;
-    align-items: center;
+    font-size: 1.1rem;
+    box-shadow: 0 0 15px rgba(251, 191, 36, 0.1);
     transition: 0.3s;
-    width: 100%;
+}
+.btn-start-hero:hover {
+    transform: translateY(-3px);
+    background: var(--neon-yellow);
+    color: black;
+    box-shadow: 0 0 30px var(--neon-yellow-glow);
 }
 
-.answer-area.correct { background-color: rgba(144, 238, 144, 0.25); border-color: #90ee90; }
-.answer-area.wrong { background-color: rgba(255, 99, 71, 0.25); border-color: #ff6347; animation: shake 0.4s; }
-
-.placeholder-text {
-    color: rgba(255,255,255,0.6);
-    font-style: italic;
-    font-size: 1rem;
-    pointer-events: none;
+/* =========================================
+   4. GAME PLAY AREA
+   ========================================= */
+.game-header {
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; gap: 20px;
 }
+.lives-box {
+    background: rgba(244, 63, 94, 0.1); border: 1px solid rgba(244, 63, 94, 0.3);
+    padding: 6px 16px; border-radius: 50px; color: var(--neon-red);
+    display: flex; align-items: center; gap: 8px; font-weight: bold; white-space: nowrap;
+}
+.progress-container { flex-grow: 1; }
+.progress { background: rgba(255,255,255,0.05); height: 8px !important; border-radius: 10px; }
+.progress-bar { background: var(--neon-yellow); box-shadow: 0 0 10px var(--neon-yellow-glow); border-radius: 10px; }
+
+#question-text {
+    color: white; font-size: 1.5rem; text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    margin-bottom: 2rem; min-height: 60px; display: flex; align-items: center; justify-content: center;
+}
+
+.answer-area {
+    background: rgba(0,0,0,0.3); border: 2px dashed rgba(255,255,255,0.15); border-radius: 16px;
+    min-height: 120px; padding: 20px;
+    display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; align-items: center;
+    transition: 0.3s; margin-bottom: 30px;
+}
+.placeholder-text { color: rgba(255,255,255,0.3); font-style: italic; font-size: 0.9rem; }
 
 .word-chip {
-    background-color: white;
-    color: var(--primary-blue);
-    border: none;
-    padding: 12px 20px;
-    border-radius: 12px;
-    font-weight: 700;
-    font-family: 'Noto Sans JP', sans-serif;
-    cursor: pointer;
-    box-shadow: 0 4px 0 rgba(0,0,0,0.1);
-    transition: transform 0.1s, opacity 0.2s;
-    font-size: 1.1rem;
+    background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255,255,255,0.15); color: white;
+    padding: 10px 18px; border-radius: 12px; font-weight: 600; font-family: 'Noto Sans JP', sans-serif;
+    transition: 0.2s; font-size: 1rem;
+}
+.word-chip:hover {
+    background: var(--neon-yellow); color: black; border-color: var(--neon-yellow);
+    transform: translateY(-2px); box-shadow: 0 0 15px var(--neon-yellow-glow);
+}
+.word-chip.used { display: none; }
+
+#feedback-area {
+    margin-bottom: 20px; border-radius: 12px; padding: 15px; backdrop-filter: blur(5px); text-align: left;
+}
+#feedback-area[style*="background-color: rgb(209, 231, 221)"] {
+    background-color: rgba(74, 222, 128, 0.15) !important; border: 1px solid var(--neon-green) !important; color: var(--neon-green) !important;
+}
+#feedback-area[style*="background-color: rgb(248, 215, 218)"] {
+    background-color: rgba(244, 63, 94, 0.15) !important; border: 1px solid var(--neon-red) !important; color: var(--neon-red) !important;
 }
 
-.word-chip:hover { transform: translateY(-2px); }
-.word-chip:active { transform: translateY(2px); box-shadow: none; }
-.word-chip.used {
-    display: none; /* INI KUNCINYA: Hilang dari layout, bukan cuma transparan */
+#action-btn {
+    border-radius: 50px; font-weight: 800; letter-spacing: 1px; padding: 15px; border: none;
+    transition: 0.3s; text-transform: uppercase; width: 100%; margin-top: 20px;
+    background: var(--neon-blue) !important; color: black !important; box-shadow: 0 0 15px var(--neon-blue-glow);
 }
+#action-btn:hover { transform: translateY(-2px); box-shadow: 0 0 25px var(--neon-blue-glow); }
+#action-btn[style*="background: rgb(25, 135, 84)"] { background: var(--neon-green) !important; box-shadow: 0 0 20px rgba(74, 222, 128, 0.5); }
+#action-btn[style*="background: rgb(220, 53, 69)"] { background: var(--neon-red) !important; box-shadow: 0 0 20px rgba(244, 63, 94, 0.5); }
 
-.btn-white-action {
-    background: white;
-    color: var(--primary-blue);
-    font-weight: 700;
-    border-radius: 50px;
-    padding: 15px;
-    border: none;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    font-size: 1.1rem;
+/* =========================================
+   5. MODALS & REVIEW (PERBAIKAN UTAMA)
+   ========================================= */
+.modal-content {
+    background: #0f172a; border: 1px solid var(--border-color); color: white;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
 }
-.btn-white-action:hover { background: #f0f0f0; }
+.modal-header { border-bottom: 1px solid rgba(255,255,255,0.05); }
+.modal-footer { border-top: 1px solid rgba(255,255,255,0.05); }
+.modal-title { color: white !important; font-weight: 800; }
+.btn-close { filter: invert(1); }
 
-.btn-warning-action {
-    background: #ffc107;
-    color: #333;
-    font-weight: 700;
-    border-radius: 50px;
-    padding: 15px;
-    border: none;
-    font-size: 1.1rem;
-}
-
-/* Animation */
-.fade-in { animation: fadeIn 0.6s ease; }
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
-}
-
-/* Responsive Mobile */
-@media (max-width: 768px) {
-    .main-container { padding-top: 90px; }
-    .hero-card { width: 95%; padding: 40px 20px; border-radius: 20px; }
-    .hero-title-main { font-size: 1.8rem; }
-    .hero-desc { font-size: 0.9rem; }
-    .btn-start-hero { width: 100%; padding: 12px; }
-}
-
-
-/* --- STORY MODAL STYLES --- */
 .story-card-btn {
-    background: white;
-    border: 2px solid #eef2f6;
-    border-radius: 16px;
-    padding: 20px;
-    text-align: left;
-    transition: all 0.2s ease;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    position: relative;
-    overflow: hidden;
+    background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); color: white;
+    padding: 15px; border-radius: 15px; display: flex; align-items: center; gap: 15px;
+    width: 100%; text-align: left; transition: 0.2s;
 }
-
 .story-card-btn:hover {
-    border-color: var(--primary-blue);
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 114, 255, 0.1);
+    background: rgba(251, 191, 36, 0.1); border-color: var(--neon-yellow); transform: translateY(-2px);
 }
-
 .story-icon-box {
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(135deg, #e0f2ff, #cce9ff);
-    color: var(--primary-blue);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.4rem;
-    flex-shrink: 0;
+    width: 45px; height: 45px; background: rgba(255,255,255,0.1); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; color: var(--neon-yellow); font-size: 1.2rem;
 }
+.story-info h6 { margin: 0; font-weight: 700; color: white; }
+.story-info p { margin: 3px 0 0 0; font-size: 0.8rem; color: var(--text-secondary); }
+.badge { background: rgba(255,255,255,0.1) !important; color: white !important; border: none !important; }
 
-.story-info h6 {
-    font-weight: 700;
-    margin-bottom: 4px;
-    color: #333;
-}
+/* --- PERBAIKAN TAMPILAN REVIEW (PENTING) --- */
+/* Kita override class hardcode dari JS (text-dark, text-muted) agar terbaca di dark mode */
 
-.story-info p {
-    font-size: 0.8rem;
-    color: #888;
-    margin-bottom: 0;
-    line-height: 1.4;
-}
-
-/* Arrow indicator di kanan */
-.story-card-btn::after {
-    content: '\f054'; /* FontAwesome Chevron Right */
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    position: absolute;
-    right: 20px;
-    color: #ddd;
-    transition: 0.2s;
-}
-
-.story-card-btn:hover::after {
-    color: var(--primary-blue);
-    right: 15px;
-}
-
-/* --- RESULT MODAL STYLES --- */
-.custom-scrollbar {
-    max-height: 60vh; /* Batasi tinggi agar bisa di-scroll */
-    overflow-y: auto;
-}
-
-/* Scrollbar tipis yang cantik */
-.custom-scrollbar::-webkit-scrollbar {
-    width: 8px;
-}
-.custom-scrollbar::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 4px;
-}
-.custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #ccc;
-    border-radius: 4px;
-}
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #bbb;
-}
-
-/* Background warna lembut untuk pembahasan */
-.bg-success-subtle { background-color: #d1e7dd; }
-.bg-danger-subtle { background-color: #f8d7da; }
-
-
-/* Styling Modal Hasil */
-.custom-scrollbar {
-    max-height: 65vh;
-    overflow-y: auto;
-}
-
-.bg-success-subtle { background-color: #d1e7dd; border: 1px solid #a3cfbb !important; }
-.bg-danger-subtle { background-color: #f8d7da; border: 1px solid #f1aeb5 !important; }
-
-/* Placeholder text di kotak jawaban */
-.placeholder-text {
-    color: rgba(255,255,255,0.5);
-    font-style: italic;
-    pointer-events: none;
-}
-
-
-/* --- NEW ICON BUTTONS --- */
-/* Tombol Bendera di Pojok Kanan Atas */
-.btn-icon-top {
-    width: 42px;
-    height: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 12px;
-    border: 2px solid rgba(255,255,255,0.5);
-    color: white;
-    transition: all 0.2s;
-    background: rgba(255,255,255,0.1);
-}
-.btn-icon-top:hover {
-    background: rgba(255,255,255,0.3);
-    border-color: white;
-    transform: scale(1.05);
-}
-
-/* Tombol Lanjut (Checkmark Besar) di Bawah */
-.btn-icon-big {
-    width: 65px;
-    height: 65px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%; /* Lingkaran penuh */
-    font-size: 1.5rem;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15) !important;
-    border: none;
-    margin: 0 auto; /* Center horizontal */
-    transition: all 0.2s;
-}
-.btn-icon-big:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.2) !important;
-}
-
-
-/* --- NEW RESULT MODAL STYLES --- */
-.modal-body.custom-scrollbar {
-    background-color: #f8f9fa; /* Latar belakang abu sangat muda */
-    padding: 2rem !important; /* Padding lebih lega */
-}
-
-/* Kartu Skor Akhir */
-.score-card {
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    padding: 2rem;
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-/* Kartu Pembahasan Per Item */
 .review-card {
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    padding: 1.5rem;
-    margin-bottom: 1.5rem; /* Jarak antar kartu */
-    border-left: 6px solid #e9ecef; /* Default border abu */
-    transition: transform 0.2s;
-}
-.review-card:hover {
-    transform: translateY(-2px);
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border-color);
+    border-left-width: 4px; /* Border warna di kiri */
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-/* Warna Border Kiri */
-.review-card.correct { border-left-color: #198754; } /* Hijau Sukses */
-.review-card.wrong { border-left-color: #dc3545; }   /* Merah Gagal */
+/* OVERRIDE TEXT COLOR DARI MAIN.JS */
+.review-card h6.text-dark {
+    color: white !important; /* Judul Soal jadi Putih */
+}
 
-/* Label kecil di atas jawaban */
-.answer-label {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 700;
-    color: #adb5bd;
-    margin-bottom: 6px;
+.review-card .text-muted {
+    color: #94a3b8 !important; /* Label 'Jawaban Kamu' jadi abu terang */
+}
+
+.review-card span.text-dark {
+    color: #e2e8f0 !important; /* Jawaban User jadi putih gading */
+    font-weight: 600;
+}
+
+.review-card span.text-primary {
+    color: var(--neon-blue) !important; /* Kunci Jawaban jadi Biru Neon */
+    font-weight: 600;
+}
+
+.review-card .text-secondary.fst-italic {
+    color: #64748b !important; /* Terjemahan jadi abu gelap sedikit */
+    margin-top: 8px !important;
     display: block;
 }
 
-/* Kotak Jawaban di dalam review */
-.answer-box {
-    padding: 10px 15px;
-    border-radius: 10px;
-    font-weight: 600;
-    font-family: 'Noto Sans JP', monospace; /* Font Jepang/Monospace agar rapi */
-    font-size: 1rem;
+/* Indikator Status */
+.review-card.correct {
+    border-left-color: var(--neon-green);
+    background: linear-gradient(90deg, rgba(74, 222, 128, 0.05) 0%, transparent 100%);
+}
+.review-card.wrong {
+    border-left-color: var(--neon-red);
+    background: linear-gradient(90deg, rgba(244, 63, 94, 0.05) 0%, transparent 100%);
 }
 
-/* ... (Kode lama di atas biarkan saja) ... */
+/* Icon Benar/Salah */
+.review-card .fa-check-circle { color: var(--neon-green) !important; filter: drop-shadow(0 0 5px var(--neon-green)); }
+.review-card .fa-times-circle { color: var(--neon-red) !important; filter: drop-shadow(0 0 5px var(--neon-red)); }
 
-/* --- TAMBAHAN BARU UNTUK FITUR BARU --- */
-
-/* Furigana Styling */
-ruby {
-    font-family: 'Noto Sans JP', sans-serif;
-    ruby-align: center;
-}
-rt {
-    font-size: 0.6em;
-    color: rgba(255,255,255,0.9); /* Warna furigana agak transparan */
-    user-select: none;
-}
-
-/* Feedback Box (Muncul saat benar/salah) */
-.feedback-box {
-    margin: 15px 0;
-    padding: 15px;
-    border-radius: 12px;
-    text-align: center;
-    font-weight: bold;
-    animation: fadeIn 0.3s ease;
-    display: none; /* Default hidden */
-}
-
-.feedback-correct {
-    background-color: #d1e7dd;
-    color: #0f5132;
-    border: 1px solid #badbcc;
-}
-
-.feedback-wrong {
-    background-color: #f8d7da;
-    color: #842029;
-    border: 1px solid #f5c2c7;
-    animation: shake 0.4s;
-}
-
-/* Clue Box */
-.clue-box {
-    background-color: #fff3cd;
-    color: #664d03;
-    border: 1px dashed #ffecb5;
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 15px;
-    text-align: center;
-    font-size: 0.9rem;
-    display: none;
-}
-
-/* Animasi */
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
-}
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.hidden { display: none !important; }
-
-
-
-
+/* Furigana */
+ruby { font-family: 'Noto Sans JP'; }
+rt { color: rgba(255,255,255,0.7); font-size: 0.6em; }

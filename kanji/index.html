@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Hafalan Kotoba — Modern</title>
+    <title>Hafalan Kanji — Modern</title>
 
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -20,64 +20,43 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
-    <link rel="icon" type="image/x-icon" href="logo2-removebg.png" />
+    <link rel="icon" type="image/x-icon" href="/kanji/logo2-removebg.png" />
   </head>
   <body>
-    <nav
-      class="navbar sticky-top navbar-light bg-white py-3 shadow-sm"
-      id="main-nav"
-    >
-      <div class="container d-flex justify-content-between align-items-center">
-        <a
-          href="index.html"
-          class="navbar-brand d-flex align-items-center gap-3 m-0"
-        >
-          <img
-            src="/kotoba/logo2-removebg.png"
-            alt="Logo"
-            style="height: 42px; width: auto"
-            class="brand-logo"
-            onerror="this.style.display='none'"
-          />
-          <div class="d-flex flex-column lh-1">
-            <span class="fw-bold brand-title fs-5">Hafalan Kotoba</span>
-            <small class="brand-subtitle text-muted" style="font-size: 0.75rem"
-              >by Ardian Wahyu Saputra</small
-            >
-          </div>
-        </a>
-        <div class="d-flex gap-2 align-items-center">
-          <a
-            href="/index.html"
-            id="btn-main-back"
-            class="btn rounded-pill fw-bold d-flex align-items-center shadow-sm"
-            style="
-              border: 2.5px solid #0d6efd;
-              color: #0d6efd;
-              background: white;
-              transition: all 0.3s ease;
-            "
-            onmouseover="this.style.background='#0d6efd'; this.style.color='white'; this.style.transform='translateX(-3px)';"
-            onmouseout="this.style.background='white'; this.style.color='#0d6efd'; this.style.transform='translateX(0)';"
-          >
-            <i
-              class="bi bi-arrow-left me-2"
-              style="font-size: 1.2rem; -webkit-text-stroke: 1px"
-            ></i>
-            Kembali
-          </a>
-
-          <button
-            id="btn-stop-quiz"
-            class="btn btn-outline-danger btn-sm rounded-pill px-3 fw-bold d-none"
-            data-bs-toggle="modal"
-            data-bs-target="#stopQuizModal"
-          >
-            <i class="bi bi-stop-circle-fill me-1"></i> Berhenti
-          </button>
-        </div>
+<nav class="navbar sticky-top navbar-dark py-3 shadow-sm" id="main-nav">
+  <div class="container d-flex justify-content-between align-items-center">
+    <a href="index.html" class="navbar-brand d-flex align-items-center gap-3 m-0">
+      <img
+        src="/kanji/logo2-removebg.png"
+        alt="Logo"
+        style="height: 42px; width: auto"
+        class="brand-logo"
+        onerror="this.style.display='none'"
+      />
+      <div class="d-flex flex-column lh-1">
+        <span class="fw-bold brand-title fs-5">Hafalan Kanji</span>
+        <small class="brand-subtitle text-white" style="font-size: 0.75rem">
+          by Ardian Wahyu Saputra
+        </small>
       </div>
-    </nav>
+    </a>
+
+    <div class="d-flex gap-2 align-items-center">
+      <a href="/index.html" id="btn-main-back" class="btn rounded-pill fw-bold d-flex align-items-center shadow-sm">
+          <i class="bi bi-arrow-left me-2"></i> Kembali
+      </a>
+
+      <button
+        id="btn-stop-quiz"
+        class="btn btn-outline-danger btn-sm rounded-pill px-3 fw-bold d-none"
+        data-bs-toggle="modal"
+        data-bs-target="#stopQuizModal"
+      >
+        <i class="bi bi-stop-circle-fill me-1"></i> Berhenti
+      </button>
+    </div>
+  </div>
+</nav>
 
     <div class="modal fade" id="stopQuizModal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-sm">
@@ -89,8 +68,8 @@
                 style="font-size: 3.5rem"
               ></i>
             </div>
-            <h5 class="fw-bold mb-2">Hentikan Sesi?</h5>
-            <p class="text-muted small mb-4">
+            <h4 class="fw-bold mb-2">Hentikan Sesi?</h4>
+            <p class="text-white small mb-4">
               Progress saat ini akan langsung dinilai.<br />Anda tidak bisa
               melanjutkan lagi.
             </p>
@@ -124,7 +103,7 @@
           <div
             class="text-center hero-card p-5 rounded-5 position-relative overflow-hidden text-white"
           >
-            <div class="hero-bg-kanji">言葉</div>
+            <div class="hero-bg-kanji">漢字</div>
 
             <div style="position: relative; z-index: 2">
               <div class="mb-4">
@@ -135,13 +114,13 @@
                     backdrop-filter: blur(5px);
                   "
                 >
-                  <i class="bi bi-translate fs-1 text-white"></i>
+                  <i class="bi bi-chat-quote-fill fs-1 text-white"></i>
                 </div>
               </div>
 
-              <h1 class="display-5 fw-bolder mb-3">言葉を覚えましょう！</h1>
+              <h1 class="display-5 fw-bolder mb-3">漢字を覚えましょう！</h1>
               <p class="lead mb-5 px-3 opacity-75">
-                Pilih mode untuk menambah kosakata bahasa Jepangmu.<br />
+                Pilih mode untuk menambah hafalan Kanji-mu.<br />
                 Tulis Arti, Tebak Arti, atau Lihat Daftar.
               </p>
 
@@ -150,7 +129,7 @@
               >
                 <i class="bi bi-database-fill"></i>
                 <span
-                  >Total: <strong id="totalCount">...</strong> Kosakata</span
+                  >Total: <strong id="totalCount">...</strong> Kanji</span
                 >
               </div>
 
@@ -161,7 +140,7 @@
                   id="daftarHafalanBtn"
                   class="btn btn-outline-custom btn-lg rounded-pill px-4 py-3"
                 >
-                  <i class="bi bi-list-task me-2"></i> Daftar Kotoba
+                  <i class="bi bi-list-task me-2"></i> Daftar Kanji
                 </button>
 
                 <button
@@ -175,7 +154,7 @@
                   id="startBtn"
                   class="btn btn-outline-custom btn-lg rounded-pill px-4 py-3"
                 >
-                  <i class="bi bi-check-circle me-2"></i> Tebak Arti
+                  <i class="bi bi-check-circle-fill me-2"></i> Tebak Arti
                 </button>
 
                 <button
@@ -183,7 +162,7 @@
                   class="btn btn-outline-custom btn-lg rounded-pill px-4 py-3"
                 >
                   <i class="bi bi-question-circle-fill me-2"></i>
-                  Tebak Hiragana
+                  Tebak Cara Baca
                 </button>
 
                 <button
@@ -191,7 +170,7 @@
                   class="btn btn-outline-custom btn-lg rounded-pill px-4 py-3"
                 >
                   <i class="bi bi-pen-fill me-2"></i>
-                  Tulis Romaji
+                  Tulis Cara Baca
                 </button>
 
                 <button
@@ -208,14 +187,14 @@
       </div>
     </main>
 
-<div class="modal fade" id="progressModal" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="progressModal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"> 
         <div class="modal-content border-0 shadow-lg" style="border-radius: 16px; background-color: #f8f9fa;">
           
           <div class="modal-header border-0 pb-0 pt-4 px-4 bg-white rounded-top-4">
             <div>
                 <h4 class="modal-title fw-bold text-dark mb-1"><i class="bi bi-pie-chart-fill me-2 text-primary"></i>Progress Hafalan</h4>
-                <p class="text-muted small mb-0">Indikator 100% jika semua mode (4 jenis) selesai.</p>
+                <p class="text-white small mb-0">Indikator 100% jika semua mode (4 jenis) selesai.</p>
             </div>
             <button type="button" class="btn-close bg-light p-2 rounded-circle" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
@@ -239,8 +218,8 @@
         <div class="modal-content px-3 py-2">
           <div class="modal-header border-0 pb-0">
             <div>
-              <h4 class="modal-title fw-bold">Pilih Paket Kosakata</h4>
-              <p class="text-muted small mb-0">
+              <h4 class="modal-title fw-bold">Pilih Paket Kanji</h4>
+              <p class="text-white small mb-0">
                 Pilih paket yang ingin ditampilkan di daftar.
               </p>
             </div>
@@ -270,7 +249,7 @@
           <div class="modal-footer border-0 pt-0 pb-4">
             <button
               type="button"
-              class="btn btn-light text-muted fw-medium rounded-pill px-4 py-2"
+              class="btn btn-light text-white fw-medium rounded-pill px-4 py-2"
               data-bs-dismiss="modal"
             >
               Batal
@@ -299,8 +278,8 @@
         <div class="modal-content px-0 overflow-hidden">
           <div class="modal-header border-bottom-0 pb-0 pt-4 px-4 bg-white">
             <div>
-              <h4 class="modal-title fw-bold text-dark">
-                Daftar Kosakata Terpilih
+              <h4 class="modal-title fw-bold text-white mb-1">
+                Daftar Kanji Terpilih
               </h4>
               <p class="text-white small mb-0">
                 Menampilkan hasil dari paket yang dipilih.
@@ -336,7 +315,7 @@
           <div class="modal-header border-0 pb-0">
             <div>
               <h4 class="modal-title fw-bold">Pilih Materi Quiz</h4>
-              <p class="text-muted small mb-0">
+              <p class="text-white small mb-0">
                 Siap menguji kemampuan arti katamu?
               </p>
             </div>
@@ -367,7 +346,7 @@
           <div class="modal-footer border-0 pt-0 pb-4">
             <button
               type="button"
-              class="btn btn-light text-muted fw-medium rounded-pill px-4 py-2"
+              class="btn btn-light text-white fw-medium rounded-pill px-4 py-2"
               data-bs-dismiss="modal"
             >
               Batal</button
@@ -388,8 +367,8 @@
           <div class="modal-header border-0 pb-0">
             <div>
               <h4 class="modal-title fw-bold">Pilih Materi Hafalan</h4>
-              <p class="text-muted small mb-0">
-                Ketik Romaji dari kata yang muncul.
+              <p class="text-white small mb-0">
+                Ketik bacaan/arti dari Kanji yang muncul.
               </p>
             </div>
             <button
@@ -419,7 +398,7 @@
           <div class="modal-footer border-0 pt-0 pb-4">
             <button
               type="button"
-              class="btn btn-light text-muted fw-medium rounded-pill px-4 py-2"
+              class="btn btn-light text-white fw-medium rounded-pill px-4 py-2"
               data-bs-dismiss="modal"
             >
               Batal</button
@@ -434,28 +413,6 @@
       </div>
     </div>
 
-    <div class="modal fade" id="partSelectionModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content border-0 shadow-lg">
-      <div class="modal-header border-0 pb-0">
-        <div>
-           <h5 class="modal-title fw-bold" id="partModalTitle">Pilih Bagian</h5>
-           <p class="text-muted small mb-0">Pilih rentang kata yang ingin dipelajari.</p>
-        </div>
-        <button type="button" class="btn-close bg-light rounded-circle p-2" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body pt-3">
-        <div id="partListContainer" class="d-grid gap-2"></div>
-      </div>
-      <div class="modal-footer border-0 pt-0">
-        <button type="button" class="btn btn-primary-custom w-100 rounded-pill py-2" data-bs-dismiss="modal">
-            Simpan Pilihan
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
     <div class="modal fade" id="confirmModal" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered modal-sm">
         <div class="modal-content border-0 shadow-lg rounded-4 text-center p-4">
@@ -464,7 +421,7 @@
               <i class="bi bi-check-circle-fill" style="font-size: 3rem"></i>
             </div>
             <h4 class="fw-bold mb-2">Selesai Mengerjakan?</h4>
-            <div id="confirmSummary" class="text-muted mb-4"></div>
+            <div id="confirmSummary" class="text-white mb-4"></div>
             <div class="d-flex gap-2 justify-content-center">
               <button
                 type="button"

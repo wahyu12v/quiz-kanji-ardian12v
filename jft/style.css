@@ -1,363 +1,305 @@
+
+
+
+
 /* =========================================
-   1. GLOBAL STYLES (Dipakai Semua Halaman)
+   1. GLOBAL VARIABLES & DARK THEME
    ========================================= */
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f8f9fa;
-    color: #333;
-    background-image: radial-gradient(#dee2e6 1px, transparent 1px);
-    background-size: 20px 20px;
+   :root {
+    --bg-main: #020617;
+    --bg-card: rgba(15, 23, 42, 0.7);
+    --bg-glass: rgba(15, 23, 42, 0.85);
+    
+    --border-color: rgba(255, 255, 255, 0.08);
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    
+    /* JFT THEME COLOR (CYBER BLUE) */
+    --neon-blue: #00d2ff;
+    --neon-blue-glow: rgba(0, 210, 255, 0.4);
+    
+    --neon-green: #4ade80;
+    --neon-red: #f43f5e;
 }
 
-.fade-in { animation: fadeIn 0.5s ease-in-out; }
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+body {
+    font-family: 'Inter', 'Poppins', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(0, 210, 255, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(0, 210, 255, 0.05) 0%, transparent 40%);
+    background-attachment: fixed;
+    background-size: cover;
 }
+
+/* Scrollbar Keren */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-main); }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--neon-blue); }
+
+.fade-in { animation: fadeIn 0.5s ease-out forwards; opacity: 0; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 .hidden { display: none !important; }
 
-/* Navbar (Dipakai di Home & Ujian) */
+/* Navbar Glass */
 .app-header {
-    height: 60px;
-    z-index: 1030;
-    background: white;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-}
-.app-header .container {
-    height: 100%;
+    height: 70px;
+    background: var(--bg-glass);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
 }
 
-/* Ikon Buku di Navbar */
 .brand-icon {
-    width: 35px; height: 35px;
-    background-color: #0d6efd;
-    color: white;
-    border-radius: 8px;
+    width: 38px; height: 38px;
+    background: rgba(0, 210, 255, 0.1);
+    color: var(--neon-blue);
+    border: 1px solid rgba(0, 210, 255, 0.2);
+    border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    box-shadow: 0 0 10px var(--neon-blue-glow);
 }
 
-/* Jarak Konten dari Navbar */
-.main-content { padding-top: 40px; }
+.main-content { padding-top: 50px; }
 
 
 /* =========================================
-   2. STYLES KHUSUS HOME (index.html)
+   2. HOME PAGE STYLES
    ========================================= */
-/* Kartu Biru Besar (Hero Section) */
 .hero-card {
-    background: linear-gradient(135deg, #00C6FF 0%, #0072FF 100%);
-    color: white;
-    border-radius: 30px;
-    padding: 50px 30px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 60px 30px;
     text-align: center;
-    box-shadow: 0 20px 40px rgba(0, 114, 255, 0.25);
-    border: none;
     position: relative;
     overflow: hidden;
-    margin-bottom: 40px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.2);
+    backdrop-filter: blur(10px);
 }
 
-/* Ikon Topi Wisuda */
+/* Background Icon Raksasa di Hero */
+.hero-card::before {
+    content: '\f501'; /* Icon User Graduate FontAwesome */
+    font-family: "Font Awesome 6 Free"; font-weight: 900;
+    position: absolute;
+    top: -30px; right: -30px;
+    font-size: 15rem;
+    color: var(--neon-blue);
+    opacity: 0.03;
+    transform: rotate(-15deg);
+    pointer-events: none;
+}
+
 .hero-icon {
-    font-size: 4rem;
-    margin-bottom: 20px;
-    text-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    font-size: 4rem; margin-bottom: 25px;
+    color: var(--neon-blue);
+    filter: drop-shadow(0 0 15px var(--neon-blue-glow));
 }
 
-/* Judul Jepang */
 .hero-card h1 {
-    font-weight: 700;
-    letter-spacing: -1px;
+    font-weight: 800;
+    background: linear-gradient(to right, #fff, var(--neon-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-/* Tombol Mulai Ujian (Outline Putih) */
-.btn-outline-white {
-    border: 2px solid white;
-    color: white;
-    background: transparent;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+.btn-neon {
+    background: rgba(0, 210, 255, 0.1);
+    color: var(--neon-blue);
+    border: 1px solid var(--neon-blue);
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 210, 255, 0.1);
+}
+.btn-neon:hover {
+    background: var(--neon-blue);
+    color: #000;
+    box-shadow: 0 0 25px var(--neon-blue-glow);
+    transform: translateY(-2px);
 }
 
-.btn-outline-white:hover {
-    background: white;
-    color: #0072FF;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+/* Package Cards (Modal) */
+.package-card {
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    position: relative;
+    overflow: hidden;
 }
+.package-card:hover {
+    background: rgba(30, 41, 59, 0.9);
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 15px var(--neon-blue-glow);
+}
+/* Background Icon di Kartu Paket */
+.package-card .bg-icon {
+    position: absolute; right: -10px; bottom: -10px;
+    font-size: 6rem; opacity: 0.05; transform: rotate(-15deg);
+    transition: 0.3s;
+}
+.package-card:hover .bg-icon { opacity: 0.1; transform: scale(1.1) rotate(0); }
+
 
 /* =========================================
-   3. STYLES KHUSUS UJIAN (ujian.html)
+   3. EXAM PAGE (UJIAN) STYLES
    ========================================= */
 
-/* --- Navigasi Jenis Soal (Warna-warni) --- */
+/* Navigasi Section */
 .btn-sect {
-    font-size: 0.85rem;
-    font-weight: 600;
-    border: 1px solid transparent;
-    transition: all 0.2s ease;
-    background-color: white;
-    color: #555;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    background: rgba(255,255,255,0.05);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+}
+.btn-sect:hover, .btn-sect.active {
+    color: white !important;
+    border-color: var(--neon-blue);
+    background: rgba(0, 210, 255, 0.15);
+    box-shadow: 0 0 10px var(--neon-blue-glow);
 }
 
-/* Hover Effect: Teks jadi Putih */
-.btn-sect:hover, 
-.btn-sect.active { 
-    transform: translateY(-2px); 
-    color: white !important; /* WAJIB PUTIH */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
-
-/* Warna Per Kategori */
-.btn-sect-0 { border-color: #0d6efd; color: #0d6efd; }
-.btn-sect-0:hover, .btn-sect-0.active { background-color: #0d6efd; border-color: #0d6efd; }
-
-.btn-sect-1 { border-color: #9c27b0; color: #9c27b0; }
-.btn-sect-1:hover, .btn-sect-1.active { background-color: #9c27b0; border-color: #9c27b0; }
-
-.btn-sect-2 { border-color: #ef6c00; color: #ef6c00; }
-.btn-sect-2:hover, .btn-sect-2.active { background-color: #ef6c00; border-color: #ef6c00; }
-
-.btn-sect-3 { border-color: #198754; color: #198754; }
-.btn-sect-3:hover, .btn-sect-3.active { background-color: #198754; border-color: #198754; }
-
-
-/* --- Kartu Soal --- */
+/* Question Card */
 .question-card {
-    background: white;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    border: 1px solid rgba(0,0,0,0.05);
+    padding: 35px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    backdrop-filter: blur(10px);
 }
-.question-text {
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: #2c3e50;
-    font-family: 'Noto Sans JP', sans-serif;
-    line-height: 1.6;
-    margin-bottom: 20px;
+.question-text { color: var(--text-primary); font-size: 1.25rem; font-weight: 500; }
+
+/* Options */
+.quiz-option-btn {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+}
+.quiz-option-btn:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.3);
+    color: white;
+}
+.quiz-option-btn.selected {
+    background: rgba(0, 210, 255, 0.1);
+    border-color: var(--neon-blue);
+    color: white;
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.15) inset;
+}
+.opt-label {
+    background: rgba(255,255,255,0.1);
+    color: white;
+}
+.quiz-option-btn.selected .opt-label {
+    background: var(--neon-blue);
+    color: #000;
 }
 
-
-/* --- Audio Player Modern (Kotak) --- */
+/* Audio Player Modern HUD */
 .audio-player-card {
-    background: #f8f9fa;
-    border: 2px solid #e9ecef;
-    border-radius: 20px;
-    padding: 15px 25px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 15px;
-    transition: all 0.3s ease;
-    max-width: 450px;
-    margin: 0 auto 30px auto;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 15px 20px;
+    color: white;
 }
-
-/* Saat Playing (Hijau) */
 .audio-player-card.active {
-    border-color: #198754;
-    background: #f0fff4;
-    box-shadow: 0 4px 15px rgba(25, 135, 84, 0.15);
+    border-color: var(--neon-green);
+    box-shadow: 0 0 15px rgba(74, 222, 128, 0.2);
 }
-
-/* Tombol Play Bulat */
 .btn-play-modern {
-    width: 55px; height: 55px;
-    border-radius: 50%; border: none;
-    background: linear-gradient(135deg, #0d6efd, #0a58ca);
-    color: white; font-size: 1.2rem;
-    display: flex; align-items: center; justify-content: center;
-    transition: 0.2s;
-    box-shadow: 0 4px 10px rgba(13, 110, 253, 0.3);
-    flex-shrink: 0;
+    background: var(--neon-blue);
+    color: #000;
+    box-shadow: 0 0 15px var(--neon-blue-glow);
 }
-.btn-play-modern:active { transform: scale(0.95); }
-
-/* Animasi Pulse saat Playing */
 .audio-player-card.active .btn-play-modern {
-    background: linear-gradient(135deg, #198754, #146c43);
-    box-shadow: 0 4px 10px rgba(25, 135, 84, 0.3);
-    animation: pulse-green 2s infinite;
+    background: var(--neon-green);
+    box-shadow: 0 0 15px rgba(74, 222, 128, 0.5);
+    animation: pulse-green 1.5s infinite;
 }
-@keyframes pulse-green {
-    0% { box-shadow: 0 0 0 0 rgba(25, 135, 84, 0.7); }
-    70% { box-shadow: 0 0 0 10px rgba(25, 135, 84, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(25, 135, 84, 0); }
+.wave-bar { background-color: rgba(255,255,255,0.2); }
+.audio-player-card.active .wave-bar { background-color: var(--neon-green); }
+
+/* Timer HUD */
+.custom-timer {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--neon-red);
+    color: var(--neon-red);
+    box-shadow: 0 0 10px rgba(244, 63, 94, 0.2);
+}
+.timer-icon { color: var(--neon-red); }
+#timer-display { color: white; }
+
+/* --- FIX MODAL DARK THEME --- */
+.modal-content {
+    background-color: #0f172a; /* Warna Gelap (Sesuai var --bg-card) */
+    background-color: var(--bg-card, #0f172a);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
 }
 
-/* Teks Status & Visualizer */
-.audio-info { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
-.audio-label { 
-    font-size: 0.8rem; color: #6c757d; 
-    font-weight: 600; text-transform: uppercase; 
-    letter-spacing: 1px; margin-bottom: 5px; 
+.modal-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Visualizer (Gelombang) */
-.visualizer { display: flex; align-items: flex-end; height: 25px; gap: 4px; }
-.wave-bar { 
-    width: 5px; background-color: #dee2e6; border-radius: 3px; 
-    height: 20%; transition: height 0.1s; 
+.modal-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
-.audio-player-card.active .wave-bar { 
-    background-color: #198754; 
-    animation: wave-anim 1s infinite ease-in-out; 
-}
-/* Delay animasi biar bergelombang */
-.audio-player-card.active .wave-bar:nth-child(1) { animation-delay: 0.0s; }
-.audio-player-card.active .wave-bar:nth-child(2) { animation-delay: 0.2s; }
-.audio-player-card.active .wave-bar:nth-child(3) { animation-delay: 0.4s; }
-.audio-player-card.active .wave-bar:nth-child(4) { animation-delay: 0.1s; }
-.audio-player-card.active .wave-bar:nth-child(5) { animation-delay: 0.3s; }
 
+.modal-title {
+    color: white;
+}
+
+/* Tombol Close (Silang) jadi Putih */
+.btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+/* Hover pada list paket di Modal Home */
+.package-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--neon-blue) !important;
+}
+.modal-header { border-bottom: 1px solid rgba(255,255,255,0.05); }
+.modal-footer { border-top: 1px solid rgba(255,255,255,0.05); }
+.btn-close { filter: invert(1); }
+
+/* Progress Bar */
+.progress { background-color: rgba(255,255,255,0.1); }
+.progress-bar { 
+    background: linear-gradient(90deg, var(--neon-blue), #60a5fa);
+    box-shadow: 0 0 10px var(--neon-blue-glow);
+}
+
+/* --- TAMBAHAN: ANIMASI AUDIO VISUALIZER & PULSE --- */
+
+/* Animasi Gelombang Suara */
 @keyframes wave-anim { 
     0%, 100% { height: 20%; } 
     50% { height: 100%; } 
 }
 
-/* Tombol Stop Kecil */
-.btn-stop-modern {
-    width: 40px; height: 40px;
-    border-radius: 50%; border: 2px solid #fee2e2;
-    background: #fff; color: #dc3545;
-    display: flex; align-items: center; justify-content: center;
-    transition: 0.2s; flex-shrink: 0;
-}
-.btn-stop-modern:hover { background: #dc3545; color: white; border-color: #dc3545; }
-
-
-/* --- Pilihan Jawaban --- */
-.quiz-option-btn {
-    display: flex; align-items: center; width: 100%;
-    background: #fff; border: 2px solid #e9ecef;
-    border-radius: 15px; padding: 15px 20px;
-    margin-bottom: 12px; cursor: pointer;
-    transition: 0.2s; text-align: left;
-}
-.quiz-option-btn:hover { border-color: #dee2e6; background-color: #f8f9fa; }
-.quiz-option-btn.selected {
-    border-color: #0d6efd; background-color: #ecf4ff;
-    box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.1);
-}
-.opt-label {
-    width: 35px; height: 35px; background: #e9ecef; color: #6c757d;
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    font-weight: bold; margin-right: 15px; flex-shrink: 0; font-size: 1rem;
-}
-.quiz-option-btn.selected .opt-label { background: #0d6efd; color: white; }
-
-
-/* --- Modal Hasil Skor --- */
-.score-circle {
-    width: 140px; height: 140px; border-radius: 50%;
-    border: 8px solid #e9ecef;
-}
-.score-num { font-size: 3rem; color: #333; font-weight: 800; }
-.score-label { font-size: 0.8rem; font-weight: 600; color: #6c757d; }
-
-
-/* =========================================
-   4. RESPONSIVE MOBILE FIXES
-   ========================================= */
-@media (max-width: 576px) {
-    /* Navbar Home & Ujian */
-    .app-header { height: auto; min-height: 60px; padding: 10px 0; }
-    .brand-title { font-size: 1rem; }
-    
-    /* Home Hero Card */
-    .hero-card { padding: 30px 20px; border-radius: 20px; }
-    .hero-title { font-size: 1.8rem; }
-    .hero-subtitle { font-size: 0.9rem; }
-    .btn-start-hero { width: 100%; justify-content: center; }
-    
-    /* Ujian Components */
-    .timer-badge { padding: 4px 10px !important; font-size: 0.8rem !important; }
-    .btn-sect { font-size: 0.75rem !important; padding: 6px 12px !important; }
-    
-    .question-text { font-size: 1.1rem !important; }
-    .quiz-option-btn { padding: 12px; font-size: 0.95rem; }
-    .opt-label { width: 30px; height: 30px; font-size: 0.85rem; margin-right: 10px; }
-    
-    /* Audio Player Mobile */
-    .audio-player-card { padding: 12px 15px; gap: 10px; margin-bottom: 20px; }
-    .btn-play-modern { width: 45px; height: 45px; font-size: 1rem; }
-    .btn-stop-modern { width: 35px; height: 35px; }
-    .audio-label { font-size: 0.7rem; }
-    .visualizer { height: 15px; }
-    
-    .main-content { padding-top: 20px; }
+/* Animasi Denyut Tombol Play */
+@keyframes pulse-green {
+    0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(74, 222, 128, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
 }
 
-/* --- FIX IKON MODAL PAKET (Agar tidak gepeng) --- */
-.pkg-icon-box {
-    width: 55px;              /* Lebar tetap */
-    height: 55px;             /* Tinggi tetap */
-    border-radius: 12px;      /* Sudut tumpul */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.6rem;
-    margin-right: 15px;       /* Jarak ke teks */
-    
-    /* PENTING: Mencegah ikon tergencet teks panjang */
-    flex-shrink: 0 !important; 
-    
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* Bayangan halus */
+/* Pastikan tombol Play bisa diklik (paling atas layer) */
+.btn-play-modern {
+    cursor: pointer;
+    position: relative;
+    z-index: 10;
 }
 
-/* --- TIMER MODERN (GANTIKAN STYLE TIMER LAMA) --- */
-.custom-timer {
-    display: flex;
-    align-items: center;
-    background: #fff0f0; /* Merah sangat muda */
-    border: 2px solid #ff6b6b;
-    border-radius: 50px;
-    padding: 5px 15px;
-    box-shadow: 0 4px 10px rgba(255, 107, 107, 0.2);
-    transition: all 0.3s ease;
-    height: 38px;
+/* Pastikan Kartu Audio tidak tertutup layer lain */
+.audio-player-card {
+    position: relative;
+    z-index: 5;
 }
 
-.custom-timer:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(255, 107, 107, 0.3);
-    background: #ffe5e5;
-}
-
-/* Ikon Jam */
-.timer-icon {
-    color: #ff4757;
-    font-size: 1.1rem;
-    margin-right: 8px;
-    animation: pulse-red 2s infinite; /* Ikon berdenyut */
-}
-
-/* Angka Timer */
-#timer-display {
-    font-family: 'Courier New', Courier, monospace; /* Monospace agar angka tidak goyang */
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: #eb2f06;
-    letter-spacing: 1px;
-}
-
-/* Animasi Denyut Halus */
-@keyframes pulse-red {
-    0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.1); opacity: 0.7; }
-    100% { transform: scale(1); opacity: 1; }
-}
-
-/* Update Responsive untuk Timer */
-@media (max-width: 576px) {
-    .custom-timer {
-        padding: 4px 10px;
-        height: 32px;
-    }
-    .timer-icon { font-size: 0.9rem; margin-right: 5px; }
-    #timer-display { font-size: 0.9rem; }
-}
