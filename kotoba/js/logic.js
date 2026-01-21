@@ -24,18 +24,72 @@ function getSimilarityScore(target, candidate) {
     return score;
 }
 
+// --- ALGORITMA LEVENSHTEIN (MENGHITUNG JARAK TYPO) ---
+function levenshtein(a, b) {
+    if (a.length === 0) return b.length;
+    if (b.length === 0) return a.length;
+    const matrix = [];
+    for (let i = 0; i <= b.length; i++) matrix[i] = [i];
+    for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
+    for (let i = 1; i <= b.length; i++) {
+        for (let j = 1; j <= a.length; j++) {
+            if (b.charAt(i - 1) === a.charAt(j - 1)) {
+                matrix[i][j] = matrix[i - 1][j - 1];
+            } else {
+                matrix[i][j] = Math.min(
+                    matrix[i - 1][j - 1] + 1, // substitution
+                    matrix[i][j - 1] + 1, // insertion
+                    matrix[i - 1][j] + 1  // deletion
+                );
+            }
+        }
+    }
+    return matrix[b.length][a.length];
+}
+
+// --- LOGIKA CEK JAWABAN (TOLERANSI TYPO) ---
+function checkFuzzyAnswer(userRaw, dbValueString) {
+    if (!userRaw || userRaw === 'Lupa') return false;
+    const user = userRaw.toLowerCase().trim().replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, "");
+    
+    // Pisahkan kunci jawaban (misal: "Makan / Memakan" jadi ["makan", "memakan"])
+    const candidates = dbValueString.toLowerCase().split(/[\/,]/).map(s => s.trim()).filter(s => s);
+
+    return candidates.some(target => {
+        // Hapus simbol dari target juga
+        const cleanTarget = target.replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, "");
+        
+        // 1. Cek Exact Match
+        if (user === cleanTarget) return true;
+
+        // 2. Cek Inclusion (Yang penting ada kata benar)
+        // Syarat: kata user minimal 3 huruf agar tidak false positive (misal "ya" dianggap benar untuk "saya")
+        if (user.length >= 3 && cleanTarget.includes(user)) return true;
+        
+        // 3. Cek Typo (Levenshtein)
+        // Toleransi: 1 kesalahan per 4 huruf. (Misal: 4 huruf boleh salah 1, 8 huruf boleh salah 2)
+        const dist = levenshtein(user, cleanTarget);
+        const tolerance = Math.max(1, Math.floor(cleanTarget.length / 4)); 
+        
+        if (dist <= tolerance) return true;
+
+        return false;
+    });
+}
+
 export function buildChoices(orderIndices, allQuestions, mode = 'quiz') {
   return orderIndices.map(idx => {
     const q = allQuestions[idx];
     let correctVal;
-    if (mode === 'quiz_hiragana') correctVal = String(q[KEYS.hiragana] || q['kana'] || '').trim();
-    else correctVal = String(q[KEYS.meaning] || q['arti'] || q['indo'] || '').trim();
+    if (mode === 'quiz_hiragana') correctVal = String(q[KEYS.meaning] || '').trim();
+    else correctVal = String(q[KEYS.hiragana] || q['kana'] || '').trim(); // Default ke Hiragana
 
     const correctOption = { text: correctVal, isCorrect: true }; 
     let rawPool = allQuestions.map(item => {
-        if (mode === 'quiz_hiragana') return String(item[KEYS.hiragana] || item['kana'] || '').trim();
-        return String(item[KEYS.meaning] || item['arti'] || item['indo'] || '').trim();
+        if (mode === 'quiz_hiragana') return String(item[KEYS.meaning] || '').trim();
+        return String(item[KEYS.hiragana] || item['kana'] || '').trim();
     });
+    
     let uniquePool = [...new Set(rawPool)];
     let pool = uniquePool.filter(val => val !== "" && val !== correctVal);
     let scoredPool = pool.map(candidate => ({ text: candidate, score: getSimilarityScore(correctVal, candidate) }));
@@ -66,6 +120,7 @@ export function gradeSession(state, allQuestions) {
         let userAnsStr = "Lupa";
 
         if (state.sessionType.includes('quiz')) {
+            // Mode Quiz (Pilihan Ganda) - Tetap Strict
             const choiceIdx = state.answers[i];
             const choices = state.choicesPerQ[i];
             if (choiceIdx !== null && choiceIdx !== 'Lupa') {
@@ -74,37 +129,35 @@ export function gradeSession(state, allQuestions) {
                 userAnsStr = choice ? choice.text : "Lupa";
             }
         } else {
+            // Mode Tulis (Isian) - Pakai Fuzzy Logic
             const raw = state.answers[i] || '';
-            if (raw && raw !== 'Lupa') {
+            userAnsStr = raw === 'Lupa' ? 'Lupa' : raw;
+
+            if (userAnsStr !== 'Lupa') {
                 if (state.sessionType === 'write_romaji') {
-                    const cleanRomaji = (text) => text ? text.toLowerCase().replace(/\[.*?\]/g, '').replace(/[~～]/g, '').trim() : "";
-                    if (cleanRomaji(romajiDB) === cleanRomaji(raw)) isCorrect = true;
+                    // Cek Jawaban Romaji (Bandingkan dengan Romaji DB atau Kana)
+                    // Gabungkan romaji dan kana sebagai kunci jawaban valid
+                    const validKeys = romajiDB + " / " + hira;
+                    isCorrect = checkFuzzyAnswer(raw, validKeys);
                 } else {
-                    const userAns = raw.toLowerCase().trim();
-                    const validAnswers = mean.toLowerCase().split(/[\/,]/).map(s => s.trim());
-                    isCorrect = validAnswers.some(key => {
-                        if (key.length < 3) return key === userAns;
-                        if (userAns.length < 2) return key === userAns;
-                        return key.includes(userAns) || userAns.includes(key);
-                    });
+                    // Cek Jawaban Arti (Bandingkan dengan Indo)
+                    isCorrect = checkFuzzyAnswer(raw, mean);
                 }
             }
-            userAnsStr = raw;
         }
+        
         if (isCorrect) correctCount++;
-        return { q, isCorrect, userAns: userAnsStr, realHira: hira, realMean: mean, realRomaji: romajiDB, romTrue: hiraToRomaji(hira), originalIndex: originalIndex };
+        return { q, isCorrect, userAns: userAnsStr, realHira: hira, realMean: mean, realRomaji: romajiDB, originalIndex: originalIndex };
     });
     return { score: correctCount, total: state.batch.length, details: results };
 }
 
-// --- PERBAIKAN LOGIKA PROGRESS (SISTEM BAB) ---
 export function calculateProgress(allQuestions) {
     const mastery = getMastery();
     const babStats = {};
 
-    // 1. Hitung Data per Bab
     allQuestions.forEach((q, idx) => {
-        const babName = q.bab || "Lainnya"; // Pakai Key BAB
+        const babName = q.bab || "Lainnya"; 
         if (!babStats[babName]) {
             babStats[babName] = { totalWords: 0, modes: { quiz:0, quiz_hiragana:0, mem:0, write_romaji:0 } };
         }
@@ -121,12 +174,11 @@ export function calculateProgress(allQuestions) {
     const finalReport = Object.keys(babStats).map(bab => {
         const data = babStats[bab];
         const totalWords = data.totalWords;
-        const totalSlots = totalWords * 4; // Total untuk progress BAR (Gabungan)
+        const totalSlots = totalWords * 4; 
         
         const sumMastered = data.modes.quiz + data.modes.quiz_hiragana + data.modes.mem + data.modes.write_romaji;
         const totalPct = totalSlots > 0 ? Math.round((sumMastered / totalSlots) * 100) : 0;
 
-        // PERBAIKAN RUMUS: Dibagi 'totalWords' bukan 'totalSlots'
         const getModePct = (val) => totalWords > 0 ? Math.round((val / totalWords) * 100) : 0;
 
         return {

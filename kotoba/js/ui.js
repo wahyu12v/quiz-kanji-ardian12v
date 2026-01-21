@@ -3,66 +3,57 @@ import { KEYS, SELECTORS } from "./constants.js";
 
 const area = document.getElementById(SELECTORS.quizArea);
 
-// --- CSS INJECT ---
+// ============================================================
+// 1. INJECT CSS TAMBAHAN (PENTING: Agar Font Responsif & Animasi Jalan)
+// ============================================================
 const style = document.createElement("style");
 style.innerHTML = `
-    .choice-card-anim { transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s, border-color 0.2s !important; }
-    .choice-card-anim:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(13, 110, 253, 0.15) !important; border-color: #0d6efd !important; z-index: 2; }
-    .choice-card-anim:active { transform: scale(0.98) translateY(-2px); }
+    /* Animasi Kartu Pilihan */
+    .choice-card-anim { 
+        transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s, border-color 0.2s !important; 
+    }
+    .choice-card-anim:hover { 
+        transform: translateY(-5px); 
+        box-shadow: 0 10px 20px rgba(244, 114, 182, 0.25) !important; 
+        border-color: #f472b6 !important; 
+        z-index: 2; 
+    }
+    .choice-card-anim:active { 
+        transform: scale(0.98) translateY(-2px); 
+    }
     
-    /* PROGRESS STYLES */
-    .prog-card { background: #fff; border-radius: 12px; padding: 15px; border: 1px solid #dee2e6; box-shadow: 0 2px 4px rgba(0,0,0,0.02); height: 100%; display: flex; flex-direction: column; }
-    .prog-item { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
-    .prog-label { font-size: 0.75rem; color: #6c757d; display: flex; align-items: center; gap: 6px; font-weight: 600; }
-    .prog-pct { font-size: 0.75rem; font-weight: bold; }
-    .prog-track { flex-grow: 1; height: 6px; background-color: #f1f3f5; border-radius: 3px; margin: 0 8px; overflow: hidden; }
-    .prog-fill { height: 100%; border-radius: 3px; }
-    .c-blue { color: #0d6efd; } .bg-blue { background-color: #0d6efd; }
-    .c-green { color: #198754; } .bg-green { background-color: #198754; }
-    .c-orange { color: #fd7e14; } .bg-orange { background-color: #fd7e14; }
-    .c-red { color: #dc3545; } .bg-red { background-color: #dc3545; }
-    .bab-done { border: 2px solid #198754; background-color: #f0fff4; }
-
-    /* RESULT STYLES (MINIMALIS) */
-    .res-item { background: #fff; padding: 12px 15px; border-radius: 10px; border: 1px solid #eee; margin-bottom: 10px; }
-    .res-kanji-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-    .res-kanji-main { font-size: 1.8rem; font-weight: bold; color: #212529; line-height: 1; }
-    .res-compare { display: flex; flex-direction: column; gap: 6px; }
-    .res-line { padding: 8px 12px; border-radius: 6px; font-size: 0.95rem; display: flex; align-items: center; justify-content: space-between; font-weight: 500; }
-    .res-wrong { background-color: #ffe3e3; color: #c92a2a; border: 1px solid #ffc9c9; }
-    .res-correct { background-color: #d3f9d8; color: #2b8a3e; border: 1px solid #b2f2bb; }
-    .res-tag { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.7; margin-right: 8px; font-weight: 700; }
-    .res-val { flex-grow: 1; text-align: right; }
-    .res-meta { font-size: 0.75rem; color: #868e96; margin-top: 6px; text-align: right; }
-
-    /* --- UPDATE: FONT RESPONSIF UNTUK SOAL --- */
+    /* Font Responsif untuk Soal (Agar tidak kekecilan/kebesaran) */
     .q-text-responsive {
-        /* Rumus clamp(MIN, IDEAL, MAX) */
         font-size: clamp(1.8rem, 5vw, 3.5rem); 
         line-height: 1.3;
-        font-weight: bold;
-        color: #0d6efd;
+        font-weight: 800;
+        color: #ffffff !important;
+        text-shadow: 0 0 20px rgba(244, 114, 182, 0.6);
         text-align: center;
         word-wrap: break-word; 
         width: 100%;
     }
+
+    /* Confetti (Hujan Kertas) */
+    .confetti {
+        position: absolute;
+        width: 10px; height: 10px;
+        background-color: #f0f;
+        animation: fall linear forwards;
+    }
+    @keyframes fall {
+        to { transform: translateY(100vh) rotate(720deg); }
+    }
 `;
 document.head.appendChild(style);
 
-// --- HELPER: FORMAT TAMPILAN SOAL (PAKAI CLASS RESPONSIF) ---
-// --- HELPER: FORMAT TAMPILAN SOAL (AUTO SIZE) ---
+// Helper: Mengatur ukuran font soal otomatis
 function formatQuestion(text) {
     const len = text.length;
-    let fontSize = "5rem"; // Ukuran Default (untuk Kanji/Kata Pendek)
-
-    // Logika Pintar: Makin panjang teks, makin kecil font-nya
-    if (len > 30) {
-        fontSize = "1.8rem"; // Kalimat sangat panjang
-    } else if (len > 15) {
-        fontSize = "2.5rem"; // Kalimat sedang (contoh: "Penting / Berharga")
-    } else if (len > 6) {
-        fontSize = "3.5rem"; // Kata agak panjang (Hiragana majemuk)
-    }
+    let fontSize = "5rem"; 
+    if (len > 30) fontSize = "1.8rem";
+    else if (len > 15) fontSize = "2.5rem";
+    else if (len > 6) fontSize = "3.5rem";
 
     return `<div class="d-flex align-items-center justify-content-center px-2" style="min-height: 120px;">
                 <span class="q-text-responsive" style="font-size: ${fontSize} !important; line-height: 1.2;">
@@ -71,39 +62,45 @@ function formatQuestion(text) {
             </div>`;
 }
 
-// --- 1. RENDER QUIZ (UPDATE: TEMA DARK NEON) ---
+// Helper: Mengubah kode 'quiz' jadi 'Tebak Arti' (Sempat hilang, ini saya kembalikan)
+function formatModeName(type) {
+  if (type === "quiz") return "Tebak Arti";
+  if (type === "quiz_hiragana") return "Tebak Bacaan";
+  if (type === "mem") return "Tulis Arti";
+  if (type === "write_romaji") return "Tulis Romaji";
+  return type;
+}
 
+// ============================================================
+// 2. RENDER QUIZ (PILIHAN GANDA)
+// ============================================================
 export function renderQuiz(state, qNo) {
-  const area = document.getElementById(SELECTORS.quizArea);
   area.innerHTML = "";
-  
   const idx = state.current;
   const q = state.batch[idx];
   const choices = state.choicesPerQ[idx];
   const isLupa = state.answers[idx] === "Lupa";
 
-  // Ambil Text Utama
   const kanjiTxt = String(q[KEYS.kanji] || "").trim();
   const meanTxt = String(q[KEYS.meaning] || "").trim();
   const hiraTxt = String(q[KEYS.hiragana] || "").trim();
 
   let displayHtml = "";
 
-  // Tentukan Soal (Tebak Hiragana atau Tebak Arti)
+  // --- LOGIKA SOAL (SESUAI REQUEST) ---
   if (state.sessionType === "quiz_hiragana") {
-    displayHtml = formatQuestion(meanTxt || hiraTxt);
+    // Mode Tebak Bacaan -> Soal: Indo
+    displayHtml = formatQuestion(meanTxt);
   } else {
-    displayHtml = formatQuestion(kanjiTxt || hiraTxt);
+    // Mode Tebak Arti -> Soal: Hiragana (Fallback ke Kanji jika Hiragana kosong)
+    displayHtml = formatQuestion(hiraTxt || kanjiTxt);
   }
 
-  // --- Render Pilihan Ganda ---
   let choicesHtml = '<div class="d-grid gap-3">'; 
-  
   choices.forEach((c, i) => {
     const isSelected = state.answers[idx] === i;
-    
-    // Class dinamis: Jika dipilih pakai 'choice-selected', jika tidak 'choice-option'
-    let btnClass = isSelected ? "choice-option choice-selected" : "choice-option";
+    // Pakai class choice-card-anim agar ada animasinya
+    let btnClass = isSelected ? "choice-option choice-selected" : "choice-option choice-card-anim";
     
     choicesHtml += `
         <div class="${btnClass} d-flex align-items-center justify-content-center text-center p-3" 
@@ -115,7 +112,6 @@ export function renderQuiz(state, qNo) {
   choicesHtml += "</div>";
 
   const card = document.createElement("div");
-  // Gunakan class 'quiz-card' baru agar gelap
   card.className = "quiz-card p-4 h-100 d-flex flex-column";
   
   card.innerHTML = `
@@ -158,42 +154,36 @@ export function renderQuiz(state, qNo) {
     `;
   area.appendChild(card);
 }
-// --- 2. RENDER MEMORY (UPDATE: TAMPILAN KAPSUL MODERN) ---
+
+// ============================================================
+// 3. RENDER MEMORY (ISIAN)
+// ============================================================
 export function renderMem(state, qNo) {
-  const area = document.getElementById(SELECTORS.quizArea);
   area.innerHTML = "";
-  
   const idx = state.current;
   const q = state.batch[idx];
   const val = state.answers[idx] === "Lupa" ? "" : state.answers[idx] || "";
   
-  // Ambil Data
-  const kanjiTxt = String(q[KEYS.kanji] || "").trim();   // Kanji
-  const meanTxt = String(q[KEYS.meaning] || "").trim();  // Arti Indo
-  const hiraTxt = String(q[KEYS.hiragana] || "").trim(); // Hiragana
+  const kanjiTxt = String(q[KEYS.kanji] || "").trim();
+  const meanTxt = String(q[KEYS.meaning] || "").trim();
+  const hiraTxt = String(q[KEYS.hiragana] || "").trim();
 
   let displayHtml = "";
   let placeholderTxt = "", labelTxt = "";
   
-  // --- LOGIKA TAMPILAN SOAL (SESUAI REQUEST) ---
-  
+  // --- LOGIKA SOAL (SESUAI REQUEST) ---
   if (state.sessionType === "write_romaji") {
-    // 1. Bagian TULIS ROMAJI -> Soal yang muncul ARTI (Bahasa Indonesia)
+    // Mode Tulis Romaji -> Soal: Indo
     displayHtml = formatQuestion(meanTxt); 
-    
     placeholderTxt = "Ketik bahasa Jepangnya...";
     labelTxt = "TERJEMAHKAN KE JEPANG (ROMAJI)";
-    
   } else {
-    // 2. Bagian TULIS ARTI -> Soal yang muncul HIRAGANA (Bukan Kanji)
-    // Jika hiragana kosong, baru fallback ke kanji (opsional)
+    // Mode Tulis Arti -> Soal: Hiragana (Fallback ke Kanji)
     displayHtml = formatQuestion(hiraTxt || kanjiTxt);
-    
     placeholderTxt = "Ketik artinya...";
     labelTxt = "TERJEMAHKAN KE INDONESIA";
   }
 
-  // --- RENDER KARTU (TEMA DARK NEON) ---
   const card = document.createElement("div");
   card.className = "mem-card p-4 d-flex flex-column align-items-center justify-content-center h-100";
   
@@ -250,7 +240,7 @@ export function renderMem(state, qNo) {
   `;
   area.appendChild(card);
 
-  // Setup Input Focus & Mic
+  // Focus & Mic Setup
   const inp = document.getElementById("memInput");
   const btnMic = document.getElementById("btnMic");
   setTimeout(() => inp.focus(), 100);
@@ -278,173 +268,170 @@ export function renderMem(state, qNo) {
   }
 }
 
-// --- 3. RENDER RESULT (SUDAH DIPERBAIKI: DARK MODE HISTORY) ---
-// --- Update Function renderResult di js/ui.js ---
-
+// ============================================================
+// 4. RENDER RESULT (HASIL TES)
+// ============================================================
 export function renderResult(result, sessionType, wrongIndices = []) {
-  const area = document.getElementById(SELECTORS.quizArea);
   area.innerHTML = "";
-  
   const pct = result.total > 0 ? Math.round((result.score / result.total) * 100) : 0;
-  let modeLabel = sessionType.includes("quiz") ? "Hasil Quiz" : "Hasil Tes";
   
-  // Tentukan warna skor (Hijau jika lulus > 60%, Merah jika gagal)
+  // Gunakan fungsi helper formatModeName yang tadi saya restore
+  let modeLabel = formatModeName(sessionType); 
   const scoreClass = pct >= 60 ? "text-neon-green" : "text-neon-red";
 
   let html = `
     <div class="res-card p-5 text-center mb-5">
         <h5 class="text-muted fw-bold mb-2 text-uppercase tracking-wider">${modeLabel}</h5>
-        
-        <h1 class="display-1 fw-black mb-0 ${scoreClass}" style="font-weight: 900; letter-spacing: -2px;">
-            ${pct}%
-        </h1>
-        
+        <h1 class="display-1 fw-black mb-0 ${scoreClass}" style="font-weight: 900;">${pct}%</h1>
         <p class="text-white fs-4 mb-4" style="opacity: 0.9;">Benar ${result.score} dari ${result.total}</p>
 
         <div class="d-grid gap-3 col-lg-8 mx-auto">
             ${
                 wrongIndices.length > 0
-                ? `<button class="btn btn-primary-custom w-100 fw-bold py-3 shadow-lg d-flex align-items-center justify-content-center gap-2" onclick="window.handleRetryWrong([${wrongIndices}])">
+                ? `<button class="btn btn-primary-custom w-100 fw-bold py-3 shadow-lg" onclick="window.handleRetryWrong([${wrongIndices}])">
                      <i class="bi bi-arrow-counterclockwise fs-5"></i> Perbaiki ${wrongIndices.length} Soal Salah
                    </button>`
-                : `<div class="p-3 rounded-3 border border-success bg-success bg-opacity-10 text-success fw-bold">
-                    <i class="bi bi-trophy-fill me-2"></i> Sempurna! Kerja Bagus.
-                   </div>`
+                : `<div class="p-3 rounded-3 border border-success bg-success bg-opacity-10 text-success fw-bold">Sempurna!</div>`
             }
-            
             <div class="row g-2">
-                <div class="col-6">
-                    <button class="btn btn-outline-custom w-100 fw-bold py-2" onclick="window.handleRetry()">
-                        <i class="bi bi-arrow-repeat me-1"></i> Ulangi
-                    </button>
-                </div>
-                <div class="col-6">
-                    <button class="btn btn-outline-secondary w-100 fw-bold py-2 text-white" onclick="window.handleBack()" style="border-color: rgba(255,255,255,0.15);">
-                        <i class="bi bi-house me-1"></i> Menu
-                    </button>
-                </div>
+                <div class="col-6"><button class="btn btn-outline-custom w-100 fw-bold py-2" onclick="window.handleRetry()">Ulangi</button></div>
+                <div class="col-6"><button class="btn btn-outline-secondary w-100 fw-bold py-2 text-white" onclick="window.handleBack()">Menu Utama</button></div>
             </div>
         </div>
     </div>`;
 
-  // --- Bagian Detail Jawaban ---
   if (result.details && result.details.length > 0) {
-    html += `
-        <div class="d-flex align-items-center mb-4 border-bottom border-secondary border-opacity-25 pb-2">
-            <i class="bi bi-list-check fs-4 me-2" style="color: var(--neon-pink);"></i>
-            <h5 class="fw-bold text-white m-0">Detail Jawaban</h5>
-        </div>
-    `;
-
-    result.details.forEach((d, i) => {
+    html += `<h5 class="fw-bold text-white mb-3 mt-4">Detail Jawaban</h5>`;
+    result.details.forEach((d) => {
       const isCorrect = d.isCorrect;
       const userTxt = d.userAns === "Lupa" ? "Lupa" : d.userAns || "-";
-
+      
       const kanji = (d.q[KEYS.kanji] || "").trim();
       const hira = (d.realHira || "").trim();
       const mean = d.realMean || "";
+      const romaji = d.q['romaji'] || ""; 
 
-      let keyAnswer = "";
-      let extraInfo = "";
-
-      // Logic tampilan jawaban berdasarkan mode
-      if (sessionType === "quiz_hiragana" || sessionType === "write_romaji") {
-        keyAnswer = hira;
-        extraInfo = mean;
+      let mainText = ""; 
+      let correctAns = "";
+      
+      // LOGIC TAMPILAN PEMBAHASAN (KUNCI JAWABAN)
+      if (sessionType === "write_romaji") {
+         mainText = mean; // Soal tadi Indo
+         // Kunci Jawaban: Romaji & Hiragana
+         correctAns = `${romaji} / ${hira}`;
       } else {
-        keyAnswer = mean;
-        extraInfo = hira;
+         // Mode lain
+         mainText = hira || kanji;
+         correctAns = mean;
       }
-
-      const displayKanji = kanji || hira;
 
       html += `
             <div class="res-item mb-3">
-               <div class="d-flex justify-content-between align-items-start mb-2">
-                  <div class="res-kanji">${escapeHtml(displayKanji)}</div>
-                  ${
-                    isCorrect
-                      ? '<i class="bi bi-check-circle-fill text-neon-green fs-4"></i>'
-                      : '<i class="bi bi-x-circle-fill text-neon-red fs-4"></i>'
-                  }
+               <div class="d-flex justify-content-between align-items-center mb-2">
+                  <div class="res-kanji fs-3">${escapeHtml(mainText)}</div>
+                  ${isCorrect ? '<i class="bi bi-check-circle-fill text-neon-green fs-3"></i>' : '<i class="bi bi-x-circle-fill text-neon-red fs-3"></i>'}
                </div>
-
-               <div class="d-flex flex-column gap-2 mt-2">
-                   ${
-                     !isCorrect
-                       ? `
-                   <div class="res-box res-wrong">
-                       <span class="res-label">JAWABANMU</span>
-                       <span class="res-val">${escapeHtml(userTxt)}</span>
-                   </div>`
-                       : ""
-                   }
-
-                   <div class="res-box res-correct">
-                       <span class="res-label">KUNCI JAWABAN</span>
-                       <span class="res-val">${escapeHtml(keyAnswer)}</span>
-                   </div>
-               </div>
-               
-               <div class="text-end mt-2 pt-2 border-top border-secondary border-opacity-10">
-                    <small class="text-muted fst-italic">${escapeHtml(extraInfo)}</small>
+               <div class="d-flex flex-column gap-2">
+                   ${!isCorrect ? `<div class="res-box res-wrong"><span class="res-label">KAMU</span><span class="res-val">${escapeHtml(userTxt)}</span></div>` : ""}
+                   <div class="res-box res-correct"><span class="res-label">BENAR</span><span class="res-val">${escapeHtml(correctAns)}</span></div>
                </div>
             </div>`;
     });
   }
-
-  html += `<div class="pb-5"></div>`; // Spacer bawah
-  area.innerHTML = html;
+  area.innerHTML = html + `<div class="pb-5"></div>`;
   
+  // EFECT CONFETTI (Yang tadi hilang, sekarang ada lagi!)
   if (pct >= 60) launchConfetti();
 }
+
+// ============================================================
+// 5. RENDER PROGRESS (KARTU STATISTIK)
+// ============================================================
 export function renderProgressModal(stats) {
   const list = document.getElementById("progressList");
   if (!list) return;
   list.innerHTML = "";
   const gridDiv = document.createElement("div");
   gridDiv.className = "row g-3";
+  
   stats.forEach((item) => {
     const pctTotal = item.totalPct;
     const p1 = item.detail.tebakArti;
     const p2 = item.detail.tebakHiragana;
     const p3 = item.detail.tulisArti;
     const p4 = item.detail.tulisRomaji;
+    
     const isDone = pctTotal === 100;
-    const cardClass = isDone ? "prog-card bab-done" : "prog-card";
-    const titleColor = isDone ? "text-success" : "text-dark";
+    const cardClass = isDone ? "prog-card prog-done" : "prog-card";
+    const badgeClass = isDone ? "bg-neon-green text-black" : "bg-dark-subtle text-white";
+
     const col = document.createElement("div");
     col.className = "col-12 col-md-6";
-    col.innerHTML = `<div class="${cardClass}"><div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom"><span class="fw-bold ${titleColor}" style="font-size: 1.1rem;">${item.bab}</span><span class="badge ${isDone ? "bg-success" : "bg-dark"} rounded-pill" style="font-size: 0.9rem;">Total: ${pctTotal}%</span></div><div class="prog-item"><div class="prog-label c-blue"><i class="bi bi-eye-fill"></i> Tebak Arti</div><div class="prog-track"><div class="prog-fill bg-blue" style="width:${p1}%"></div></div><div class="prog-pct c-blue">${p1}%</div></div><div class="prog-item"><div class="prog-label c-green"><i class="bi bi-translate"></i> Tebak Bacaan</div><div class="prog-track"><div class="prog-fill bg-green" style="width:${p2}%"></div></div><div class="prog-pct c-green">${p2}%</div></div><div class="prog-item"><div class="prog-label c-orange"><i class="bi bi-pencil-fill"></i> Tulis Arti</div><div class="prog-track"><div class="prog-fill bg-orange" style="width:${p3}%"></div></div><div class="prog-pct c-orange">${p3}%</div></div><div class="prog-item"><div class="prog-label c-red"><i class="bi bi-keyboard-fill"></i> Tulis Bacaan</div><div class="prog-track"><div class="prog-fill bg-red" style="width:${p4}%"></div></div><div class="prog-pct c-red">${p4}%</div></div></div>`;
+    col.innerHTML = `
+        <div class="${cardClass} p-3 h-100 d-flex flex-column justify-content-center">
+            <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom border-secondary border-opacity-25">
+                <span class="fw-bold text-white fs-5">${escapeHtml(item.bab)}</span>
+                <span class="badge ${badgeClass} rounded-pill px-3">Total: ${pctTotal}%</span>
+            </div>
+            <div class="d-flex flex-column gap-3">
+                <div class="prog-item">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span class="prog-label text-neon-blue"><i class="bi bi-eye-fill me-2"></i> Tebak Arti</span>
+                        <span class="prog-val text-white">${p1}%</span>
+                    </div>
+                    <div class="progress" style="height: 6px; background: rgba(255,255,255,0.1);"><div class="progress-bar bg-neon-blue" style="width: ${p1}%"></div></div>
+                </div>
+                <div class="prog-item">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span class="prog-label text-neon-green"><i class="bi bi-translate me-2"></i> Tebak Bacaan</span>
+                        <span class="prog-val text-white">${p2}%</span>
+                    </div>
+                    <div class="progress" style="height: 6px; background: rgba(255,255,255,0.1);"><div class="progress-bar bg-neon-green" style="width: ${p2}%"></div></div>
+                </div>
+                <div class="prog-item">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span class="prog-label text-neon-yellow"><i class="bi bi-pencil-fill me-2"></i> Tulis Arti</span>
+                        <span class="prog-val text-white">${p3}%</span>
+                    </div>
+                    <div class="progress" style="height: 6px; background: rgba(255,255,255,0.1);"><div class="progress-bar bg-neon-yellow" style="width: ${p3}%"></div></div>
+                </div>
+                <div class="prog-item">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span class="prog-label text-neon-pink"><i class="bi bi-keyboard-fill me-2"></i> Tulis Romaji</span>
+                        <span class="prog-val text-white">${p4}%</span>
+                    </div>
+                    <div class="progress" style="height: 6px; background: rgba(255,255,255,0.1);"><div class="progress-bar bg-neon-pink" style="width: ${p4}%"></div></div>
+                </div>
+            </div>
+        </div>`;
     gridDiv.appendChild(col);
   });
   list.appendChild(gridDiv);
 }
 
-function formatModeName(type) {
-  if (type === "quiz") return "Tebak Arti";
-  if (type === "quiz_hiragana") return "Tebak Bacaan";
-  if (type === "mem") return "Tulis Arti";
-  if (type === "write_romaji") return "Tulis Bacaan";
-  return type;
-}
-
+// ============================================================
+// 6. FUNGSI PEMANIS (CONFETTI) - INI YANG TADI HILANG
+// ============================================================
 function launchConfetti() {
   const wrap = document.getElementById(SELECTORS.confetti);
   if (!wrap) return;
-  for (let i = 0; i < 40; i++) {
+  wrap.innerHTML = ""; // Bersihkan confetti lama
+  
+  for (let i = 0; i < 50; i++) {
     const el = document.createElement("div");
     el.className = "confetti";
+    // Posisi acak horizontal
     el.style.left = Math.random() * 100 + "vw";
-    el.style.backgroundColor = ["#f00", "#0f0", "#00f", "#ff0"][
-      Math.floor(Math.random() * 4)
-    ];
-    el.style.width = "8px";
-    el.style.height = "8px";
-    el.style.position = "fixed";
-    el.style.top = "-10px";
-    el.style.animation = `drop ${1 + Math.random() * 2}s linear forwards`;
+    // Warna Acak (Neon Style)
+    const colors = ["#f472b6", "#3b82f6", "#4ade80", "#facc15", "#ffffff"];
+    el.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    // Kecepatan & Delay acak
+    el.style.animationDuration = (2 + Math.random() * 3) + "s";
+    el.style.animationDelay = (Math.random() * 2) + "s";
+    
     wrap.appendChild(el);
-    setTimeout(() => el.remove(), 3000);
+    
+    // Hapus elemen setelah selesai animasi biar gak menuhin memori
+    setTimeout(() => el.remove(), 5000);
   }
 }

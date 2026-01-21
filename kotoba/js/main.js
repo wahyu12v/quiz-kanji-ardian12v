@@ -12,9 +12,11 @@ let state = null;
 let quizModal, memModal, confirmModal, daftarRangeModal, daftarListModal, progressModal, partSelectionModal;
 let pendingSessionType = 'quiz'; 
 
-// Penyimpanan Pilihan User (Setiap mode punya set index sendiri)
-// Format: { 'rangeListQuiz': Set([1,2,3]), 'rangeListMem': Set([...]) }
+// Penyimpanan Pilihan User
 const GLOBAL_SELECTIONS = {}; 
+
+// Flag Animasi (Untuk Auto Next)
+let isAnim = false;
 
 // ============================================================
 // 1. INISIALISASI
@@ -22,19 +24,20 @@ const GLOBAL_SELECTIONS = {};
 async function init() {
     try {
         setupModals();
+        
+        // Pastikan Tombol Kembali MUNCUL saat awal buka web
         toggleMainBackButton(true); 
         
-        // Load Data dengan cache busting agar selalu fresh
+        // Load Data
         const uniqueUrl = 'data/data.json?v=' + new Date().getTime();
         const response = await fetch(uniqueUrl);
         if(!response.ok) throw new Error("Gagal memuat data/data.json");
         QUESTIONS = await response.json();
         
-        // Update Total Kosakata di UI
         const totalEl = document.getElementById('totalCount');
         if(totalEl) totalEl.innerText = QUESTIONS.length;
         
-        // Generate Tampilan Awal (Grid Bab)
+        // Generate Tampilan Awal
         generateCheckboxes('rangeListQuiz', 'q');
         generateCheckboxes('rangeListMem', 'm');
         generateCheckboxes('rangeListDaftar', 'd'); 
@@ -48,7 +51,6 @@ async function init() {
 }
 
 function setupModals() {
-    // Inisialisasi semua modal Bootstrap
     quizModal = new bootstrap.Modal(document.getElementById('quizModal'));
     memModal = new bootstrap.Modal(document.getElementById('memModal'));
     confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
@@ -56,59 +58,59 @@ function setupModals() {
     daftarListModal = new bootstrap.Modal(document.getElementById('daftarHafalanModal'));
     progressModal = new bootstrap.Modal(document.getElementById('progressModal'));
     
-    // Modal Part Baru
     const partEl = document.getElementById('partSelectionModal');
     if(partEl) partSelectionModal = new bootstrap.Modal(partEl);
 }
 
 function setupEventListeners() {
-    // Tombol Menu Utama
     document.getElementById('startBtn').onclick = () => { pendingSessionType = 'quiz'; quizModal.show(); };
     document.getElementById('btnTebakHiragana').onclick = () => { pendingSessionType = 'quiz_hiragana'; quizModal.show(); };
     document.getElementById('memorizeBtn').onclick = () => { pendingSessionType = 'mem'; memModal.show(); };
     document.getElementById('btnTulisRomaji').onclick = () => { pendingSessionType = 'write_romaji'; memModal.show(); };
     document.getElementById('daftarHafalanBtn').onclick = () => { daftarRangeModal.show(); };
 
-    // Tombol Progress
     document.getElementById('btnCekProgress').onclick = () => {
         const stats = Logic.calculateProgress(QUESTIONS);
         UI.renderProgressModal(stats);
         progressModal.show();
     };
 
-    // Tombol di dalam Modal (Start / Tampilkan)
     document.getElementById('quizForm').onsubmit = (e) => { e.preventDefault(); handleStart('rangeListQuiz'); };
     document.getElementById('memForm').onsubmit = (e) => { e.preventDefault(); handleStart('rangeListMem'); };
     document.getElementById('btnShowList').onclick = () => renderDaftarList();
 
-    // Tombol Select All / Reset
     setupCheckboxHelpers('selectAllQuiz', 'clearAllQuiz', 'rangeListQuiz');
     setupCheckboxHelpers('selectAllMem', 'clearAllMem', 'rangeListMem');
     setupCheckboxHelpers('btnDaftarSelectAll', 'btnDaftarReset', 'rangeListDaftar');
 
-    // Tombol Konfirmasi Selesai
     document.getElementById('confirmSend').onclick = () => {
         confirmModal.hide();
         finishSession();
     };
 }
 
+// --- FUNGSI FIX TOMBOL KEMBALI (DENGAN IMPORTANT) ---
 function toggleMainBackButton(show) {
     const btnBack = document.getElementById('btn-main-back');
-    if(btnBack) btnBack.style.display = show ? 'flex' : 'none';
+    if(btnBack) {
+        if (show) {
+            // Gunakan setProperty untuk menimpa class d-flex bootstrap
+            btnBack.style.setProperty('display', 'flex', 'important');
+        } else {
+            btnBack.style.setProperty('display', 'none', 'important');
+        }
+    }
 }
 
 // ============================================================
-// 2. LOGIKA SELEKSI BAB & PART (SISTEM BARU)
+// 2. LOGIKA SELEKSI BAB & PART
 // ============================================================
 
-// A. Generate Tombol Bab (Grid)
 function generateCheckboxes(containerId, prefix) {
     const container = document.getElementById(containerId);
     if (!container) return;
     container.innerHTML = '';
     
-    // Siapkan penyimpanan set untuk container ini
     if (!GLOBAL_SELECTIONS[containerId]) {
         GLOBAL_SELECTIONS[containerId] = new Set();
     }
@@ -118,19 +120,15 @@ function generateCheckboxes(containerId, prefix) {
         return;
     }
 
-    // Ambil Bab Unik
     const uniqueBabs = [...new Set(QUESTIONS.map(item => item.bab || "Lainnya"))];
-
-    // Reset container class agar jadi grid
     container.className = 'range-grid-container'; 
     
     uniqueBabs.forEach((babName, index) => {
-        // Hitung total kata di bab ini
         const count = QUESTIONS.filter(q => (q.bab || "Lainnya") === babName).length;
         
         const div = document.createElement('div');
         div.className = 'bab-selector-card';
-        div.id = `${prefix}_btn_${index}`; // ID Unik Tombol Bab
+        div.id = `${prefix}_btn_${index}`; 
         div.onclick = () => window.openPartModal(babName, containerId, prefix, index);
         
         div.innerHTML = `
@@ -140,15 +138,12 @@ function generateCheckboxes(containerId, prefix) {
         `;
         container.appendChild(div);
         
-        // Update UI awal (jika ada seleksi tersimpan sebelumnya)
-        // Kita butuh array index untuk bab ini
         const indicesInBab = [];
         QUESTIONS.forEach((q, idx) => { if ((q.bab || "Lainnya") === babName) indicesInBab.push(idx); });
         window.updateBabUI(containerId, prefix, index, indicesInBab);
     });
 }
 
-// B. Buka Modal Pilih Part
 window.openPartModal = function(babName, containerId, prefix, babIndex) {
     const modalTitle = document.getElementById('partModalTitle');
     const modalContainer = document.getElementById('partListContainer');
@@ -157,7 +152,6 @@ window.openPartModal = function(babName, containerId, prefix, babIndex) {
     modalTitle.innerText = `Pilih Bagian: ${babName}`;
     modalContainer.innerHTML = '';
 
-    // Cari index soal yang termasuk Bab ini
     const indicesInBab = [];
     QUESTIONS.forEach((q, idx) => {
         if ((q.bab || "Lainnya") === babName) indicesInBab.push(idx);
@@ -166,18 +160,14 @@ window.openPartModal = function(babName, containerId, prefix, babIndex) {
     const totalWords = indicesInBab.length;
     const MAX_PER_PART = 25; 
     let totalParts = Math.ceil(totalWords / MAX_PER_PART);
-    if (totalWords <= 35) totalParts = 1; // Toleransi, kalau cuma 35 kata jadikan 1 part
+    if (totalWords <= 35) totalParts = 1;
 
-    // Buat Checkbox per Part
     for (let i = 0; i < totalParts; i++) {
         const start = i * MAX_PER_PART;
         const end = start + MAX_PER_PART;
-        const chunk = indicesInBab.slice(start, end); // Array index soal asli untuk part ini
+        const chunk = indicesInBab.slice(start, end); 
 
-        // Cek status seleksi saat ini
         const currentSet = GLOBAL_SELECTIONS[containerId];
-        // Part dianggap terpilih jika setidaknya satu item di dalamnya terpilih (atau logika 'some' diganti 'every' jika mau strict)
-        // Kita pakai 'some' agar jika user select all lalu uncheck satu, part tetap terlihat aktif
         const isChecked = chunk.some(idx => currentSet.has(idx));
 
         const partLabel = totalParts > 1 ? `Part ${i + 1}` : `Full Paket`;
@@ -186,7 +176,6 @@ window.openPartModal = function(babName, containerId, prefix, babIndex) {
         const div = document.createElement('div');
         div.className = 'form-check p-0 mb-2';
         
-        // Simpan array chunk dalam atribut onclick agar mudah
         div.innerHTML = `
             <input class="form-check-input d-none" type="checkbox" id="chk_part_${i}" 
                    ${isChecked ? 'checked' : ''} onchange="window.togglePartSelection('${containerId}', this.checked, [${chunk}])">
@@ -201,10 +190,7 @@ window.openPartModal = function(babName, containerId, prefix, babIndex) {
         modalContainer.appendChild(div);
     }
 
-    // Event listener saat modal part ditutup: Update UI Tombol Bab Utama
     const el = document.getElementById('partSelectionModal');
-    // Hapus listener lama biar gak numpuk (opsional, tapi bootstrap handle 'hidden' event global)
-    // Cara bersih: buat handler khusus
     const handler = () => {
         window.updateBabUI(containerId, prefix, babIndex, indicesInBab);
         el.removeEventListener('hidden.bs.modal', handler);
@@ -214,7 +200,6 @@ window.openPartModal = function(babName, containerId, prefix, babIndex) {
     partSelectionModal?.show();
 }
 
-// C. Toggle Seleksi Part (Simpan ke Set Global)
 window.togglePartSelection = function(containerId, isChecked, indicesArray) {
     const set = GLOBAL_SELECTIONS[containerId];
     indicesArray.forEach(idx => {
@@ -222,7 +207,6 @@ window.togglePartSelection = function(containerId, isChecked, indicesArray) {
         else set.delete(idx);
     });
     
-    // Update visual icon centang di modal realtime
     const checkbox = event.target;
     const icon = checkbox.nextElementSibling.querySelector('.check-icon');
     const label = checkbox.nextElementSibling.querySelector('.part-option-label');
@@ -238,7 +222,6 @@ window.togglePartSelection = function(containerId, isChecked, indicesArray) {
     }
 }
 
-// D. Update UI Tombol Bab (Warna Pink jika ada isi)
 window.updateBabUI = function(containerId, prefix, babIndex, indicesInBab) {
     const set = GLOBAL_SELECTIONS[containerId];
     const btn = document.getElementById(`${prefix}_btn_${babIndex}`);
@@ -246,7 +229,6 @@ window.updateBabUI = function(containerId, prefix, babIndex, indicesInBab) {
     
     if(!btn || !badge) return;
 
-    // Hitung berapa item di bab ini yang terpilih
     let countSelected = 0;
     indicesInBab.forEach(idx => {
         if (set.has(idx)) countSelected++;
@@ -262,32 +244,25 @@ window.updateBabUI = function(containerId, prefix, babIndex, indicesInBab) {
     }
 }
 
-// E. Ambil Index Terpilih (Untuk memulai game)
 window.getCheckedIndices = function(containerId) {
     const set = GLOBAL_SELECTIONS[containerId];
     if (!set) return [];
     return Array.from(set).sort((a, b) => a - b);
 }
 
-// F. Tombol Select All / Reset Global
 function setupCheckboxHelpers(btnAllId, btnClearId, containerId) {
     const btnAll = document.getElementById(btnAllId);
     const btnClear = document.getElementById(btnClearId);
 
     if(btnAll) btnAll.onclick = () => {
-        // Pilih semua index
         const allIndices = QUESTIONS.map((_, i) => i);
         GLOBAL_SELECTIONS[containerId] = new Set(allIndices);
-        
-        // Refresh UI Bab (Re-generate biar update semua status)
         const prefix = containerId === 'rangeListQuiz' ? 'q' : (containerId === 'rangeListMem' ? 'm' : 'd');
         generateCheckboxes(containerId, prefix);
     };
 
     if(btnClear) btnClear.onclick = () => {
         GLOBAL_SELECTIONS[containerId] = new Set();
-        
-        // Refresh UI Bab
         const prefix = containerId === 'rangeListQuiz' ? 'q' : (containerId === 'rangeListMem' ? 'm' : 'd');
         generateCheckboxes(containerId, prefix);
     };
@@ -310,29 +285,29 @@ function handleStart(rangeId) {
 }
 
 function startSession(type, indices) {
+    // 1. HILANGKAN TOMBOL KEMBALI SECARA PAKSA
     toggleMainBackButton(false); 
+    
     const selectedQ = indices.map(i => QUESTIONS[i]);
-    // Acak urutan soal
     const shuffled = shuffleArray([...selectedQ]); 
 
-    // Siapkan State
     state = {
         sessionType: type,
         batch: shuffled,
         current: 0,
         answers: new Array(shuffled.length).fill(null),
-        orderIndices: indices // Simpan index asli untuk retry
+        orderIndices: indices 
     };
 
-    // Jika Quiz, siapkan pilihan ganda di awal
     if (type.includes('quiz')) {
         const globalIndices = shuffled.map(q => QUESTIONS.indexOf(q));
         state.choicesPerQ = Logic.buildChoices(globalIndices, QUESTIONS, type);
     }
 
+    isAnim = false; // Reset flag animasi
     renderCurrent();
     
-    // Tampilkan tombol stop
+    // TAMPILKAN TOMBOL BERHENTI (MERAH)
     const btnStop = document.getElementById('btn-stop-quiz');
     if(btnStop) btnStop.classList.remove('d-none');
 }
@@ -345,11 +320,27 @@ function renderCurrent() {
     }
 }
 
-// --- Event Handlers Game ---
+// --- UPDATE: EVENT HANDLERS (AUTO NEXT) ---
 
 window.handleAnswer = (choiceIndex) => {
+    // 1. Cek apakah sedang transisi?
+    if (isAnim) return; 
+
+    // 2. Simpan Jawaban
     state.answers[state.current] = choiceIndex;
-    renderCurrent();
+    renderCurrent(); // Update UI biar tombol terpilih menyala
+    
+    // 3. Set Flag & Mulai Timer Auto Next
+    isAnim = true;
+    setTimeout(() => {
+        if (state.current < state.batch.length - 1) {
+            state.current++;
+            renderCurrent();
+        } else {
+            window.handleConfirm(); // Jika soal habis, tampilkan konfirmasi
+        }
+        isAnim = false; // Buka kunci interaksi
+    }, 400); // Jeda 0.4 detik (cukup cepat tapi smooth)
 };
 
 window.handleNext = () => {
@@ -360,6 +351,7 @@ window.handleNext = () => {
 };
 
 window.handleNextOrSubmit = () => {
+    // Dipanggil saat tekan ENTER di mode Tulis
     if (state.current < state.batch.length - 1) {
         window.handleNext();
     } else {
@@ -380,11 +372,11 @@ window.handlePrev = () => {
 
 window.handleLupa = () => {
     state.answers[state.current] = "Lupa";
+    // Lupa juga langsung next otomatis
     window.handleNext();
 };
 
 window.handleConfirm = () => {
-    // Cek jawaban kosong
     let emptyCount = 0;
     state.answers.forEach(a => {
         if (a === null || a === undefined || a === "") emptyCount++;
@@ -400,7 +392,6 @@ window.handleConfirm = () => {
 };
 
 window.executeStopQuiz = () => {
-    // Handler Tombol Berhenti (Force Finish)
     const stopModalEl = document.getElementById('stopQuizModal');
     const stopModal = bootstrap.Modal.getInstance(stopModalEl);
     stopModal.hide();
@@ -409,28 +400,22 @@ window.executeStopQuiz = () => {
 
 window.handleBack = () => { 
     Storage.clearTemp(); 
-    // Reset state tampilan
     document.getElementById('quiz-area').innerHTML = ''; 
-    document.location.reload(); // Reload bersih
+    document.location.reload(); 
 };
 
 function finishSession() {
     const result = Logic.gradeSession(state, QUESTIONS);
-    
-    // Simpan Progress (Mastery)
     Storage.saveMastery(result.details, state.sessionType);
 
-    // Simpan History
     const uniqueBabs = [...new Set(state.batch.map(item => item.bab || "Default"))].sort();
     const packagesStr = uniqueBabs.join(', ');
+
     Storage.saveToHistory(result.score, result.total, state.sessionType, packagesStr);
     
-    // Cari soal yang salah untuk fitur Retry
     const wrongIndices = [];
     result.details.forEach((item, i) => {
         if (!item.isCorrect || state.answers[i] === 'Lupa') {
-            // Kita butuh index asli dari soal ini di QUESTIONS
-            // Item.q adalah object soalnya. Cari indexnya di QUESTIONS global.
             const originalIdx = QUESTIONS.indexOf(item.q);
             if(originalIdx !== -1) wrongIndices.push(originalIdx);
         }
@@ -439,13 +424,15 @@ function finishSession() {
     Storage.clearTemp();
     UI.renderResult(result, state.sessionType, wrongIndices);
     
+    // HILANGKAN TOMBOL BERHENTI (MERAH)
     const btnStop = document.getElementById('btn-stop-quiz');
     if(btnStop) btnStop.classList.add('d-none'); 
+    
+    // PENTING: TOMBOL KEMBALI TETAP DISEMBUNYIKAN
+    // (Akan otomatis muncul lagi hanya jika user menekan tombol 'Menu Utama' di UI Result yang memicu handleBack/reload)
 }
 
 window.handleRetry = () => {
-    // Ulangi dengan soal yang sama persis
-    // Ambil index dari batch saat ini
     const indices = state.batch.map(q => QUESTIONS.indexOf(q));
     startSession(state.sessionType, indices);
 };
@@ -463,12 +450,13 @@ function renderDaftarList() {
     if(indices.length === 0) return alert("Pilih minimal satu paket.");
     
     daftarRangeModal?.hide();
+    
+    // HILANGKAN TOMBOL KEMBALI
     toggleMainBackButton(false);
 
     const listContainer = document.getElementById('daftarList');
     if(listContainer) {
         listContainer.innerHTML = '';
-        // Layout Grid Responsif
         listContainer.className = 'row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-3'; 
 
         indices.forEach(idx => {
@@ -478,7 +466,6 @@ function renderDaftarList() {
             const kana = String(item.kana || '-').trim();
             const showKana = kanji !== kana;
             
-            // Auto size font
             let fontSizeClass = 'fs-1';
             if (kanji.length > 4) fontSizeClass = 'fs-2';
             if (kanji.length > 6) fontSizeClass = 'fs-3';
@@ -487,7 +474,6 @@ function renderDaftarList() {
             const colDiv = document.createElement('div');
             colDiv.className = 'col';
             
-            // Render Kartu Daftar (Sesuai tema Dark Neon)
             colDiv.innerHTML = `
                 <div class="kotoba-card h-100 p-3 d-flex flex-column align-items-center text-center justify-content-center">
                     <div class="mb-1 w-100">
@@ -509,5 +495,4 @@ function renderDaftarList() {
     setTimeout(() => { daftarListModal?.show(); }, 300);
 }
 
-// Jalankan Init
 window.onload = init;
