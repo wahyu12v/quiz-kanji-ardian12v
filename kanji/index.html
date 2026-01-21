@@ -23,61 +23,40 @@
     <link rel="icon" type="image/x-icon" href="/kanji/logo2-removebg.png" />
   </head>
   <body>
-    <nav
-      class="navbar sticky-top navbar-light bg-white py-3 shadow-sm"
-      id="main-nav"
-    >
-      <div class="container d-flex justify-content-between align-items-center">
-        <a
-          href="index.html"
-          class="navbar-brand d-flex align-items-center gap-3 m-0"
-        >
-          <img
-            src="/kanji/logo2-removebg.png"
-            alt="Logo"
-            style="height: 42px; width: auto"
-            class="brand-logo"
-            onerror="this.style.display='none'"
-          />
-          <div class="d-flex flex-column lh-1">
-            <span class="fw-bold brand-title fs-5">Hafalan Kanji</span>
-            <small class="brand-subtitle text-muted" style="font-size: 0.75rem"
-              >by Ardian Wahyu Saputra</small
-            >
-          </div>
-        </a>
-        <div class="d-flex gap-2 align-items-center">
-          <a
-            href="/index.html"
-            id="btn-main-back"
-            class="btn rounded-pill fw-bold d-flex align-items-center shadow-sm"
-            style="
-              border: 2.5px solid #0d6efd;
-              color: #0d6efd;
-              background: white;
-              transition: all 0.3s ease;
-            "
-            onmouseover="this.style.background='#0d6efd'; this.style.color='white'; this.style.transform='translateX(-3px)';"
-            onmouseout="this.style.background='white'; this.style.color='#0d6efd'; this.style.transform='translateX(0)';"
-          >
-            <i
-              class="bi bi-arrow-left me-2"
-              style="font-size: 1.2rem; -webkit-text-stroke: 1px"
-            ></i>
-            Kembali
-          </a>
-
-          <button
-            id="btn-stop-quiz"
-            class="btn btn-outline-danger btn-sm rounded-pill px-3 fw-bold d-none"
-            data-bs-toggle="modal"
-            data-bs-target="#stopQuizModal"
-          >
-            <i class="bi bi-stop-circle-fill me-1"></i> Berhenti
-          </button>
-        </div>
+<nav class="navbar sticky-top navbar-dark py-3 shadow-sm" id="main-nav">
+  <div class="container d-flex justify-content-between align-items-center">
+    <a href="index.html" class="navbar-brand d-flex align-items-center gap-3 m-0">
+      <img
+        src="/kanji/logo2-removebg.png"
+        alt="Logo"
+        style="height: 42px; width: auto"
+        class="brand-logo"
+        onerror="this.style.display='none'"
+      />
+      <div class="d-flex flex-column lh-1">
+        <span class="fw-bold brand-title fs-5">Hafalan Kanji</span>
+        <small class="brand-subtitle text-white" style="font-size: 0.75rem">
+          by Ardian Wahyu Saputra
+        </small>
       </div>
-    </nav>
+    </a>
+
+    <div class="d-flex gap-2 align-items-center">
+      <a href="/index.html" id="btn-main-back" class="btn rounded-pill fw-bold d-flex align-items-center shadow-sm">
+          <i class="bi bi-arrow-left me-2"></i> Kembali
+      </a>
+
+      <button
+        id="btn-stop-quiz"
+        class="btn btn-outline-danger btn-sm rounded-pill px-3 fw-bold d-none"
+        data-bs-toggle="modal"
+        data-bs-target="#stopQuizModal"
+      >
+        <i class="bi bi-stop-circle-fill me-1"></i> Berhenti
+      </button>
+    </div>
+  </div>
+</nav>
 
     <div class="modal fade" id="stopQuizModal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-sm">
@@ -90,7 +69,7 @@
               ></i>
             </div>
             <h4 class="fw-bold mb-2">Hentikan Sesi?</h4>
-            <p class="text-muted small mb-4">
+            <p class="text-white small mb-4">
               Progress saat ini akan langsung dinilai.<br />Anda tidak bisa
               melanjutkan lagi.
             </p>
@@ -215,7 +194,7 @@
           <div class="modal-header border-0 pb-0 pt-4 px-4 bg-white rounded-top-4">
             <div>
                 <h4 class="modal-title fw-bold text-dark mb-1"><i class="bi bi-pie-chart-fill me-2 text-primary"></i>Progress Hafalan</h4>
-                <p class="text-muted small mb-0">Indikator 100% jika semua mode (4 jenis) selesai.</p>
+                <p class="text-white small mb-0">Indikator 100% jika semua mode (4 jenis) selesai.</p>
             </div>
             <button type="button" class="btn-close bg-light p-2 rounded-circle" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
@@ -240,7 +219,7 @@
           <div class="modal-header border-0 pb-0">
             <div>
               <h4 class="modal-title fw-bold">Pilih Paket Kanji</h4>
-              <p class="text-muted small mb-0">
+              <p class="text-white small mb-0">
                 Pilih paket yang ingin ditampilkan di daftar.
               </p>
             </div>
@@ -270,7 +249,7 @@
           <div class="modal-footer border-0 pt-0 pb-4">
             <button
               type="button"
-              class="btn btn-light text-muted fw-medium rounded-pill px-4 py-2"
+              class="btn btn-light text-white fw-medium rounded-pill px-4 py-2"
               data-bs-dismiss="modal"
             >
               Batal
@@ -299,10 +278,10 @@
         <div class="modal-content px-0 overflow-hidden">
           <div class="modal-header border-bottom-0 pb-0 pt-4 px-4 bg-white">
             <div>
-              <h4 class="modal-title fw-bold text-dark">
+              <h4 class="modal-title fw-bold text-white mb-1">
                 Daftar Kanji Terpilih
               </h4>
-              <p class="text-muted small mb-0">
+              <p class="text-white small mb-0">
                 Menampilkan hasil dari paket yang dipilih.
               </p>
             </div>
@@ -336,7 +315,7 @@
           <div class="modal-header border-0 pb-0">
             <div>
               <h4 class="modal-title fw-bold">Pilih Materi Quiz</h4>
-              <p class="text-muted small mb-0">
+              <p class="text-white small mb-0">
                 Siap menguji kemampuan arti katamu?
               </p>
             </div>
@@ -367,7 +346,7 @@
           <div class="modal-footer border-0 pt-0 pb-4">
             <button
               type="button"
-              class="btn btn-light text-muted fw-medium rounded-pill px-4 py-2"
+              class="btn btn-light text-white fw-medium rounded-pill px-4 py-2"
               data-bs-dismiss="modal"
             >
               Batal</button
@@ -388,7 +367,7 @@
           <div class="modal-header border-0 pb-0">
             <div>
               <h4 class="modal-title fw-bold">Pilih Materi Hafalan</h4>
-              <p class="text-muted small mb-0">
+              <p class="text-white small mb-0">
                 Ketik bacaan/arti dari Kanji yang muncul.
               </p>
             </div>
@@ -419,7 +398,7 @@
           <div class="modal-footer border-0 pt-0 pb-4">
             <button
               type="button"
-              class="btn btn-light text-muted fw-medium rounded-pill px-4 py-2"
+              class="btn btn-light text-white fw-medium rounded-pill px-4 py-2"
               data-bs-dismiss="modal"
             >
               Batal</button
@@ -442,7 +421,7 @@
               <i class="bi bi-check-circle-fill" style="font-size: 3rem"></i>
             </div>
             <h4 class="fw-bold mb-2">Selesai Mengerjakan?</h4>
-            <div id="confirmSummary" class="text-muted mb-4"></div>
+            <div id="confirmSummary" class="text-white mb-4"></div>
             <div class="d-flex gap-2 justify-content-center">
               <button
                 type="button"

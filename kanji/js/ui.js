@@ -130,74 +130,103 @@ export function renderQuiz(state, qNo) {
     area.appendChild(card);
 }
 
-// --- 2. RENDER MEMORY ---
+// --- 2. RENDER MEMORY (FIX FINAL: GLASS STYLE) ---
 export function renderMem(state, qNo) {
     area.innerHTML = "";
     const idx = state.current;
     const q = state.batch[idx];
-    const val = state.answers[idx] === 'Lupa' ? '' : (state.answers[idx] || '');
-    
-    const kanjiTxt = String(q[KEYS.kanji] || '').trim();
-    const meanTxt = String(q[KEYS.meaning] || '').trim();
-    const hiraTxt = String(q[KEYS.hiragana] || '').trim();
+    const val = state.answers[idx] === "Lupa" ? "" : state.answers[idx] || "";
 
-    let displayHtml = '';
-    let placeholderTxt = '', labelTxt = '';
+    const kanjiTxt = String(q[KEYS.kanji] || "").trim();
+    const meanTxt = String(q[KEYS.meaning] || "").trim();
+    const hiraTxt = String(q[KEYS.hiragana] || "").trim();
 
-    if (state.sessionType === 'write_romaji') {
-        // Mode Tulis Bacaan -> Soal: ARTI (Bisa panjang)
+    let displayHtml = "";
+    let placeholderTxt = "", labelTxt = "";
+
+    // Tentukan Label & Placeholder
+    if (state.sessionType === "write_romaji") {
         displayHtml = formatQuestion(meanTxt || hiraTxt);
-        placeholderTxt = "Ketik Cara Baca (Romaji/Kana)";
-        labelTxt = "Ketik Bacaan:";
+        placeholderTxt = "Ketik bacaan...";
+        labelTxt = "TERJEMAHKAN KE ROMAJI / KANA";
     } else {
-        // Mode Tulis Arti -> Soal: KANJI / HIRAGANA
         const textToShow = kanjiTxt || hiraTxt;
         displayHtml = formatQuestion(textToShow);
-        placeholderTxt = "Contoh: Ikan, Air";
-        labelTxt = "Ketik Arti (Indonesia):";
+        placeholderTxt = "Contoh: Ikan, Air...";
+        labelTxt = "TERJEMAHKAN KE INDONESIA";
     }
 
-    const card = document.createElement('div');
-    card.className = 'card card-kanji mb-3 border-0 shadow-sm';
+    const card = document.createElement("div");
+    card.className = "card card-kanji mb-3 border-0 shadow-sm";
+    
+    // STRUKTUR HTML BARU (Rapi & Tengah)
     card.innerHTML = `
-      <div class="card-body p-4">
-        <div class="d-flex justify-content-between mb-3">
-            <h5 class="fw-bold">Hafalan ${idx + 1} / ${state.batch.length}</h5>
-            <small class="text-muted">No Asli: ${q[KEYS.number] || '-'}</small>
+      <div class="card-body p-4 d-flex flex-column h-100 justify-content-center">
+        
+        <div class="d-flex justify-content-between mb-3 align-items-center w-100">
+            <h5 class="fw-bold m-0 text-white">Hafalan ${idx + 1} / ${state.batch.length}</h5>
+            <small class="text-muted" style="font-size: 0.8rem;">No Asli: ${q[KEYS.number] || "-"}</small>
         </div>
-        ${displayHtml}
-        <div class="mt-3">
-            <label class="fw-bold text-muted mb-2">${labelTxt}</label>
-            <div class="input-group input-group-lg">
-                <input type="text" id="memInput" class="form-control border-secondary" placeholder="${placeholderTxt}" autocomplete="off" value="${escapeHtml(val)}" style="font-size: 1.3rem;">
-                <button class="btn btn-outline-secondary" type="button" id="btnMic" title="Rekam Suara"><i class="bi bi-mic-fill"></i></button>
+        
+        <div class="flex-grow-1 d-flex align-items-center justify-content-center my-4">
+            ${displayHtml}
+        </div>
+
+        <div class="mb-5 w-100 text-center">
+            <div class="mem-label">${labelTxt}</div>
+            
+            <div class="mem-input-box">
+                <input type="text" id="memInput" 
+                       placeholder="${placeholderTxt}" 
+                       autocomplete="off" 
+                       spellcheck="false" 
+                       value="${escapeHtml(val)}">
+                
+                <div id="btnMic" role="button" title="Rekam Suara">
+                    <i class="bi bi-mic-fill fs-5"></i>
+                </div>
             </div>
         </div>
-        <div class="mt-4 d-flex gap-2 w-100">
-            <button class="btn btn-outline-secondary fw-bold flex-grow-1" onclick="window.handlePrev()" ${idx===0?'disabled':''}>Sebelumnya</button>
+
+        <div class="d-flex gap-2 w-100 mt-auto">
+            <button class="btn btn-outline-secondary fw-bold flex-grow-1" onclick="window.handlePrev()" ${idx === 0 ? "disabled" : ""}>Sebelumnya</button>
             <button class="btn btn-outline-warning fw-bold flex-grow-1" onclick="window.handleLupa()">Lupa</button>
-            ${ idx < state.batch.length - 1 ? `<button class="btn btn-outline-primary fw-bold flex-grow-1" onclick="window.handleNext()">Berikutnya</button>` : `<button class="btn btn-success fw-bold flex-grow-1" onclick="window.handleConfirm()">Selesai</button>` }
+            ${
+              idx < state.batch.length - 1
+                ? `<button class="btn btn-primary fw-bold flex-grow-1" onclick="window.handleNext()">Berikutnya</button>`
+                : `<button class="btn btn-success fw-bold flex-grow-1" onclick="window.handleConfirm()">Selesai</button>`
+            }
         </div>
       </div>
     `;
     area.appendChild(card);
-    
-    const inp = document.getElementById('memInput');
-    const btnMic = document.getElementById('btnMic');
+
+    // Logic Input & Mic (Tetap sama)
+    const inp = document.getElementById("memInput");
+    const btnMic = document.getElementById("btnMic");
     inp.focus();
     inp.oninput = (e) => window.handleInput(e.target.value);
-    inp.onkeydown = (e) => { if(e.key === 'Enter') window.handleNextOrSubmit(); };
+    inp.onkeydown = (e) => { if (e.key === "Enter") window.handleNextOrSubmit(); };
 
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (SpeechRecognition) {
         const recognition = new SpeechRecognition();
-        recognition.lang = state.sessionType === 'write_romaji' ? 'ja-JP' : 'id-ID'; 
-        recognition.interimResults = false; recognition.maxAlternatives = 1;
+        recognition.lang = state.sessionType === "write_romaji" ? "ja-JP" : "id-ID";
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+
         btnMic.onclick = () => { try { recognition.start(); } catch (e) { recognition.stop(); } };
-        recognition.onstart = () => { btnMic.classList.remove('btn-outline-secondary'); btnMic.classList.add('btn-danger'); btnMic.innerHTML = '<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>'; };
-        recognition.onend = () => { btnMic.classList.remove('btn-danger'); btnMic.classList.add('btn-outline-secondary'); btnMic.innerHTML = '<i class="bi bi-mic-fill"></i>'; inp.focus(); };
-        recognition.onresult = (event) => { let transcript = event.results[0][0].transcript; const cleanText = transcript.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,""); inp.value = cleanText; window.handleInput(cleanText); };
-    } else { btnMic.style.display = 'none'; inp.style.borderRadius = '0.5rem'; }
+        recognition.onstart = () => { btnMic.classList.add("recording"); };
+        recognition.onend = () => { btnMic.classList.remove("recording"); inp.focus(); };
+        recognition.onresult = (event) => {
+            let transcript = event.results[0][0].transcript;
+            const cleanText = transcript.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
+            inp.value = cleanText;
+            window.handleInput(cleanText);
+        };
+    } else {
+        btnMic.style.display = "none";
+    }
 }
 
 // --- 3. RENDER RESULT ---

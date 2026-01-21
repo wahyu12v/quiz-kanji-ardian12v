@@ -1,5 +1,5 @@
 import { BATCH_SIZE, KEYS } from './constants.js'; 
-import { shuffleArray } from './utils.js';
+import { shuffleArray, hiraToRomaji } from './utils.js'; // TAMBAHAN: Import hiraToRomaji
 import * as Storage from './storage.js';
 import * as Logic from './logic.js';
 import * as UI from './ui.js';
@@ -14,6 +14,7 @@ async function init() {
         setupModals();
         toggleMainBackButton(true); 
         
+        // Cache busting untuk memastikan data selalu fresh
         const uniqueUrl = 'data/kanjiasli.json?v=' + new Date().getTime();
         const response = await fetch(uniqueUrl);
         if(!response.ok) throw new Error("Gagal memuat data/kanjiasli.json");
@@ -130,7 +131,6 @@ function setupEventListeners() {
     if(btnShowList) btnShowList.onclick = () => renderDaftarList();
 }
 
-// --- PERUBAHAN UTAMA DI SINI (LOGIKA 20 ITEMS) ---
 function generateCheckboxes(containerId, prefix) {
     const container = document.getElementById(containerId);
     if(!container) return; 
@@ -141,7 +141,7 @@ function generateCheckboxes(containerId, prefix) {
         return;
     }
 
-    const chunkSize = 20; // 20 KANJI PER PAKET
+    const chunkSize = 20; 
     const totalChunks = Math.ceil(QUESTIONS.length / chunkSize);
 
     for (let i = 0; i < totalChunks; i++) {
@@ -153,7 +153,6 @@ function generateCheckboxes(containerId, prefix) {
         const div = document.createElement('div');
         div.className = 'form-check position-relative'; 
         
-        // Kita simpan range index di data-attribute
         div.innerHTML = `
             <input class="form-check-input" type="checkbox" value="${i}" id="${prefix}_${i}" data-start="${start}" data-end="${end}">
             <label class="form-check-label w-100 stretched-link" for="${prefix}_${i}">
@@ -165,6 +164,7 @@ function generateCheckboxes(containerId, prefix) {
     }
 }
 
+// --- FUNGSI RENDER DAFTAR (DIPERBARUI: ADA ROMAJI) ---
 function renderDaftarList() {
     const indices = getCheckedIndices('rangeListDaftar');
     if(indices.length === 0) return alert("Pilih minimal satu paket.");
@@ -174,7 +174,7 @@ function renderDaftarList() {
     const listContainer = document.getElementById('daftarList');
     if(listContainer) {
         listContainer.innerHTML = '';
-        listContainer.className = 'row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3'; 
+        listContainer.className = 'kanji-list-grid'; // Pakai class Grid CSS kita
 
         indices.forEach(idx => {
             const item = QUESTIONS[idx];
@@ -184,22 +184,24 @@ function renderDaftarList() {
             const kana = String(item[KEYS.hiragana] || '-').trim();
             const arti = String(item[KEYS.meaning] || '').trim();
             
-            // Hitung dia masuk paket berapa
+            // Generate Romaji Otomatis
+            const romaji = hiraToRomaji(kana);
+
             const paketNum = Math.floor(idx / 20) + 1;
 
             const colDiv = document.createElement('div');
-            colDiv.className = 'col';
+            colDiv.className = 'kanji-card-small'; // Pakai class Card CSS kita
             colDiv.innerHTML = `
-                <div class="card h-100 shadow-sm border-0" style="border-radius: 12px; background: #fff;">
-                    <div class="card-body p-2 d-flex flex-column text-center align-items-center justify-content-center">
-                        <div class="mb-1 w-100"><span class="badge bg-light text-secondary border fw-normal" style="font-size: 0.7rem;">Paket ${paketNum}</span></div>
-                        <div class="fw-bold text-primary mb-1 text-break w-100" style="font-size: 2.5rem; line-height: 1.2;">${kanji}</div>
-                        <div class="w-100">
-                            <div class="text-dark fw-bold text-break" style="font-size: 0.9rem;">${kana}</div>
-                            <div class="text-secondary border-top pt-2 mt-1 w-100 d-flex align-items-center justify-content-center" style="font-size: 0.8rem; min-height: 40px; line-height: 1.2;">${arti}</div>
-                        </div>
-                    </div>
-                </div>`;
+                <div class="mb-2"><span class="badge rounded-pill">Paket ${paketNum}</span></div>
+                <div class="k-char">${kanji}</div>
+                
+                <div class="w-100">
+                    <div class="k-read">${kana}</div>
+                    <div class="k-romaji small fst-italic" style="margin-bottom: 5px;">${romaji}</div>
+                    
+                    <div class="k-mean">${arti}</div>
+                </div>
+            `;
             listContainer.appendChild(colDiv);
         });
     }
@@ -213,7 +215,6 @@ function setupCheckboxHelpers(btnAllId, btnClearId, containerId) {
     if(btnClear) btnClear.onclick = () => document.querySelectorAll(`#${containerId} input[type=checkbox]`).forEach(cb => cb.checked = false);
 }
 
-// --- LOGIKA BARU UNTUK MENGAMBIL INDEX DARI RANGE 20 ---
 window.getCheckedIndices = function(containerId) {
     const checkedBoxes = document.querySelectorAll(`#${containerId} input[type=checkbox]:checked`);
     let allIndices = [];
@@ -221,7 +222,6 @@ window.getCheckedIndices = function(containerId) {
     checkedBoxes.forEach(cb => {
         const start = parseInt(cb.getAttribute('data-start'));
         const end = parseInt(cb.getAttribute('data-end'));
-
         for (let i = start; i < end; i++) {
             allIndices.push(i);
         }
@@ -285,10 +285,8 @@ window.handleBack = () => { Storage.clearTemp(); window.location.href = 'index.h
 
 function finishSession() {
     const result = Logic.gradeSession(state, QUESTIONS);
-    
     Storage.saveMastery(result.details, state.sessionType);
 
-    // --- LOGIKA HISTORY: Simpan "Paket X" ---
     const usedPackets = new Set();
     state.batch.forEach(item => {
         const idx = QUESTIONS.indexOf(item);
@@ -298,13 +296,11 @@ function finishSession() {
         }
     });
     
-    // Urutkan paket (Paket 1, Paket 2...)
     const sortedPackets = [...usedPackets].sort((a, b) => {
         const numA = parseInt(a.replace('Paket ', ''));
         const numB = parseInt(b.replace('Paket ', ''));
         return numA - numB;
     });
-    
     const packagesStr = sortedPackets.join(', ');
 
     Storage.saveToHistory(result.score, result.total, state.sessionType, packagesStr);

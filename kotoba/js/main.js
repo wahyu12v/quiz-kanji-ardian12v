@@ -159,6 +159,8 @@ function generateCheckboxes(containerId, prefix) {
     });
 }
 
+// --- Di dalam js/main.js ---
+
 function renderDaftarList() {
     const indices = getCheckedIndices('rangeListDaftar');
     if(indices.length === 0) return alert("Pilih minimal satu paket.");
@@ -168,6 +170,7 @@ function renderDaftarList() {
     const listContainer = document.getElementById('daftarList');
     if(listContainer) {
         listContainer.innerHTML = '';
+        // Grid layout responsive
         listContainer.className = 'row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3'; 
 
         indices.forEach(idx => {
@@ -176,21 +179,29 @@ function renderDaftarList() {
             const kanji = String(item.jepang || '?').trim();
             const kana = String(item.kana || '-').trim();
             const showKana = kanji !== kana;
-            let fontSizeKanji = '2rem';
-            if (kanji.length > 5) fontSizeKanji = '1.4rem';
-            if (kanji.length > 9) fontSizeKanji = '1.1rem';
+            
+            // Logic ukuran font (agar teks panjang tidak pecah)
+            let fontSizeClass = 'fs-1';
+            if (kanji.length > 5) fontSizeClass = 'fs-3';
+            if (kanji.length > 9) fontSizeClass = 'fs-4';
 
             const colDiv = document.createElement('div');
             colDiv.className = 'col';
+            
+            // UPDATE: Menggunakan class 'kotoba-card' dan menghapus style inline putih
             colDiv.innerHTML = `
-                <div class="card h-100 shadow-sm border-0" style="border-radius: 12px; background: #fff;">
-                    <div class="card-body p-2 d-flex flex-column text-center align-items-center justify-content-center">
-                        <div class="mb-1 w-100"><span class="badge bg-light text-secondary border fw-normal" style="font-size: 0.7rem;">${item.bab || '-'}</span></div>
-                        <div class="k-char fw-bold text-primary mb-1 text-break w-100" style="font-size: ${fontSizeKanji}; line-height: 1.2;">${kanji}</div>
+                <div class="kotoba-card h-100 shadow-sm">
+                    <div class="card-body p-3 d-flex flex-column text-center align-items-center justify-content-center">
+                        <div class="mb-2 w-100">
+                            <span class="badge badge-neon">${item.bab || '-'}</span>
+                        </div>
+                        
+                        <div class="k-char ${fontSizeClass}">${kanji}</div>
+                        
                         <div class="k-info w-100">
-                            ${showKana ? `<div class="k-read text-dark fw-bold text-break" style="font-size: 0.9rem;">${kana}</div>` : ''}
-                            <div class="k-romaji text-danger fw-bold text-truncate px-1" style="font-size: 0.85rem; margin: 2px 0;">${item.romaji || '-'}</div>
-                            <div class="k-mean text-secondary border-top pt-2 mt-1 w-100 d-flex align-items-center justify-content-center" style="font-size: 0.8rem; min-height: 40px; line-height: 1.2;">${item.indo || ''}</div>
+                            ${showKana ? `<div class="k-read">${kana}</div>` : ''}
+                            <div class="k-romaji">${item.romaji || '-'}</div>
+                            <div class="k-mean">${item.indo || ''}</div>
                         </div>
                     </div>
                 </div>`;

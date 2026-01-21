@@ -8575,5 +8575,3056 @@
     "romaji": "douzo ogenkide",
     "indo": "Jagalah diri Anda baik-baik (perpisahan)",
     "kelompok": "Ungkapan"
+  },
+  {
+    "no": 954,
+    "bab": "Bab 26",
+    "jepang": "見ます",
+    "kana": "みます[診ます]",
+    "romaji": "mimasu",
+    "indo": "Memeriksa (kesehatan)",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 955,
+    "bab": "Bab 26",
+    "jepang": "探します",
+    "kana": "さがします",
+    "romaji": "sagashimasu",
+    "indo": "Mencari",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 956,
+    "bab": "Bab 26",
+    "jepang": "遅れます",
+    "kana": "おくれます[じかんに]",
+    "romaji": "okuremasu [jikanni]",
+    "indo": "Terlambat [waktu]",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 957,
+    "bab": "Bab 26",
+    "jepang": "間に合います",
+    "kana": "まにあいます[じかんに]",
+    "romaji": "maniaimasu [jikanni]",
+    "indo": "Tepat waktu / Keburu",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 958,
+    "bab": "Bab 26",
+    "jepang": "やります",
+    "kana": "やります",
+    "romaji": "yarimasu",
+    "indo": "Melakukan / Mengerjakan",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 959,
+    "bab": "Bab 26",
+    "jepang": "参加します",
+    "kana": "さんかします",
+    "romaji": "sankashimasu",
+    "indo": "Mengikuti / Berpartisipasi",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 960,
+    "bab": "Bab 26",
+    "jepang": "申し込みます",
+    "kana": "もうしこみます",
+    "romaji": "moushikomimasu",
+    "indo": "Mendaftar",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 961,
+    "bab": "Bab 26",
+    "jepang": "都合がいい",
+    "kana": "つごうがいい",
+    "romaji": "tsugouga ii",
+    "indo": "Tidak sibuk (waktunya pas)",
+    "kelompok": "Ungkapan"
+  },
+  {
+    "no": 962,
+    "bab": "Bab 26",
+    "jepang": "都合が悪い",
+    "kana": "つごうがわるい",
+    "romaji": "tsugouga warui",
+    "indo": "Sibuk (waktunya tidak pas)",
+    "kelompok": "Ungkapan"
+  },
+  {
+    "no": 963,
+    "bab": "Bab 26",
+    "jepang": "気分がいい",
+    "kana": "きぶんがいい",
+    "romaji": "kibunga ii",
+    "indo": "Perasaan enak / Sehat",
+    "kelompok": "Ungkapan"
+  },
+  {
+    "no": 964,
+    "bab": "Bab 26",
+    "jepang": "気分が悪い",
+    "kana": "きぶんがわるい",
+    "romaji": "kibunga warui",
+    "indo": "Perasaan tidak enak / Mual",
+    "kelompok": "Ungkapan"
+  },
+  {
+    "no": 965,
+    "bab": "Bab 26",
+    "jepang": "新聞社",
+    "kana": "しんぶんしゃ",
+    "romaji": "shinbunsha",
+    "indo": "Perusahaan surat kabar",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 966,
+    "bab": "Bab 26",
+    "jepang": "柔道",
+    "kana": "じゅうどう",
+    "romaji": "juudou",
+    "indo": "Judo",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 967,
+    "bab": "Bab 26",
+    "jepang": "運動会",
+    "kana": "うんどうかい",
+    "romaji": "undoukai",
+    "indo": "Pesta olahraga / Sports day",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 968,
+    "bab": "Bab 26",
+    "jepang": "場所",
+    "kana": "ばしょ",
+    "romaji": "basho",
+    "indo": "Tempat",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 969,
+    "bab": "Bab 26",
+    "jepang": "ボランティア",
+    "kana": "ボランティア",
+    "romaji": "borantia",
+    "indo": "Volunteer / Sukarelawan",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 970,
+    "bab": "Bab 26",
+    "jepang": "～弁",
+    "kana": "～べん",
+    "romaji": "~ben",
+    "indo": "Dialek ～",
+    "kelompok": "Sufiks"
+  },
+  {
+    "no": 971,
+    "bab": "Bab 26",
+    "jepang": "今度",
+    "kana": "こんど",
+    "romaji": "kondo",
+    "indo": "Lain kali",
+    "kelompok": "Kata Keterangan"
+  },
+  {
+    "no": 972,
+    "bab": "Bab 26",
+    "jepang": "ずいぶん",
+    "kana": "ずいぶん",
+    "romaji": "zuibun",
+    "indo": "Cukup / Lumayan (banyak/lama)",
+    "kelompok": "Kata Keterangan"
+  },
+  {
+    "no": 973,
+    "bab": "Bab 26",
+    "jepang": "直接",
+    "kana": "ちょくせつ",
+    "romaji": "chokusetsu",
+    "indo": "Langsung",
+    "kelompok": "Kata Keterangan"
+  },
+  {
+    "no": 974,
+    "bab": "Bab 26",
+    "jepang": "いつでも",
+    "kana": "いつでも",
+    "romaji": "itsudemo",
+    "indo": "Kapan pun",
+    "kelompok": "Kata Keterangan"
+  },
+  {
+    "no": 975,
+    "bab": "Bab 26",
+    "jepang": "どこでも",
+    "kana": "どこでも",
+    "romaji": "dokodemo",
+    "indo": "Di mana pun",
+    "kelompok": "Kata Keterangan"
+  },
+  {
+    "no": 976,
+    "bab": "Bab 26",
+    "jepang": "だれでも",
+    "kana": "だれでも",
+    "romaji": "daredemo",
+    "indo": "Siapa pun",
+    "kelompok": "Kata Keterangan"
+  },
+  {
+    "no": 977,
+    "bab": "Bab 26",
+    "jepang": "何でも",
+    "kana": "なんでも",
+    "romaji": "nandemo",
+    "indo": "Apa pun",
+    "kelompok": "Kata Keterangan"
+  },
+  {
+    "no": 978,
+    "bab": "Bab 26",
+    "jepang": "こんな",
+    "kana": "こんな",
+    "romaji": "konna",
+    "indo": "Seperti ini",
+    "kelompok": "Kata Keterangan"
+  },
+  {
+    "no": 979,
+    "bab": "Bab 26",
+    "jepang": "そんな",
+    "kana": "そんな",
+    "romaji": "sonna",
+    "indo": "Seperti itu (dekat lawan bicara)",
+    "kelompok": "Kata Keterangan"
+  },
+  {
+    "no": 980,
+    "bab": "Bab 26",
+    "jepang": "あんな",
+    "kana": "あんな",
+    "romaji": "anna",
+    "indo": "Seperti itu (jauh)",
+    "kelompok": "Kata Keterangan"
+  },
+  {
+    "no": 981,
+    "bab": "Bab 26",
+    "jepang": "片づきます",
+    "kana": "かたづきます[にもつが]",
+    "romaji": "katazukimasu [nimotsuga]",
+    "indo": "Beres / Rapi [barang]",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 982,
+    "bab": "Bab 26",
+    "jepang": "ごみ",
+    "kana": "ごみ",
+    "romaji": "gomi",
+    "indo": "Sampah",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 983,
+    "bab": "Bab 26",
+    "jepang": "出します",
+    "kana": "だします[ごみを]",
+    "romaji": "dashimasu [gomio]",
+    "indo": "Membuang / Mengeluarkan [sampah]",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 984,
+    "bab": "Bab 26",
+    "jepang": "燃えるごみ",
+    "kana": "もえるごみ",
+    "romaji": "moerugomi",
+    "indo": "Sampah yang bisa dibakar",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 985,
+    "bab": "Bab 26",
+    "jepang": "置き場",
+    "kana": "おきば",
+    "romaji": "okiba",
+    "indo": "Tempat meletakkan sesuatu",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 986,
+    "bab": "Bab 26",
+    "jepang": "横",
+    "kana": "よこ",
+    "romaji": "yoko",
+    "indo": "Samping / Sebelah",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 987,
+    "bab": "Bab 26",
+    "jepang": "瓶",
+    "kana": "びん",
+    "romaji": "bin",
+    "indo": "Botol",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 988,
+    "bab": "Bab 26",
+    "jepang": "缶",
+    "kana": "かん",
+    "romaji": "kan",
+    "indo": "Kaleng",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 989,
+    "bab": "Bab 26",
+    "jepang": "ガス",
+    "kana": "ガス",
+    "romaji": "gasu",
+    "indo": "Gas",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 990,
+    "bab": "Bab 26",
+    "jepang": "～会社",
+    "kana": "～がいしゃ",
+    "romaji": "~gaisha",
+    "indo": "Perusahaan ～",
+    "kelompok": "Sufiks"
+  },
+  {
+    "no": 991,
+    "bab": "Bab 26",
+    "jepang": "宇宙",
+    "kana": "うちゅう",
+    "romaji": "uchuu",
+    "indo": "Luar angkasa",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 992,
+    "bab": "Bab 26",
+    "jepang": "～様",
+    "kana": "～さま",
+    "romaji": "~sama",
+    "indo": "Tuan/Nyonya ～ (sangat sopan)",
+    "kelompok": "Sufiks"
+  },
+  {
+    "no": 993,
+    "bab": "Bab 26",
+    "jepang": "宇宙船",
+    "kana": "うちゅうせん",
+    "romaji": "uchuusen",
+    "indo": "Kapal luar angkasa",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 994,
+    "bab": "Bab 26",
+    "jepang": "怖い",
+    "kana": "こわい",
+    "romaji": "kowai",
+    "indo": "Takut / Menakutkan",
+    "kelompok": "Kata Sifat-i"
+  },
+  {
+    "no": 995,
+    "bab": "Bab 26",
+    "jepang": "宇宙ステーション",
+    "kana": "うちゅうステーション",
+    "romaji": "uchuusuteeshon",
+    "indo": "Stasiun luar angkasa",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 996,
+    "bab": "Bab 26",
+    "jepang": "違います",
+    "kana": "ちがいます",
+    "romaji": "chigaimasu",
+    "indo": "Berbeda / Salah",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 997,
+    "bab": "Bab 26",
+    "jepang": "宇宙飛行士",
+    "kana": "うちゅうひこうし",
+    "romaji": "uchuuhikoushi",
+    "indo": "Astronot",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 998,
+    "bab": "Bab 27",
+    "jepang": "飼います",
+    "kana": "かいます",
+    "romaji": "kaimasu",
+    "indo": "Memelihara (hewan)",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 999,
+    "bab": "Bab 27",
+    "jepang": "走ります",
+    "kana": "はしります[みちを]",
+    "romaji": "hashirimasu [michio]",
+    "indo": "Berlari [di jalan]",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1000,
+    "bab": "Bab 27",
+    "jepang": "見えます",
+    "kana": "みえます[やまが]",
+    "romaji": "miemasu [yamaga]",
+    "indo": "Terlihat [gunung]",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1001,
+    "bab": "Bab 27",
+    "jepang": "聞こえます",
+    "kana": "きこえます[おとが]",
+    "romaji": "kikoemasu [otoga]",
+    "indo": "Terdengar [suara]",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1002,
+    "bab": "Bab 27",
+    "jepang": "できます",
+    "kana": "できます[みちが]",
+    "romaji": "dekimasu [michiga]",
+    "indo": "Jadi / Rampung / Terbuat [jalan]",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1003,
+    "bab": "Bab 27",
+    "jepang": "開きます",
+    "kana": "ひらきます[きょうしつを]",
+    "romaji": "hirakimasu [kyoushitsuo]",
+    "indo": "Membuka [kelas]",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1004,
+    "bab": "Bab 27",
+    "jepang": "心配",
+    "kana": "しんぱい[な]",
+    "romaji": "shinpai [na]",
+    "indo": "Khawatir / Cemas",
+    "kelompok": "Kata Sifat-na"
+  },
+  {
+    "no": 1005,
+    "bab": "Bab 27",
+    "jepang": "ペット",
+    "kana": "ペット",
+    "romaji": "petto",
+    "indo": "Hewan peliharaan",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1006,
+    "bab": "Bab 27",
+    "jepang": "鳥",
+    "kana": "とり",
+    "romaji": "tori",
+    "indo": "Burung",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1007,
+    "bab": "Bab 27",
+    "jepang": "声",
+    "kana": "こえ",
+    "romaji": "koe",
+    "indo": "Suara (manusia/hewan)",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1008,
+    "bab": "Bab 27",
+    "jepang": "波",
+    "kana": "なみ",
+    "romaji": "nami",
+    "indo": "Ombak",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1009,
+    "bab": "Bab 27",
+    "jepang": "花火",
+    "kana": "はなび",
+    "romaji": "hanabi",
+    "indo": "Kembang api",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1010,
+    "bab": "Bab 27",
+    "jepang": "景色",
+    "kana": "けしき",
+    "romaji": "keshiki",
+    "indo": "Pemandangan",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1011,
+    "bab": "Bab 27",
+    "jepang": "昼間",
+    "kana": "ひるま",
+    "romaji": "hiruma",
+    "indo": "Siang hari",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1012,
+    "bab": "Bab 27",
+    "jepang": "昔",
+    "kana": "むかし",
+    "romaji": "mukashi",
+    "indo": "Masa lalu / Dahulu kala",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1013,
+    "bab": "Bab 27",
+    "jepang": "道具",
+    "kana": "どうぐ",
+    "romaji": "dougu",
+    "indo": "Alat / Perkakas",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1014,
+    "bab": "Bab 27",
+    "jepang": "自動販売機",
+    "kana": "じどうはんばいき",
+    "romaji": "jidouhanbaiki",
+    "indo": "Mesin penjual otomatis (Vending machine)",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1015,
+    "bab": "Bab 27",
+    "jepang": "通信販売",
+    "kana": "つうしんはんばい",
+    "romaji": "tsuushinhanbai",
+    "indo": "Perdagangan via pos/internet (Online shop)",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1016,
+    "bab": "Bab 27",
+    "jepang": "クリーニング",
+    "kana": "クリーニング",
+    "romaji": "kuriiningu",
+    "indo": "Laundry / Pembersihan",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1017,
+    "bab": "Bab 27",
+    "jepang": "マンション",
+    "kana": "マンション",
+    "romaji": "manshon",
+    "indo": "Mansion / Apartemen mewah",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1018,
+    "bab": "Bab 27",
+    "jepang": "台所",
+    "kana": "だいどころ",
+    "romaji": "daidokoro",
+    "indo": "Dapur",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1019,
+    "bab": "Bab 27",
+    "jepang": "～教室",
+    "kana": "～きょうしつ",
+    "romaji": "~kyoushitsu",
+    "indo": "Kelas ～ / Kursus ～",
+    "kelompok": "Sufiks"
+  },
+  {
+    "no": 1020,
+    "bab": "Bab 27",
+    "jepang": "パーティールーム",
+    "kana": "パーティールーム",
+    "romaji": "paatiiruumu",
+    "indo": "Ruang pesta",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1021,
+    "bab": "Bab 27",
+    "jepang": "～後",
+    "kana": "～ご",
+    "romaji": "~go",
+    "indo": "Setelah ～ / ～ kemudian",
+    "kelompok": "Sufiks"
+  },
+  {
+    "no": 1022,
+    "bab": "Bab 27",
+    "jepang": "～しか",
+    "kana": "～しか",
+    "romaji": "~shika",
+    "indo": "Hanya ～ (diikuti negatif)",
+    "kelompok": "Partikel"
+  },
+  {
+    "no": 1023,
+    "bab": "Bab 27",
+    "jepang": "ほかの",
+    "kana": "ほかの",
+    "romaji": "hokano",
+    "indo": "Yang lain",
+    "kelompok": "Kata Keterangan"
+  },
+  {
+    "no": 1024,
+    "bab": "Bab 27",
+    "jepang": "はっきり",
+    "kana": "はっきり",
+    "romaji": "hakkiri",
+    "indo": "Dengan jelas",
+    "kelompok": "Kata Keterangan"
+  },
+  {
+    "no": 1025,
+    "bab": "Bab 27",
+    "jepang": "ほとんど",
+    "kana": "ほとんど",
+    "romaji": "hotondo",
+    "indo": "Hampir semua / Sebagian besar",
+    "kelompok": "Kata Keterangan"
+  },
+  {
+    "no": 1026,
+    "bab": "Bab 27",
+    "jepang": "日曜大工",
+    "kana": "にちようだいく",
+    "romaji": "nichiyoudaiku",
+    "indo": "Tukang kayu hari Minggu (Hobi pertukangan)",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1027,
+    "bab": "Bab 27",
+    "jepang": "本棚",
+    "kana": "ほんだな",
+    "romaji": "hondana",
+    "indo": "Rak buku",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1028,
+    "bab": "Bab 27",
+    "jepang": "夢",
+    "kana": "ゆめ",
+    "romaji": "yume",
+    "indo": "Mimpi",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1029,
+    "bab": "Bab 27",
+    "jepang": "いつか",
+    "kana": "いつか",
+    "romaji": "itsuka",
+    "indo": "Suatu saat nanti",
+    "kelompok": "Kata Keterangan"
+  },
+  {
+    "no": 1030,
+    "bab": "Bab 27",
+    "jepang": "家",
+    "kana": "いえ",
+    "romaji": "ie",
+    "indo": "Rumah",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1031,
+    "bab": "Bab 27",
+    "jepang": "すばらしい",
+    "kana": "すばらしい",
+    "romaji": "subarashii",
+    "indo": "Hebat / Mengagumkan",
+    "kelompok": "Kata Sifat-i"
+  },
+  {
+    "no": 1032,
+    "bab": "Bab 27",
+    "jepang": "子どもたち",
+    "kana": "こどもたち",
+    "romaji": "kodomotachi",
+    "indo": "Anak-anak",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1033,
+    "bab": "Bab 27",
+    "jepang": "大好き",
+    "kana": "だいすき[な]",
+    "romaji": "daisuki [na]",
+    "indo": "Suka sekali",
+    "kelompok": "Kata Sifat-na"
+  },
+  {
+    "no": 1034,
+    "bab": "Bab 27",
+    "jepang": "漫画",
+    "kana": "まんが",
+    "romaji": "manga",
+    "indo": "Komik",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1035,
+    "bab": "Bab 27",
+    "jepang": "主人公",
+    "kana": "しゅじんこう",
+    "romaji": "shujinkou",
+    "indo": "Tokoh utama",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1036,
+    "bab": "Bab 27",
+    "jepang": "形",
+    "kana": "かたち",
+    "romaji": "katachi",
+    "indo": "Bentuk",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1037,
+    "bab": "Bab 27",
+    "jepang": "ロボット",
+    "kana": "ロボット",
+    "romaji": "robotto",
+    "indo": "Robot",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1038,
+    "bab": "Bab 27",
+    "jepang": "不思議",
+    "kana": "ふしぎ[な]",
+    "romaji": "fushigi [na]",
+    "indo": "Ajaib / Misterius",
+    "kelompok": "Kata Sifat-na"
+  },
+  {
+    "no": 1039,
+    "bab": "Bab 27",
+    "jepang": "ポケット",
+    "kana": "ポケット",
+    "romaji": "poketto",
+    "indo": "Saku / Kantong",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1040,
+    "bab": "Bab 27",
+    "jepang": "例えば",
+    "kana": "たとえば",
+    "romaji": "tatoeba",
+    "indo": "Contohnya / Misalnya",
+    "kelompok": "Kata Keterangan"
+  },
+  {
+    "no": 1041,
+    "bab": "Bab 27",
+    "jepang": "付けます",
+    "kana": "つけます",
+    "romaji": "tsukemasu",
+    "indo": "Memasang / Menempelkan",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1042,
+    "bab": "Bab 27",
+    "jepang": "自由に",
+    "kana": "じゆうに",
+    "romaji": "jiyuuni",
+    "indo": "Dengan bebas",
+    "kelompok": "Kata Keterangan"
+  },
+  {
+    "no": 1043,
+    "bab": "Bab 27",
+    "jepang": "空",
+    "kana": "そら",
+    "romaji": "sora",
+    "indo": "Langit",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1044,
+    "bab": "Bab 27",
+    "jepang": "飛びます",
+    "kana": "とびます",
+    "romaji": "tobimasu",
+    "indo": "Terbang",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1045,
+    "bab": "Bab 27",
+    "jepang": "自分",
+    "kana": "じぶん",
+    "romaji": "jibun",
+    "indo": "Diri sendiri",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1046,
+    "bab": "Bab 27",
+    "jepang": "将来",
+    "kana": "しょうらい",
+    "romaji": "shourai",
+    "indo": "Masa depan",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1047,
+    "bab": "Bab 28",
+    "jepang": "売れます",
+    "kana": "うれます[パンが]",
+    "romaji": "uremasu [panga]",
+    "indo": "Terjual laris [roti]",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1048,
+    "bab": "Bab 28",
+    "jepang": "踊ります",
+    "kana": "おどります",
+    "romaji": "odorimasu",
+    "indo": "Menari",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1049,
+    "bab": "Bab 28",
+    "jepang": "噛みます",
+    "kana": "かみます",
+    "romaji": "kamimasu",
+    "indo": "Mengunyah / Menggigit",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1050,
+    "bab": "Bab 28",
+    "jepang": "選びます",
+    "kana": "えらびます",
+    "romaji": "erabimasu",
+    "indo": "Memilih",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1051,
+    "bab": "Bab 28",
+    "jepang": "違います",
+    "kana": "ちがいます",
+    "romaji": "chigaimasu",
+    "indo": "Berbeda",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1052,
+    "bab": "Bab 28",
+    "jepang": "通います",
+    "kana": "かよいます[だいがくに]",
+    "romaji": "kayoimasu [daigakuni]",
+    "indo": "Pulang pergi / Komuter [ke universitas]",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1053,
+    "bab": "Bab 28",
+    "jepang": "メモします",
+    "kana": "メモします",
+    "romaji": "memoshimasu",
+    "indo": "Mencatat (memo)",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1054,
+    "bab": "Bab 28",
+    "jepang": "真面目",
+    "kana": "まじめ[な]",
+    "romaji": "majime [na]",
+    "indo": "Rajin / Serius / Sungguh-sungguh",
+    "kelompok": "Kata Sifat-na"
+  },
+  {
+    "no": 1055,
+    "bab": "Bab 28",
+    "jepang": "熱心",
+    "kana": "ねっしん[な]",
+    "romaji": "nesshin [na]",
+    "indo": "Tekun / Antusias",
+    "kelompok": "Kata Sifat-na"
+  },
+  {
+    "no": 1056,
+    "bab": "Bab 28",
+    "jepang": "優しい",
+    "kana": "やさしい",
+    "romaji": "yasashii",
+    "indo": "Baik hati / Lemah lembut",
+    "kelompok": "Kata Sifat-i"
+  },
+  {
+    "no": 1057,
+    "bab": "Bab 28",
+    "jepang": "偉い",
+    "kana": "えらい",
+    "romaji": "erai",
+    "indo": "Hebat / Terpandang",
+    "kelompok": "Kata Sifat-i"
+  },
+  {
+    "no": 1058,
+    "bab": "Bab 28",
+    "jepang": "ちょうどいい",
+    "kana": "ちょうどいい",
+    "romaji": "choudoii",
+    "indo": "Pas / Tepat",
+    "kelompok": "Kata Sifat-i"
+  },
+  {
+    "no": 1059,
+    "bab": "Bab 28",
+    "jepang": "習慣",
+    "kana": "しゅうかん",
+    "romaji": "shuukan",
+    "indo": "Kebiasaan",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1060,
+    "bab": "Bab 28",
+    "jepang": "経験",
+    "kana": "けいけん",
+    "romaji": "keiken",
+    "indo": "Pengalaman",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1061,
+    "bab": "Bab 28",
+    "jepang": "力",
+    "kana": "ちから",
+    "romaji": "chikara",
+    "indo": "Tenaga / Kekuatan",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1062,
+    "bab": "Bab 28",
+    "jepang": "人気",
+    "kana": "にんき",
+    "romaji": "ninki",
+    "indo": "Populer / Kepopuleran",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1063,
+    "bab": "Bab 28",
+    "jepang": "形",
+    "kana": "かたち",
+    "romaji": "katachi",
+    "indo": "Bentuk",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1064,
+    "bab": "Bab 28",
+    "jepang": "色",
+    "kana": "いろ",
+    "romaji": "iro",
+    "indo": "Warna",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1065,
+    "bab": "Bab 28",
+    "jepang": "味",
+    "kana": "あじ",
+    "romaji": "aji",
+    "indo": "Rasa",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1066,
+    "bab": "Bab 28",
+    "jepang": "ガム",
+    "kana": "ガム",
+    "romaji": "gamu",
+    "indo": "Permen karet",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1067,
+    "bab": "Bab 28",
+    "jepang": "品物",
+    "kana": "しなもの",
+    "romaji": "shinamono",
+    "indo": "Barang",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1068,
+    "bab": "Bab 28",
+    "jepang": "値段",
+    "kana": "ねだん",
+    "romaji": "nedan",
+    "indo": "Harga",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1069,
+    "bab": "Bab 28",
+    "jepang": "給料",
+    "kana": "きゅうりょう",
+    "romaji": "kyuuryou",
+    "indo": "Gaji",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1070,
+    "bab": "Bab 28",
+    "jepang": "ボーナス",
+    "kana": "ボーナス",
+    "romaji": "boonasu",
+    "indo": "Bonus",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1071,
+    "bab": "Bab 28",
+    "jepang": "番組",
+    "kana": "ばんぐみ",
+    "romaji": "bangumi",
+    "indo": "Acara (TV/Radio)",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1072,
+    "bab": "Bab 28",
+    "jepang": "ドラマ",
+    "kana": "ドラマ",
+    "romaji": "dorama",
+    "indo": "Drama",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1073,
+    "bab": "Bab 28",
+    "jepang": "歌手",
+    "kana": "かしゅ",
+    "romaji": "kashu",
+    "indo": "Penyanyi",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1074,
+    "bab": "Bab 28",
+    "jepang": "小説",
+    "kana": "しょうせつ",
+    "romaji": "shousetsu",
+    "indo": "Novel",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1075,
+    "bab": "Bab 28",
+    "jepang": "小説家",
+    "kana": "しょうせつか",
+    "romaji": "shousetsuka",
+    "indo": "Novelis / Penulis novel",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1076,
+    "bab": "Bab 28",
+    "jepang": "～家",
+    "kana": "～か",
+    "romaji": "~ka",
+    "indo": "Ahli ～ / Penulis ～",
+    "kelompok": "Sufiks"
+  },
+  {
+    "no": 1077,
+    "bab": "Bab 28",
+    "jepang": "～機",
+    "kana": "～き",
+    "romaji": "~ki",
+    "indo": "Mesin ～",
+    "kelompok": "Sufiks"
+  },
+  {
+    "no": 1078,
+    "bab": "Bab 28",
+    "jepang": "息子",
+    "kana": "むすこ",
+    "romaji": "musuko",
+    "indo": "Anak laki-laki (saya)",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1079,
+    "bab": "Bab 28",
+    "jepang": "息子さん",
+    "kana": "むすこさん",
+    "romaji": "musukosan",
+    "indo": "Anak laki-laki (orang lain)",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1080,
+    "bab": "Bab 28",
+    "jepang": "娘",
+    "kana": "むすめ",
+    "romaji": "musume",
+    "indo": "Anak perempuan (saya)",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1081,
+    "bab": "Bab 28",
+    "jepang": "娘さん",
+    "kana": "むすめさん",
+    "romaji": "musumesan",
+    "indo": "Anak perempuan (orang lain)",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1082,
+    "bab": "Bab 28",
+    "jepang": "自分",
+    "kana": "じぶん",
+    "romaji": "jibun",
+    "indo": "Diri sendiri",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1083,
+    "bab": "Bab 28",
+    "jepang": "将来",
+    "kana": "しょうらい",
+    "romaji": "shourai",
+    "indo": "Masa depan",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1084,
+    "bab": "Bab 28",
+    "jepang": "しばらく",
+    "kana": "しばらく",
+    "romaji": "shibaraku",
+    "indo": "Sebentar / Sementara waktu",
+    "kelompok": "Kata Keterangan"
+  },
+  {
+    "no": 1085,
+    "bab": "Bab 28",
+    "jepang": "たいてい",
+    "kana": "たいてい",
+    "romaji": "taitei",
+    "indo": "Biasanya / Pada umumnya",
+    "kelompok": "Kata Keterangan"
+  },
+  {
+    "no": 1086,
+    "bab": "Bab 28",
+    "jepang": "それに",
+    "kana": "それに",
+    "romaji": "soreni",
+    "indo": "Dan lagi / Tambahan lagi",
+    "kelompok": "Kata Sambung"
+  },
+  {
+    "no": 1087,
+    "bab": "Bab 28",
+    "jepang": "それで",
+    "kana": "それで",
+    "romaji": "sorede",
+    "indo": "Jadi / Oleh karena itu",
+    "kelompok": "Kata Sambung"
+  },
+  {
+    "no": 1088,
+    "bab": "Bab 28",
+    "jepang": "お願いします",
+    "kana": "おねがいします[ちょっと～]",
+    "romaji": "onegaishimasu [chotto~]",
+    "indo": "Minta tolong",
+    "kelompok": "Ungkapan"
+  },
+  {
+    "no": 1089,
+    "bab": "Bab 28",
+    "jepang": "実",
+    "kana": "じつは",
+    "romaji": "jitsuwa",
+    "indo": "Sebenarnya...",
+    "kelompok": "Kata Keterangan"
+  },
+  {
+    "no": 1090,
+    "bab": "Bab 28",
+    "jepang": "会話",
+    "kana": "かいわ",
+    "romaji": "kaiwa",
+    "indo": "Percakapan",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1091,
+    "bab": "Bab 28",
+    "jepang": "お知らせ",
+    "kana": "おしらせ",
+    "romaji": "oshirase",
+    "indo": "Pemberitahuan / Pengumuman",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1092,
+    "bab": "Bab 28",
+    "jepang": "参加します",
+    "kana": "さんかします",
+    "romaji": "sankashimasu",
+    "indo": "Berpartisipasi",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1093,
+    "bab": "Bab 28",
+    "jepang": "日",
+    "kana": "ひ",
+    "romaji": "hi",
+    "indo": "Hari / Tanggal",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1094,
+    "bab": "Bab 28",
+    "jepang": "体育館",
+    "kana": "たいいくかん",
+    "romaji": "taiikukan",
+    "indo": "Gedung olahraga",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1095,
+    "bab": "Bab 28",
+    "jepang": "無料",
+    "kana": "むりょう",
+    "romaji": "muryou",
+    "indo": "Gratis",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1096,
+    "bab": "Bab 28",
+    "jepang": "誘います",
+    "kana": "さそいます",
+    "romaji": "sasoimasu",
+    "indo": "Mengajak",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1097,
+    "bab": "Bab 28",
+    "jepang": "イベント",
+    "kana": "イベント",
+    "romaji": "ibento",
+    "indo": "Event / Acara",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1098,
+    "bab": "Bab 29",
+    "jepang": "開きます",
+    "kana": "あきます[ドアが]",
+    "romaji": "akimasu [doaga]",
+    "indo": "Terbuka [pintu]",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1099,
+    "bab": "Bab 29",
+    "jepang": "閉まります",
+    "kana": "しまります[ドアが]",
+    "romaji": "shimarimasu [doaga]",
+    "indo": "Tertutup [pintu]",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1100,
+    "bab": "Bab 29",
+    "jepang": "つきます",
+    "kana": "つきます[でんきが]",
+    "romaji": "tsukimasu [denkiga]",
+    "indo": "Menyala [lampu]",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1101,
+    "bab": "Bab 29",
+    "jepang": "消えます",
+    "kana": "きえます[でんきが]",
+    "romaji": "kiemasu [denkiga]",
+    "indo": "Padam / Mati [lampu]",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1102,
+    "bab": "Bab 29",
+    "jepang": "込みます",
+    "kana": "こみます[みちが]",
+    "romaji": "komimasu [michiga]",
+    "indo": "Macet / Penuh [jalan]",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1103,
+    "bab": "Bab 29",
+    "jepang": "すきます",
+    "kana": "すきます[みちが]",
+    "romaji": "sukimasu [michiga]",
+    "indo": "Sepi / Kosong [jalan]",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1104,
+    "bab": "Bab 29",
+    "jepang": "壊れます",
+    "kana": "こわれます[いすが]",
+    "romaji": "kowaremasu [isuga]",
+    "indo": "Rusak [kursi]",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1105,
+    "bab": "Bab 29",
+    "jepang": "割れます",
+    "kana": "われます[コップが]",
+    "romaji": "waremasu [koppuga]",
+    "indo": "Pecah [gelas]",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1106,
+    "bab": "Bab 29",
+    "jepang": "折れます",
+    "kana": "おれます[きが]",
+    "romaji": "oremasu [kiga]",
+    "indo": "Patah [pohon]",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1107,
+    "bab": "Bab 29",
+    "jepang": "破れます",
+    "kana": "やぶれます[かみが]",
+    "romaji": "yaburemasu [kamiga]",
+    "indo": "Robek [kertas]",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1108,
+    "bab": "Bab 29",
+    "jepang": "汚れます",
+    "kana": "よごれます[ふくが]",
+    "romaji": "yogoremasu [fukuga]",
+    "indo": "Kotor [baju]",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1109,
+    "bab": "Bab 29",
+    "jepang": "付きます",
+    "kana": "つきます[ポケットが]",
+    "romaji": "tsukimasu [pokettoga]",
+    "indo": "Terpasang / Ada [saku]",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1110,
+    "bab": "Bab 29",
+    "jepang": "外れます",
+    "kana": "はずれます[ボタンが]",
+    "romaji": "hazuremasu [botanga]",
+    "indo": "Terlepas [kancing]",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1111,
+    "bab": "Bab 29",
+    "jepang": "止まります",
+    "kana": "とまります[エレベーターが]",
+    "romaji": "tomarimasu [erebeetaaga]",
+    "indo": "Berhenti [lift/mobil]",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1112,
+    "bab": "Bab 29",
+    "jepang": "間違えます",
+    "kana": "まちがえます",
+    "romaji": "machigaemasu",
+    "indo": "Berbuat salah / Keliru",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1113,
+    "bab": "Bab 29",
+    "jepang": "落とします",
+    "kana": "おとします",
+    "romaji": "otoshimasu",
+    "indo": "Menjatuhkan / Kehilangan",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1114,
+    "bab": "Bab 29",
+    "jepang": "掛かります",
+    "kana": "かかります[かぎが]",
+    "romaji": "kakarimasu [kagiga]",
+    "indo": "Terkunci [kunci]",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1115,
+    "bab": "Bab 29",
+    "jepang": "お皿",
+    "kana": "おさら",
+    "romaji": "osara",
+    "indo": "Piring",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1116,
+    "bab": "Bab 29",
+    "jepang": "お茶碗",
+    "kana": "おちゃわん",
+    "romaji": "ochawan",
+    "indo": "Mangkuk (nasi/teh)",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1117,
+    "bab": "Bab 29",
+    "jepang": "コップ",
+    "kana": "コップ",
+    "romaji": "koppu",
+    "indo": "Gelas (Cup)",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1118,
+    "bab": "Bab 29",
+    "jepang": "ガラス",
+    "kana": "ガラス",
+    "romaji": "garasu",
+    "indo": "Kaca / Gelas kaca",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1119,
+    "bab": "Bab 29",
+    "jepang": "袋",
+    "kana": "ふくろ",
+    "romaji": "fukuro",
+    "indo": "Kantong / Kresek / Karung",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1120,
+    "bab": "Bab 29",
+    "jepang": "財布",
+    "kana": "さいふ",
+    "romaji": "saifu",
+    "indo": "Dompet",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1121,
+    "bab": "Bab 29",
+    "jepang": "枝",
+    "kana": "えだ",
+    "romaji": "eda",
+    "indo": "Cabang pohon / Ranting",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1122,
+    "bab": "Bab 29",
+    "jepang": "駅員",
+    "kana": "えきいん",
+    "romaji": "ekiin",
+    "indo": "Pegawai stasiun",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1123,
+    "bab": "Bab 29",
+    "jepang": "この辺",
+    "kana": "このへん",
+    "romaji": "konohen",
+    "indo": "Sekitar sini",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1124,
+    "bab": "Bab 29",
+    "jepang": "辺",
+    "kana": "～へん",
+    "romaji": "~hen",
+    "indo": "Sekitar ～",
+    "kelompok": "Sufiks"
+  },
+  {
+    "no": 1125,
+    "bab": "Bab 29",
+    "jepang": "このくらい",
+    "kana": "このくらい",
+    "romaji": "konokurai",
+    "indo": "Kira-kira sebesar ini",
+    "kelompok": "Kata Keterangan"
+  },
+  {
+    "no": 1126,
+    "bab": "Bab 29",
+    "jepang": "お先にどうぞ",
+    "kana": "おさきにどうぞ",
+    "romaji": "osakinidouzo",
+    "indo": "Silakan duluan",
+    "kelompok": "Ungkapan"
+  },
+  {
+    "no": 1127,
+    "bab": "Bab 29",
+    "jepang": "よかった",
+    "kana": "[ああ]よかった",
+    "romaji": "[aa] yokatta",
+    "indo": "Syukurlah (lega)",
+    "kelompok": "Ungkapan"
+  },
+  {
+    "no": 1128,
+    "bab": "Bab 29",
+    "jepang": "今の電車",
+    "kana": "いまのでんしゃ",
+    "romaji": "imanodensha",
+    "indo": "Kereta yang baru saja berangkat",
+    "kelompok": "Ungkapan"
+  },
+  {
+    "no": 1129,
+    "bab": "Bab 29",
+    "jepang": "忘れ物",
+    "kana": "わすれもの",
+    "romaji": "wasuremono",
+    "indo": "Barang yang tertinggal",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1130,
+    "bab": "Bab 29",
+    "jepang": "側",
+    "kana": "～がわ",
+    "romaji": "~gawa",
+    "indo": "Sebelah ～ / Sisi ～",
+    "kelompok": "Sufiks"
+  },
+  {
+    "no": 1131,
+    "bab": "Bab 29",
+    "jepang": "ポケット",
+    "kana": "ポケット",
+    "romaji": "poketto",
+    "indo": "Saku",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1132,
+    "bab": "Bab 29",
+    "jepang": "覚えていません",
+    "kana": "おぼえていません",
+    "romaji": "oboeteimasen",
+    "indo": "Saya tidak ingat",
+    "kelompok": "Ungkapan"
+  },
+  {
+    "no": 1133,
+    "bab": "Bab 29",
+    "jepang": "網棚",
+    "kana": "あみだな",
+    "romaji": "amidana",
+    "indo": "Rak bagasi (di atas kursi kereta)",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1134,
+    "bab": "Bab 29",
+    "jepang": "確か",
+    "kana": "たしか",
+    "romaji": "tashika",
+    "indo": "Kalau tidak salah / Pasti",
+    "kelompok": "Kata Keterangan"
+  },
+  {
+    "no": 1135,
+    "bab": "Bab 29",
+    "jepang": "ああ",
+    "kana": "ああ",
+    "romaji": "aa",
+    "indo": "Ah! (kaget/ingat)",
+    "kelompok": "Ungkapan"
+  },
+  {
+    "no": 1136,
+    "bab": "Bab 29",
+    "jepang": "地震",
+    "kana": "じしん",
+    "romaji": "jishin",
+    "indo": "Gempa bumi",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1137,
+    "bab": "Bab 29",
+    "jepang": "壁",
+    "kana": "かべ",
+    "romaji": "kabe",
+    "indo": "Dinding / Tembok",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1138,
+    "bab": "Bab 29",
+    "jepang": "針",
+    "kana": "はり",
+    "romaji": "hari",
+    "indo": "Jarum (jam)",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1139,
+    "bab": "Bab 29",
+    "jepang": "指します",
+    "kana": "さします",
+    "romaji": "sashimasu",
+    "indo": "Menunjuk",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1140,
+    "bab": "Bab 29",
+    "jepang": "駅前",
+    "kana": "えきまえ",
+    "romaji": "ekimae",
+    "indo": "Depan stasiun",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1141,
+    "bab": "Bab 29",
+    "jepang": "倒れます",
+    "kana": "たおれます",
+    "romaji": "taoremasu",
+    "indo": "Roboh / Tumbang / Jatuh",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1142,
+    "bab": "Bab 29",
+    "jepang": "西",
+    "kana": "にし",
+    "romaji": "nishi",
+    "indo": "Barat",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1143,
+    "bab": "Bab 29",
+    "jepang": "方",
+    "kana": "ほう",
+    "romaji": "hou",
+    "indo": "Arah / Bagian",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1144,
+    "bab": "Bab 30",
+    "jepang": "貼ります",
+    "kana": "はります",
+    "romaji": "harimasu",
+    "indo": "Menempelkan / Merekatkan",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1145,
+    "bab": "Bab 30",
+    "jepang": "掛けます",
+    "kana": "かけます",
+    "romaji": "kakemasu",
+    "indo": "Menggantungkan",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1146,
+    "bab": "Bab 30",
+    "jepang": "飾ります",
+    "kana": "かざります",
+    "romaji": "kazarimasu",
+    "indo": "Menghias / Mendekorasi",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1147,
+    "bab": "Bab 30",
+    "jepang": "並べます",
+    "kana": "ならべます",
+    "romaji": "narabemasu",
+    "indo": "Menjajarkan / Menyusun",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1148,
+    "bab": "Bab 30",
+    "jepang": "植えます",
+    "kana": "うえます",
+    "romaji": "uemasu",
+    "indo": "Menanam",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1149,
+    "bab": "Bab 30",
+    "jepang": "戻します",
+    "kana": "もどします",
+    "romaji": "modoshimasu",
+    "indo": "Mengembalikan (ke tempat semula)",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1150,
+    "bab": "Bab 30",
+    "jepang": "まとめます",
+    "kana": "まとめます",
+    "romaji": "matomemasu",
+    "indo": "Menyimpulkan / Membereskan",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1151,
+    "bab": "Bab 30",
+    "jepang": "片づけます",
+    "kana": "かたづけます",
+    "romaji": "katazukemasu",
+    "indo": "Membereskan / Merapikan",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1152,
+    "bab": "Bab 30",
+    "jepang": "しまいます",
+    "kana": "しまいます",
+    "romaji": "shimaimasu",
+    "indo": "Menyimpan / Memasukkan (selesai pakai)",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1153,
+    "bab": "Bab 30",
+    "jepang": "決めます",
+    "kana": "きめます",
+    "romaji": "kimemasu",
+    "indo": "Memutuskan / Menentukan",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1154,
+    "bab": "Bab 30",
+    "jepang": "知らせます",
+    "kana": "しらせます",
+    "romaji": "shirasemasu",
+    "indo": "Memberitahukan",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1155,
+    "bab": "Bab 30",
+    "jepang": "相談します",
+    "kana": "そうだんします",
+    "romaji": "soudanshimasu",
+    "indo": "Berunding / Berkonsultasi",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1156,
+    "bab": "Bab 30",
+    "jepang": "予習します",
+    "kana": "よしゅうします",
+    "romaji": "yoshuushimasu",
+    "indo": "Belajar persiapan (sebelum kelas)",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1157,
+    "bab": "Bab 30",
+    "jepang": "復習します",
+    "kana": "ふくしゅうします",
+    "romaji": "fukushuushimasu",
+    "indo": "Mengulang pelajaran (setelah kelas)",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1158,
+    "bab": "Bab 30",
+    "jepang": "そのままにします",
+    "kana": "そのままにします",
+    "romaji": "sonomamanishimasu",
+    "indo": "Membiarkan begitu saja",
+    "kelompok": "Ungkapan"
+  },
+  {
+    "no": 1159,
+    "bab": "Bab 30",
+    "jepang": "お子さん",
+    "kana": "おこさん",
+    "romaji": "okosan",
+    "indo": "Anak (orang lain)",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1160,
+    "bab": "Bab 30",
+    "jepang": "授業",
+    "kana": "じゅぎょう",
+    "romaji": "jugyou",
+    "indo": "Jam pelajaran / Kuliah",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1161,
+    "bab": "Bab 30",
+    "jepang": "講義",
+    "kana": "こうぎ",
+    "romaji": "kougi",
+    "indo": "Kuliah (ceramah dosen)",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1162,
+    "bab": "Bab 30",
+    "jepang": "ミーティング",
+    "kana": "ミーティング",
+    "romaji": "miitingu",
+    "indo": "Rapat / Meeting",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1163,
+    "bab": "Bab 30",
+    "jepang": "予定",
+    "kana": "よてい",
+    "romaji": "yotei",
+    "indo": "Rencana / Jadwal",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1164,
+    "bab": "Bab 30",
+    "jepang": "お知らせ",
+    "kana": "おしらせ",
+    "romaji": "oshirase",
+    "indo": "Pemberitahuan",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1165,
+    "bab": "Bab 30",
+    "jepang": "案内書",
+    "kana": "あんないしょ",
+    "romaji": "annaisho",
+    "indo": "Buku panduan",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1166,
+    "bab": "Bab 30",
+    "jepang": "カレンダー",
+    "kana": "カレンダー",
+    "romaji": "karendaa",
+    "indo": "Kalender",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1167,
+    "bab": "Bab 30",
+    "jepang": "ポスター",
+    "kana": "ポスター",
+    "romaji": "posutaa",
+    "indo": "Poster",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1168,
+    "bab": "Bab 30",
+    "jepang": "ごみ箱",
+    "kana": "ごみばこ",
+    "romaji": "gomibako",
+    "indo": "Tempat sampah",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1169,
+    "bab": "Bab 30",
+    "jepang": "人形",
+    "kana": "にんぎょう",
+    "romaji": "ningyou",
+    "indo": "Boneka",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1170,
+    "bab": "Bab 30",
+    "jepang": "花瓶",
+    "kana": "かびん",
+    "romaji": "kabin",
+    "indo": "Vas bunga",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1171,
+    "bab": "Bab 30",
+    "jepang": "鏡",
+    "kana": "かがみ",
+    "romaji": "kagami",
+    "indo": "Cermin / Kaca",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1172,
+    "bab": "Bab 30",
+    "jepang": "引き出し",
+    "kana": "ひきだし",
+    "romaji": "hikidashi",
+    "indo": "Laci",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1173,
+    "bab": "Bab 30",
+    "jepang": "玄関",
+    "kana": "げんかん",
+    "romaji": "genkan",
+    "indo": "Pintu masuk (area lepas sepatu)",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1174,
+    "bab": "Bab 30",
+    "jepang": "廊下",
+    "kana": "ろうか",
+    "romaji": "rouka",
+    "indo": "Lorong / Koridor",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1175,
+    "bab": "Bab 30",
+    "jepang": "壁",
+    "kana": "かべ",
+    "romaji": "kabe",
+    "indo": "Dinding",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1176,
+    "bab": "Bab 30",
+    "jepang": "池",
+    "kana": "いけ",
+    "romaji": "ike",
+    "indo": "Kolam",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1177,
+    "bab": "Bab 30",
+    "jepang": "交番",
+    "kana": "こうばん",
+    "romaji": "kouban",
+    "indo": "Pos Polisi",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1178,
+    "bab": "Bab 30",
+    "jepang": "元の所",
+    "kana": "もとのところ",
+    "romaji": "motonotokoro",
+    "indo": "Tempat semula",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1179,
+    "bab": "Bab 30",
+    "jepang": "周り",
+    "kana": "まわり",
+    "romaji": "mawari",
+    "indo": "Sekitar / Sekeliling",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1180,
+    "bab": "Bab 30",
+    "jepang": "真ん中",
+    "kana": "まんなか",
+    "romaji": "mannaka",
+    "indo": "Tengah-tengah / Pusat",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1181,
+    "bab": "Bab 30",
+    "jepang": "隅",
+    "kana": "すみ",
+    "romaji": "sumi",
+    "indo": "Pojok (dalam ruangan)",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1182,
+    "bab": "Bab 30",
+    "jepang": "まだ",
+    "kana": "まだ",
+    "romaji": "mada",
+    "indo": "Masih (belum)",
+    "kelompok": "Kata Keterangan"
+  },
+  {
+    "no": 1183,
+    "bab": "Bab 30",
+    "jepang": "ほど",
+    "kana": "～ほど",
+    "romaji": "~hodo",
+    "indo": "Kira-kira ～ / Sekitar ～",
+    "kelompok": "Sufiks"
+  },
+  {
+    "no": 1184,
+    "bab": "Bab 30",
+    "jepang": "予定表",
+    "kana": "よていひょう",
+    "romaji": "yoteihyou",
+    "indo": "Jadwal acara",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1185,
+    "bab": "Bab 30",
+    "jepang": "ご苦労さま",
+    "kana": "ごくろうさま",
+    "romaji": "gokurousama",
+    "indo": "Terima kasih atas kerja kerasnya (ke bawahan)",
+    "kelompok": "Ungkapan"
+  },
+  {
+    "no": 1186,
+    "bab": "Bab 30",
+    "jepang": "希望",
+    "kana": "きぼう",
+    "romaji": "kibou",
+    "indo": "Harapan / Keinginan",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1187,
+    "bab": "Bab 30",
+    "jepang": "何か",
+    "kana": "なにか",
+    "romaji": "nanika",
+    "indo": "Sesuatu",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1188,
+    "bab": "Bab 30",
+    "jepang": "丸い",
+    "kana": "まるい",
+    "romaji": "marui",
+    "indo": "Bulat",
+    "kelompok": "Kata Sifat-i"
+  },
+  {
+    "no": 1189,
+    "bab": "Bab 30",
+    "jepang": "月",
+    "kana": "つき",
+    "romaji": "tsuki",
+    "indo": "Bulan (benda langit)",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1190,
+    "bab": "Bab 30",
+    "jepang": "ある",
+    "kana": "ある～",
+    "romaji": "aru ~",
+    "indo": "Suatu ～ / Salah satu ～",
+    "kelompok": "Kata Keterangan"
+  },
+  {
+    "no": 1191,
+    "bab": "Bab 30",
+    "jepang": "地球",
+    "kana": "ちきゅう",
+    "romaji": "chikyuu",
+    "indo": "Bumi",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1192,
+    "bab": "Bab 30",
+    "jepang": "嬉しい",
+    "kana": "うれしい",
+    "romaji": "ureshii",
+    "indo": "Senang / Bahagia",
+    "kelompok": "Kata Sifat-i"
+  },
+  {
+    "no": 1193,
+    "bab": "Bab 30",
+    "jepang": "嫌",
+    "kana": "いや[な]",
+    "romaji": "iya [na]",
+    "indo": "Tidak suka / Benci",
+    "kelompok": "Kata Sifat-na"
+  },
+  {
+    "no": 1194,
+    "bab": "Bab 30",
+    "jepang": "すると",
+    "kana": "すると",
+    "romaji": "suruto",
+    "indo": "Lalu / Kemudian / Lantas",
+    "kelompok": "Kata Sambung"
+  },
+  {
+    "no": 1195,
+    "bab": "Bab 30",
+    "jepang": "目が覚めます",
+    "kana": "めがさめます",
+    "romaji": "megasamemasu",
+    "indo": "Terbangun",
+    "kelompok": "Ungkapan"
+  },
+  {
+    "no": 1196,
+    "bab": "Bab 31",
+    "jepang": "続けます",
+    "kana": "つづけます",
+    "romaji": "tsuzukemasu",
+    "indo": "Melanjutkan",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1197,
+    "bab": "Bab 31",
+    "jepang": "見つけます",
+    "kana": "みつけます",
+    "romaji": "mitsukemasu",
+    "indo": "Menemukan",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1198,
+    "bab": "Bab 31",
+    "jepang": "取ります",
+    "kana": "とります[やすみを]",
+    "romaji": "torimasu yasumi o",
+    "indo": "Mengambil cuti",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1199,
+    "bab": "Bab 31",
+    "jepang": "受けます",
+    "kana": "うけます[しけんを]",
+    "romaji": "ukemasu shiken o",
+    "indo": "Mengikuti ujian",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1200,
+    "bab": "Bab 31",
+    "jepang": "申し込みます",
+    "kana": "もうしこみます",
+    "romaji": "moushikomimasu",
+    "indo": "Mendaftar",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1201,
+    "bab": "Bab 31",
+    "jepang": "休憩します",
+    "kana": "きゅうけいします",
+    "romaji": "kyuukeishimasu",
+    "indo": "Beristirahat",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1202,
+    "bab": "Bab 31",
+    "jepang": "連休",
+    "kana": "れんきゅう",
+    "romaji": "renkyuu",
+    "indo": "Liburan berturutan",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1203,
+    "bab": "Bab 31",
+    "jepang": "作文",
+    "kana": "さくぶん",
+    "romaji": "sakubun",
+    "indo": "Karangan",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1204,
+    "bab": "Bab 31",
+    "jepang": "発表",
+    "kana": "はっぴょう",
+    "romaji": "happyou",
+    "indo": "Presentasi",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1205,
+    "bab": "Bab 31",
+    "jepang": "展覧会",
+    "kana": "てんらんかい",
+    "romaji": "tenrankai",
+    "indo": "Pameran",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1206,
+    "bab": "Bab 31",
+    "jepang": "結婚式",
+    "kana": "けっこんしき",
+    "romaji": "kekkonshiki",
+    "indo": "Upacara pernikahan",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1207,
+    "bab": "Bab 31",
+    "jepang": "お葬式",
+    "kana": "おそうしき",
+    "romaji": "osoushiki",
+    "indo": "Upacara kematian",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1208,
+    "bab": "Bab 31",
+    "jepang": "式",
+    "kana": "しき",
+    "romaji": "shiki",
+    "indo": "Upacara",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1209,
+    "bab": "Bab 31",
+    "jepang": "本社",
+    "kana": "ほんしゃ",
+    "romaji": "honsha",
+    "indo": "Kantor pusat",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1210,
+    "bab": "Bab 31",
+    "jepang": "支店",
+    "kana": "してん",
+    "romaji": "shiten",
+    "indo": "Kantor cabang",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1211,
+    "bab": "Bab 31",
+    "jepang": "教会",
+    "kana": "きょうかい",
+    "romaji": "kyoukai",
+    "indo": "Gereja",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1212,
+    "bab": "Bab 31",
+    "jepang": "大学院",
+    "kana": "だいがくいん",
+    "romaji": "daigakuin",
+    "indo": "Program S2 / S3 Universitas",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1213,
+    "bab": "Bab 31",
+    "jepang": "動物園",
+    "kana": "どうぶつえん",
+    "romaji": "doubutsuen",
+    "indo": "Kebun binatang",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1214,
+    "bab": "Bab 31",
+    "jepang": "温泉",
+    "kana": "おんせん",
+    "romaji": "onsen",
+    "indo": "Tempat pemandian air panas",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1215,
+    "bab": "Bab 31",
+    "jepang": "帰り",
+    "kana": "かえり",
+    "romaji": "kaeri",
+    "indo": "Pulang",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1216,
+    "bab": "Bab 31",
+    "jepang": "お子さん",
+    "kana": "おこさん",
+    "romaji": "okosan",
+    "indo": "Anak orang lain",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1217,
+    "bab": "Bab 31",
+    "jepang": "号",
+    "kana": "ごう",
+    "romaji": "gou",
+    "indo": "Nomor (kereta, angin topan, dll)",
+    "kelompok": "Sufiks"
+  },
+  {
+    "no": 1218,
+    "bab": "Bab 31",
+    "jepang": "の方",
+    "kana": "のほう",
+    "romaji": "no hou",
+    "indo": "Sebelah",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1219,
+    "bab": "Bab 31",
+    "jepang": "ずっと",
+    "kana": "ずっと",
+    "romaji": "zutto",
+    "indo": "Seterusnya",
+    "kelompok": "Kata Keterangan"
+  },
+  {
+    "no": 1220,
+    "bab": "Bab 31",
+    "jepang": "バリ",
+    "kana": "バリ",
+    "romaji": "bari",
+    "indo": "Bali (pulau di Indonesia)",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1221,
+    "bab": "Bab 31",
+    "jepang": "ピカソ",
+    "kana": "ピカソ",
+    "romaji": "pikaso",
+    "indo": "Pablo Picasso",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1222,
+    "bab": "Bab 31",
+    "jepang": "のぞみ",
+    "kana": "のぞみ",
+    "romaji": "nozomi",
+    "indo": "Nama Shinkansen",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1223,
+    "bab": "Bab 31",
+    "jepang": "残ります",
+    "kana": "のこります",
+    "romaji": "nokorimasu",
+    "indo": "Tinggal",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1224,
+    "bab": "Bab 31",
+    "jepang": "入学試験",
+    "kana": "にゅうがくしけん",
+    "romaji": "nyuugakushiken",
+    "indo": "Ujian masuk",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1225,
+    "bab": "Bab 31",
+    "jepang": "月に",
+    "kana": "つきに",
+    "romaji": "tsukini",
+    "indo": "Dalam sebulan",
+    "kelompok": "Kata Keterangan"
+  },
+  {
+    "no": 1226,
+    "bab": "Bab 31",
+    "jepang": "村",
+    "kana": "むら",
+    "romaji": "mura",
+    "indo": "Desa / Kampung",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1227,
+    "bab": "Bab 31",
+    "jepang": "卒業します",
+    "kana": "そつぎょうします",
+    "romaji": "sotsugyoushimasu",
+    "indo": "Lulus / Tamat",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1228,
+    "bab": "Bab 31",
+    "jepang": "映画館",
+    "kana": "えいがかん",
+    "romaji": "eigakan",
+    "indo": "Gedung bioskop",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1229,
+    "bab": "Bab 31",
+    "jepang": "嫌",
+    "kana": "いや[な]",
+    "romaji": "iya na",
+    "indo": "Tidak senang / Tidak suka",
+    "kelompok": "Kata Sifat-na"
+  },
+  {
+    "no": 1230,
+    "bab": "Bab 31",
+    "jepang": "空",
+    "kana": "そら",
+    "romaji": "sora",
+    "indo": "Langit",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1231,
+    "bab": "Bab 31",
+    "jepang": "閉じます",
+    "kana": "とじます",
+    "romaji": "tojimasu",
+    "indo": "Tutup",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1232,
+    "bab": "Bab 31",
+    "jepang": "都会",
+    "kana": "とかい",
+    "romaji": "tokai",
+    "indo": "Kota besar",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1233,
+    "bab": "Bab 31",
+    "jepang": "子どもたち",
+    "kana": "こどもたち",
+    "romaji": "kodomotachi",
+    "indo": "Anak-anak",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1234,
+    "bab": "Bab 31",
+    "jepang": "自由に",
+    "kana": "じゆうに",
+    "romaji": "jiyuuni",
+    "indo": "Dengan bebas",
+    "kelompok": "Kata Keterangan"
+  },
+  {
+    "no": 1235,
+    "bab": "Bab 32",
+    "jepang": "運動します",
+    "kana": "うんどうします",
+    "romaji": "undoushimasu",
+    "indo": "Berolahraga",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1236,
+    "bab": "Bab 32",
+    "jepang": "成功します",
+    "kana": "せいこうします",
+    "romaji": "seikoushimasu",
+    "indo": "Berhasil",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1237,
+    "bab": "Bab 32",
+    "jepang": "失敗します",
+    "kana": "しっぱいします[しけんに]",
+    "romaji": "shippaishimasu shiken ni",
+    "indo": "Gagal ujian",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1238,
+    "bab": "Bab 32",
+    "jepang": "合格します",
+    "kana": "ごうかくします[しけんに]",
+    "romaji": "goukakushimasu shiken ni",
+    "indo": "Lulus ujian",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1239,
+    "bab": "Bab 32",
+    "jepang": "止みます",
+    "kana": "やみます[あめが]",
+    "romaji": "yamimasu ame ga",
+    "indo": "Hujan berhenti",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1240,
+    "bab": "Bab 32",
+    "jepang": "晴れます",
+    "kana": "はれます",
+    "romaji": "haremasu",
+    "indo": "Cerah",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1241,
+    "bab": "Bab 32",
+    "jepang": "曇ります",
+    "kana": "くもります",
+    "romaji": "kumorimasu",
+    "indo": "Mendung",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1242,
+    "bab": "Bab 32",
+    "jepang": "続きます",
+    "kana": "つづきます[ねつが]",
+    "romaji": "tsuzukimasu netsu ga",
+    "indo": "Demam berlangsung",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1243,
+    "bab": "Bab 32",
+    "jepang": "引きます",
+    "kana": "ひきます[かぜを]",
+    "romaji": "hikimasu kaze o",
+    "indo": "Masuk angin",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1244,
+    "bab": "Bab 32",
+    "jepang": "冷やします",
+    "kana": "ひやします",
+    "romaji": "hiyashimasu",
+    "indo": "Mendinginkan",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1245,
+    "bab": "Bab 32",
+    "jepang": "込みます",
+    "kana": "こみます[みちが]",
+    "romaji": "komimasu michi ga",
+    "indo": "Jalan macet",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1246,
+    "bab": "Bab 32",
+    "jepang": "すきます",
+    "kana": "すきます[みちが]",
+    "romaji": "sukimasu michi ga",
+    "indo": "Jalan sepi",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1247,
+    "bab": "Bab 32",
+    "jepang": "出ます",
+    "kana": "でます[しあいに]",
+    "romaji": "demasu shiai ni",
+    "indo": "Mengikutsertakan pertandingan",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1248,
+    "bab": "Bab 32",
+    "jepang": "出ます",
+    "kana": "でます[パーティーに]",
+    "romaji": "demasu paatii ni",
+    "indo": "Menghadiri pesta",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1249,
+    "bab": "Bab 32",
+    "jepang": "無理をします",
+    "kana": "むりをします",
+    "romaji": "muri o shimasu",
+    "indo": "Memaksakan diri",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1250,
+    "bab": "Bab 32",
+    "jepang": "十分",
+    "kana": "じゅうぶん[な]",
+    "romaji": "juubun na",
+    "indo": "Dengan cukup",
+    "kelompok": "Kata Sifat-na"
+  },
+  {
+    "no": 1251,
+    "bab": "Bab 32",
+    "jepang": "おかしい",
+    "kana": "おかしい",
+    "romaji": "okashii",
+    "indo": "Aneh / Menarik",
+    "kelompok": "Kata Sifat-i"
+  },
+  {
+    "no": 1252,
+    "bab": "Bab 32",
+    "jepang": "うるさい",
+    "kana": "うるさい",
+    "romaji": "urusai",
+    "indo": "Bising",
+    "kelompok": "Kata Sifat-i"
+  },
+  {
+    "no": 1253,
+    "bab": "Bab 32",
+    "jepang": "先生",
+    "kana": "せんせい",
+    "romaji": "sensei",
+    "indo": "Dokter (sebutan)",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1254,
+    "bab": "Bab 32",
+    "jepang": "やけど",
+    "kana": "やけど",
+    "romaji": "yakedo",
+    "indo": "Luka bakar",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1255,
+    "bab": "Bab 32",
+    "jepang": "けが",
+    "kana": "けが",
+    "romaji": "kega",
+    "indo": "Luka",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1256,
+    "bab": "Bab 32",
+    "jepang": "せき",
+    "kana": "せき",
+    "romaji": "seki",
+    "indo": "Batuk",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1257,
+    "bab": "Bab 32",
+    "jepang": "インフルエンザ",
+    "kana": "インフルエンザ",
+    "romaji": "infuruenza",
+    "indo": "Influenza",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1258,
+    "bab": "Bab 32",
+    "jepang": "空",
+    "kana": "そら",
+    "romaji": "sora",
+    "indo": "Langit",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1259,
+    "bab": "Bab 32",
+    "jepang": "太陽",
+    "kana": "たいよう",
+    "romaji": "taiyou",
+    "indo": "Matahari",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1260,
+    "bab": "Bab 32",
+    "jepang": "星",
+    "kana": "ほし",
+    "romaji": "hoshi",
+    "indo": "Bintang",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1261,
+    "bab": "Bab 32",
+    "jepang": "風",
+    "kana": "かぜ",
+    "romaji": "kaze",
+    "indo": "Angin",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1262,
+    "bab": "Bab 32",
+    "jepang": "東",
+    "kana": "ひがし",
+    "romaji": "higashi",
+    "indo": "Timur",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1263,
+    "bab": "Bab 32",
+    "jepang": "西",
+    "kana": "にし",
+    "romaji": "nishi",
+    "indo": "Barat",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1264,
+    "bab": "Bab 32",
+    "jepang": "南",
+    "kana": "みなみ",
+    "romaji": "minami",
+    "indo": "Selatan",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1265,
+    "bab": "Bab 32",
+    "jepang": "北",
+    "kana": "きた",
+    "romaji": "kita",
+    "indo": "Utara",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1266,
+    "bab": "Bab 32",
+    "jepang": "国際",
+    "kana": "こくさい",
+    "romaji": "kokusai",
+    "indo": "Internasional",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1267,
+    "bab": "Bab 32",
+    "jepang": "水道",
+    "kana": "すいどう",
+    "romaji": "suidou",
+    "indo": "Air PAM",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1268,
+    "bab": "Bab 32",
+    "jepang": "エンジン",
+    "kana": "エンジン",
+    "romaji": "enjin",
+    "indo": "Mesin",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1269,
+    "bab": "Bab 32",
+    "jepang": "チーム",
+    "kana": "チーム",
+    "romaji": "chiimu",
+    "indo": "Regu / Tim",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1270,
+    "bab": "Bab 32",
+    "jepang": "今夜",
+    "kana": "こんや",
+    "romaji": "kon'ya",
+    "indo": "Nanti malam / Malam ini",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1271,
+    "bab": "Bab 32",
+    "jepang": "夕方",
+    "kana": "ゆうがた",
+    "romaji": "yuugata",
+    "indo": "Sore",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1272,
+    "bab": "Bab 32",
+    "jepang": "前",
+    "kana": "まえ",
+    "romaji": "mae",
+    "indo": "Sebelum",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1273,
+    "bab": "Bab 32",
+    "jepang": "遅く",
+    "kana": "おそく",
+    "romaji": "osoku",
+    "indo": "Kemalaman",
+    "kelompok": "Kata Keterangan"
+  },
+  {
+    "no": 1274,
+    "bab": "Bab 32",
+    "jepang": "こんなに",
+    "kana": "こんなに",
+    "romaji": "konna ni",
+    "indo": "Begini",
+    "kelompok": "Kata Keterangan"
+  },
+  {
+    "no": 1275,
+    "bab": "Bab 32",
+    "jepang": "そんなに",
+    "kana": "そんなに",
+    "romaji": "sonna ni",
+    "indo": "Begitu (dekat lawan bicara)",
+    "kelompok": "Kata Keterangan"
+  },
+  {
+    "no": 1276,
+    "bab": "Bab 32",
+    "jepang": "あんなに",
+    "kana": "あんなに",
+    "romaji": "anna ni",
+    "indo": "Begitu (jauh)",
+    "kelompok": "Kata Keterangan"
+  },
+  {
+    "no": 1277,
+    "bab": "Bab 32",
+    "jepang": "ヨーロッパ",
+    "kana": "ヨーロッパ",
+    "romaji": "yooroppa",
+    "indo": "Eropa",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1278,
+    "bab": "Bab 32",
+    "jepang": "元気",
+    "kana": "げんき",
+    "romaji": "genki",
+    "indo": "Sehat",
+    "kelompok": "Kata Sifat-na"
+  },
+  {
+    "no": 1279,
+    "bab": "Bab 32",
+    "jepang": "胃",
+    "kana": "い",
+    "romaji": "i",
+    "indo": "Lambung",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1280,
+    "bab": "Bab 32",
+    "jepang": "ストレス",
+    "kana": "ストレス",
+    "romaji": "sutoresu",
+    "indo": "Stres",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1281,
+    "bab": "Bab 32",
+    "jepang": "それはいけませんね",
+    "kana": "それはいけませんね",
+    "romaji": "sore wa ikemasen ne",
+    "indo": "Kurang bagus (ungkapan simpati)",
+    "kelompok": "Ungkapan"
+  },
+  {
+    "no": 1282,
+    "bab": "Bab 32",
+    "jepang": "星占い",
+    "kana": "ほしうらない",
+    "romaji": "hoshiuranai",
+    "indo": "Horoskop",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1283,
+    "bab": "Bab 32",
+    "jepang": "牡牛座",
+    "kana": "おうしざ",
+    "romaji": "oushiza",
+    "indo": "Taurus",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1284,
+    "bab": "Bab 32",
+    "jepang": "働きすぎ",
+    "kana": "はたらきすぎ",
+    "romaji": "hatarakisugi",
+    "indo": "Terlalu banyak pekerjaan",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1285,
+    "bab": "Bab 32",
+    "jepang": "困ります",
+    "kana": "こまります",
+    "romaji": "komarimasu",
+    "indo": "Bingung / Susah",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1286,
+    "bab": "Bab 32",
+    "jepang": "宝くじ",
+    "kana": "たからくじ",
+    "romaji": "takarakuji",
+    "indo": "Lotre",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1287,
+    "bab": "Bab 32",
+    "jepang": "当たります",
+    "kana": "あたります[たからくじが]",
+    "romaji": "atarimasu takarakuji ga",
+    "indo": "Memenangi lotre",
+    "kelompok": "Kata Kerja"
+  },
+  {
+    "no": 1288,
+    "bab": "Bab 32",
+    "jepang": "健康",
+    "kana": "けんこう",
+    "romaji": "kenkou",
+    "indo": "Kesehatan",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1289,
+    "bab": "Bab 32",
+    "jepang": "恋愛",
+    "kana": "れんあい",
+    "romaji": "ren'ai",
+    "indo": "Asmara",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1290,
+    "bab": "Bab 32",
+    "jepang": "恋人",
+    "kana": "こいびと",
+    "romaji": "koibito",
+    "indo": "Pacar",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1291,
+    "bab": "Bab 32",
+    "jepang": "ラッキーアイテム",
+    "kana": "ラッキーアイテム",
+    "romaji": "rakkii aitemu",
+    "indo": "Benda yang mujur (Lucky item)",
+    "kelompok": "Kata Benda"
+  },
+  {
+    "no": 1292,
+    "bab": "Bab 32",
+    "jepang": "石",
+    "kana": "いし",
+    "romaji": "ishi",
+    "indo": "Batu",
+    "kelompok": "Kata Benda"
   }
 ]
