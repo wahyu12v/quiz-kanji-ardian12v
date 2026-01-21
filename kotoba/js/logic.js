@@ -37,9 +37,9 @@ function levenshtein(a, b) {
                 matrix[i][j] = matrix[i - 1][j - 1];
             } else {
                 matrix[i][j] = Math.min(
-                    matrix[i - 1][j - 1] + 1, // substitution
-                    matrix[i][j - 1] + 1, // insertion
-                    matrix[i - 1][j] + 1  // deletion
+                    matrix[i - 1][j - 1] + 1, 
+                    matrix[i][j - 1] + 1, 
+                    matrix[i - 1][j] + 1  
                 );
             }
         }
@@ -47,51 +47,46 @@ function levenshtein(a, b) {
     return matrix[b.length][a.length];
 }
 
-// --- LOGIKA CEK JAWABAN (TOLERANSI TYPO) ---
 function checkFuzzyAnswer(userRaw, dbValueString) {
     if (!userRaw || userRaw === 'Lupa') return false;
     const user = userRaw.toLowerCase().trim().replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, "");
-    
-    // Pisahkan kunci jawaban (misal: "Makan / Memakan" jadi ["makan", "memakan"])
     const candidates = dbValueString.toLowerCase().split(/[\/,]/).map(s => s.trim()).filter(s => s);
 
     return candidates.some(target => {
-        // Hapus simbol dari target juga
         const cleanTarget = target.replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, "");
-        
-        // 1. Cek Exact Match
         if (user === cleanTarget) return true;
-
-        // 2. Cek Inclusion (Yang penting ada kata benar)
-        // Syarat: kata user minimal 3 huruf agar tidak false positive (misal "ya" dianggap benar untuk "saya")
         if (user.length >= 3 && cleanTarget.includes(user)) return true;
-        
-        // 3. Cek Typo (Levenshtein)
-        // Toleransi: 1 kesalahan per 4 huruf. (Misal: 4 huruf boleh salah 1, 8 huruf boleh salah 2)
         const dist = levenshtein(user, cleanTarget);
         const tolerance = Math.max(1, Math.floor(cleanTarget.length / 4)); 
-        
         if (dist <= tolerance) return true;
-
         return false;
     });
 }
 
+// --- FUNGSI BUILD CHOICES (DIPERBAIKI) ---
 export function buildChoices(orderIndices, allQuestions, mode = 'quiz') {
   return orderIndices.map(idx => {
     const q = allQuestions[idx];
     let correctVal;
-    if (mode === 'quiz_hiragana') correctVal = String(q[KEYS.meaning] || '').trim();
-    else correctVal = String(q[KEYS.hiragana] || q['kana'] || '').trim(); // Default ke Hiragana
+    let rawPool;
+
+    // KETENTUAN PILIHAN JAWABAN:
+    if (mode === 'quiz_hiragana') {
+        // Mode Tebak Hiragana -> Pilihan Jawabannya HIRAGANA
+        correctVal = String(q[KEYS.hiragana] || q['kana'] || '').trim();
+        rawPool = allQuestions.map(item => String(item[KEYS.hiragana] || item['kana'] || '').trim());
+    } else {
+        // Mode Tebak Arti (Default) -> Pilihan Jawabannya INDONESIA
+        correctVal = String(q[KEYS.meaning] || '').trim();
+        rawPool = allQuestions.map(item => String(item[KEYS.meaning] || '').trim());
+    }
 
     const correctOption = { text: correctVal, isCorrect: true }; 
-    let rawPool = allQuestions.map(item => {
-        if (mode === 'quiz_hiragana') return String(item[KEYS.meaning] || '').trim();
-        return String(item[KEYS.hiragana] || item['kana'] || '').trim();
-    });
     
     let uniquePool = [...new Set(rawPool)];
     let pool = uniquePool.filter(val => val !== "" && val !== correctVal);
+    
+    // Cari pengecoh yang mirip (opsional)
     let scoredPool = pool.map(candidate => ({ text: candidate, score: getSimilarityScore(correctVal, candidate) }));
     scoredPool.sort((a, b) => b.score - a.score);
     let topDistractors = scoredPool.slice(0, 3).map(item => ({ text: item.text, isCorrect: false }));
@@ -120,7 +115,7 @@ export function gradeSession(state, allQuestions) {
         let userAnsStr = "Lupa";
 
         if (state.sessionType.includes('quiz')) {
-            // Mode Quiz (Pilihan Ganda) - Tetap Strict
+            // Mode Quiz (Pilihan Ganda)
             const choiceIdx = state.answers[i];
             const choices = state.choicesPerQ[i];
             if (choiceIdx !== null && choiceIdx !== 'Lupa') {
@@ -129,18 +124,15 @@ export function gradeSession(state, allQuestions) {
                 userAnsStr = choice ? choice.text : "Lupa";
             }
         } else {
-            // Mode Tulis (Isian) - Pakai Fuzzy Logic
+            // Mode Tulis (Isian)
             const raw = state.answers[i] || '';
             userAnsStr = raw === 'Lupa' ? 'Lupa' : raw;
 
             if (userAnsStr !== 'Lupa') {
                 if (state.sessionType === 'write_romaji') {
-                    // Cek Jawaban Romaji (Bandingkan dengan Romaji DB atau Kana)
-                    // Gabungkan romaji dan kana sebagai kunci jawaban valid
                     const validKeys = romajiDB + " / " + hira;
                     isCorrect = checkFuzzyAnswer(raw, validKeys);
                 } else {
-                    // Cek Jawaban Arti (Bandingkan dengan Indo)
                     isCorrect = checkFuzzyAnswer(raw, mean);
                 }
             }

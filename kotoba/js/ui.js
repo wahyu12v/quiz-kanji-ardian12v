@@ -4,11 +4,12 @@ import { KEYS, SELECTORS } from "./constants.js";
 const area = document.getElementById(SELECTORS.quizArea);
 
 // ============================================================
-// 1. INJECT CSS TAMBAHAN (PENTING: Agar Font Responsif & Animasi Jalan)
+// 1. INJECT CSS GLOBAL (Animasi, Font, Confetti)
 // ============================================================
+// Kita pasang style ini lewat JS agar Anda tidak perlu edit style.css lagi
 const style = document.createElement("style");
 style.innerHTML = `
-    /* Animasi Kartu Pilihan */
+    /* Animasi Kartu Pilihan saat di-hover */
     .choice-card-anim { 
         transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s, border-color 0.2s !important; 
     }
@@ -17,12 +18,13 @@ style.innerHTML = `
         box-shadow: 0 10px 20px rgba(244, 114, 182, 0.25) !important; 
         border-color: #f472b6 !important; 
         z-index: 2; 
+        background-color: rgba(244, 114, 182, 0.1) !important;
     }
     .choice-card-anim:active { 
         transform: scale(0.98) translateY(-2px); 
     }
     
-    /* Font Responsif untuk Soal (Agar tidak kekecilan/kebesaran) */
+    /* Font Responsif untuk Soal (Agar teks panjang mengecil otomatis) */
     .q-text-responsive {
         font-size: clamp(1.8rem, 5vw, 3.5rem); 
         line-height: 1.3;
@@ -34,12 +36,13 @@ style.innerHTML = `
         width: 100%;
     }
 
-    /* Confetti (Hujan Kertas) */
+    /* Efek Confetti (Hujan Kertas) */
     .confetti {
         position: absolute;
         width: 10px; height: 10px;
         background-color: #f0f;
         animation: fall linear forwards;
+        z-index: 9999;
     }
     @keyframes fall {
         to { transform: translateY(100vh) rotate(720deg); }
@@ -47,7 +50,12 @@ style.innerHTML = `
 `;
 document.head.appendChild(style);
 
-// Helper: Mengatur ukuran font soal otomatis
+
+// ============================================================
+// 2. HELPER FUNCTIONS
+// ============================================================
+
+// Mengatur ukuran font berdasarkan panjang teks
 function formatQuestion(text) {
     const len = text.length;
     let fontSize = "5rem"; 
@@ -62,7 +70,7 @@ function formatQuestion(text) {
             </div>`;
 }
 
-// Helper: Mengubah kode 'quiz' jadi 'Tebak Arti' (Sempat hilang, ini saya kembalikan)
+// Mengubah kode mode menjadi teks Bahasa Indonesia yang cantik
 function formatModeName(type) {
   if (type === "quiz") return "Tebak Arti";
   if (type === "quiz_hiragana") return "Tebak Bacaan";
@@ -71,8 +79,9 @@ function formatModeName(type) {
   return type;
 }
 
+
 // ============================================================
-// 2. RENDER QUIZ (PILIHAN GANDA)
+// 3. RENDER QUIZ (PILIHAN GANDA)
 // ============================================================
 export function renderQuiz(state, qNo) {
   area.innerHTML = "";
@@ -81,25 +90,29 @@ export function renderQuiz(state, qNo) {
   const choices = state.choicesPerQ[idx];
   const isLupa = state.answers[idx] === "Lupa";
 
+  // Ambil data soal
   const kanjiTxt = String(q[KEYS.kanji] || "").trim();
   const meanTxt = String(q[KEYS.meaning] || "").trim();
   const hiraTxt = String(q[KEYS.hiragana] || "").trim();
 
   let displayHtml = "";
 
-  // --- LOGIKA SOAL (SESUAI REQUEST) ---
+  // --- LOGIKA TAMPILAN SOAL (SESUAI REQUEST TERBARU) ---
   if (state.sessionType === "quiz_hiragana") {
-    // Mode Tebak Bacaan -> Soal: Indo
+    // Mode: Tebak Hiragana
+    // SOAL = BAHASA INDONESIA
     displayHtml = formatQuestion(meanTxt);
   } else {
-    // Mode Tebak Arti -> Soal: Hiragana (Fallback ke Kanji jika Hiragana kosong)
+    // Mode: Tebak Arti
+    // SOAL = HIRAGANA (Kalau kosong baru Kanji)
     displayHtml = formatQuestion(hiraTxt || kanjiTxt);
   }
 
+  // Generate Tombol Pilihan
   let choicesHtml = '<div class="d-grid gap-3">'; 
   choices.forEach((c, i) => {
     const isSelected = state.answers[idx] === i;
-    // Pakai class choice-card-anim agar ada animasinya
+    // Tambahkan class 'choice-card-anim' agar ada efek hover/animasi
     let btnClass = isSelected ? "choice-option choice-selected" : "choice-option choice-card-anim";
     
     choicesHtml += `
@@ -111,6 +124,7 @@ export function renderQuiz(state, qNo) {
   });
   choicesHtml += "</div>";
 
+  // Render Kartu Utama
   const card = document.createElement("div");
   card.className = "quiz-card p-4 h-100 d-flex flex-column";
   
@@ -145,7 +159,7 @@ export function renderQuiz(state, qNo) {
                 ? `<button class="btn btn-primary-custom w-100 py-3 fw-bold" onclick="window.handleNext()">
                     <i class="bi bi-arrow-right d-md-none"></i> <span class="d-none d-md-inline">Berikutnya</span>
                    </button>`
-                : `<button class="btn btn-success w-100 py-3 fw-bold" onclick="window.handleConfirm()">
+                : `<button class="btn btn-outline-success w-100 py-3 fw-bold" onclick="window.handleConfirm()">
                     <i class="bi bi-check-lg d-md-none"></i> <span class="d-none d-md-inline">Selesai</span>
                    </button>`
             }
@@ -155,8 +169,9 @@ export function renderQuiz(state, qNo) {
   area.appendChild(card);
 }
 
+
 // ============================================================
-// 3. RENDER MEMORY (ISIAN)
+// 4. RENDER MEMORY (ISIAN: TULIS ARTI / TULIS ROMAJI)
 // ============================================================
 export function renderMem(state, qNo) {
   area.innerHTML = "";
@@ -171,14 +186,16 @@ export function renderMem(state, qNo) {
   let displayHtml = "";
   let placeholderTxt = "", labelTxt = "";
   
-  // --- LOGIKA SOAL (SESUAI REQUEST) ---
+  // --- LOGIKA SOAL ISIAN ---
   if (state.sessionType === "write_romaji") {
-    // Mode Tulis Romaji -> Soal: Indo
+    // Mode: Tulis Romaji
+    // Soal: INDONESIA -> Jawab: Romaji/Jepang
     displayHtml = formatQuestion(meanTxt); 
     placeholderTxt = "Ketik bahasa Jepangnya...";
     labelTxt = "TERJEMAHKAN KE JEPANG (ROMAJI)";
   } else {
-    // Mode Tulis Arti -> Soal: Hiragana (Fallback ke Kanji)
+    // Mode: Tulis Arti
+    // Soal: HIRAGANA (atau Kanji) -> Jawab: Indo
     displayHtml = formatQuestion(hiraTxt || kanjiTxt);
     placeholderTxt = "Ketik artinya...";
     labelTxt = "TERJEMAHKAN KE INDONESIA";
@@ -240,14 +257,14 @@ export function renderMem(state, qNo) {
   `;
   area.appendChild(card);
 
-  // Focus & Mic Setup
+  // Focus & Mic Events
   const inp = document.getElementById("memInput");
   const btnMic = document.getElementById("btnMic");
   setTimeout(() => inp.focus(), 100);
   inp.oninput = (e) => window.handleInput(e.target.value);
   inp.onkeydown = (e) => { if (e.key === "Enter") window.handleNextOrSubmit(); };
 
-  // Mic Logic
+  // Mic Logic (Deteksi Bahasa)
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (SpeechRecognition) {
     const recognition = new SpeechRecognition();
@@ -268,14 +285,15 @@ export function renderMem(state, qNo) {
   }
 }
 
+
 // ============================================================
-// 4. RENDER RESULT (HASIL TES)
+// 5. RENDER RESULT (HASIL AKHIR & PEMBAHASAN)
 // ============================================================
 export function renderResult(result, sessionType, wrongIndices = []) {
   area.innerHTML = "";
   const pct = result.total > 0 ? Math.round((result.score / result.total) * 100) : 0;
   
-  // Gunakan fungsi helper formatModeName yang tadi saya restore
+  // Gunakan nama mode yang cantik (bukan 'quiz')
   let modeLabel = formatModeName(sessionType); 
   const scoreClass = pct >= 60 ? "text-neon-green" : "text-neon-red";
 
@@ -300,6 +318,7 @@ export function renderResult(result, sessionType, wrongIndices = []) {
         </div>
     </div>`;
 
+  // Render Detail Jawaban (Pembahasan)
   if (result.details && result.details.length > 0) {
     html += `<h5 class="fw-bold text-white mb-3 mt-4">Detail Jawaban</h5>`;
     result.details.forEach((d) => {
@@ -314,15 +333,21 @@ export function renderResult(result, sessionType, wrongIndices = []) {
       let mainText = ""; 
       let correctAns = "";
       
-      // LOGIC TAMPILAN PEMBAHASAN (KUNCI JAWABAN)
-      if (sessionType === "write_romaji") {
-         mainText = mean; // Soal tadi Indo
-         // Kunci Jawaban: Romaji & Hiragana
-         correctAns = `${romaji} / ${hira}`;
-      } else {
-         // Mode lain
-         mainText = hira || kanji;
-         correctAns = mean;
+      // --- LOGIKA TAMPILAN PEMBAHASAN (SESUAI REQUEST) ---
+      if (sessionType === "quiz_hiragana") {
+          // Tebak Hiragana -> Soal tadi INDO. Kunci Jawabannya HIRAGANA.
+          mainText = mean;      // Kolom Kiri: Soal (Indo)
+          correctAns = hira;    // Kolom Kanan: Jawaban Benar (Hiragana)
+      
+      } else if (sessionType === "quiz" || sessionType === "mem") {
+          // Tebak Arti / Tulis Arti -> Soal tadi HIRAGANA. Kunci Jawabannya INDO.
+          mainText = hira || kanji; // Kolom Kiri: Soal (Hiragana)
+          correctAns = mean;        // Kolom Kanan: Jawaban Benar (Indo)
+      
+      } else if (sessionType === "write_romaji") {
+          // Tulis Romaji -> Soal tadi INDO. Kunci Jawabannya ROMAJI & HIRAGANA.
+          mainText = mean;                // Kolom Kiri: Soal (Indo)
+          correctAns = `${romaji} / ${hira}`; // Kolom Kanan: Jawaban Benar
       }
 
       html += `
@@ -340,12 +365,13 @@ export function renderResult(result, sessionType, wrongIndices = []) {
   }
   area.innerHTML = html + `<div class="pb-5"></div>`;
   
-  // EFECT CONFETTI (Yang tadi hilang, sekarang ada lagi!)
+  // Trigger Confetti jika skor bagus
   if (pct >= 60) launchConfetti();
 }
 
+
 // ============================================================
-// 5. RENDER PROGRESS (KARTU STATISTIK)
+// 6. RENDER PROGRESS (KARTU STATISTIK DI MODAL)
 // ============================================================
 export function renderProgressModal(stats) {
   const list = document.getElementById("progressList");
@@ -409,29 +435,31 @@ export function renderProgressModal(stats) {
   list.appendChild(gridDiv);
 }
 
+
 // ============================================================
-// 6. FUNGSI PEMANIS (CONFETTI) - INI YANG TADI HILANG
+// 7. FUNGSI PEMANIS (CONFETTI)
 // ============================================================
 function launchConfetti() {
   const wrap = document.getElementById(SELECTORS.confetti);
   if (!wrap) return;
   wrap.innerHTML = ""; // Bersihkan confetti lama
   
+  // Buat 50 partikel kertas jatuh
   for (let i = 0; i < 50; i++) {
     const el = document.createElement("div");
     el.className = "confetti";
-    // Posisi acak horizontal
+    // Posisi horizontal acak
     el.style.left = Math.random() * 100 + "vw";
-    // Warna Acak (Neon Style)
+    // Warna warni neon
     const colors = ["#f472b6", "#3b82f6", "#4ade80", "#facc15", "#ffffff"];
     el.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-    // Kecepatan & Delay acak
+    // Kecepatan acak
     el.style.animationDuration = (2 + Math.random() * 3) + "s";
     el.style.animationDelay = (Math.random() * 2) + "s";
     
     wrap.appendChild(el);
     
-    // Hapus elemen setelah selesai animasi biar gak menuhin memori
+    // Hapus elemen setelah animasi selesai agar ringan
     setTimeout(() => el.remove(), 5000);
   }
 }
