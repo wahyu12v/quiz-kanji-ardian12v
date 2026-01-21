@@ -988,3 +988,59 @@ input[type="text"]:focus {
 .prog-label {
     color: #adb5bd !important; /* Abu terang */
 }
+
+/* Style untuk Card Bab di Menu Utama */
+.bab-selector-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    color: #fff;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.bab-selector-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* Kalo ada Part yang dipilih di dalam Bab ini */
+.bab-selector-card.has-selection {
+    background: rgba(244, 114, 182, 0.15) !important; /* Pink Transparan */
+    border: 1px solid #f472b6 !important; /* Border Pink */
+    box-shadow: 0 0 15px rgba(244, 114, 182, 0.2);
+}
+
+.bab-selector-card.has-selection strong {
+    color: #f472b6 !important;
+}
+
+/* Checkbox di dalam Modal Part */
+.part-option {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.part-option:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Saat checkbox part dicentang */
+.form-check-input:checked + .part-option-label {
+    color: #f472b6;
+    font-weight: bold;
+}
