@@ -4,48 +4,65 @@ import { KEYS, SELECTORS } from "./constants.js";
 const area = document.getElementById(SELECTORS.quizArea);
 
 // ============================================================
-// 1. INJECT CSS GLOBAL (Animasi, Font, Confetti)
+// 1. INJECT CSS GLOBAL (Font Responsive, Animasi, Confetti)
 // ============================================================
-// Kita pasang style ini lewat JS agar Anda tidak perlu edit style.css lagi
 const style = document.createElement("style");
 style.innerHTML = `
-    /* Animasi Kartu Pilihan saat di-hover */
+    /* --- 1. ANIMASI KARTU PILIHAN --- */
     .choice-card-anim { 
-        transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s, border-color 0.2s !important; 
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important; 
     }
     .choice-card-anim:hover { 
-        transform: translateY(-5px); 
-        box-shadow: 0 10px 20px rgba(244, 114, 182, 0.25) !important; 
+        transform: translateY(-4px); 
+        box-shadow: 0 10px 25px rgba(244, 114, 182, 0.3) !important; 
         border-color: #f472b6 !important; 
-        z-index: 2; 
+        z-index: 5; 
         background-color: rgba(244, 114, 182, 0.1) !important;
     }
     .choice-card-anim:active { 
-        transform: scale(0.98) translateY(-2px); 
+        transform: scale(0.98); 
     }
     
-    /* Font Responsif untuk Soal (Agar teks panjang mengecil otomatis) */
-    .q-text-responsive {
-        font-size: clamp(1.8rem, 5vw, 3.5rem); 
-        line-height: 1.3;
+    /* --- 2. LOGIKA UKURAN FONT (MOBILE FRIENDLY) --- */
+    .q-text-base {
         font-weight: 800;
         color: #ffffff !important;
-        text-shadow: 0 0 20px rgba(244, 114, 182, 0.6);
+        text-shadow: 0 0 25px rgba(244, 114, 182, 0.6);
         text-align: center;
-        word-wrap: break-word; 
         width: 100%;
+        line-height: 1.4;
+        word-wrap: break-word;       
+        overflow-wrap: break-word;
     }
 
-    /* Efek Confetti (Hujan Kertas) */
+    /* Ukuran Besar (1-4 Karakter) - Contoh: Kanji tunggal */
+    .q-size-lg {
+        font-size: clamp(4rem, 18vw, 6.5rem) !important; 
+    }
+
+    /* Ukuran Sedang (5-12 Karakter) - Contoh: Kata biasa */
+    .q-size-md {
+        font-size: clamp(2.2rem, 10vw, 3.5rem) !important;
+    }
+
+    /* Ukuran Kecil (>12 Karakter) - Contoh: Kalimat/Arti Panjang */
+    .q-size-sm {
+        font-size: clamp(1.4rem, 6vw, 2rem) !important;
+        font-weight: 700 !important;
+    }
+
+    /* --- 3. CONFETTI FULL SCREEN (FIXED) --- */
     .confetti {
-        position: absolute;
+        position: fixed; 
+        top: -20px;
         width: 10px; height: 10px;
-        background-color: #f0f;
+        z-index: 10000;
+        pointer-events: none;
+        border-radius: 3px;
         animation: fall linear forwards;
-        z-index: 9999;
     }
     @keyframes fall {
-        to { transform: translateY(100vh) rotate(720deg); }
+        to { transform: translateY(110vh) rotate(720deg); }
     }
 `;
 document.head.appendChild(style);
@@ -55,22 +72,27 @@ document.head.appendChild(style);
 // 2. HELPER FUNCTIONS
 // ============================================================
 
-// Mengatur ukuran font berdasarkan panjang teks
+// Fungsi Pintar menentukan ukuran font berdasarkan panjang teks
 function formatQuestion(text) {
     const len = text.length;
-    let fontSize = "5rem"; 
-    if (len > 30) fontSize = "1.8rem";
-    else if (len > 15) fontSize = "2.5rem";
-    else if (len > 6) fontSize = "3.5rem";
+    let sizeClass = "";
 
-    return `<div class="d-flex align-items-center justify-content-center px-2" style="min-height: 120px;">
-                <span class="q-text-responsive" style="font-size: ${fontSize} !important; line-height: 1.2;">
+    if (len <= 4) {
+        sizeClass = "q-size-lg"; // Besar
+    } else if (len <= 12) {
+        sizeClass = "q-size-md"; // Sedang
+    } else {
+        sizeClass = "q-size-sm"; // Kecil (Muat Banyak)
+    }
+
+    // Min-height 150px agar area soal stabil tidak naik turun
+    return `<div class="d-flex align-items-center justify-content-center px-3" style="min-height: 150px;">
+                <span class="q-text-base ${sizeClass}">
                     ${escapeHtml(text)}
                 </span>
             </div>`;
 }
 
-// Mengubah kode mode menjadi teks Bahasa Indonesia yang cantik
 function formatModeName(type) {
   if (type === "quiz") return "Tebak Arti";
   if (type === "quiz_hiragana") return "Tebak Bacaan";
@@ -90,29 +112,24 @@ export function renderQuiz(state, qNo) {
   const choices = state.choicesPerQ[idx];
   const isLupa = state.answers[idx] === "Lupa";
 
-  // Ambil data soal
   const kanjiTxt = String(q[KEYS.kanji] || "").trim();
   const meanTxt = String(q[KEYS.meaning] || "").trim();
   const hiraTxt = String(q[KEYS.hiragana] || "").trim();
 
   let displayHtml = "";
 
-  // --- LOGIKA TAMPILAN SOAL (SESUAI REQUEST TERBARU) ---
+  // --- LOGIKA SOAL ---
   if (state.sessionType === "quiz_hiragana") {
-    // Mode: Tebak Hiragana
-    // SOAL = BAHASA INDONESIA
+    // Mode Tebak Hiragana -> Soal: INDONESIA
     displayHtml = formatQuestion(meanTxt);
   } else {
-    // Mode: Tebak Arti
-    // SOAL = HIRAGANA (Kalau kosong baru Kanji)
+    // Mode Tebak Arti -> Soal: HIRAGANA (bukan Kanji)
     displayHtml = formatQuestion(hiraTxt || kanjiTxt);
   }
 
-  // Generate Tombol Pilihan
   let choicesHtml = '<div class="d-grid gap-3">'; 
   choices.forEach((c, i) => {
     const isSelected = state.answers[idx] === i;
-    // Tambahkan class 'choice-card-anim' agar ada efek hover/animasi
     let btnClass = isSelected ? "choice-option choice-selected" : "choice-option choice-card-anim";
     
     choicesHtml += `
@@ -124,7 +141,6 @@ export function renderQuiz(state, qNo) {
   });
   choicesHtml += "</div>";
 
-  // Render Kartu Utama
   const card = document.createElement("div");
   card.className = "quiz-card p-4 h-100 d-flex flex-column";
   
@@ -134,13 +150,11 @@ export function renderQuiz(state, qNo) {
           <small class="text-muted fw-bold">#${q[KEYS.number] || "-"}</small>
       </div>
       
-      <div class="flex-grow-1 d-flex align-items-center justify-content-center py-4">
+      <div class="flex-grow-1 d-flex align-items-center justify-content-center py-2">
         ${displayHtml} 
       </div>
       
-      <div class="mb-4">
-        ${choicesHtml}
-      </div>
+      <div class="mb-4">${choicesHtml}</div>
 
       <div class="row g-2 mt-auto">
           <div class="col-4">
@@ -156,12 +170,8 @@ export function renderQuiz(state, qNo) {
           <div class="col-4">
             ${
               idx < state.batch.length - 1
-                ? `<button class="btn btn-primary-custom w-100 py-3 fw-bold" onclick="window.handleNext()">
-                    <i class="bi bi-arrow-right d-md-none"></i> <span class="d-none d-md-inline">Berikutnya</span>
-                   </button>`
-                : `<button class="btn btn-outline-success w-100 py-3 fw-bold" onclick="window.handleConfirm()">
-                    <i class="bi bi-check-lg d-md-none"></i> <span class="d-none d-md-inline">Selesai</span>
-                   </button>`
+                ? `<button class="btn btn-primary-custom w-100 py-3 fw-bold" onclick="window.handleNext()">Berikutnya</button>`
+                : `<button class="btn btn-success w-100 py-3 fw-bold" onclick="window.handleConfirm()">Selesai</button>`
             }
           </div>
       </div>
@@ -171,7 +181,7 @@ export function renderQuiz(state, qNo) {
 
 
 // ============================================================
-// 4. RENDER MEMORY (ISIAN: TULIS ARTI / TULIS ROMAJI)
+// 4. RENDER MEMORY (ISIAN)
 // ============================================================
 export function renderMem(state, qNo) {
   area.innerHTML = "";
@@ -188,14 +198,10 @@ export function renderMem(state, qNo) {
   
   // --- LOGIKA SOAL ISIAN ---
   if (state.sessionType === "write_romaji") {
-    // Mode: Tulis Romaji
-    // Soal: INDONESIA -> Jawab: Romaji/Jepang
     displayHtml = formatQuestion(meanTxt); 
     placeholderTxt = "Ketik bahasa Jepangnya...";
     labelTxt = "TERJEMAHKAN KE JEPANG (ROMAJI)";
   } else {
-    // Mode: Tulis Arti
-    // Soal: HIRAGANA (atau Kanji) -> Jawab: Indo
     displayHtml = formatQuestion(hiraTxt || kanjiTxt);
     placeholderTxt = "Ketik artinya...";
     labelTxt = "TERJEMAHKAN KE INDONESIA";
@@ -215,11 +221,11 @@ export function renderMem(state, qNo) {
       </div>
 
       <div class="w-100 text-center mb-4" style="max-width: 600px;">
-          <div class="mem-label mb-3" style="color: var(--neon-pink);">${labelTxt}</div>
+          <div class="mem-label mb-3" style="color: var(--neon-pink); font-size: 0.9rem; letter-spacing: 1px;">${labelTxt}</div>
           
           <div class="position-relative">
               <input type="text" id="memInput" 
-                     class="mem-input form-control text-center"
+                     class="mem-input form-control text-center fs-4 fw-bold py-3"
                      placeholder="${placeholderTxt}" 
                      autocomplete="off" 
                      spellcheck="false" 
@@ -233,38 +239,28 @@ export function renderMem(state, qNo) {
 
       <div class="row g-2 w-100" style="max-width: 600px;">
           <div class="col-4">
-            <button class="btn btn-outline-custom w-100 py-3 fw-bold h-100" onclick="window.handlePrev()" ${idx === 0 ? "disabled" : ""}>
-                <i class="bi bi-arrow-left d-md-none"></i> <span class="d-none d-md-inline">Kembali</span>
-            </button>
+            <button class="btn btn-outline-custom w-100 py-3 fw-bold h-100" onclick="window.handlePrev()" ${idx === 0 ? "disabled" : ""}>Kembali</button>
           </div>
           <div class="col-4">
-            <button class="btn btn-outline-warning w-100 py-3 fw-bold h-100" onclick="window.handleLupa()">
-                <i class="bi bi-question-lg d-md-none"></i> <span class="d-none d-md-inline">Lupa</span>
-            </button>
+            <button class="btn btn-outline-warning w-100 py-3 fw-bold h-100" onclick="window.handleLupa()">Lupa</button>
           </div>
           <div class="col-4">
             ${
               idx < state.batch.length - 1
-                ? `<button class="btn btn-primary-custom w-100 py-3 fw-bold h-100" onclick="window.handleNext()">
-                     <i class="bi bi-arrow-right d-md-none"></i> <span class="d-none d-md-inline">Lanjut</span>
-                   </button>`
-                : `<button class="btn btn-success w-100 py-3 fw-bold h-100" onclick="window.handleConfirm()">
-                     <i class="bi bi-check-lg d-md-none"></i> <span class="d-none d-md-inline">Selesai</span>
-                   </button>`
+                ? `<button class="btn btn-primary-custom w-100 py-3 fw-bold h-100" onclick="window.handleNext()">Lanjut</button>`
+                : `<button class="btn btn-success w-100 py-3 fw-bold h-100" onclick="window.handleConfirm()">Selesai</button>`
             }
           </div>
       </div>
   `;
   area.appendChild(card);
 
-  // Focus & Mic Events
   const inp = document.getElementById("memInput");
   const btnMic = document.getElementById("btnMic");
   setTimeout(() => inp.focus(), 100);
   inp.oninput = (e) => window.handleInput(e.target.value);
   inp.onkeydown = (e) => { if (e.key === "Enter") window.handleNextOrSubmit(); };
 
-  // Mic Logic (Deteksi Bahasa)
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (SpeechRecognition) {
     const recognition = new SpeechRecognition();
@@ -287,13 +283,11 @@ export function renderMem(state, qNo) {
 
 
 // ============================================================
-// 5. RENDER RESULT (HASIL AKHIR & PEMBAHASAN)
+// 5. RENDER RESULT
 // ============================================================
 export function renderResult(result, sessionType, wrongIndices = []) {
   area.innerHTML = "";
   const pct = result.total > 0 ? Math.round((result.score / result.total) * 100) : 0;
-  
-  // Gunakan nama mode yang cantik (bukan 'quiz')
   let modeLabel = formatModeName(sessionType); 
   const scoreClass = pct >= 60 ? "text-neon-green" : "text-neon-red";
 
@@ -318,7 +312,6 @@ export function renderResult(result, sessionType, wrongIndices = []) {
         </div>
     </div>`;
 
-  // Render Detail Jawaban (Pembahasan)
   if (result.details && result.details.length > 0) {
     html += `<h5 class="fw-bold text-white mb-3 mt-4">Detail Jawaban</h5>`;
     result.details.forEach((d) => {
@@ -333,21 +326,15 @@ export function renderResult(result, sessionType, wrongIndices = []) {
       let mainText = ""; 
       let correctAns = "";
       
-      // --- LOGIKA TAMPILAN PEMBAHASAN (SESUAI REQUEST) ---
       if (sessionType === "quiz_hiragana") {
-          // Tebak Hiragana -> Soal tadi INDO. Kunci Jawabannya HIRAGANA.
-          mainText = mean;      // Kolom Kiri: Soal (Indo)
-          correctAns = hira;    // Kolom Kanan: Jawaban Benar (Hiragana)
-      
+          mainText = mean;      
+          correctAns = hira;    
       } else if (sessionType === "quiz" || sessionType === "mem") {
-          // Tebak Arti / Tulis Arti -> Soal tadi HIRAGANA. Kunci Jawabannya INDO.
-          mainText = hira || kanji; // Kolom Kiri: Soal (Hiragana)
-          correctAns = mean;        // Kolom Kanan: Jawaban Benar (Indo)
-      
+          mainText = hira || kanji; 
+          correctAns = mean;        
       } else if (sessionType === "write_romaji") {
-          // Tulis Romaji -> Soal tadi INDO. Kunci Jawabannya ROMAJI & HIRAGANA.
-          mainText = mean;                // Kolom Kiri: Soal (Indo)
-          correctAns = `${romaji} / ${hira}`; // Kolom Kanan: Jawaban Benar
+          mainText = mean;                
+          correctAns = `${romaji} / ${hira}`; 
       }
 
       html += `
@@ -365,13 +352,12 @@ export function renderResult(result, sessionType, wrongIndices = []) {
   }
   area.innerHTML = html + `<div class="pb-5"></div>`;
   
-  // Trigger Confetti jika skor bagus
   if (pct >= 60) launchConfetti();
 }
 
 
 // ============================================================
-// 6. RENDER PROGRESS (KARTU STATISTIK DI MODAL)
+// 6. RENDER PROGRESS
 // ============================================================
 export function renderProgressModal(stats) {
   const list = document.getElementById("progressList");
@@ -386,7 +372,6 @@ export function renderProgressModal(stats) {
     const p2 = item.detail.tebakHiragana;
     const p3 = item.detail.tulisArti;
     const p4 = item.detail.tulisRomaji;
-    
     const isDone = pctTotal === 100;
     const cardClass = isDone ? "prog-card prog-done" : "prog-card";
     const badgeClass = isDone ? "bg-neon-green text-black" : "bg-dark-subtle text-white";
@@ -400,34 +385,10 @@ export function renderProgressModal(stats) {
                 <span class="badge ${badgeClass} rounded-pill px-3">Total: ${pctTotal}%</span>
             </div>
             <div class="d-flex flex-column gap-3">
-                <div class="prog-item">
-                    <div class="d-flex justify-content-between mb-1">
-                        <span class="prog-label text-neon-blue"><i class="bi bi-eye-fill me-2"></i> Tebak Arti</span>
-                        <span class="prog-val text-white">${p1}%</span>
-                    </div>
-                    <div class="progress" style="height: 6px; background: rgba(255,255,255,0.1);"><div class="progress-bar bg-neon-blue" style="width: ${p1}%"></div></div>
-                </div>
-                <div class="prog-item">
-                    <div class="d-flex justify-content-between mb-1">
-                        <span class="prog-label text-neon-green"><i class="bi bi-translate me-2"></i> Tebak Bacaan</span>
-                        <span class="prog-val text-white">${p2}%</span>
-                    </div>
-                    <div class="progress" style="height: 6px; background: rgba(255,255,255,0.1);"><div class="progress-bar bg-neon-green" style="width: ${p2}%"></div></div>
-                </div>
-                <div class="prog-item">
-                    <div class="d-flex justify-content-between mb-1">
-                        <span class="prog-label text-neon-yellow"><i class="bi bi-pencil-fill me-2"></i> Tulis Arti</span>
-                        <span class="prog-val text-white">${p3}%</span>
-                    </div>
-                    <div class="progress" style="height: 6px; background: rgba(255,255,255,0.1);"><div class="progress-bar bg-neon-yellow" style="width: ${p3}%"></div></div>
-                </div>
-                <div class="prog-item">
-                    <div class="d-flex justify-content-between mb-1">
-                        <span class="prog-label text-neon-pink"><i class="bi bi-keyboard-fill me-2"></i> Tulis Romaji</span>
-                        <span class="prog-val text-white">${p4}%</span>
-                    </div>
-                    <div class="progress" style="height: 6px; background: rgba(255,255,255,0.1);"><div class="progress-bar bg-neon-pink" style="width: ${p4}%"></div></div>
-                </div>
+                <div class="prog-item"><div class="d-flex justify-content-between mb-1"><span class="prog-label text-neon-blue"><i class="bi bi-eye-fill me-2"></i> Tebak Arti</span><span class="prog-val text-white">${p1}%</span></div><div class="progress" style="height: 6px; background: rgba(255,255,255,0.1);"><div class="progress-bar bg-neon-blue" style="width: ${p1}%"></div></div></div>
+                <div class="prog-item"><div class="d-flex justify-content-between mb-1"><span class="prog-label text-neon-green"><i class="bi bi-translate me-2"></i> Tebak Bacaan</span><span class="prog-val text-white">${p2}%</span></div><div class="progress" style="height: 6px; background: rgba(255,255,255,0.1);"><div class="progress-bar bg-neon-green" style="width: ${p2}%"></div></div></div>
+                <div class="prog-item"><div class="d-flex justify-content-between mb-1"><span class="prog-label text-neon-yellow"><i class="bi bi-pencil-fill me-2"></i> Tulis Arti</span><span class="prog-val text-white">${p3}%</span></div><div class="progress" style="height: 6px; background: rgba(255,255,255,0.1);"><div class="progress-bar bg-neon-yellow" style="width: ${p3}%"></div></div></div>
+                <div class="prog-item"><div class="d-flex justify-content-between mb-1"><span class="prog-label text-neon-pink"><i class="bi bi-keyboard-fill me-2"></i> Tulis Romaji</span><span class="prog-val text-white">${p4}%</span></div><div class="progress" style="height: 6px; background: rgba(255,255,255,0.1);"><div class="progress-bar bg-neon-pink" style="width: ${p4}%"></div></div></div>
             </div>
         </div>`;
     gridDiv.appendChild(col);
@@ -437,29 +398,22 @@ export function renderProgressModal(stats) {
 
 
 // ============================================================
-// 7. FUNGSI PEMANIS (CONFETTI)
+// 7. FUNGSI CONFETTI (FULL SCREEN - FIXED)
 // ============================================================
 function launchConfetti() {
-  const wrap = document.getElementById(SELECTORS.confetti);
-  if (!wrap) return;
-  wrap.innerHTML = ""; // Bersihkan confetti lama
-  
-  // Buat 50 partikel kertas jatuh
-  for (let i = 0; i < 50; i++) {
+  const count = 70;
+  for (let i = 0; i < count; i++) {
     const el = document.createElement("div");
     el.className = "confetti";
-    // Posisi horizontal acak
-    el.style.left = Math.random() * 100 + "vw";
-    // Warna warni neon
+    el.style.left = Math.random() * 100 + "vw"; 
+    
     const colors = ["#f472b6", "#3b82f6", "#4ade80", "#facc15", "#ffffff"];
     el.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-    // Kecepatan acak
+    
     el.style.animationDuration = (2 + Math.random() * 3) + "s";
-    el.style.animationDelay = (Math.random() * 2) + "s";
+    el.style.animationDelay = (Math.random() * 1.5) + "s";
     
-    wrap.appendChild(el);
-    
-    // Hapus elemen setelah animasi selesai agar ringan
-    setTimeout(() => el.remove(), 5000);
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 6000);
   }
 }

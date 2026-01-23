@@ -1,724 +1,696 @@
-/* ==================================================================
-   STYLE.CSS - HAFALAN KANJI (NEON PURPLE - REFERENCE LOOK)
-   ================================================================== */
-
-/* --- VARIABLES & GLOBAL --- */
+/* --- 1. CORE VARIABLES & RESET --- */
 :root {
-  /* PALET WARNA (NEON PURPLE) */
-  --primary: #c084fc;  /* Ungu Neon */
-  --primary-dark: #9333ea;
-  --primary-gradient: linear-gradient(135deg, #c084fc 0%, #7e22ce 100%);
-  --primary-glow: rgba(192, 132, 252, 0.6);   /* Glow Ungu Kuat */
-  --primary-faint: rgba(192, 132, 252, 0.1);  /* Background transparan */
-
-  /* DARK MODE BACKGROUNDS */
-  --bg-dark: #020617;       /* Background Body (Sangat Gelap) */
-  --surface: #0f172a;       /* Warna Kartu (Dark Slate) */
-  --surface-light: #1e293b; /* Warna Item List/Input */
-  
-  /* TEXT COLORS */
-  --text-main: #f8fafc;    /* Putih Terang */
-  --text-muted: #94a3b8;   /* Abu-abu */
-  --text-inverse: #000000; /* Teks di atas warna solid */
-
-  /* BORDERS */
-  --border-color: rgba(255, 255, 255, 0.15); /* Border default putih tipis (biar rapi) */
-  --border-active: #c084fc; /* Border saat aktif */
-
-  /* SHADOWS */
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 20px 50px -5px rgba(0, 0, 0, 0.6);
-  --shadow-neon: 0 0 25px rgba(192, 132, 252, 0.3); /* Glow Card Utama */
+    /* Main Background: Deep Dark Purple-Black */
+    --bg-dark: #0b0510;
+    
+    /* Neon Accent: Purple / Magenta */
+    --neon-main: #d946ef; /* Magenta Terang */
+    --neon-sec: #a855f7;  /* Ungu Neon */
+    --neon-glow: 0 0 20px rgba(217, 70, 239, 0.4);
+    
+    /* Glass Effect */
+    --glass-bg: rgba(20, 15, 30, 0.75);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+    --glass-blur: blur(24px);
+    
+    /* Text */
+    --text-primary: #ffffff;
+    --text-sec: #e9d5ff; /* Putih keunguan */
+    
+    --font-main: 'Inter', system-ui, sans-serif;
 }
 
 body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background-color: var(--bg-dark);
-  color: var(--text-main);
-  display: flex; flex-direction: column; min-height: 100vh;
-  
-  /* PATTERN BINTIK (Sesuai Referensi) */
-  background-image: radial-gradient(#334155 1px, transparent 1px);
-  background-size: 32px 32px; /* Jarak bintik diperlebar sedikit agar elegan */
+    background-color: var(--bg-dark);
+    /* Latar belakang gradient ungu halus yang 'hidup' */
+    background-image: 
+        radial-gradient(circle at 15% 25%, rgba(168, 85, 247, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 85% 75%, rgba(217, 70, 239, 0.1) 0%, transparent 40%);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    overflow-x: hidden;
+    min-height: 100vh;
 }
 
-/* --- NAVBAR --- */
-#main-nav {
-  background: rgba(2, 6, 23, 0.8); /* Gelap Transparan */
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border-color);
-  box-shadow: var(--shadow-sm);
+/* --- 2. TYPOGRAPHY --- */
+h1, h2, h3, h4, h5, h6 {
+    color: #fff;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.5);
 }
-.brand-title { font-size: 18px; color: var(--primary) !important; letter-spacing: 0.5px; font-weight: 800; }
-.brand-subtitle { font-size: 12px; color: var(--text-muted); font-weight: 500; }
 
-/* Tombol Kembali di Navbar (Outline Style) */
+.text-muted { color: var(--text-sec) !important; }
+.text-primary { color: var(--neon-main) !important; }
+
+/* --- 3. FIX TOMBOL KEMBALI (UTAMA) --- */
+/* Menargetkan tombol di Navbar secara spesifik */
 #btn-main-back {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    text-decoration: none; /* Hapus garis bawah link */
+}
+
+#btn-main-back:hover {
+    background: rgba(217, 70, 239, 0.15); /* Tint Ungu saat hover */
+    border-color: var(--neon-main);
+    box-shadow: 0 0 20px rgba(217, 70, 239, 0.3);
+    transform: translateX(-3px); /* Efek gerak sedikit ke kiri */
+    color: var(--neon-main);
+}
+
+#btn-main-back i {
+    transition: transform 0.3s ease;
+}
+#btn-main-back:hover i {
+    transform: translateX(-3px);
+}
+
+/* --- 4. NAVBAR --- */
+.navbar {
+    background: rgba(11, 5, 16, 0.85) !important;
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.navbar-brand .brand-title {
+    background: linear-gradient(to right, #fff, var(--text-sec));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+/* --- 5. GLASS CARDS (LAYOUT SEPERTI YANG ANDA SUKA) --- */
+.card, .modal-content, .hero-card {
+    background: var(--glass-bg) !important;
+    backdrop-filter: var(--glass-blur) !important;
+    -webkit-backdrop-filter: var(--glass-blur) !important;
+    border: var(--glass-border) !important;
+    border-radius: 24px !important;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6) !important;
+    color: #fff;
+}
+
+.hero-card {
+    /* Hero card sedikit lebih menonjol */
+    background: linear-gradient(145deg, rgba(25, 20, 35, 0.8), rgba(10, 5, 15, 0.9)) !important;
+}
+
+/* Fix Modal Header/Footer agar menyatu */
+.modal-header, .modal-footer {
+    border-color: rgba(255,255,255,0.05) !important;
     background: transparent !important;
-    border: 1px solid var(--border-color) !important;
-    color: var(--text-main) !important;
+}
+.btn-close { filter: invert(1); opacity: 0.8; }
+
+/* --- 6. NEON BUTTONS (PURPLE THEME) --- */
+.btn-primary, .btn-primary-custom {
+    background: linear-gradient(135deg, var(--neon-main), var(--neon-sec)) !important;
+    border: none !important;
+    color: #fff !important;
+    font-weight: 700;
+    padding: 12px 30px;
+    border-radius: 50px !important;
+    box-shadow: var(--neon-glow);
     transition: all 0.3s ease;
 }
-#btn-main-back:hover {
-    border-color: var(--primary) !important;
-    color: var(--primary) !important;
-    box-shadow: 0 0 10px var(--primary-glow);
+
+.btn-primary:hover, .btn-primary-custom:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 0 40px rgba(217, 70, 239, 0.6) !important;
 }
 
-/* --- HERO SECTION (KARTU UTAMA TENGAH) --- */
-.hero-card {
-    background: linear-gradient(160deg, #1e293b 0%, #0f172a 100%); /* Gradasi halus ke bawah */
-    color: var(--text-main);
-    border: 1px solid var(--primary); /* Border Ungu Tipis */
-    box-shadow: var(--shadow-neon);   /* GLOW UNGU DI SEKELILING KARTU */
-    border-radius: 30px;              /* Sudut sangat bulat */
-    padding: 40px;
-    position: relative; overflow: hidden;
-}
-
-/* Efek Icon Besar di Belakang (Samar) */
-.hero-bg-kanji {
-    position: absolute; top: -30px; right: -20px;
-    font-size: 250px; font-weight: 900;
-    color: var(--primary); opacity: 0.05; /* Sangat samar */
-    pointer-events: none; z-index: 0; transform: rotate(15deg);
-}
-
-.hero-card h1 { color: #fff; text-shadow: 0 0 20px rgba(192, 132, 252, 0.4); }
-.hero-card .lead { color: var(--text-muted); font-weight: 400; }
-
-/* Badge Total Kotoba */
-.hero-card .rounded-pill.bg-white {
-    background-color: rgba(255, 255, 255, 0.1) !important; /* Semi transparan */
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    color: #fff !important;
-}
-
-/* --- BUTTONS DI MENU UTAMA --- */
-/* Style tombol menu (Daftar, Tulis, Tebak, dll) */
-.hero-card .btn-outline-custom {
-    color: var(--text-main);
-    border: 1px solid var(--border-color); /* Border awal putih pudar */
-    background: rgba(255, 255, 255, 0.03);
+/* Tombol Outline (Menu Awal) */
+.btn-outline-custom, .btn-outline-primary, .btn-light {
+    background: rgba(255,255,255,0.03) !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    color: var(--text-primary) !important;
+    border-radius: 50px !important; /* Kapsul */
+    padding: 12px 25px;
     font-weight: 600;
-    border-radius: 50px; /* Pill Shape sempurna */
-    padding: 12px 20px;
-    display: flex; align-items: center; justify-content: center; /* Rata Tengah */
+    transition: all 0.3s ease;
+}
+
+.btn-outline-custom:hover, .btn-outline-primary:hover {
+    border-color: var(--neon-main) !important;
+    color: var(--neon-main) !important;
+    background: rgba(217, 70, 239, 0.1) !important;
+    box-shadow: 0 0 20px rgba(217, 70, 239, 0.2);
+    transform: translateY(-2px);
+}
+
+/* --- 7. INPUT FIELDS --- */
+.form-control, .form-check-input {
+    background: rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+    border-radius: 12px !important;
+    padding: 12px 15px;
+}
+
+.form-control:focus {
+    border-color: var(--neon-main) !important;
+    box-shadow: 0 0 0 4px rgba(217, 70, 239, 0.2) !important;
+}
+
+.form-check-input:checked {
+    background-color: var(--neon-main) !important;
+    border-color: var(--neon-main) !important;
+}
+
+/* --- 8. UI ELEMENTS (Quiz & Lists) --- */
+
+/* Pilihan Ganda */
+.choice-card-anim {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: 16px !important;
+    color: #fff !important;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-/* Efek Hover Tombol Menu */
-.hero-card .btn-outline-custom:hover {
-    background: rgba(192, 132, 252, 0.15); /* Isi ungu transparan */
-    border-color: var(--primary);          /* Border jadi ungu */
-    color: #fff;
-    box-shadow: 0 0 15px var(--primary-glow); /* Glow tombol */
-    transform: translateY(-2px);
+.choice-card-anim:hover {
+    border-color: var(--neon-main) !important;
+    background: rgba(217, 70, 239, 0.05) !important;
+    transform: scale(1.02);
 }
 
-/* --- TOMBOL PRIMARY (Mulai/Selesai/Lanjut) --- */
-.btn-primary-custom {
-    background: var(--primary-gradient);
-    color: white; 
-    border: none;
-    font-weight: 700; 
-    padding: 12px 30px; 
-    border-radius: 50px; 
-    box-shadow: 0 4px 15px rgba(147, 51, 234, 0.4);
-    transition: all 0.3s ease;
-}
-.btn-primary-custom:hover { 
-    transform: translateY(-2px);
-    box-shadow: 0 0 30px var(--primary-glow);
-    color: white;
+/* Teks Soal */
+.q-text-responsive {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 800;
+    background: linear-gradient(to bottom, #fff, #e9d5ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 15px rgba(217, 70, 239, 0.3));
 }
 
-/* --- QUIZ AREA & CARD KANJI --- */
-.card-kanji {
-  background: linear-gradient(160deg, #1e293b 0%, #020617 100%);
-  border: 1px solid var(--border-color); 
-  border-radius: 24px; 
-  box-shadow: var(--shadow-lg); 
-  overflow: hidden;
+/* List Kanji (Grid Kecil) */
+.kanji-list-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
 }
+.kanji-card-small {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 15px;
+    text-align: center;
+    transition: 0.3s;
+}
+.kanji-card-small:hover {
+    border-color: var(--neon-main);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(217, 70, 239, 0.2);
+}
+.k-char { color: var(--neon-main); font-size: 2.5rem; font-weight: 800; margin-bottom: 5px; }
 
-/* KANJI BESAR MENYALA */
-.kanji-big, .q-text-responsive {
-  text-align: center; 
-  font-weight: 800; 
-  color: var(--primary);
-  text-shadow: 0 0 25px var(--primary-glow); /* Neon Effect */
-  line-height: 1.2;
-}
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-dark); }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--neon-main); }
 
-/* --- PILIHAN GANDA --- */
-.choice-card, .choice-option {
-  border-radius: 16px; 
-  padding: 16px 20px;
-  background: #1e293b; /* Kartu Pilihan Gelap */
-  border: 1px solid var(--border-color); 
-  box-shadow: var(--shadow-sm); 
-  color: var(--text-main); 
-  font-weight: 600;
-  cursor: pointer; 
-  transition: all 0.2s ease;
-}
 
-.choice-card:hover, .choice-option:hover {
-    background-color: var(--primary-faint); 
-    border-color: var(--primary);           
-    color: white;             
-    transform: translateY(-2px);
-    box-shadow: 0 0 15px rgba(192, 132, 252, 0.2);
-}
+/* --- SELECTION GRID (PAKET KANJI) --- */
 
-.choice-selected {
-  background: var(--primary-gradient) !important; 
-  color: white !important; 
-  border-color: transparent !important;
-  box-shadow: 0 0 25px var(--primary-glow) !important;
-  transform: scale(1.02) !important; 
-}
-
-/* --- INPUT TEXT (KAPSUL) --- */
-.mem-input-box {
-    background: #020617 !important;
-    border: 2px solid var(--border-color) !important;
-    border-radius: 50px !important;
-    padding: 8px 15px !important;
-    box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
-}
-.mem-input-box:focus-within {
-    border-color: var(--primary) !important;
-    box-shadow: 0 0 20px var(--primary-glow) !important;
-}
-#memInput { color: white !important; font-weight: 600; font-size: 1.2rem; }
-#btnMic { color: var(--primary); }
-#btnMic:hover { background: var(--primary); color: #fff; box-shadow: 0 0 15px var(--primary); }
-/* ==================================================================
-   FIX FINAL: GRID PILIHAN PAKET (NEON TILES)
-   ================================================================== */
-
-/* --- MODAL UTAMA --- */
-.modal-content { 
-    background-color: var(--surface) !important; 
-    color: var(--text-main) !important;
-    border: 1px solid var(--border-color) !important; 
-    border-radius: 24px !important; 
-    box-shadow: 0 0 50px rgba(0,0,0,0.8) !important;
-}
-.modal-header { 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important; 
-    padding: 20px 25px !important;
-}
-.modal-footer {
-    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-    padding: 20px 25px !important;
-}
-.btn-close { 
-    filter: invert(1) grayscale(100%) brightness(200%); /* Silang Putih */
-}
-
-/* --- GRID CONTAINER (SCROLLBAR CUSTOM) --- */
+/* Container Grid */
 .range-grid-container {
-    display: grid; 
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); /* Ukuran kartu pas */
-    gap: 12px; 
-    padding: 5px; 
-    max-height: 400px; 
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); /* Responsif */
+    gap: 12px;
+    max-height: 400px;
     overflow-y: auto;
-    overflow-x: hidden; 
+    padding: 10px;
 }
 
-/* Scrollbar Keren (Tipis & Gelap) */
-.range-grid-container::-webkit-scrollbar { width: 6px; }
-.range-grid-container::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
-.range-grid-container::-webkit-scrollbar-thumb { 
-    background: #334155; 
-    border-radius: 10px; 
-}
-.range-grid-container::-webkit-scrollbar-thumb:hover { background: var(--primary); }
-
-/* Reset Container Bootstrap */
-.range-grid-container .form-check { 
-    padding: 0 !important; 
-    margin: 0 !important; 
-    min-height: auto !important;
-}
-
-/* SEMBUNYIKAN CHECKBOX ASLI (PENTING!) */
-.range-grid-container .form-check-input { 
-    position: absolute;
-    opacity: 0;
+/* Base Card Style (Kotak Kaca) */
+.selection-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 15px;
+    position: relative;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
-    height: 0; width: 0;
-}
-
-/* --- DESAIN KARTU PILIHAN --- */
-.range-grid-container .form-check-label {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
     text-align: center;
-    
-    width: 100%;
-    height: 100%;
-    min-height: 85px; /* Tinggi kartu */
-    padding: 15px 10px;
-    
-    background-color: rgba(30, 41, 59, 0.6); /* Gelap Transparan */
-    border: 2px solid rgba(255, 255, 255, 0.05); /* Border tipis */
-    border-radius: 16px;       
-    
-    cursor: pointer; 
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    user-select: none; /* Biar teks gak ke-blok biru */
 }
 
-/* Typography Judul (No. 1 - 20) */
-.range-grid-container .form-check-label strong {
-    font-size: 1rem; 
-    font-weight: 700;  
-    color: #e2e8f0;    
+/* Hover Effect */
+.selection-card:hover {
+    background: rgba(217, 70, 239, 0.1);
+    border-color: var(--neon-main);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Sembunyikan Checkbox Asli (Kita ganti visualnya) */
+.selection-card .form-check-input {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    margin: 0;
+    z-index: 2;
+    background-color: transparent;
+    border: 1px solid rgba(255,255,255,0.3);
+    width: 20px;
+    height: 20px;
+    border-radius: 6px !important;
+    cursor: pointer;
+}
+
+/* STATE: CHECKED (Ketika Dipilih) */
+/* Kita gunakan :has() selector modern atau styling input langsung */
+
+.selection-card:has(.form-check-input:checked), 
+.selection-card.active {
+    background: linear-gradient(135deg, rgba(217, 70, 239, 0.2), rgba(168, 85, 247, 0.1));
+    border-color: var(--neon-main);
+    box-shadow: 0 0 20px rgba(217, 70, 239, 0.3);
+}
+
+/* Ubah warna centang checkbox jadi ungu neon */
+.selection-card .form-check-input:checked {
+    background-color: var(--neon-main) !important;
+    border-color: var(--neon-main) !important;
+    box-shadow: 0 0 10px var(--neon-main);
+}
+
+/* Typography di dalam card */
+.selection-label {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #fff;
     margin-bottom: 4px;
     display: block;
 }
 
-/* Typography Sub-judul (20 Kanji) */
-.range-grid-container .form-check-label span {
-    font-size: 0.75rem; 
-    color: #94a3b8 !important; 
-    font-weight: 500;
+.selection-sub {
+    font-size: 0.8rem;
+    color: var(--text-sec); /* Warna ungu pudar */
 }
 
-/* --- EFEK HOVER --- */
-.range-grid-container .form-check-label:hover { 
-    background-color: rgba(192, 132, 252, 0.1); /* Ungu tipis */
-    border-color: rgba(192, 132, 252, 0.5); 
-    transform: translateY(-2px);
-}
-
-/* --- EFEK SAAT DIPILIH (CHECKED) - MENYALA UNGU --- */
-.range-grid-container .form-check-input:checked + .form-check-label {
-    background: linear-gradient(135deg, rgba(192, 132, 252, 0.2) 0%, rgba(126, 34, 206, 0.2) 100%);
-    border-color: var(--primary); /* Border Ungu Terang */
-    box-shadow: 0 0 20px rgba(192, 132, 252, 0.25), inset 0 0 10px rgba(192, 132, 252, 0.1); 
-}
-
-.range-grid-container .form-check-input:checked + .form-check-label strong {
-    color: var(--primary) !important; /* Teks jadi Ungu */
-    text-shadow: 0 0 10px rgba(192, 132, 252, 0.6);
-}
-
-.range-grid-container .form-check-input:checked + .form-check-label span { 
-    color: #fff !important; 
-}
-
-/* Tambahkan Ikon Centang Kecil saat dipilih */
-.range-grid-container .form-check-input:checked + .form-check-label::after {
-    content: "✓";
-    position: absolute;
-    top: 5px; right: 8px;
-    font-size: 12px;
-    color: var(--primary);
-    font-weight: bold;
-}
-
-/* --- TOMBOL DI FOOTER MODAL --- */
-.modal-footer .btn-light {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: #cbd5e1;
-}
-.modal-footer .btn-light:hover {
-    background: rgba(255,255,255,0.1);
-    color: #fff;
-}
-
-/* --- DAFTAR KOTOBA GRID (HASIL) --- */
-.kanji-list-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
-    gap: 15px; padding: 10px 5px;
-}
-.kanji-card-small {
-    background: #1e293b !important; /* Gelap */
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    border-radius: 16px;
-    padding: 20px 10px;
-    text-align: center;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-}
-.kanji-card-small:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-    border-color: var(--primary) !important;
-}
-.k-char {
-    font-size: 2.5rem; 
-    font-weight: 800;
-    color: var(--primary); /* Ungu Neon */
+/* Icon dekorasi kecil (Opsional) */
+.selection-icon {
+    font-size: 1.5rem;
+    color: rgba(255,255,255,0.2);
     margin-bottom: 8px;
-    line-height: 1;
-    text-shadow: 0 0 15px rgba(192, 132, 252, 0.3);
-}
-.k-read { color: #fff; font-weight: bold; font-size: 1.1rem; }
-.k-mean { color: #94a3b8; font-size: 0.9rem; margin-top: 5px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 5px;}
-
-/* ==================================================================
-   FIX FINAL: GRID PILIHAN PAKET (KEMBALI KE UNGU & LEBIH PREMIUM)
-   ================================================================== */
-
-/* 1. TOMBOL BATAL & RESET (GELAP TAPI JELAS) */
-.modal-footer .btn-light, 
-.modal-body .btn-light {
-    background-color: rgba(255, 255, 255, 0.08) !important; /* Transparan Putih */
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    color: #e2e8f0 !important; /* Teks Putih Terang */
-    font-weight: 600 !important;
-    padding: 8px 25px !important;
-    border-radius: 50px !important; /* Bulat Lonjong */
-    transition: all 0.3s;
+    transition: 0.3s;
 }
 
-.modal-footer .btn-light:hover, 
-.modal-body .btn-light:hover {
-    background-color: #fff !important;
-    color: #000 !important; /* Saat hover jadi Putih Solid */
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+.selection-card:hover .selection-icon,
+.selection-card:has(.form-check-input:checked) .selection-icon {
+    color: var(--neon-main);
+    transform: scale(1.1);
 }
 
-/* 2. GRID LAYOUT YANG RAPI */
+
+/* --- TAMBAHAN KHUSUS (PATCH) --- */
+
+/* 1. RESET DAFTAR PAKET JADI TEXT-ONLY (SIMPLE) */
 .range-grid-container {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)) !important; 
-    gap: 12px !important;
-    padding: 10px 5px !important;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px 20px;
+    padding: 10px 5px;
+    max-height: 400px;
+    overflow-y: auto;
 }
 
-/* 3. KARTU PAKET (KONDISI MATI / BELUM DIPILIH) */
-.range-grid-container .form-check-label {
-    background: #0f172a !important;        /* Background Gelap */
-    border: 1px solid rgba(192, 132, 252, 0.3) !important; /* Border Ungu Tipis */
-    border-radius: 16px !important;
-    
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    align-items: center !important;        /* Rata Tengah biar rapi */
-    text-align: center !important;
-    
-    min-height: 85px !important;
-    padding: 10px !important;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    
-    /* Reset style aneh */
+/* Hapus semua kotak/border dari item list */
+.simple-check-item {
+    background: transparent !important;
+    border: none !important;
     box-shadow: none !important;
-    transform: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     cursor: pointer;
 }
 
-/* Teks Judul (No. 1-20) */
-.range-grid-container .form-check-label strong {
-    font-size: 0.95rem !important;
-    color: #c084fc !important; /* Teks Ungu Neon */
-    margin-bottom: 4px !important;
-    text-shadow: 0 0 5px rgba(192, 132, 252, 0.3);
+/* Style Checkbox Custom (Ungu Neon) */
+.simple-check-item .form-check-input {
+    background-color: transparent;
+    border: 2px solid #555; /* Abu gelap */
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    border-radius: 4px !important;
+    cursor: pointer;
 }
 
-/* Teks Info (20 Kanji) */
-.range-grid-container .form-check-label span,
-.range-grid-container .form-check-label .small {
-    font-size: 0.75rem !important;
-    color: #94a3b8 !important; /* Abu-abu */
+.simple-check-item .form-check-input:checked {
+    background-color: #d946ef !important; /* UNGU */
+    border-color: #d946ef !important;
+    box-shadow: 0 0 8px #d946ef;
 }
 
-/* EFEK HOVER KARTU */
-.range-grid-container .form-check-label:hover {
-    background: rgba(192, 132, 252, 0.1) !important;
-    border-color: #c084fc !important;
+/* Teks Label */
+.simple-check-item label {
+    color: #aaa; /* Abu-abu default */
+    font-weight: 500;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* Teks saat dipilih jadi Putih */
+.simple-check-item .form-check-input:checked ~ label {
+    color: #fff !important;
+    font-weight: 700;
+    text-shadow: 0 0 5px rgba(217, 70, 239, 0.5);
+}
+
+/* 2. RESET TOMBOL KEMBALI (TEXT ONLY) */
+#btn-main-back {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    color: #888 !important; /* Warna abu */
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+}
+
+#btn-main-back:hover {
+    color: #d946ef !important; /* Jadi Ungu saat hover */
+    transform: translateX(-5px); /* Geser kiri dikit */
+}
+
+/* ========================================================
+   PATCH CSS: TAMPILAN SIMPLE & TEXT-ONLY (TANPA UBAH JS)
+   ======================================================== */
+/* =================================================================
+   FINAL TUNING: UKURAN PAS & RAPI (INVISIBLE CHECKBOX)
+   ================================================================= */
+
+/* 1. GRID CONTAINER (UKURAN LEBAR KOTAK DIATUR DI SINI) */
+#rangeListQuiz, 
+#rangeListMem, 
+#rangeListDaftar {
+    display: grid !important;
+    /* UBAH ANGKA 130px DI BAWAH JIKA MAU LEBIH LEBAR/SEMPIT */
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)) !important;
+    gap: 10px !important; /* Jarak antar kotak lebih rapat */
+    padding: 10px 5px !important;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* 2. ITEM KARTU (UKURAN TINGGI DIATUR DI SINI) */
+#rangeListQuiz .form-check, 
+#rangeListMem .form-check, 
+#rangeListDaftar .form-check {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important; /* Susun vertikal biar rapi */
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    
+    /* Background Transparan Elegan */
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 10px !important; /* Sudut sedikit lebih tumpul */
+    
+    /* UKURAN TINGGI & PADDING */
+    padding: 8px 5px !important;  /* Lebih hemat tempat */
+    margin: 0 !important;
+    min-height: 50px !important;  /* Tinggi minimal pas, tidak kegedean */
+    
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    cursor: pointer !important;
+    overflow: hidden !important;
+}
+
+/* EFEK HOVER */
+#rangeListQuiz .form-check:hover, 
+#rangeListMem .form-check:hover, 
+#rangeListDaftar .form-check:hover {
+    background: rgba(217, 70, 239, 0.15) !important;
+    border-color: rgba(217, 70, 239, 0.4) !important;
     transform: translateY(-2px) !important;
 }
 
-/* 4. KARTU SAAT DIPILIH (AKTIF) - UNGU NEON GRADIENT */
-.range-grid-container .form-check-input:checked + .form-check-label {
-    background: linear-gradient(135deg, #c084fc 0%, #7e22ce 100%) !important; /* Gradasi Ungu */
-    border-color: transparent !important;
-    box-shadow: 0 0 20px rgba(192, 132, 252, 0.5) !important; /* Glow Ungu */
-    transform: scale(1.02) !important;
+/* EFEK SAAT DIPILIH (AKTIF) */
+#rangeListQuiz .form-check:has(.form-check-input:checked), 
+#rangeListMem .form-check:has(.form-check-input:checked), 
+#rangeListDaftar .form-check:has(.form-check-input:checked) {
+    background: linear-gradient(135deg, rgba(217, 70, 239, 0.25), rgba(168, 85, 247, 0.15)) !important;
+    border-color: #d946ef !important;
+    box-shadow: 0 0 12px rgba(217, 70, 239, 0.3) !important;
 }
 
-/* Teks saat dipilih jadi Putih Bersih */
-.range-grid-container .form-check-input:checked + .form-check-label strong,
-.range-grid-container .form-check-input:checked + .form-check-label span,
-.range-grid-container .form-check-input:checked + .form-check-label .small {
-    color: #ffffff !important;
-    text-shadow: none !important;
+/* 3. SEMBUNYIKAN INPUT CHECKBOX (JANGAN DIUBAH) */
+#rangeListQuiz .form-check-input, 
+#rangeListMem .form-check-input, 
+#rangeListDaftar .form-check-input {
+    opacity: 0 !important;
+    position: absolute !important;
+    width: 0 !important;
+    height: 0 !important;
+    pointer-events: none !important;
+}
+/* Hapus style default checked */
+#rangeListQuiz .form-check-input:checked, 
+#rangeListMem .form-check-input:checked, 
+#rangeListDaftar .form-check-input:checked {
+     box-shadow: none !important;
+     background: transparent !important;
 }
 
-/* Matikan centang (biar bersih) */
-.range-grid-container .form-check-input:checked + .form-check-label::after {
-    content: none !important;
+/* 4. TEKS LABEL */
+#rangeListQuiz .form-check-label, 
+#rangeListMem .form-check-label, 
+#rangeListDaftar .form-check-label {
+    padding: 0 !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+    line-height: 1.1 !important;
+    user-select: none;
+    z-index: 2;
+    width: 100% !important;
 }
 
-/* 5. TOMBOL CLOSE (SILANG PUTIH) */
-.btn-close {
-    filter: invert(1) grayscale(100%) brightness(200%) !important;
-    opacity: 0.7;
-}
-.btn-close:hover { opacity: 1; }
-
-
-
-/* ==================================================================
-   FIX FINAL: TAMPILAN DAFTAR KANJI (DARK NEON PURPLE)
-   ================================================================== */
-
-/* 1. UBAH BACKGROUND MODAL BESAR JADI GELAP */
-#daftarHafalanModal .modal-content {
-    background-color: #0f172a !important; /* Dark Blue Black */
-    border: 1px solid rgba(192, 132, 252, 0.2) !important;
-}
-
-#daftarHafalanModal .modal-header,
-#daftarHafalanModal .modal-footer {
-    background-color: #0f172a !important;
-    border-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-#daftarHafalanModal .modal-body {
-    background-color: #020617 !important; /* Latar Belakang Paling Gelap */
-}
-
-/* 2. UBAH KARTU KANJI (YANG TADINYA PUTIH) */
-#daftarList .card {
-    background: #1e293b !important; /* Paksa Background Gelap */
-    border: 1px solid rgba(192, 132, 252, 0.15) !important;
-    border-radius: 16px !important;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3) !important;
-    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
-}
-
-/* Efek Hover Kartu */
-#daftarList .card:hover {
-    transform: translateY(-5px);
-    border-color: #c084fc !important; /* Border Ungu Nyala */
-    box-shadow: 0 0 20px rgba(192, 132, 252, 0.25) !important;
-    background: #252f46 !important;
-}
-
-/* 3. UBAH TEKS KANJI (BESAR & UNGU) */
-#daftarList .text-primary {
-    color: #c084fc !important; /* Ganti Biru jadi Ungu Neon */
-    text-shadow: 0 0 15px rgba(192, 132, 252, 0.5); /* Efek Cahaya */
-    font-weight: 800 !important;
-}
-
-/* 4. UBAH TEKS CARA BACA (Furigana) */
-#daftarList .text-dark {
-    color: #ffffff !important; /* Ganti Hitam jadi Putih */
-}
-
-/* 5. UBAH TEKS ARTI (Indonesia) */
-#daftarList .text-secondary {
-    color: #94a3b8 !important; /* Abu-abu Terang */
-    border-top-color: rgba(255, 255, 255, 0.1) !important; /* Garis pemisah */
-}
-
-/* 6. UBAH BADGE (Label Paket di Atas Kartu) */
-#daftarList .badge {
-    background-color: rgba(192, 132, 252, 0.1) !important; /* Ungu Transparan */
-    color: #c084fc !important; /* Teks Ungu */
-    border: 1px solid rgba(192, 132, 252, 0.3) !important;
+/* Judul Paket (Strong) */
+#rangeListQuiz .form-check-label strong, 
+#rangeListMem .form-check-label strong, 
+#rangeListDaftar .form-check-label strong {
     font-weight: 600 !important;
+    font-size: 0.9rem !important; /* Ukuran font pas */
+    color: #a0a0a0 !important;
+    display: block !important;
+    margin-bottom: 2px !important;
 }
 
-/* 7. TOMBOL "GANTI PAKET" DI BAWAH */
-#daftarHafalanModal .btn-outline-custom {
-    color: #c084fc !important;
-    border-color: #c084fc !important;
-}
-#daftarHafalanModal .btn-outline-custom:hover {
-    background-color: #c084fc !important;
-    color: #000 !important;
-    box-shadow: 0 0 15px rgba(192, 132, 252, 0.5);
+/* Info Kecil */
+#rangeListQuiz .form-check-label .small, 
+#rangeListMem .form-check-label .small, 
+#rangeListDaftar .form-check-label .small {
+    font-size: 0.7rem !important;
+    color: #666 !important;
+    display: block !important;
 }
 
-/* Style Khusus Romaji di Daftar */
-#daftarList .k-romaji {
-    color: #f472b6 !important; /* Pink Neon Pudar */
-    opacity: 0.9;
-    letter-spacing: 0.5px;
-}
-
-
-/* ==================================================================
-   FIX FINAL: INPUT TULIS ARTI (GLASS CAPSULE)
-   ================================================================== */
-
-/* 1. LABEL "Ketik Arti..." */
-.mem-label {
-    color: #94a3b8 !important; /* Abu Terang */
-    font-size: 0.85rem !important;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 700;
-    margin-bottom: 10px;
-    display: block;
-}
-
-/* 2. WADAH INPUT (KAPSUL UTAMA) */
-.mem-input-box {
-    display: flex;
-    align-items: center;
-    
-    /* Background Gelap Transparan */
-    background: rgba(15, 23, 42, 0.6) !important; 
-    border: 2px solid rgba(255, 255, 255, 0.1) !important; 
-    
-    border-radius: 50px !important; 
-    padding: 5px 5px 5px 25px !important; 
-    box-shadow: inset 0 2px 10px rgba(0,0,0,0.3); 
-    transition: all 0.3s ease;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-/* Efek Fokus (Glow Ungu) */
-.mem-input-box:focus-within {
-    border-color: #c084fc !important; /* Border Ungu */
-    box-shadow: 0 0 20px rgba(192, 132, 252, 0.3), inset 0 2px 5px rgba(0,0,0,0.5) !important;
-    background: rgba(15, 23, 42, 0.9) !important;
-}
-
-/* 3. FIELD INPUT (TEKS) */
-#memInput {
-    background: transparent !important; /* Hapus putih */
-    border: none !important;
-    outline: none !important;
-    box-shadow: none !important;
-    
-    color: #ffffff !important; /* Teks Putih */
-    font-size: 1.3rem !important;
-    font-weight: 600 !important;
-    width: 100%;
-    height: 50px;
-}
-
-/* Placeholder (Teks samar) */
-#memInput::placeholder {
-    color: rgba(255, 255, 255, 0.2) !important;
-    font-weight: 400;
-}
-
-/* Matikan Background Kuning AutoFill Browser */
-#memInput:-webkit-autofill,
-#memInput:-webkit-autofill:hover, 
-#memInput:-webkit-autofill:focus {
-    -webkit-text-fill-color: white;
-    -webkit-box-shadow: 0 0 0px 1000px #0f172a inset;
-    transition: background-color 5000s ease-in-out 0s;
-}
-
-/* 4. TOMBOL MIC */
-#btnMic {
-    width: 48px; height: 48px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.05);
-    color: #c084fc; /* Ikon Ungu */
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: all 0.2s;
-    margin-left: 10px;
-}
-
-#btnMic:hover {
-    background: #c084fc; /* Ungu Solid */
-    color: #000;
-    box-shadow: 0 0 15px rgba(192, 132, 252, 0.6);
-}
-
-/* Animasi Merekam */
-#btnMic.recording {
-    background: #ef4444 !important;
-    color: white !important;
-    animation: pulseMic 1s infinite;
-}
-@keyframes pulseMic {
-    0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
-    100% { box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); }
-}
-
-/* ==================================================================
-   FIX FINAL: TOMBOL NAVIGASI & UKURAN KARTU (HAPUS BIRU)
-   ================================================================== */
-
-/* 1. PERBESAR KOTAK UTAMA (CARD) */
-.card-kanji {
-    min-height: 550px !important; /* Diperbesar (sebelumnya 480px) */
-    padding: 10px !important;     /* Tambah ruang di dalam */
-}
-
-/* 2. TOMBOL UTAMA (BERIKUTNYA / SELESAI) -> JADI UNGU NEON */
-.card-kanji .btn-primary, 
-.card-kanji .btn-success {
-    background: var(--primary-gradient) !important; /* Pakai Gradasi Ungu */
-    border: none !important;
-    box-shadow: 0 4px 15px rgba(192, 132, 252, 0.4) !important; /* Bayangan Ungu */
+/* SAAT DIPILIH: TEKS MENYALA */
+#rangeListQuiz .form-check-input:checked + .form-check-label strong, 
+#rangeListMem .form-check-input:checked + .form-check-label strong, 
+#rangeListDaftar .form-check-input:checked + .form-check-label strong {
     color: #fff !important;
-    font-weight: 700 !important;
-    border-radius: 50px !important; /* Bulat penuh */
-    padding: 12px 30px !important;  /* Lebih tebal */
+    text-shadow: 0 0 8px rgba(217, 70, 239, 0.7) !important;
+}
+#rangeListQuiz .form-check-input:checked + .form-check-label .small, 
+#rangeListMem .form-check-input:checked + .form-check-label .small, 
+#rangeListDaftar .form-check-input:checked + .form-check-label .small {
+    color: rgba(255,255,255,0.8) !important;
+}
+
+/* 5. TOMBOL KEMBALI (TETAP SAMA) */
+#btn-main-back {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: #94a3b8 !important;
+    padding: 5px 12px !important;
+    font-weight: 600 !important;
+    font-size: 0.9rem !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 50px !important;
     transition: all 0.3s ease !important;
 }
 
-/* Efek Hover (Menyala) */
-.card-kanji .btn-primary:hover, 
-.card-kanji .btn-success:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 0 25px var(--primary-glow) !important;
-}
-
-/* Hapus efek biru saat diklik */
-.card-kanji .btn-primary:active, 
-.card-kanji .btn-primary:focus {
-    background: var(--primary-dark) !important;
-    box-shadow: none !important;
-}
-
-/* 3. TOMBOL SEBELUMNYA (GAYA MINIMALIS GELAP) */
-.card-kanji .btn-outline-secondary {
-    border: 2px solid rgba(255, 255, 255, 0.15) !important;
-    color: #94a3b8 !important; /* Abu terang */
-    background: transparent !important;
-    font-weight: 600 !important;
-    border-radius: 50px !important;
-    padding: 12px 25px !important;
-}
-
-.card-kanji .btn-outline-secondary:hover {
-    border-color: #fff !important;
+#btn-main-back:hover {
     color: #fff !important;
-    background: rgba(255, 255, 255, 0.05) !important;
+    background: rgba(217, 70, 239, 0.15) !important;
+    transform: translateX(-3px);
 }
 
-/* 4. TOMBOL LUPA (KUNING AMBER MODERN) */
-.card-kanji .btn-outline-warning {
-    border: 2px solid #fbbf24 !important; /* Kuning Emas */
-    color: #fbbf24 !important;
-    background: transparent !important;
-    font-weight: 600 !important;
-    border-radius: 50px !important;
-    padding: 12px 25px !important;
+/* =================================================================
+   FINAL ULTRA: TOMBOL KEMBALI (NEON PILL - BERWARNA & BULAT)
+   ================================================================= */
+
+#btn-main-back {
+    /* 1. BENTUK: PIL BULAT SEMPURNA */
+    border-radius: 9999px !important; /* Memastikan sangat bulat */
+    padding: 5px 14px !important;    /* Lebih 'gemuk' */
+    
+    /* 2. WARNA DASAR (Lebih Hidup) */
+    /* Menggunakan gradient ungu transparan sebagai warna dasar */
+    background: linear-gradient(135deg, rgba(217, 70, 239, 0.15), rgba(168, 85, 247, 0.15)) !important;
+    /* Border ungu tipis */
+    border: 1px solid rgba(217, 70, 239, 0.3) !important;
+    /* Teks Putih agar kontras */
+    color: #ffffff !important;
+    /* Bayangan halus */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+
+    /* 3. TYPOGRAPHY & LAYOUT */
+    text-decoration: none !important;
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 0.95rem !important;
+    letter-spacing: 0.5px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    
+    /* Animasi */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-.card-kanji .btn-outline-warning:hover {
-    background: #fbbf24 !important;
-    color: #0f172a !important; /* Teks jadi hitam saat dihover */
-    box-shadow: 0 0 15px rgba(251, 191, 36, 0.4) !important;
+/* EFEK HOVER (SAAT DISENTUH -> MAKIN MENYALA) */
+#btn-main-back:hover {
+    /* Warna gradient lebih pekat */
+    background: linear-gradient(135deg, rgba(217, 70, 239, 0.3), rgba(168, 85, 247, 0.3)) !important;
+    border-color: #d946ef !important;
+    
+    /* Glow Neon Kuat */
+    box-shadow: 0 0 25px rgba(217, 70, 239, 0.4) !important;
+    
+    /* Efek tekan & geser */
+    transform: translateX(-4px) scale(1.02) !important;
+}
+
+/* ANIMASI IKON PANAH */
+#btn-main-back i {
+    transition: transform 0.3s ease !important;
+    color: #e9d5ff !important; /* Ikon sedikit lebih terang */
+}
+
+#btn-main-back:hover i {
+    transform: translateX(-3px) !important;
+    color: #fff !important; /* Ikon jadi putih saat hover */
+}
+
+
+/* =================================================================
+   HERO UPGRADE: IKON CHAT JADI BOLA NEON
+   ================================================================= */
+
+/* Target Lingkaran Pembungkus Ikon */
+.hero-card .rounded-circle {
+    /* 1. BENTUK & UKURAN (BOLA SEMPURNA) */
+    width: 120px !important;       /* Lebar fix */
+    height: 120px !important;      /* Tinggi fix sama dgn lebar */
+    padding: 0 !important;         /* Reset padding */
+    border-radius: 50% !important; /* Bulat penuh */
+    
+    /* 2. WARNA (NEON PURPLE GRADIENT) */
+    background: linear-gradient(135deg, #d946ef, #9333ea) !important;
+    border: 4px solid rgba(255, 255, 255, 0.2) !important; /* Ring kaca luar */
+    
+    /* 3. EFEK CAHAYA (GLOW) */
+    box-shadow: 
+        0 10px 30px rgba(217, 70, 239, 0.5), /* Cahaya ungu luar */
+        inset 0 0 20px rgba(255, 255, 255, 0.3) !important; /* Kilau dalam */
+    
+    /* 4. POSISI CENTER */
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-bottom: 25px !important; /* Jarak ke judul */
+    
+    /* 5. ANIMASI MELAYANG (FLOATING) */
+    animation: neonFloat 3s ease-in-out infinite !important;
+}
+
+/* Style Ikon di Dalamnya */
+.hero-card .rounded-circle i {
+    font-size: 3.5rem !important; /* Perbesar ikon */
+    color: #fff !important;
+    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3)); /* Bayangan ikon */
+}
+
+/* Definisi Animasi Melayang */
+@keyframes neonFloat {
+    0% { transform: translateY(0px); box-shadow: 0 10px 30px rgba(217, 70, 239, 0.5); }
+    50% { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(217, 70, 239, 0.7); }
+    100% { transform: translateY(0px); box-shadow: 0 10px 30px rgba(217, 70, 239, 0.5); }
+}
+
+/* (Opsional) Samarkan Kanji Besar di Background agar Ikon lebih Pop-up */
+.hero-bg-kanji {
+    opacity: 0.03 !important; 
+}
+
+/* =================================================================
+   FINAL UPGRADE: TOMBOL SILANG (NEON CLOSE BUTTON) - UKURAN PAS
+   ================================================================= */
+
+/* Target tombol close di semua modal */
+.btn-close {
+    /* 1. GANTI IKON JADI PUTIH */
+    background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat !important;
+    
+    /* 2. BENTUK & UKURAN (LEBIH RINGKAS) */
+    width: 2rem !important;      /* Dikurangi dari 2.5rem */
+    height: 2rem !important;     /* Dikurangi dari 2.5rem */
+    padding: 0.4rem !important;  /* Padding disesuaikan */
+    border-radius: 50% !important; /* Bulat sempurna */
+    
+    /* 3. WARNA DASAR (GLASS) */
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    opacity: 0.7 !important;
+    box-shadow: none !important;
+    
+    /* 4. ANIMASI */
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) !important;
+    filter: none !important;
+}
+
+/* EFEK HOVER (SAAT DISENTUH) */
+.btn-close:hover {
+    opacity: 1 !important;
+    /* Warna Merah Neon */
+    background-color: rgba(255, 50, 50, 0.15) !important; 
+    border-color: #ff4d4d !important;
+    /* Glow Merah */
+    box-shadow: 0 0 15px rgba(255, 77, 77, 0.4) !important;
+    /* Animasi Putar */
+    transform: rotate(90deg) scale(1.1) !important; 
+}
+
+/* Fokus */
+.btn-close:focus {
+    box-shadow: 0 0 0 3px rgba(255, 77, 77, 0.2) !important;
+    outline: none !important;
 }
