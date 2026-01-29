@@ -1416,3 +1416,23 @@ h1.display-1, .text-center h1 {
     margin-bottom: 30px !important; /* Jarak tambahan di bawah judul 'Hafalan 1/20' */
 }
 
+
+/* =================================================================
+   FIX: POSISI TOMBOL KEMBALI DI MOBILE (AGAR TIDAK MEPET)
+   ================================================================= */
+
+@media (max-width: 576px) {
+    #btn-main-back {
+        /* Memberi jarak dari kiri layar (agar lurus dengan konten) */
+        margin-left: 24px !important; 
+        
+        /* Memberi jarak sedikit dari elemen atas & bawahnya */
+        margin-top: 15px !important;
+        margin-bottom: 10px !important;
+        
+        /* Pastikan tombol tidak terlalu lebar */
+        width: fit-content !important; 
+    }
+}
+
+
