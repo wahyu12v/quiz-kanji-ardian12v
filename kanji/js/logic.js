@@ -1,151 +1,215 @@
-import { KEYS } from './constants.js';
-import { hiraToRomaji } from './utils.js';
-import { getMastery } from './storage.js'; 
+// ============================================================
+// logic.js — Otak Algoritma
+// ============================================================
 
-function internalShuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
+import { CHUNK_SIZE, LEVELS, MODES, NUM_OPTIONS } from './constants.js';
+import { shuffleArray, getAnswerAliases, isFuzzyMatch, romajiToHiragana, normalizeText } from './utils.js';
+import { getMastery, countMastered } from './storage.js';
+
+// =============================================
+// FILTER & CHUNKING
+// =============================================
+
+export function processData(allData, levelFilter) {
+  let filtered;
+
+  if (levelFilter === LEVELS.N5) {
+    filtered = allData.filter(k => k.level === 'N5');
+  } else if (levelFilter === LEVELS.N4) {
+    filtered = allData.filter(k => k.level === 'N4');
+  } else {
+    const n5 = allData.filter(k => k.level === 'N5').sort((a, b) => a.No - b.No);
+    const n4 = allData.filter(k => k.level === 'N4').sort((a, b) => a.No - b.No);
+    filtered = [...n5, ...n4];
   }
-  return array;
+
+  const packets = [];
+  for (let i = 0; i < filtered.length; i += CHUNK_SIZE) {
+    packets.push(filtered.slice(i, i + CHUNK_SIZE));
+  }
+
+  return { filtered, packets };
 }
 
-function getSimilarityScore(target, candidate) {
-    if (!target || !candidate) return 0;
-    let score = 0;
-    const lenDiff = Math.abs(target.length - candidate.length);
-    if (lenDiff === 0) score += 30; else if (lenDiff === 1) score += 10; else score -= 50;
-    if (target[0] === candidate[0]) score += 25;
-    if (target.slice(-1) === candidate.slice(-1)) score += 15;
-    if (target.length > 1 && candidate.length > 1 && target[1] === candidate[1]) score += 10;
-    let sharedChars = 0;
-    for (let char of candidate) { if (target.includes(char)) sharedChars++; }
-    score += (sharedChars * 2);
-    return score;
+export function mergePackets(selectedPackets) {
+  return selectedPackets.flat();
 }
 
-export function buildChoices(orderIndices, allQuestions, mode = 'quiz') {
-  return orderIndices.map(idx => {
-    const q = allQuestions[idx];
-    let correctVal;
-    if (mode === 'quiz_hiragana') correctVal = String(q[KEYS.hiragana] || q['kana'] || '').trim();
-    else correctVal = String(q[KEYS.meaning] || q['arti'] || q['indo'] || '').trim();
+// =============================================
+// PEMBUATAN SOAL
+// =============================================
 
-    const correctOption = { text: correctVal, isCorrect: true }; 
-    let rawPool = allQuestions.map(item => {
-        if (mode === 'quiz_hiragana') return String(item[KEYS.hiragana] || item['kana'] || '').trim();
-        return String(item[KEYS.meaning] || item['arti'] || item['indo'] || '').trim();
-    });
-    let uniquePool = [...new Set(rawPool)];
-    let pool = uniquePool.filter(val => val !== "" && val !== correctVal);
-    let scoredPool = pool.map(candidate => ({ text: candidate, score: getSimilarityScore(correctVal, candidate) }));
-    scoredPool.sort((a, b) => b.score - a.score);
-    let topDistractors = scoredPool.slice(0, 3).map(item => ({ text: item.text, isCorrect: false }));
-    
-    if (topDistractors.length < 3) {
-        const needed = 3 - topDistractors.length;
-        const usedTexts = topDistractors.map(d => d.text);
-        const leftovers = pool.filter(p => !usedTexts.includes(p));
-        internalShuffle(leftovers);
-        leftovers.slice(0, needed).forEach(t => topDistractors.push({ text: t, isCorrect: false }));
+export function buildQuestion(kanji, mode, pool) {
+  const question = {
+    kanji,
+    mode,
+    type: mode.startsWith('quiz') ? 'quiz' : 'essay',
+    options: null,
+    correctKey: '',
+    correctAliases: [],
+  };
+
+  if (mode === MODES.QUIZ_ARTI || mode === MODES.ESSAY_ARTI) {
+    // FIX: handle data entry No.514 yang punya field 'arti' lowercase
+    const artiVal = kanji.Arti || kanji.arti || '';
+    question.correctKey     = artiVal;
+    question.correctAliases = getAnswerAliases(artiVal);
+  } else {
+    question.correctKey     = kanji.Hiragana;
+    question.correctAliases = getAnswerAliases(kanji.Hiragana);
+    if (kanji.Romaji) {
+      question.correctAliases.push(...getAnswerAliases(kanji.Romaji));
     }
-    const finalChoices = [correctOption, ...topDistractors];
-    return internalShuffle(finalChoices);
-  });
+  }
+
+  if (question.type === 'quiz') {
+    question.options = buildSmartDistractors(kanji, mode, pool);
+  }
+
+  return question;
 }
 
-export function gradeSession(state, allQuestions) {
-    let correctCount = 0;
-    const results = state.batch.map((q, i) => {
-        const originalIndex = allQuestions.indexOf(q); 
-        const hira = String(q[KEYS.hiragana] || q['kana'] || '').trim(); 
-        const mean = String(q[KEYS.meaning] || q['indo'] || '').trim(); 
-        const romajiDB = String(q['romaji'] || '').trim(); 
-        
-        let isCorrect = false;
-        let userAnsStr = "Lupa";
+// =============================================
+// SMART DISTRACTOR — Menjebak tapi fair
+// Bug fix: shuffleArray returns NEW array, assign hasilnya kembali
+// =============================================
 
-        if (state.sessionType.includes('quiz')) {
-            const choiceIdx = state.answers[i];
-            const choices = state.choicesPerQ[i];
-            if (choiceIdx !== null && choiceIdx !== 'Lupa') {
-                const choice = choices[choiceIdx];
-                if (choice && choice.isCorrect) isCorrect = true;
-                userAnsStr = choice ? choice.text : "Lupa";
-            }
-        } else {
-            const raw = state.answers[i] || '';
-            if (raw && raw !== 'Lupa') {
-                if (state.sessionType === 'write_romaji') {
-                    const cleanRomaji = (text) => text ? text.toLowerCase().replace(/\[.*?\]/g, '').replace(/[~～]/g, '').trim() : "";
-                    if (cleanRomaji(romajiDB) === cleanRomaji(raw)) isCorrect = true;
-                } else {
-                    const userAns = raw.toLowerCase().trim();
-                    const validAnswers = mean.toLowerCase().split(/[\/,]/).map(s => s.trim());
-                    isCorrect = validAnswers.some(key => {
-                        if (key.length < 3) return key === userAns;
-                        if (userAns.length < 2) return key === userAns;
-                        return key.includes(userAns) || userAns.includes(key);
-                    });
-                }
-            }
-            userAnsStr = raw;
-        }
-        if (isCorrect) correctCount++;
-        return { q, isCorrect, userAns: userAnsStr, realHira: hira, realMean: mean, realRomaji: romajiDB, romTrue: hiraToRomaji(hira), originalIndex: originalIndex };
-    });
-    return { score: correctCount, total: state.batch.length, details: results };
+function buildSmartDistractors(kanji, mode, pool) {
+  const isArti        = mode === MODES.QUIZ_ARTI;
+  const getField      = (k) => isArti ? (k.Arti || k.arti || '') : (k.Hiragana || '');
+  const correctAnswer = getField(kanji);
+  const correctNorm   = normalizeText(correctAnswer);
+
+  // Hitung skor kedekatan untuk setiap kandidat
+  const scoreCandidate = (k) => {
+    const val  = getField(k);
+    const norm = normalizeText(val);
+    let s = 0;
+
+    if (isArti) {
+      // Kedekatan panjang kata
+      const lenDiff = Math.abs(val.length - correctAnswer.length);
+      s += Math.max(0, 12 - lenDiff * 2);
+      // Prefiks 2 karakter sama → sangat menjebak
+      if (norm.slice(0, 2) === correctNorm.slice(0, 2)) s += 10;
+      else if (norm[0] === correctNorm[0]) s += 5;
+      // Jumlah kata sama (frasa mirip)
+      if (val.split(' ').length === correctAnswer.split(' ').length) s += 4;
+      // Sufiks sama ("membeli" vs "menjual")
+      if (norm.slice(-2) === correctNorm.slice(-2)) s += 6;
+      // Kata yang overlap (misal "pergi" vs "pergi-pergi")
+      const wordSet = new Set(correctAnswer.toLowerCase().split(/[\s,/\-]+/));
+      val.toLowerCase().split(/[\s,/\-]+/).forEach(w => {
+        if (w.length > 2 && wordSet.has(w)) s += 8;
+      });
+    } else {
+      // Hiragana: mora awal identik = paling menjebak
+      if (val.length >= 3 && val.slice(0, 3) === correctAnswer.slice(0, 3)) s += 14;
+      else if (val.length >= 2 && val.slice(0, 2) === correctAnswer.slice(0, 2)) s += 10;
+      else if (val[0] === correctAnswer[0]) s += 6;
+      // Panjang mora mirip
+      const lenDiff = Math.abs(val.length - correctAnswer.length);
+      s += Math.max(0, 10 - lenDiff * 2);
+      // Akhiran sama
+      if (val.length >= 2 && val.slice(-2) === correctAnswer.slice(-2)) s += 5;
+    }
+
+    // Tipe & level sama → konteks lebih relevan
+    if (k.type  === kanji.type)  s += 6;
+    if (k.level === kanji.level) s += 4;
+
+    return s;
+  };
+
+  // Kumpulkan semua kandidat unik dari pool
+  const seen       = new Set([correctNorm]);
+  const candidates = [];
+
+  for (const k of pool) {
+    if (k.No === kanji.No) continue;
+    const val  = getField(k);
+    const norm = normalizeText(val);
+    if (seen.has(norm)) continue;
+    seen.add(norm);
+    candidates.push({ val, score: scoreCandidate(k) });
+  }
+
+  // Sort descending by score
+  candidates.sort((a, b) => b.score - a.score);
+
+  // Ambil top pool (2x kebutuhan) lalu acak — FIX: gunakan hasil return shuffleArray
+  const topN        = Math.min(candidates.length, Math.max((NUM_OPTIONS - 1) * 2, 6));
+  const topShuffled = shuffleArray(candidates.slice(0, topN)); // FIX: assign result
+  const distractors = topShuffled.slice(0, NUM_OPTIONS - 1).map(c => c.val);
+
+  // Fallback jika distractor kurang dari 3
+  if (distractors.length < NUM_OPTIONS - 1) {
+    for (const c of candidates.slice(topN)) {
+      if (distractors.length >= NUM_OPTIONS - 1) break;
+      distractors.push(c.val);
+    }
+  }
+
+  // Gabung & acak final
+  return shuffleArray([correctAnswer, ...distractors]);
 }
 
-// --- PERBAIKAN LOGIKA PROGRESS (SISTEM PAKET 20) ---
-export function calculateProgress(allQuestions) {
-    const mastery = getMastery();
-    const babStats = {};
-    const chunkSize = 20; // 20 Items per Paket
+export function buildAllQuestions(kanjiList, mode, fullPool) {
+  return kanjiList.map(kanji => buildQuestion(kanji, mode, fullPool));
+}
 
-    // 1. Hitung Data per Paket 20
-    allQuestions.forEach((q, idx) => {
-        const chunkIndex = Math.floor(idx / chunkSize) + 1;
-        const babName = `Paket ${chunkIndex}`;
+// =============================================
+// PENILAIAN JAWABAN
+// =============================================
 
-        if (!babStats[babName]) {
-            babStats[babName] = { totalWords: 0, modes: { quiz:0, quiz_hiragana:0, mem:0, write_romaji:0 } };
-        }
-        babStats[babName].totalWords++;
+export function gradeAnswer(question, userAnswer) {
+  const input = (userAnswer || '').trim();
 
-        if (mastery[idx]) {
-            if (mastery[idx].quiz) babStats[babName].modes.quiz++;
-            if (mastery[idx].quiz_hiragana) babStats[babName].modes.quiz_hiragana++;
-            if (mastery[idx].mem) babStats[babName].modes.mem++;
-            if (mastery[idx].write_romaji) babStats[babName].modes.write_romaji++;
-        }
-    });
+  if (question.type === 'quiz') {
+    // Gunakan normalizeText agar trim + lowercase tidak jadi masalah
+    const isCorrect = normalizeText(input) === normalizeText(question.correctKey);
+    return { isCorrect, userAnswer: input };
+  }
 
-    const finalReport = Object.keys(babStats).map(bab => {
-        const data = babStats[bab];
-        const totalWords = data.totalWords;
-        const totalSlots = totalWords * 4; // Total untuk progress BAR (Gabungan)
-        
-        const sumMastered = data.modes.quiz + data.modes.quiz_hiragana + data.modes.mem + data.modes.write_romaji;
-        const totalPct = totalSlots > 0 ? Math.round((sumMastered / totalSlots) * 100) : 0;
+  // Essay: fuzzy match
+  let isCorrect = isFuzzyMatch(input, question.correctAliases);
 
-        // PERBAIKAN RUMUS: Dibagi 'totalWords' bukan 'totalSlots'
-        const getModePct = (val) => totalWords > 0 ? Math.round((val / totalWords) * 100) : 0;
+  if (!isCorrect && question.mode === MODES.ESSAY_BACA) {
+    const converted = romajiToHiragana(input);
+    isCorrect = isFuzzyMatch(converted, question.correctAliases);
+  }
 
-        return {
-            bab: bab,
-            totalPct: totalPct,
-            detail: {
-                tebakArti: getModePct(data.modes.quiz),
-                tebakHiragana: getModePct(data.modes.quiz_hiragana),
-                tulisArti: getModePct(data.modes.mem),
-                tulisRomaji: getModePct(data.modes.write_romaji)
-            }
-        };
-    });
-    
-    // Sort agar Paket 1, 2, 3 berurutan
-    return finalReport.sort((a, b) => {
-        return parseInt(a.bab.replace('Paket ', '')) - parseInt(b.bab.replace('Paket ', ''));
-    });
+  return { isCorrect, userAnswer: input };
+}
+
+// =============================================
+// PROGRESS & STATISTIK
+// =============================================
+
+export function calculateProgress(kanjiList) {
+  const total      = kanjiList.length;
+  const mastered   = countMastered(kanjiList);
+  const percentage = total > 0 ? Math.round((mastered / total) * 100) : 0;
+  return { total, mastered, percentage };
+}
+
+export function getAllProgressStats(allData) {
+  const n5List = allData.filter(k => k.level === 'N5');
+  const n4List = allData.filter(k => k.level === 'N4');
+  return {
+    N5:  calculateProgress(n5List),
+    N4:  calculateProgress(n4List),
+    ALL: calculateProgress(allData),
+  };
+}
+
+export function calcScore(results) {
+  const total      = results.length;
+  const correct    = results.filter(r => r.isCorrect).length;
+  const percentage = total > 0 ? Math.round((correct / total) * 100) : 0;
+  return { correct, total, percentage };
+}
+
+export function getWrongKanjiList(results) {
+  return results.filter(r => !r.isCorrect).map(r => r.question.kanji);
 }

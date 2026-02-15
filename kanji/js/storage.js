@@ -1,59 +1,142 @@
-// Kunci Penyimpanan
-const HISTORY_KEY = 'kotoba_apps_history';
-const TEMP_KEY = 'kotoba_apps_temp';
-const MASTERY_KEY = 'kotoba_apps_mastery'; // Kunci baru untuk progress
+// ============================================================
+// storage.js — CRUD ke localStorage
+// ============================================================
 
-// --- HISTORY (RIWAYAT TES) ---
-export function saveToHistory(score, total, type, babList) {
-    const history = getHistory();
-    let labelType = type;
-    if (type === 'quiz') labelType = 'Tebak Arti';
-    else if (type === 'quiz_hiragana') labelType = 'Tebak Hiragana';
-    else if (type === 'mem') labelType = 'Tulis Arti';
-    else if (type === 'write_romaji') labelType = 'Tulis Romaji';
-    
-    const entry = {
-        date: new Date().toLocaleString('id-ID', { day: 'numeric', month: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
-        score: score,
-        total: total,
-        type: labelType, 
-        packages: babList || '-', 
-        percentage: total > 0 ? Math.round((score / total) * 100) : 0
-    };
-    history.unshift(entry);
-    if (history.length > 20) history.pop();
-    localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
-}
+import { LS_KEYS } from './constants.js';
 
-export function getHistory() {
-    try { return JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]"); } catch (e) { return []; }
-}
+// =====================
+// MASTERY (Hafal Mati)
+// =====================
 
-// --- MASTERY (PROGRESS HAFALAN) ---
-// Struktur: { "index_0": { "quiz": true, "mem": false ... }, "index_1": ... }
-export function saveMastery(results, sessionType) {
-    const mastery = getMastery();
-    
-    results.forEach((item, index) => {
-        // Kita gunakan index soal asli sebagai ID unik
-        // Pastikan 'q' memiliki properti referensi ke index asli di QUESTIONS global
-        // Di logic.js nanti kita pastikan item.originalIndex terbawa
-        const uniqueId = item.originalIndex; 
-        
-        if (uniqueId !== undefined && item.isCorrect) {
-            if (!mastery[uniqueId]) mastery[uniqueId] = {};
-            mastery[uniqueId][sessionType] = true; // Tandai mode ini sudah pernah benar
-        }
-    });
-    
-    localStorage.setItem(MASTERY_KEY, JSON.stringify(mastery));
-}
-
+/**
+ * Ambil semua data mastery dari localStorage.
+ * Format: { [kanjiNo]: { quiz_arti: bool, quiz_baca: bool, essay_arti: bool, essay_baca: bool } }
+ * @returns {Object}
+ */
 export function getMastery() {
-    try { return JSON.parse(localStorage.getItem(MASTERY_KEY) || "{}"); } catch (e) { return {}; }
+  try {
+    const raw = localStorage.getItem(LS_KEYS.MASTERY);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
 }
 
-// --- TEMP ---
-export function saveTemp(state) { localStorage.setItem(TEMP_KEY, JSON.stringify(state)); }
-export function loadTemp() { try { return JSON.parse(localStorage.getItem(TEMP_KEY)); } catch (e) { return null; } }
-export function clearTemp() { localStorage.removeItem(TEMP_KEY); }
+/**
+ * Update status mastery untuk satu kanji pada satu mode.
+ * @param {number|string} kanjiNo - Nomor kanji (key).
+ * @param {string} mode - Nama mode (lihat MODES di constants.js).
+ * @param {boolean} isCorrect - Apakah dijawab benar.
+ */
+export function updateMastery(kanjiNo, mode, isCorrect) {
+  const mastery = getMastery();
+  const key = String(kanjiNo);
+  if (!mastery[key]) {
+    mastery[key] = {
+      quiz_arti:  false,
+      quiz_baca:  false,
+      essay_arti: false,
+      essay_baca: false,
+    };
+  }
+  // Mastery hanya diberikan saat benar; tidak pernah di-reset otomatis ke false
+  if (isCorrect) {
+    mastery[key][mode] = true;
+  }
+  try {
+    localStorage.setItem(LS_KEYS.MASTERY, JSON.stringify(mastery));
+  } catch (e) {
+    console.warn('Storage penuh atau error:', e);
+  }
+}
+
+/**
+ * Cek apakah sebuah kanji sudah "Mastered" di semua 4 mode.
+ * @param {number|string} kanjiNo
+ * @returns {boolean}
+ */
+export function isMastered(kanjiNo) {
+  const mastery = getMastery();
+  const key = String(kanjiNo);
+  const m = mastery[key];
+  if (!m) return false;
+  return m.quiz_arti && m.quiz_baca && m.essay_arti && m.essay_baca;
+}
+
+/**
+ * Hitung jumlah kanji yang sudah mastered dari list tertentu.
+ * @param {Array} kanjiList - Array kanji object dengan field No.
+ * @returns {number}
+ */
+export function countMastered(kanjiList) {
+  return kanjiList.filter(k => isMastered(k.No)).length;
+}
+
+/**
+ * Reset seluruh data mastery (hati-hati!).
+ */
+export function resetAllMastery() {
+  localStorage.removeItem(LS_KEYS.MASTERY);
+}
+
+// =====================
+// HISTORY SESI UJIAN
+// =====================
+
+/**
+ * Simpan satu sesi hasil ujian ke history.
+ * @param {Object} sessionData - { mode, level, total, correct, wrongItems[], timestamp }
+ */
+export function saveSession(sessionData) {
+  try {
+    const history = getHistory();
+    history.unshift({ ...sessionData, timestamp: Date.now() }); // simpan di depan
+    // Batasi history maks 50 entri agar tidak membengkak
+    if (history.length > 50) history.length = 50;
+    localStorage.setItem(LS_KEYS.HISTORY, JSON.stringify(history));
+  } catch (e) {
+    console.warn('Gagal menyimpan history:', e);
+  }
+}
+
+/**
+ * Ambil semua history sesi.
+ * @returns {Array}
+ */
+export function getHistory() {
+  try {
+    const raw = localStorage.getItem(LS_KEYS.HISTORY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * Hapus semua history.
+ */
+export function clearHistory() {
+  localStorage.removeItem(LS_KEYS.HISTORY);
+}
+
+// =====================
+// PREFERENSI USER
+// =====================
+
+/**
+ * Simpan preferensi level terakhir user.
+ * @param {string} level - 'N5', 'N4', atau 'ALL'.
+ */
+export function saveLevelPref(level) {
+  try {
+    localStorage.setItem(LS_KEYS.LEVEL_PREF, level);
+  } catch { /* ignore */ }
+}
+
+/**
+ * Ambil preferensi level terakhir user.
+ * @returns {string} Level tersimpan atau 'N5' sebagai default.
+ */
+export function getLevelPref() {
+  return localStorage.getItem(LS_KEYS.LEVEL_PREF) || 'N5';
+}

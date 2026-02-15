@@ -1,411 +1,414 @@
-import { escapeHtml } from './utils.js';
-import { KEYS, SELECTORS } from './constants.js';
+// ============================================================
+// ui.js — Manipulasi DOM, Rendering, Animasi
+// ============================================================
 
-const area = document.getElementById(SELECTORS.quizArea);
+import { DOM_IDS, MODES, LEVELS } from './constants.js';
+import { escapeHTML } from './utils.js';
+import { getMastery } from './storage.js';
 
-// --- CSS INJECT (DIPERBARUI KE DARK/GLASS THEME) ---
-// Kita ubah style bawaan JS agar langsung gelap (Dark Mode) tanpa perlu ditimpa CSS luar
-const style = document.createElement('style');
-style.innerHTML = `
-    .choice-card-anim { transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s, border-color 0.2s !important; }
-    .choice-card-anim:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(13, 110, 253, 0.15) !important; border-color: #0d6efd !important; z-index: 2; }
-    .choice-card-anim:active { transform: scale(0.98) translateY(-2px); }
-    
-    /* PROGRESS STYLES (DARK GLASS) */
-    .prog-card { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 15px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 4px 6px rgba(0,0,0,0.2); height: 100%; display: flex; flex-direction: column; color: #fff; }
-    .prog-item { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
-    .prog-label { font-size: 0.75rem; color: #adb5bd; display: flex; align-items: center; gap: 6px; font-weight: 600; }
-    .prog-pct { font-size: 0.75rem; font-weight: bold; color: #fff; }
-    .prog-track { flex-grow: 1; height: 6px; background-color: rgba(255,255,255,0.1); border-radius: 3px; margin: 0 8px; overflow: hidden; }
-    .prog-fill { height: 100%; border-radius: 3px; }
-    
-    .c-blue { color: #3b82f6 !important; } .bg-blue { background-color: #3b82f6 !important; }
-    .c-green { color: #22c55e !important; } .bg-green { background-color: #22c55e !important; }
-    .c-orange { color: #f59e0b !important; } .bg-orange { background-color: #f59e0b !important; }
-    .c-red { color: #ef4444 !important; } .bg-red { background-color: #ef4444 !important; }
-    .bab-done { border: 1px solid #22c55e; background-color: rgba(34, 197, 94, 0.1); }
+// =============================================
+// HELPERS DOM
+// =============================================
 
-    /* RESULT STYLES (DARK GLASS - MINIMALIS) */
-    .res-item { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); margin-bottom: 12px; }
-    .res-kanji-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-    .res-kanji-main { font-size: 2rem; font-weight: 800; color: #fff; line-height: 1; text-shadow: 0 0 10px rgba(217, 70, 239, 0.3); }
-    .res-compare { display: flex; flex-direction: column; gap: 8px; }
-    .res-line { padding: 8px 12px; border-radius: 8px; font-size: 0.95rem; display: flex; align-items: center; justify-content: space-between; font-weight: 500; }
-    
-    /* Warna Salah/Benar dibuat lebih neon/gelap */
-    .res-wrong { background-color: rgba(239, 68, 68, 0.15); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.3); }
-    .res-correct { background-color: rgba(34, 197, 94, 0.15); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.3); }
-    
-    .res-tag { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; margin-right: 8px; font-weight: 800; }
-    .res-val { flex-grow: 1; text-align: right; }
-    .res-meta { font-size: 0.8rem; color: #aaa; margin-top: 8px; text-align: right; font-style: italic; }
+export const $ = (id) => document.getElementById(id);
 
-    /* FONT RESPONSIF UNTUK SOAL */
-    .q-text-responsive {
-        font-size: clamp(2rem, 5vw, 4rem); 
-        line-height: 1.3;
-        font-weight: 800;
-        color: #fff; /* Pastikan putih */
-        text-shadow: 0 0 20px rgba(217, 70, 239, 0.5); /* Glow bawaan */
-        text-align: center;
-        word-wrap: break-word;
-        width: 100%;
-    }
-`;
-document.head.appendChild(style);
-
-// --- HELPER: FORMAT TAMPILAN SOAL ---
-function formatQuestion(text) {
-    return `<div class="d-flex align-items-center justify-content-center px-2" style="min-height: 120px;">
-                <span class="q-text-responsive">${escapeHtml(text)}</span>
-            </div>`;
+export function show(id) {
+  const el = $(id); if (el) el.classList.remove('d-none');
 }
 
-// --- 1. RENDER QUIZ ---
-export function renderQuiz(state, qNo) {
-    area.innerHTML = "";
-    const idx = state.current;
-    const q = state.batch[idx];
-    const choices = state.choicesPerQ[idx];
-    const isLupa = state.answers[idx] === 'Lupa';
-    
-    const kanjiTxt = String(q[KEYS.kanji] || '').trim();
-    const meanTxt = String(q[KEYS.meaning] || '').trim();
-    const hiraTxt = String(q[KEYS.hiragana] || '').trim();
+export function hide(id) {
+  const el = $(id); if (el) el.classList.add('d-none');
+}
 
-    let displayHtml = '';
-    if (state.sessionType === 'quiz_hiragana') {
-        displayHtml = formatQuestion(meanTxt || hiraTxt);
+export function setHTML(id, html) {
+  const el = $(id); if (el) el.innerHTML = html;
+}
+
+export function setText(id, text) {
+  const el = $(id); if (el) el.textContent = text;
+}
+
+export function setDisabled(id, disabled) {
+  const el = $(id); if (el) el.disabled = disabled;
+}
+
+// =============================================
+// NAVIGASI LAYAR
+// =============================================
+
+const ALL_SCREENS = [
+  DOM_IDS.SCREEN_DASHBOARD,
+  DOM_IDS.SCREEN_QUIZ,
+  DOM_IDS.SCREEN_RESULT,
+  DOM_IDS.SCREEN_PROGRESS,
+  DOM_IDS.SCREEN_DISPLAY,
+];
+
+export function showScreen(screenId) {
+  ALL_SCREENS.forEach(id => {
+    const el = $(id);
+    if (!el) return;
+    if (id === screenId) {
+      el.classList.remove('d-none');
+      el.classList.add('screen-active');
     } else {
-        const textToShow = kanjiTxt || hiraTxt;
-        displayHtml = formatQuestion(textToShow);
+      el.classList.add('d-none');
+      el.classList.remove('screen-active');
+    }
+  });
+}
+
+// =============================================
+// DASHBOARD
+// =============================================
+
+export function updateTotalBadge(count, level) {
+  const el = $(DOM_IDS.TOTAL_KANJI_BADGE);
+  if (!el) return;
+  const label = level === LEVELS.ALL ? 'Gabungan' : level;
+  el.innerHTML = `<span class="badge-num">${count}</span> Kanji ${label} tersedia`;
+}
+
+// =============================================
+// MODAL PAKET — Grid Card
+// =============================================
+
+export function renderPacketList(packets, modeLabel) {
+  setText(DOM_IDS.MODAL_PAKET_TITLE, `Pilih Paket — ${modeLabel}`);
+  const container = $(DOM_IDS.PAKET_LIST);
+  if (!container) return;
+
+  if (packets.length === 0) {
+    container.innerHTML = `<p style="text-align:center;padding:1.5rem;color:var(--c4);font-size:.875rem;">Tidak ada data tersedia.</p>`;
+    return;
+  }
+
+  const mastery = getMastery();
+  let html = '<div class="paket-grid">';
+
+  packets.forEach((packet, idx) => {
+    const firstNo  = packet[0].No;
+    const lastNo   = packet[packet.length - 1].No;
+    const count    = packet.length;
+    const packetId = `packet-${idx}`;
+
+    const masteredCount = packet.filter(k => {
+      const m = mastery[String(k.No)];
+      return m && m.quiz_arti && m.quiz_baca && m.essay_arti && m.essay_baca;
+    }).length;
+
+    const pct      = Math.round((masteredCount / count) * 100);
+    const barClass = pct === 100 ? 'bar-full' : pct >= 50 ? 'bar-mid' : 'bar-low';
+
+    html += `
+      <div class="paket-card" data-index="${idx}">
+        <input class="paket-check-hidden" type="checkbox" id="${packetId}" value="${idx}">
+        <label class="paket-card-label" for="${packetId}">
+          <div class="paket-card-top">
+            <span class="paket-card-num">P${idx + 1}</span>
+            <span class="paket-card-check-icon">✓</span>
+          </div>
+          <div class="paket-card-range">${firstNo}–${lastNo}</div>
+          <div class="paket-card-count">${count} kanji</div>
+          <div class="paket-mini-bar">
+            <div class="paket-mini-fill ${barClass}" style="width:${pct}%"></div>
+          </div>
+          <div class="paket-card-mastered">${masteredCount}/${count}</div>
+        </label>
+      </div>`;
+  });
+
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+// =============================================
+// LAYAR QUIZ
+// =============================================
+
+export function renderQuestion(question, current, total, savedAnswer = null) {
+  setText(DOM_IDS.QUIZ_COUNTER, `${current} / ${total}`);
+  setText(DOM_IDS.QUIZ_NO_ASLI, `No.${question.kanji.No} · ${question.kanji.level} · ${question.kanji.type}`);
+
+  setHTML(DOM_IDS.QUIZ_KANJI,
+    `<span class="q-text-responsive">${escapeHTML(question.kanji.Kanji)}</span>`);
+
+  const inputArea = $(DOM_IDS.QUIZ_INPUT_AREA);
+  if (!inputArea) return;
+
+  if (question.type === 'quiz') {
+    renderQuizOptions(inputArea, question.options, savedAnswer);
+  } else {
+    renderEssayInput(inputArea, question.mode, savedAnswer);
+  }
+
+  setDisabled(DOM_IDS.BTN_PREV, current === 1);
+}
+
+function renderQuizOptions(container, options, savedAnswer) {
+  // FIX: opsi dirender sebagai data-value yang EXACT match string asli
+  let html = '<div class="options-grid">';
+  options.forEach((opt, i) => {
+    const sel    = savedAnswer === opt ? 'selected' : '';
+    const letter = ['A', 'B', 'C', 'D'][i];
+    html += `
+      <button class="option-btn ${sel}" data-value="${escapeHTML(opt)}">
+        <span class="opt-letter">${letter}</span>
+        <span class="opt-text">${escapeHTML(opt)}</span>
+      </button>`;
+  });
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+function renderEssayInput(container, mode, savedAnswer) {
+  const ph = mode === MODES.ESSAY_ARTI
+    ? 'Ketik arti dalam Bahasa Indonesia…'
+    : 'Ketik cara baca (Romaji atau Hiragana)…';
+
+  container.innerHTML = `
+    <div class="essay-wrapper">
+      <input type="text" id="essay-input" class="essay-input"
+             placeholder="${ph}" value="${escapeHTML(savedAnswer || '')}"
+             autocomplete="off" autocorrect="off" spellcheck="false">
+      <div class="essay-hint">Tekan Enter untuk lanjut ke soal berikutnya</div>
+    </div>`;
+
+  setTimeout(() => {
+    const inp = document.getElementById('essay-input');
+    if (inp) inp.focus();
+  }, 50);
+}
+
+export function showFeedback(isCorrect, callback) {
+  if (callback) setTimeout(callback, 120);
+}
+
+export function highlightOptions() {
+  // Tidak highlight — semua hasil tampil di akhir
+  document.querySelectorAll('.option-btn').forEach(btn => { btn.disabled = true; });
+}
+
+// =============================================
+// LAYAR HASIL — FIX: pembahasan lengkap tiap soal
+// =============================================
+
+export function renderResult(results, score) {
+  // Score circle
+  const scoreEl = $(DOM_IDS.RESULT_SCORE);
+  if (scoreEl) {
+    const cls = score.percentage >= 80 ? 'score-pass'
+              : score.percentage >= 50 ? 'score-mid'
+              : 'score-fail';
+    scoreEl.innerHTML = `
+      <div class="score-circle ${cls}">
+        <span class="score-num">${score.percentage}</span>
+        <span class="score-pct">%</span>
+      </div>`;
+  }
+
+  setText(DOM_IDS.RESULT_SCORE_LABEL, `${score.correct} benar dari ${score.total} soal`);
+
+  // FIX: Pastikan listEl ada, dan render SEMUA soal dengan section header
+  const listEl = $(DOM_IDS.RESULT_LIST);
+  if (!listEl) {
+    console.error('result-list element not found!');
+    return;
+  }
+
+  // Tambah section header "Pembahasan"
+  let html = `
+    <div class="result-list-header">
+      <span class="result-list-title">📋 Pembahasan ${results.length} Soal</span>
+    </div>
+    <div class="result-list-wrap">`;
+
+  results.forEach((r, idx) => {
+    // FIX: Pastikan r.question ada
+    if (!r || !r.question) {
+      console.warn('Missing question at index', idx, r);
+      return;
     }
 
-    let choicesHtml = '<div class="row g-3 p-3">';
-    choices.forEach((c, i) => {
-        const isSelected = state.answers[idx] === i;
-        let cardClass = "p-3 shadow-sm border rounded-3 fw-bold choice-card-anim"; 
-        let textClass = "";
-        let style = "cursor: pointer; position: relative;";
+    const { question, isCorrect, userAnswer } = r;
+    const k = question.kanji;
 
-        // Update warna kartu pilihan agar cocok dengan dark theme (Glassy White)
-        if (isSelected) {
-            style += "background-color: #d946ef !important; border-color: #d946ef !important; color: #ffffff !important; box-shadow: 0 0 15px rgba(217, 70, 239, 0.4) !important;";
-            textClass = "text-white"; 
-        } else {
-            // Default kartu pilihan: Transparan Gelap
-            style += "background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff;";
-            textClass = "text-white";
-        }
-        
-        choicesHtml += `
-          <div class="col-12"> 
-            <div class="${cardClass}" role="button" onclick="window.handleAnswer(${i})" style="${style}">
-              <div class="${textClass}" style="font-size: 1.1rem;">${escapeHtml(c.text)}</div>
-            </div>
-          </div>`;
-    });
-    choicesHtml += '</div>';
+    // Tentukan jawaban benar & info meta berdasarkan mode
+    let correctDisplay, metaLine1, metaLine2;
 
-    const card = document.createElement('div');
-    card.className = 'card card-kanji mb-3 border-0 shadow-sm';
-    // Style card dipaksa transparan lewat JS agar override bootstrap
-    card.style.background = "transparent"; 
-    
-    card.innerHTML = `
-      <div class="card-body p-3">
-        <div class="d-flex justify-content-between mb-3 align-items-center">
-            <h5 class="fw-bold text-white m-0">Soal ${idx + 1} / ${state.batch.length}</h5>
-            <small class="text-white-50">No Asli: ${q[KEYS.number] || '-'}</small>
+    if (question.mode === MODES.QUIZ_ARTI || question.mode === MODES.ESSAY_ARTI) {
+      correctDisplay = k.Arti;
+      metaLine1      = `${k.Hiragana}  (${k.Romaji})`;
+      metaLine2      = `${k.level} · ${k.type}`;
+    } else {
+      correctDisplay = k.Hiragana;
+      metaLine1      = `Romaji: ${k.Romaji}`;
+      metaLine2      = `Arti: ${k.Arti} · ${k.level}`;
+    }
+
+    html += `
+      <div class="res-item ${isCorrect ? 'res-correct-item' : 'res-wrong-item'}">
+
+        <div class="res-header">
+          <div class="res-kanji-wrap">
+            <span class="res-num">${idx + 1}.</span>
+            <span class="res-kanji">${escapeHTML(k.Kanji)}</span>
+          </div>
+          <span class="res-icon ${isCorrect ? 'res-icon-correct' : 'res-icon-wrong'}">
+            ${isCorrect ? '✓' : '✗'}
+          </span>
         </div>
-        ${displayHtml} ${choicesHtml}
-        <div class="mt-4 d-flex gap-2 w-100 p-3">
-            <button class="btn btn-outline-secondary fw-bold flex-grow-1" onclick="window.handlePrev()" ${idx===0?'disabled':''}>Sebelumnya</button>
-            <button class="btn btn-outline-warning fw-bold flex-grow-1" onclick="window.handleLupa()">${isLupa ? 'Ditandai' : 'Lupa'}</button>
-            ${ idx < state.batch.length - 1 
-               ? `<button class="btn btn-primary fw-bold flex-grow-1" onclick="window.handleNext()">Berikutnya</button>` 
-               : `<button class="btn btn-primary fw-bold flex-grow-1" onclick="window.handleConfirm()">Selesai</button>`
-            }
+
+        ${!isCorrect ? `
+        <div class="res-box res-box-wrong">
+          <span class="res-label">Jawaban kamu</span>
+          <span class="res-value res-val-wrong">${escapeHTML(userAnswer || '(tidak dijawab)')}</span>
+        </div>` : ''}
+
+        <div class="res-box res-box-correct">
+          <span class="res-label">Jawaban benar</span>
+          <span class="res-value res-val-correct">${escapeHTML(correctDisplay)}</span>
         </div>
+
+        <div class="res-meta">
+          <span class="res-meta-main">${escapeHTML(metaLine1)}</span>
+          <span class="res-meta-sub">${escapeHTML(metaLine2)}</span>
+        </div>
+
+      </div>`;
+  });
+
+  listEl.innerHTML = html
+    ? html + '</div>'
+    : '<p style="text-align:center;color:var(--ink-4);padding:2rem;">Tidak ada data soal.</p>';
+
+  // Tombol perbaiki soal salah
+  const wrongCount = results.filter(r => !r.isCorrect).length;
+  if (wrongCount > 0) {
+    setText(DOM_IDS.WRONG_COUNT_BADGE, wrongCount);
+    show(DOM_IDS.BTN_RETRY_WRONG);
+  } else {
+    hide(DOM_IDS.BTN_RETRY_WRONG);
+  }
+}
+
+// =============================================
+// LAYAR PROGRESS
+// =============================================
+
+export function renderProgress(allData, levelFilter, stats) {
+  const container = $(DOM_IDS.PROGRESS_CONTENT);
+  if (!container) return;
+
+  const mastery    = getMastery();
+  const MODES_LIST = ['quiz_arti', 'quiz_baca', 'essay_arti', 'essay_baca'];
+  const MODE_ICON  = { quiz_arti: '👁', quiz_baca: '👂', essay_arti: '✍️', essay_baca: '🔤' };
+
+  let list;
+  if (levelFilter === LEVELS.N5)      list = allData.filter(k => k.level === 'N5');
+  else if (levelFilter === LEVELS.N4) list = allData.filter(k => k.level === 'N4');
+  else                                list = allData;
+
+  const stat = levelFilter === LEVELS.ALL ? stats.ALL : stats[levelFilter];
+
+  let html = `
+    <div class="progress-summary">
+      <div class="prog-stat">
+        <span class="prog-num">${stat.mastered}</span>
+        <span class="prog-label">Mastered</span>
       </div>
-    `;
-    area.appendChild(card);
-}
-
-// --- 2. RENDER MEMORY ---
-export function renderMem(state, qNo) {
-    area.innerHTML = "";
-    const idx = state.current;
-    const q = state.batch[idx];
-    const val = state.answers[idx] === "Lupa" ? "" : state.answers[idx] || "";
-
-    const kanjiTxt = String(q[KEYS.kanji] || "").trim();
-    const meanTxt = String(q[KEYS.meaning] || "").trim();
-    const hiraTxt = String(q[KEYS.hiragana] || "").trim();
-
-    let displayHtml = "";
-    let placeholderTxt = "", labelTxt = "";
-
-    if (state.sessionType === "write_romaji") {
-        displayHtml = formatQuestion(meanTxt || hiraTxt);
-        placeholderTxt = "Ketik bacaan...";
-        labelTxt = "TERJEMAHKAN KE ROMAJI / KANA";
-    } else {
-        const textToShow = kanjiTxt || hiraTxt;
-        displayHtml = formatQuestion(textToShow);
-        placeholderTxt = "Contoh: Ikan, Air...";
-        labelTxt = "TERJEMAHKAN KE INDONESIA";
-    }
-
-    const card = document.createElement("div");
-    card.className = "card card-kanji mb-3 border-0 shadow-sm";
-    card.style.background = "transparent"; // Pastikan transparan
-
-    card.innerHTML = `
-      <div class="card-body p-0 d-flex flex-column h-100 justify-content-center" style="margin-left: 1em; margin-top: 1em;">
-        
-        <div class="d-flex justify-content-between mb-3 align-items-center w-100" style="padding-right: 1em; margin-top: 1em;">
-            <h5 class="fw-bold m-0 text-white">Hafalan ${idx + 1} / ${state.batch.length}</h5>
-            <small class="text-white-50" style="font-size: 0.8rem;">No Asli: ${q[KEYS.number] || "-"}</small>
-        </div>
-        
-        <div class="flex-grow-1 d-flex align-items-center justify-content-center my-4">
-            ${displayHtml}
-        </div>
-
-        <div class="mb-5 w-100 text-center">
-            <div class="mem-label" style="color: #aaa; letter-spacing: 1px; font-weight: 600; font-size: 0.8rem; margin-bottom: 10px;">${labelTxt}</div>
-            
-            <div class="mem-input-box">
-                <input type="text" id="memInput" 
-                       placeholder="${placeholderTxt}" 
-                       autocomplete="off" 
-                       spellcheck="false" 
-                       value="${escapeHtml(val)}">
-                
-                <div id="btnMic" role="button" title="Rekam Suara">
-                    <i class="bi bi-mic-fill fs-5"></i>
-                </div>
-            </div>
-        </div>
-
-        <div class="d-flex gap-2 w-100 mt-auto" style="padding-bottom: 1em; padding-left: 1em; padding-right: 1em;">
-            <button class="btn btn-outline-secondary fw-bold flex-grow-1" onclick="window.handlePrev()" ${idx === 0 ? "disabled" : ""}>Sebelumnya</button>
-            <button class="btn btn-outline-warning fw-bold flex-grow-1" onclick="window.handleLupa()">Lupa</button>
-            ${
-              idx < state.batch.length - 1
-                ? `<button class="btn btn-primary fw-bold flex-grow-1" onclick="window.handleNext()">Berikutnya</button>`
-                : `<button class="btn btn-success fw-bold flex-grow-1" onclick="window.handleConfirm()">Selesai</button>`
-            }
-        </div>
+      <div class="prog-stat">
+        <span class="prog-num">${stat.total - stat.mastered}</span>
+        <span class="prog-label">Belum</span>
       </div>
-    `;
-    area.appendChild(card);
+      <div class="prog-stat">
+        <span class="prog-num">${stat.percentage}%</span>
+        <span class="prog-label">Progress</span>
+      </div>
+    </div>
+    <div class="prog-bar-outer">
+      <div class="prog-bar-fill" style="width:${stat.percentage}%"></div>
+    </div>
+    <div class="progress-list">`;
 
-    const inp = document.getElementById("memInput");
-    const btnMic = document.getElementById("btnMic");
-    inp.focus();
-    inp.oninput = (e) => window.handleInput(e.target.value);
-    inp.onkeydown = (e) => { if (e.key === "Enter") window.handleNextOrSubmit(); };
+  list.forEach(k => {
+    const m       = mastery[String(k.No)] || {};
+    const allDone = MODES_LIST.every(md => m[md]);
 
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (SpeechRecognition) {
-        const recognition = new SpeechRecognition();
-        recognition.lang = state.sessionType === "write_romaji" ? "ja-JP" : "id-ID";
-        recognition.interimResults = false;
-        recognition.maxAlternatives = 1;
+    html += `
+      <div class="prog-item ${allDone ? 'prog-mastered' : ''}">
+        <span class="prog-kanji">${escapeHTML(k.Kanji)}</span>
+        <span class="prog-arti">${escapeHTML(k.Arti)}</span>
+        <div class="prog-modes">
+          ${MODES_LIST.map(md => `
+            <span class="prog-mode-dot ${m[md] ? 'done' : ''}" title="${md}">${MODE_ICON[md]}</span>
+          `).join('')}
+        </div>
+      </div>`;
+  });
 
-        btnMic.onclick = () => { try { recognition.start(); } catch (e) { recognition.stop(); } };
-        recognition.onstart = () => { btnMic.classList.add("recording"); };
-        recognition.onend = () => { btnMic.classList.remove("recording"); inp.focus(); };
-        recognition.onresult = (event) => {
-            let transcript = event.results[0][0].transcript;
-            const cleanText = transcript.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
-            inp.value = cleanText;
-            window.handleInput(cleanText);
-        };
-    } else {
-        btnMic.style.display = "none";
-    }
+  html += '</div>';
+  container.innerHTML = html;
 }
 
-// --- 3. RENDER RESULT (REVISI: LEBIH LEGA & RAPI) ---
-export function renderResult(result, sessionType, wrongIndices = []) {
-    area.innerHTML = "";
-    const pct = result.total > 0 ? Math.round((result.score / result.total) * 100) : 0;
-    const history = JSON.parse(localStorage.getItem("kotoba_apps_history") || "[]");
-    const lastHistory = history.slice(0, 5); 
-    
-    let modeLabel = sessionType.includes('quiz') ? 'Hasil Quiz' : 'Hasil Tes';
-    let scoreColorClass = pct >= 60 ? 'text-success' : 'text-danger';
-    
-    // Style Glass untuk Tabel Riwayat
-    const historyStyle = "background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 20px; margin-top: 30px;";
-    
-    let html = `
-    <div class="card shadow-lg border-0 mb-4" style="background: transparent;">
-        <div class="card-body p-4 p-md-5">
-            
-            <div class="text-center mb-5 relative-container">
-                <h5 class="fw-bold text-white-50 text-uppercase letter-spacing-2 mb-3">${modeLabel}</h5>
-                <h1 class="display-1 fw-bold ${scoreColorClass}" style="font-size: 5rem; text-shadow: 0 0 30px rgba(0,0,0,0.5); margin-bottom: 10px;">${pct}%</h1>
-                <div class="badge rounded-pill bg-dark border border-secondary px-4 py-2 mt-2">
-                    <span class="text-white fs-6">Skor: <span class="fw-bold text-warning">${result.score}</span> / ${result.total}</span>
-                </div>
-            </div>
-            
-            <div class="d-grid gap-3 mb-5" style="max-width: 600px; margin: 0 auto;">
-                <div class="row g-3">
-                    <div class="col-6">
-                        <button class="btn btn-outline-light w-100 fw-bold py-3 rounded-4 h-100 d-flex align-items-center justify-content-center gap-2" onclick="window.handleRetry()">
-                            <i class="bi bi-arrow-repeat fs-5"></i> Ulangi
-                        </button>
-                    </div>
-                    <div class="col-6">
-                        <button class="btn btn-outline-secondary w-100 fw-bold py-3 rounded-4 h-100 d-flex align-items-center justify-content-center gap-2" onclick="window.handleBack()">
-                            <i class="bi bi-grid-fill fs-5"></i> Menu
-                        </button>
-                    </div>
-                </div>
-                
-                ${wrongIndices.length > 0 
-                    ? `<button class="btn btn-danger btn-lg shadow fw-bold mt-2 rounded-4 py-3 w-100 d-flex align-items-center justify-content-center gap-2" onclick="window.handleRetryWrong([${wrongIndices}])">
-                         <i class="bi bi-exclamation-triangle-fill"></i> Perbaiki ${wrongIndices.length} Soal Salah
-                       </button>` 
-                    : `<div class="alert alert-success text-center py-3 fw-bold rounded-4 border-0 mt-2" style="background: rgba(34, 197, 94, 0.15); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.3);">
-                         <i class="bi bi-trophy-fill me-2"></i>Sempurna! Kerja Bagus.
-                       </div>`
-                }
-            </div>
+// =============================================
+// LAYAR DISPLAY / LIHAT & HAFAL
+// =============================================
 
-            <div style="${historyStyle}">
-                <h6 class="fw-bold mb-4 small text-uppercase text-white-50 d-flex align-items-center gap-2">
-                    <i class="bi bi-clock-history text-primary"></i> Riwayat Terakhir
-                </h6>
-                <div class="table-responsive">
-                    <table class="table table-borderless mb-0 align-middle" style="color: #fff;">
-                        <thead class="text-white-50 small border-bottom border-secondary" style="font-size: 0.75rem; text-transform: uppercase;">
-                            <tr><td width="30%" class="pb-2">Waktu</td><td width="50%" class="pb-2">Info</td><td width="20%" class="text-end pb-2">Skor</td></tr>
-                        </thead>
-                        <tbody>
-                        ${lastHistory.length > 0 ? lastHistory.map(h => `
-                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                                <td class="text-white-50 small py-3">
-                                    <div class="fw-bold text-light">${h.date.split(' ')[0]}</div>
-                                    <div style="font-size:0.8em; opacity:0.6;">${h.date.split(' ')[1] || ''}</div>
-                                </td>
-                                <td class="py-3">
-                                    <div class="fw-bold text-white mb-1" style="font-size: 0.95rem;">${formatModeName(h.type)}</div>
-                                    <div class="badge bg-secondary bg-opacity-25 text-white-50 fw-normal text-truncate" style="max-width: 140px;">${h.packages || '-'}</div>
-                                </td>
-                                <td class="text-end fw-bold py-3">
-                                    <span class="${h.percentage >= 60 ? 'text-success' : 'text-danger'}" style="font-size: 1.1rem; text-shadow: 0 0 10px rgba(0,0,0,0.5);">${h.percentage}%</span>
-                                </td>
-                            </tr>`).join('') : '<tr><td colspan="3" class="text-center text-white-50 py-4 fst-italic">Belum ada riwayat</td></tr>'}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-    `;
-    
-    if (result.details && result.details.length > 0) {
-        html += `<h5 class="fw-bold mb-4 mt-5 text-white ps-2 border-start border-4 border-primary">&nbsp; Detail Jawaban</h5>`;
-        
-        result.details.forEach((d, i) => {
-            const isCorrect = d.isCorrect;
-            const userTxt = d.userAns === 'Lupa' ? 'Lupa' : (d.userAns || '-');
-            const kanji = (d.q[KEYS.kanji] || '').trim();
-            const hira = (d.realHira || '').trim();
-            const mean = d.realMean || '';
-            
-            let keyAnswer = "";
-            let extraInfo = "";
+export function renderDisplayCard(kanji, current, total) {
+  setText(DOM_IDS.DISPLAY_COUNTER, `${current} / ${total}`);
 
-            if (sessionType === 'quiz_hiragana' || sessionType === 'write_romaji') {
-                keyAnswer = hira;
-                extraInfo = mean; 
-            } else {
-                keyAnswer = mean;
-                extraInfo = hira;
-            }
-            const displayKanji = kanji || hira;
+  setHTML(DOM_IDS.DISPLAY_KANJI,
+    `<span class="q-text-responsive">${escapeHTML(kanji.Kanji)}</span>`);
 
-            html += `
-            <div class="res-item">
-               <div class="res-kanji-row">
-                  <div class="res-kanji-main">${escapeHtml(displayKanji)}</div>
-                  <div class="rounded-circle d-flex align-items-center justify-content-center ${isCorrect ? 'bg-success bg-opacity-25' : 'bg-danger bg-opacity-25'}" style="width: 40px; height: 40px;">
-                    ${isCorrect ? 
-                        '<i class="bi bi-check-lg text-success fs-4"></i>' : 
-                        '<i class="bi bi-x-lg text-danger fs-4"></i>'}
-                  </div>
-               </div>
+  // Langsung tampilkan info — tidak perlu tombol reveal
+  const artiVal = kanji.Arti || kanji.arti || '—';
+  setHTML(DOM_IDS.DISPLAY_REVEAL, `
+    <div class="display-info-row">
+      <span class="display-info-label">読み方</span>
+      <span class="display-info-val display-hira">${escapeHTML(kanji.Hiragana)}</span>
+    </div>
+    <div class="display-info-row">
+      <span class="display-info-label">Romaji</span>
+      <span class="display-info-val display-romaji-val">${escapeHTML(kanji.Romaji || '—')}</span>
+    </div>
+    <div class="display-info-row">
+      <span class="display-info-label">Arti</span>
+      <span class="display-info-val display-arti-val">${escapeHTML(artiVal)}</span>
+    </div>
+    <div class="display-info-row">
+      <span class="display-info-label">Tipe</span>
+      <span class="display-type-badge">${escapeHTML(kanji.type)} · ${escapeHTML(kanji.level)}</span>
+    </div>
+  `);
 
-               <div class="res-compare mt-3">
-                   ${!isCorrect ? `
-                   <div class="res-line res-wrong">
-                       <span class="res-tag text-danger"><i class="bi bi-person-fill"></i> KAMU</span>
-                       <span class="res-val text-white">${escapeHtml(userTxt)}</span>
-                   </div>` : ''}
+  // Langsung tampilkan panel, sembunyikan tombol reveal
+  const revealEl  = $(DOM_IDS.DISPLAY_REVEAL);
+  const revealBtn = document.getElementById('btn-display-reveal');
+  if (revealEl)  revealEl.classList.remove('d-none');
+  if (revealBtn) revealBtn.classList.add('d-none');
 
-                   <div class="res-line res-correct">
-                       <span class="res-tag text-success"><i class="bi bi-key-fill"></i> JAWABAN</span>
-                       <span class="res-val fw-bold text-white">${escapeHtml(keyAnswer)}</span>
-                   </div>
-               </div>
-               
-               <div class="res-meta mt-2 pt-2 border-top border-secondary border-opacity-25">
-                 <i class="bi bi-info-circle me-1"></i> ${escapeHtml(extraInfo)}
-               </div>
-            </div>`;
-        });
-    }
-    
-    html += `</div></div>`; 
-    area.innerHTML = html; 
-    
-    if(pct >= 60) launchConfetti();
+  setDisabled(DOM_IDS.BTN_DISPLAY_PREV, current === 1);
+  setDisabled(DOM_IDS.BTN_DISPLAY_NEXT, current === total);
 }
 
-export function renderProgressModal(stats) {
-    const list = document.getElementById('progressList');
-    if(!list) return;
-    list.innerHTML = '';
-    const gridDiv = document.createElement('div');
-    gridDiv.className = "row g-3"; 
-    stats.forEach(item => {
-        const pctTotal = item.totalPct;
-        const p1 = item.detail.tebakArti; const p2 = item.detail.tebakHiragana;
-        const p3 = item.detail.tulisArti; const p4 = item.detail.tulisRomaji;
-        const isDone = pctTotal === 100;
-        
-        // Style Card: Jika Selesai, border hijau, jika belum abu.
-        const cardClass = isDone ? "prog-card bab-done" : "prog-card";
-        const titleColor = isDone ? "text-success" : "text-white";
-        
-        const col = document.createElement('div');
-        col.className = "col-12 col-md-6"; 
-        col.innerHTML = `
-        <div class="${cardClass}">
-            <div class="d-flex justify-content-between align-items-center mb-3 pb-2" style="border-bottom: 1px solid rgba(255,255,255,0.1);">
-                <span class="fw-bold ${titleColor}" style="font-size: 1.1rem;">${item.bab}</span>
-                <span class="badge rounded-pill" style="font-size: 0.8rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">Total: ${pctTotal}%</span>
-            </div>
-            <div class="prog-item"><div class="prog-label c-blue"><i class="bi bi-eye-fill"></i> Tebak Arti</div><div class="prog-track"><div class="prog-fill bg-blue" style="width:${p1}%"></div></div><div class="prog-pct c-blue">${p1}%</div></div>
-            <div class="prog-item"><div class="prog-label c-green"><i class="bi bi-translate"></i> Tebak Bacaan</div><div class="prog-track"><div class="prog-fill bg-green" style="width:${p2}%"></div></div><div class="prog-pct c-green">${p2}%</div></div>
-            <div class="prog-item"><div class="prog-label c-orange"><i class="bi bi-pencil-fill"></i> Tulis Arti</div><div class="prog-track"><div class="prog-fill bg-orange" style="width:${p3}%"></div></div><div class="prog-pct c-orange">${p3}%</div></div>
-            <div class="prog-item"><div class="prog-label c-red"><i class="bi bi-keyboard-fill"></i> Tulis Bacaan</div><div class="prog-track"><div class="prog-fill bg-red" style="width:${p4}%"></div></div><div class="prog-pct c-red">${p4}%</div></div>
-        </div>`;
-        gridDiv.appendChild(col);
-    });
-    list.appendChild(gridDiv);
-}
+// =============================================
+// TOAST
+// =============================================
 
-function formatModeName(type) {
-    if(type === 'quiz') return 'Tebak Arti'; if(type === 'quiz_hiragana') return 'Tebak Bacaan'; if(type === 'mem') return 'Tulis Arti'; if(type === 'write_romaji') return 'Tulis Bacaan'; return type;
-}
+export function showToast(message, type = 'info') {
+  const old = document.getElementById('app-toast');
+  if (old) old.remove();
 
-function launchConfetti() {
-    const wrap = document.getElementById(SELECTORS.confetti); if (!wrap) return; 
-    for(let i=0; i<40; i++) { const el = document.createElement('div'); el.className = 'confetti'; el.style.left = Math.random()*100 + 'vw'; el.style.backgroundColor = ['#f00','#0f0','#00f','#ff0'][Math.floor(Math.random()*4)]; el.style.width='8px'; el.style.height='8px'; el.style.position = 'fixed'; el.style.top = '-10px'; el.style.animation = `drop ${1+Math.random()*2}s linear forwards`; wrap.appendChild(el); setTimeout(()=>el.remove(), 3000); }
+  const toast       = document.createElement('div');
+  toast.id          = 'app-toast';
+  toast.className   = `app-toast toast-${type}`;
+  toast.textContent = message;
+  document.body.appendChild(toast);
+
+  setTimeout(() => toast.classList.add('toast-show'), 10);
+  setTimeout(() => {
+    toast.classList.remove('toast-show');
+    setTimeout(() => toast.remove(), 300);
+  }, 2500);
 }

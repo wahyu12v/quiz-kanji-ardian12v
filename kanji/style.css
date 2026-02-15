@@ -1,1438 +1,1480 @@
-/* --- 1. CORE VARIABLES & RESET --- */
+/* ============================================================
+   style.css — Tema Teal Ocean | Kanji Mastery V3.3
+   Palet: #005461 · #018790 · #00B7B5 · #F4F4F4
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@400;500&display=swap');
+
+/* ============================================================
+   CSS VARIABLES — Teal Ocean Palette
+   ============================================================ */
 :root {
-    /* Main Background: Deep Dark Purple-Black */
-    --bg-dark: #0b0510;
-    
-    /* Neon Accent: Purple / Magenta */
-    --neon-main: #d946ef; /* Magenta Terang */
-    --neon-sec: #a855f7;  /* Ungu Neon */
-    --neon-glow: 0 0 20px rgba(217, 70, 239, 0.4);
-    
-    /* Glass Effect */
-    --glass-bg: rgba(20, 15, 30, 0.75);
-    --glass-border: 1px solid rgba(255, 255, 255, 0.08);
-    --glass-blur: blur(24px);
-    
-    /* Text */
-    --text-primary: #ffffff;
-    --text-sec: #e9d5ff; /* Putih keunguan */
-    
-    --font-main: 'Inter', system-ui, sans-serif;
+/* Palette utama (Berdasarkan Logo Shield Biru) */
+  --c1:        #00204A;   /* Deep Navy — elemen dominan gelap, bagian bawah shield */
+  --c2:        #0057B8;   /* Royal Blue — tombol utama, aksen, bagian atas shield */
+  --c3:        #3385FF;   /* Bright Blue — highlight, hover state */
+  --c4:        #F8F9FA;   /* Cool Off-white — background netral */
+
+  /* Derivatif */
+  --c1-dark:   #001026;   /* Versi lebih gelap dari c1 */
+  --c2-dark:   #003D82;   /* Versi lebih gelap dari c2 (misal: tombol aktif) */
+  --c3-light:  #E6F0FF;   /* Tint biru sangat muda */
+  --c4-dark:   #E0E0E0;   /* Gray netral */
+
+  /* Semantik */
+  --bg:        #F0F4F8;   /* Background utama — campuran c4 + sedikit tint biru */
+  --surface:   #ffffff;   /* Card/surface */
+  --surface-2: #F5F8FC;   /* Surface sekunder, cool tint */
+  
+  /* Teks (Ink) — Menggunakan basis biru tua, bukan hitam pekat */
+  --ink:       #0a1c36;   /* Teks utama — Navy sangat gelap untuk kontras tinggi */
+  --ink-2:     #1F3A5F;   /* Teks medium — Navy menengah */
+  --ink-3:     #476285;   /* Teks muted — Biru keabu-abuan */
+  --ink-4:     #8DA3BF;   /* Teks dim — Biru muda pucat */
+
+  /* Status - Tetap menggunakan standar UI, tapi disesuaikan sedikit agar lebih 'cool' */
+  --success:   #0d7a5f;   /* (Tidak berubah drastis, hijau standar tetap cocok dengan biru) */
+  --success-bg:#e6f5f1;
+  --error:     #c23e3e;   /* Merah sedikit lebih dingin */
+  --error-bg:  #fcf2f2;
+  --warn:      #9e7300;
+  --warn-bg:   #fffaf0;
+
+  /* Border — Menggunakan transparansi dari biru tua (c1) */
+  --border:    rgba(0, 32, 74, 0.15);
+  --border-2:  rgba(0, 32, 74, 0.08);
+  /* Shadow */
+  --shadow-sm: 0 1px 4px rgba(0,84,97,0.10), 0 1px 2px rgba(0,84,97,0.07);
+  --shadow-md: 0 4px 20px rgba(0,84,97,0.12), 0 2px 6px rgba(0,84,97,0.07);
+  --shadow-lg: 0 12px 48px rgba(0,84,97,0.16), 0 4px 14px rgba(0,84,97,0.09);
+
+  --radius:    16px;
+  --radius-sm: 10px;
+  --radius-xs: 6px;
+  --ease:      cubic-bezier(0.4, 0, 0.2, 1);
+  --t:         0.2s;
 }
+
+/* ============================================================
+   BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 
 body {
-    background-color: var(--bg-dark);
-    /* Latar belakang gradient ungu halus yang 'hidup' */
-    background-image: 
-        radial-gradient(circle at 15% 25%, rgba(168, 85, 247, 0.15) 0%, transparent 40%),
-        radial-gradient(circle at 85% 75%, rgba(217, 70, 239, 0.1) 0%, transparent 40%);
-    background-attachment: fixed;
-    color: var(--text-primary);
-    font-family: var(--font-main);
-    overflow-x: hidden;
-    min-height: 100vh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-/* --- 2. TYPOGRAPHY --- */
-h1, h2, h3, h4, h5, h6 {
-    color: #fff;
-    font-weight: 800;
-    letter-spacing: -0.5px;
-    text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--c4); }
+::-webkit-scrollbar-thumb { background: var(--c3); border-radius: 3px; }
+
+/* ============================================================
+   TIPOGRAFI
+   ============================================================ */
+h1, h2, h3 {
+  font-family: 'Crimson Pro', serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
-.text-muted { color: var(--text-sec) !important; }
-.text-primary { color: var(--neon-main) !important; }
-
-/* --- 3. FIX TOMBOL KEMBALI (UTAMA) --- */
-/* Menargetkan tombol di Navbar secara spesifik */
-#btn-main-back {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: #fff;
-    padding: 8px 20px;
-    border-radius: 50px;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    text-decoration: none; /* Hapus garis bawah link */
-}
-
-#btn-main-back:hover {
-    background: rgba(217, 70, 239, 0.15); /* Tint Ungu saat hover */
-    border-color: var(--neon-main);
-    box-shadow: 0 0 20px rgba(217, 70, 239, 0.3);
-    transform: translateX(-3px); /* Efek gerak sedikit ke kiri */
-    color: var(--neon-main);
-}
-
-#btn-main-back i {
-    transition: transform 0.3s ease;
-}
-#btn-main-back:hover i {
-    transform: translateX(-3px);
-}
-
-/* --- 4. NAVBAR --- */
-.navbar {
-    background: rgba(11, 5, 16, 0.85) !important;
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-
-.navbar-brand .brand-title {
-    background: linear-gradient(to right, #fff, var(--text-sec));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 800;
-}
-
-/* --- 5. GLASS CARDS (LAYOUT SEPERTI YANG ANDA SUKA) --- */
-.card, .modal-content, .hero-card {
-    background: var(--glass-bg) !important;
-    backdrop-filter: var(--glass-blur) !important;
-    -webkit-backdrop-filter: var(--glass-blur) !important;
-    border: var(--glass-border) !important;
-    border-radius: 24px !important;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.6) !important;
-    color: #fff;
-}
-
-.hero-card {
-    /* Hero card sedikit lebih menonjol */
-    background: linear-gradient(145deg, rgba(25, 20, 35, 0.8), rgba(10, 5, 15, 0.9)) !important;
-}
-
-/* Fix Modal Header/Footer agar menyatu */
-.modal-header, .modal-footer {
-    border-color: rgba(255,255,255,0.05) !important;
-    background: transparent !important;
-}
-.btn-close { filter: invert(1); opacity: 0.8; }
-
-/* --- 6. NEON BUTTONS (PURPLE THEME) --- */
-.btn-primary, .btn-primary-custom {
-    background: linear-gradient(135deg, var(--neon-main), var(--neon-sec)) !important;
-    border: none !important;
-    color: #fff !important;
-    font-weight: 700;
-    padding: 12px 30px;
-    border-radius: 50px !important;
-    box-shadow: var(--neon-glow);
-    transition: all 0.3s ease;
-}
-
-.btn-primary:hover, .btn-primary-custom:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 0 40px rgba(217, 70, 239, 0.6) !important;
-}
-
-/* Tombol Outline (Menu Awal) */
-.btn-outline-custom, .btn-outline-primary, .btn-light {
-    background: rgba(255,255,255,0.03) !important;
-    border: 1px solid rgba(255,255,255,0.1) !important;
-    color: var(--text-primary) !important;
-    border-radius: 50px !important; /* Kapsul */
-    padding: 12px 25px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.btn-outline-custom:hover, .btn-outline-primary:hover {
-    border-color: var(--neon-main) !important;
-    color: var(--neon-main) !important;
-    background: rgba(217, 70, 239, 0.1) !important;
-    box-shadow: 0 0 20px rgba(217, 70, 239, 0.2);
-    transform: translateY(-2px);
-}
-
-/* --- 7. INPUT FIELDS --- */
-.form-control, .form-check-input {
-    background: rgba(0, 0, 0, 0.4) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    color: #fff !important;
-    border-radius: 12px !important;
-    padding: 12px 15px;
-}
-
-.form-control:focus {
-    border-color: var(--neon-main) !important;
-    box-shadow: 0 0 0 4px rgba(217, 70, 239, 0.2) !important;
-}
-
-.form-check-input:checked {
-    background-color: var(--neon-main) !important;
-    border-color: var(--neon-main) !important;
-}
-
-/* --- 8. UI ELEMENTS (Quiz & Lists) --- */
-
-/* Pilihan Ganda */
-.choice-card-anim {
-    background: rgba(255, 255, 255, 0.03) !important;
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
-    border-radius: 16px !important;
-    color: #fff !important;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.choice-card-anim:hover {
-    border-color: var(--neon-main) !important;
-    background: rgba(217, 70, 239, 0.05) !important;
-    transform: scale(1.02);
-}
-
-/* Teks Soal */
+/* Kanji besar — di layar quiz dan display */
 .q-text-responsive {
-    font-size: clamp(2rem, 5vw, 4rem);
-    font-weight: 800;
-    background: linear-gradient(to bottom, #fff, #e9d5ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 15px rgba(217, 70, 239, 0.3));
-}
-
-/* List Kanji (Grid Kecil) */
-.kanji-list-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 1rem;
-}
-.kanji-card-small {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
-    padding: 15px;
-    text-align: center;
-    transition: 0.3s;
-}
-.kanji-card-small:hover {
-    border-color: var(--neon-main);
-    transform: translateY(-5px);
-    box-shadow: 0 5px 20px rgba(217, 70, 239, 0.2);
-}
-.k-char { color: var(--neon-main); font-size: 2.5rem; font-weight: 800; margin-bottom: 5px; }
-
-/* Scrollbar */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: var(--bg-dark); }
-::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: var(--neon-main); }
-
-
-/* --- SELECTION GRID (PAKET KANJI) --- */
-
-/* Container Grid */
-.range-grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); /* Responsif */
-    gap: 12px;
-    max-height: 400px;
-    overflow-y: auto;
-    padding: 10px;
-}
-
-/* Base Card Style (Kotak Kaca) */
-.selection-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    padding: 15px;
-    position: relative;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-/* Hover Effect */
-.selection-card:hover {
-    background: rgba(217, 70, 239, 0.1);
-    border-color: var(--neon-main);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
-
-/* Sembunyikan Checkbox Asli (Kita ganti visualnya) */
-.selection-card .form-check-input {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    margin: 0;
-    z-index: 2;
-    background-color: transparent;
-    border: 1px solid rgba(255,255,255,0.3);
-    width: 20px;
-    height: 20px;
-    border-radius: 6px !important;
-    cursor: pointer;
-}
-
-/* STATE: CHECKED (Ketika Dipilih) */
-/* Kita gunakan :has() selector modern atau styling input langsung */
-
-.selection-card:has(.form-check-input:checked), 
-.selection-card.active {
-    background: linear-gradient(135deg, rgba(217, 70, 239, 0.2), rgba(168, 85, 247, 0.1));
-    border-color: var(--neon-main);
-    box-shadow: 0 0 20px rgba(217, 70, 239, 0.3);
-}
-
-/* Ubah warna centang checkbox jadi ungu neon */
-.selection-card .form-check-input:checked {
-    background-color: var(--neon-main) !important;
-    border-color: var(--neon-main) !important;
-    box-shadow: 0 0 10px var(--neon-main);
-}
-
-/* Typography di dalam card */
-.selection-label {
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: #fff;
-    margin-bottom: 4px;
-    display: block;
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(4rem, 18vw, 7rem);
+  font-weight: 300;
+  line-height: 1;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  display: block;
+  text-align: center;
+  color: var(--c1);
+  letter-spacing: -0.03em;
+}
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+.app-navbar {
+  background: var(--c1);
+  border-bottom: none;
+  padding: 0.875rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,84,97,0.3);
+}
+
+.navbar-logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+
+.logo-icon {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--c3);
+  line-height: 1;
+}
+
+.logo-text {
+  font-family: 'Crimson Pro', serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+.logo-text span { color: var(--c3); }
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.app-wrapper {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 5rem;
+}
+
+.screen-active { animation: fadeUp 0.28s var(--ease); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   CARD
+   ============================================================ */
+.neon-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+/* Accent bar di atas card utama */
+.neon-card.card-primary::before {
+  content: '';
+  display: block;
+  height: 4px;
+  background: linear-gradient(90deg, var(--c1), var(--c3));
+}
+
+.card-body-pad { padding: 1.25rem 1.5rem; }
+
+.divider-neon {
+  border: none;
+  height: 1px;
+  background: var(--border);
+  margin: 0 1.5rem;
+}
+
+/* ============================================================
+   SECTION LABEL
+   ============================================================ */
+.section-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c2);
+  margin-bottom: 0.6rem;
+}
+
+/* ============================================================
+   HERO TITLE
+   ============================================================ */
+.hero-title {
+  font-family: 'Crimson Pro', serif;
+  font-size: clamp(1.8rem, 5vw, 2.4rem);
+  font-weight: 600;
+  color: var(--c1);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.hero-title .hi {
+  color: var(--c2);
+  font-style: italic;
+}
+
+.hero-subtitle {
+  font-size: 0.83rem;
+  color: var(--ink-4);
+  margin-top: 4px;
+  letter-spacing: 0.04em;
+}
+
+/* ============================================================
+   FILTER LEVEL
+   ============================================================ */
+.level-filter-group { display: flex; gap: 0.45rem; flex-wrap: wrap; }
+.level-filter-group input[type="radio"] { display: none; }
+
+.level-btn-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 1.1rem;
+  min-height: 38px;
+  border-radius: 999px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--ink-3);
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all var(--t) var(--ease);
+  user-select: none;
+}
+
+.level-btn-label:hover {
+  border-color: var(--c2);
+  color: var(--c2);
+  background: rgba(1,135,144,0.07);
+}
+
+input[type="radio"]:checked + .level-btn-label {
+  background: var(--c2);
+  border-color: var(--c2);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(1,135,144,0.3);
+}
+
+.total-badge-wrap { margin-top: 0.6rem; }
+
+#total-kanji-badge {
+  font-size: 0.9rem;
+  color: var(--ink-3);
+}
+
+#total-kanji-badge .badge-num {
+  font-family: 'Crimson Pro', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--c1);
+  margin-right: 2px;
+}
+
+/* ============================================================
+   TOMBOL LIHAT & HAFAL
+   ============================================================ */
+.btn-display-mode {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  width: 100%;
+  padding: 0.85rem 1.1rem;
+  min-height: 58px;
+  background: linear-gradient(135deg, var(--c3-light), rgba(0,183,181,0.06));
+  border: 1.5px solid rgba(0,183,181,0.4);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  cursor: pointer;
+  transition: all var(--t) var(--ease);
+  text-align: left;
+}
+
+.btn-display-mode:hover {
+  border-color: var(--c3);
+  background: rgba(0,183,181,0.12);
+  box-shadow: 0 4px 14px rgba(0,183,181,0.15);
+  transform: translateY(-1px);
+}
+
+.display-icon { font-size: 1.5rem; flex-shrink: 0; }
+
+.display-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.display-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--c1);
+}
+
+.display-sub { font-size: 0.75rem; color: var(--ink-4); }
+.display-arrow { font-size: 1rem; color: var(--c2); opacity: 0.7; }
+
+/* ============================================================
+   MODE GRID
+   ============================================================ */
+.mode-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin-top: 0.75rem;
+}
+
+.btn-mode {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.85rem 1rem;
+  min-height: 64px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: var(--surface-2);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--t) var(--ease);
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-mode::after {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--c2);
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform var(--t) var(--ease);
+}
+
+.btn-mode:hover {
+  border-color: var(--c2);
+  background: rgba(1,135,144,0.05);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-mode:hover::after { transform: scaleY(1); }
+.btn-mode:active { transform: translateY(0); }
+
+.mode-icon { font-size: 1.35rem; flex-shrink: 0; position: relative; z-index: 1; }
+
+.mode-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  position: relative;
+  z-index: 1;
+  line-height: 1.2;
+}
+
+.mode-text small { font-size: 0.7rem; color: var(--ink-4); font-weight: 400; }
+
+.btn-progress-full {
+  width: 100%;
+  margin-top: 0.6rem;
+  background: transparent;
+  border: 1.5px solid var(--border);
+  color: var(--ink-4);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.6rem;
+  min-height: 44px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--t) var(--ease);
+}
+
+.btn-progress-full:hover {
+  border-color: var(--c1);
+  color: var(--c1);
+  background: rgba(0,84,97,0.04);
+}
+
+/* ============================================================
+   MODAL PAKET
+   ============================================================ */
+.modal-content {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--border);
+  padding: 1.1rem 1.4rem;
+  background: var(--c1);
+}
+
+.modal-title {
+  font-family: 'Crimson Pro', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.modal-footer {
+  border-top: 1px solid var(--border);
+  padding: 0.9rem 1.4rem;
+  background: var(--surface);
+  gap: 0.5rem;
+}
+
+/* Flash animation saat klik option — konfirmasi visual tanpa benar/salah */
+.opt-flash {
+  border-color: var(--c2) !important;
+  background: rgba(1,135,144,0.12) !important;
+  transform: scale(0.98);
+}
+
+.opt-flash .opt-letter {
+  background: var(--c2) !important;
+  color: #fff !important;
+}
+
+.modal-backdrop { background-color: rgba(0,84,97,0.5); }
+.modal-backdrop.show { opacity: 1; }
+.btn-close { filter: invert(1); opacity: 0.7; transition: opacity var(--t); }
+.btn-close:hover { opacity: 1; }
+
+/* Grid Paket */
+.paket-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+  gap: 0.5rem;
+}
+
+.paket-card { position: relative; }
+
+.paket-check-hidden {
+  position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none;
+}
+
+.paket-card-label {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 0.7rem 0.5rem 0.55rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  cursor: pointer;
+  transition: all var(--t) var(--ease);
+  text-align: center;
+  position: relative;
+  user-select: none;
+}
+
+.paket-card-label:hover {
+  border-color: var(--c2);
+  background: rgba(1,135,144,0.06);
+}
+
+.paket-card-selected .paket-card-label {
+  border-color: var(--c2);
+  background: rgba(1,135,144,0.1);
+  box-shadow: 0 0 0 3px rgba(1,135,144,0.15);
+}
+
+.paket-card-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.paket-card-num {
+  font-family: 'Crimson Pro', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--c1);
+}
+
+.paket-card-check-icon {
+  position: absolute; right: 0; top: 0;
+  font-size: 0.72rem;
+  color: var(--c2);
+  opacity: 0;
+  transition: opacity var(--t);
+}
+
+.paket-card-selected .paket-card-check-icon { opacity: 1; }
+
+.paket-card-range { font-size: 0.65rem; color: var(--ink-3); white-space: nowrap; }
+.paket-card-count { font-size: 0.62rem; color: var(--ink-4); }
+
+.paket-mini-bar {
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 2px;
+}
+
+.paket-mini-fill { height: 100%; border-radius: 2px; transition: width 0.5s; }
+.bar-full { background: var(--success); }
+.bar-mid  { background: var(--c3); }
+.bar-low  { background: var(--c2); }
+
+.paket-card-mastered { font-size: 0.6rem; color: var(--ink-4); }
+
+/* Tombol modal */
+.btn-modal-secondary {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--ink-3);
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  min-height: 36px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  font-size: 0.83rem;
+  cursor: pointer;
+  transition: all var(--t);
+}
+
+.btn-modal-secondary:hover {
+  border-color: var(--c1);
+  color: var(--c1);
+  background: rgba(0,84,97,0.06);
+}
+
+.btn-modal-primary {
+  background: var(--c3);
+  border: none;
+  color: var(--c1);
+  border-radius: 999px;
+  padding: 0.4rem 1.3rem;
+  min-height: 36px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all var(--t) var(--ease);
+  box-shadow: 0 2px 8px rgba(0,183,181,0.35);
+  letter-spacing: 0.02em;
+}
+
+.btn-modal-primary:hover {
+  background: #00d4d1;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0,183,181,0.4);
+}
+
+/* ============================================================
+   LAYAR QUIZ
+   ============================================================ */
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.875rem 1.5rem;
+  background: var(--c1);
+}
+
+.quiz-counter {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--c3);
+  letter-spacing: 0.08em;
+}
+
+.quiz-no-asli {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.5);
+  font-family: 'DM Mono', monospace;
+}
+
+/* Progress bar tipis */
+.quiz-progress-wrap {
+  height: 3px;
+  background: rgba(0,84,97,0.12);
+}
+
+.quiz-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--c2), var(--c3));
+  transition: width 0.3s var(--ease);
+}
+
+.quiz-kanji-area {
+  padding: 2.5rem 1.5rem 2rem;
+  text-align: center;
+  min-height: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+}
+
+.quiz-input-area { padding: 0 1.25rem 1.25rem; background: var(--surface); }
+
+.quiz-footer {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.875rem 1.25rem;
+  border-top: 1px solid var(--border-2);
+  background: var(--surface-2);
+}
+
+/* ---- Pilihan Ganda ---- */
+.options-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.option-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  min-height: 52px;
+  background: var(--surface-2);
+  border: 1.5px solid var(--border);
+  color: var(--ink);
+  border-radius: var(--radius-sm);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--t) var(--ease);
+  width: 100%;
+}
+
+.opt-letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--border);
+  color: var(--ink-3);
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: 'DM Mono', monospace;
+  flex-shrink: 0;
+  transition: all var(--t);
+}
+
+.opt-text { flex: 1; }
+
+.option-btn:hover:not(:disabled) {
+  border-color: var(--c2);
+  background: rgba(1,135,144,0.06);
+}
+
+.option-btn:hover:not(:disabled) .opt-letter {
+  background: var(--c2);
+  color: #fff;
+}
+
+.option-btn.selected {
+  border-color: var(--c1);
+  background: rgba(0,84,97,0.06);
+  font-weight: 500;
+}
+
+.option-btn.selected .opt-letter {
+  background: var(--c1);
+  color: #fff;
+}
+
+.option-btn:disabled { opacity: 0.65; cursor: not-allowed; }
+
+/* ---- Essay Input ---- */
+.essay-wrapper { display: flex; flex-direction: column; gap: 0.4rem; }
+
+.essay-input {
+  width: 100%;
+  background: var(--surface-2);
+  border: 1.5px solid var(--border);
+  color: var(--ink);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1rem;
+  font-size: 1rem;
+  font-family: 'DM Sans', sans-serif;
+  min-height: 52px;
+  transition: border-color var(--t), box-shadow var(--t);
+  outline: none;
+}
+
+.essay-input:focus {
+  border-color: var(--c2);
+  box-shadow: 0 0 0 3px rgba(1,135,144,0.12);
+  background: var(--surface);
+}
+
+.essay-hint { font-size: 0.72rem; color: var(--ink-4); text-align: center; }
+
+/* Tombol navigasi quiz */
+.btn-quiz-nav {
+  background: transparent;
+  border: 1.5px solid var(--border);
+  color: var(--ink-3);
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  min-height: 44px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--t) var(--ease);
+  flex: 1;
+}
+
+.btn-quiz-nav:hover:not(:disabled) {
+  border-color: var(--c1);
+  color: var(--c1);
+  background: rgba(0,84,97,0.05);
+}
+
+.btn-quiz-nav:disabled { opacity: 0.3; cursor: not-allowed; }
+
+.btn-lupa {
+  background: transparent;
+  border-color: rgba(138,98,0,0.3);
+  color: var(--warn);
+  flex: 0.8;
+}
+
+.btn-lupa:hover {
+  background: var(--warn-bg);
+  border-color: rgba(138,98,0,0.5);
+}
+
+.btn-next-quiz {
+  background: var(--c1);
+  border-color: var(--c1);
+  color: #fff;
+}
+
+.btn-next-quiz:hover:not(:disabled) {
+  background: var(--c2);
+  border-color: var(--c2);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Feedback overlay */
+.feedback-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: transparent;
+}
+
+/* Tombol Stop navbar */
+.btn-stop-nav {
+  background: rgba(255,255,255,0.1);
+  border: 1.5px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.85);
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  min-height: 36px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  font-size: 0.83rem;
+  cursor: pointer;
+  transition: all var(--t) var(--ease);
+}
+
+.btn-stop-nav:hover {
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.5);
+  color: #fff;
+}
+
+/* ============================================================
+   LAYAR HASIL — Pembahasan lengkap
+   ============================================================ */
+.result-score-area {
+  text-align: center;
+  padding: 2rem 1rem 1.25rem;
+  background: linear-gradient(180deg, var(--c1) 0%, var(--c2) 100%);
+}
+
+.score-circle {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(8px);
+  margin-bottom: 0.6rem;
+}
+
+.score-num {
+  font-family: 'Crimson Pro', serif;
+  font-size: 3rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1;
+}
+
+.score-pct { font-size: 1.2rem; color: rgba(255,255,255,0.7); margin-left: 1px; }
+
+.result-score-label {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.75);
+}
+
+.score-pass .score-num, .score-mid .score-num, .score-fail .score-num { color: #fff; }
+
+/* Tombol aksi */
+.result-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.1rem 1.25rem;
+  border-bottom: 1px solid var(--border-2);
+  background: var(--surface-2);
+}
+
+.btn-result {
+  width: 100%;
+  padding: 0.7rem;
+  min-height: 48px;
+  border-radius: 999px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: all var(--t) var(--ease);
+  border: none;
+}
+
+.btn-result-primary {
+  background: var(--c1);
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+.btn-result-primary:hover {
+  background: var(--c2);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-result-secondary {
+  background: transparent;
+  border: 1.5px solid var(--border) !important;
+  color: var(--ink-3);
+}
+.btn-result-secondary:hover {
+  border-color: var(--c1) !important;
+  color: var(--c1);
+  background: rgba(0,84,97,0.04);
+}
+
+.btn-result-danger {
+  background: transparent;
+  border: 1.5px solid rgba(179,58,58,0.35) !important;
+  color: var(--error);
+}
+.btn-result-danger:hover {
+  background: var(--error-bg);
+  border-color: rgba(179,58,58,0.6) !important;
+}
+
+.wrong-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--error);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-left: 5px;
+}
+
+/* LIST PEMBAHASAN */
+.result-list-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.1rem 0;
+}
+
+.result-list-title {
+  font-family: 'Crimson Pro', serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--c1);
+  letter-spacing: -0.01em;
+}
+
+.result-list-wrap {
+  padding: 0.65rem 1.1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.res-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.res-correct-item { border-left: 4px solid var(--success); }
+.res-wrong-item   { border-left: 4px solid var(--error); }
+
+/* Header soal */
+.res-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem 0.5rem;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border-2);
+}
+
+.res-kanji-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.res-num {
+  font-size: 0.75rem;
+  color: var(--ink-4);
+  font-family: 'DM Mono', monospace;
+  flex-shrink: 0;
+}
+
+.res-kanji {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(1.4rem, 5vw, 2rem);
+  font-weight: 400;
+  color: var(--c1);
+  line-height: 1.2;
+}
+
+.res-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.res-icon-correct {
+  background: var(--success-bg);
+  color: var(--success);
+  border: 1.5px solid rgba(13,122,95,0.2);
+}
+
+.res-icon-wrong {
+  background: var(--error-bg);
+  color: var(--error);
+  border: 1.5px solid rgba(179,58,58,0.2);
+}
+
+/* Kotak jawaban */
+.res-box {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.5rem 1rem;
+  flex-wrap: wrap;
+}
+
+.res-box-wrong {
+  background: var(--error-bg);
+  border-bottom: 1px solid rgba(179,58,58,0.1);
+}
+
+.res-box-correct {
+  background: var(--success-bg);
+  border-bottom: 1px solid rgba(13,122,95,0.1);
+}
+
+.res-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.res-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.res-val-wrong  { color: var(--error); }
+.res-val-correct { color: var(--success); }
+
+/* Meta info */
+.res-meta {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0.45rem 1rem;
+  background: var(--surface-2);
+}
+
+.res-meta-main {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--c2);
+}
+
+.res-meta-sub {
+  font-size: 0.72rem;
+  color: var(--ink-4);
+  font-style: italic;
+}
+
+/* ============================================================
+   SCREEN HEADER (Progress & Display)
+   ============================================================ */
+.screen-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background: var(--c1);
+}
+
+.screen-title {
+  font-family: 'Crimson Pro', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.btn-screen-back {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.85);
+  border-radius: 999px;
+  padding: 0.3rem 0.8rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all var(--t);
+}
+
+.btn-screen-back:hover {
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+}
+
+/* ============================================================
+   LAYAR PROGRESS
+   ============================================================ */
+.progress-summary {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+}
+
+.prog-stat { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+
+.prog-num {
+  font-family: 'Crimson Pro', serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--c1);
+  line-height: 1;
+}
+
+.prog-label {
+  font-size: 0.68rem;
+  color: var(--ink-4);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.prog-bar-outer {
+  height: 6px;
+  background: var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.prog-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--c1), var(--c3));
+  border-radius: 6px;
+  transition: width 0.5s var(--ease);
+}
+
+.progress-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  max-height: 55vh;
+  overflow-y: auto;
+}
+
+.prog-item {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border-2);
+  background: var(--surface-2);
+  transition: all var(--t);
+}
+
+.prog-mastered {
+  border-color: rgba(13,122,95,0.2);
+  background: rgba(13,122,95,0.04);
+}
+
+.prog-kanji {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.35rem;
+  font-weight: 400;
+  min-width: 46px;
+  text-align: center;
+  color: var(--c1);
+}
+
+.prog-arti { flex: 1; font-size: 0.82rem; color: var(--ink-3); }
+
+.prog-modes { display: flex; gap: 3px; }
+
+.prog-mode-dot { font-size: 0.88rem; opacity: 0.18; transition: opacity var(--t); cursor: default; }
+.prog-mode-dot.done { opacity: 1; }
+
+/* ============================================================
+   LAYAR DISPLAY
+   ============================================================ */
+.display-counter-wrap {
+  text-align: center;
+  padding: 0.5rem 0;
+  background: var(--c1);
+  border-bottom: 1px solid rgba(0,183,181,0.2);
+}
+
+.display-counter {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--c3);
+  letter-spacing: 0.12em;
+}
+
+.display-kanji-area {
+  padding: 2rem 1.5rem 1.5rem;
+  text-align: center;
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+}
+
+.display-reveal-wrap {
+  padding: 0 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  background: var(--surface);
+}
+
+.btn-reveal {
+  background: rgba(0,183,181,0.08);
+  border: 1.5px solid rgba(0,183,181,0.4);
+  color: var(--c2);
+  border-radius: 999px;
+  padding: 0.55rem 1.6rem;
+  min-height: 42px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--t) var(--ease);
+}
+
+.btn-reveal:hover {
+  background: rgba(0,183,181,0.14);
+  border-color: var(--c3);
+  box-shadow: 0 2px 10px rgba(0,183,181,0.2);
+}
+
+.display-info-panel {
+  width: 100%;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  animation: revealSlide 0.25s var(--ease);
+}
+
+@keyframes revealSlide {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.display-info-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--border-2);
+}
+.display-info-row:last-child { border-bottom: none; }
+
+.display-info-label {
+  font-size: 0.68rem;
+  color: var(--ink-4);
+  min-width: 56px;
+  flex-shrink: 0;
+  letter-spacing: 0.05em;
+  font-style: italic;
+}
+
+.display-info-val { font-size: 0.95rem; font-weight: 500; color: var(--ink); }
+.display-hira { font-family: 'Noto Serif JP', serif; color: var(--c1); font-size: 1.05rem; }
+.display-romaji-val { font-family: 'DM Mono', monospace; font-size: 0.88rem; color: var(--c2); }
+.display-arti-val { color: var(--success); font-weight: 600; }
+
+.display-type-badge {
+  background: var(--border-2);
+  border: 1px solid var(--border);
+  color: var(--ink-4);
+  font-size: 0.72rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.display-nav {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.9rem 1.25rem;
+  border-top: 1px solid var(--border-2);
+  background: var(--surface-2);
+}
+
+.btn-display-nav {
+  flex: 1;
+  background: transparent;
+  border: 1.5px solid var(--border);
+  color: var(--ink-3);
+  border-radius: 999px;
+  padding: 0.5rem;
+  min-height: 44px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--t) var(--ease);
+}
+
+.btn-display-nav:hover:not(:disabled) {
+  border-color: var(--c2);
+  color: var(--c2);
+  background: rgba(1,135,144,0.05);
+}
+
+.btn-display-nav:disabled { opacity: 0.3; cursor: not-allowed; }
+
+.btn-display-nav-next {
+  background: var(--c2);
+  border-color: var(--c2);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(1,135,144,0.25);
+}
+
+.btn-display-nav-next:hover:not(:disabled) {
+  background: var(--c1);
+  border-color: var(--c1);
+  box-shadow: 0 4px 14px rgba(0,84,97,0.3);
+}
+
+/* ============================================================
+   MODAL KONFIRMASI CUSTOM
+   ============================================================ */
+.confirm-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,84,97,0.5);
+  backdrop-filter: blur(6px);
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: backdropIn 0.2s var(--ease);
+}
+
+@keyframes backdropIn { from { opacity: 0; } to { opacity: 1; } }
+
+.confirm-modal-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  max-width: 360px;
+  width: 100%;
+  overflow: hidden;
+  animation: modalPop 0.22s var(--ease);
+}
+
+@keyframes modalPop {
+  from { opacity: 0; transform: scale(0.94) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.confirm-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem 1.4rem 0.75rem;
+  background: var(--c1);
+}
+
+.confirm-modal-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.confirm-modal-title {
+  font-family: 'Crimson Pro', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+}
+
+.confirm-modal-body { padding: 1rem 1.4rem; }
+
+.confirm-modal-msg {
+  font-size: 0.875rem;
+  color: var(--ink-2);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.confirm-modal-footer {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem 1.4rem 1.2rem;
+  justify-content: flex-end;
+}
+
+.btn-confirm-cancel {
+  background: transparent;
+  border: 1.5px solid var(--border);
+  color: var(--ink-3);
+  border-radius: 999px;
+  padding: 0.45rem 1.1rem;
+  min-height: 38px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all var(--t) var(--ease);
+}
+
+.btn-confirm-cancel:hover {
+  border-color: var(--c1);
+  color: var(--c1);
+  background: rgba(0,84,97,0.05);
+}
+
+.btn-confirm-ok {
+  background: var(--error);
+  border: none;
+  color: #fff;
+  border-radius: 999px;
+  padding: 0.45rem 1.3rem;
+  min-height: 38px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all var(--t) var(--ease);
+  box-shadow: 0 2px 8px rgba(179,58,58,0.3);
+}
+
+.btn-confirm-ok:hover {
+  background: #c0392b;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(179,58,58,0.35);
+}
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+.app-toast {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(16px);
+  padding: 0.6rem 1.3rem;
+  border-radius: 999px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  z-index: 9999;
+  opacity: 0;
+  transition: all 0.25s var(--ease);
+  white-space: nowrap;
+  box-shadow: var(--shadow-md);
+  border: 1px solid;
+}
+
+.app-toast.toast-show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.toast-warning { background: var(--surface); border-color: rgba(138,98,0,0.4); color: var(--warn); }
+.toast-success { background: var(--surface); border-color: rgba(13,122,95,0.4); color: var(--success); }
+.toast-danger  { background: var(--surface); border-color: rgba(179,58,58,0.4); color: var(--error); }
+.toast-info    { background: var(--surface); border-color: var(--border); color: var(--c1); }
+
+/* ============================================================
+   UTILITY & RESPONSIF
+   ============================================================ */
+.d-none { display: none !important; }
+
+@media (max-width: 480px) {
+  .app-wrapper { padding: 1rem 0.7rem 3rem; }
+  .mode-grid { grid-template-columns: 1fr; }
+  .quiz-footer { flex-wrap: wrap; }
+  .btn-quiz-nav { flex: 0 0 calc(50% - 4px); }
+  .btn-lupa { flex: 0 0 100%; order: -1; }
+  .score-circle { width: 110px; height: 110px; }
+  .score-num { font-size: 2.5rem; }
+  .paket-grid { grid-template-columns: repeat(auto-fill, minmax(74px, 1fr)); }
+}
+
+@media (max-width: 360px) {
+  .level-filter-group { gap: 0.3rem; }
+  .level-btn-label { padding: 0.35rem 0.7rem; font-size: 0.8rem; }
 }
-
-.selection-sub {
-    font-size: 0.8rem;
-    color: var(--text-sec); /* Warna ungu pudar */
-}
-
-/* Icon dekorasi kecil (Opsional) */
-.selection-icon {
-    font-size: 1.5rem;
-    color: rgba(255,255,255,0.2);
-    margin-bottom: 8px;
-    transition: 0.3s;
-}
-
-.selection-card:hover .selection-icon,
-.selection-card:has(.form-check-input:checked) .selection-icon {
-    color: var(--neon-main);
-    transform: scale(1.1);
-}
-
-
-/* --- TAMBAHAN KHUSUS (PATCH) --- */
-
-/* 1. RESET DAFTAR PAKET JADI TEXT-ONLY (SIMPLE) */
-.range-grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 10px 20px;
-    padding: 10px 5px;
-    max-height: 400px;
-    overflow-y: auto;
-}
-
-/* Hapus semua kotak/border dari item list */
-.simple-check-item {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-}
-
-/* Style Checkbox Custom (Ungu Neon) */
-.simple-check-item .form-check-input {
-    background-color: transparent;
-    border: 2px solid #555; /* Abu gelap */
-    width: 18px;
-    height: 18px;
-    margin: 0;
-    border-radius: 4px !important;
-    cursor: pointer;
-}
-
-.simple-check-item .form-check-input:checked {
-    background-color: #d946ef !important; /* UNGU */
-    border-color: #d946ef !important;
-    box-shadow: 0 0 8px #d946ef;
-}
-
-/* Teks Label */
-.simple-check-item label {
-    color: #aaa; /* Abu-abu default */
-    font-weight: 500;
-    font-size: 0.95rem;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-/* Teks saat dipilih jadi Putih */
-.simple-check-item .form-check-input:checked ~ label {
-    color: #fff !important;
-    font-weight: 700;
-    text-shadow: 0 0 5px rgba(217, 70, 239, 0.5);
-}
-
-/* 2. RESET TOMBOL KEMBALI (TEXT ONLY) */
-#btn-main-back {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    color: #888 !important; /* Warna abu */
-    font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    text-decoration: none;
-}
-
-#btn-main-back:hover {
-    color: #d946ef !important; /* Jadi Ungu saat hover */
-    transform: translateX(-5px); /* Geser kiri dikit */
-}
-
-/* ========================================================
-   PATCH CSS: TAMPILAN SIMPLE & TEXT-ONLY (TANPA UBAH JS)
-   ======================================================== */
-/* =================================================================
-   FINAL TUNING: UKURAN PAS & RAPI (INVISIBLE CHECKBOX)
-   ================================================================= */
-
-/* 1. GRID CONTAINER (UKURAN LEBAR KOTAK DIATUR DI SINI) */
-#rangeListQuiz, 
-#rangeListMem, 
-#rangeListDaftar {
-    display: grid !important;
-    /* UBAH ANGKA 130px DI BAWAH JIKA MAU LEBIH LEBAR/SEMPIT */
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)) !important;
-    gap: 10px !important; /* Jarak antar kotak lebih rapat */
-    padding: 10px 5px !important;
-    max-height: 400px;
-    overflow-y: auto;
-}
-
-/* 2. ITEM KARTU (UKURAN TINGGI DIATUR DI SINI) */
-#rangeListQuiz .form-check, 
-#rangeListMem .form-check, 
-#rangeListDaftar .form-check {
-    position: relative !important;
-    display: flex !important;
-    flex-direction: column !important; /* Susun vertikal biar rapi */
-    align-items: center !important;
-    justify-content: center !important;
-    text-align: center !important;
-    
-    /* Background Transparan Elegan */
-    background: rgba(255, 255, 255, 0.03) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    border-radius: 10px !important; /* Sudut sedikit lebih tumpul */
-    
-    /* UKURAN TINGGI & PADDING */
-    padding: 8px 5px !important;  /* Lebih hemat tempat */
-    margin: 0 !important;
-    min-height: 50px !important;  /* Tinggi minimal pas, tidak kegedean */
-    
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    cursor: pointer !important;
-    overflow: hidden !important;
-}
-
-/* EFEK HOVER */
-#rangeListQuiz .form-check:hover, 
-#rangeListMem .form-check:hover, 
-#rangeListDaftar .form-check:hover {
-    background: rgba(217, 70, 239, 0.15) !important;
-    border-color: rgba(217, 70, 239, 0.4) !important;
-    transform: translateY(-2px) !important;
-}
-
-/* EFEK SAAT DIPILIH (AKTIF) */
-#rangeListQuiz .form-check:has(.form-check-input:checked), 
-#rangeListMem .form-check:has(.form-check-input:checked), 
-#rangeListDaftar .form-check:has(.form-check-input:checked) {
-    background: linear-gradient(135deg, rgba(217, 70, 239, 0.25), rgba(168, 85, 247, 0.15)) !important;
-    border-color: #d946ef !important;
-    box-shadow: 0 0 12px rgba(217, 70, 239, 0.3) !important;
-}
-
-/* 3. SEMBUNYIKAN INPUT CHECKBOX (JANGAN DIUBAH) */
-#rangeListQuiz .form-check-input, 
-#rangeListMem .form-check-input, 
-#rangeListDaftar .form-check-input {
-    opacity: 0 !important;
-    position: absolute !important;
-    width: 0 !important;
-    height: 0 !important;
-    pointer-events: none !important;
-}
-/* Hapus style default checked */
-#rangeListQuiz .form-check-input:checked, 
-#rangeListMem .form-check-input:checked, 
-#rangeListDaftar .form-check-input:checked {
-     box-shadow: none !important;
-     background: transparent !important;
-}
-
-/* 4. TEKS LABEL */
-#rangeListQuiz .form-check-label, 
-#rangeListMem .form-check-label, 
-#rangeListDaftar .form-check-label {
-    padding: 0 !important;
-    margin: 0 !important;
-    cursor: pointer !important;
-    line-height: 1.1 !important;
-    user-select: none;
-    z-index: 2;
-    width: 100% !important;
-}
-
-/* Judul Paket (Strong) */
-#rangeListQuiz .form-check-label strong, 
-#rangeListMem .form-check-label strong, 
-#rangeListDaftar .form-check-label strong {
-    font-weight: 600 !important;
-    font-size: 0.9rem !important; /* Ukuran font pas */
-    color: #a0a0a0 !important;
-    display: block !important;
-    margin-bottom: 2px !important;
-}
-
-/* Info Kecil */
-#rangeListQuiz .form-check-label .small, 
-#rangeListMem .form-check-label .small, 
-#rangeListDaftar .form-check-label .small {
-    font-size: 0.7rem !important;
-    color: #666 !important;
-    display: block !important;
-}
-
-/* SAAT DIPILIH: TEKS MENYALA */
-#rangeListQuiz .form-check-input:checked + .form-check-label strong, 
-#rangeListMem .form-check-input:checked + .form-check-label strong, 
-#rangeListDaftar .form-check-input:checked + .form-check-label strong {
-    color: #fff !important;
-    text-shadow: 0 0 8px rgba(217, 70, 239, 0.7) !important;
-}
-#rangeListQuiz .form-check-input:checked + .form-check-label .small, 
-#rangeListMem .form-check-input:checked + .form-check-label .small, 
-#rangeListDaftar .form-check-input:checked + .form-check-label .small {
-    color: rgba(255,255,255,0.8) !important;
-}
-
-/* 5. TOMBOL KEMBALI (TETAP SAMA) */
-#btn-main-back {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    color: #94a3b8 !important;
-    padding: 5px 12px !important;
-    font-weight: 600 !important;
-    font-size: 0.9rem !important;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    border-radius: 50px !important;
-    transition: all 0.3s ease !important;
-}
-
-#btn-main-back:hover {
-    color: #fff !important;
-    background: rgba(217, 70, 239, 0.15) !important;
-    transform: translateX(-3px);
-}
-
-/* =================================================================
-   FINAL ULTRA: TOMBOL KEMBALI (NEON PILL - BERWARNA & BULAT)
-   ================================================================= */
-
-#btn-main-back {
-    /* 1. BENTUK: PIL BULAT SEMPURNA */
-    border-radius: 9999px !important; /* Memastikan sangat bulat */
-    padding: 5px 14px !important;    /* Lebih 'gemuk' */
-    
-    /* 2. WARNA DASAR (Lebih Hidup) */
-    /* Menggunakan gradient ungu transparan sebagai warna dasar */
-    background: linear-gradient(135deg, rgba(217, 70, 239, 0.15), rgba(168, 85, 247, 0.15)) !important;
-    /* Border ungu tipis */
-    border: 1px solid rgba(217, 70, 239, 0.3) !important;
-    /* Teks Putih agar kontras */
-    color: #ffffff !important;
-    /* Bayangan halus */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
-
-    /* 3. TYPOGRAPHY & LAYOUT */
-    text-decoration: none !important;
-    font-family: 'Inter', sans-serif !important;
-    font-weight: 700 !important;
-    font-size: 0.95rem !important;
-    letter-spacing: 0.5px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 10px !important;
-    
-    /* Animasi */
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-}
-
-/* EFEK HOVER (SAAT DISENTUH -> MAKIN MENYALA) */
-#btn-main-back:hover {
-    /* Warna gradient lebih pekat */
-    background: linear-gradient(135deg, rgba(217, 70, 239, 0.3), rgba(168, 85, 247, 0.3)) !important;
-    border-color: #d946ef !important;
-    
-    /* Glow Neon Kuat */
-    box-shadow: 0 0 25px rgba(217, 70, 239, 0.4) !important;
-    
-    /* Efek tekan & geser */
-    transform: translateX(-4px) scale(1.02) !important;
-}
-
-/* ANIMASI IKON PANAH */
-#btn-main-back i {
-    transition: transform 0.3s ease !important;
-    color: #e9d5ff !important; /* Ikon sedikit lebih terang */
-}
-
-#btn-main-back:hover i {
-    transform: translateX(-3px) !important;
-    color: #fff !important; /* Ikon jadi putih saat hover */
-}
-
-
-/* =================================================================
-   HERO UPGRADE: IKON CHAT JADI BOLA NEON
-   ================================================================= */
-
-/* =================================================================
-   HERO UPGRADE: IKON CHAT (UKURAN LEBIH KECIL & PAS)
-   ================================================================= */
-
-/* Target Lingkaran Pembungkus Ikon */
-.hero-card .rounded-circle {
-    /* 1. UKURAN DIPERKECIL (Dari 120px jadi 80px) */
-    width: 85px !important;       
-    height: 85px !important;      
-    padding: 0 !important;         
-    border-radius: 50% !important; 
-    
-    /* 2. WARNA (NEON PURPLE) */
-    background: linear-gradient(135deg, #d946ef, #9333ea) !important;
-    border: 3px solid rgba(255, 255, 255, 0.2) !important; 
-    
-    /* 3. GLOW */
-    box-shadow: 
-        0 8px 25px rgba(217, 70, 239, 0.4), 
-        inset 0 0 15px rgba(255, 255, 255, 0.3) !important;
-    
-    /* 4. POSISI */
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    margin-bottom: 20px !important; /* Jarak bawah dikurangi dikit */
-    
-    /* 5. ANIMASI */
-    animation: neonFloat 3s ease-in-out infinite !important;
-}
-
-/* Style Ikon di Dalamnya */
-.hero-card .rounded-circle i {
-    font-size: 2.5rem !important; /* Diperkecil dari 3.5rem */
-    color: #fff !important;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-}
-
-/* Animasi Melayang */
-@keyframes neonFloat {
-    0% { transform: translateY(0px); box-shadow: 0 8px 25px rgba(217, 70, 239, 0.4); }
-    50% { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(217, 70, 239, 0.6); }
-    100% { transform: translateY(0px); box-shadow: 0 8px 25px rgba(217, 70, 239, 0.4); }
-}
-
-/* (Opsional) Samarkan Kanji Besar di Background agar Ikon lebih Pop-up */
-.hero-bg-kanji {
-    opacity: 0.03 !important; 
-}
-
-/* =================================================================
-   FINAL UPGRADE: TOMBOL SILANG (NEON CLOSE BUTTON) - UKURAN PAS
-   ================================================================= */
-
-/* Target tombol close di semua modal */
-.btn-close {
-    /* 1. GANTI IKON JADI PUTIH */
-    background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat !important;
-    
-    /* 2. BENTUK & UKURAN (LEBIH RINGKAS) */
-    width: 2rem !important;      /* Dikurangi dari 2.5rem */
-    height: 2rem !important;     /* Dikurangi dari 2.5rem */
-    padding: 0.4rem !important;  /* Padding disesuaikan */
-    border-radius: 50% !important; /* Bulat sempurna */
-    
-    /* 3. WARNA DASAR (GLASS) */
-    background-color: rgba(255, 255, 255, 0.05) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    opacity: 0.7 !important;
-    box-shadow: none !important;
-    
-    /* 4. ANIMASI */
-    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) !important;
-    filter: none !important;
-}
-
-/* EFEK HOVER (SAAT DISENTUH) */
-.btn-close:hover {
-    opacity: 1 !important;
-    /* Warna Merah Neon */
-    background-color: rgba(255, 50, 50, 0.15) !important; 
-    border-color: #ff4d4d !important;
-    /* Glow Merah */
-    box-shadow: 0 0 15px rgba(255, 77, 77, 0.4) !important;
-    /* Animasi Putar */
-    transform: rotate(90deg) scale(1.1) !important; 
-}
-
-/* Fokus */
-.btn-close:focus {
-    box-shadow: 0 0 0 3px rgba(255, 77, 77, 0.2) !important;
-    outline: none !important;
-}
-
-/* =================================================================
-   FINAL UPDATE: DAFTAR KANJI (UKURAN RAMPING & PAS)
-   ================================================================= */
-
-/* 1. BACKGROUND MODAL (TETAP GELAP) */
-#daftarHafalanModal .modal-body, 
-#daftarHafalanModal .bg-light-subtle {
-    background-color: #0b0510 !important;
-    background: #0b0510 !important;
-}
-#daftarHafalanModal .modal-content {
-    background-color: #0b0510 !important;
-    border: 1px solid rgba(255,255,255,0.1) !important;
-    border-radius: 24px !important;
-}
-
-/* 2. GRID LAYOUT (LEBIH RAPAT) */
-.kanji-list-grid {
-    display: grid;
-    /* Lebar minimal kartu diperkecil dari 150px jadi 120px */
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 12px; /* Jarak antar kartu lebih dekat */
-    padding-bottom: 40px;
-}
-
-/* 3. KARTU KANJI (LEBIH KECIL) */
-.kanji-card-small {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px; /* Radius sudut disesuaikan */
-    
-    /* Padding diperkecil drastis agar kartu tidak gembung */
-    padding: 15px 10px; 
-    
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow: hidden;
-    min-height: 160px; /* Tinggi minimal pas */
-}
-
-.kanji-card-small:hover {
-    transform: translateY(-3px);
-    background: rgba(217, 70, 239, 0.1);
-    border-color: #d946ef;
-    box-shadow: 0 8px 20px rgba(217, 70, 239, 0.15);
-}
-
-/* 4. TYPOGRAPHY (FONT LEBIH KECIL) */
-
-/* Karakter Kanji */
-.k-char {
-    font-size: 2.5rem; /* Dikecilkan dari 4rem */
-    font-weight: 700;
-    line-height: 1.2;
-    margin: 8px 0;
-    
-    background: linear-gradient(to bottom, #ffffff 40%, #d946ef 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 10px rgba(217, 70, 239, 0.3));
-}
-
-/* Cara Baca (Kana) */
-.k-read {
-    font-size: 1rem; /* Dikecilkan */
-    font-weight: 600;
-    color: #fff;
-    margin-bottom: 2px;
-}
-
-/* Romaji */
-.k-romaji {
-    font-size: 0.8rem; /* Dikecilkan */
-    color: #999;
-    font-style: italic;
-    margin-bottom: 8px;
-    line-height: 1;
-}
-
-/* Arti (Indonesia) */
-.k-mean {
-    font-size: 0.85rem; /* Dikecilkan */
-    color: #e2e8f0;
-    font-weight: 500;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 8px;
-    width: 100%;
-    
-    /* Membatasi arti panjang jadi titik-titik (...) jika perlu */
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-/* 5. BADGE PAKET (UKURAN MINI) */
-.kanji-card-small .badge {
-    background: rgba(255, 255, 255, 0.05) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    color: #777 !important;
-    font-size: 0.6rem;
-    padding: 3px 8px;
-    border-radius: 50px;
-    margin-bottom: 5px;
-}
-
-.kanji-card-small:hover .badge {
-    background: #d946ef !important;
-    color: #fff !important;
-    border-color: #d946ef !important;
-}
-
-/* =================================================================
-   UPDATE: RATA KIRI (LEFT ALIGN) - PILIH PAKET
-   ================================================================= */
-
-/* 1. UBAH POSISI ITEM DALAM KOTAK */
-#rangeListQuiz .form-check, 
-#rangeListMem .form-check, 
-#rangeListDaftar .form-check {
-    /* Ganti dari center ke flex-start (Kiri) */
-    align-items: flex-start !important; 
-    text-align: left !important;
-    
-    /* Beri jarak lebih di kiri agar tidak mepet */
-    padding-left: 15px !important; 
-    padding-right: 10px !important;
-}
-
-/* 2. PASTIKAN TEKS LABEL JUGA RATA KIRI */
-#rangeListQuiz .form-check-label, 
-#rangeListMem .form-check-label, 
-#rangeListDaftar .form-check-label {
-    text-align: left !important;
-    width: 100% !important;
-}
-
-
-/* =================================================================
-   UPDATE FINAL: MODE TULIS & FIX TOMBOL KEMBALI
-   ================================================================= */
-
-/* --- 1. FIX: HILANGKAN TOMBOL KEMBALI SAAT UJIAN --- */
-/* Ini SANGAT PENTING. Kode ini memastikan class 'd-none' dari JS bekerja */
-/* dan mengalahkan 'display: inline-flex !important' yang kita buat sebelumnya */
-#btn-main-back.d-none {
-    display: none !important;
-}
-
-/* --- 2. TAMPILAN KANJI UTAMA (SOAL) --- */
-/* Membuat Kanji di tengah layar menjadi Besar & Menyala */
-.q-text-responsive {
-    font-size: 5rem !important; /* Ukuran Jumbo */
-    font-weight: 800 !important;
-    line-height: 1.2 !important;
-    margin: 20px 0 !important;
-    
-    /* Warna Putih dengan Glow Ungu */
-    color: #ffffff !important;
-    text-shadow: 0 0 25px rgba(217, 70, 239, 0.6) !important;
-    
-    /* Animasi muncul halus */
-    animation: neonPulse 2s infinite alternate;
-}
-
-@keyframes neonPulse {
-    from { text-shadow: 0 0 20px rgba(217, 70, 239, 0.5); }
-    to   { text-shadow: 0 0 40px rgba(217, 70, 239, 0.8), 0 0 10px #fff; }
-}
-
-/* --- 3. INPUT BOX (TULIS JAWABAN) --- */
-/* Wadah Input */
-.mem-input-box {
-    position: relative;
-    max-width: 500px;
-    margin: 0 auto;
-}
-
-/* Input Field (Kapsul Kaca) */
-#memInput {
-    width: 100% !important;
-    background: rgba(255, 255, 255, 0.05) !important; /* Gelap Transparan */
-    border: 2px solid rgba(255, 255, 255, 0.1) !important;
-    border-radius: 50px !important; /* Bulat Penuh */
-    padding: 15px 60px 15px 25px !important; /* Padding kanan besar utk ikon Mic */
-    
-    color: #fff !important;
-    font-size: 1.2rem !important;
-    font-weight: 600 !important;
-    text-align: center !important;
-    
-    transition: all 0.3s ease !important;
-    outline: none !important;
-}
-
-/* Efek saat mengetik (Focus) */
-#memInput:focus {
-    background: rgba(255, 255, 255, 0.1) !important;
-    border-color: #d946ef !important; /* Border Ungu */
-    box-shadow: 0 0 20px rgba(217, 70, 239, 0.3) !important; /* Glow Input */
-}
-
-/* Placeholder text */
-#memInput::placeholder {
-    color: rgba(255, 255, 255, 0.3) !important;
-    font-weight: 400 !important;
-    font-size: 1rem !important;
-}
-/* --- FIX: TOMBOL MIC AGAR BISA DIKLIK --- */
-#btnMic {
-    position: absolute !important;
-    right: 15px !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    
-    width: 40px !important;
-    height: 40px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    border-radius: 50% !important;
-    
-    color: #aaa !important;
-    cursor: pointer !important;
-    transition: all 0.3s !important;
-    
-    /* PENTING: Agar tidak tertutup input */
-    z-index: 9999 !important; 
-    pointer-events: auto !important; 
-}
-
-#btnMic:hover {
-    background: rgba(255,255,255,0.1) !important;
-    color: #fff !important;
-    transform: translateY(-50%) scale(1.1) !important; /* Efek membesar */
-}
-
-/* Animasi saat merekam (Hanya muncul jika JS jalan) */
-#btnMic.recording {
-    color: #ff4d4d !important;
-    text-shadow: 0 0 10px #ff0000;
-    animation: pulseMic 1s infinite !important;
-}
-
-@keyframes pulseMic {
-    0% { transform: translateY(-50%) scale(1); box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.4); }
-    70% { transform: translateY(-50%) scale(1.1); box-shadow: 0 0 0 10px rgba(255, 77, 77, 0); }
-    100% { transform: translateY(-50%) scale(1); box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); }
-}
-
-/* --- 5. LABEL PERINTAH --- */
-.mem-label {
-    font-size: 0.85rem !important;
-    letter-spacing: 2px !important;
-    text-transform: uppercase !important;
-    color: #888 !important;
-    margin-bottom: 15px !important;
-    font-weight: 700 !important;
-}
-
-/* =================================================================
-   FINAL TOUCH: TOMBOL AKSI & RESPONSIF MOBILE
-   ================================================================= */
-
-/* --- 1. FIX: HAPUS TOMBOL KEMBALI SAAT UJIAN (FORCE) --- */
-/* Memastikan tombol benar-benar hilang saat class 'd-none' aktif */
-body #btn-main-back.d-none {
-    display: none !important;
-}
-
-/* --- 2. TOMBOL AKSI (BAWAH) - MODERN PILLS --- */
-
-/* Reset Style Umum Tombol */
-.card-body .btn {
-    border-radius: 50px !important; /* Bentuk Kapsul */
-    padding: 12px 20px !important;  /* Lebih tebal & nyaman diklik */
-    font-weight: 700 !important;
-    letter-spacing: 0.5px !important;
-    text-transform: uppercase !important;
-    font-size: 0.85rem !important;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    position: relative;
-    overflow: hidden;
-}
-
-/* TOMBOL: SEBELUMNYA (GHOST) */
-.btn-outline-secondary {
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    color: rgba(255, 255, 255, 0.5) !important;
-    background: transparent !important;
-}
-.btn-outline-secondary:hover {
-    border-color: rgba(255, 255, 255, 0.8) !important;
-    color: #fff !important;
-    background: rgba(255, 255, 255, 0.05) !important;
-    transform: translateY(-2px);
-}
-
-/* TOMBOL: LUPA (WARNING NEON) */
-.btn-outline-warning {
-    border: 1px solid #ffc107 !important; /* Kuning Emas */
-    color: #ffc107 !important;
-    background: transparent !important;
-    box-shadow: 0 0 10px rgba(255, 193, 7, 0.1) !important;
-}
-.btn-outline-warning:hover {
-    background: #ffc107 !important;
-    color: #000 !important; /* Teks hitam agar kontras */
-    box-shadow: 0 0 25px rgba(255, 193, 7, 0.6) !important;
-    transform: translateY(-2px);
-}
-
-/* TOMBOL: BERIKUTNYA (PURPLE NEON) */
-.btn-primary {
-    border: none !important;
-    background: linear-gradient(135deg, #d946ef, #a855f7) !important; /* Gradient Ungu */
-    color: #fff !important;
-    box-shadow: 0 0 20px rgba(217, 70, 239, 0.4) !important;
-}
-.btn-primary:hover {
-    box-shadow: 0 0 35px rgba(217, 70, 239, 0.7) !important;
-    transform: translateY(-2px);
-}
-
-/* TOMBOL: SELESAI (GREEN NEON) */
-.btn-success {
-    border: none !important;
-    background: linear-gradient(135deg, #22c55e, #16a34a) !important; /* Gradient Hijau */
-    color: #fff !important;
-    box-shadow: 0 0 20px rgba(34, 197, 94, 0.4) !important;
-}
-.btn-success:hover {
-    box-shadow: 0 0 35px rgba(34, 197, 94, 0.7) !important;
-    transform: translateY(-2px);
-}
-
-/* --- 3. MOBILE RESPONSIVE (LAYAR KECIL) --- */
-@media (max-width: 576px) {
-    /* Perkecil Kanji Utama agar tidak memenuhi layar HP */
-    .q-text-responsive {
-        font-size: 4rem !important; 
-        margin: 10px 0 !important;
-    }
-
-    /* Perkecil Padding Input Box */
-    #memInput {
-        padding: 12px 45px 12px 20px !important;
-        font-size: 1rem !important;
-    }
-
-    /* Atur Tombol Bawah agar muat di layar sempit */
-    .card-body .btn {
-        padding: 10px 10px !important; /* Kurangi padding samping */
-        font-size: 0.75rem !important; /* Font lebih kecil */
-    }
-    
-    /* Tombol 'Sebelumnya' bisa disembunyikan teksnya (opsional) atau dikecilkan */
-    .btn-outline-secondary {
-        flex-grow: 0 !important; /* Jangan terlalu lebar */
-        min-width: 40px !important;
-    }
-    
-    /* Pastikan Container Tombol Rapi */
-    .card-body .d-flex.gap-2 {
-        gap: 8px !important; /* Jarak antar tombol lebih rapat */
-    }
-}
-/* =================================================================
-   FINAL UPGRADE: HALAMAN HASIL & PEMBAHASAN (DARK NEON)
-   ================================================================= */
-
-/* 1. SKOR BESAR (JUMBO TEXT) */
-/* Membuat angka persentase menyala */
-h1.display-1, .text-center h1 { 
-    font-weight: 900 !important;
-    /* Gradient Putih ke Ungu */
-    background: linear-gradient(to bottom, #ffffff 40%, #d946ef 100%) !important;
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    /* Efek Cahaya */
-    filter: drop-shadow(0 0 25px rgba(217, 70, 239, 0.4));
-    margin-bottom: 25px !important;
-}
-
-/* 2. TOMBOL AKSI DI HASIL */
-/* Tombol 'Ulangi Semua' & 'Menu Utama' */
-.btn-outline-light, .btn-outline-secondary {
-    border-radius: 50px !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    color: #ccc !important;
-    background: transparent !important;
-    padding: 10px 25px !important;
-    transition: all 0.3s !important;
-}
-.btn-outline-light:hover, .btn-outline-secondary:hover {
-    border-color: #d946ef !important;
-    color: #fff !important;
-    background: rgba(217, 70, 239, 0.1) !important;
-    box-shadow: 0 0 15px rgba(217, 70, 239, 0.3) !important;
-}
-
-/* Tombol Merah (Perbaiki Salah) */
-.btn-danger {
-    border-radius: 50px !important;
-    background: linear-gradient(135deg, #ef4444, #b91c1c) !important;
-    border: none !important;
-    box-shadow: 0 0 15px rgba(239, 68, 68, 0.4) !important;
-    font-weight: 700 !important;
-    padding: 12px 30px !important;
-}
-.btn-danger:hover {
-    box-shadow: 0 0 25px rgba(239, 68, 68, 0.6) !important;
-    transform: translateY(-2px);
-}
-
-/* 3. UBAH SEMUA KARTU PUTIH JADI GELAP (CARD STYLING) */
-/* Menargetkan kartu Riwayat & Kartu Pembahasan */
-.card {
-    background: rgba(255, 255, 255, 0.03) !important; /* Kaca Gelap */
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    color: #fff !important;
-    border-radius: 20px !important;
-    box-shadow: none !important;
-    margin-bottom: 15px !important;
-}
-
-/* Header Card (Judul Riwayat) */
-.card-header {
-    background: rgba(255, 255, 255, 0.05) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-    color: #ddd !important;
-    font-weight: 700 !important;
-}
-
-/* 4. TABEL RIWAYAT */
-.table {
-    --bs-table-bg: transparent !important;
-    --bs-table-color: #eee !important;
-    border-color: rgba(255,255,255,0.1) !important;
-}
-.table td, .table th {
-    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
-    vertical-align: middle !important;
-}
-
-/* 5. PEMBAHASAN SOAL (ITEM JAWABAN) */
-
-/* Kanji Besar di Pembahasan */
-.card-body h2, .card-body h3 { 
-    color: #fff !important;
-    text-shadow: 0 0 10px rgba(217, 70, 239, 0.5); /* Glow Ungu */
-    font-weight: 700 !important;
-    font-size: 2.5rem !important;
-    margin-bottom: 15px !important;
-}
-
-/* Kotak 'KAMU' (Jawaban User - Merah) */
-.alert-danger {
-    background-color: rgba(239, 68, 68, 0.1) !important; /* Merah Transparan */
-    border: 1px solid rgba(239, 68, 68, 0.4) !important;
-    color: #fca5a5 !important; /* Teks Merah Muda Terang */
-    border-radius: 12px !important;
-}
-
-/* Kotak 'BENAR' (Kunci Jawaban - Hijau) */
-.alert-success {
-    background-color: rgba(34, 197, 94, 0.1) !important; /* Hijau Transparan */
-    border: 1px solid rgba(34, 197, 94, 0.4) !important;
-    color: #86efac !important; /* Teks Hijau Muda Terang */
-    border-radius: 12px !important;
-}
-
-/* Teks Label Kecil (KAMU / BENAR) */
-.small, small {
-    color: #aaa !important;
-    font-weight: 700 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 1px !important;
-}
-
-/* Ikon X Merah (Salah) */
-.bi-x-circle-fill, .text-danger {
-    color: #ef4444 !important;
-    filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.5));
-}
-
-/* Kana Kecil di bawah */
-.text-muted {
-    color: #888 !important; /* Abu-abu terang agar terbaca di background gelap */
-}
-
-/* =================================================================
-   FIX: JARAK ISI KARTU HASIL (AGAR TIDAK MEPET)
-   ================================================================= */
-
-/* 1. MEMBERI JARAK DALAM (PADDING) PADA KARTU UTAMA */
-/* Ini akan membuat semua isi (Skor, Tombol) masuk ke dalam & tidak nempel garis tepi */
-#quizArea .card-body {
-    padding: 35px !important; 
-}
-
-/* Khusus layar HP, padding sedikit lebih kecil biar muat */
-@media (max-width: 576px) {
-    #quizArea .card-body {
-        padding: 20px !important;
-    }
-}
-
-/* 2. MEMBERI JARAK ANTAR ELEMEN (SPACING) */
-
-/* Jarak antara Judul "Hasil Tes" ke Angka Persen */
-#quizArea h4.fw-bold.text-white {
-    margin-bottom: 20px !important;
-}
-
-/* Jarak antara Angka Persen ke "Skor: 0/20" */
-#quizArea .display-1 {
-    margin-bottom: 15px !important;
-}
-
-/* Jarak antara "Skor" ke Tombol-Tombol */
-#quizArea .text-center.mb-5 {
-    margin-bottom: 40px !important; /* Lebih jauh dikit biar lega */
-}
-
-/* 3. PERBAIKAN TOMBOL AGAR TIDAK TERLALU LEBAR/MEPET TENGAH */
-#quizArea .row.g-2 {
-    gap: 15px !important; /* Jarak antar tombol kiri-kanan */
-    margin: 0 !important; /* Reset margin row */
-}
-
-#quizArea .col-6 {
-    width: calc(50% - 8px) !important; /* Hitung manual agar pas dengan gap */
-    padding: 0 !important;
-}
-
-/* 4. PERBAIKAN LIST DETAIL JAWABAN (KAMU/BENAR) */
-/* Memberi jarak dalam pada kotak jawaban detail */
-#quizArea .res-item {
-    padding: 20px !important; /* Lebih lega */
-}
-
-/* Jarak antara baris Kanji dan kotak jawaban */
-.res-kanji-row {
-    margin-bottom: 15px !important;
-}
-
-/* Jarak antara kotak 'KAMU' dan 'BENAR' */
-.res-compare {
-    gap: 10px !important;
-}
-
-/* =================================================================
-   UPDATE: TAMPILAN SESI LATIHAN (TULIS ARTI & QUIZ)
-   ================================================================= */
-
-/* 1. KARTU SESI (CONTAINER UTAMA) */
-.card-session {
-    /* Latar kaca gelap deep */
-    background: rgba(15, 10, 25, 0.75) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
-    backdrop-filter: blur(20px);
-    border-radius: 30px !important;
-    
-    /* Bayangan dalam (depth) */
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5) !important;
-    overflow: hidden;
-    position: relative;
-}
-
-/* 2. PROGRESS BAR NEON (DI ATAS KARTU) */
-.session-progress-track {
-    position: absolute;
-    top: 0; left: 0; width: 100%;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.1);
-}
-.session-progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #d946ef, #a855f7); /* Gradient Ungu */
-    box-shadow: 0 0 10px rgba(217, 70, 239, 0.8);
-    transition: width 0.3s ease;
-}
-
-/* 3. INPUT FIELD (DIGITAL LOOK) */
-#memInput {
-    background: rgba(0, 0, 0, 0.4) !important; /* Latar hitam transparan */
-    border: 2px solid rgba(255, 255, 255, 0.15) !important;
-    color: #fff !important;
-    font-size: 1.3rem !important;
-    font-weight: 600;
-    text-align: center;
-    border-radius: 20px !important;
-    padding: 18px 50px 18px 20px !important;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Efek Fokus (Saat mengetik) */
-#memInput:focus {
-    background: rgba(0, 0, 0, 0.6) !important;
-    border-color: #d946ef !important; /* Border Ungu */
-    box-shadow: 0 0 25px rgba(217, 70, 239, 0.25) !important;
-    transform: scale(1.02);
-}
-
-/* 4. TOMBOL MIC (MENYESUAIKAN INPUT BARU) */
-#btnMic {
-    right: 20px !important; /* Geser dikit */
-    color: rgba(255,255,255,0.4) !important;
-}
-#btnMic:hover {
-    color: #d946ef !important;
-    text-shadow: 0 0 10px #d946ef;
-}
-
-/* 5. BADGE INFO (NO ASLI) */
-.badge-glass {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.7);
-    padding: 5px 12px;
-    border-radius: 50px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-}
-/* =================================================================
-   FIX: SPACING & PADDING KARTU HAFALAN (LEBIH LEGA)
-   ================================================================= */
-
-/* 1. PERBESAR PADDING DALAM KARTU UTAMA */
-/* Memberi jarak yang luas antara pinggir kartu dan isinya */
-.card-session .card-body {
-    padding: 50px !important; 
-}
-
-/* Khusus layar HP agar tetap muat tapi lega */
-@media (max-width: 576px) {
-    .card-session .card-body {
-        padding: 30px 20px !important;
-    }
-}
-
-/* 2. ATUR JARAK VERTIKAL ANTAR ELEMEN */
-
-/* Memberi napas di sekitar Kanji Besar */
-.card-session .flex-grow-1 {
-    padding-top: 20px !important;
-    padding-bottom: 20px !important;
-}
-
-/* Jarak antara Label "TERJEMAHKAN..." dengan Input */
-.card-session .text-uppercase {
-    margin-bottom: 25px !important; /* Jarak lebih jauh */
-}
-
-/* Jarak antara Input Box dengan Tombol Bawah */
-.card-session .mem-input-box {
-    margin-bottom: 20px !important; /* Jarak tambahan */
-}
-
-/* 3. PERBESAR INPUT FIELD (PADDING DALAM INPUT) */
-/* Agar teks yang diketik tidak mepet garis input */
-#memInput {
-    padding-top: 20px !important;
-    padding-bottom: 20px !important;
-    padding-left: 25px !important;
-    padding-right: 60px !important; /* Ruang untuk ikon Mic */
-    height: auto !important; /* Biarkan tinggi menyesuaikan padding */
-}
-/* =================================================================
-   FIX FINAL: MEMAKSA JARAK DALAM (PADDING) AGAR TIDAK MEPET
-   ================================================================= */
-
-/* 1. PAKSA PADDING KARTU JADI LEGA */
-.card-session .card-body {
-    /* Jarak atas-bawah-kiri-kanan 60px (Sangat Luas) */
-    padding: 60px !important; 
-    
-    /* Pastikan tinggi kartu menyesuaikan isi + padding */
-    height: auto !important; 
-    min-height: 100% !important;
-}
-
-/* 2. KHUSUS LAYAR HP (MOBILE) */
-/* Di HP kita kurangi sedikit agar tidak terlalu boros tempat, tapi tetap lega */
-@media (max-width: 576px) {
-    .card-session .card-body {
-        padding: 30px 25px !important; /* Atas/Bawah 30px, Kiri/Kanan 25px */
-    }
-    
-    /* Perkecil sedikit judul Hafalan di HP agar muat */
-    .card-session .fw-bold.text-uppercase {
-        font-size: 0.75rem !important;
-        margin-bottom: 15px !important;
-    }
-}
-
-/* 3. PASTIKAN TOMBOL TIDAK NEMPEL KE BAWAH */
-/* Kadang flexbox mendorong tombol sampai mentok ke bawah */
-.card-session .mt-auto {
-    margin-top: auto !important;
-    padding-top: 30px !important; /* Tambahan jarak aman di atas tombol */
-}
-
-/* 4. PASTIKAN HEADER TIDAK NEMPEL KE ATAS */
-.card-session .d-flex.justify-content-between.align-items-center.mb-2 {
-    margin-bottom: 30px !important; /* Jarak tambahan di bawah judul 'Hafalan 1/20' */
-}
-
-
-/* =================================================================
-   FIX: POSISI TOMBOL KEMBALI DI MOBILE (AGAR TIDAK MEPET)
-   ================================================================= */
-
-@media (max-width: 576px) {
-    #btn-main-back {
-        /* Memberi jarak dari kiri layar (agar lurus dengan konten) */
-        margin-left: 24px !important; 
-        
-        /* Memberi jarak sedikit dari elemen atas & bawahnya */
-        margin-top: 15px !important;
-        margin-bottom: 10px !important;
-        
-        /* Pastikan tombol tidak terlalu lebar */
-        width: fit-content !important; 
-    }
-}
-
-
