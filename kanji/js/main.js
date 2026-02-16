@@ -436,17 +436,16 @@ function attachEventListeners() {
   if (btnNext) btnNext.addEventListener('click', goNext);
   if (btnLupa) btnLupa.addEventListener('click', markLupa);
 
-  // [DIUBAH] Tombol Stop → Modal custom, bukan confirm()
+  // Tombol Stop → konfirmasi → tampilkan hasil (soal belum dijawab = salah)
   const btnStop = $(DOM_IDS.BTN_STOP);
   if (btnStop) btnStop.addEventListener('click', () => {
     showConfirmModal({
       title:       'Berhenti Ujian?',
-      message:     'Jawaban yang sudah diisi tidak akan tersimpan ke hasil. Yakin ingin berhenti?',
-      okLabel:     'Ya, Berhenti',
+      message:     'Soal yang belum dijawab akan dianggap salah. Pembahasan tetap ditampilkan.',
+      okLabel:     'Lihat Hasil',
       cancelLabel: 'Lanjutkan',
       onOk: () => {
-        hide(DOM_IDS.BTN_STOP);
-        showScreen(DOM_IDS.SCREEN_DASHBOARD);
+        finishSession(); // langsung finishSession — soal kosong otomatis jadi salah
       },
     });
   });

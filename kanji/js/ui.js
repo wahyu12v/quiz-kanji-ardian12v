@@ -4,7 +4,7 @@
 
 import { DOM_IDS, MODES, LEVELS } from './constants.js';
 import { escapeHTML } from './utils.js';
-import { getMastery } from './storage.js';
+import { getMastery, isLearned, isMastered } from './storage.js';
 
 // =============================================
 // HELPERS DOM
@@ -190,100 +190,95 @@ export function highlightOptions() {
 }
 
 // =============================================
-// LAYAR HASIL — FIX: pembahasan lengkap tiap soal
+// LAYAR HASIL
 // =============================================
 
 export function renderResult(results, score) {
-  // Score circle
+  // ---- Score area ----
   const scoreEl = $(DOM_IDS.RESULT_SCORE);
   if (scoreEl) {
-    const cls = score.percentage >= 80 ? 'score-pass'
-              : score.percentage >= 50 ? 'score-mid'
-              : 'score-fail';
+    const emoji = score.percentage === 100 ? '🏆'
+                : score.percentage >= 80   ? '⭐'
+                : score.percentage >= 50   ? '💪'
+                : '📚';
+
+    const colorClass = score.percentage >= 80 ? 'score-great'
+                     : score.percentage >= 50 ? 'score-ok'
+                     : 'score-low';
+
     scoreEl.innerHTML = `
-      <div class="score-circle ${cls}">
-        <span class="score-num">${score.percentage}</span>
-        <span class="score-pct">%</span>
+      <div class="score-hero ${colorClass}">
+        <div class="score-emoji">${emoji}</div>
+        <div class="score-big">${score.percentage}<span class="score-pct-sign">%</span></div>
+        <div class="score-detail">${score.correct} benar &nbsp;·&nbsp; ${score.total - score.correct} salah &nbsp;·&nbsp; ${score.total} soal</div>
       </div>`;
   }
 
-  setText(DOM_IDS.RESULT_SCORE_LABEL, `${score.correct} benar dari ${score.total} soal`);
-
-  // FIX: Pastikan listEl ada, dan render SEMUA soal dengan section header
+  // ---- Pembahasan ----
   const listEl = $(DOM_IDS.RESULT_LIST);
-  if (!listEl) {
-    console.error('result-list element not found!');
-    return;
-  }
+  if (!listEl) return;
 
-  // Tambah section header "Pembahasan"
+  // Hitung salah untuk header
+  const wrongCount = results.filter(r => !r.isCorrect).length;
+
   let html = `
-    <div class="result-list-header">
-      <span class="result-list-title">📋 Pembahasan ${results.length} Soal</span>
+    <div class="result-section-head">
+      <span class="result-section-title">Pembahasan</span>
+      <span class="result-section-meta">${score.correct} ✓ &nbsp; ${wrongCount} ✗</span>
     </div>
     <div class="result-list-wrap">`;
 
   results.forEach((r, idx) => {
-    // FIX: Pastikan r.question ada
-    if (!r || !r.question) {
-      console.warn('Missing question at index', idx, r);
-      return;
-    }
+    if (!r || !r.question) return;
 
     const { question, isCorrect, userAnswer } = r;
-    const k = question.kanji;
+    const k    = question.kanji;
+    const arti = k.Arti || k.arti || '—';
 
-    // Tentukan jawaban benar & info meta berdasarkan mode
-    let correctDisplay, metaLine1, metaLine2;
-
+    let jawaban, info;
     if (question.mode === MODES.QUIZ_ARTI || question.mode === MODES.ESSAY_ARTI) {
-      correctDisplay = k.Arti;
-      metaLine1      = `${k.Hiragana}  (${k.Romaji})`;
-      metaLine2      = `${k.level} · ${k.type}`;
+      jawaban = arti;
+      info    = `${k.Hiragana} · ${k.Romaji}`;
     } else {
-      correctDisplay = k.Hiragana;
-      metaLine1      = `Romaji: ${k.Romaji}`;
-      metaLine2      = `Arti: ${k.Arti} · ${k.level}`;
+      jawaban = k.Hiragana;
+      info    = `${k.Romaji} · ${arti}`;
     }
 
     html += `
       <div class="res-item ${isCorrect ? 'res-correct-item' : 'res-wrong-item'}">
-
         <div class="res-header">
           <div class="res-kanji-wrap">
-            <span class="res-num">${idx + 1}.</span>
+            <span class="res-num">${idx + 1}</span>
             <span class="res-kanji">${escapeHTML(k.Kanji)}</span>
           </div>
-          <span class="res-icon ${isCorrect ? 'res-icon-correct' : 'res-icon-wrong'}">
-            ${isCorrect ? '✓' : '✗'}
-          </span>
+          <div class="res-badge ${isCorrect ? 'res-badge-correct' : 'res-badge-wrong'}">
+            ${isCorrect ? '✓ Benar' : '✗ Salah'}
+          </div>
         </div>
 
-        ${!isCorrect ? `
-        <div class="res-box res-box-wrong">
-          <span class="res-label">Jawaban kamu</span>
-          <span class="res-value res-val-wrong">${escapeHTML(userAnswer || '(tidak dijawab)')}</span>
+        ${!isCorrect && userAnswer && userAnswer !== '(tidak dijawab)' && userAnswer !== '(lupa)' ? `
+        <div class="res-row res-row-wrong">
+          <span class="res-row-label">Jawabanmu</span>
+          <span class="res-row-val res-wrong-val">${escapeHTML(userAnswer)}</span>
         </div>` : ''}
 
-        <div class="res-box res-box-correct">
-          <span class="res-label">Jawaban benar</span>
-          <span class="res-value res-val-correct">${escapeHTML(correctDisplay)}</span>
+        <div class="res-row res-row-correct">
+          <span class="res-row-label">Seharusnya</span>
+          <span class="res-row-val res-correct-val">${escapeHTML(jawaban)}</span>
         </div>
 
-        <div class="res-meta">
-          <span class="res-meta-main">${escapeHTML(metaLine1)}</span>
-          <span class="res-meta-sub">${escapeHTML(metaLine2)}</span>
+        <div class="res-info-row">
+          <span class="res-kanji-big">${escapeHTML(k.Kanji)}</span>
+          <span class="res-info-text">${escapeHTML(info)}</span>
+          <span class="res-level-tag">${escapeHTML(k.level)}</span>
         </div>
-
       </div>`;
   });
 
-  listEl.innerHTML = html
-    ? html + '</div>'
-    : '<p style="text-align:center;color:var(--ink-4);padding:2rem;">Tidak ada data soal.</p>';
+  html += '</div>';
+  listEl.innerHTML = html;
 
   // Tombol perbaiki soal salah
-  const wrongCount = results.filter(r => !r.isCorrect).length;
   if (wrongCount > 0) {
     setText(DOM_IDS.WRONG_COUNT_BADGE, wrongCount);
     show(DOM_IDS.BTN_RETRY_WRONG);
@@ -293,7 +288,7 @@ export function renderResult(results, score) {
 }
 
 // =============================================
-// LAYAR PROGRESS
+// LAYAR PROGRESS — Sistem sederhana: pernah benar = sudah dipelajari
 // =============================================
 
 export function renderProgress(allData, levelFilter, stats) {
@@ -309,36 +304,54 @@ export function renderProgress(allData, levelFilter, stats) {
   else if (levelFilter === LEVELS.N4) list = allData.filter(k => k.level === 'N4');
   else                                list = allData;
 
-  const stat = levelFilter === LEVELS.ALL ? stats.ALL : stats[levelFilter];
+  const stat     = levelFilter === LEVELS.ALL ? stats.ALL : stats[levelFilter];
+  const learned  = stat.learned  ?? stat.mastered ?? 0;
+  const mastered = stat.mastered ?? 0;
+  const pct      = stat.percentage ?? 0;
 
   let html = `
-    <div class="progress-summary">
-      <div class="prog-stat">
-        <span class="prog-num">${stat.mastered}</span>
-        <span class="prog-label">Mastered</span>
+    <div class="prog-summary-card">
+      <div class="prog-summary-row">
+        <div class="prog-summary-num">${pct}%</div>
+        <div class="prog-summary-label">Dipelajari</div>
       </div>
-      <div class="prog-stat">
-        <span class="prog-num">${stat.total - stat.mastered}</span>
-        <span class="prog-label">Belum</span>
+      <div class="prog-summary-divider"></div>
+      <div class="prog-summary-row">
+        <div class="prog-summary-num prog-num-green">${learned}</div>
+        <div class="prog-summary-label">Sudah benar</div>
       </div>
-      <div class="prog-stat">
-        <span class="prog-num">${stat.percentage}%</span>
-        <span class="prog-label">Progress</span>
+      <div class="prog-summary-divider"></div>
+      <div class="prog-summary-row">
+        <div class="prog-summary-num prog-num-teal">${mastered}</div>
+        <div class="prog-summary-label">4-mode hafal</div>
+      </div>
+      <div class="prog-summary-divider"></div>
+      <div class="prog-summary-row">
+        <div class="prog-summary-num prog-num-dim">${stat.total - learned}</div>
+        <div class="prog-summary-label">Belum</div>
       </div>
     </div>
+
     <div class="prog-bar-outer">
-      <div class="prog-bar-fill" style="width:${stat.percentage}%"></div>
+      <div class="prog-bar-fill" style="width:${pct}%"></div>
     </div>
+    <div class="prog-bar-hint">Progress naik setiap kali kamu benar menjawab kanji baru</div>
+
     <div class="progress-list">`;
 
   list.forEach(k => {
-    const m       = mastery[String(k.No)] || {};
-    const allDone = MODES_LIST.every(md => m[md]);
+    const m         = mastery[String(k.No)] || {};
+    const learned_k = MODES_LIST.some(md => m[md]);
+    const master_k  = MODES_LIST.every(md => m[md]);
+    const doneCount = MODES_LIST.filter(md => m[md]).length;
 
     html += `
-      <div class="prog-item ${allDone ? 'prog-mastered' : ''}">
+      <div class="prog-item ${master_k ? 'prog-mastered' : learned_k ? 'prog-learned' : ''}">
         <span class="prog-kanji">${escapeHTML(k.Kanji)}</span>
-        <span class="prog-arti">${escapeHTML(k.Arti)}</span>
+        <div class="prog-item-middle">
+          <span class="prog-arti">${escapeHTML(k.Arti || k.arti || '')}</span>
+          ${learned_k ? `<span class="prog-done-count">${doneCount}/4</span>` : ''}
+        </div>
         <div class="prog-modes">
           ${MODES_LIST.map(md => `
             <span class="prog-mode-dot ${m[md] ? 'done' : ''}" title="${md}">${MODE_ICON[md]}</span>

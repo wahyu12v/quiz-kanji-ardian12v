@@ -5,14 +5,10 @@
 import { LS_KEYS } from './constants.js';
 
 // =====================
-// MASTERY (Hafal Mati)
+// MASTERY — Sistem Baru: per-kanji, track berapa mode sudah benar
+// Progress = jumlah kanji yang pernah dijawab benar minimal 1 mode / total
 // =====================
 
-/**
- * Ambil semua data mastery dari localStorage.
- * Format: { [kanjiNo]: { quiz_arti: bool, quiz_baca: bool, essay_arti: bool, essay_baca: bool } }
- * @returns {Object}
- */
 export function getMastery() {
   try {
     const raw = localStorage.getItem(LS_KEYS.MASTERY);
@@ -23,10 +19,8 @@ export function getMastery() {
 }
 
 /**
- * Update status mastery untuk satu kanji pada satu mode.
- * @param {number|string} kanjiNo - Nomor kanji (key).
- * @param {string} mode - Nama mode (lihat MODES di constants.js).
- * @param {boolean} isCorrect - Apakah dijawab benar.
+ * Update mastery: mode apapun yang dijawab benar akan ditandai.
+ * Mastery tidak pernah di-reset ke false secara otomatis.
  */
 export function updateMastery(kanjiNo, mode, isCorrect) {
   const mastery = getMastery();
@@ -37,61 +31,60 @@ export function updateMastery(kanjiNo, mode, isCorrect) {
       quiz_baca:  false,
       essay_arti: false,
       essay_baca: false,
+      correctCount: 0, // berapa mode yang sudah pernah benar
     };
   }
-  // Mastery hanya diberikan saat benar; tidak pernah di-reset otomatis ke false
-  if (isCorrect) {
+  if (isCorrect && !mastery[key][mode]) {
     mastery[key][mode] = true;
+    // Hitung ulang correctCount
+    const modes = ['quiz_arti','quiz_baca','essay_arti','essay_baca'];
+    mastery[key].correctCount = modes.filter(m => mastery[key][m]).length;
   }
   try {
     localStorage.setItem(LS_KEYS.MASTERY, JSON.stringify(mastery));
   } catch (e) {
-    console.warn('Storage penuh atau error:', e);
+    console.warn('Storage error:', e);
   }
 }
 
 /**
- * Cek apakah sebuah kanji sudah "Mastered" di semua 4 mode.
- * @param {number|string} kanjiNo
- * @returns {boolean}
+ * Kanji dianggap "sudah dipelajari" jika PERNAH dijawab benar di minimal 1 mode.
+ * Kanji dianggap "mastered" jika sudah benar di semua 4 mode.
  */
+export function isLearned(kanjiNo) {
+  const mastery = getMastery();
+  const m = mastery[String(kanjiNo)];
+  if (!m) return false;
+  return m.quiz_arti || m.quiz_baca || m.essay_arti || m.essay_baca;
+}
+
 export function isMastered(kanjiNo) {
   const mastery = getMastery();
-  const key = String(kanjiNo);
-  const m = mastery[key];
+  const m = mastery[String(kanjiNo)];
   if (!m) return false;
   return m.quiz_arti && m.quiz_baca && m.essay_arti && m.essay_baca;
 }
 
-/**
- * Hitung jumlah kanji yang sudah mastered dari list tertentu.
- * @param {Array} kanjiList - Array kanji object dengan field No.
- * @returns {number}
- */
+export function countLearned(kanjiList) {
+  return kanjiList.filter(k => isLearned(k.No)).length;
+}
+
 export function countMastered(kanjiList) {
   return kanjiList.filter(k => isMastered(k.No)).length;
 }
 
-/**
- * Reset seluruh data mastery (hati-hati!).
- */
 export function resetAllMastery() {
   localStorage.removeItem(LS_KEYS.MASTERY);
 }
 
 // =====================
-// HISTORY SESI UJIAN
+// HISTORY
 // =====================
 
-/**
- * Simpan satu sesi hasil ujian ke history.
- * @param {Object} sessionData - { mode, level, total, correct, wrongItems[], timestamp }
- */
 export function saveSession(sessionData) {
   try {
     const history = getHistory();
-    history.unshift({ ...sessionData, timestamp: Date.now() }); // simpan di depan
-    // Batasi history maks 50 entri agar tidak membengkak
+    history.unshift({ ...sessionData, timestamp: Date.now() });
     if (history.length > 50) history.length = 50;
     localStorage.setItem(LS_KEYS.HISTORY, JSON.stringify(history));
   } catch (e) {
@@ -99,10 +92,6 @@ export function saveSession(sessionData) {
   }
 }
 
-/**
- * Ambil semua history sesi.
- * @returns {Array}
- */
 export function getHistory() {
   try {
     const raw = localStorage.getItem(LS_KEYS.HISTORY);
@@ -112,31 +101,18 @@ export function getHistory() {
   }
 }
 
-/**
- * Hapus semua history.
- */
 export function clearHistory() {
   localStorage.removeItem(LS_KEYS.HISTORY);
 }
 
 // =====================
-// PREFERENSI USER
+// PREFERENSI
 // =====================
 
-/**
- * Simpan preferensi level terakhir user.
- * @param {string} level - 'N5', 'N4', atau 'ALL'.
- */
 export function saveLevelPref(level) {
-  try {
-    localStorage.setItem(LS_KEYS.LEVEL_PREF, level);
-  } catch { /* ignore */ }
+  try { localStorage.setItem(LS_KEYS.LEVEL_PREF, level); } catch { }
 }
 
-/**
- * Ambil preferensi level terakhir user.
- * @returns {string} Level tersimpan atau 'N5' sebagai default.
- */
 export function getLevelPref() {
   return localStorage.getItem(LS_KEYS.LEVEL_PREF) || 'N5';
 }

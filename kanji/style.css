@@ -9,40 +9,39 @@
    CSS VARIABLES — Teal Ocean Palette
    ============================================================ */
 :root {
-/* Palette utama (Berdasarkan Logo Shield Biru) */
-  --c1:        #00204A;   /* Deep Navy — elemen dominan gelap, bagian bawah shield */
-  --c2:        #0057B8;   /* Royal Blue — tombol utama, aksen, bagian atas shield */
-  --c3:        #3385FF;   /* Bright Blue — highlight, hover state */
-  --c4:        #F8F9FA;   /* Cool Off-white — background netral */
+  /* Palette utama */
+  --c1:        #005461;   /* Deep Teal — elemen dominan */
+  --c2:        #018790;   /* Mid Teal — tombol, aksen */
+  --c3:        #00B7B5;   /* Light Teal — highlight, hover */
+  --c4:        #F4F4F4;   /* Off-white — background */
 
   /* Derivatif */
-  --c1-dark:   #001026;   /* Versi lebih gelap dari c1 */
-  --c2-dark:   #003D82;   /* Versi lebih gelap dari c2 (misal: tombol aktif) */
-  --c3-light:  #E6F0FF;   /* Tint biru sangat muda */
-  --c4-dark:   #E0E0E0;   /* Gray netral */
+  --c1-dark:   #003d4a;
+  --c2-dark:   #016570;
+  --c3-light:  #e0fafa;
+  --c4-dark:   #e0e0e0;
 
   /* Semantik */
-  --bg:        #F0F4F8;   /* Background utama — campuran c4 + sedikit tint biru */
+  --bg:        #f0f6f7;   /* Background utama — campuran c4 + tint c1 */
   --surface:   #ffffff;   /* Card/surface */
-  --surface-2: #F5F8FC;   /* Surface sekunder, cool tint */
-  
-  /* Teks (Ink) — Menggunakan basis biru tua, bukan hitam pekat */
-  --ink:       #0a1c36;   /* Teks utama — Navy sangat gelap untuk kontras tinggi */
-  --ink-2:     #1F3A5F;   /* Teks medium — Navy menengah */
-  --ink-3:     #476285;   /* Teks muted — Biru keabu-abuan */
-  --ink-4:     #8DA3BF;   /* Teks dim — Biru muda pucat */
+  --surface-2: #f7fbfc;   /* Surface sekunder */
+  --ink:       #0a2830;   /* Teks utama — teal sangat gelap */
+  --ink-2:     #1d4a55;   /* Teks medium */
+  --ink-3:     #3a7080;   /* Teks muted */
+  --ink-4:     #7aa8b0;   /* Teks dim */
 
-  /* Status - Tetap menggunakan standar UI, tapi disesuaikan sedikit agar lebih 'cool' */
-  --success:   #0d7a5f;   /* (Tidak berubah drastis, hijau standar tetap cocok dengan biru) */
+  /* Status */
+  --success:   #0d7a5f;
   --success-bg:#e6f5f1;
-  --error:     #c23e3e;   /* Merah sedikit lebih dingin */
-  --error-bg:  #fcf2f2;
-  --warn:      #9e7300;
-  --warn-bg:   #fffaf0;
+  --error:     #b33a3a;
+  --error-bg:  #faeaea;
+  --warn:      #8a6200;
+  --warn-bg:   #fff8e6;
 
-  /* Border — Menggunakan transparansi dari biru tua (c1) */
-  --border:    rgba(0, 32, 74, 0.15);
-  --border-2:  rgba(0, 32, 74, 0.08);
+  /* Border */
+  --border:    rgba(0, 84, 97, 0.14);
+  --border-2:  rgba(0, 84, 97, 0.07);
+
   /* Shadow */
   --shadow-sm: 0 1px 4px rgba(0,84,97,0.10), 0 1px 2px rgba(0,84,97,0.07);
   --shadow-md: 0 4px 20px rgba(0,84,97,0.12), 0 2px 6px rgba(0,84,97,0.07);
@@ -794,63 +793,81 @@ input[type="radio"]:checked + .level-btn-label {
 }
 
 /* ============================================================
-   LAYAR HASIL — Pembahasan lengkap
+   LAYAR HASIL — Score Hero + Pembahasan
    ============================================================ */
 .result-score-area {
-  text-align: center;
-  padding: 2rem 1rem 1.25rem;
-  background: linear-gradient(180deg, var(--c1) 0%, var(--c2) 100%);
+  padding: 0;
 }
 
-.score-circle {
-  display: inline-flex;
-  align-items: baseline;
-  justify-content: center;
-  width: 130px;
-  height: 130px;
-  border-radius: 50%;
-  border: 3px solid rgba(255,255,255,0.3);
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(8px);
-  margin-bottom: 0.6rem;
+/* Score hero — desain baru, clean */
+.score-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1.5rem 1.5rem;
+  gap: 0.4rem;
+  position: relative;
+  overflow: hidden;
 }
 
-.score-num {
+.score-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.08;
+  background: radial-gradient(circle at 50% 30%, currentColor 0%, transparent 70%);
+}
+
+.score-great { background: linear-gradient(160deg, var(--c1) 0%, var(--c2) 100%); }
+.score-ok    { background: linear-gradient(160deg, var(--c2) 0%, var(--c3) 100%); }
+.score-low   { background: linear-gradient(160deg, #016b78 0%, var(--c2) 100%); }
+
+.score-emoji { font-size: 2.4rem; line-height: 1; position: relative; z-index: 1; }
+
+.score-big {
   font-family: 'Crimson Pro', serif;
-  font-size: 3rem;
+  font-size: 4.5rem;
   font-weight: 600;
   color: #fff;
   line-height: 1;
+  letter-spacing: -0.03em;
+  position: relative;
+  z-index: 1;
 }
 
-.score-pct { font-size: 1.2rem; color: rgba(255,255,255,0.7); margin-left: 1px; }
+.score-pct-sign {
+  font-size: 2rem;
+  opacity: 0.7;
+  vertical-align: super;
+}
 
-.result-score-label {
-  font-size: 0.875rem;
+.score-detail {
+  font-size: 0.82rem;
   color: rgba(255,255,255,0.75);
+  letter-spacing: 0.04em;
+  position: relative;
+  z-index: 1;
 }
-
-.score-pass .score-num, .score-mid .score-num, .score-fail .score-num { color: #fff; }
 
 /* Tombol aksi */
 .result-actions {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  padding: 1.1rem 1.25rem;
+  padding: 1rem 1.25rem;
   border-bottom: 1px solid var(--border-2);
   background: var(--surface-2);
 }
 
 .btn-result {
   width: 100%;
-  padding: 0.7rem;
-  min-height: 48px;
+  padding: 0.75rem;
+  min-height: 50px;
   border-radius: 999px;
   font-family: 'DM Sans', sans-serif;
   font-weight: 600;
   font-size: 0.9rem;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   cursor: pointer;
   transition: all var(--t) var(--ease);
   border: none;
@@ -899,155 +916,152 @@ input[type="radio"]:checked + .level-btn-label {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  margin-left: 5px;
+  margin-left: 4px;
 }
 
-/* LIST PEMBAHASAN */
-.result-list-header {
+/* Section header pembahasan */
+.result-section-head {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.1rem 0;
+  justify-content: space-between;
+  padding: 1rem 1.25rem 0.5rem;
 }
 
-.result-list-title {
+.result-section-title {
   font-family: 'Crimson Pro', serif;
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 600;
   color: var(--c1);
-  letter-spacing: -0.01em;
 }
 
+.result-section-meta {
+  font-size: 0.8rem;
+  color: var(--ink-4);
+  font-family: 'DM Mono', monospace;
+}
+
+/* List pembahasan */
 .result-list-wrap {
-  padding: 0.65rem 1.1rem 1.5rem;
+  padding: 0 0.9rem 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
+  gap: 0.55rem;
 }
 
+/* Item soal */
 .res-item {
   background: var(--surface);
-  border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   overflow: hidden;
+  border: 1px solid var(--border);
 }
 
 .res-correct-item { border-left: 4px solid var(--success); }
 .res-wrong-item   { border-left: 4px solid var(--error); }
 
-/* Header soal */
+/* Header item */
 .res-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 1rem 0.5rem;
+  justify-content: space-between;
+  padding: 0.65rem 0.9rem 0.5rem;
   background: var(--surface-2);
-  border-bottom: 1px solid var(--border-2);
 }
 
-.res-kanji-wrap {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
+.res-kanji-wrap { display: flex; align-items: center; gap: 0.5rem; }
 
 .res-num {
-  font-size: 0.75rem;
-  color: var(--ink-4);
   font-family: 'DM Mono', monospace;
-  flex-shrink: 0;
+  font-size: 0.72rem;
+  color: var(--ink-4);
+  min-width: 18px;
 }
 
 .res-kanji {
   font-family: 'Noto Serif JP', serif;
-  font-size: clamp(1.4rem, 5vw, 2rem);
+  font-size: clamp(1.3rem, 4.5vw, 1.9rem);
   font-weight: 400;
   color: var(--c1);
   line-height: 1.2;
 }
 
-.res-icon {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.9rem;
+.res-badge {
+  font-size: 0.72rem;
   font-weight: 700;
-  flex-shrink: 0;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  letter-spacing: 0.04em;
 }
 
-.res-icon-correct {
+.res-badge-correct {
   background: var(--success-bg);
   color: var(--success);
-  border: 1.5px solid rgba(13,122,95,0.2);
+  border: 1px solid rgba(13,122,95,0.2);
 }
 
-.res-icon-wrong {
+.res-badge-wrong {
   background: var(--error-bg);
   color: var(--error);
-  border: 1.5px solid rgba(179,58,58,0.2);
+  border: 1px solid rgba(179,58,58,0.2);
 }
 
-/* Kotak jawaban */
-.res-box {
+/* Baris jawaban */
+.res-row {
   display: flex;
   align-items: baseline;
   gap: 0.6rem;
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 0.9rem;
   flex-wrap: wrap;
 }
 
-.res-box-wrong {
-  background: var(--error-bg);
-  border-bottom: 1px solid rgba(179,58,58,0.1);
-}
+.res-row-wrong   { background: var(--error-bg); }
+.res-row-correct { background: var(--success-bg); }
 
-.res-box-correct {
-  background: var(--success-bg);
-  border-bottom: 1px solid rgba(13,122,95,0.1);
-}
-
-.res-label {
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+.res-row-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-4);
   white-space: nowrap;
   flex-shrink: 0;
 }
 
-.res-value {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--ink);
-}
+.res-row-val { font-size: 0.95rem; font-weight: 600; }
+.res-wrong-val   { color: var(--error); }
+.res-correct-val { color: var(--success); }
 
-.res-val-wrong  { color: var(--error); }
-.res-val-correct { color: var(--success); }
-
-/* Meta info */
-.res-meta {
+/* Baris info kanji */
+.res-info-row {
   display: flex;
-  gap: 0.6rem;
   align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.9rem 0.55rem;
   flex-wrap: wrap;
-  padding: 0.45rem 1rem;
-  background: var(--surface-2);
 }
 
-.res-meta-main {
+.res-kanji-big {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.1rem;
+  color: var(--ink-3);
+  display: none; /* sudah ada di header, tidak perlu duplikat */
+}
+
+.res-info-text {
   font-family: 'DM Mono', monospace;
   font-size: 0.78rem;
   color: var(--c2);
+  flex: 1;
 }
 
-.res-meta-sub {
-  font-size: 0.72rem;
+.res-level-tag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   color: var(--ink-4);
-  font-style: italic;
+  background: var(--border-2);
+  border-radius: 999px;
+  padding: 0.15rem 0.5rem;
 }
 
 /* ============================================================
@@ -1086,29 +1100,52 @@ input[type="radio"]:checked + .level-btn-label {
 }
 
 /* ============================================================
-   LAYAR PROGRESS
+   LAYAR PROGRESS — Sistem sederhana
    ============================================================ */
-.progress-summary {
+.prog-summary-card {
   display: flex;
-  justify-content: space-around;
+  align-items: stretch;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
   margin-bottom: 1rem;
 }
 
-.prog-stat { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.prog-summary-row {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0.5rem;
+  gap: 0.2rem;
+}
 
-.prog-num {
+.prog-summary-divider {
+  width: 1px;
+  background: var(--border-2);
+  align-self: stretch;
+}
+
+.prog-summary-num {
   font-family: 'Crimson Pro', serif;
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 600;
   color: var(--c1);
   line-height: 1;
 }
 
-.prog-label {
-  font-size: 0.68rem;
+.prog-num-green { color: var(--success); }
+.prog-num-teal  { color: var(--c2); }
+.prog-num-dim   { color: var(--ink-4); }
+
+.prog-summary-label {
+  font-size: 0.63rem;
   color: var(--ink-4);
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .prog-bar-outer {
@@ -1116,7 +1153,7 @@ input[type="radio"]:checked + .level-btn-label {
   background: var(--border);
   border-radius: 6px;
   overflow: hidden;
-  margin-bottom: 1rem;
+  margin-bottom: 0.4rem;
 }
 
 .prog-bar-fill {
@@ -1124,6 +1161,14 @@ input[type="radio"]:checked + .level-btn-label {
   background: linear-gradient(90deg, var(--c1), var(--c3));
   border-radius: 6px;
   transition: width 0.5s var(--ease);
+}
+
+.prog-bar-hint {
+  font-size: 0.72rem;
+  color: var(--ink-4);
+  margin-bottom: 1rem;
+  text-align: center;
+  font-style: italic;
 }
 
 .progress-list {
@@ -1145,10 +1190,8 @@ input[type="radio"]:checked + .level-btn-label {
   transition: all var(--t);
 }
 
-.prog-mastered {
-  border-color: rgba(13,122,95,0.2);
-  background: rgba(13,122,95,0.04);
-}
+.prog-mastered { border-color: rgba(1,135,144,0.3); background: rgba(1,135,144,0.06); }
+.prog-learned  { border-color: rgba(13,122,95,0.2); background: rgba(13,122,95,0.04); }
 
 .prog-kanji {
   font-family: 'Noto Serif JP', serif;
@@ -1159,11 +1202,27 @@ input[type="radio"]:checked + .level-btn-label {
   color: var(--c1);
 }
 
-.prog-arti { flex: 1; font-size: 0.82rem; color: var(--ink-3); }
+.prog-item-middle {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
 
-.prog-modes { display: flex; gap: 3px; }
+.prog-arti { font-size: 0.82rem; color: var(--ink-3); }
 
-.prog-mode-dot { font-size: 0.88rem; opacity: 0.18; transition: opacity var(--t); cursor: default; }
+.prog-done-count {
+  font-size: 0.65rem;
+  font-family: 'DM Mono', monospace;
+  color: var(--c2);
+  background: rgba(1,135,144,0.1);
+  border-radius: 999px;
+  padding: 0.1rem 0.4rem;
+}
+
+.prog-modes { display: flex; gap: 3px; flex-shrink: 0; }
+
+.prog-mode-dot { font-size: 0.85rem; opacity: 0.18; transition: opacity var(--t); }
 .prog-mode-dot.done { opacity: 1; }
 
 /* ============================================================

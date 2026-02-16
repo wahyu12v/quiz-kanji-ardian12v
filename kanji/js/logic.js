@@ -4,7 +4,7 @@
 
 import { CHUNK_SIZE, LEVELS, MODES, NUM_OPTIONS } from './constants.js';
 import { shuffleArray, getAnswerAliases, isFuzzyMatch, romajiToHiragana, normalizeText } from './utils.js';
-import { getMastery, countMastered } from './storage.js';
+import { getMastery, countMastered, countLearned } from './storage.js';
 
 // =============================================
 // FILTER & CHUNKING
@@ -184,13 +184,16 @@ export function gradeAnswer(question, userAnswer) {
 
 // =============================================
 // PROGRESS & STATISTIK
+// Progress = kanji yang sudah pernah dijawab benar di minimal 1 mode
+// Mastered  = kanji yang sudah benar di semua 4 mode
 // =============================================
 
 export function calculateProgress(kanjiList) {
-  const total      = kanjiList.length;
-  const mastered   = countMastered(kanjiList);
-  const percentage = total > 0 ? Math.round((mastered / total) * 100) : 0;
-  return { total, mastered, percentage };
+  const total    = kanjiList.length;
+  const learned  = countLearned(kanjiList);   // sudah pernah benar ≥1 mode
+  const mastered = countMastered(kanjiList);  // sudah benar semua 4 mode
+  const percentage = total > 0 ? Math.round((learned / total) * 100) : 0;
+  return { total, learned, mastered, percentage };
 }
 
 export function getAllProgressStats(allData) {
