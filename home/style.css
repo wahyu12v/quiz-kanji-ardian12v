@@ -105,12 +105,12 @@ body {
   font-weight: 800;
   margin: 0;
   line-height: 1.1;
-  color: var(--text-primary);
+  color: var(--teal);
 }
 .brand-section p {
   margin: 3px 0 0;
   font-size: 0.78rem;
-  color: var(--teal);
+  color: var(--text-secondary);
   font-weight: 600;
   letter-spacing: 0.5px;
 }
