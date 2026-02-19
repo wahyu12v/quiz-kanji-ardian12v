@@ -1,427 +1,453 @@
+import { escapeHtml } from "./utils.js";
+import { KEYS, SELECTORS } from "./constants.js";
+
+const area = document.getElementById(SELECTORS.quizArea);
+
 // ============================================================
-// ui.js — Manipulasi DOM, Rendering, Animasi
+// 1. CSS GLOBAL
 // ============================================================
-
-import { DOM_IDS, MODES, LEVELS } from './constants.js';
-import { escapeHTML } from './utils.js';
-import { getMastery, isLearned, isMastered } from './storage.js';
-
-// =============================================
-// HELPERS DOM
-// =============================================
-
-export const $ = (id) => document.getElementById(id);
-
-export function show(id) {
-  const el = $(id); if (el) el.classList.remove('d-none');
-}
-
-export function hide(id) {
-  const el = $(id); if (el) el.classList.add('d-none');
-}
-
-export function setHTML(id, html) {
-  const el = $(id); if (el) el.innerHTML = html;
-}
-
-export function setText(id, text) {
-  const el = $(id); if (el) el.textContent = text;
-}
-
-export function setDisabled(id, disabled) {
-  const el = $(id); if (el) el.disabled = disabled;
-}
-
-// =============================================
-// NAVIGASI LAYAR
-// =============================================
-
-const ALL_SCREENS = [
-  DOM_IDS.SCREEN_DASHBOARD,
-  DOM_IDS.SCREEN_QUIZ,
-  DOM_IDS.SCREEN_RESULT,
-  DOM_IDS.SCREEN_PROGRESS,
-  DOM_IDS.SCREEN_DISPLAY,
-];
-
-export function showScreen(screenId) {
-  ALL_SCREENS.forEach(id => {
-    const el = $(id);
-    if (!el) return;
-    if (id === screenId) {
-      el.classList.remove('d-none');
-      el.classList.add('screen-active');
-    } else {
-      el.classList.add('d-none');
-      el.classList.remove('screen-active');
+const style = document.createElement("style");
+style.innerHTML = `
+    /* --- TRANSISI SMOOTH (FADE + SLIDE UP) --- */
+    .card-enter {
+        animation: cardEnter 0.2s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-  });
+    @keyframes cardEnter {
+        from { opacity: 0; transform: translateY(14px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+    /* Area tidak berkedip karena tidak di-clear dulu */
+    #quiz-area { position: relative; }
+
+    .choice-card-anim {
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+    .choice-card-anim:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(13, 148, 136, 0.2) !important;
+        border-color: #0D9488 !important;
+        z-index: 5;
+        background-color: rgba(13, 148, 136, 0.08) !important;
+    }
+    .choice-card-anim:active { transform: scale(0.98); }
+
+    .q-text-base {
+        font-weight: 800;
+        color: #1E293B !important;
+        text-shadow: none;
+        text-align: center;
+        width: 100%;
+        line-height: 1.4;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    .q-size-lg { font-size: clamp(4rem, 18vw, 6.5rem) !important; }
+    .q-size-md { font-size: clamp(2.2rem, 10vw, 3.5rem) !important; }
+    .q-size-sm { font-size: clamp(1.4rem, 6vw, 2rem) !important; font-weight: 700 !important; }
+
+    /* Badge tipe kata */
+    .badge-type-benda  { background: #E0F2FE; color: #0369A1; }
+    .badge-type-kerja  { background: #DCFCE7; color: #15803D; }
+    .badge-type-sifat  { background: #FEF9C3; color: #A16207; }
+    .badge-type-other  { background: #F1F5F9; color: #475569; }
+
+    .confetti {
+        position: fixed;
+        top: -20px;
+        width: 10px; height: 10px;
+        z-index: 10000;
+        pointer-events: none;
+        border-radius: 3px;
+        animation: fall linear forwards;
+    }
+    @keyframes fall {
+        to { transform: translateY(110vh) rotate(720deg); }
+    }
+`;
+document.head.appendChild(style);
+
+
+// ============================================================
+// 2. HELPER FUNCTIONS
+// ============================================================
+function formatQuestion(text) {
+    const len = text.length;
+    let sizeClass = len <= 4 ? "q-size-lg" : len <= 12 ? "q-size-md" : "q-size-sm";
+    return `<div class="d-flex align-items-center justify-content-center px-3" style="min-height: 150px;">
+                <span class="q-text-base ${sizeClass}">${escapeHtml(text)}</span>
+            </div>`;
 }
 
-// =============================================
-// DASHBOARD
-// =============================================
-
-export function updateTotalBadge(count, level) {
-  const el = $(DOM_IDS.TOTAL_KANJI_BADGE);
-  if (!el) return;
-  const label = level === LEVELS.ALL ? 'Gabungan' : level;
-  el.innerHTML = `<span class="badge-num">${count}</span> Kanji ${label} tersedia`;
+function formatModeName(type) {
+    if (type === "quiz")          return "Tebak Arti";
+    if (type === "quiz_hiragana") return "Tebak Cara Baca";
+    if (type === "mem")           return "Tulis Arti";
+    if (type === "write_romaji")  return "Tulis Romaji";
+    return type;
 }
 
-// =============================================
-// MODAL PAKET — Grid Card
-// =============================================
-
-export function renderPacketList(packets, modeLabel) {
-  setText(DOM_IDS.MODAL_PAKET_TITLE, `Pilih Paket — ${modeLabel}`);
-  const container = $(DOM_IDS.PAKET_LIST);
-  if (!container) return;
-
-  if (packets.length === 0) {
-    container.innerHTML = `<p style="text-align:center;padding:1.5rem;color:var(--c4);font-size:.875rem;">Tidak ada data tersedia.</p>`;
-    return;
-  }
-
-  const mastery = getMastery();
-  let html = '<div class="paket-grid">';
-
-  packets.forEach((packet, idx) => {
-    const firstNo  = packet[0].No;
-    const lastNo   = packet[packet.length - 1].No;
-    const count    = packet.length;
-    const packetId = `packet-${idx}`;
-
-    const masteredCount = packet.filter(k => {
-      const m = mastery[String(k.No)];
-      return m && m.quiz_arti && m.quiz_baca && m.essay_arti && m.essay_baca;
-    }).length;
-
-    const pct      = Math.round((masteredCount / count) * 100);
-    const barClass = pct === 100 ? 'bar-full' : pct >= 50 ? 'bar-mid' : 'bar-low';
-
-    html += `
-      <div class="paket-card" data-index="${idx}">
-        <input class="paket-check-hidden" type="checkbox" id="${packetId}" value="${idx}">
-        <label class="paket-card-label" for="${packetId}">
-          <div class="paket-card-top">
-            <span class="paket-card-num">P${idx + 1}</span>
-            <span class="paket-card-check-icon">✓</span>
-          </div>
-          <div class="paket-card-range">${firstNo}–${lastNo}</div>
-          <div class="paket-card-count">${count} kanji</div>
-          <div class="paket-mini-bar">
-            <div class="paket-mini-fill ${barClass}" style="width:${pct}%"></div>
-          </div>
-          <div class="paket-card-mastered">${masteredCount}/${count}</div>
-        </label>
-      </div>`;
-  });
-
-  html += '</div>';
-  container.innerHTML = html;
+function typeBadgeHtml(type) {
+    const map = { benda: 'badge-type-benda', kerja: 'badge-type-kerja', sifat: 'badge-type-sifat' };
+    const cls = map[type] || 'badge-type-other';
+    return `<span class="badge rounded-pill px-2 py-1 small fw-semibold ${cls}">${escapeHtml(type || '')}</span>`;
 }
 
-// =============================================
-// LAYAR QUIZ
-// =============================================
 
-export function renderQuestion(question, current, total, savedAnswer = null) {
-  setText(DOM_IDS.QUIZ_COUNTER, `${current} / ${total}`);
-  setText(DOM_IDS.QUIZ_NO_ASLI, `No.${question.kanji.No} · ${question.kanji.level} · ${question.kanji.type}`);
+// ============================================================
+// 3. RENDER QUIZ (PILIHAN GANDA)
+// ============================================================
+export function renderQuiz(state, qNo) {
+    const idx     = state.current;
+    const q       = state.batch[idx];
+    const choices = state.choicesPerQ[idx];
+    const isLupa  = state.answers[idx] === "Lupa";
 
-  setHTML(DOM_IDS.QUIZ_KANJI,
-    `<span class="q-text-responsive">${escapeHTML(question.kanji.Kanji)}</span>`);
+    const kanjiTxt = String(q[KEYS.kanji]    || "").trim();
+    const meanTxt  = String(q[KEYS.meaning]  || "").trim();
+    const hiraTxt  = String(q[KEYS.hiragana] || "").trim();
+    const typeVal  = q.type || "";
+    const levelVal = q.level || "";
 
-  const inputArea = $(DOM_IDS.QUIZ_INPUT_AREA);
-  if (!inputArea) return;
-
-  if (question.type === 'quiz') {
-    renderQuizOptions(inputArea, question.options, savedAnswer);
-  } else {
-    renderEssayInput(inputArea, question.mode, savedAnswer);
-  }
-
-  setDisabled(DOM_IDS.BTN_PREV, current === 1);
-}
-
-function renderQuizOptions(container, options, savedAnswer) {
-  // FIX: opsi dirender sebagai data-value yang EXACT match string asli
-  let html = '<div class="options-grid">';
-  options.forEach((opt, i) => {
-    const sel    = savedAnswer === opt ? 'selected' : '';
-    const letter = ['A', 'B', 'C', 'D'][i];
-    html += `
-      <button class="option-btn ${sel}" data-value="${escapeHTML(opt)}">
-        <span class="opt-letter">${letter}</span>
-        <span class="opt-text">${escapeHTML(opt)}</span>
-      </button>`;
-  });
-  html += '</div>';
-  container.innerHTML = html;
-}
-
-function renderEssayInput(container, mode, savedAnswer) {
-  const ph = mode === MODES.ESSAY_ARTI
-    ? 'Ketik arti dalam Bahasa Indonesia…'
-    : 'Ketik cara baca (Romaji atau Hiragana)…';
-
-  container.innerHTML = `
-    <div class="essay-wrapper">
-      <input type="text" id="essay-input" class="essay-input"
-             placeholder="${ph}" value="${escapeHTML(savedAnswer || '')}"
-             autocomplete="off" autocorrect="off" spellcheck="false">
-      <div class="essay-hint">Tekan Enter untuk lanjut ke soal berikutnya</div>
-    </div>`;
-
-  setTimeout(() => {
-    const inp = document.getElementById('essay-input');
-    if (inp) inp.focus();
-  }, 50);
-}
-
-export function showFeedback(isCorrect, callback) {
-  if (callback) setTimeout(callback, 120);
-}
-
-export function highlightOptions() {
-  // Tidak highlight — semua hasil tampil di akhir
-  document.querySelectorAll('.option-btn').forEach(btn => { btn.disabled = true; });
-}
-
-// =============================================
-// LAYAR HASIL
-// =============================================
-
-export function renderResult(results, score) {
-  // ---- Score area ----
-  const scoreEl = $(DOM_IDS.RESULT_SCORE);
-  if (scoreEl) {
-    const emoji = score.percentage === 100 ? '🏆'
-                : score.percentage >= 80   ? '⭐'
-                : score.percentage >= 50   ? '💪'
-                : '📚';
-
-    const colorClass = score.percentage >= 80 ? 'score-great'
-                     : score.percentage >= 50 ? 'score-ok'
-                     : 'score-low';
-
-    scoreEl.innerHTML = `
-      <div class="score-hero ${colorClass}">
-        <div class="score-emoji">${emoji}</div>
-        <div class="score-big">${score.percentage}<span class="score-pct-sign">%</span></div>
-        <div class="score-detail">${score.correct} benar &nbsp;·&nbsp; ${score.total - score.correct} salah &nbsp;·&nbsp; ${score.total} soal</div>
-      </div>`;
-  }
-
-  // ---- Pembahasan ----
-  const listEl = $(DOM_IDS.RESULT_LIST);
-  if (!listEl) return;
-
-  // Hitung salah untuk header
-  const wrongCount = results.filter(r => !r.isCorrect).length;
-
-  let html = `
-    <div class="result-section-head">
-      <span class="result-section-title">Pembahasan</span>
-      <span class="result-section-meta">${score.correct} ✓ &nbsp; ${wrongCount} ✗</span>
-    </div>
-    <div class="result-list-wrap">`;
-
-  results.forEach((r, idx) => {
-    if (!r || !r.question) return;
-
-    const { question, isCorrect, userAnswer } = r;
-    const k    = question.kanji;
-    const arti = k.Arti || k.arti || '—';
-
-    let jawaban, info;
-    if (question.mode === MODES.QUIZ_ARTI || question.mode === MODES.ESSAY_ARTI) {
-      jawaban = arti;
-      info    = `${k.Hiragana} · ${k.Romaji}`;
+    let displayHtml = "";
+    if (state.sessionType === "quiz_hiragana") {
+        // Tebak Cara Baca → soal: ARTI INDONESIA
+        displayHtml = formatQuestion(meanTxt);
     } else {
-      jawaban = k.Hiragana;
-      info    = `${k.Romaji} · ${arti}`;
+        // Tebak Arti → soal: KANJI (tampilkan kanji besar + hiragana kecil di bawah)
+        displayHtml = `
+            <div class="d-flex flex-column align-items-center justify-content-center px-3" style="min-height: 150px;">
+                <span class="q-text-base q-size-lg">${escapeHtml(kanjiTxt)}</span>
+            </div>`;
     }
 
-    html += `
-      <div class="res-item ${isCorrect ? 'res-correct-item' : 'res-wrong-item'}">
-        <div class="res-header">
-          <div class="res-kanji-wrap">
-            <span class="res-num">${idx + 1}</span>
-            <span class="res-kanji">${escapeHTML(k.Kanji)}</span>
-          </div>
-          <div class="res-badge ${isCorrect ? 'res-badge-correct' : 'res-badge-wrong'}">
-            ${isCorrect ? '✓ Benar' : '✗ Salah'}
-          </div>
+    let choicesHtml = '<div class="d-grid gap-3">';
+    choices.forEach((c, i) => {
+        const isSelected = state.answers[idx] === i;
+        let btnClass = isSelected ? "choice-option choice-selected" : "choice-option choice-card-anim";
+        choicesHtml += `
+            <div class="${btnClass} d-flex align-items-center justify-content-center text-center p-3"
+                 role="button"
+                 onclick="window.handleAnswer(${i})">
+                <div class="fw-bold" style="font-size: 1.1rem; letter-spacing: 0.5px;">${escapeHtml(c.text)}</div>
+            </div>`;
+    });
+    choicesHtml += "</div>";
+
+    const card = document.createElement("div");
+    card.className = "quiz-card p-4 h-100 d-flex flex-column card-enter";
+    card.style.cssText = "animation-fill-mode: both;";
+    card.innerHTML = `
+        <div class="d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom border-secondary border-opacity-25">
+            <span class="badge badge-neon px-3 py-2">Soal ${idx + 1} / ${state.batch.length}</span>
+            <div class="d-flex align-items-center gap-2">
+                ${typeBadgeHtml(typeVal)}
+                <small class="text-muted fw-bold">${escapeHtml(levelVal)}</small>
+            </div>
         </div>
 
-        ${!isCorrect && userAnswer && userAnswer !== '(tidak dijawab)' && userAnswer !== '(lupa)' ? `
-        <div class="res-row res-row-wrong">
-          <span class="res-row-label">Jawabanmu</span>
-          <span class="res-row-val res-wrong-val">${escapeHTML(userAnswer)}</span>
-        </div>` : ''}
-
-        <div class="res-row res-row-correct">
-          <span class="res-row-label">Seharusnya</span>
-          <span class="res-row-val res-correct-val">${escapeHTML(jawaban)}</span>
+        <div class="flex-grow-1 d-flex align-items-center justify-content-center py-2">
+            ${displayHtml}
         </div>
 
-        <div class="res-info-row">
-          <span class="res-kanji-big">${escapeHTML(k.Kanji)}</span>
-          <span class="res-info-text">${escapeHTML(info)}</span>
-          <span class="res-level-tag">${escapeHTML(k.level)}</span>
+        <div class="mb-4">${choicesHtml}</div>
+
+        <div class="row g-2 mt-auto">
+            <div class="col-4">
+                <button class="btn btn-outline-custom w-100 py-3 fw-bold" onclick="window.handlePrev()" ${idx === 0 ? "disabled" : ""}>
+                    <i class="bi bi-arrow-left d-md-none"></i>
+                    <span class="d-none d-md-inline">Sebelumnya</span>
+                </button>
+            </div>
+            <div class="col-4">
+                <button class="btn btn-outline-warning w-100 py-3 fw-bold" onclick="window.handleLupa()">
+                    <i class="bi bi-question-lg d-md-none"></i>
+                    <span class="d-none d-md-inline">${isLupa ? "Ditandai" : "Lupa"}</span>
+                </button>
+            </div>
+            <div class="col-4">
+                ${idx < state.batch.length - 1
+                    ? `<button class="btn btn-primary-custom w-100 py-3 fw-bold" onclick="window.handleNext()">Berikutnya</button>`
+                    : `<button class="btn btn-success w-100 py-3 fw-bold" onclick="window.handleConfirm()">Selesai</button>`}
+            </div>
         </div>
-      </div>`;
-  });
-
-  html += '</div>';
-  listEl.innerHTML = html;
-
-  // Tombol perbaiki soal salah
-  if (wrongCount > 0) {
-    setText(DOM_IDS.WRONG_COUNT_BADGE, wrongCount);
-    show(DOM_IDS.BTN_RETRY_WRONG);
-  } else {
-    hide(DOM_IDS.BTN_RETRY_WRONG);
-  }
+    `;
+    area.replaceChildren(card);
 }
 
-// =============================================
-// LAYAR PROGRESS — Sistem sederhana: pernah benar = sudah dipelajari
-// =============================================
 
-export function renderProgress(allData, levelFilter, stats) {
-  const container = $(DOM_IDS.PROGRESS_CONTENT);
-  if (!container) return;
+// ============================================================
+// 4. RENDER MEMORY (ISIAN)
+// ============================================================
+export function renderMem(state, qNo) {
+    const idx = state.current;
+    const q   = state.batch[idx];
+    const val = state.answers[idx] === "Lupa" ? "" : state.answers[idx] || "";
 
-  const mastery    = getMastery();
-  const MODES_LIST = ['quiz_arti', 'quiz_baca', 'essay_arti', 'essay_baca'];
-  const MODE_ICON  = { quiz_arti: '👁', quiz_baca: '👂', essay_arti: '✍️', essay_baca: '🔤' };
+    const kanjiTxt = String(q[KEYS.kanji]    || "").trim();
+    const meanTxt  = String(q[KEYS.meaning]  || "").trim();
+    const hiraTxt  = String(q[KEYS.hiragana] || "").trim();
+    const typeVal  = q.type  || "";
+    const levelVal = q.level || "";
 
-  let list;
-  if (levelFilter === LEVELS.N5)      list = allData.filter(k => k.level === 'N5');
-  else if (levelFilter === LEVELS.N4) list = allData.filter(k => k.level === 'N4');
-  else                                list = allData;
+    let displayHtml = "";
+    let placeholderTxt = "";
+    let labelTxt = "";
 
-  const stat     = levelFilter === LEVELS.ALL ? stats.ALL : stats[levelFilter];
-  const learned  = stat.learned  ?? stat.mastered ?? 0;
-  const mastered = stat.mastered ?? 0;
-  const pct      = stat.percentage ?? 0;
+    if (state.sessionType === "write_romaji") {
+        // Soal: ARTI INDONESIA → Jawab: Romaji / Hiragana
+        displayHtml    = formatQuestion(meanTxt);
+        placeholderTxt = "Ketik Romaji-nya...";
+        labelTxt       = "TULIS ROMAJI / CARA BACA";
+    } else {
+        // Soal: KANJI + HIRAGANA → Jawab: ARTI INDONESIA
+        displayHtml = `
+            <div class="d-flex flex-column align-items-center justify-content-center px-3" style="min-height: 150px;">
+                <span class="q-text-base q-size-lg">${escapeHtml(kanjiTxt)}</span>
+            </div>`;
+        placeholderTxt = "Ketik artinya dalam bahasa Indonesia...";
+        labelTxt       = "TERJEMAHKAN KE INDONESIA";
+    }
 
-  let html = `
-    <div class="prog-summary-card">
-      <div class="prog-summary-row">
-        <div class="prog-summary-num">${pct}%</div>
-        <div class="prog-summary-label">Dipelajari</div>
-      </div>
-      <div class="prog-summary-divider"></div>
-      <div class="prog-summary-row">
-        <div class="prog-summary-num prog-num-green">${learned}</div>
-        <div class="prog-summary-label">Sudah benar</div>
-      </div>
-      <div class="prog-summary-divider"></div>
-      <div class="prog-summary-row">
-        <div class="prog-summary-num prog-num-teal">${mastered}</div>
-        <div class="prog-summary-label">4-mode hafal</div>
-      </div>
-      <div class="prog-summary-divider"></div>
-      <div class="prog-summary-row">
-        <div class="prog-summary-num prog-num-dim">${stat.total - learned}</div>
-        <div class="prog-summary-label">Belum</div>
-      </div>
-    </div>
-
-    <div class="prog-bar-outer">
-      <div class="prog-bar-fill" style="width:${pct}%"></div>
-    </div>
-    <div class="prog-bar-hint">Progress naik setiap kali kamu benar menjawab kanji baru</div>
-
-    <div class="progress-list">`;
-
-  list.forEach(k => {
-    const m         = mastery[String(k.No)] || {};
-    const learned_k = MODES_LIST.some(md => m[md]);
-    const master_k  = MODES_LIST.every(md => m[md]);
-    const doneCount = MODES_LIST.filter(md => m[md]).length;
-
-    html += `
-      <div class="prog-item ${master_k ? 'prog-mastered' : learned_k ? 'prog-learned' : ''}">
-        <span class="prog-kanji">${escapeHTML(k.Kanji)}</span>
-        <div class="prog-item-middle">
-          <span class="prog-arti">${escapeHTML(k.Arti || k.arti || '')}</span>
-          ${learned_k ? `<span class="prog-done-count">${doneCount}/4</span>` : ''}
+    const card = document.createElement("div");
+    card.className = "mem-card p-4 d-flex flex-column align-items-center justify-content-center h-100 card-enter";
+    card.innerHTML = `
+        <div class="d-flex justify-content-between align-items-center w-100 mb-3 border-bottom border-secondary border-opacity-25 pb-3">
+            <span class="badge badge-neon px-3 py-2">Soal ${idx + 1} / ${state.batch.length}</span>
+            <div class="d-flex align-items-center gap-2">
+                ${typeBadgeHtml(typeVal)}
+                <small class="text-muted fw-bold">${escapeHtml(levelVal)}</small>
+            </div>
         </div>
-        <div class="prog-modes">
-          ${MODES_LIST.map(md => `
-            <span class="prog-mode-dot ${m[md] ? 'done' : ''}" title="${md}">${MODE_ICON[md]}</span>
-          `).join('')}
-        </div>
-      </div>`;
-  });
 
-  html += '</div>';
-  container.innerHTML = html;
+        <div class="flex-grow-1 d-flex flex-column align-items-center justify-content-center text-center my-3 w-100">
+            ${displayHtml}
+        </div>
+
+        <div class="w-100 text-center mb-4" style="max-width: 600px;">
+            <div class="mem-label mb-3">${labelTxt}</div>
+            <div class="position-relative">
+                <input type="text" id="memInput"
+                       class="mem-input form-control text-center fs-4 fw-bold py-3"
+                       placeholder="${placeholderTxt}"
+                       autocomplete="off"
+                       spellcheck="false"
+                       value="${escapeHtml(val)}">
+                <div id="btnMic" class="mic-icon-wrapper" role="button" title="Rekam Suara">
+                    <i class="bi bi-mic-fill"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-2 w-100" style="max-width: 600px;">
+            <div class="col-4">
+                <button class="btn btn-outline-custom w-100 py-3 fw-bold h-100" onclick="window.handlePrev()" ${idx === 0 ? "disabled" : ""}>Kembali</button>
+            </div>
+            <div class="col-4">
+                <button class="btn btn-outline-warning w-100 py-3 fw-bold h-100" onclick="window.handleLupa()">Lupa</button>
+            </div>
+            <div class="col-4">
+                ${idx < state.batch.length - 1
+                    ? `<button class="btn btn-primary-custom w-100 py-3 fw-bold h-100" onclick="window.handleNext()">Lanjut</button>`
+                    : `<button class="btn btn-success w-100 py-3 fw-bold h-100" onclick="window.handleConfirm()">Selesai</button>`}
+            </div>
+        </div>
+    `;
+    area.replaceChildren(card);
+
+    const inp    = document.getElementById("memInput");
+    const btnMic = document.getElementById("btnMic");
+    setTimeout(() => inp.focus(), 100);
+    inp.oninput   = (e) => window.handleInput(e.target.value);
+    inp.onkeydown = (e) => { if (e.key === "Enter") window.handleNextOrSubmit(); };
+
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SpeechRecognition) {
+        const recognition = new SpeechRecognition();
+        recognition.lang            = state.sessionType === "write_romaji" ? "ja-JP" : "id-ID";
+        recognition.interimResults  = false;
+        recognition.maxAlternatives = 1;
+        btnMic.onclick    = () => { try { recognition.start(); } catch (e) { recognition.stop(); } };
+        recognition.onstart  = () => { btnMic.classList.add("recording"); };
+        recognition.onend    = () => { btnMic.classList.remove("recording"); inp.focus(); };
+        recognition.onresult = (event) => {
+            let transcript = event.results[0][0].transcript;
+            const cleanText = transcript.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
+            inp.value = cleanText;
+            window.handleInput(cleanText);
+        };
+    } else {
+        btnMic.style.display = "none";
+    }
 }
 
-// =============================================
-// LAYAR DISPLAY / LIHAT & HAFAL
-// =============================================
 
-export function renderDisplayCard(kanji, current, total) {
-  setText(DOM_IDS.DISPLAY_COUNTER, `${current} / ${total}`);
+// ============================================================
+// 5. RENDER RESULT
+// ============================================================
+export function renderResult(result, sessionType, wrongIndices = []) {
+    area.innerHTML = "";
+    const pct        = result.total > 0 ? Math.round((result.score / result.total) * 100) : 0;
+    const modeLabel  = formatModeName(sessionType);
+    const scoreClass = pct >= 60 ? "text-neon-green" : "text-neon-red";
 
-  setHTML(DOM_IDS.DISPLAY_KANJI,
-    `<span class="q-text-responsive">${escapeHTML(kanji.Kanji)}</span>`);
+    let html = `
+        <div class="res-card p-5 text-center mb-5">
+            <h5 class="text-muted fw-bold mb-2 text-uppercase tracking-wider">${modeLabel}</h5>
+            <h1 class="display-1 fw-black mb-0 ${scoreClass}" style="font-weight: 900;">${pct}%</h1>
+            <p class="text-secondary fs-4 mb-4" style="opacity: 0.9;">Benar ${result.score} dari ${result.total}</p>
 
-  // Langsung tampilkan info — tidak perlu tombol reveal
-  const artiVal = kanji.Arti || kanji.arti || '—';
-  setHTML(DOM_IDS.DISPLAY_REVEAL, `
-    <div class="display-info-row">
-      <span class="display-info-label">読み方</span>
-      <span class="display-info-val display-hira">${escapeHTML(kanji.Hiragana)}</span>
-    </div>
-    <div class="display-info-row">
-      <span class="display-info-label">Romaji</span>
-      <span class="display-info-val display-romaji-val">${escapeHTML(kanji.Romaji || '—')}</span>
-    </div>
-    <div class="display-info-row">
-      <span class="display-info-label">Arti</span>
-      <span class="display-info-val display-arti-val">${escapeHTML(artiVal)}</span>
-    </div>
-    <div class="display-info-row">
-      <span class="display-info-label">Tipe</span>
-      <span class="display-type-badge">${escapeHTML(kanji.type)} · ${escapeHTML(kanji.level)}</span>
-    </div>
-  `);
+            <div class="d-grid gap-3 col-lg-8 mx-auto">
+                ${wrongIndices.length > 0
+                    ? `<button class="btn btn-primary-custom w-100 fw-bold py-3 shadow-lg" onclick="window.handleRetryWrong([${wrongIndices}])">
+                           <i class="bi bi-arrow-counterclockwise fs-5"></i> Perbaiki ${wrongIndices.length} Soal Salah
+                       </button>`
+                    : `<div class="p-3 rounded-3 border border-success bg-success bg-opacity-10 text-success fw-bold">Sempurna! 🎉</div>`}
+                <div class="row g-2">
+                    <div class="col-6"><button class="btn btn-outline-custom w-100 fw-bold py-2" onclick="window.handleRetry()">Ulangi</button></div>
+                    <div class="col-6"><button class="btn btn-outline-custom w-100 fw-bold py-2" onclick="window.handleBack()">Menu Utama</button></div>
+                </div>
+            </div>
+        </div>`;
 
-  // Langsung tampilkan panel, sembunyikan tombol reveal
-  const revealEl  = $(DOM_IDS.DISPLAY_REVEAL);
-  const revealBtn = document.getElementById('btn-display-reveal');
-  if (revealEl)  revealEl.classList.remove('d-none');
-  if (revealBtn) revealBtn.classList.add('d-none');
+    if (result.details && result.details.length > 0) {
+        html += `<h5 class="fw-bold mb-3 mt-4" style="color: var(--text-primary, #1E293B);">Detail Jawaban</h5>`;
+        result.details.forEach((d) => {
+            const isCorrect = d.isCorrect;
+            const userTxt   = d.userAns === "Lupa" ? "Lupa" : d.userAns || "-";
 
-  setDisabled(DOM_IDS.BTN_DISPLAY_PREV, current === 1);
-  setDisabled(DOM_IDS.BTN_DISPLAY_NEXT, current === total);
+            const kanji  = (d.q[KEYS.kanji]    || "").trim();
+            const hira   = (d.realHira          || "").trim();
+            const mean   = d.realMean           || "";
+            const romaji = d.q['Romaji']        || "";
+            const type   = d.q.type             || "";
+            const level  = d.q.level            || "";
+
+            let mainText  = "";
+            let correctAns = "";
+
+            if (sessionType === "quiz_hiragana") {
+                mainText   = mean;
+                correctAns = hira;
+            } else if (sessionType === "quiz" || sessionType === "mem") {
+                mainText   = kanji;
+                correctAns = mean;
+            } else if (sessionType === "write_romaji") {
+                mainText   = mean;
+                correctAns = `${romaji} / ${hira}`;
+            }
+
+            html += `
+                <div class="res-item mb-3">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="res-kanji fs-3">${escapeHtml(mainText)}</div>
+                            ${typeBadgeHtml(type)}
+                            <small class="text-muted fw-bold">${escapeHtml(level)}</small>
+                        </div>
+                        ${isCorrect
+                            ? '<i class="bi bi-check-circle-fill text-neon-green fs-3"></i>'
+                            : '<i class="bi bi-x-circle-fill text-neon-red fs-3"></i>'}
+                    </div>
+                    <div class="d-flex flex-column gap-2">
+                        ${!isCorrect ? `<div class="res-box res-wrong"><span class="res-label">KAMU</span><span class="res-val">${escapeHtml(userTxt)}</span></div>` : ""}
+                        <div class="res-box res-correct"><span class="res-label">BENAR</span><span class="res-val">${escapeHtml(correctAns)}</span></div>
+                    </div>
+                </div>`;
+        });
+    }
+
+    area.innerHTML = html + `<div class="pb-5"></div>`;
+    if (pct >= 60) launchConfetti();
 }
 
-// =============================================
-// TOAST
-// =============================================
 
-export function showToast(message, type = 'info') {
-  const old = document.getElementById('app-toast');
-  if (old) old.remove();
+// ============================================================
+// 6. RENDER PROGRESS
+// ============================================================
+export function renderProgressModal(stats) {
+    const list = document.getElementById("progressList");
+    if (!list) return;
+    list.innerHTML = "";
+    const gridDiv = document.createElement("div");
+    gridDiv.className = "row g-3";
 
-  const toast       = document.createElement('div');
-  toast.id          = 'app-toast';
-  toast.className   = `app-toast toast-${type}`;
-  toast.textContent = message;
-  document.body.appendChild(toast);
+    stats.forEach((item) => {
+        const pctTotal = item.totalPct;
+        const p1 = item.detail.tebakArti;
+        const p2 = item.detail.tebakCaraBaca;
+        const p3 = item.detail.tulisArti;
+        const p4 = item.detail.tulisRomaji;
+        const isDone    = pctTotal === 100;
+        const cardClass = isDone ? "prog-card bab-done" : "prog-card";
+        const badgeClass = isDone ? "bg-success text-white" : "bg-light text-secondary border";
 
-  setTimeout(() => toast.classList.add('toast-show'), 10);
-  setTimeout(() => {
-    toast.classList.remove('toast-show');
-    setTimeout(() => toast.remove(), 300);
-  }, 2500);
+        const col = document.createElement("div");
+        col.className = "col-12 col-md-6";
+        col.innerHTML = `
+            <div class="${cardClass} p-3 h-100 d-flex flex-column justify-content-center">
+                <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+                    <span class="fw-bold fs-5" style="color: var(--text-primary, #1E293B);">Level ${escapeHtml(item.bab)}</span>
+                    <span class="badge ${badgeClass} rounded-pill px-3">Total: ${pctTotal}%</span>
+                </div>
+                <div class="d-flex flex-column gap-3">
+                    <div class="prog-item">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span class="prog-label"><i class="bi bi-eye-fill me-2"></i> Tebak Arti</span>
+                            <span class="prog-val" style="color: var(--teal, #0D9488); font-weight:700;">${p1}%</span>
+                        </div>
+                        <div class="progress prog-track" style="height: 6px;">
+                            <div class="progress-bar" style="width: ${p1}%; background: var(--teal, #0D9488);"></div>
+                        </div>
+                    </div>
+                    <div class="prog-item">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span class="prog-label"><i class="bi bi-translate me-2"></i> Tebak Cara Baca</span>
+                            <span class="prog-val" style="color: #22C55E; font-weight:700;">${p2}%</span>
+                        </div>
+                        <div class="progress prog-track" style="height: 6px;">
+                            <div class="progress-bar bg-success" style="width: ${p2}%"></div>
+                        </div>
+                    </div>
+                    <div class="prog-item">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span class="prog-label"><i class="bi bi-pencil-fill me-2"></i> Tulis Arti</span>
+                            <span class="prog-val" style="color: #F59E0B; font-weight:700;">${p3}%</span>
+                        </div>
+                        <div class="progress prog-track" style="height: 6px;">
+                            <div class="progress-bar" style="width: ${p3}%; background: #F59E0B;"></div>
+                        </div>
+                    </div>
+                    <div class="prog-item">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span class="prog-label"><i class="bi bi-keyboard-fill me-2"></i> Tulis Romaji</span>
+                            <span class="prog-val" style="color: var(--indigo, #6366F1); font-weight:700;">${p4}%</span>
+                        </div>
+                        <div class="progress prog-track" style="height: 6px;">
+                            <div class="progress-bar" style="width: ${p4}%; background: var(--indigo, #6366F1);"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+        gridDiv.appendChild(col);
+    });
+    list.appendChild(gridDiv);
+}
+
+
+// ============================================================
+// 7. CONFETTI
+// ============================================================
+function launchConfetti() {
+    const count = 70;
+    for (let i = 0; i < count; i++) {
+        const el = document.createElement("div");
+        el.className = "confetti";
+        el.style.left = Math.random() * 100 + "vw";
+        const colors = ["#f472b6", "#3b82f6", "#4ade80", "#facc15", "#ffffff"];
+        el.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        el.style.animationDuration = (2 + Math.random() * 3) + "s";
+        el.style.animationDelay    = (Math.random() * 1.5) + "s";
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 6000);
+    }
 }

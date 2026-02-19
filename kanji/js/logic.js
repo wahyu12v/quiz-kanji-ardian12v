@@ -1,371 +1,185 @@
-// ============================================================
-// logic.js — Otak Algoritma
-// ============================================================
+import { KEYS } from './constants.js';
+import { hiraToRomaji } from './utils.js';
+import { getMastery } from './storage.js';
 
-import { CHUNK_SIZE, LEVELS, MODES, NUM_OPTIONS } from './constants.js';
-import { shuffleArray, getAnswerAliases, isFuzzyMatch, romajiToHiragana, normalizeText } from './utils.js';
-import { getMastery, countMastered, countLearned } from './storage.js';
-
-// =============================================
-// FILTER & CHUNKING
-// =============================================
-
-export function processData(allData, levelFilter) {
-  let filtered;
-
-  if (levelFilter === LEVELS.N5) {
-    filtered = allData.filter(k => k.level === 'N5');
-  } else if (levelFilter === LEVELS.N4) {
-    filtered = allData.filter(k => k.level === 'N4');
-  } else {
-    const n5 = allData.filter(k => k.level === 'N5').sort((a, b) => a.No - b.No);
-    const n4 = allData.filter(k => k.level === 'N4').sort((a, b) => a.No - b.No);
-    filtered = [...n5, ...n4];
+function internalShuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
   }
-
-  const packets = [];
-  for (let i = 0; i < filtered.length; i += CHUNK_SIZE) {
-    packets.push(filtered.slice(i, i + CHUNK_SIZE));
-  }
-
-  return { filtered, packets };
+  return array;
 }
 
-export function mergePackets(selectedPackets) {
-  return selectedPackets.flat();
+function getSimilarityScore(target, candidate) {
+    if (!target || !candidate) return 0;
+    let score = 0;
+    const lenDiff = Math.abs(target.length - candidate.length);
+    if (lenDiff === 0) score += 30; else if (lenDiff === 1) score += 10; else score -= 50;
+    if (target[0] === candidate[0]) score += 25;
+    if (target.slice(-1) === candidate.slice(-1)) score += 15;
+    if (target.length > 1 && candidate.length > 1 && target[1] === candidate[1]) score += 10;
+    let sharedChars = 0;
+    for (let char of candidate) { if (target.includes(char)) sharedChars++; }
+    score += (sharedChars * 2);
+    return score;
 }
 
-// =============================================
-// PEMBUATAN SOAL
-// =============================================
-
-export function buildQuestion(kanji, mode, pool) {
-  const question = {
-    kanji,
-    mode,
-    type: mode.startsWith('quiz') ? 'quiz' : 'essay',
-    options: null,
-    correctKey: '',
-    correctAliases: [],
-  };
-
-  if (mode === MODES.QUIZ_ARTI || mode === MODES.ESSAY_ARTI) {
-    // FIX: handle data entry No.514 yang punya field 'arti' lowercase
-    const artiVal = kanji.Arti || kanji.arti || '';
-    question.correctKey     = artiVal;
-    question.correctAliases = getAnswerAliases(artiVal);
-  } else {
-    question.correctKey     = kanji.Hiragana;
-    question.correctAliases = getAnswerAliases(kanji.Hiragana);
-    if (kanji.Romaji) {
-      question.correctAliases.push(...getAnswerAliases(kanji.Romaji));
-    }
-  }
-
-  if (question.type === 'quiz') {
-    question.options = buildSmartDistractors(kanji, mode, pool);
-  }
-
-  return question;
-}
-
-// =============================================
-// ULTRA-DECEPTIVE DISTRACTOR ENGINE
-// Berlapis 3 tahap:
-//   1. Hardcoded semantic traps (antonim, kategori-sama, voiced-pair)
-//   2. Precision scoring fonetik/leksikal
-//   3. Fallback level+tipe
-// =============================================
-
-// Peta jebakan semantik: jawaban benar -> [pilihan menjebak]
-const TRAPS = {
-  'besar':['kecil','luas','banyak'],'kecil':['besar','sedikit','pendek'],
-  'baru':['lama, usang','bekas','tua'],'lama, usang':['baru','modern','usang'],
-  'mahal':['murah','hemat','berharga'],'murah':['mahal','terjangkau','gratis'],
-  'panjang':['pendek','singkat','kecil'],'pendek':['panjang','tinggi','besar'],
-  'banyak':['sedikit','kurang','jarang'],'sedikit':['banyak','cukup','melimpah'],
-  'tinggi':['rendah','pendek','bawah'],'rendah':['tinggi','atas','mahal'],
-  'panas':['dingin (benda)','dingin (suhu)','sejuk'],
-  'panas (cuaca)':['dingin (suhu)','sejuk','dingin (benda)'],
-  'dingin (benda)':['panas','hangat','panas (cuaca)'],
-  'dingin (suhu)':['panas (cuaca)','hangat','panas'],
-  'terang':['gelap','redup','suram'],'gelap':['terang','cerah','benderang'],
-  'kuat':['lemah','rapuh','lembut'],'lemah':['kuat','tangguh','keras'],
-  'luas':['sempit','kecil','terbatas'],'jauh':['dekat','sekitar sini','tidak jauh'],
-  'berat':['ringan','enteng','kecil'],'berat, sulit':['mudah','ringan','santai'],
-  'ringan':['berat','susah','padat'],'sulit':['mudah','gampang','ringan'],
-  'sehat':['sakit','lemah','lelah'],'bahagia':['sedih','khawatir','kegelisahan'],
-  'khawatir':['bahagia','tenang','santai'],'tenang':['sibuk','ramai','khawatir'],
-  'sibuk':['santai','tenang','bebas'],'muda':['tua','lama, usang','senior'],
-  'bahaya':['aman','keselamatan','tenang'],'keselamatan':['bahaya','risiko','ancaman'],
-  'benar':['salah','keliru','jelek'],'manis':['pedas','asin','pahit'],
-  'pedas':['manis','tawar','hambar'],'praktis':['tidak praktis','ribet','susah'],
-  'tidak praktis':['praktis','mudah','nyaman'],'istimewa':['biasa','sama','umum'],
-  'sama':['berbeda','istimewa','lain'],'penting':['tidak penting','biasa','sepele'],
-  'mengantuk':['bersemangat','segar','sehat'],
-  'suka':['tidak begitu suka, berat','benci','kurang suka'],
-  'tidak begitu suka, berat':['suka','senang','gembira'],
-  'pandai':['tidak begitu suka, berat','gagal','sulit'],
-  'ramah':['kasar','cuek','dingin (benda)'],'cepat':['lambat','pelan','lama'],
-  'bernuansa Jepang':['bersejarah','modern','internasional'],
-  'bersejarah':['bernuansa Jepang','modern','baru'],
-  'Senin':['Selasa','Minggu','Rabu'],'Selasa':['Senin','Rabu','Kamis'],
-  'Rabu':['Selasa','Kamis','Senin'],'Kamis':['Rabu','Jumat','Selasa'],
-  'Jumat':['Kamis','Sabtu','Rabu'],'Sabtu':['Jumat','Minggu','Kamis'],
-  'Minggu':['Sabtu','Senin','Jumat'],
-  'timur':['barat','utara','selatan'],'barat':['timur','selatan','utara'],
-  'utara':['selatan','timur','barat'],'selatan':['utara','barat','timur'],
-  'pintu timur':['pintu barat','pintu utara','pintu selatan'],
-  'pintu barat':['pintu timur','pintu selatan','pintu utara'],
-  'pintu utara':['pintu selatan','pintu timur','pintu barat'],
-  'pintu selatan':['pintu utara','pintu barat','pintu timur'],
-  'jam':['menit','detik','waktu'],'menit':['jam','detik','setengah'],
-  'setengah':['seperempat','menit','jam'],
-  'tahun':['bulan','minggu','hari'],'bulan':['minggu','tahun','tanggal'],
-  'minggu':['bulan','hari','tanggal'],
-  'minggu lalu':['minggu depan','minggu ini','bulan lalu'],
-  'minggu ini':['minggu lalu','minggu depan','hari ini'],
-  'minggu depan':['minggu ini','minggu lalu','bulan depan'],
-  'hari ini':['kemarin','besok','tadi'],
-  'kemarin':['hari ini','besok','tadi'],'besok':['kemarin','hari ini','lusa'],
-  'makan':['minum','memasak','mencicipi'],
-  'minum':['makan','meminum obat','mencicipi'],
-  'membaca':['menulis','melihat','mendengarkan'],
-  'menulis':['membaca','menggambar','mencatat'],
-  'melihat':['mendengarkan','membaca','menonton'],
-  'mendengarkan':['melihat','membaca','berbicara'],
-  'membeli':['menjual','meminjam','membayar'],
-  'menjual':['membeli','menukar','memberikan'],
-  'pergi':['pulang','datang','berangkat'],
-  'pulang':['pergi','berangkat','datang'],
-  'datang':['pergi','pulang','berangkat'],
-  'berkata':['berbicara','bertanya','menjawab'],
-  'berbicara':['berkata','mendengarkan','bertanya'],
-  'bangun tidur':['tidur','istirahat','berbaring'],
-  'tidur':['bangun tidur','istirahat','berbaring'],
-  'libur, istirahat':['bekerja','sibuk','aktif'],
-  'bekerja':['libur, istirahat','bermain','belajar'],
-  'berjalan':['berlari','berhenti','naik'],
-  'berlari':['berjalan','berhenti','terbang'],
-  'naik':['turun','berjalan','berhenti'],
-  'turun':['naik','masuk','berangkat'],
-  'masuk':['keluar','pergi keluar rumah','datang'],
-  'keluar':['masuk','datang','pulang'],
-  'pergi keluar rumah':['masuk','pulang','datang'],
-  'membawa pergi':['membawa','menerima','mengambil'],
-  'menggunakan':['meminjam','membeli','menyimpan'],
-  'meminjam':['meminjamkan','menggunakan','mengambil'],
-  'mengirim':['menerima','mengambil','membawa'],
-  'menerima':['mengirim','memberikan','mengambil'],
-  'bertemu':['berpisah','menunggu','memanggil'],
-  'menunggu':['bertemu','berhenti','istirahat'],
-  'berhenti':['mulai','berjalan','lanjut'],
-  'mulai':['selesai','berhenti','batal'],
-  'selesai':['mulai','lanjut','belum'],
-  'membuat':['merusak','membuang','memperbaiki'],
-  'memasukkan':['mengeluarkan','mengambil','membuang'],
-  'berkumpul':['berpencar','berpisah','pergi'],
-  'memesan':['membatalkan','membeli','meminjam'],
-  'menyetir':['naik','berjalan','berhenti'],
-  'menyanyi':['berbicara','bermain','menari'],
-  'belajar':['mengajarkan','bermain','istirahat'],
-  'mengajarkan':['belajar','bertanya','menjawab'],
-  'tinggal':['pergi','pindah','datang'],
-  'pindah':['tinggal','menetap','datang'],
-  'memakai pakaian':['melepas','berganti','mandi'],
-  'berenang':['tenggelam','berjalan','berlari'],
-  'tolong':['meminta','menolak','menyuruh'],
-  'rasa':['bau','suara','warna'],
-  'kaki':['tangan','kepala','badan'],
-  'listrik':['cuaca','gas','air'],
-  'cuaca':['listrik','suhu','musim'],
-  'kota':['desa','daerah','negara'],
-  'mulut':['pintu','telinga','hidung'],
-  'makanan barat':['masakan Jepang','makanan lokal','masakan tradisional'],
-};
-
-// Voiced/unvoiced map
-const VOICED = (() => {
-  const p=[['か','が'],['き','ぎ'],['く','ぐ'],['け','げ'],['こ','ご'],
-           ['さ','ざ'],['し','じ'],['す','ず'],['せ','ぜ'],['そ','ぞ'],
-           ['た','だ'],['ち','ぢ'],['つ','づ'],['て','で'],['と','ど'],
-           ['は','ば'],['ひ','び'],['ふ','ぶ'],['へ','べ'],['ほ','ぼ'],
-           ['は','ぱ'],['ひ','ぴ'],['ふ','ぷ'],['へ','ぺ'],['ほ','ぽ']];
-  const m={};p.forEach(([u,v])=>{m[u]=v;m[v]=u;});return m;
-})();
-
-function buildSmartDistractors(kanji, mode, pool) {
-  const isArti        = mode === MODES.QUIZ_ARTI;
-  const getField      = (k) => isArti ? (k.Arti || k.arti || '') : (k.Hiragana || '');
-  const correctAnswer = getField(kanji);
-  const correctNorm   = normalizeText(correctAnswer);
-  const need          = NUM_OPTIONS - 1;
-
-  // TAHAP 1: Semantic / voiced trap
-  const trapVals  = [];
-  const usedNorms = new Set([correctNorm]);
-
-  if (isArti) {
-    const targets = TRAPS[correctAnswer] || TRAPS[correctNorm] || [];
-    for (const t of targets) {
-      const tn = normalizeText(t);
-      if (usedNorms.has(tn)) continue;
-      const inPool = pool.find(k => normalizeText(k.Arti || k.arti || '') === tn);
-      trapVals.push(inPool ? getField(inPool) : t);
-      usedNorms.add(tn);
-      if (trapVals.length >= need) break;
-    }
-  } else {
-    // Voiced-pair: identik kecuali 1-2 mora voiced/unvoiced
-    for (const k of pool) {
-      if (k.No === kanji.No) continue;
-      const val = getField(k);
-      if (!val || val.length !== correctAnswer.length) continue;
-      let diff = 0, allVP = true;
-      for (let i = 0; i < val.length; i++) {
-        if (val[i] !== correctAnswer[i]) { diff++; if (VOICED[val[i]] !== correctAnswer[i]) allVP = false; }
-      }
-      if (diff >= 1 && diff <= 2 && allVP) {
-        const vn = normalizeText(val);
-        if (!usedNorms.has(vn)) { usedNorms.add(vn); trapVals.push(val); }
-      }
-      if (trapVals.length >= need) break;
-    }
-  }
-
-  // TAHAP 2: Precision scoring
-  const candidates = [];
-  for (const k of pool) {
-    if (k.No === kanji.No) continue;
-    const val  = getField(k);
-    const norm = normalizeText(val);
-    if (!val || usedNorms.has(norm)) continue;
-    usedNorms.add(norm);
-    let s = 0;
-    if (isArti) {
-      const ld = Math.abs(val.length - correctAnswer.length);
-      s += Math.max(0, 16 - ld * 2);
-      for (let i = 0; i < Math.min(norm.length, correctNorm.length, 6); i++) {
-        if (norm[i] === correctNorm[i]) s += 7; else break;
-      }
-      const rn = [...norm].reverse().join('');
-      const rc = [...correctNorm].reverse().join('');
-      for (let i = 0; i < Math.min(rn.length, rc.length, 4); i++) {
-        if (rn[i] === rc[i]) s += 5; else break;
-      }
-      const vw = norm.split(/[\s,/\-]+/).filter(w=>w.length>1);
-      const cw = correctNorm.split(/[\s,/\-]+/).filter(w=>w.length>1);
-      if (vw.length === cw.length) s += 8;
-      const pfx = ['ber','me','di','ter','ke','meng','men','mem','pe','per'];
-      const cp  = pfx.find(p=>correctNorm.startsWith(p));
-      const vp  = pfx.find(p=>norm.startsWith(p));
-      if (cp && vp && cp === vp) s += 14;
-      vw.forEach(w => {
-        if (cw.includes(w)) s += 12;
-        else if (cw.some(c=>c.length>3&&(c.includes(w)||w.includes(c)))) s += 6;
-      });
-      if (k.type  === kanji.type)  s += 16;
-      if (k.level === kanji.level) s += 5;
-    } else {
-      for (let i = 0; i < Math.min(val.length, correctAnswer.length); i++) {
-        if (val[i] === correctAnswer[i]) s += 11;
-        else if (VOICED[val[i]] === correctAnswer[i]) s += 8;
-        else break;
-      }
-      const ld = Math.abs(val.length - correctAnswer.length);
-      s += Math.max(0, 14 - ld * 4);
-      for (let i = 1; i <= Math.min(val.length, correctAnswer.length, 3); i++) {
-        if (val[val.length-i] === correctAnswer[correctAnswer.length-i]) s += 6; else break;
-      }
-      if (val.replace(/[っー]/g,'') === correctAnswer.replace(/[っー]/g,'')) s += 28;
-      if (val.length === correctAnswer.length) {
-        for (let i = 0; i < val.length; i++) {
-          if (val[i] === correctAnswer[i]) s += 3;
-          else if (VOICED[val[i]] === correctAnswer[i]) s += 2;
+// --- ALGORITMA LEVENSHTEIN (MENGHITUNG JARAK TYPO) ---
+function levenshtein(a, b) {
+    if (a.length === 0) return b.length;
+    if (b.length === 0) return a.length;
+    const matrix = [];
+    for (let i = 0; i <= b.length; i++) matrix[i] = [i];
+    for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
+    for (let i = 1; i <= b.length; i++) {
+        for (let j = 1; j <= a.length; j++) {
+            if (b.charAt(i - 1) === a.charAt(j - 1)) {
+                matrix[i][j] = matrix[i - 1][j - 1];
+            } else {
+                matrix[i][j] = Math.min(
+                    matrix[i - 1][j - 1] + 1,
+                    matrix[i][j - 1] + 1,
+                    matrix[i - 1][j] + 1
+                );
+            }
         }
-      }
-      if (k.type  === kanji.type)  s += 12;
-      if (k.level === kanji.level) s += 5;
     }
-    candidates.push({ val, score: s });
-  }
-  candidates.sort((a, b) => b.score - a.score);
-
-  // TAHAP 3: Gabung + fill
-  const final = [...trapVals];
-  for (const c of candidates) {
-    if (final.length >= need) break;
-    if (!final.includes(c.val)) final.push(c.val);
-  }
-  for (const k of pool) {
-    if (final.length >= need) break;
-    const val = getField(k);
-    if (val && val !== correctAnswer && !final.includes(val)) final.push(val);
-  }
-
-  return shuffleArray([correctAnswer, ...final.slice(0, need)]);
+    return matrix[b.length][a.length];
 }
 
+function checkFuzzyAnswer(userRaw, dbValueString) {
+    if (!userRaw || userRaw === 'Lupa') return false;
+    const user = userRaw.toLowerCase().trim().replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, "");
+    const candidates = dbValueString.toLowerCase().split(/[\/,]/).map(s => s.trim()).filter(s => s);
 
-export function buildAllQuestions(kanjiList, mode, fullPool) {
-  return kanjiList.map(kanji => buildQuestion(kanji, mode, fullPool));
+    return candidates.some(target => {
+        const cleanTarget = target.replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, "");
+        if (user === cleanTarget) return true;
+        if (user.length >= 3 && cleanTarget.includes(user)) return true;
+        const dist = levenshtein(user, cleanTarget);
+        const tolerance = Math.max(1, Math.floor(cleanTarget.length / 4));
+        if (dist <= tolerance) return true;
+        return false;
+    });
 }
 
-// =============================================
-// PENILAIAN JAWABAN
-// =============================================
+// --- BUILD CHOICES ---
+export function buildChoices(orderIndices, allQuestions, mode = 'quiz') {
+  return orderIndices.map(idx => {
+    const q = allQuestions[idx];
+    let correctVal;
+    let rawPool;
 
-export function gradeAnswer(question, userAnswer) {
-  const input = (userAnswer || '').trim();
+    if (mode === 'quiz_hiragana') {
+        // Mode Tebak Cara Baca -> Pilihan: HIRAGANA
+        correctVal = String(q[KEYS.hiragana] || '').trim();
+        rawPool = allQuestions.map(item => String(item[KEYS.hiragana] || '').trim());
+    } else {
+        // Mode Tebak Arti (Default) -> Pilihan: ARTI INDONESIA
+        correctVal = String(q[KEYS.meaning] || '').trim();
+        rawPool = allQuestions.map(item => String(item[KEYS.meaning] || '').trim());
+    }
 
-  if (question.type === 'quiz') {
-    // Gunakan normalizeText agar trim + lowercase tidak jadi masalah
-    const isCorrect = normalizeText(input) === normalizeText(question.correctKey);
-    return { isCorrect, userAnswer: input };
-  }
+    const correctOption = { text: correctVal, isCorrect: true };
 
-  // Essay: fuzzy match
-  let isCorrect = isFuzzyMatch(input, question.correctAliases);
+    let uniquePool = [...new Set(rawPool)];
+    let pool = uniquePool.filter(val => val !== "" && val !== correctVal);
 
-  if (!isCorrect && question.mode === MODES.ESSAY_BACA) {
-    const converted = romajiToHiragana(input);
-    isCorrect = isFuzzyMatch(converted, question.correctAliases);
-  }
+    let scoredPool = pool.map(candidate => ({ text: candidate, score: getSimilarityScore(correctVal, candidate) }));
+    scoredPool.sort((a, b) => b.score - a.score);
+    let topDistractors = scoredPool.slice(0, 3).map(item => ({ text: item.text, isCorrect: false }));
 
-  return { isCorrect, userAnswer: input };
+    if (topDistractors.length < 3) {
+        const needed = 3 - topDistractors.length;
+        const usedTexts = topDistractors.map(d => d.text);
+        const leftovers = pool.filter(p => !usedTexts.includes(p));
+        internalShuffle(leftovers);
+        leftovers.slice(0, needed).forEach(t => topDistractors.push({ text: t, isCorrect: false }));
+    }
+    const finalChoices = [correctOption, ...topDistractors];
+    return internalShuffle(finalChoices);
+  });
 }
 
-// =============================================
-// PROGRESS & STATISTIK
-// Progress = kanji yang sudah pernah dijawab benar di minimal 1 mode
-// Mastered  = kanji yang sudah benar di semua 4 mode
-// =============================================
+export function gradeSession(state, allQuestions) {
+    let correctCount = 0;
+    const results = state.batch.map((q, i) => {
+        const originalIndex = allQuestions.indexOf(q);
+        // Gunakan KEYS (huruf kapital) sesuai struktur JSON kanji
+        const hira     = String(q[KEYS.hiragana] || '').trim();
+        const mean     = String(q[KEYS.meaning]  || '').trim();
+        const romajiDB = String(q['Romaji']      || '').trim();
 
-export function calculateProgress(kanjiList) {
-  const total    = kanjiList.length;
-  const learned  = countLearned(kanjiList);   // sudah pernah benar ≥1 mode
-  const mastered = countMastered(kanjiList);  // sudah benar semua 4 mode
-  const percentage = total > 0 ? Math.round((learned / total) * 100) : 0;
-  return { total, learned, mastered, percentage };
+        let isCorrect = false;
+        let userAnsStr = "Lupa";
+
+        if (state.sessionType.includes('quiz')) {
+            const choiceIdx = state.answers[i];
+            const choices   = state.choicesPerQ[i];
+            if (choiceIdx !== null && choiceIdx !== 'Lupa') {
+                const choice = choices[choiceIdx];
+                if (choice && choice.isCorrect) isCorrect = true;
+                userAnsStr = choice ? choice.text : "Lupa";
+            }
+        } else {
+            const raw = state.answers[i] || '';
+            userAnsStr = raw === 'Lupa' ? 'Lupa' : raw;
+            if (userAnsStr !== 'Lupa') {
+                if (state.sessionType === 'write_romaji') {
+                    const validKeys = romajiDB + " / " + hira;
+                    isCorrect = checkFuzzyAnswer(raw, validKeys);
+                } else {
+                    isCorrect = checkFuzzyAnswer(raw, mean);
+                }
+            }
+        }
+
+        if (isCorrect) correctCount++;
+        return { q, isCorrect, userAns: userAnsStr, realHira: hira, realMean: mean, realRomaji: romajiDB, originalIndex };
+    });
+    return { score: correctCount, total: state.batch.length, details: results };
 }
 
-export function getAllProgressStats(allData) {
-  const n5List = allData.filter(k => k.level === 'N5');
-  const n4List = allData.filter(k => k.level === 'N4');
-  return {
-    N5:  calculateProgress(n5List),
-    N4:  calculateProgress(n4List),
-    ALL: calculateProgress(allData),
-  };
-}
+export function calculateProgress(allQuestions) {
+    const mastery  = getMastery();
+    const babStats = {};
 
-export function calcScore(results) {
-  const total      = results.length;
-  const correct    = results.filter(r => r.isCorrect).length;
-  const percentage = total > 0 ? Math.round((correct / total) * 100) : 0;
-  return { correct, total, percentage };
-}
+    allQuestions.forEach((q, idx) => {
+        // Gunakan field 'level' sebagai pengelompokan (N5, N4, dst.)
+        const levelName = q.level || "Lainnya";
+        if (!babStats[levelName]) {
+            babStats[levelName] = { totalWords: 0, modes: { quiz: 0, quiz_hiragana: 0, mem: 0, write_romaji: 0 } };
+        }
+        babStats[levelName].totalWords++;
 
-export function getWrongKanjiList(results) {
-  return results.filter(r => !r.isCorrect).map(r => r.question.kanji);
+        if (mastery[idx]) {
+            if (mastery[idx].quiz)          babStats[levelName].modes.quiz++;
+            if (mastery[idx].quiz_hiragana) babStats[levelName].modes.quiz_hiragana++;
+            if (mastery[idx].mem)           babStats[levelName].modes.mem++;
+            if (mastery[idx].write_romaji)  babStats[levelName].modes.write_romaji++;
+        }
+    });
+
+    const finalReport = Object.keys(babStats).sort().map(level => {
+        const data       = babStats[level];
+        const totalWords = data.totalWords;
+        const totalSlots = totalWords * 4;
+
+        const sumMastered = data.modes.quiz + data.modes.quiz_hiragana + data.modes.mem + data.modes.write_romaji;
+        const totalPct    = totalSlots > 0 ? Math.round((sumMastered / totalSlots) * 100) : 0;
+        const getModePct  = (val) => totalWords > 0 ? Math.round((val / totalWords) * 100) : 0;
+
+        return {
+            bab: level,
+            totalPct,
+            detail: {
+                tebakArti:    getModePct(data.modes.quiz),
+                tebakCaraBaca: getModePct(data.modes.quiz_hiragana),
+                tulisArti:    getModePct(data.modes.mem),
+                tulisRomaji:  getModePct(data.modes.write_romaji)
+            }
+        };
+    });
+
+    return finalReport;
 }

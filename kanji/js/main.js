@@ -1,524 +1,527 @@
-// ============================================================
-// main.js — Entry Point, State Global, Event Listeners
-// ============================================================
-
-import { DOM_IDS, MODES, MODE_LABELS, LEVELS, MESSAGES } from './constants.js';
+import { BATCH_SIZE } from './constants.js';
 import { shuffleArray } from './utils.js';
-import { saveLevelPref, getLevelPref, updateMastery, saveSession } from './storage.js';
-import {
-  processData, mergePackets, buildAllQuestions,
-  gradeAnswer, calcScore, getWrongKanjiList, getAllProgressStats
-} from './logic.js';
-import {
-  $, show, hide, showScreen, updateTotalBadge,
-  renderPacketList, renderQuestion, renderResult,
-  renderProgress, showFeedback, highlightOptions,
-  showToast, renderDisplayCard
-} from './ui.js';
+import * as Storage from './storage.js';
+import * as Logic from './logic.js';
+import * as UI from './ui.js';
 
-// =============================================
-// STATE GLOBAL
-// =============================================
-const state = {
-  allData:       [],
-  currentLevel:  'N5',
-  filteredData:  [],
-  packets:       [],
-  currentMode:   null,
-  questions:     [],
-  currentQIndex: 0,
-  answers:       [],
-  pendingAnswer: null,
-  isRetryMode:   false,
-  displayList:   [],
-  displayIndex:  0,
+// --- VARIABEL GLOBAL ---
+let QUESTIONS = [];
+let state = null;
+
+// Modal Instances
+let quizModal, memModal, confirmModal, daftarRangeModal, daftarListModal, progressModal, partSelectionModal;
+let pendingSessionType = 'quiz';
+
+// Penyimpanan Pilihan User
+const GLOBAL_SELECTIONS = {};
+
+// Flag Animasi (Untuk Auto Next)
+let isAnim = false;
+
+// ============================================================
+// 1. INISIALISASI
+// ============================================================
+async function init() {
+    try {
+        setupModals();
+        toggleMainBackButton(true);
+
+        // Load data kanji
+        const uniqueUrl = 'data/kanjiasli.json?v=' + new Date().getTime();
+        const response  = await fetch(uniqueUrl);
+        if (!response.ok) throw new Error("Gagal memuat data/kanjiasli.json");
+        QUESTIONS = await response.json();
+
+        const totalEl = document.getElementById('totalCount');
+        if (totalEl) totalEl.innerText = QUESTIONS.length;
+
+        generateCheckboxes('rangeListQuiz',   'q');
+        generateCheckboxes('rangeListMem',    'm');
+        generateCheckboxes('rangeListDaftar', 'd');
+
+    } catch (e) {
+        console.error("Error Loading:", e);
+        alert("Gagal memuat kanjiasli.json. Pastikan file ada di folder data/ dan formatnya benar.");
+        toggleMainBackButton(true);
+    }
+    setupEventListeners();
+}
+
+function setupModals() {
+    quizModal        = new bootstrap.Modal(document.getElementById('quizModal'));
+    memModal         = new bootstrap.Modal(document.getElementById('memModal'));
+    confirmModal     = new bootstrap.Modal(document.getElementById('confirmModal'));
+    daftarRangeModal = new bootstrap.Modal(document.getElementById('daftarRangeModal'));
+    daftarListModal  = new bootstrap.Modal(document.getElementById('daftarHafalanModal'));
+    progressModal    = new bootstrap.Modal(document.getElementById('progressModal'));
+
+    const partEl = document.getElementById('partSelectionModal');
+    if (partEl) partSelectionModal = new bootstrap.Modal(partEl);
+}
+
+function setupEventListeners() {
+    document.getElementById('startBtn').onclick           = () => { pendingSessionType = 'quiz';          quizModal.show(); };
+    document.getElementById('btnTebakCaraBaca').onclick   = () => { pendingSessionType = 'quiz_hiragana'; quizModal.show(); };
+    document.getElementById('memorizeBtn').onclick        = () => { pendingSessionType = 'mem';           memModal.show();  };
+    document.getElementById('btnTulisRomaji').onclick     = () => { pendingSessionType = 'write_romaji';  memModal.show();  };
+    document.getElementById('daftarHafalanBtn').onclick   = () => { daftarRangeModal.show(); };
+
+    document.getElementById('btnCekProgress').onclick = () => {
+        const stats = Logic.calculateProgress(QUESTIONS);
+        UI.renderProgressModal(stats);
+        progressModal.show();
+    };
+
+    document.getElementById('quizForm').onsubmit = (e) => { e.preventDefault(); handleStart('rangeListQuiz'); };
+    document.getElementById('memForm').onsubmit  = (e) => { e.preventDefault(); handleStart('rangeListMem');  };
+    document.getElementById('btnShowList').onclick = () => renderDaftarList();
+
+    setupCheckboxHelpers('selectAllQuiz',      'clearAllQuiz',      'rangeListQuiz');
+    setupCheckboxHelpers('selectAllMem',        'clearAllMem',       'rangeListMem');
+    setupCheckboxHelpers('btnDaftarSelectAll',  'btnDaftarReset',    'rangeListDaftar');
+
+    document.getElementById('confirmSend').onclick = () => {
+        confirmModal.hide();
+        finishSession();
+    };
+}
+
+function toggleMainBackButton(show) {
+    const btnBack = document.getElementById('btn-main-back');
+    if (btnBack) {
+        if (show) btnBack.style.setProperty('display', 'flex', 'important');
+        else      btnBack.style.setProperty('display', 'none', 'important');
+    }
+}
+
+
+// ============================================================
+// 2. LOGIKA SELEKSI LEVEL & PART
+// ============================================================
+
+function generateCheckboxes(containerId, prefix) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    container.innerHTML = '';
+
+    if (!GLOBAL_SELECTIONS[containerId]) GLOBAL_SELECTIONS[containerId] = new Set();
+
+    if (QUESTIONS.length === 0) {
+        container.innerHTML = '<div class="text-center text-muted p-3">Data kosong.</div>';
+        return;
+    }
+
+    // Kelompokkan berdasarkan level (N5, N4, dst.)
+    const uniqueLevels = [...new Set(QUESTIONS.map(item => item.level || "Lainnya"))].sort();
+    container.className = 'range-grid-container';
+
+    uniqueLevels.forEach((levelName, index) => {
+        const count = QUESTIONS.filter(q => (q.level || "Lainnya") === levelName).length;
+
+        const div = document.createElement('div');
+        div.className = 'bab-selector-card';
+        div.id = `${prefix}_btn_${index}`;
+        div.onclick = () => window.openPartModal(levelName, containerId, prefix, index);
+
+        div.innerHTML = `
+            <strong>Level ${levelName}</strong>
+            <span class="small text-muted mt-1">${count} Kanji</span>
+            <span class="badge rounded-pill mt-2 d-none" id="${prefix}_badge_${index}" style="font-size:0.6rem; background: var(--teal, #0D9488); color: white;">0 Terpilih</span>
+        `;
+        container.appendChild(div);
+
+        const indicesInLevel = [];
+        QUESTIONS.forEach((q, idx) => { if ((q.level || "Lainnya") === levelName) indicesInLevel.push(idx); });
+        window.updateBabUI(containerId, prefix, index, indicesInLevel);
+    });
+}
+
+window.openPartModal = function(levelName, containerId, prefix, levelIndex) {
+    const modalTitle     = document.getElementById('partModalTitle');
+    const modalSubtitle  = document.getElementById('partModalSubtitle');
+    const modalContainer = document.getElementById('partListContainer');
+    if (!modalTitle || !modalContainer) return;
+
+    modalTitle.innerText = `Level ${levelName}`;
+
+    const indicesInLevel = [];
+    QUESTIONS.forEach((q, idx) => { if ((q.level || "Lainnya") === levelName) indicesInLevel.push(idx); });
+
+    const totalWords   = indicesInLevel.length;
+    const MAX_PER_PART = 25;
+    let totalParts = Math.ceil(totalWords / MAX_PER_PART);
+    if (totalWords <= 35) totalParts = 1;
+
+    if (modalSubtitle) modalSubtitle.innerText = `${totalWords} Kanji · ${totalParts} Bagian`;
+
+    // Fungsi re-render grid (dipanggil ulang saat select all / reset)
+    function renderGrid() {
+        modalContainer.innerHTML = '';
+
+        // Tombol aksi cepat
+        const actionRow = document.createElement('div');
+        actionRow.className = 'd-flex gap-2 mb-3';
+        actionRow.innerHTML = `
+            <button type="button" class="btn btn-sm btn-light border px-3 rounded-pill fw-medium flex-fill"
+                    onclick="window._partSelectAll('${containerId}', [${indicesInLevel}], [${Array.from({length: totalParts}, (_, i) => i)}], ${totalWords}, ${MAX_PER_PART})">
+                <i class="bi bi-check-all me-1"></i> Pilih Semua
+            </button>
+            <button type="button" class="btn btn-sm btn-light border px-3 rounded-pill fw-medium flex-fill"
+                    onclick="window._partReset('${containerId}', [${indicesInLevel}])">
+                <i class="bi bi-x-lg me-1"></i> Reset
+            </button>
+        `;
+        modalContainer.appendChild(actionRow);
+
+        // Grid kartu part
+        const grid = document.createElement('div');
+        grid.className = 'part-grid';
+
+        for (let i = 0; i < totalParts; i++) {
+            const start      = i * MAX_PER_PART;
+            const end        = start + MAX_PER_PART;
+            const chunk      = indicesInLevel.slice(start, end);
+            const currentSet = GLOBAL_SELECTIONS[containerId];
+            const isChecked  = chunk.some(idx => currentSet.has(idx));
+            const partLabel  = totalParts > 1 ? `Part ${i + 1}` : `Full`;
+            const count      = chunk.length;
+
+            const card = document.createElement('div');
+            card.className = `part-grid-card ${isChecked ? 'part-grid-card--active' : ''}`;
+            card.id = `pgc_${containerId}_${i}`;
+            card.innerHTML = `
+                <input class="d-none" type="checkbox" id="chk_part_${containerId}_${i}"
+                       ${isChecked ? 'checked' : ''}>
+                <div class="part-grid-label">${partLabel}</div>
+                <div class="part-grid-count">${count} Kanji</div>
+            `;
+            card.onclick = () => {
+                const chk     = document.getElementById(`chk_part_${containerId}_${i}`);
+                const nowCheck = !chk.checked;
+                chk.checked   = nowCheck;
+                const set     = GLOBAL_SELECTIONS[containerId];
+                chunk.forEach(idx => { if (nowCheck) set.add(idx); else set.delete(idx); });
+
+                // Update tampilan card ini saja
+                card.classList.toggle('part-grid-card--active', nowCheck);
+                card.querySelector('.part-grid-check').classList.toggle('invisible', !nowCheck);
+            };
+            grid.appendChild(card);
+        }
+        modalContainer.appendChild(grid);
+    }
+
+    // Helper: pilih semua part
+    window._partSelectAll = function(cId, allIndices, partIndices, tw, maxPP) {
+        const set = GLOBAL_SELECTIONS[cId];
+        allIndices.forEach(idx => set.add(idx));
+        renderGrid();
+    };
+
+    // Helper: reset semua part
+    window._partReset = function(cId, allIndices) {
+        const set = GLOBAL_SELECTIONS[cId];
+        allIndices.forEach(idx => set.delete(idx));
+        renderGrid();
+    };
+
+    renderGrid();
+
+    const el = document.getElementById('partSelectionModal');
+    const handler = () => {
+        window.updateBabUI(containerId, prefix, levelIndex, indicesInLevel);
+        el.removeEventListener('hidden.bs.modal', handler);
+    };
+    el.addEventListener('hidden.bs.modal', handler);
+    partSelectionModal?.show();
+}
+
+window.togglePartSelection = function(containerId, isChecked, indicesArray) {
+    const set = GLOBAL_SELECTIONS[containerId];
+    indicesArray.forEach(idx => {
+        if (isChecked) set.add(idx);
+        else           set.delete(idx);
+    });
+
+    const checkbox = event.target;
+    const icon  = checkbox.nextElementSibling.querySelector('.check-icon');
+    const label = checkbox.nextElementSibling.querySelector('.part-option-label');
+
+    if (isChecked) {
+        icon.classList.remove('d-none');
+        label.style.color      = '#0D9488';
+        label.style.fontWeight = 'bold';
+    } else {
+        icon.classList.add('d-none');
+        label.style.color      = '';
+        label.style.fontWeight = 'normal';
+    }
+}
+
+window.updateBabUI = function(containerId, prefix, levelIndex, indicesInLevel) {
+    const set   = GLOBAL_SELECTIONS[containerId];
+    const btn   = document.getElementById(`${prefix}_btn_${levelIndex}`);
+    const badge = document.getElementById(`${prefix}_badge_${levelIndex}`);
+    if (!btn || !badge) return;
+
+    let countSelected = 0;
+    indicesInLevel.forEach(idx => { if (set.has(idx)) countSelected++; });
+
+    if (countSelected > 0) {
+        btn.classList.add('has-selection');
+        badge.classList.remove('d-none');
+        badge.innerText = `${countSelected} Terpilih`;
+    } else {
+        btn.classList.remove('has-selection');
+        badge.classList.add('d-none');
+    }
+}
+
+window.getCheckedIndices = function(containerId) {
+    const set = GLOBAL_SELECTIONS[containerId];
+    if (!set) return [];
+    return Array.from(set).sort((a, b) => a - b);
+}
+
+function setupCheckboxHelpers(btnAllId, btnClearId, containerId) {
+    const btnAll   = document.getElementById(btnAllId);
+    const btnClear = document.getElementById(btnClearId);
+
+    if (btnAll) btnAll.onclick = () => {
+        GLOBAL_SELECTIONS[containerId] = new Set(QUESTIONS.map((_, i) => i));
+        const prefix = containerId === 'rangeListQuiz' ? 'q' : (containerId === 'rangeListMem' ? 'm' : 'd');
+        generateCheckboxes(containerId, prefix);
+    };
+
+    if (btnClear) btnClear.onclick = () => {
+        GLOBAL_SELECTIONS[containerId] = new Set();
+        const prefix = containerId === 'rangeListQuiz' ? 'q' : (containerId === 'rangeListMem' ? 'm' : 'd');
+        generateCheckboxes(containerId, prefix);
+    };
+}
+
+
+// ============================================================
+// 3. LOGIKA GAME & SESI
+// ============================================================
+
+function handleStart(rangeId) {
+    const indices = window.getCheckedIndices(rangeId);
+    if (indices.length === 0) {
+        alert("Pilih setidaknya satu level atau part!");
+        return;
+    }
+    quizModal.hide();
+    memModal.hide();
+    startSession(pendingSessionType, indices);
+}
+
+function startSession(type, indices) {
+    toggleMainBackButton(false);
+
+    const selectedQ = indices.map(i => QUESTIONS[i]);
+    const shuffled  = shuffleArray([...selectedQ]);
+
+    state = {
+        sessionType:  type,
+        batch:        shuffled,
+        current:      0,
+        answers:      new Array(shuffled.length).fill(null),
+        orderIndices: indices
+    };
+
+    if (type.includes('quiz')) {
+        const globalIndices = shuffled.map(q => QUESTIONS.indexOf(q));
+        state.choicesPerQ   = Logic.buildChoices(globalIndices, QUESTIONS, type);
+    }
+
+    isAnim = false;
+    renderCurrent();
+
+    const btnStop = document.getElementById('btn-stop-quiz');
+    if (btnStop) btnStop.classList.remove('d-none');
+}
+
+function renderCurrent() {
+    if (state.sessionType.includes('quiz')) {
+        UI.renderQuiz(state, state.current);
+    } else {
+        UI.renderMem(state, state.current);
+    }
+}
+
+// --- EVENT HANDLERS ---
+
+window.handleAnswer = (choiceIndex) => {
+    if (isAnim) return;
+
+    // 1. Simpan jawaban & update UI (highlight pilihan)
+    state.answers[state.current] = choiceIndex;
+    renderCurrent();
+
+    // 2. Tunggu sebentar (beri waktu lihat highlight), lalu ganti soal
+    isAnim = true;
+    setTimeout(() => {
+        if (state.current < state.batch.length - 1) {
+            state.current++;
+            renderCurrent(); // card-enter animation otomatis aktif
+        } else {
+            window.handleConfirm();
+        }
+        isAnim = false;
+    }, 500); // 500ms: cukup untuk lihat highlight, tidak terasa lama
 };
 
-// =============================================
-// MODAL KONFIRMASI CUSTOM (ganti browser confirm)
-// =============================================
-
-/**
- * Tampilkan modal konfirmasi kustom (pengganti window.confirm).
- * @param {Object} opts - { title, message, okLabel, cancelLabel, onOk }
- */
-function showConfirmModal({ title, message, okLabel = 'Ya', cancelLabel = 'Batal', onOk }) {
-  // Hapus modal lama jika ada
-  const old = document.getElementById('confirm-modal-wrapper');
-  if (old) old.remove();
-
-  const wrapper = document.createElement('div');
-  wrapper.id    = 'confirm-modal-wrapper';
-  wrapper.className = 'confirm-modal-backdrop';
-  wrapper.innerHTML = `
-    <div class="confirm-modal-box" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
-      <div class="confirm-modal-header">
-        <div class="confirm-modal-icon">⚠️</div>
-        <h2 class="confirm-modal-title" id="confirm-title">${title}</h2>
-      </div>
-      <div class="confirm-modal-body">
-        <p class="confirm-modal-msg">${message}</p>
-      </div>
-      <div class="confirm-modal-footer">
-        <button class="btn-confirm-cancel" id="confirm-cancel">${cancelLabel}</button>
-        <button class="btn-confirm-ok" id="confirm-ok">${okLabel}</button>
-      </div>
-    </div>`;
-
-  document.body.appendChild(wrapper);
-
-  // Focus tombol Cancel secara default (safer UX)
-  setTimeout(() => {
-    const cancelBtn = document.getElementById('confirm-cancel');
-    if (cancelBtn) cancelBtn.focus();
-  }, 50);
-
-  const close = () => wrapper.remove();
-
-  document.getElementById('confirm-cancel').addEventListener('click', close);
-  document.getElementById('confirm-ok').addEventListener('click', () => {
-    close();
-    if (onOk) onOk();
-  });
-
-  // Klik backdrop untuk cancel
-  wrapper.addEventListener('click', (e) => {
-    if (e.target === wrapper) close();
-  });
-
-  // ESC untuk cancel
-  const escHandler = (e) => {
-    if (e.key === 'Escape') { close(); document.removeEventListener('keydown', escHandler); }
-  };
-  document.addEventListener('keydown', escHandler);
-}
-
-// =============================================
-// INISIALISASI
-// =============================================
-
-async function init() {
-  try {
-    const res = await fetch('./data/kanjiasli.json');
-    if (!res.ok) throw new Error('HTTP error ' + res.status);
-    state.allData = await res.json();
-
-    state.currentLevel = getLevelPref();
-    setLevelUI(state.currentLevel);
-    refreshFilteredData();
-    showScreen(DOM_IDS.SCREEN_DASHBOARD);
-    attachEventListeners();
-
-  } catch (err) {
-    console.error(err);
-    document.body.innerHTML = `
-      <div style="display:flex;align-items:center;justify-content:center;height:100vh;padding:2rem;text-align:center">
-        <div>
-          <p style="font-size:3rem">⚠️</p>
-          <p style="color:#c0392b;font-size:1.1rem">${MESSAGES.DATA_LOAD_ERROR}</p>
-          <p style="color:#9e968e;font-size:.9rem">${err.message}</p>
-        </div>
-      </div>`;
-  }
-}
-
-// =============================================
-// FILTER & REFRESH
-// =============================================
-
-function refreshFilteredData() {
-  const { filtered, packets } = processData(state.allData, state.currentLevel);
-  state.filteredData = filtered;
-  state.packets      = packets;
-  updateTotalBadge(filtered.length, state.currentLevel);
-}
-
-function setLevelUI(level) {
-  document.querySelectorAll('input[name="level-filter"]').forEach(r => {
-    r.checked = r.value === level;
-  });
-}
-
-// =============================================
-// BUKA MODAL PAKET
-// =============================================
-
-function openPacketModal(mode) {
-  state.currentMode = mode;
-  renderPacketList(state.packets, MODE_LABELS[mode]);
-
-  const modal = bootstrap.Modal.getOrCreateInstance($(DOM_IDS.MODAL_PAKET));
-  modal.show();
-}
-
-// =============================================
-// MULAI SESI UJIAN
-// =============================================
-
-function startSession(kanjiList, mode) {
-  if (!kanjiList || kanjiList.length === 0) {
-    showToast('Tidak ada kanji untuk diujikan!', 'warning');
-    return;
-  }
-
-  const shuffled      = shuffleArray(kanjiList);
-  state.questions     = buildAllQuestions(shuffled, mode, state.filteredData);
-  state.answers       = new Array(state.questions.length).fill(null);
-  state.currentQIndex = 0;
-  state.pendingAnswer = null;
-
-  showScreen(DOM_IDS.SCREEN_QUIZ);
-  show(DOM_IDS.BTN_STOP);
-  renderCurrentQuestion();
-}
-
-function renderCurrentQuestion() {
-  const q       = state.questions[state.currentQIndex];
-  const saved   = state.answers[state.currentQIndex];
-  const savedAns = saved ? saved.userAnswer : null;
-  renderQuestion(q, state.currentQIndex + 1, state.questions.length, savedAns);
-
-  // Update progress bar
-  updateQuizProgressBar();
-}
-
-function updateQuizProgressBar() {
-  const fill = document.getElementById('quiz-progress-fill');
-  if (fill) {
-    const pct = ((state.currentQIndex) / state.questions.length) * 100;
-    fill.style.width = pct + '%';
-  }
-}
-
-// =============================================
-// NAVIGASI SOAL
-// [DIUBAH] Auto-next setelah pilih, tanpa tampilkan benar/salah
-// =============================================
-
-function goNext() {
-  const answered = collectCurrentAnswer();
-
-  if (answered !== null) {
-    const q      = state.questions[state.currentQIndex];
-    const result = gradeAnswer(q, answered);
-    state.answers[state.currentQIndex] = { ...result, question: q };
-    updateMastery(q.kanji.No, q.mode, result.isCorrect);
-
-    // Langsung pindah tanpa feedback warna
-    setTimeout(() => {
-      if (state.currentQIndex < state.questions.length - 1) {
-        state.currentQIndex++;
-        state.pendingAnswer = null;
-        renderCurrentQuestion();
-      } else {
-        finishSession();
-      }
-    }, 120);
-  } else {
-    showToast(MESSAGES.EMPTY_ANSWER, 'warning');
-  }
-}
-
-function goPrev() {
-  if (state.currentQIndex > 0) {
-    const answered = collectCurrentAnswer();
-    if (answered !== null) {
-      const q      = state.questions[state.currentQIndex];
-      const result = gradeAnswer(q, answered);
-      state.answers[state.currentQIndex] = { ...result, question: q };
-      updateMastery(q.kanji.No, q.mode, result.isCorrect);
+window.handleNext = () => {
+    if (state.current < state.batch.length - 1) {
+        state.current++;
+        renderCurrent();
     }
-    state.currentQIndex--;
-    state.pendingAnswer = null;
-    renderCurrentQuestion();
-  }
-}
+};
 
-function markLupa() {
-  const q = state.questions[state.currentQIndex];
-  state.answers[state.currentQIndex] = {
-    isCorrect:  false,
-    userAnswer: '(lupa)',
-    question:   q,
-  };
-  updateMastery(q.kanji.No, q.mode, false);
+window.handleNextOrSubmit = () => {
+    if (state.current < state.batch.length - 1) window.handleNext();
+    else window.handleConfirm();
+};
 
-  setTimeout(() => {
-    if (state.currentQIndex < state.questions.length - 1) {
-      state.currentQIndex++;
-      state.pendingAnswer = null;
-      renderCurrentQuestion();
-    } else {
-      finishSession();
+window.handleInput = (text) => { state.answers[state.current] = text; };
+
+window.handlePrev = () => {
+    if (state.current > 0) {
+        state.current--;
+        renderCurrent();
     }
-  }, 120);
+};
+
+window.handleLupa = () => {
+    state.answers[state.current] = "Lupa";
+    window.handleNext();
+};
+
+window.handleConfirm = () => {
+    let emptyCount = 0;
+    state.answers.forEach(a => { if (a === null || a === undefined || a === "") emptyCount++; });
+
+    const summary = document.getElementById('confirmSummary');
+    if (summary) {
+        summary.innerHTML = emptyCount > 0
+            ? `<span class="text-danger fw-bold">${emptyCount} soal belum dijawab!</span>`
+            : "Semua soal sudah dijawab.";
+    }
+    confirmModal.show();
+};
+
+window.executeStopQuiz = () => {
+    const stopModalEl = document.getElementById('stopQuizModal');
+    const stopModal   = bootstrap.Modal.getInstance(stopModalEl);
+    stopModal.hide();
+    finishSession();
 }
 
-function collectCurrentAnswer() {
-  const q = state.questions[state.currentQIndex];
-  if (q.type === 'quiz') {
-    return state.pendingAnswer || null;
-  } else {
-    const input = document.getElementById('essay-input');
-    return (input && input.value.trim()) ? input.value.trim() : null;
-  }
-}
-
-// =============================================
-// SELESAI SESI
-// =============================================
+window.handleBack = () => {
+    Storage.clearTemp();
+    document.getElementById('quiz-area').innerHTML = '';
+    document.location.reload();
+};
 
 function finishSession() {
-  state.questions.forEach((q, i) => {
-    if (!state.answers[i]) {
-      state.answers[i] = { isCorrect: false, userAnswer: '(tidak dijawab)', question: q };
-      updateMastery(q.kanji.No, q.mode, false);
-    }
-  });
+    const result      = Logic.gradeSession(state, QUESTIONS);
+    Storage.saveMastery(result.details, state.sessionType);
 
-  const score = calcScore(state.answers);
-  saveSession({
-    mode:       state.currentMode,
-    level:      state.currentLevel,
-    total:      score.total,
-    correct:    score.correct,
-    wrongItems: getWrongKanjiList(state.answers).map(k => k.No),
-  });
+    const uniqueLevels = [...new Set(state.batch.map(item => item.level || "N5"))].sort();
+    Storage.saveToHistory(result.score, result.total, state.sessionType, uniqueLevels.join(', '));
 
-  hide(DOM_IDS.BTN_STOP);
-  renderResult(state.answers, score);
-  showScreen(DOM_IDS.SCREEN_RESULT);
+    const wrongIndices = [];
+    result.details.forEach((item, i) => {
+        if (!item.isCorrect || state.answers[i] === 'Lupa') {
+            const originalIdx = QUESTIONS.indexOf(item.q);
+            if (originalIdx !== -1) wrongIndices.push(originalIdx);
+        }
+    });
+
+    Storage.clearTemp();
+    UI.renderResult(result, state.sessionType, wrongIndices);
+
+    const btnStop = document.getElementById('btn-stop-quiz');
+    if (btnStop) btnStop.classList.add('d-none');
 }
 
-// =============================================
-// MODE DISPLAY
-// =============================================
+window.handleRetry = () => {
+    const indices = state.batch.map(q => QUESTIONS.indexOf(q));
+    startSession(state.sessionType, indices);
+};
 
-function startDisplay(kanjiList) {
-  if (!kanjiList || kanjiList.length === 0) {
-    showToast('Tidak ada kanji!', 'warning');
-    return;
-  }
-  state.displayList  = kanjiList;
-  state.displayIndex = 0;
-  showScreen(DOM_IDS.SCREEN_DISPLAY);
-  renderCurrentDisplay();
-}
+window.handleRetryWrong = (indices) => {
+    if (!indices || indices.length === 0) return;
+    startSession(state.sessionType, indices);
+};
 
-function renderCurrentDisplay() {
-  const kanji = state.displayList[state.displayIndex];
-  renderDisplayCard(kanji, state.displayIndex + 1, state.displayList.length);
-}
 
-// =============================================
-// EVENT LISTENERS
-// =============================================
+// ============================================================
+// 4. DAFTAR KANJI (VIEWER)
+// ============================================================
 
-function attachEventListeners() {
+function renderDaftarList() {
+    const indices = window.getCheckedIndices('rangeListDaftar');
+    if (indices.length === 0) return alert("Pilih minimal satu level.");
 
-  // Filter Level
-  document.querySelectorAll('input[name="level-filter"]').forEach(radio => {
-    radio.addEventListener('change', (e) => {
-      state.currentLevel = e.target.value;
-      saveLevelPref(state.currentLevel);
-      refreshFilteredData();
-    });
-  });
+    daftarRangeModal?.hide();
+    toggleMainBackButton(false);
 
-  // Tombol Mode Ujian
-  const modeButtons = {
-    'btn-mode-quiz-arti':  MODES.QUIZ_ARTI,
-    'btn-mode-quiz-baca':  MODES.QUIZ_BACA,
-    'btn-mode-essay-arti': MODES.ESSAY_ARTI,
-    'btn-mode-essay-baca': MODES.ESSAY_BACA,
-  };
-  Object.entries(modeButtons).forEach(([id, mode]) => {
-    const btn = $(id);
-    if (btn) btn.addEventListener('click', () => openPacketModal(mode));
-  });
+    const listContainer = document.getElementById('daftarList');
+    if (listContainer) {
+        listContainer.innerHTML = '';
+        listContainer.className = 'row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-3';
 
-  // Tombol Lihat & Hafal
-  const btnDisplay = $('btn-mode-display');
-  if (btnDisplay) btnDisplay.addEventListener('click', () => openPacketModal(MODES.DISPLAY));
+        indices.forEach(idx => {
+            const item = QUESTIONS[idx];
+            if (!item) return;
 
-  // Tombol Cek Progress
-  const btnProgress = $('btn-cek-progress');
-  if (btnProgress) btnProgress.addEventListener('click', openProgress);
+            const kanji    = String(item.Kanji    || '?').trim();
+            const hiragana = String(item.Hiragana || '-').trim();
+            const romaji   = String(item.Romaji   || '-').trim();
+            const arti     = String(item.Arti     || '' ).trim();
+            const type     = item.type  || '';
+            const level    = item.level || '';
 
-  // Modal: Pilih Semua
-  const btnPilihSemua = $(DOM_IDS.BTN_PILIH_SEMUA);
-  if (btnPilihSemua) btnPilihSemua.addEventListener('click', () => {
-    document.querySelectorAll('.paket-check-hidden').forEach(cb => {
-      cb.checked = true;
-      cb.closest('.paket-card')?.classList.add('paket-card-selected');
-    });
-  });
+            const showHira = kanji !== hiragana;
 
-  // Modal: Reset
-  const btnReset = $(DOM_IDS.BTN_RESET_PAKET);
-  if (btnReset) btnReset.addEventListener('click', () => {
-    document.querySelectorAll('.paket-check-hidden').forEach(cb => {
-      cb.checked = false;
-      cb.closest('.paket-card')?.classList.remove('paket-card-selected');
-    });
-  });
+            // Ukuran font berdasar panjang kanji
+            let fontSizeClass = 'fs-1';
+            if (kanji.length > 4)  fontSizeClass = 'fs-2';
+            if (kanji.length > 6)  fontSizeClass = 'fs-3';
+            if (kanji.length > 10) fontSizeClass = 'fs-5';
 
-  // Modal: Toggle card saat checkbox berubah
-  const paketList = $(DOM_IDS.PAKET_LIST);
-  if (paketList) {
-    paketList.addEventListener('change', (e) => {
-      if (e.target.classList.contains('paket-check-hidden')) {
-        const card = e.target.closest('.paket-card');
-        if (card) card.classList.toggle('paket-card-selected', e.target.checked);
-      }
-    });
-  }
+            // Badge warna per type
+            const typeColorMap = {
+                benda: 'background:#E0F2FE;color:#0369A1;',
+                kerja: 'background:#DCFCE7;color:#15803D;',
+                sifat: 'background:#FEF9C3;color:#A16207;'
+            };
+            const typeBadgeStyle = typeColorMap[type] || 'background:#F1F5F9;color:#475569;';
 
-  // Modal: Mulai
-  const btnMulai = $(DOM_IDS.BTN_MULAI);
-  if (btnMulai) btnMulai.addEventListener('click', () => {
-    const checked = [...document.querySelectorAll('.paket-check-hidden:checked')];
-    if (checked.length === 0) {
-      showToast(MESSAGES.NO_PAKET_SELECTED, 'warning');
-      return;
-    }
-    const selectedPackets = checked.map(cb => state.packets[parseInt(cb.value)]);
-    const kanjiList       = mergePackets(selectedPackets);
-    const modal           = bootstrap.Modal.getInstance($(DOM_IDS.MODAL_PAKET));
-    if (modal) modal.hide();
+            const colDiv = document.createElement('div');
+            colDiv.className = 'col';
+            colDiv.innerHTML = `
+                <div class="kotoba-card h-100 p-3 d-flex flex-column align-items-center text-center justify-content-center">
+                    <div class="mb-1 w-100 d-flex justify-content-center gap-1 flex-wrap">
+                        <span class="badge rounded-pill px-2 py-1" style="font-size:0.6rem;${typeBadgeStyle}">${type}</span>
+                        <span class="badge-neon" style="font-size:0.6rem;">${level}</span>
+                    </div>
 
-    setTimeout(() => {
-      if (state.currentMode === MODES.DISPLAY) {
-        startDisplay(kanjiList);
-      } else {
-        startSession(kanjiList, state.currentMode);
-      }
-    }, 300);
-  });
+                    <div class="k-char ${fontSizeClass}">${kanji}</div>
 
-  // Quiz: Klik pilihan ganda → flash singkat lalu auto-next
-  const quizScreen = $(DOM_IDS.SCREEN_QUIZ);
-  if (quizScreen) {
-    quizScreen.addEventListener('click', (e) => {
-      const btn = e.target.closest('.option-btn');
-      if (btn && !btn.disabled) {
-        // Nonaktifkan semua tombol segera agar tidak double-click
-        document.querySelectorAll('.option-btn').forEach(b => {
-          b.disabled = true;
-          b.classList.remove('selected');
+                    <div class="w-100">
+                        ${showHira ? `<div class="k-read">${hiragana}</div>` : ''}
+                        <div class="k-romaji">${romaji}</div>
+                    </div>
+
+                    <div class="k-mean">${arti}</div>
+                </div>`;
+            listContainer.appendChild(colDiv);
         });
-        btn.classList.add('selected', 'opt-flash');
-        state.pendingAnswer = btn.dataset.value;
-        // Delay 350ms agar user melihat pilihannya sebelum lanjut
-        setTimeout(() => {
-          btn.classList.remove('opt-flash');
-          goNext();
-        }, 350);
-      }
-    });
-  }
-
-  // Quiz: Enter di essay input
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      const screen = $(DOM_IDS.SCREEN_QUIZ);
-      if (screen && !screen.classList.contains('d-none')) {
-        goNext();
-      }
     }
-  });
-
-  // Navigasi Quiz
-  const btnPrev = $(DOM_IDS.BTN_PREV);
-  const btnNext = $(DOM_IDS.BTN_NEXT);
-  const btnLupa = $(DOM_IDS.BTN_LUPA);
-  if (btnPrev) btnPrev.addEventListener('click', goPrev);
-  if (btnNext) btnNext.addEventListener('click', goNext);
-  if (btnLupa) btnLupa.addEventListener('click', markLupa);
-
-  // Tombol Stop → konfirmasi → tampilkan hasil (soal belum dijawab = salah)
-  const btnStop = $(DOM_IDS.BTN_STOP);
-  if (btnStop) btnStop.addEventListener('click', () => {
-    showConfirmModal({
-      title:       'Berhenti Ujian?',
-      message:     'Soal yang belum dijawab akan dianggap salah. Pembahasan tetap ditampilkan.',
-      okLabel:     'Lihat Hasil',
-      cancelLabel: 'Lanjutkan',
-      onOk: () => {
-        finishSession(); // langsung finishSession — soal kosong otomatis jadi salah
-      },
-    });
-  });
-
-  // Hasil
-  const btnRetryAll = $(DOM_IDS.BTN_RETRY_ALL);
-  if (btnRetryAll) btnRetryAll.addEventListener('click', () => {
-    startSession(state.questions.map(q => q.kanji), state.currentMode);
-  });
-
-  const btnRetryWrong = $(DOM_IDS.BTN_RETRY_WRONG);
-  if (btnRetryWrong) btnRetryWrong.addEventListener('click', () => {
-    const wrongList = getWrongKanjiList(state.answers);
-    if (wrongList.length === 0) return;
-    startSession(wrongList, state.currentMode);
-  });
-
-  const btnToMenu = $(DOM_IDS.BTN_TO_MENU);
-  if (btnToMenu) btnToMenu.addEventListener('click', () => showScreen(DOM_IDS.SCREEN_DASHBOARD));
-
-  // Progress
-  const btnCloseProgress = $(DOM_IDS.BTN_CLOSE_PROGRESS);
-  if (btnCloseProgress) btnCloseProgress.addEventListener('click', () => showScreen(DOM_IDS.SCREEN_DASHBOARD));
-
-  // Display: Navigasi
-  const btnDisplayPrev  = $(DOM_IDS.BTN_DISPLAY_PREV);
-  const btnDisplayNext  = $(DOM_IDS.BTN_DISPLAY_NEXT);
-  const btnDisplayClose = $(DOM_IDS.BTN_DISPLAY_CLOSE);
-
-  if (btnDisplayPrev) btnDisplayPrev.addEventListener('click', () => {
-    if (state.displayIndex > 0) {
-      state.displayIndex--;
-      renderCurrentDisplay();
-    }
-  });
-
-  if (btnDisplayNext) btnDisplayNext.addEventListener('click', () => {
-    if (state.displayIndex < state.displayList.length - 1) {
-      state.displayIndex++;
-      renderCurrentDisplay();
-    } else {
-      showToast('Semua kanji sudah dilihat! Saatnya ujian 💪', 'success');
-      setTimeout(() => showScreen(DOM_IDS.SCREEN_DASHBOARD), 900);
-    }
-  });
-
-  if (btnDisplayClose) btnDisplayClose.addEventListener('click', () => showScreen(DOM_IDS.SCREEN_DASHBOARD));
-
-  // Display: Tombol Reveal
-  const displayScreen = $(DOM_IDS.SCREEN_DISPLAY);
-  if (displayScreen) {
-    displayScreen.addEventListener('click', (e) => {
-      const revealBtn = e.target.closest('#btn-display-reveal');
-      if (revealBtn) {
-        const revealEl = $(DOM_IDS.DISPLAY_REVEAL);
-        if (revealEl) revealEl.classList.remove('d-none');
-        revealBtn.classList.add('d-none');
-      }
-    });
-  }
+    setTimeout(() => { daftarListModal?.show(); }, 300);
 }
 
-// =============================================
-// PROGRESS
-// =============================================
-
-function openProgress() {
-  const stats = getAllProgressStats(state.allData);
-  renderProgress(state.allData, state.currentLevel, stats);
-  showScreen(DOM_IDS.SCREEN_PROGRESS);
-}
-
-// =============================================
-// JALANKAN
-// =============================================
-document.addEventListener('DOMContentLoaded', init);
+window.onload = init;

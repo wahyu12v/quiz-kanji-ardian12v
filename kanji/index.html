@@ -1,217 +1,321 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Aplikasi hafalan Kanji Jepang N5/N4 — Quiz, Essay, 4 Mode Mastery" />
-  <title>漢字 Mastery — Hafalan N5 &amp; N4</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Hafalan Kanji — Modern</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Shippori+Mincho:wght@400;500;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/x-icon" href="logo2-removebg.png" />
+  </head>
+  <body>
 
-  <!-- NAVBAR -->
-  <nav class="app-navbar">
-    <a href="#" class="navbar-logo">
-      <span class="logo-icon">漢</span>
-      <span class="logo-text">Kanji<span>Mastery</span></span>
-    </a>
-    <button id="btn-stop" class="btn-stop-nav d-none">✕ Berhenti</button>
-  </nav>
-
-  <div class="app-wrapper">
-
-    <!-- ==========================================
-         LAYAR 1: DASHBOARD
-    ========================================== -->
-    <div id="screen-dashboard">
-      <div class="neon-card card-primary">
-        <!-- Hero -->
-        <div class="card-body-pad">
-          <h1 class="hero-title"><span class="hi">漢字</span> Hafalan</h1>
-          <p class="hero-subtitle">N5 · N4 · Quiz &amp; Essay · 4 Mode Mastery</p>
-        </div>
-
-        <hr class="divider-neon" />
-
-        <!-- Filter Level -->
-        <div class="card-body-pad">
-          <div class="section-label">Filter Level</div>
-          <div class="level-filter-group" id="level-filter-group">
-            <input type="radio" name="level-filter" id="filter-n5"  value="N5"  />
-            <label class="level-btn-label" for="filter-n5">N5</label>
-            <input type="radio" name="level-filter" id="filter-n4"  value="N4"  />
-            <label class="level-btn-label" for="filter-n4">N4</label>
-            <input type="radio" name="level-filter" id="filter-all" value="ALL" />
-            <label class="level-btn-label" for="filter-all">Gabungan</label>
+    <!-- ===================== NAVBAR ===================== -->
+    <nav class="navbar sticky-top navbar-light bg-white py-3 shadow-sm" id="main-nav">
+      <div class="container d-flex justify-content-between align-items-center">
+        <a href="index.html" class="navbar-brand d-flex align-items-center gap-3 m-0">
+          <img src="/kotoba/logo2-removebg.png" alt="Logo"
+               style="height: 42px; width: auto" class="brand-logo"
+               onerror="this.style.display='none'" />
+          <div class="d-flex flex-column lh-1">
+            <span class="fw-bold brand-title fs-5">Hafalan Kanji</span>
+            <small class="brand-subtitle text-muted" style="font-size: 0.75rem">by Ardian Wahyu Saputra</small>
           </div>
-          <div class="total-badge-wrap">
-            <span id="total-kanji-badge"><span class="badge-num">…</span> Kanji tersedia</span>
-          </div>
+        </a>
+        <div class="d-flex gap-2 align-items-center">
+          <a href="/index.html" id="btn-main-back"
+             class="btn rounded-pill fw-bold d-flex align-items-center">
+            <i class="bi bi-arrow-left me-2" style="font-size: 1.2rem;"></i> Kembali
+          </a>
+          <button id="btn-stop-quiz"
+                  class="btn btn-outline-danger btn-sm rounded-pill px-3 fw-bold d-none"
+                  data-bs-toggle="modal" data-bs-target="#stopQuizModal">
+            <i class="bi bi-stop-circle-fill me-1"></i> Berhenti
+          </button>
         </div>
+      </div>
+    </nav>
 
-        <hr class="divider-neon" />
-
-        <!-- Tombol Lihat & Hafal -->
-        <div class="card-body-pad">
-          <div class="section-label">Belajar Dulu</div>
-          <button class="btn-display-mode" id="btn-mode-display">
-            <span class="display-icon">📖</span>
-            <div class="display-text">
-              <span class="display-title">Lihat &amp; Hafal</span>
-              <span class="display-sub">Tampilkan kanji + bacaan + arti sebelum latihan</span>
+    <!-- ===================== MODAL: KONFIRMASI BERHENTI ===================== -->
+    <div class="modal fade" id="stopQuizModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content border-0 shadow-lg rounded-4 text-center p-4">
+          <div class="modal-body p-0">
+            <div class="mb-3 text-warning">
+              <i class="bi bi-exclamation-circle-fill" style="font-size: 3.5rem"></i>
             </div>
-            <span class="display-arrow">→</span>
-          </button>
-        </div>
-
-        <hr class="divider-neon" />
-
-        <!-- Grid Mode Ujian -->
-        <div class="card-body-pad">
-          <div class="section-label">Mode Ujian</div>
-          <div class="mode-grid">
-            <button class="btn-mode" id="btn-mode-quiz-arti">
-              <span class="mode-icon">👁</span>
-              <span class="mode-text">Tebak Arti <small>Kanji → Pilih Arti</small></span>
-            </button>
-            <button class="btn-mode" id="btn-mode-quiz-baca">
-              <span class="mode-icon">👂</span>
-              <span class="mode-text">Tebak Bacaan <small>Kanji → Pilih Hiragana</small></span>
-            </button>
-            <button class="btn-mode" id="btn-mode-essay-arti">
-              <span class="mode-icon">✍️</span>
-              <span class="mode-text">Tulis Arti <small>Kanji → Ketik Arti</small></span>
-            </button>
-            <button class="btn-mode" id="btn-mode-essay-baca">
-              <span class="mode-icon">🔤</span>
-              <span class="mode-text">Tulis Bacaan <small>Kanji → Ketik Romaji/Kana</small></span>
-            </button>
+            <h5 class="fw-bold mb-2">Hentikan Sesi?</h5>
+            <p class="text-muted small mb-4">
+              Progress saat ini akan langsung dinilai.<br />Anda tidak bisa melanjutkan lagi.
+            </p>
+            <div class="d-grid gap-2">
+              <button type="button" class="btn btn-danger rounded-pill fw-bold shadow-sm"
+                      onclick="executeStopQuiz()">Ya, Selesai Sekarang</button>
+              <button type="button" class="btn btn-light rounded-pill fw-medium text-muted"
+                      data-bs-dismiss="modal">Batal</button>
+            </div>
           </div>
-          <button class="btn-progress-full" id="btn-cek-progress">📊 Cek Progress Mastery</button>
-        </div>
-      </div>
-    </div><!-- /#screen-dashboard -->
-
-
-    <!-- ==========================================
-         LAYAR 2: QUIZ
-    ========================================== -->
-    <div id="screen-quiz" class="d-none">
-      <div class="neon-card">
-        <!-- Header -->
-        <div class="quiz-header">
-          <span id="quiz-counter" class="quiz-counter">1 / 20</span>
-          <span id="quiz-no-asli" class="quiz-no-asli">No.— · — · —</span>
-        </div>
-        <!-- Progress bar tipis -->
-        <div class="quiz-progress-wrap">
-          <div id="quiz-progress-fill" class="quiz-progress-fill" style="width:0%"></div>
-        </div>
-        <!-- Kanji besar -->
-        <div class="quiz-kanji-area" id="quiz-kanji" aria-live="polite"></div>
-        <!-- Input area -->
-        <div class="quiz-input-area" id="quiz-input-area" aria-live="polite"></div>
-        <!-- Footer navigasi -->
-        <div class="quiz-footer">
-          <button id="btn-prev" class="btn-quiz-nav" disabled>← Sebelumnya</button>
-          <button id="btn-lupa" class="btn-quiz-nav btn-lupa">😵 Lupa</button>
-          <button id="btn-next" class="btn-quiz-nav btn-next-quiz">Berikutnya →</button>
-        </div>
-      </div>
-      <!-- Overlay feedback (transparan, hanya untuk transisi) -->
-      <div id="feedback-overlay" class="feedback-overlay d-none" aria-hidden="true"></div>
-    </div><!-- /#screen-quiz -->
-
-
-    <!-- ==========================================
-         LAYAR 3: HASIL
-    ========================================== -->
-    <div id="screen-result" class="d-none">
-      <div class="neon-card">
-        <div class="result-score-area" id="result-score"></div>
-        <div class="result-actions">
-          <button id="btn-retry-all"   class="btn-result btn-result-primary">🔄 Ulangi Semua Soal</button>
-          <button id="btn-retry-wrong" class="btn-result btn-result-danger d-none">
-             Perbaiki <span id="wrong-count-badge">0</span> Soal Salah
-          </button>
-          <button id="btn-to-menu" class="btn-result btn-result-secondary">← Menu Utama</button>
-        </div>
-        <div id="result-list" aria-live="polite"></div>
-      </div>
-    </div><!-- /#screen-result -->
-
-
-    <!-- ==========================================
-         LAYAR 4: PROGRESS
-    ========================================== -->
-    <div id="screen-progress" class="d-none">
-      <div class="neon-card">
-        <div class="screen-header">
-          <span class="screen-title">📊 Progress Mastery</span>
-          <button id="btn-close-progress" class="btn-screen-back">← Kembali</button>
-        </div>
-        <div class="card-body-pad" id="progress-content" aria-live="polite"></div>
-      </div>
-    </div><!-- /#screen-progress -->
-
-
-    <!-- ==========================================
-         LAYAR 5: LIHAT & HAFAL (DISPLAY)
-    ========================================== -->
-    <div id="screen-display" class="d-none">
-      <div class="neon-card">
-        <div class="screen-header">
-          <span class="screen-title">📖 Lihat &amp; Hafal</span>
-          <button id="btn-display-close" class="btn-screen-back">✕ Tutup</button>
-        </div>
-        <div class="display-counter-wrap">
-          <span id="display-counter" class="display-counter">1 / 20</span>
-        </div>
-        <!-- Kanji besar -->
-        <div class="display-kanji-area" id="display-kanji" aria-live="polite"></div>
-        <!-- Info kanji — langsung tampil tanpa tombol -->
-        <div class="display-reveal-wrap">
-          <div id="display-reveal" class="display-info-panel"></div>
-        </div>
-        <!-- Navigasi -->
-        <div class="display-nav">
-          <button id="btn-display-prev" class="btn-display-nav" disabled>← Sebelumnya</button>
-          <button id="btn-display-next" class="btn-display-nav btn-display-nav-next">Berikutnya →</button>
-        </div>
-      </div>
-    </div><!-- /#screen-display -->
-
-  </div><!-- /.app-wrapper -->
-
-
-  <!-- ==========================================
-       MODAL: PILIH PAKET
-  ========================================== -->
-  <div class="modal fade" id="modal-paket" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modal-paket-title">Pilih Paket</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body" style="padding: 1rem 1.1rem;">
-          <div id="paket-list"></div>
-        </div>
-        <div class="modal-footer">
-          <button id="btn-pilih-semua" class="btn-modal-secondary">☑ Semua</button>
-          <button id="btn-reset-paket" class="btn-modal-secondary">✕ Reset</button>
-          <button id="btn-mulai"       class="btn-modal-primary">▶ Mulai</button>
         </div>
       </div>
     </div>
-  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script type="module" src="js/main.js"></script>
-</body>
+    <!-- ===================== HERO AREA ===================== -->
+    <main class="container my-5 d-flex flex-column justify-content-center" style="min-height: 70vh">
+      <div class="row g-4 justify-content-center">
+        <div id="quiz-area" class="col-md-10 col-lg-8">
+          <div class="text-center hero-card p-5 rounded-5 position-relative overflow-hidden">
+            <div class="hero-bg-kanji">漢字</div>
+
+            <div style="position: relative; z-index: 2">
+              <div class="mb-4">
+                <div class="d-inline-flex align-items-center justify-content-center rounded-circle p-4">
+                  <i class="bi bi-journal-text fs-1"></i>
+                </div>
+              </div>
+
+              <h1 class="display-5 fw-bolder mb-3">漢字を覚えましょう！</h1>
+              <p class="lead mb-5 px-3 opacity-75">
+                Pilih mode untuk menghafal Kanji Jepang.<br />
+                Tebak Arti, Tebak Cara Baca, atau Lihat Daftar.
+              </p>
+
+              <div class="d-inline-flex align-items-center gap-2 px-4 py-2 rounded-pill border mb-5"
+                   style="background: var(--teal-dim); border-color: var(--teal) !important;">
+                <i class="bi bi-database-fill"></i>
+                <span>Total: <strong id="totalCount">...</strong> Kanji</span>
+              </div>
+
+              <div class="d-grid gap-3 d-sm-flex justify-content-center flex-wrap">
+
+                <button id="daftarHafalanBtn"
+                        class="btn btn-outline-custom btn-lg rounded-pill px-4 py-3">
+                  <i class="bi bi-list-task me-2"></i> Daftar Kanji
+                </button>
+
+                <button id="memorizeBtn"
+                        class="btn btn-outline-custom btn-lg rounded-pill px-4 py-3">
+                  <i class="bi bi-pencil-fill me-2"></i> Tulis Arti
+                </button>
+
+                <button id="startBtn"
+                        class="btn btn-outline-custom btn-lg rounded-pill px-4 py-3">
+                  <i class="bi bi-check-circle me-2"></i> Tebak Arti
+                </button>
+
+                <button id="btnTebakCaraBaca"
+                        class="btn btn-outline-custom btn-lg rounded-pill px-4 py-3">
+                  <i class="bi bi-question-circle-fill me-2"></i> Tebak Cara Baca
+                </button>
+
+                <button id="btnTulisRomaji"
+                        class="btn btn-outline-custom btn-lg rounded-pill px-4 py-3">
+                  <i class="bi bi-pen-fill me-2"></i> Tulis Romaji
+                </button>
+
+                <button id="btnCekProgress"
+                        class="btn btn-outline-custom btn-lg rounded-pill px-4 py-3">
+                  <i class="bi bi-graph-up-arrow me-2"></i> Progress Hafalan
+                </button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+
+    <!-- ===================== MODAL: PROGRESS ===================== -->
+    <div class="modal fade" id="progressModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content border-0 shadow-lg" style="border-radius: 16px;">
+          <div class="modal-header border-0 pb-0 pt-4 px-4 rounded-top-4">
+            <div>
+              <h4 class="modal-title fw-bold text-dark mb-1">
+                <i class="bi bi-pie-chart-fill me-2 text-success"></i>Progress Hafalan
+              </h4>
+              <p class="text-muted small mb-0">Indikator 100% jika semua mode (4 jenis) selesai per level.</p>
+            </div>
+            <button type="button" class="btn-close bg-light p-2 rounded-circle"
+                    data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body p-4 rounded-bottom-4">
+            <div id="progressList"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ===================== MODAL: PILIH LEVEL (DAFTAR) ===================== -->
+    <div class="modal fade" id="daftarRangeModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content px-3 py-2">
+          <div class="modal-header border-0 pb-0">
+            <div>
+              <h4 class="modal-title fw-bold">Pilih Level Kanji</h4>
+              <p class="text-muted small mb-0">Pilih level yang ingin ditampilkan di daftar.</p>
+            </div>
+            <button type="button" class="btn-close bg-light rounded-circle p-2"
+                    data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body pt-4">
+            <div id="rangeListDaftar" class="range-grid-container"></div>
+            <div class="mt-4 pt-3 border-top d-flex gap-2">
+              <button id="btnDaftarSelectAll" class="btn btn-sm btn-light border px-3 rounded-pill fw-medium">Pilih Semua</button>
+              <button id="btnDaftarReset"     class="btn btn-sm btn-light border px-3 rounded-pill fw-medium">Reset</button>
+            </div>
+          </div>
+          <div class="modal-footer border-0 pt-0 pb-4">
+            <button type="button" class="btn btn-light text-muted fw-medium rounded-pill px-4 py-2"
+                    data-bs-dismiss="modal">Batal</button>
+            <button id="btnShowList" type="button"
+                    class="btn btn-primary-custom rounded-pill shadow-sm">Tampilkan</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ===================== MODAL: DAFTAR KANJI ===================== -->
+    <div class="modal fade" id="daftarHafalanModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
+        <div class="modal-content px-0 overflow-hidden">
+          <div class="modal-header border-bottom-0 pb-0 pt-4 px-4">
+            <div>
+              <h4 class="modal-title fw-bold">Daftar Kanji Terpilih</h4>
+              <p class="text-muted small mb-0">Menampilkan kanji dari level yang dipilih.</p>
+            </div>
+            <button type="button" class="btn-close bg-light rounded-circle p-2"
+                    data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body px-4 pt-4 bg-light-subtle">
+            <div id="daftarList" class="kanji-list-grid pb-5 pt-2"></div>
+          </div>
+          <div class="modal-footer border-top p-4">
+            <button class="btn btn-outline-custom rounded-pill py-2 px-4 fw-medium"
+                    data-bs-target="#daftarRangeModal" data-bs-toggle="modal">
+              <i class="bi bi-arrow-left me-2"></i> Ganti Level
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ===================== MODAL: QUIZ (PILIH LEVEL) ===================== -->
+    <div class="modal fade" id="quizModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <form id="quizForm" class="modal-content px-3 py-2">
+          <div class="modal-header border-0 pb-0">
+            <div>
+              <h4 class="modal-title fw-bold">Pilih Level Quiz</h4>
+              <p class="text-muted small mb-0">Siap menguji hafalanmu?</p>
+            </div>
+            <button type="button" class="btn-close bg-light rounded-circle p-2"
+                    data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body pt-4">
+            <div id="rangeListQuiz" class="range-grid-container"></div>
+            <div class="mt-4 pt-3 border-top d-flex gap-2">
+              <button type="button" id="selectAllQuiz" class="btn btn-sm btn-light border px-3 rounded-pill fw-medium">Pilih Semua</button>
+              <button type="button" id="clearAllQuiz"  class="btn btn-sm btn-light border px-3 rounded-pill fw-medium">Reset</button>
+            </div>
+          </div>
+          <div class="modal-footer border-0 pt-0 pb-4">
+            <button type="button" class="btn btn-light text-muted fw-medium rounded-pill px-4 py-2"
+                    data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-primary-custom rounded-pill px-5 py-3 shadow-sm">Mulai Quiz</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <!-- ===================== MODAL: MEM / TULIS (PILIH LEVEL) ===================== -->
+    <div class="modal fade" id="memModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <form id="memForm" class="modal-content px-3 py-2">
+          <div class="modal-header border-0 pb-0">
+            <div>
+              <h4 class="modal-title fw-bold">Pilih Level Hafalan</h4>
+              <p class="text-muted small mb-0">Ketik jawaban dari kanji yang muncul.</p>
+            </div>
+            <button type="button" class="btn-close bg-light rounded-circle p-2"
+                    data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body pt-4">
+            <div id="rangeListMem" class="range-grid-container"></div>
+            <div class="mt-4 pt-3 border-top d-flex gap-2">
+              <button type="button" id="selectAllMem" class="btn btn-sm btn-light border px-3 rounded-pill fw-medium">Pilih Semua</button>
+              <button type="button" id="clearAllMem"  class="btn btn-sm btn-light border px-3 rounded-pill fw-medium">Reset</button>
+            </div>
+          </div>
+          <div class="modal-footer border-0 pt-0 pb-4">
+            <button type="button" class="btn btn-light text-muted fw-medium rounded-pill px-4 py-2"
+                    data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-primary-custom rounded-pill px-5 py-3 shadow-sm">Mulai Tes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <!-- ===================== MODAL: PILIH PART ===================== -->
+    <div class="modal fade" id="partSelectionModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content border-0 shadow-lg">
+          <div class="modal-header border-0 pb-0">
+            <div>
+              <h5 class="modal-title fw-bold" id="partModalTitle">Pilih Bagian</h5>
+              <p class="text-muted small mb-0" id="partModalSubtitle">Pilih bagian kanji yang ingin dipelajari.</p>
+            </div>
+            <button type="button" class="btn-close bg-light rounded-circle p-2"
+                    data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body pt-3">
+            <div id="partListContainer"></div>
+          </div>
+          <div class="modal-footer border-0 pt-0">
+            <button type="button" class="btn btn-primary-custom w-100 rounded-pill py-2"
+                    data-bs-dismiss="modal">
+              <i class="bi bi-check-lg me-2"></i>Simpan Pilihan
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ===================== MODAL: KONFIRMASI SELESAI ===================== -->
+    <div class="modal fade" id="confirmModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content border-0 shadow-lg rounded-4 text-center p-4">
+          <div class="modal-body p-2">
+            <div class="mb-3" style="color: var(--teal);">
+              <i class="bi bi-check-circle-fill" style="font-size: 3rem"></i>
+            </div>
+            <h4 class="fw-bold mb-2">Selesai Mengerjakan?</h4>
+            <div id="confirmSummary" class="text-muted mb-4"></div>
+            <div class="d-flex gap-2 justify-content-center">
+              <button type="button" class="btn btn-light rounded-pill px-4 py-2 fw-medium"
+                      data-bs-dismiss="modal">Batal</button>
+              <button id="confirmSend" type="button"
+                      class="btn btn-primary-custom rounded-pill px-4 py-2 shadow-sm">Ya, Nilai</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="confetti-wrapper"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="js/main.js"></script>
+  </body>
 </html>
