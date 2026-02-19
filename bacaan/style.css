@@ -53,6 +53,7 @@ body {
   color: var(--text-primary);
   min-height: 100vh;
   overflow-x: hidden;
+  font-size: 16px;
   background-image:
     radial-gradient(circle at 80% 10%, rgba(13,148,136,0.06) 0%, transparent 50%),
     radial-gradient(circle at 20% 90%, rgba(99,102,241,0.06) 0%, transparent 50%);
@@ -65,7 +66,7 @@ body {
 
 /* ─── NAVBAR ────────────────────────────── */
 .app-header {
-  height: 70px;
+  height: 76px;
   background: rgba(255,255,255,0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -79,7 +80,7 @@ body {
 
 /* Kotak logo teal */
 .brand-icon {
-  width: 42px; height: 42px;
+  width: 46px; height: 46px;
   background: var(--teal-gradient);
   color: #fff;
   border-radius: 10px;
@@ -91,12 +92,12 @@ body {
 }
 
 .brand-title {
-  font-size: 1rem; font-weight: 700;
+  font-size: 1.1rem; font-weight: 700;
   color: var(--text-primary); line-height: 1.2;
 }
 
 .brand-subtitle-text {
-  font-size: 0.72rem; color: var(--teal); font-weight: 600;
+  font-size: 0.78rem; color: var(--teal); font-weight: 600;
 }
 
 /* Tombol Kembali — sama persis Kotoba */
@@ -105,8 +106,8 @@ body {
   background: var(--bg-card);
   border: 1px solid var(--border) !important;
   color: var(--text-primary) !important;
-  font-weight: 600; font-size: 0.875rem;
-  padding: 0.45rem 1rem;
+  font-weight: 600; font-size: 0.95rem;
+  padding: 0.55rem 1.2rem;
   border-radius: var(--radius-pill);
   text-decoration: none;
   box-shadow: var(--shadow-sm);
@@ -139,8 +140,8 @@ body {
   background: var(--bg-card);
   border: 1.5px solid var(--border) !important;
   color: var(--text-primary) !important;
-  font-weight: 600; font-size: 0.875rem;
-  padding: 0.55rem 1.1rem;
+  font-weight: 600; font-size: 1rem;
+  padding: 0.65rem 1.25rem;
   border-radius: var(--radius-pill);
   cursor: pointer;
   box-shadow: var(--shadow-sm);
@@ -160,9 +161,9 @@ body {
   border: 1.5px solid var(--border);
   color: var(--text-primary);
   border-radius: var(--radius-pill);
-  padding: 0.55rem 1rem 0.55rem 2.75rem;
-  font-size: 0.875rem;
-  min-width: 250px;
+  padding: 0.65rem 1rem 0.65rem 2.75rem;
+  font-size: 1rem;
+  min-width: 280px;
   box-shadow: var(--shadow-sm);
   transition: all var(--t) var(--ease);
 }
@@ -202,9 +203,9 @@ body {
 
 /* Icon area di kartu */
 .card-icon-wrapper {
-  height: 140px;
+  height: 160px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 3.5rem;
+  font-size: 4rem;
   color: var(--teal) !important;
   background: var(--teal-dim) !important;
   border-bottom: 1px solid var(--border);
@@ -219,7 +220,7 @@ body {
 }
 
 .card-body-custom {
-  padding: 1rem 1.25rem 1.25rem;
+  padding: 1.2rem 1.5rem 1.5rem;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   text-align: center;
@@ -227,7 +228,7 @@ body {
 }
 
 .story-title {
-  font-size: 1rem; font-weight: 700;
+  font-size: 1.1rem; font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 0;
   font-family: 'Noto Sans JP', sans-serif;
@@ -239,10 +240,10 @@ body {
   color: var(--teal);
   border: 1px solid rgba(13,148,136,0.2);
   border-radius: var(--radius-pill);
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  padding: 0.2rem 0.6rem;
-  margin-top: 0.4rem;
+  padding: 0.25rem 0.75rem;
+  margin-top: 0.5rem;
 }
 
 /* Pagination */
@@ -411,7 +412,7 @@ body {
 }
 
 .reader-main-title {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: 800;
   color: var(--text-primary) !important;
   margin-top: 0.5rem !important;
@@ -430,8 +431,8 @@ body {
 /* ─── KONTEN BACA ───────────────────────── */
 .japanese-content {
   font-family: 'Noto Sans JP', sans-serif;
-  font-size: 1.4rem;
-  line-height: 2.5;
+  font-size: 1.6rem;
+  line-height: 2.8;
   color: var(--text-primary);
   text-align: justify;
 }
@@ -454,15 +455,15 @@ rt {
 
 .jp-sentence {
   font-family: 'Noto Sans JP', sans-serif;
-  font-size: 1.35rem;
-  line-height: 2.2;
+  font-size: 1.55rem;
+  line-height: 2.5;
   color: var(--text-primary);
   margin-bottom: 4px;
 }
 
 .id-translation {
   font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: var(--teal);
   background: var(--teal-dim);
   padding: 0.5rem 0.85rem;
@@ -530,12 +531,12 @@ rt {
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
-  gap: 6px !important;
+  gap: 7px !important;
   cursor: pointer !important;
-  padding: 6px 10px !important;
-  border-radius: 14px !important;
+  padding: 8px 14px !important;
+  border-radius: 16px !important;
   transition: background 0.15s ease !important;
-  min-width: 58px !important;
+  min-width: 68px !important;
 }
 
 #floating-dock button:hover {
@@ -547,15 +548,15 @@ rt {
 #icon-trans,
 #icon-furigana,
 #icon-up {
-  width: 46px !important;
-  height: 46px !important;
-  border-radius: 13px !important;
+  width: 52px !important;
+  height: 52px !important;
+  border-radius: 15px !important;
   background: #F1F5F9 !important;
   color: #94A3B8 !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  font-size: 1.2rem !important;
+  font-size: 1.35rem !important;
   transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease !important;
   border: 1.5px solid #E2E8F0 !important;
   box-shadow: none !important;
@@ -609,7 +610,7 @@ rt {
 /* ── Label ── */
 #label-audio,
 #floating-dock button > span {
-  font-size: 0.58rem !important;
+  font-size: 0.65rem !important;
   font-weight: 700 !important;
   color: #94A3B8 !important;
   letter-spacing: 0.06em !important;
@@ -629,18 +630,28 @@ rt {
   transform: none !important;
   pointer-events: auto !important;
   width: auto !important;
-  min-width: 58px !important;
+  min-width: 68px !important;
   transition: background 0.15s ease !important;
   margin: 0 !important;
 }
 
 /* ─── RESPONSIVE ────────────────────────── */
 @media (max-width: 768px) {
-  .card-icon-wrapper { height: 120px; font-size: 2.8rem; }
-  .reader-hero-icon { height: 150px !important; font-size: 3rem !important; }
-  .japanese-content, .jp-sentence { font-size: 1.15rem; line-height: 2; }
-  .reader-main-title { font-size: 1.25rem !important; }
-  .reader-body { padding: 1rem 1.25rem 2rem !important; }
+  .card-icon-wrapper { height: 140px; font-size: 3.2rem; }
+  .reader-hero-icon { height: 160px !important; font-size: 3.5rem !important; }
+  .japanese-content { font-size: 1.35rem; line-height: 2.4; }
+  .jp-sentence { font-size: 1.35rem; line-height: 2.4; }
+  .reader-main-title { font-size: 1.5rem !important; }
+  .reader-body { padding: 1.25rem 1.5rem 2.5rem !important; }
+  .story-title { font-size: 1rem; }
+}
+
+@media (max-width: 480px) {
+  .japanese-content { font-size: 1.2rem; line-height: 2.2; }
+  .jp-sentence { font-size: 1.2rem; line-height: 2.2; }
+  .reader-main-title { font-size: 1.3rem !important; }
+  #floating-dock button { padding: 7px 10px !important; min-width: 60px !important; }
+  #icon-audio, #icon-trans, #icon-furigana, #icon-up { width: 46px !important; height: 46px !important; }
 }
 
 @media (max-width: 576px) {
