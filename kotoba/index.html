@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="id">
   <head>
@@ -50,20 +52,9 @@
           <a
             href="/index.html"
             id="btn-main-back"
-            class="btn rounded-pill fw-bold d-flex align-items-center shadow-sm"
-            style="
-              border: 2.5px solid #0d6efd;
-              color: #0d6efd;
-              background: white;
-              transition: all 0.3s ease;
-            "
-            onmouseover="this.style.background='#0d6efd'; this.style.color='white'; this.style.transform='translateX(-3px)';"
-            onmouseout="this.style.background='white'; this.style.color='#0d6efd'; this.style.transform='translateX(0)';"
+            class="btn rounded-pill fw-bold d-flex align-items-center"
           >
-            <i
-              class="bi bi-arrow-left me-2"
-              style="font-size: 1.2rem; -webkit-text-stroke: 1px"
-            ></i>
+            <i class="bi bi-arrow-left me-2" style="font-size: 1.2rem;"></i>
             Kembali
           </a>
 
@@ -122,7 +113,7 @@
       <div class="row g-4 justify-content-center">
         <div id="quiz-area" class="col-md-10 col-lg-8">
           <div
-            class="text-center hero-card p-5 rounded-5 position-relative overflow-hidden text-white"
+            class="text-center hero-card p-5 rounded-5 position-relative overflow-hidden"
           >
             <div class="hero-bg-kanji">言葉</div>
 
@@ -130,12 +121,8 @@
               <div class="mb-4">
                 <div
                   class="d-inline-flex align-items-center justify-content-center rounded-circle p-4"
-                  style="
-                    background: rgba(255, 255, 255, 0.2);
-                    backdrop-filter: blur(5px);
-                  "
                 >
-                  <i class="bi bi-translate fs-1 text-white"></i>
+                  <i class="bi bi-translate fs-1"></i>
                 </div>
               </div>
 
@@ -146,7 +133,8 @@
               </p>
 
               <div
-                class="d-inline-flex align-items-center gap-2 px-4 py-2 rounded-pill bg-white bg-opacity-10 border border-white border-opacity-25 mb-5 shadow-sm"
+                class="d-inline-flex align-items-center gap-2 px-4 py-2 rounded-pill border mb-5"
+                style="background: var(--teal-dim); border-color: var(--teal) !important;"
               >
                 <i class="bi bi-database-fill"></i>
                 <span
@@ -210,9 +198,9 @@
 
 <div class="modal fade" id="progressModal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"> 
-        <div class="modal-content border-0 shadow-lg" style="border-radius: 16px; background-color: #f8f9fa;">
+        <div class="modal-content border-0 shadow-lg" style="border-radius: 16px;">
           
-          <div class="modal-header border-0 pb-0 pt-4 px-4 bg-white rounded-top-4">
+          <div class="modal-header border-0 pb-0 pt-4 px-4 rounded-top-4">
             <div>
                 <h4 class="modal-title fw-bold text-dark mb-1"><i class="bi bi-pie-chart-fill me-2 text-primary"></i>Progress Hafalan</h4>
                 <p class="text-muted small mb-0">Indikator 100% jika semua mode (4 jenis) selesai.</p>
@@ -297,12 +285,12 @@
         class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable"
       >
         <div class="modal-content px-0 overflow-hidden">
-          <div class="modal-header border-bottom-0 pb-0 pt-4 px-4 bg-white">
+          <div class="modal-header border-bottom-0 pb-0 pt-4 px-4">
             <div>
-              <h4 class="modal-title fw-bold text-dark">
+              <h4 class="modal-title fw-bold">
                 Daftar Kosakata Terpilih
               </h4>
-              <p class="text-white small mb-0">
+              <p class="text-muted small mb-0">
                 Menampilkan hasil dari paket yang dipilih.
               </p>
             </div>
@@ -317,7 +305,7 @@
             <div id="daftarList" class="kanji-list-grid pb-5 pt-2"></div>
           </div>
 
-          <div class="modal-footer bg-white border-top p-4">
+          <div class="modal-footer border-top p-4">
             <button
               class="btn btn-outline-custom rounded-pill py-2 px-4 fw-medium"
               data-bs-target="#daftarRangeModal"
@@ -460,7 +448,7 @@
       <div class="modal-dialog modal-dialog-centered modal-sm">
         <div class="modal-content border-0 shadow-lg rounded-4 text-center p-4">
           <div class="modal-body p-2">
-            <div class="mb-3 text-white">
+            <div class="mb-3" style="color: var(--teal);">
               <i class="bi bi-check-circle-fill" style="font-size: 3rem"></i>
             </div>
             <h4 class="fw-bold mb-2">Selesai Mengerjakan?</h4>

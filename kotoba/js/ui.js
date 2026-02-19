@@ -14,10 +14,10 @@ style.innerHTML = `
     }
     .choice-card-anim:hover { 
         transform: translateY(-4px); 
-        box-shadow: 0 10px 25px rgba(244, 114, 182, 0.3) !important; 
-        border-color: #f472b6 !important; 
+        box-shadow: 0 8px 20px rgba(13, 148, 136, 0.2) !important; 
+        border-color: #0D9488 !important; 
         z-index: 5; 
-        background-color: rgba(244, 114, 182, 0.1) !important;
+        background-color: rgba(13, 148, 136, 0.08) !important;
     }
     .choice-card-anim:active { 
         transform: scale(0.98); 
@@ -26,8 +26,8 @@ style.innerHTML = `
     /* --- 2. LOGIKA UKURAN FONT (MOBILE FRIENDLY) --- */
     .q-text-base {
         font-weight: 800;
-        color: #ffffff !important;
-        text-shadow: 0 0 25px rgba(244, 114, 182, 0.6);
+        color: #1E293B !important;
+        text-shadow: none;
         text-align: center;
         width: 100%;
         line-height: 1.4;
@@ -35,17 +35,17 @@ style.innerHTML = `
         overflow-wrap: break-word;
     }
 
-    /* Ukuran Besar (1-4 Karakter) - Contoh: Kanji tunggal */
+    /* Ukuran Besar (1-4 Karakter) */
     .q-size-lg {
         font-size: clamp(4rem, 18vw, 6.5rem) !important; 
     }
 
-    /* Ukuran Sedang (5-12 Karakter) - Contoh: Kata biasa */
+    /* Ukuran Sedang (5-12 Karakter) */
     .q-size-md {
         font-size: clamp(2.2rem, 10vw, 3.5rem) !important;
     }
 
-    /* Ukuran Kecil (>12 Karakter) - Contoh: Kalimat/Arti Panjang */
+    /* Ukuran Kecil (>12 Karakter) */
     .q-size-sm {
         font-size: clamp(1.4rem, 6vw, 2rem) !important;
         font-weight: 700 !important;
@@ -221,7 +221,7 @@ export function renderMem(state, qNo) {
       </div>
 
       <div class="w-100 text-center mb-4" style="max-width: 600px;">
-          <div class="mem-label mb-3" style="color: var(--neon-pink); font-size: 0.9rem; letter-spacing: 1px;">${labelTxt}</div>
+          <div class="mem-label mb-3">${labelTxt}</div>
           
           <div class="position-relative">
               <input type="text" id="memInput" 
@@ -295,7 +295,7 @@ export function renderResult(result, sessionType, wrongIndices = []) {
     <div class="res-card p-5 text-center mb-5">
         <h5 class="text-muted fw-bold mb-2 text-uppercase tracking-wider">${modeLabel}</h5>
         <h1 class="display-1 fw-black mb-0 ${scoreClass}" style="font-weight: 900;">${pct}%</h1>
-        <p class="text-white fs-4 mb-4" style="opacity: 0.9;">Benar ${result.score} dari ${result.total}</p>
+        <p class="text-secondary fs-4 mb-4" style="opacity: 0.9;">Benar ${result.score} dari ${result.total}</p>
 
         <div class="d-grid gap-3 col-lg-8 mx-auto">
             ${
@@ -307,13 +307,13 @@ export function renderResult(result, sessionType, wrongIndices = []) {
             }
             <div class="row g-2">
                 <div class="col-6"><button class="btn btn-outline-custom w-100 fw-bold py-2" onclick="window.handleRetry()">Ulangi</button></div>
-                <div class="col-6"><button class="btn btn-outline-secondary w-100 fw-bold py-2 text-white" onclick="window.handleBack()">Menu Utama</button></div>
+                <div class="col-6"><button class="btn btn-outline-custom w-100 fw-bold py-2" onclick="window.handleBack()">Menu Utama</button></div>
             </div>
         </div>
     </div>`;
 
   if (result.details && result.details.length > 0) {
-    html += `<h5 class="fw-bold text-white mb-3 mt-4">Detail Jawaban</h5>`;
+    html += `<h5 class="fw-bold mb-3 mt-4" style="color: var(--text-primary, #1E293B);">Detail Jawaban</h5>`;
     result.details.forEach((d) => {
       const isCorrect = d.isCorrect;
       const userTxt = d.userAns === "Lupa" ? "Lupa" : d.userAns || "-";
@@ -373,22 +373,22 @@ export function renderProgressModal(stats) {
     const p3 = item.detail.tulisArti;
     const p4 = item.detail.tulisRomaji;
     const isDone = pctTotal === 100;
-    const cardClass = isDone ? "prog-card prog-done" : "prog-card";
-    const badgeClass = isDone ? "bg-neon-green text-black" : "bg-dark-subtle text-white";
+    const cardClass = isDone ? "prog-card bab-done" : "prog-card";
+    const badgeClass = isDone ? "bg-success text-white" : "bg-light text-secondary border";
 
     const col = document.createElement("div");
     col.className = "col-12 col-md-6";
     col.innerHTML = `
         <div class="${cardClass} p-3 h-100 d-flex flex-column justify-content-center">
-            <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom border-secondary border-opacity-25">
-                <span class="fw-bold text-white fs-5">${escapeHtml(item.bab)}</span>
+            <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+                <span class="fw-bold fs-5" style="color: var(--text-primary, #1E293B);">${escapeHtml(item.bab)}</span>
                 <span class="badge ${badgeClass} rounded-pill px-3">Total: ${pctTotal}%</span>
             </div>
             <div class="d-flex flex-column gap-3">
-                <div class="prog-item"><div class="d-flex justify-content-between mb-1"><span class="prog-label text-neon-blue"><i class="bi bi-eye-fill me-2"></i> Tebak Arti</span><span class="prog-val text-white">${p1}%</span></div><div class="progress" style="height: 6px; background: rgba(255,255,255,0.1);"><div class="progress-bar bg-neon-blue" style="width: ${p1}%"></div></div></div>
-                <div class="prog-item"><div class="d-flex justify-content-between mb-1"><span class="prog-label text-neon-green"><i class="bi bi-translate me-2"></i> Tebak Bacaan</span><span class="prog-val text-white">${p2}%</span></div><div class="progress" style="height: 6px; background: rgba(255,255,255,0.1);"><div class="progress-bar bg-neon-green" style="width: ${p2}%"></div></div></div>
-                <div class="prog-item"><div class="d-flex justify-content-between mb-1"><span class="prog-label text-neon-yellow"><i class="bi bi-pencil-fill me-2"></i> Tulis Arti</span><span class="prog-val text-white">${p3}%</span></div><div class="progress" style="height: 6px; background: rgba(255,255,255,0.1);"><div class="progress-bar bg-neon-yellow" style="width: ${p3}%"></div></div></div>
-                <div class="prog-item"><div class="d-flex justify-content-between mb-1"><span class="prog-label text-neon-pink"><i class="bi bi-keyboard-fill me-2"></i> Tulis Romaji</span><span class="prog-val text-white">${p4}%</span></div><div class="progress" style="height: 6px; background: rgba(255,255,255,0.1);"><div class="progress-bar bg-neon-pink" style="width: ${p4}%"></div></div></div>
+                <div class="prog-item"><div class="d-flex justify-content-between mb-1"><span class="prog-label"><i class="bi bi-eye-fill me-2"></i> Tebak Arti</span><span class="prog-val" style="color: var(--teal, #0D9488); font-weight:700;">${p1}%</span></div><div class="progress prog-track" style="height: 6px;"><div class="progress-bar" style="width: ${p1}%; background: var(--teal, #0D9488);"></div></div></div>
+                <div class="prog-item"><div class="d-flex justify-content-between mb-1"><span class="prog-label"><i class="bi bi-translate me-2"></i> Tebak Bacaan</span><span class="prog-val" style="color: #22C55E; font-weight:700;">${p2}%</span></div><div class="progress prog-track" style="height: 6px;"><div class="progress-bar bg-success" style="width: ${p2}%"></div></div></div>
+                <div class="prog-item"><div class="d-flex justify-content-between mb-1"><span class="prog-label"><i class="bi bi-pencil-fill me-2"></i> Tulis Arti</span><span class="prog-val" style="color: #F59E0B; font-weight:700;">${p3}%</span></div><div class="progress prog-track" style="height: 6px;"><div class="progress-bar" style="width: ${p3}%; background: #F59E0B;"></div></div></div>
+                <div class="prog-item"><div class="d-flex justify-content-between mb-1"><span class="prog-label"><i class="bi bi-keyboard-fill me-2"></i> Tulis Romaji</span><span class="prog-val" style="color: var(--indigo, #6366F1); font-weight:700;">${p4}%</span></div><div class="progress prog-track" style="height: 6px;"><div class="progress-bar" style="width: ${p4}%; background: var(--indigo, #6366F1);"></div></div></div>
             </div>
         </div>`;
     gridDiv.appendChild(col);

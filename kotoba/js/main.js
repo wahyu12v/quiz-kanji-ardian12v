@@ -134,7 +134,7 @@ function generateCheckboxes(containerId, prefix) {
         div.innerHTML = `
             <strong>${babName}</strong>
             <span class="small text-muted mt-1">${count} Kata</span>
-            <span class="badge bg-neon-pink rounded-pill mt-2 d-none" id="${prefix}_badge_${index}" style="font-size:0.6rem">0 Terpilih</span>
+            <span class="badge rounded-pill mt-2 d-none" id="${prefix}_badge_${index}" style="font-size:0.6rem; background: var(--teal, #0D9488); color: white;">0 Terpilih</span>
         `;
         container.appendChild(div);
         
@@ -184,7 +184,7 @@ window.openPartModal = function(babName, containerId, prefix, babIndex) {
                     <span class="part-option-label">${partLabel}</span>
                     <small class="text-muted fw-normal">${rangeLabel}</small>
                 </div>
-                <i class="bi bi-check-circle-fill text-neon-pink check-icon ${isChecked ? '' : 'd-none'}"></i>
+                <i class="bi bi-check-circle-fill check-icon ${isChecked ? '' : 'd-none'}" style="color: var(--teal, #0D9488);"></i>
             </label>
         `;
         modalContainer.appendChild(div);
@@ -213,7 +213,7 @@ window.togglePartSelection = function(containerId, isChecked, indicesArray) {
     
     if(isChecked) {
         icon.classList.remove('d-none');
-        label.style.color = '#f472b6';
+        label.style.color = '#0D9488';
         label.style.fontWeight = 'bold';
     } else {
         icon.classList.add('d-none');

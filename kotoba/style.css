@@ -1,1046 +1,898 @@
+
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
+/* =========================================
+   DESIGN SYSTEM — HAFALAN KANJI APPS
+   Theme: Light | Accent: Teal + Indigo
+   ========================================= */
+
 :root {
-  /* --- PALET WARNA VIVID NEON --- */
-  --bg-dark: #050507;           /* Hitam pekat untuk kontras maksimal */
-  --bg-glass: rgba(20, 20, 25, 0.6);
-  
-  /* Pink Neon yang lebih "Pedas" */
-  --neon-pink: #ff6ac2;         /* Pink utama lebih cerah */
-  --neon-pink-dim: rgba(255, 106, 194, 0.1);
-  --neon-gradient: linear-gradient(135deg, #ff6ac2 0%, #d946ef 100%);
-  
-  --text-white: #ffffff;
-  --text-grey: #94a3b8;
-  
-  /* Efek Cahaya (Glow) Bertingkat */
-  --glow-text: 0 0 15px rgba(255, 106, 194, 0.6);
-  --glow-box: 0 0 15px rgba(255, 106, 194, 0.25), inset 0 0 10px rgba(255, 106, 194, 0.05);
-  --glow-active: 0 0 25px rgba(255, 106, 194, 0.5), 0 0 5px rgba(255, 106, 194, 0.8);
+  /* --- BACKGROUND --- */
+  --bg-main:      #F0F4F8;
+  --bg-card:      #FFFFFF;
+  --bg-card-alt:  #F8FAFC;
+  --bg-overlay:   rgba(255, 255, 255, 0.85);
+
+  /* --- ACCENT COLORS --- */
+  --teal:         #0D9488;
+  --teal-light:   #CCFBF1;
+  --teal-mid:     #14B8A6;
+  --teal-dim:     rgba(13, 148, 136, 0.12);
+  --teal-gradient: linear-gradient(135deg, #0D9488 0%, #14B8A6 100%);
+
+  --indigo:       #6366F1;
+  --indigo-light: #EEF2FF;
+  --indigo-dim:   rgba(99, 102, 241, 0.12);
+  --indigo-gradient: linear-gradient(135deg, #4F46E5 0%, #818CF8 100%);
+
+  /* --- TEXT --- */
+  --text-primary:   #1E293B;
+  --text-secondary: #64748B;
+  --text-muted:     #94A3B8;
+  --text-white:     #FFFFFF;
+
+  /* --- BORDER & SHADOW --- */
+  --border:         #E2E8F0;
+  --border-focus:   #0D9488;
+  --shadow-sm:      0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md:      0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.05);
+  --shadow-lg:      0 10px 25px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.06);
+  --shadow-teal:    0 4px 15px rgba(13, 148, 136, 0.25);
+  --shadow-indigo:  0 4px 15px rgba(99, 102, 241, 0.25);
+
+  /* --- STATUS --- */
+  --success:      #22C55E;
+  --success-bg:   rgba(34, 197, 94, 0.1);
+  --success-border: rgba(34, 197, 94, 0.35);
+  --error:        #EF4444;
+  --error-bg:     rgba(239, 68, 68, 0.1);
+  --error-border: rgba(239, 68, 68, 0.35);
+  --warning:      #F59E0B;
+  --warning-bg:   rgba(245, 158, 11, 0.1);
+  --warning-border: rgba(245, 158, 11, 0.35);
+
+  /* --- RADIUS --- */
+  --radius-sm:    8px;
+  --radius-md:    12px;
+  --radius-lg:    16px;
+  --radius-xl:    20px;
+  --radius-pill:  50px;
 }
+
+/* =========================================
+   BASE
+   ========================================= */
+
+*, *::before, *::after { box-sizing: border-box; }
 
 body {
-  background-color: var(--bg-dark);
-  color: var(--text-white);
+  background-color: var(--bg-main);
+  color: var(--text-primary);
   font-family: 'Inter', sans-serif;
-  /* Background Spot Light dari atas tengah */
-  background-image: radial-gradient(circle at 50% 0%, rgba(217, 70, 239, 0.15) 0%, transparent 60%);
-  background-attachment: fixed;
   min-height: 100vh;
+  background-image:
+    radial-gradient(circle at 80% 10%, rgba(13, 148, 136, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 20% 90%, rgba(99, 102, 241, 0.06) 0%, transparent 50%);
+  background-attachment: fixed;
 }
 
-/* --- TYPOGRAPHY HIDUP --- */
+/* =========================================
+   TYPOGRAPHY
+   ========================================= */
+
 .fw-bolder { font-weight: 900 !important; }
-.text-muted { color: var(--text-grey) !important; }
 
-/* Judul Utama dengan Glow Kuat */
-.brand-title, h1.display-5, .modal-title {
-    color: #fff;
-    text-shadow: var(--glow-text);
+.text-muted {
+  color: var(--text-muted) !important;
 }
 
-/* --- NAVBAR GLASS --- */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+/* =========================================
+   NAVBAR
+   ========================================= */
+
 .navbar {
-  background: rgba(5, 5, 7, 0.8) !important;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 106, 194, 0.2);
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border) !important;
+  box-shadow: var(--shadow-sm);
 }
 
 .navbar-brand .brand-subtitle {
-  background: var(--neon-gradient);
+  background: var(--teal-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 700;
 }
 
-/* --- TOMBOL KEMBALI (NEON PILL) --- */
+.brand-title {
+  color: var(--text-primary);
+}
+
+/* =========================================
+   TOMBOL KEMBALI
+   ========================================= */
+
 #btn-main-back {
-    background: rgba(0,0,0,0.3) !important;
-    border: 1px solid var(--neon-pink) !important;
-    color: #fff !important;
-    box-shadow: 0 0 10px rgba(255, 106, 194, 0.2);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-primary) !important;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s ease;
+  font-weight: 600;
 }
 
 #btn-main-back:hover {
-    background: var(--neon-pink) !important;
-    border-color: var(--neon-pink) !important;
-    box-shadow: 0 0 25px rgba(255, 106, 194, 0.6); /* Glow meledak saat hover */
-    transform: translateY(-2px);
-    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-}
-#btn-main-back i { transition: 0.3s; }
-#btn-main-back:hover i { color: #fff; }
-
-/* --- HERO CARD & MODALS --- */
-.hero-card, .modal-content {
-  background: #0f1014 !important; /* Gelap tapi bukan hitam mati */
-  border: 1px solid rgba(255, 106, 194, 0.15) !important;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
-  border-radius: 24px !important;
-}
-
-/* Lingkaran Ikon di Hero */
-.hero-card .rounded-circle {
-    background: linear-gradient(135deg, rgba(255, 106, 194, 0.1), transparent) !important;
-    border: 1px solid rgba(255, 106, 194, 0.3) !important;
-    box-shadow: 0 0 30px rgba(255, 106, 194, 0.1);
-}
-.hero-card .rounded-circle i { color: var(--neon-pink); filter: drop-shadow(0 0 8px var(--neon-pink)); }
-
-/* --- BUTTONS MENU UTAMA (GRID STYLE) --- */
-.btn-outline-custom {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 106, 194, 0.25);
-  color: #fff;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Hover Effect: Isi Penuh Pink Transparan */
-.btn-outline-custom:hover {
-  background: rgba(255, 106, 194, 0.15);
-  border-color: var(--neon-pink);
-  box-shadow: var(--glow-active);
-  transform: translateY(-3px);
-  color: #fff;
-}
-.btn-outline-custom i { color: var(--neon-pink); transition: 0.3s; }
-.btn-outline-custom:hover i { color: #fff; filter: drop-shadow(0 0 5px #fff); }
-
-/* Tombol Primary (Solid Gradient) */
-.btn-primary-custom, .btn-primary {
-  background: var(--neon-gradient) !important;
-  border: none;
-  color: #fff;
-  font-weight: 700;
-  box-shadow: 0 5px 15px rgba(217, 70, 239, 0.4);
-}
-.btn-primary-custom:hover {
-  filter: brightness(1.2);
-  box-shadow: 0 10px 25px rgba(217, 70, 239, 0.6);
+  background: var(--teal) !important;
+  border-color: var(--teal) !important;
+  color: var(--text-white) !important;
+  box-shadow: var(--shadow-teal);
   transform: translateY(-2px);
 }
 
-/* --- GRID PILIHAN PAKET (MODAL) --- */
-/* Layout Grid Kotak-Kotak */
+#btn-main-back i { transition: 0.25s; }
+
+/* =========================================
+   HERO CARD & MODALS
+   ========================================= */
+
+.hero-card {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow-lg) !important;
+  border-radius: var(--radius-xl) !important;
+}
+
+.hero-card .rounded-circle {
+  width: 100px !important;
+  height: 100px !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50% !important;
+  aspect-ratio: 1 / 1;
+  background: var(--teal-dim) !important;
+  border: 1px solid rgba(13, 148, 136, 0.25) !important;
+  box-shadow: none;
+}
+
+.hero-card .rounded-circle i {
+  font-size: 3rem !important;
+  line-height: 1;
+  color: var(--teal);
+  filter: none;
+}
+
+/* =========================================
+   MODAL
+   ========================================= */
+
+.modal-content {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow-lg) !important;
+  border-radius: var(--radius-xl) !important;
+  color: var(--text-primary) !important;
+}
+
+.modal-header, .modal-footer {
+  background-color: transparent !important;
+  border-color: var(--border) !important;
+}
+
+.modal-title {
+  color: var(--text-primary) !important;
+  text-shadow: none;
+  font-weight: 700;
+}
+
+.modal-body {
+  background-color: var(--bg-card-alt) !important;
+  color: var(--text-primary) !important;
+}
+
+.btn-close {
+  filter: none;
+  opacity: 0.5;
+}
+.btn-close:hover { opacity: 1; }
+
+/* =========================================
+   TOMBOL UTAMA
+   ========================================= */
+
+/* Outline / Grid Button */
+.btn-outline-custom {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-weight: 600;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-outline-custom:hover {
+  background: var(--teal-dim);
+  border-color: var(--teal);
+  box-shadow: var(--shadow-teal);
+  transform: translateY(-2px);
+  color: var(--teal);
+}
+
+.btn-outline-custom i {
+  color: var(--teal);
+  transition: 0.25s;
+}
+
+.btn-outline-custom:hover i { color: var(--teal); }
+
+/* Primary Solid */
+.btn-primary-custom,
+.btn-primary {
+  background: var(--teal-gradient) !important;
+  border: none !important;
+  color: var(--text-white) !important;
+  font-weight: 700;
+  box-shadow: var(--shadow-teal);
+  transition: all 0.25s ease;
+}
+
+.btn-primary-custom:hover,
+.btn-primary:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 8px 20px rgba(13, 148, 136, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Warning / Lupa Button */
+.btn-outline-warning {
+  color: var(--warning) !important;
+  border-color: var(--warning) !important;
+  background: transparent !important;
+  font-weight: 600;
+}
+
+.btn-outline-warning:hover {
+  background: var(--warning-bg) !important;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
+  color: var(--warning) !important;
+}
+
+/* =========================================
+   GRID PILIHAN PAKET (MODAL)
+   ========================================= */
+
 .range-grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); /* Ukuran pas */
-    gap: 12px;
-    padding: 5px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 12px;
+  padding: 5px;
 }
 
 .range-grid-container .form-check { padding: 0; margin: 0; }
 .range-grid-container .form-check-input { position: absolute; opacity: 0; cursor: pointer; }
 
-/* Tampilan Kartu Paket (Belum Dipilih) */
 .range-grid-container .form-check-label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    height: 90px;
-    
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    color: #94a3b8;
-    
-    cursor: pointer;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 90px;
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-/* Hover State */
 .range-grid-container .form-check-label:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 106, 194, 0.5);
+  background: var(--teal-dim);
+  border-color: var(--teal);
+  color: var(--teal);
 }
 
-/* ACTIVE STATE (SAAT DIPILIH) - INI KUNCINYA */
+/* SELECTED */
 .range-grid-container .form-check-input:checked + .form-check-label {
-    /* Background Gradient Halus */
-    background: linear-gradient(145deg, rgba(255, 106, 194, 0.2) 0%, rgba(217, 70, 239, 0.05) 100%);
-    /* Border Pink Menyala */
-    border: 1px solid var(--neon-pink);
-    /* Shadow Keluar (Glow) */
-    box-shadow: 0 0 15px rgba(255, 106, 194, 0.3), inset 0 0 10px rgba(255, 106, 194, 0.1);
-    color: #fff;
-    transform: scale(0.98);
+  background: var(--teal-dim);
+  border: 1.5px solid var(--teal);
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+  color: var(--teal);
+  transform: scale(0.98);
 }
 
-/* Teks Judul Paket (Misal: Bab 1) */
 .range-grid-container .form-check-label strong {
-    font-size: 1rem;
-    color: #fff;
-    margin-bottom: 4px;
-    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: 4px;
 }
-/* Warna Teks Judul saat dipilih */
+
 .range-grid-container .form-check-input:checked + .form-check-label strong {
-    color: var(--neon-pink);
-    text-shadow: 0 0 10px var(--neon-pink);
+  color: var(--teal);
 }
 
-/* --- MODAL HEADER & FOOTER CLEAN --- */
-.modal-header, .modal-footer {
-    border-color: rgba(255,255,255,0.05) !important;
-}
-.btn-close { filter: invert(1) brightness(200%); }
+/* =========================================
+   INPUT FIELDS
+   ========================================= */
 
-/* --- INPUT FIELD --- */
-input[type="text"] {
-  background: rgba(0,0,0,0.3) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  color: #fff !important;
-  font-weight: bold;
-}
-input[type="text"]:focus {
-  background: rgba(0,0,0,0.5) !important;
-  border-color: var(--neon-pink) !important;
-  box-shadow: 0 0 20px rgba(255, 106, 194, 0.3) !important;
+input[type="text"],
+.form-control {
+  background: var(--bg-card) !important;
+  border: 1.5px solid var(--border) !important;
+  color: var(--text-primary) !important;
+  font-weight: 600;
+  border-radius: var(--radius-md) !important;
+  transition: all 0.2s ease;
 }
 
+input[type="text"]:focus,
+.form-control:focus {
+  background: var(--bg-card) !important;
+  border-color: var(--teal) !important;
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15) !important;
+  color: var(--text-primary) !important;
+  outline: none;
+}
 
-/* ========================================= */
-/* --- KOTOBA LIST CARD (DARK NEON) --- */
-/* ========================================= */
+input[type="text"]::placeholder,
+.form-control::placeholder {
+  color: var(--text-muted) !important;
+  font-weight: 400;
+}
+
+/* =========================================
+   KOTOBA CARD (DAFTAR KOSAKATA)
+   ========================================= */
 
 .kotoba-card {
-    background: rgba(255, 255, 255, 0.03); /* Gelap Transparan */
-    border: 1px solid rgba(255, 106, 194, 0.2); /* Border Pink Redup */
-    border-radius: 16px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-    backdrop-filter: blur(5px);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
 }
 
-/* Hover Effect: Kartu menyala saat disentuh */
+.kotoba-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--teal-gradient);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
 .kotoba-card:hover {
-    background: rgba(255, 106, 194, 0.08);
-    border-color: var(--neon-pink);
-    box-shadow: 0 10px 25px rgba(255, 106, 194, 0.15); /* Glow Pink Halus */
-    transform: translateY(-5px);
+  transform: translateY(-4px) scale(1.01);
+  border-color: var(--teal);
+  box-shadow: var(--shadow-md), 0 0 0 2px rgba(13, 148, 136, 0.1);
 }
 
-/* --- Typography dalam Kartu --- */
+.kotoba-card:hover::before {
+  opacity: 1;
+}
 
-/* Badge Bab (Kapsul kecil di atas) */
+/* Badge Bab */
 .badge-neon {
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #94a3b8;
-    font-weight: 500;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 0.7rem;
-    letter-spacing: 0.5px;
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 600;
 }
+
 .kotoba-card:hover .badge-neon {
-    border-color: var(--neon-pink);
-    color: #fff;
-    background: var(--neon-pink);
+  background: var(--teal);
+  color: var(--text-white);
+  border-color: var(--teal);
 }
 
-/* Huruf Kanji Utama */
+/* Huruf Kanji */
 .k-char {
-    font-weight: 800;
-    color: #ffffff;
-    margin: 5px 0;
-    line-height: 1.2;
-    /* Efek Text Shadow (Glow) */
-    text-shadow: 0 0 15px rgba(255, 106, 194, 0.4);
+  color: var(--text-primary);
+  font-weight: 900;
+  margin: 10px 0;
+  text-shadow: none;
+  transition: 0.25s;
 }
 
-/* Cara Baca (Kana) */
+.kotoba-card:hover .k-char {
+  color: var(--teal);
+  transform: scale(1.05);
+}
+
+/* Kana */
 .k-read {
-    font-size: 0.95rem;
-    color: #e2e8f0; /* Putih Gading */
-    font-weight: 600;
-    margin-bottom: 2px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.9rem;
+  opacity: 0.85;
 }
 
 /* Romaji */
 .k-romaji {
-    font-size: 0.9rem;
-    color: var(--neon-pink); /* Pink Neon */
-    font-weight: 700;
-    text-transform: lowercase;
-    margin-bottom: 8px;
+  color: var(--teal);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  text-transform: lowercase;
 }
 
 /* Arti Indonesia */
 .k-mean {
-    font-size: 0.85rem;
-    color: #94a3b8; /* Abu-abu terang */
-    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Garis pemisah tipis */
-    padding-top: 8px;
-    margin-top: 4px;
-    width: 100%;
-    line-height: 1.3;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  padding-top: 8px;
+  margin-top: 5px;
+  width: 100%;
+  line-height: 1.4;
 }
 
-/* Override background modal body agar gelap sempurna */
-#daftarHafalanModal .modal-body {
-    background: #050507 !important; 
-}
-
-/* ========================================= */
-/* --- FIX MODAL DARK (HILANGKAN PUTIH) --- */
-/* ========================================= */
-
-/* Paksa seluruh modal jadi gelap */
-.modal-content {
-    background: #0f1014 !important; /* Warna gelap */
-    border: 1px solid rgba(255, 106, 194, 0.3) !important; /* Border Pink */
-    box-shadow: 0 0 30px rgba(0,0,0,0.8) !important;
-}
-
-/* Hapus background putih di Header & Footer */
-.modal-header, .modal-footer {
-    background-color: transparent !important; /* Transparan */
-    border-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-/* Judul Modal */
-.modal-title {
-    color: #fff !important;
-    text-shadow: 0 0 10px rgba(255, 106, 194, 0.6);
-}
-
-/* Warna body modal */
-.modal-body {
-    background-color: #0a0c12 !important; /* Sedikit lebih gelap dari frame */
-}
-
-
-/* ========================================= */
-/* --- KOTOBA CARD DESIGN (PREMIUM NEON) --- */
-/* ========================================= */
-
-.kotoba-card {
-    /* Gradasi Halus dari atas ke bawah */
-    background: linear-gradient(180deg, rgba(30, 32, 40, 0.8) 0%, rgba(15, 17, 22, 0.95) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.08); /* Border abu sangat tipis */
-    border-radius: 20px;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-}
-
-/* Efek Sorot Cahaya di atas kartu (Glass Reflection) */
-.kotoba-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 106, 194, 0.5), transparent);
-    opacity: 0.5;
-}
-
-/* HOVER EFFECT: Kartu Terangkat & Menyala */
-.kotoba-card:hover {
-    transform: translateY(-5px) scale(1.02);
-    border-color: var(--neon-pink); /* Border jadi pink */
-    box-shadow: 0 10px 30px rgba(255, 106, 194, 0.15); /* Glow Pink di belakang */
-}
-.kotoba-card:hover::before {
-    opacity: 1;
-    background: linear-gradient(90deg, transparent, var(--neon-pink), transparent);
-}
-
-/* --- TYPOGRAPHY KARTU --- */
-
-/* Badge Bab (Kapsul) */
-.badge-neon {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #94a3b8;
-    font-size: 0.7rem;
-    padding: 4px 12px;
-    border-radius: 50px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-weight: 600;
-}
-.kotoba-card:hover .badge-neon {
-    background: var(--neon-pink);
-    color: #fff;
-    border-color: var(--neon-pink);
-    box-shadow: 0 0 10px var(--neon-pink);
-}
-
-/* Huruf KANJI (Hero) */
-.k-char {
-    color: #fff;
-    font-weight: 900;
-    margin: 10px 0;
-    /* Glow Putih Bersih */
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-    transition: 0.3s;
-}
-.kotoba-card:hover .k-char {
-    /* Saat hover, glow jadi pink */
-    text-shadow: 0 0 20px var(--neon-pink);
-    transform: scale(1.05);
-}
-
-/* Kana (Cara Baca Kecil) */
-.k-read {
-    color: #cbd5e1;
-    font-weight: 500;
-    font-size: 0.9rem;
-    opacity: 0.8;
-}
-
-/* Romaji (Pink Accent) */
-.k-romaji {
-    color: var(--neon-pink);
-    font-weight: 800;
-    font-size: 1rem;
-    letter-spacing: 0.5px;
-    margin-bottom: 8px;
-    text-transform: lowercase;
-}
-
-/* Arti Indonesia */
-.k-mean {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    color: #94a3b8;
-    font-size: 0.85rem;
-    padding-top: 8px;
-    margin-top: 5px;
-    width: 100%;
-    line-height: 1.4;
-}
 .kotoba-card:hover .k-mean {
-    border-color: rgba(255, 106, 194, 0.3);
-    color: #e2e8f0;
+  border-color: rgba(13, 148, 136, 0.25);
+  color: var(--text-secondary);
 }
 
+/* =========================================
+   MODAL DAFTAR HAFALAN
+   ========================================= */
 
-/* ========================================= */
-/* --- MEMORY MODE (TULIS ARTI) STYLES --- */
-/* ========================================= */
+#daftarHafalanModal .modal-body {
+  background: var(--bg-card-alt) !important;
+}
 
-/* Kartu Utama */
+/* =========================================
+   MEMORY MODE (TULIS ARTI)
+   ========================================= */
+
 .mem-card {
-    background: #0f1014;
-    border: 1px solid rgba(255, 106, 194, 0.15);
-    border-radius: 24px;
-    box-shadow: 0 0 40px rgba(0,0,0,0.6);
-    position: relative;
-    overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
 }
 
-/* Label Instruksi (Terjemahkan ke...) */
 .mem-label {
-    color: #94a3b8;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
 }
 
-/* Input Field Custom */
 .mem-input {
-    background: rgba(255, 255, 255, 0.05) !important;
-    border: 2px solid rgba(255, 255, 255, 0.1) !important;
-    color: #fff !important;
-    font-size: 1.5rem !important; /* Font Besar */
-    font-weight: 700 !important;
-    padding: 15px 50px 15px 20px !important; /* Padding kanan besar untuk ikon mic */
-    border-radius: 16px !important;
-    transition: all 0.3s ease;
+  background: var(--bg-card-alt) !important;
+  border: 2px solid var(--border) !important;
+  color: var(--text-primary) !important;
+  font-size: 1.4rem !important;
+  font-weight: 700 !important;
+  padding: 15px 50px 15px 20px !important;
+  border-radius: var(--radius-lg) !important;
+  transition: all 0.25s ease;
 }
 
-/* Saat Input Aktif/Fokus */
 .mem-input:focus {
-    background: rgba(0, 0, 0, 0.4) !important;
-    border-color: var(--neon-pink) !important;
-    box-shadow: 0 0 25px rgba(255, 106, 194, 0.25) !important;
-    transform: scale(1.01);
+  background: var(--bg-card) !important;
+  border-color: var(--teal) !important;
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15) !important;
+  transform: scale(1.005);
 }
 
-/* Placeholder Input */
 .mem-input::placeholder {
-    color: rgba(255, 255, 255, 0.2) !important;
-    font-weight: 500;
-    font-size: 1.1rem;
+  color: var(--text-muted) !important;
+  font-weight: 400;
+  font-size: 1rem;
 }
 
 /* Ikon Mic */
 .mic-icon-wrapper {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #94a3b8;
-    font-size: 1.4rem;
-    cursor: pointer;
-    transition: all 0.2s;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-}
-.mic-icon-wrapper:hover {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.1);
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
 }
 
-/* Animasi Mic saat Merekam */
+.mic-icon-wrapper:hover {
+  color: var(--teal);
+  background: var(--teal-dim);
+}
+
 .mic-icon-wrapper.recording {
-    color: #ef4444; /* Merah */
-    animation: pulseMic 1.5s infinite;
+  color: var(--error);
+  animation: pulseMic 1.5s infinite;
 }
 
 @keyframes pulseMic {
-    0% { transform: translateY(-50%) scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
-    70% { transform: translateY(-50%) scale(1.1); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
-    100% { transform: translateY(-50%) scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+  0%   { transform: translateY(-50%) scale(1);   box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
+  70%  { transform: translateY(-50%) scale(1.1); box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+  100% { transform: translateY(-50%) scale(1);   box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
 }
 
-/* --- Responsive Adjustments --- */
-@media (max-width: 576px) {
-    /* Di HP, font soal sedikit dikecilkan agar tidak nabrak */
-    .q-text-responsive {
-        font-size: 2.5rem !important; 
-    }
-    
-    /* Tombol lebih compact */
-    .mem-card {
-        padding: 1.5rem !important; /* Padding kartu dikurangi */
-    }
-    
-    /* Input field font size di HP */
-    .mem-input {
-        font-size: 1.2rem !important;
-    }
-}
-
-/* ========================================= */
-/* --- FIX WARNA TEKS SOAL (JANGAN BIRU) --- */
-/* ========================================= */
+/* =========================================
+   QUESTION TEXT
+   ========================================= */
 
 .q-text-responsive {
-    color: #ffffff !important; /* Ubah jadi Putih Bersih */
-    text-shadow: 0 0 20px rgba(244, 114, 182, 0.6) !important; /* Efek Cahaya Pink */
-    font-weight: 800;
-    line-height: 1.2;
-    text-align: center;
-    width: 100%;
-    
-    /* Responsive Font Size (Agar aman di HP) */
-    font-size: clamp(2rem, 8vw, 4.5rem) !important; 
-    word-break: break-word; /* Mencegah teks keluar layar */
+  color: var(--text-primary) !important;
+  text-shadow: none !important;
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: center;
+  width: 100%;
+  font-size: clamp(2rem, 8vw, 4.5rem) !important;
+  word-break: break-word;
 }
 
-/* Khusus layar HP kecil */
-@media (max-width: 576px) {
-    .q-text-responsive {
-        font-size: clamp(2.5rem, 10vw, 3.5rem) !important;
-        margin-bottom: 10px;
-    }
-    
-    /* Penyesuaian padding kartu di HP */
-    .mem-card {
-        padding: 1rem !important;
-    }
-    
-    /* Penyesuaian tinggi area soal agar tidak terlalu kosong */
-    .flex-grow-1.d-flex {
-        min-height: 150px;
-    }
+/* =========================================
+   QUIZ CARD (TEBAK ARTI / HIRAGANA)
+   ========================================= */
+
+.quiz-card {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  color: var(--text-primary) !important;
+  position: relative;
+  overflow: hidden;
 }
 
-/* ========================================= */
-/* --- PERBAIKAN TOMBOL "LUPA" & NEXT --- */
-/* ========================================= */
-
-/* Agar tombol "Lupa" outline-nya juga Pink/Kuning neon, bukan biru/standar */
-.btn-outline-warning {
-    color: #fcd34d !important;
-    border-color: #fcd34d !important;
-    background: transparent;
-}
-.btn-outline-warning:hover {
-    background: rgba(252, 211, 77, 0.2) !important;
-    box-shadow: 0 0 15px rgba(252, 211, 77, 0.4);
-    color: #fff !important;
+/* Pilihan Ganda */
+.choice-option {
+  background: var(--bg-card-alt);
+  border: 1.5px solid var(--border);
+  color: var(--text-secondary);
+  border-radius: var(--radius-lg);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  min-height: 60px;
+  animation: fadeInChoice 0.4s ease backwards;
 }
 
-/* Tombol Berikutnya (Pink) */
-.btn-primary-custom {
-    background: linear-gradient(135deg, #db2777 0%, #f472b6 100%) !important;
-    border: none !important;
-    box-shadow: 0 4px 15px rgba(244, 114, 182, 0.4);
+.choice-option:hover {
+  background: var(--teal-dim);
+  border-color: var(--teal);
+  color: var(--teal);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-teal);
 }
 
-/* ========================================= */
-/* --- RESULT PAGE (DARK NEON STYLE) --- */
-/* ========================================= */
+.choice-selected {
+  background: var(--teal-gradient) !important;
+  border-color: transparent !important;
+  color: var(--text-white) !important;
+  font-weight: 800 !important;
+  box-shadow: var(--shadow-teal) !important;
+  transform: scale(1.02);
+}
 
-/* Kartu Skor Utama */
+/* Stagger animation */
+.choice-option:nth-child(1) { animation-delay: 0.05s; }
+.choice-option:nth-child(2) { animation-delay: 0.10s; }
+.choice-option:nth-child(3) { animation-delay: 0.15s; }
+.choice-option:nth-child(4) { animation-delay: 0.20s; }
+
+@keyframes fadeInChoice {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
+   RESULT PAGE
+   ========================================= */
+
 .res-card {
-    background: #0f1014;
-    border: 1px solid rgba(255, 106, 194, 0.2);
-    border-radius: 24px;
-    box-shadow: 0 0 50px rgba(0,0,0,0.5);
-    position: relative;
-    overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
 }
 
-/* Background gradient halus di belakang skor */
 .res-card::before {
-    content: '';
-    position: absolute;
-    top: -50%; left: -50%; width: 200%; height: 200%;
-    background: radial-gradient(circle, rgba(255, 106, 194, 0.05) 0%, transparent 60%);
-    pointer-events: none;
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--teal-gradient);
 }
 
-/* --- WARNA SKOR NEON --- */
 .text-neon-green {
-    color: #4ade80 !important;
-    text-shadow: 0 0 25px rgba(74, 222, 128, 0.4);
+  color: var(--success) !important;
+  text-shadow: none;
 }
+
 .text-neon-red {
-    color: #f87171 !important;
-    text-shadow: 0 0 25px rgba(248, 113, 113, 0.4);
+  color: var(--error) !important;
+  text-shadow: none;
+}
+
+.text-neon-pink {
+  color: var(--teal) !important;
+  text-shadow: none;
 }
 
 .tracking-wider { letter-spacing: 2px; }
 
-/* --- DETAIL JAWABAN (LIST ITEM) --- */
+/* Detail Item Jawaban */
 .res-item {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    padding: 16px;
-    transition: transform 0.2s;
+  background: var(--bg-card-alt) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-md);
+  padding: 16px;
+  color: var(--text-primary) !important;
+  transition: transform 0.2s;
 }
 
-/* Kanji Besar di Detail */
+.res-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
 .res-kanji {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #fff;
-    line-height: 1.1;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.1;
 }
 
-/* --- KOTAK JAWABAN (BENAR/SALAH) --- */
 .res-box {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 14px;
-    border-radius: 8px;
-    font-size: 0.95rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
 }
 
-/* Style Kotak Jawaban SALAH */
 .res-wrong {
-    background: rgba(239, 68, 68, 0.1); /* Merah Transparan */
-    border: 1px solid rgba(239, 68, 68, 0.3);
-    color: #fca5a5;
+  background: var(--error-bg) !important;
+  border: 1px solid var(--error-border) !important;
+  color: #B91C1C !important;
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  justify-content: space-between;
 }
 
-/* Style Kotak Jawaban BENAR */
 .res-correct {
-    background: rgba(34, 197, 94, 0.1); /* Hijau Transparan */
-    border: 1px solid rgba(34, 197, 94, 0.3);
-    color: #86efac;
+  background: var(--success-bg) !important;
+  border: 1px solid var(--success-border) !important;
+  color: #15803D !important;
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  justify-content: space-between;
 }
 
-/* Label Kecil (KAMU / KUNCI) */
 .res-label {
-    font-size: 0.7rem;
-    font-weight: 800;
-    opacity: 0.7;
-    letter-spacing: 0.5px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  opacity: 0.65;
+  letter-spacing: 0.5px;
 }
 
-.res-val {
-    font-weight: 700;
-    text-align: right;
-}
+.res-val { font-weight: 700; text-align: right; }
 
-/* ========================================= */
-/* --- QUIZ MODE STYLES (TEBAK ARTI) --- */
-/* ========================================= */
+/* =========================================
+   PROGRESS CARD
+   ========================================= */
 
-/* Kartu Utama Quiz */
-.quiz-card {
-    background: #0f1014; /* Hitam Gelap */
-    border: 1px solid rgba(255, 106, 194, 0.2); /* Border Pink Tipis */
-    border-radius: 24px;
-    box-shadow: 0 0 50px rgba(0,0,0,0.6);
-    position: relative;
-    overflow: hidden;
-}
-
-/* --- TOMBOL PILIHAN GANDA --- */
-.choice-option {
-    background: rgba(255, 255, 255, 0.03); /* Transparan Gelap */
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Border Abu Tipis */
-    color: #cbd5e1; /* Teks Abu Terang */
-    border-radius: 16px;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-    min-height: 60px; /* Tinggi minimal agar mudah diklik di HP */
-}
-
-/* Efek Hover (Saat kursor diarahkan) */
-.choice-option:hover {
-    background: rgba(255, 106, 194, 0.1); /* Isi Pink Transparan */
-    border-color: var(--neon-pink); /* Border Pink */
-    color: #fff; /* Teks Putih */
-    transform: translateY(-2px); /* Sedikit naik */
-    box-shadow: 0 4px 15px rgba(255, 106, 194, 0.2); /* Glow Pink */
-}
-
-/* Efek Selected (Saat tombol dipilih) */
-.choice-selected {
-    background: linear-gradient(135deg, #db2777 0%, #f472b6 100%) !important; /* Gradient Pink Solid */
-    border-color: transparent !important;
-    color: #fff !important;
-    font-weight: 800 !important;
-    box-shadow: 0 0 20px rgba(244, 114, 182, 0.5) !important;
-    transform: scale(1.02);
-}
-
-/* Animasi Masuk Tombol (Opsional, biar smooth) */
-.choice-option {
-    animation: fadeInChoice 0.5s ease backwards;
-}
-.choice-option:nth-child(1) { animation-delay: 0.1s; }
-.choice-option:nth-child(2) { animation-delay: 0.2s; }
-.choice-option:nth-child(3) { animation-delay: 0.3s; }
-.choice-option:nth-child(4) { animation-delay: 0.4s; }
-
-@keyframes fadeInChoice {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-
-/* ========================================= */
-/* --- QUIZ MODE STYLES (TEBAK ARTI) --- */
-/* ========================================= */
-
-/* Kartu Utama Quiz (Ganti background putih jadi gelap) */
-.quiz-card {
-    background: #0f1014; /* Hitam Gelap */
-    border: 1px solid rgba(255, 106, 194, 0.2); /* Border Pink Tipis */
-    border-radius: 24px;
-    box-shadow: 0 0 50px rgba(0,0,0,0.6);
-    position: relative;
-    overflow: hidden;
-}
-
-/* --- TOMBOL PILIHAN GANDA --- */
-.choice-option {
-    background: rgba(255, 255, 255, 0.05); /* Transparan Gelap */
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Border Abu Tipis */
-    color: #cbd5e1; /* Teks Abu Terang */
-    border-radius: 16px;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-    min-height: 60px; /* Tinggi minimal agar mudah diklik di HP */
-}
-
-/* Efek Hover (Saat kursor diarahkan) */
-.choice-option:hover {
-    background: rgba(255, 106, 194, 0.1); /* Isi Pink Transparan */
-    border-color: var(--neon-pink); /* Border Pink */
-    color: #fff; /* Teks Putih */
-    transform: translateY(-2px); /* Sedikit naik */
-    box-shadow: 0 4px 15px rgba(255, 106, 194, 0.2); /* Glow Pink */
-}
-
-/* Efek Selected (Saat tombol dipilih) */
-.choice-selected {
-    background: linear-gradient(135deg, #db2777 0%, #f472b6 100%) !important; /* Gradient Pink Solid */
-    border-color: transparent !important;
-    color: #fff !important;
-    font-weight: 800 !important;
-    box-shadow: 0 0 20px rgba(244, 114, 182, 0.5) !important;
-    transform: scale(1.02);
-}
-
-/* Animasi Masuk Tombol (Biar smooth munculnya) */
-.choice-option {
-    animation: fadeInChoice 0.5s ease backwards;
-}
-/* Stagger animation: tombol muncul berurutan */
-.choice-option:nth-child(1) { animation-delay: 0.05s; }
-.choice-option:nth-child(2) { animation-delay: 0.1s; }
-.choice-option:nth-child(3) { animation-delay: 0.15s; }
-.choice-option:nth-child(4) { animation-delay: 0.2s; }
-
-@keyframes fadeInChoice {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-
-.text-neon-pink {
-    color: var(--neon-pink) !important;
-    text-shadow: 0 0 10px rgba(244, 114, 182, 0.4);
-}
-
-
-
-/* --- FIX LAYAR PUTIH PADA QUIZ --- */
-.quiz-card {
-    background-color: #0f1014 !important; /* Paksa Hitam */
-    border: 1px solid rgba(255, 106, 194, 0.2) !important;
-    border-radius: 24px;
-    box-shadow: 0 0 50px rgba(0,0,0,0.5);
-    color: #fff !important;
-}
-
-/* --- FIX DETAIL JAWABAN (Supaya tidak blok warna terang) --- */
-.res-item {
-    background: rgba(255, 255, 255, 0.03) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    border-radius: 12px;
-    padding: 15px;
-    color: #fff;
-}
-
-/* Kotak Salah (Merah Transparan) */
-.res-wrong {
-    background: rgba(239, 68, 68, 0.15) !important;
-    border: 1px solid rgba(239, 68, 68, 0.4) !important;
-    color: #fca5a5 !important;
-    padding: 10px; border-radius: 8px;
-    display: flex; justify-content: space-between;
-}
-
-/* Kotak Benar (Hijau Transparan) */
-.res-correct {
-    background: rgba(34, 197, 94, 0.15) !important;
-    border: 1px solid rgba(34, 197, 94, 0.4) !important;
-    color: #86efac !important;
-    padding: 10px; border-radius: 8px;
-    display: flex; justify-content: space-between;
-}
-
-/* Hapus background default bootstrap di input */
-.form-control {
-    background-color: rgba(255,255,255,0.05) !important;
-    color: #fff !important;
-    border-color: rgba(255,255,255,0.1) !important;
-}
-
-/* Judul Soal yang Besar */
-.q-text-responsive {
-    color: #ffffff !important;
-    text-shadow: 0 0 20px rgba(244, 114, 182, 0.7) !important;
-}
-
-/* HAPUS TULISAN KANJI DI ATAS ICON */
-.hero-bg-kanji {
-    display: none !important;
-}
-
-
-/* ========================================= */
-/* --- WARNING MODAL (STOP SESSION STYLE) --- */
-/* ========================================= */
-
-/* 1. KOTAK MODAL (Merah Gelap) */
-#stopQuizModal .modal-content {
-    background-color: #0f1014 !important; /* Hitam background */
-    border: 1px solid rgba(239, 68, 68, 0.5) !important; /* Border Merah */
-    box-shadow: 0 0 50px rgba(239, 68, 68, 0.2) !important; /* Glow Merah di belakang */
-}
-
-/* 2. IKON TANDA SERU (Animasi Denyut Merah) */
-#stopQuizModal .text-warning {
-    color: #ef4444 !important; /* Ganti Kuning jadi Merah Neon */
-    text-shadow: 0 0 25px rgba(239, 68, 68, 0.8) !important;
-}
-
-#stopQuizModal .bi-exclamation-circle-fill {
-    animation: pulseRed 2s infinite ease-in-out;
-    display: inline-block;
-}
-
-@keyframes pulseRed {
-    0% { transform: scale(1); text-shadow: 0 0 20px rgba(239, 68, 68, 0.6); }
-    50% { transform: scale(1.1); text-shadow: 0 0 40px rgba(239, 68, 68, 1); }
-    100% { transform: scale(1); text-shadow: 0 0 20px rgba(239, 68, 68, 0.6); }
-}
-
-/* 3. JUDUL & TEKS */
-#stopQuizModal h5 {
-    color: #ffffff !important;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-    font-size: 1.5rem;
-    margin-top: 10px;
-}
-
-#stopQuizModal p.small {
-    color: #cbd5e1 !important; /* Abu terang */
-    font-size: 0.95rem !important;
-}
-
-/* 4. TOMBOL "YA, SELESAI" (Gradient Merah) */
-#stopQuizModal .btn-danger {
-    background: linear-gradient(135deg, #b91c1c 0%, #ef4444 100%) !important;
-    border: none !important;
-    box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
-    font-weight: 800;
-    padding: 12px;
-    letter-spacing: 0.5px;
-    transition: all 0.3s;
-}
-
-#stopQuizModal .btn-danger:hover {
-    box-shadow: 0 0 30px rgba(239, 68, 68, 0.8); /* Glow lebih terang saat hover */
-    transform: translateY(-2px);
-}
-
-/* 5. TOMBOL "BATAL" (Outline Putih) */
-#stopQuizModal .btn-light {
-    background: transparent !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    color: #fff !important;
-    padding: 12px;
-    font-weight: 600;
-}
-
-#stopQuizModal .btn-light:hover {
-    background: rgba(255, 255, 255, 0.1) !important;
-    border-color: #ffffff !important;
-}
-
-
-
-/* ========================================= */
-/* --- FIX IKON HERO (BIAR BULAT SEMPURNA) --- */
-/* ========================================= */
-
-.hero-card .rounded-circle {
-    width: 100px !important;   /* Lebar tetap */
-    height: 100px !important;  /* Tinggi tetap (sama dengan lebar) */
-    padding: 0 !important;     /* Hapus padding bawaan yang bikin penyok */
-    
-    /* Pastikan ikon di tengah */
-    display: inline-flex !important; 
-    align-items: center;
-    justify-content: center;
-    
-    /* Kunci bentuk bulat */
-    border-radius: 50% !important;
-    aspect-ratio: 1 / 1; 
-}
-
-/* Pastikan ikon di dalamnya ukurannya pas */
-.hero-card .rounded-circle i {
-    font-size: 3rem !important; /* Sesuaikan ukuran ikon */
-    line-height: 1;
-}
-
-
-/* 1. Ubah Background Kartu Progress jadi Hitam */
 .prog-card {
-    background-color: #181a20 !important; /* Warna Kartu Gelap */
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    color: #ffffff !important; /* Teks jadi putih */
-    box-shadow: 0 4px 6px rgba(0,0,0,0.3) !important;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-primary) !important;
+  box-shadow: var(--shadow-sm) !important;
+  border-radius: var(--radius-md) !important;
 }
 
-/* 2. Ubah Judul "Bab X" yang tadinya hitam jadi putih */
 .prog-card .text-dark {
-    color: #ffffff !important;
+  color: var(--text-primary) !important;
 }
 
-/* 3. Ubah Background Batang Progress (Track) jadi gelap transparan */
 .prog-track {
-    background-color: rgba(255, 255, 255, 0.1) !important;
+  background-color: var(--bg-main) !important;
+  border-radius: var(--radius-pill) !important;
 }
 
-/* 4. Ubah Scrollbar Modal biar tidak putih */
 #progressModal .modal-body {
-    background-color: #0f1014 !important;
+  background-color: var(--bg-card-alt) !important;
 }
 
-/* 5. Khusus Kartu yang Sudah Selesai (Bab Done) */
 .bab-done {
-    background-color: rgba(25, 135, 84, 0.15) !important; /* Hijau Transparan Gelap */
-    border: 1px solid #198754 !important;
+  background: rgba(13, 148, 136, 0.08) !important;
+  border: 1.5px solid var(--teal) !important;
 }
 
-/* 6. Pastikan Label Indikator terlihat jelas */
 .prog-label {
-    color: #adb5bd !important; /* Abu terang */
+  color: var(--text-muted) !important;
 }
 
-/* Style untuk Card Bab di Menu Utama */
+/* =========================================
+   BAB SELECTOR CARD (MENU PILIH BAB)
+   ========================================= */
+
 .bab-selector-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 15px;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-align: center;
-    color: #fff;
-    min-height: 80px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  color: var(--text-primary);
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
 }
 
 .bab-selector-card:hover {
-    background: rgba(255, 255, 255, 0.08);
+  background: var(--teal-dim);
+  border-color: var(--teal);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-teal);
 }
 
-/* Kalo ada Part yang dipilih di dalam Bab ini */
 .bab-selector-card.has-selection {
-    background: rgba(244, 114, 182, 0.15) !important; /* Pink Transparan */
-    border: 1px solid #f472b6 !important; /* Border Pink */
-    box-shadow: 0 0 15px rgba(244, 114, 182, 0.2);
+  background: var(--teal-dim) !important;
+  border: 1.5px solid var(--teal) !important;
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15) !important;
 }
 
 .bab-selector-card.has-selection strong {
-    color: #f472b6 !important;
+  color: var(--teal) !important;
 }
 
-/* Checkbox di dalam Modal Part */
+/* Part Option di Modal */
 .part-option {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 12px;
-    border-radius: 8px;
-    color: #fff;
-    cursor: pointer;
-    transition: 0.2s;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border);
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: 0.2s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .part-option:hover {
-    background: rgba(255, 255, 255, 0.1);
+  background: var(--teal-dim);
+  border-color: var(--teal);
 }
 
-/* Saat checkbox part dicentang */
 .form-check-input:checked + .part-option-label {
-    color: #f472b6;
-    font-weight: bold;
+  color: var(--teal);
+  font-weight: 700;
+}
+
+/* =========================================
+   STOP QUIZ MODAL (WARNING)
+   ========================================= */
+
+#stopQuizModal .modal-content {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--error-border) !important;
+  box-shadow: 0 10px 30px rgba(239, 68, 68, 0.1) !important;
+}
+
+#stopQuizModal .text-warning {
+  color: var(--error) !important;
+  text-shadow: none !important;
+}
+
+#stopQuizModal .bi-exclamation-circle-fill {
+  animation: pulseRed 2s infinite ease-in-out;
+  display: inline-block;
+}
+
+@keyframes pulseRed {
+  0%   { transform: scale(1);   filter: drop-shadow(0 0 4px rgba(239, 68, 68, 0.4)); }
+  50%  { transform: scale(1.1); filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.8)); }
+  100% { transform: scale(1);   filter: drop-shadow(0 0 4px rgba(239, 68, 68, 0.4)); }
+}
+
+#stopQuizModal h5 {
+  color: var(--text-primary) !important;
+  text-shadow: none;
+  font-size: 1.4rem;
+  margin-top: 10px;
+}
+
+#stopQuizModal p.small {
+  color: var(--text-secondary) !important;
+  font-size: 0.95rem !important;
+}
+
+#stopQuizModal .btn-danger {
+  background: linear-gradient(135deg, #B91C1C 0%, #EF4444 100%) !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+  font-weight: 700;
+  padding: 12px;
+  transition: all 0.25s;
+}
+
+#stopQuizModal .btn-danger:hover {
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.5);
+  transform: translateY(-2px);
+}
+
+#stopQuizModal .btn-light {
+  background: var(--bg-card-alt) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-primary) !important;
+  padding: 12px;
+  font-weight: 600;
+}
+
+#stopQuizModal .btn-light:hover {
+  background: var(--bg-main) !important;
+  border-color: var(--text-secondary) !important;
+}
+
+/* =========================================
+   HERO BG KANJI (HIDDEN)
+   ========================================= */
+
+.hero-bg-kanji {
+  display: none !important;
+}
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 576px) {
+  .q-text-responsive {
+    font-size: clamp(2rem, 10vw, 3.5rem) !important;
+    margin-bottom: 10px;
+  }
+
+  .mem-card {
+    padding: 1.25rem !important;
+  }
+
+  .mem-input {
+    font-size: 1.2rem !important;
+  }
+
+  .flex-grow-1.d-flex {
+    min-height: 150px;
+  }
 }
