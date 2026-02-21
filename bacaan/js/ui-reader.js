@@ -109,6 +109,7 @@ function renderReaderView(story) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     toggleHeaderButtons(true);
+    markAsRead(story.id);
     handleScrollTopButton();
 }
 

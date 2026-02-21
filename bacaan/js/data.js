@@ -33,7 +33,8 @@ function fetchAllData() {
             }
         });
 
-        combinedStories.sort((a, b) => a.id - b.id);
+        // Urutkan s1 ke s60 (terkecil ke terbesar)
+        combinedStories.sort((a, b) => parseInt(a.id.replace(/[^0-9]/g, "")) - parseInt(b.id.replace(/[^0-9]/g, "")));
         filteredStories = combinedStories;
         
         setupCategories();
@@ -57,7 +58,8 @@ function applyFilters() {
 
     if (currentSearchQuery.trim() !== "") {
         result = result.filter(story => 
-            story.title.toLowerCase().includes(currentSearchQuery)
+            story.title.toLowerCase().includes(currentSearchQuery) ||
+            story.id.toLowerCase() === currentSearchQuery.trim()
         );
     }
 
