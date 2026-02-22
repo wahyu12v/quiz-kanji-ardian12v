@@ -717,3 +717,31 @@ rt {
   .filter-bar { flex-direction: column; align-items: stretch; }
   .btn-filter-category { justify-content: center; }
 }
+/* ─── TOMBOL KUIS DI FLOATING DOCK ────── */
+#icon-quiz {
+  width: 52px !important;
+  height: 52px !important;
+  border-radius: 15px !important;
+  background: #F1F5F9 !important;
+  color: #94A3B8 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1.35rem !important;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease !important;
+  border: 1.5px solid #E2E8F0 !important;
+  box-shadow: none !important;
+}
+
+#floating-dock button:hover #icon-quiz {
+  background: #CCFBF1 !important;
+  color: #0D9488 !important;
+  border-color: #5EEAD4 !important;
+}
+
+#icon-quiz.dock-active {
+  background: #0D9488 !important;
+  color: #ffffff !important;
+  border-color: #0D9488 !important;
+  box-shadow: 0 4px 14px rgba(13,148,136,0.35) !important;
+}

@@ -63,6 +63,10 @@ function mulaiAplikasi() {
     if (btnFurigana) btnFurigana.addEventListener("click", toggleFurigana);
 
     window.addEventListener("scroll", handleScrollTopButton);
+
+    const btnQuiz = document.getElementById("btn-quiz");
+    if (btnQuiz) btnQuiz.addEventListener("click", openQuiz);
+
     
     // Listener Modal
     const btnShort = document.getElementById("btn-choice-short");

@@ -5,6 +5,7 @@ const scriptsToLoad = [
     'js/data.js',
     'js/ui-list.js',
     'js/ui-reader.js',
+    'js/ui-quiz.js',
     'js/init.js' 
 ];
 
