@@ -3,90 +3,342 @@
     "id": "s1",
     "title": "N4の勉強を始める (Mulai Belajar N4)",
     "category": "Persiapan Ujian",
-    "translation": "先月、日本語能力試験のN5に合格しました。とても嬉しかったです。次はN4を受けたいと思っています。N4は少し難しいですが、頑張ります。毎日少しずつ勉強すれば、きっと合格できます。\n\nN4の勉強は毎日続けることが大切です。毎朝単語を10個覚えます。夜は文法の練習をします。週末は聴解の練習もします。少しずつ上手になっていると感じています。\n\n来年の夏に試験を受けるつもりです。合格したら、日本に行きたいです。日本語が上手になれば、日本人の友達と話せます。夢のために頑張ります！",
-    "template": "[[先月|せんげつ]]、[[日本語能力試験|にほんごのうりょくしけん]]の[[N5|エヌご]]に[[合格|ごうかく]]しました。とても[[嬉|うれ]]しかったです。[[次|つぎ]]は[[N4|エヌよん]]を[[受|う]]けたいと[[思|おも]]っています。[[N4|エヌよん]]は[[少|すこ]]し[[難|むずか]]しいですが、[[頑張|がんば]]ります。[[毎日|まいにち]][[少|すこ]]しずつ[[勉強|べんきょう]]すれば、きっと[[合格|ごうかく]]できます。\n\n[[N4|エヌよん]]の[[勉強|べんきょう]]は[[毎日|まいにち]][[続|つづ]]けることが[[大切|たいせつ]]です。[[毎朝|まいあさ]][[単語|たんご]]を10[[個|こ]][[覚|おぼ]]えます。[[夜|よる]]は[[文法|ぶんぽう]]の[[練習|れんしゅう]]をします。[[週末|しゅうまつ]]は[[聴解|ちょうかい]]の[[練習|れんしゅう]]もします。[[少|すこ]]しずつ[[上手|じょうず]]になっていると[[感|かん]]じています。\n\n[[来年|らいねん]]の[[夏|なつ]]に[[試験|しけん]]を[[受|う]]けるつもりです。[[合格|ごうかく]]したら、[[日本|にほん]]に[[行|い]]きたいです。[[日本語|にほんご]]が[[上手|じょうず]]になれば、[[日本人|にほんじん]]の[[友達|ともだち]]と[[話|はな]]せます。[[夢|ゆめ]]のために[[頑張|がんば]]ります！",
+    "translation": "Bulan lalu, saya lulus ujian kemampuan bahasa Jepang N5. Saya sangat senang. Selanjutnya, saya ingin mengikuti ujian N4. Ketika melihat hasilnya, saya tidak percaya dan membaca ulang berkali-kali.\n\nBelajar N4 memerlukan konsistensi setiap hari. Setiap pagi saya menghafal 10 kosakata. Di malam hari saya berlatih tata bahasa. Saya juga berlatih tata bahasa menggunakan buku latihan khusus N4.\n\nSaya berencana mengikuti ujian di musim panas tahun depan. Kalau lulus, saya ingin pergi ke Jepang. Demi impian, akan terus berusaha! Saya percaya semua usaha akan membuahkan hasil yang baik.",
+    "template": "[[私|わたし]]は [[先月|せんげつ]]、[[日本語能力試験|にほんごのうりょくしけん]]の [[N5|エヌご]]に [[合格|ごうかく]]しました。とても [[嬉|うれ]]しかったです。[[次|つぎ]]は [[N4|エヌよん]]を [[受|う]]けたいと [[思|おも]]っています。\n\n[[N4|エヌよん]]の [[勉強|べんきょう]]は [[毎日|まいにち]] [[続|つづ]]けることが [[大切|たいせつ]]です。[[毎朝|まいあさ]] [[単語|たんご]]を 10[[個|こ]] [[覚|おぼ]]えます。[[夜|よる]]は [[文法|ぶんぽう]]の [[練習|れんしゅう]]をします。\n\n[[来年|らいねん]]の [[夏|なつ]]に [[試験|しけん]]を [[受|う]]けるつもりです。[[合格|ごうかく]]したら、[[日本|にほん]]に [[行|い]]きたいです。[[夢|ゆめ]]のために [[頑張|がんば]]ります！",
     "icon": "fas fa-graduation-cap",
     "color": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
   },
   {
     "id": "s2",
-    "title": "日本へ行く夢 (Mimpi Pergi ke Jepang)",
+    "title": "日本へ行く夢 (Impian Pergi ke Jepang)",
     "category": "Impian ke Jepang",
-    "translation": "私の夢は日本に行くことです。日本はとてもきれいな国だと思います。アニメや映画で日本の景色をよく見ます。いつか本物の富士山を見たいです。そのために今、日本語を一生懸命勉強しています。\n\n日本に行ったら、東京と京都に行きたいです。東京では秋葉原や渋谷を歩きたいです。京都では古いお寺や神社を見たいです。日本の食べ物も楽しみにしています。本物のラーメンやすしを食べたいです。\n\n日本語がもっと上手になったら、日本人と話せます。お店で一人で買い物もできます。N4に合格したら、旅行の計画を立てます。夢に向かって毎日頑張っています！",
-    "template": "[[私|わたし]]の[[夢|ゆめ]]は[[日本|にほん]]に[[行|い]]くことです。[[日本|にほん]]はとても[[きれいな]][[国|くに]]だと[[思|おも]]います。アニメや[[映画|えいが]]で[[日本|にほん]]の[[景色|けしき]]をよく[[見|み]]ます。いつか[[本物|ほんもの]]の[[富士山|ふじさん]]を[[見|み]]たいです。そのために[[今|いま]]、[[日本語|にほんご]]を[[一生懸命|いっしょうけんめい]][[勉強|べんきょう]]しています。\n\n[[日本|にほん]]に[[行|い]]ったら、[[東京|とうきょう]]と[[京都|きょうと]]に[[行|い]]きたいです。[[東京|とうきょう]]では[[秋葉原|あきはばら]]や[[渋谷|しぶや]]を[[歩|ある]]きたいです。[[京都|きょうと]]では[[古|ふる]]い[[お寺|おてら]]や[[神社|じんじゃ]]を[[見|み]]たいです。[[日本|にほん]]の[[食|た]]べ[[物|もの]]も[[楽|たの]]しみにしています。[[本物|ほんもの]]のラーメンやすしを[[食|た]]べたいです。\n\n[[日本語|にほんご]]がもっと[[上手|じょうず]]になったら、[[日本人|にほんじん]]と[[話|はな]]せます。[[お店|おみせ]]で[[一人|ひとり]]で[[買|か]]い[[物|もの]]もできます。[[N4|エヌよん]]に[[合格|ごうかく]]したら、[[旅行|りょこう]]の[[計画|けいかく]]を[[立|た]]てます。[[夢|ゆめ]]に[[向|む]]かって[[毎日|まいにち]][[頑張|がんば]]っています！",
-    "icon": "fas fa-plane",
+    "translation": "Sejak kecil, saya selalu ingin pergi ke Jepang. Saya sangat suka musik dan makanan Jepang. Saya sudah bertekad untuk pasti pergi suatu hari nanti. Setiap malam saya menonton anime Jepang untuk membiasakan telinga dengan bahasanya.\n\nSekarang, saya belajar bahasa Jepang dengan sungguh-sungguh. Setelah lulus N4, saya berencana membuat rencana perjalanan ke Jepang. Setiap hari saya belajar kosakata dan tata bahasa agar impian semakin dekat. Saya berlatih setiap malam untuk mempersiapkan diri sebaik mungkin.\n\nDi Jepang, saya ingin berjalan-jalan di kota Tokyo dan berendam di onsen. Saya sangat menantikan hari ketika impian itu terwujud. Saya akan terus belajar dan mempersiapkan segala sesuatunya dengan baik. Impian itu semakin dekat seiring dengan usaha yang saya lakukan setiap harinya.",
+    "template": "[[小|ちい]]さいころから、[[日本|にほん]]に [[行|い]]きたいと [[思|おも]]っていました。[[日本|にほん]]の [[音楽|おんがく]]や [[食|た]]べ[[物|もの]]が [[大好|だいす]]きです。いつか [[必|かなら]]ず [[行|い]]くと [[決|き]]めています。\n\n[[今|いま]]、[[日本語|にほんご]]を [[一生懸命|いっしょうけんめい]] [[勉強|べんきょう]]しています。[[N4|エヌよん]]に [[合格|ごうかく]]したら、[[日本|にほん]]に [[行|い]]く [[計画|けいかく]]を [[立|た]]てるつもりです。\n\n[[日本|にほん]]では [[東京|とうきょう]]の [[街|まち]]を [[歩|ある]]いたり、[[温泉|おんせん]]に [[入|はい]]ったりしたいです。[[夢|ゆめ]]が [[叶|かな]]う [[日|ひ]]が [[楽|たの]]しみです。",
+    "icon": "fas fa-star",
     "color": "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)"
   },
   {
     "id": "s3",
-    "title": "毎日の勉強ルーティン (Rutinitas Belajar Setiap Hari)",
-    "category": "Kehidupan Sehari-hari",
-    "translation": "私は毎日日本語を勉強しています。朝は6時に起きます。朝ごはんを食べながら、単語カードを見ます。電車の中でも、スマホで単語を練習します。移動時間を有効に使っています。\n\n昼休みは短い時間ですが、文法の動画を見ます。夜は家に帰ってから、問題集を解きます。一日に2時間くらい勉強します。疲れた日でも、少しだけ続けます。継続は力なりと信じています。\n\n週末は図書館で長く勉強します。友達と一緒に勉強することもあります。勉強仲間がいると、やる気が出ます。N4合格という目標があるので、毎日頑張れます！",
-    "template": "[[私|わたし]]は[[毎日|まいにち]][[日本語|にほんご]]を[[勉強|べんきょう]]しています。[[朝|あさ]]は6[[時|じ]]に[[起|お]]きます。[[朝|あさ]]ごはんを[[食|た]]べながら、[[単語|たんご]]カードを[[見|み]]ます。[[電車|でんしゃ]]の[[中|なか]]でも、スマホで[[単語|たんご]]を[[練習|れんしゅう]]します。[[移動|いどう]][[時間|じかん]]を[[有効|ゆうこう]]に[[使|つか]]っています。\n\n[[昼|ひる]][[休|やす]]みは[[短|みじか]]い[[時間|じかん]]ですが、[[文法|ぶんぽう]]の[[動画|どうが]]を[[見|み]]ます。[[夜|よる]]は[[家|いえ]]に[[帰|かえ]]ってから、[[問題集|もんだいしゅう]]を[[解|と]]きます。[[一日|いちにち]]に2[[時間|じかん]]くらい[[勉強|べんきょう]]します。[[疲|つか]]れた[[日|ひ]]でも、[[少|すこ]]しだけ[[続|つづ]]けます。[[継続|けいぞく]]は[[力|ちから]]なりと[[信|しん]]じています。\n\n[[週末|しゅうまつ]]は[[図書館|としょかん]]で[[長|なが]]く[[勉強|べんきょう]]します。[[友達|ともだち]]と[[一緒|いっしょ]]に[[勉強|べんきょう]]することもあります。[[勉強|べんきょう]][[仲間|なかま]]がいると、やる[[気|き]]が[[出|で]]ます。[[N4|エヌよん]][[合格|ごうかく]]という[[目標|もくひょう]]があるので、[[毎日|まいにち]][[頑張|がんば]]れます！",
-    "icon": "fas fa-book-open",
+    "title": "パスポートを作る (Membuat Paspor)",
+    "category": "Persiapan Ujian",
+    "translation": "Untuk pergi ke Jepang, pertama-tama saya membutuhkan paspor. Minggu lalu, saya pergi mengajukan permohonan paspor. Saya agak gugup. Saya membaca panduan lengkap di internet sebelum datang ke kantor.\n\nDokumen yang diperlukan adalah kartu keluarga dan foto. Foto membutuhkan ukuran khusus. Saya sudah mengumpulkan semua dokumennya. Petugas loket memeriksa setiap dokumen dengan sangat teliti dan ramah.\n\nPaspor dijadwalkan selesai 2 minggu lagi. Saya sangat menantikannya. Dengan ini, persiapan untuk pergi ke Jepang sudah satu langkah maju. Saya benar-benar tidak sabar untuk segera memegang paspor itu.",
+    "template": "[[日本|にほん]]に [[行|い]]くために、まず [[パスポート|ぱすぽーと]]が [[必要|ひつよう]]です。[[先週|せんしゅう]]、[[パスポート|ぱすぽーと]]を [[申請|しんせい]]しに [[行|い]]きました。[[少|すこ]]し [[緊張|きんちょう]]しました。\n\n[[必要|ひつよう]]な [[書類|しょるい]]は [[住民票|じゅうみんひょう]]と [[写真|しゃしん]]です。[[写真|しゃしん]]は [[専用|せんよう]]のサイズが [[必要|ひつよう]]です。[[書類|しょるい]]を [[全部|ぜんぶ]] [[揃|そろ]]えました。\n\n2[[週間|しゅうかん]][[後|ご]]に [[パスポート|ぱすぽーと]]が できる [[予定|よてい]]です。とても [[楽|たの]]しみにしています。これで [[日本|にほん]]に [[行|い]]ける [[準備|じゅんび]]が [[一歩|いっぽ]] [[進|すす]]みました。",
+    "icon": "fas fa-id-card",
     "color": "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)"
   },
   {
     "id": "s4",
-    "title": "日本食を作ってみた (Mencoba Memasak Makanan Jepang)",
-    "category": "Budaya Jepang",
-    "translation": "先週、初めて日本食を作りました。作ったのはカレーライスです。スーパーで日本のカレーのルーを買いました。レシピは日本語で書いてありました。日本語が少し読めてよかったです。\n\nにんじん、じゃがいも、たまねぎを切りました。お肉も入れました。30分くらい煮ました。できあがったカレーはとても美味しかったです。家族も喜んでくれました。\n\n日本食を作ることで、日本の文化も学べます。料理の言葉も覚えました。日本に行ったら、もっといろいろな日本食を食べたいです。次は親子丼を作るつもりです！",
-    "template": "[[先週|せんしゅう]]、[[初|はじ]]めて[[日本食|にほんしょく]]を[[作|つく]]りました。[[作|つく]]ったのはカレーライスです。スーパーで[[日本|にほん]]のカレーのルーを[[買|か]]いました。レシピは[[日本語|にほんご]]で[[書|か]]いてありました。[[日本語|にほんご]]が[[少|すこ]]し[[読|よ]]めてよかったです。\n\nにんじん、じゃがいも、たまねぎを[[切|き]]りました。お[[肉|にく]]も[[入|い]]れました。30[[分|ふん]]くらい[[煮|に]]ました。できあがったカレーはとても[[美味|おい]]しかったです。[[家族|かぞく]]も[[喜|よろこ]]んでくれました。\n\n[[日本食|にほんしょく]]を[[作|つく]]ることで、[[日本|にほん]]の[[文化|ぶんか]]も[[学|まな]]べます。[[料理|りょうり]]の[[言葉|ことば]]も[[覚|おぼ]]えました。[[日本|にほん]]に[[行|い]]ったら、もっといろいろな[[日本食|にほんしょく]]を[[食|た]]べたいです。[[次|つぎ]]は[[親子丼|おやこどん]]を[[作|つく]]るつもりです！",
-    "icon": "fas fa-utensils",
-    "color": "linear-gradient(135deg, #fa709a 0%, #fee140 100%)"
+    "title": "飛行機に乗る (Naik Pesawat ke Jepang)",
+    "category": "Perjalanan ke Jepang",
+    "translation": "Hari ini adalah hari keberangkatan ke Jepang. Saya naik pesawat untuk pertama kalinya. Saya tiba di bandara lebih awal dan melakukan check-in. Saya memastikan semua dokumen perjalanan sudah lengkap sebelum berangkat.\n\nDi dalam pesawat, saya mendengar pengumuman dalam bahasa Jepang. Mereka berkata 'Mohon kenakan sabuk pengaman'. Saya senang karena bisa memahami artinya. Saya juga berlatih kosakata bahasa Jepang sambil mendengarkan musik di pesawat.\n\n7 jam kemudian, saya tiba di Jepang. Dari jendela, saya bisa melihat Gunung Fuji. Saya sangat terharu dan hampir menangis. Pengalaman pertama melihat Gunung Fuji itu akan selalu saya kenang seumur hidup.",
+    "template": "[[今日|きょう]]は [[日本|にほん]]に [[行|い]]く [[日|ひ]]です。[[初|はじ]]めて [[飛行機|ひこうき]]に [[乗|の]]ります。[[空港|くうこう]]に [[早|はや]]く [[着|つ]]いて、[[チェックイン|ちぇっくいん]]をしました。\n\n[[飛行機|ひこうき]]の [[中|なか]]で [[日本語|にほんご]]の [[案内|あんない]]が [[聞|き]]こえました。「[[シートベルト|しーとべると]]を [[締|し]]めてください」と [[言|い]]っていました。[[意味|いみ]]が [[分|わ]]かって [[嬉|うれ]]しかったです。\n\n7[[時間|じかん]][[後|ご]]、[[日本|にほん]]に [[着|つ]]きました。[[窓|まど]]から [[富士山|ふじさん]]が [[見|み]]えました。[[感動|かんどう]]して、[[涙|なみだ]]が [[出|で]]そうになりました。",
+    "icon": "fas fa-plane",
+    "color": "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)"
   },
   {
     "id": "s5",
-    "title": "アニメで日本語を勉強する (Belajar Bahasa Jepang lewat Anime)",
-    "category": "Cara Belajar",
-    "translation": "私はアニメが好きです。アニメを見ながら日本語も勉強できます。最初は字幕を見ていました。でも、今は少しだけ聞いて分かります。アニメのおかげで日本語が好きになりました。\n\nアニメで新しい言葉をたくさん覚えました。面白い表現も覚えました。でも、アニメの言葉は少しカジュアルすぎることもあります。試験には普通の言葉も大切です。両方バランスよく勉強しています。\n\nアニメを見ることで、日本の文化も分かります。学校生活や家族の話が多いです。日本に行ったら、アニメの聖地に行きたいです。日本語の勉強は楽しいと感じています！",
-    "template": "[[私|わたし]]はアニメが[[好|す]]きです。アニメを[[見|み]]ながら[[日本語|にほんご]]も[[勉強|べんきょう]]できます。[[最初|さいしょ]]は[[字幕|じまく]]を[[見|み]]ていました。でも、[[今|いま]]は[[少|すこ]]しだけ[[聞|き]]いて[[分|わ]]かります。アニメのおかげで[[日本語|にほんご]]が[[好|す]]きになりました。\n\nアニメで[[新|あたら]]しい[[言葉|ことば]]をたくさん[[覚|おぼ]]えました。[[面白|おもしろ]]い[[表現|ひょうげん]]も[[覚|おぼ]]えました。でも、アニメの[[言葉|ことば]]は[[少|すこ]]しカジュアルすぎることもあります。[[試験|しけん]]には[[普通|ふつう]]の[[言葉|ことば]]も[[大切|たいせつ]]です。[[両方|りょうほう]]バランスよく[[勉強|べんきょう]]しています。\n\nアニメを[[見|み]]ることで、[[日本|にほん]]の[[文化|ぶんか]]も[[分|わ]]かります。[[学校|がっこう]][[生活|せいかつ]]や[[家族|かぞく]]の[[話|はなし]]が[[多|おお]]いです。[[日本|にほん]]に[[行|い]]ったら、アニメの[[聖地|せいち]]に[[行|い]]きたいです。[[日本語|にほんご]]の[[勉強|べんきょう]]は[[楽|たの]]しいと[[感|かん]]じています！",
-    "icon": "fas fa-tv",
-    "color": "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)"
+    "title": "日本に到着する (Tiba di Jepang)",
+    "category": "Perjalanan ke Jepang",
+    "translation": "Pesawat mendarat di Bandara Narita. Ketika melihat ke luar, ada banyak papan nama dalam bahasa Jepang. Saya berpikir, 'Saya benar-benar sudah di Jepang!' Saya mengambil foto papan nama dalam bahasa Jepang sebagai kenang-kenangan. Saya benar-benar tidak menyangka bisa merasakan momen luar biasa ini secara langsung.\n\nDi pemeriksaan imigrasi, petugas berbicara kepada saya dalam bahasa Jepang. Saya agak gugup, tapi bisa menjawab. Petugasnya ramah. Saya berhasil menjawab pertanyaan petugas imigrasi meskipun sedikit gugup.\n\nDari bandara, saya menuju Tokyo naik kereta. Pemandangan yang terlihat dari jendela kereta sangat indah. Saya sangat menantikan kehidupan di Jepang. Pemandangan kota yang terlihat dari jendela kereta sungguh memukau hati saya.",
+    "template": "[[飛行機|ひこうき]]が [[成田空港|なりたくうこう]]に [[着|つ]]きました。[[外|そと]]を [[見|み]]ると、[[日本語|にほんご]]の [[看板|かんばん]]がたくさんありました。「[[本当|ほんとう]]に [[日本|にほん]]に [[来|き]]た！」と [[思|おも]]いました。\n\n[[入国審査|にゅうこくしんさ]]で [[職員|しょくいん]]に [[日本語|にほんご]]で [[話|はな]]しかけられました。[[少|すこ]]し [[緊張|きんちょう]]しましたが、[[答|こた]]えられました。[[職員|しょくいん]]は [[親切|しんせつ]]でした。\n\n[[空港|くうこう]]から [[電車|でんしゃ]]で [[東京|とうきょう]]に [[向|む]]かいました。[[車窓|しゃそう]]から [[見|み]]える [[景色|けしき]]がとても [[綺麗|きれい]]でした。[[日本|にほん]]の [[生活|せいかつ]]が [[楽|たの]]しみです。",
+    "icon": "fas fa-map-marker-alt",
+    "color": "linear-gradient(135deg, #fa709a 0%, #fee140 100%)"
   },
   {
     "id": "s6",
-    "title": "日本人の友達ができた (Punya Teman dari Jepang)",
+    "title": "コンビニで買い物 (Belanja di Konbini)",
     "category": "Kehidupan Sehari-hari",
-    "translation": "先月、インターネットで日本人の友達ができました。名前はけんさんです。私たちは言語交換をしています。私が日本語を教えてもらい、けんさんにはインドネシア語を教えています。毎週一回、ビデオ通話をします。\n\n最初は話すのが難しかったです。でも、けんさんはゆっくり話してくれます。分からない言葉があったら、説明してくれます。とても親切な人です。おかげで話す練習ができています。\n\nけんさんと話すことで、日本語が上手になっていると思います。日本の生活についても教えてもらいます。いつかけんさんに会いに日本に行きたいです。友達がいると、もっと勉強が楽しくなります！",
-    "template": "[[先月|せんげつ]]、インターネットで[[日本人|にほんじん]]の[[友達|ともだち]]ができました。[[名前|なまえ]]はけんさんです。[[私|わたし]]たちは[[言語|げんご]][[交換|こうかん]]をしています。[[私|わたし]]が[[日本語|にほんご]]を[[教|おし]]えてもらい、けんさんにはインドネシア[[語|ご]]を[[教|おし]]えています。[[毎週|まいしゅう]][[一回|いっかい]]、ビデオ[[通話|つうわ]]をします。\n\n[[最初|さいしょ]]は[[話|はな]]すのが[[難|むずか]]しかったです。でも、けんさんはゆっくり[[話|はな]]してくれます。[[分|わ]]からない[[言葉|ことば]]があったら、[[説明|せつめい]]してくれます。とても[[親切|しんせつ]]な[[人|ひと]]です。おかげで[[話|はな]]す[[練習|れんしゅう]]ができています。\n\nけんさんと[[話|はな]]すことで、[[日本語|にほんご]]が[[上手|じょうず]]になっていると[[思|おも]]います。[[日本|にほん]]の[[生活|せいかつ]]についても[[教|おし]]えてもらいます。いつかけんさんに[[会|あ]]いに[[日本|にほん]]に[[行|い]]きたいです。[[友達|ともだち]]がいると、もっと[[勉強|べんきょう]]が[[楽|たの]]しくなります！",
+    "translation": "Konbini di Jepang sangat praktis. Buka 24 jam, menjual segalanya mulai dari makanan hingga kebutuhan sehari-hari. Di konbini juga tersedia koran, majalah, dan berbagai kebutuhan lainnya. Tidak heran konbini menjadi tempat favorit masyarakat Jepang setiap harinya.\n\nHari ini saya membeli onigiri dan teh hijau. Di kasir, saya ditanya 'Mau dipanaskan?' dan berhasil menjawab 'Ya, tolong'. Saya bahkan bisa membaca huruf Hiragana pada label produk di konbini. Pengalaman berbelanja di konbini benar-benar melatih kemampuan bahasa Jepang saya.\n\nMakanan di konbini murah dan enak. Saya jadi ingin datang setiap hari. Saya ingin cepat terbiasa dengan kehidupan di Jepang. Pengalaman belanja di konbini membuat saya semakin percaya diri berbahasa Jepang.",
+    "template": "[[日本|にほん]]の [[コンビニ|こんびに]]はとても [[便利|べんり]]です。24[[時間|じかん]] [[開|あ]]いていて、[[食|た]]べ[[物|もの]]から [[日用品|にちようひん]]まで [[何|なん]]でも [[売|う]]っています。\n\n[[今日|きょう]]は [[おにぎり|おにぎり]]と [[緑茶|りょくちゃ]]を [[買|か]]いました。[[レジ|れじ]]で「[[温|あたた]]めますか？」と [[聞|き]]かれて、「[[はい|はい]]、[[お願|おねが]]いします」と [[答|こた]]えられました。\n\n[[コンビニ|こんびに]]の [[食|た]]べ[[物|もの]]は [[安|やす]]くて [[美味|おい]]しいです。[[毎日|まいにち]] [[通|かよ]]いたくなりました。[[日本|にほん]]の [[生活|せいかつ]]に [[早|はや]]く [[慣|な]]れたいです。",
+    "icon": "fas fa-store",
+    "color": "linear-gradient(135deg, #0ba360 0%, #3cba92 100%)"
+  },
+  {
+    "id": "s7",
+    "title": "電車の乗り方 (Cara Naik Kereta di Jepang)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Kereta di Jepang memiliki banyak jalur, dan pada awalnya terlihat rumit. Tapi setelah tahu cara menaikinya, sangat praktis. Saya juga memastikan untuk selalu antri dengan tertib di setiap peron. Saya kagum melihat betapa tertib dan disiplinnya masyarakat Jepang di transportasi umum.\n\nPertama-tama saya membeli kartu IC transportasi. Di pintu otomatis, tinggal menempelkan kartu ke mesin. Sangat mudah. Petugas kereta sangat membantu ketika saya bingung mencari jalur yang tepat.\n\nDi dalam kereta, saya diam dengan tenang. Saya mengatur ponsel ke mode senyap. Orang-orang Jepang sangat memperhatikan tata krama di dalam kereta. Sekarang saya merasa seperti warga lokal saat bepergian dengan kereta di Jepang.",
+    "template": "[[日本|にほん]]の [[電車|でんしゃ]]は [[路線|ろせん]]が [[多|おお]]くて、[[最初|さいしょ]]は [[複雑|ふくざつ]]に [[見|み]]えます。でも [[乗|の]]り[[方|かた]]を [[覚|おぼ]]えると、とても [[便利|べんり]]です。\n\nまず [[交通系|こうつうけい]][[ICカード|アイシーカード]]を [[買|か]]いました。[[改札|かいさつ]]では [[カード|かーど]]を [[機械|きかい]]に [[当|あ]]てるだけです。とても [[簡単|かんたん]]です。\n\n[[電車|でんしゃ]]の [[中|なか]]では [[静|しず]]かにします。[[携帯電話|けいたいでんわ]]は [[マナーモード|まなーもーど]]にします。[[日本|にほん]]の [[人|ひと]]は [[電車|でんしゃ]]の [[中|なか]]での [[マナー|まなー]]がとても [[良|よ]]いです。",
+    "icon": "fas fa-train",
+    "color": "linear-gradient(135deg, #30cfd0 0%, #330867 100%)"
+  },
+  {
+    "id": "s8",
+    "title": "ホテルに泊まる (Menginap di Hotel Jepang)",
+    "category": "Perjalanan ke Jepang",
+    "translation": "Saya check-in di hotel di Tokyo. Di resepsionis, saya menyebutkan nama dan menerima kunci kamar. Senang bisa berbicara dalam bahasa Jepang. Saya juga menikmati fasilitas onsen yang ada di dalam hotel tersebut.\n\nKamarnya bersih dan nyaman. Ada yukata yang diletakkan di sana, jadi saya mencoba mengenakannya. Sangat santai dan nyaman. Yukata yang saya kenakan membuat pengalaman menginap terasa lebih autentik.\n\nSarapan keesokan paginya adalah masakan Jepang. Ada nasi, sup miso, dan ikan bakar. Sangat enak. Pelayanan omotenashi di hotel Jepang benar-benar membuat saya merasa disambut.",
+    "template": "[[東京|とうきょう]]の [[ホテル|ほてる]]に [[チェックイン|ちぇっくいん]]しました。[[フロント|ふろんと]]で [[名前|なまえ]]を [[言|い]]って、[[鍵|かぎ]]を [[受|う]]け[[取|と]]りました。[[日本語|にほんご]]で [[話|はな]]せて よかったです。\n\n[[部屋|へや]]は [[清潔|せいけつ]]で [[快適|かいてき]]でした。[[浴衣|ゆかた]]が [[置|お]]いてあったので、[[着|き]]てみました。とても [[楽|らく]]で [[気持|きも]]ちよかったです。\n\n[[翌朝|よくあさ]]の [[朝食|ちょうしょく]]は [[和食|わしょく]]でした。[[ご飯|ごはん]]と [[味噌汁|みそしる]]と [[焼|や]]き[[魚|さかな]]でした。とても [[美味|おい]]しかったです。",
+    "icon": "fas fa-bed",
+    "color": "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)"
+  },
+  {
+    "id": "s9",
+    "title": "レストランで注文する (Memesan di Restoran Jepang)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Saya masuk ke restoran di Jepang. Menunya dalam bahasa Jepang, tapi ada fotonya jadi tidak masalah. Saya juga melihat-lihat menu lain yang menarik untuk kunjungan berikutnya. Suasana restoran yang menyenangkan membuat pengalaman makan menjadi lebih berkesan.\n\nSaya berkata kepada pelayan 'Satu ramen dan satu gyoza tolong'. Senang bisa mengatakannya dengan lancar. Pelayan sangat sabar dan ramah meskipun bahasa Jepang saya masih belum sempurna. Saya berencana kembali dan mencoba menu lain yang ada di restoran tersebut.\n\nRamennya punya rasa yang kaya, dan mienya kenyal-kenyal. Itulah ramen asli pertama yang saya makan di Jepang. Pengalaman memesan makanan dalam bahasa Jepang ini membuat kepercayaan diri saya bertambah. Saya tidak sabar untuk mencoba lebih banyak kuliner Jepang selama berada di sini.",
+    "template": "[[日本|にほん]]の [[レストラン|れすとらん]]に [[入|はい]]りました。[[メニュー|めにゅー]]は [[日本語|にほんご]]でしたが、[[写真|しゃしん]]が [[付|つ]]いていたので [[大丈夫|だいじょうぶ]]でした。\n\n[[店員|てんいん]]さんに「[[ラーメン|らーめん]]を [[一|ひと]]つと [[餃子|ぎょうざ]]を [[一|ひと]]つ [[お願|おねが]]いします」と [[言|い]]いました。[[上手|じょうず]]に [[言|い]]えて [[嬉|うれ]]しかったです。\n\n[[ラーメン|らーめん]]は [[濃厚|のうこう]]な [[味|あじ]]で、[[麺|めん]]は [[もちもち|もちもち]]していました。[[日本|にほん]]で [[食|た]]べる [[初|はじ]]めての [[本物|ほんもの]]の [[ラーメン|らーめん]]でした。",
+    "icon": "fas fa-utensils",
+    "color": "linear-gradient(135deg, #f7971e 0%, #ffd200 100%)"
+  },
+  {
+    "id": "s10",
+    "title": "観光地を歩く (Jalan-jalan di Tempat Wisata)",
+    "category": "Wisata & Budaya",
+    "translation": "Hari ini saya pergi ke Asakusa. Saya berfoto di depan Kaminarimon. Ada sangat banyak wisatawan. Saya juga membeli beberapa oleh-oleh khas Asakusa untuk keluarga di rumah.\n\nSaya melihat-lihat oleh-oleh di Nakamise-dori. Ada banyak kue khas terkenal dari zaman Edo seperti Ningyo-yaki dan Kaminari-okoshi. Saya menggambar omikuji dan mendapat ramalan keberuntungan yang baik. Saya juga membeli beberapa oleh-oleh khas untuk dibawa pulang sebagai kenang-kenangan.\n\nSaya bersembahyang di Kuil Sensoji. Lampion besar itu berkesan. Suasananya tenang dan damai. Kunjungan ke Asakusa menjadi salah satu pengalaman paling berkesan selama di Jepang.",
+    "template": "[[今日|きょう]]は [[浅草|あさくさ]]に [[行|い]]きました。[[雷門|かみなりもん]]の [[前|まえ]]で [[写真|しゃしん]]を [[撮|と]]りました。[[観光客|かんこうきゃく]]が とても [[多|おお]]かったです。\n\n[[仲見世通|なかみせどお]]りで [[お土産|おみやげ]]を [[見|み]]ました。[[人形焼|にんぎょうやき]]や [[雷おこし|かみなりおこし]]など、[[江戸|えど]][[時代|じだい]]からある [[有名|ゆうめい]]な [[お菓子|おかし]]がたくさんありました。\n\n[[浅草寺|せんそうじ]]に [[参拝|さんぱい]]しました。[[大|おお]]きな [[提灯|ちょうちん]]が [[印象的|いんしょうてき]]でした。[[静|しず]]かで [[落|お]]ち[[着|つ]]いた [[雰囲気|ふんいき]]でした。",
+    "icon": "fas fa-camera",
+    "color": "linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%)"
+  },
+  {
+    "id": "s11",
+    "title": "道を聞く (Bertanya Arah dalam Bahasa Jepang)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Meski sudah melihat peta, saya tidak tahu jalan menuju tujuan. Saat sedang bingung, ada seorang pria Jepang di dekat sana. Saya memperhatikan setiap petunjuk jalan yang ada di sekitar kawasan Shinjuku. Saya memberanikan diri untuk menyapa dan bertanya kepada orang yang lewat di dekat saya.\n\nSaya bertanya 'Permisi, di mana Stasiun Shinjuku?'. Pria itu dengan tersenyum memberi tahu 'Jalan lurus di jalan ini, lalu belok kanan di lampu lalu lintas'. Wanita itu bahkan menunjukkan arah dengan sangat jelas sambil tersenyum ramah. Saya mengucapkan terima kasih berkali-kali karena sangat bersyukur mendapat bantuan tersebut.\n\nSaya bertanya arah dalam bahasa Jepang dan berhasil memahami jawabannya. Saya sangat senang. Kepercayaan diri saya sedikit bertambah. Saya merasa semakin yakin bahwa bahasa Jepang yang saya pelajari benar-benar berguna.",
+    "template": "[[地図|ちず]]を [[見|み]]ても、[[目的地|もくてきち]]への [[道|みち]]が [[分|わ]]かりませんでした。[[困|こま]]って いたところ、[[近|ちか]]くに [[日本人|にほんじん]]の [[男性|だんせい]]がいました。\n\n「[[すみません|すみません]]、[[新宿駅|しんじゅくえき]]は どこですか」と [[聞|き]]きました。[[男性|だんせい]]は [[笑顔|えがお]]で「[[この道|このみち]]を [[真|まっ]]すぐ [[行|い]]って、[[信号|しんごう]]を [[右|みぎ]]に [[曲|ま]]がってください」と [[教|おし]]えてくれました。\n\n[[日本語|にほんご]]で [[道|みち]]を [[聞|き]]いて、[[答|こた]]えを [[理解|りかい]]できました。とても [[嬉|うれ]]しかったです。[[自信|じしん]]が [[少|すこ]]し [[付|つ]]きました。",
+    "icon": "fas fa-map-signs",
+    "color": "linear-gradient(135deg, #fda085 0%, #f6d365 100%)"
+  },
+  {
+    "id": "s12",
+    "title": "スーパーで買い物 (Belanja di Supermarket Jepang)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Hari ini saya pergi ke supermarket terdekat. Ada berbagai bahan makanan seperti sayuran, buah-buahan, dan daging berjajar di sana. Saya juga mencoba membaca label harga dan informasi produk dalam bahasa Jepang. Berbelanja di sini membuat saya berlatih membaca kanji pada kemasan produk.\n\nSaya memilih sambil melihat dan membandingkan harga. Saya mencoba membeli tahu dan natto. Saya senang bisa memasak bahan makanan Jepang sendiri. Saya senang bisa berkomunikasi dengan kasir menggunakan bahasa Jepang sehari-hari.\n\nDi kasir, pelayan bertanya 'Perlu kantong plastik?'. Di Jepang, kantong plastik sering dikenakan biaya. Saya menjawab 'Tidak perlu'. Berbelanja di supermarket Jepang adalah pengalaman yang menyenangkan dan edukatif.",
+    "template": "[[今日|きょう]]は [[近|ちか]]くの [[スーパー|すーぱー]]に [[行|い]]きました。[[野菜|やさい]]や [[果物|くだもの]]、[[肉|にく]]など、いろいろな [[食材|しょくざい]]が [[並|なら]]んでいました。\n\n[[値段|ねだん]]の [[表示|ひょうじ]]を [[見|み]]て、[[比較|ひかく]]しながら [[選|えら]]びました。[[豆腐|とうふ]]と [[納豆|なっとう]]を [[買|か]]ってみました。[[日本|にほん]]の [[食材|しょくざい]]を [[自分|じぶん]]で [[料理|りょうり]]するのが [[楽|たの]]しみです。\n\n[[レジ|れじ]]で [[店員|てんいん]]さんに「[[袋|ふくろ]]は [[必要|ひつよう]]ですか」と [[聞|き]]かれました。[[日本|にほん]]では [[袋|ふくろ]]に [[料金|りょうきん]]が [[掛|か]]かることが [[多|おお]]いです。「[[結構|けっこう]]です」と [[答|こた]]えました。",
+    "icon": "fas fa-shopping-basket",
+    "color": "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)"
+  },
+  {
+    "id": "s13",
+    "title": "お土産を買う (Membeli Oleh-oleh Khas Jepang)",
+    "category": "Wisata & Budaya",
+    "translation": "Saya sedang mencari oleh-oleh untuk keluarga dan teman-teman. Oleh-oleh Jepang jenisnya sangat banyak. Saya bingung harus memilih yang mana. Saya juga mencari oleh-oleh yang khas dari daerah yang saya kunjungi.\n\nSaya memutuskan untuk membeli Tokyo Banana dan kue kering matcha. Kemasannya lucu dengan desain khas Jepang. Saya pikir keluarga akan senang. Setiap kemasan oleh-oleh Jepang sangat cantik sehingga rasanya sayang untuk dibuka.\n\nMemilih oleh-oleh itu menyenangkan. Kalau dipilih sambil memikirkan orang yang akan diberi, jadi semakin menyenangkan. Saya ingin menyampaikan budaya Jepang kepada mereka. Saya berharap oleh-oleh ini bisa menjadi jembatan untuk berbagi cerita tentang Jepang.",
+    "template": "[[家族|かぞく]]や [[友達|ともだち]]への [[お土産|おみやげ]]を [[探|さが]]しています。[[日本|にほん]]の [[お土産|おみやげ]]は [[種類|しゅるい]]がとても [[多|おお]]いです。[[何|なに]]を [[選|えら]]べばいいか [[迷|まよ]]いました。\n\n[[東京|とうきょう]][[バナナ|ばなな]]と [[抹茶|まっちゃ]][[クッキー|くっきー]]を [[買|か]]うことにしました。[[パッケージ|ぱっけーじ]]が [[可愛|かわい]]くて、[[日本|にほん]]らしいデザインです。[[家族|かぞく]]が [[喜|よろこ]]んでくれると [[思|おも]]います。\n\n[[お土産|おみやげ]]を [[選|えら]]ぶのは [[楽|たの]]しいです。[[贈|おく]]る [[相手|あいて]]のことを [[考|かんが]]えながら [[選|えら]]ぶと、もっと [[楽|たの]]しくなります。[[日本|にほん]]の [[文化|ぶんか]]を [[伝|つた]]えたいです。",
+    "icon": "fas fa-gift",
+    "color": "linear-gradient(135deg, #f83600 0%, #f9d423 100%)"
+  },
+  {
+    "id": "s14",
+    "title": "日本の天気と季節 (Cuaca dan Musim di Jepang)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Jepang memiliki 4 musim: musim semi, panas, gugur, dan dingin. Pemandangan dan iklim berubah setiap musim. Saya juga membeli payung karena hujan bisa datang tiba-tiba di musim ini. Cuaca di Jepang sangat berbeda dengan di Indonesia sehingga saya perlu menyesuaikan diri.\n\nSekarang adalah musim hujan, dan hujan turun setiap hari. Kelembapan tinggi dan terasa panas lembap. Payung sangat diperlukan. Tingginya kelembapan membuat saya lebih sering minum air untuk menjaga kesehatan.\n\nSaya ingin melihat daun musim gugur (koyo). Koyo Jepang sangat terkenal dan katanya sangat indah. Saya berencana datang di musim gugur untuk perjalanan berikutnya. Saya sudah mulai mencari jadwal terbaik untuk perjalanan musim gugur ke Jepang.",
+    "template": "[[日本|にほん]]には [[春|はる]]・[[夏|なつ]]・[[秋|あき]]・[[冬|ふゆ]]の 4つの [[季節|きせつ]]があります。[[季節|きせつ]]ごとに [[景色|けしき]]や [[気候|きこう]]が [[変|か]]わります。\n\n[[今|いま]]は [[梅雨|つゆ]]の [[季節|きせつ]]で、[[毎日|まいにち]] [[雨|あめ]]が [[降|ふ]]ります。[[湿度|しつど]]が [[高|たか]]くて、[[蒸|む]]し[[暑|あつ]]いです。[[傘|かさ]]が [[必要|ひつよう]]です。\n\n[[秋|あき]]の [[紅葉|こうよう]]を [[見|み]]たいです。[[日本|にほん]]の [[紅葉|こうよう]]は とても [[有名|ゆうめい]]で、[[美|うつく]]しいと [[聞|き]]きました。[[次|つぎ]]の [[旅行|りょこう]]は [[秋|あき]]に [[来|こ]]ようと [[思|おも]]っています。",
+    "icon": "fas fa-cloud-sun",
+    "color": "linear-gradient(135deg, #96fbc4 0%, #f9f586 100%)"
+  },
+  {
+    "id": "s15",
+    "title": "神社に行く (Mengunjungi Kuil Shinto)",
+    "category": "Wisata & Budaya",
+    "translation": "Saya pergi ke Meiji Jingu. Meskipun berada di pusat kota, ada banyak pepohonan hijau dan alam yang subur. Torii besar di pintu masuknya sangat megah. Saya juga belajar cara menulis doa atau harapan di ema yang digantung di kuil.\n\nSaya sudah mencari tahu cara bersembahyang sebelum datang. Saya mencuci tangan di temizuya, lalu memasukkan koin ke kotak persembahan. Membungkuk 2 kali dan bertepuk 2 kali. Pengalaman bersembahyang di kuil membuat saya semakin menghargai budaya Jepang.\n\nUdara di kuil terasa jernih dan hati saya menjadi tenang. Saya merasa sedikit lebih memahami agama dan budaya Jepang. Saya berencana mengunjungi lebih banyak kuil dan shrine selama tinggal di Jepang. Saya sangat bersyukur bisa merasakan ketenangan dan kedamaian di tempat yang sakral ini.",
+    "template": "[[明治神宮|めいじじんぐう]]に [[行|い]]きました。[[都心|としん]]にありながら、[[緑|みどり]]が [[多|おお]]くて [[自然|しぜん]][[豊|ゆた]]かな [[場所|ばしょ]]です。[[入口|いりぐち]]の [[大鳥居|おおとりい]]が [[立派|りっぱ]]でした。\n\n[[参拝|さんぱい]]の [[仕方|しかた]]を [[調|しら]]べてから [[来|き]]ました。[[手水舎|てみずや]]で [[手|て]]を [[洗|あら]]って、[[賽銭箱|さいせんばこ]]に [[小銭|こぜに]]を [[入|い]]れました。2[[回|かい]] [[お辞儀|おじぎ]]して、2[[回|かい]] [[手|て]]を [[叩|たた]]きました。\n\n[[神社|じんじゃ]]の [[空気|くうき]]は [[澄|す]]んでいて、[[心|こころ]]が [[落|お]]ち[[着|つ]]きました。[[日本|にほん]]の [[宗教|しゅうきょう]]や [[文化|ぶんか]]を [[少|すこ]]し [[理解|りかい]]できた [[気|き]]がしました。",
+    "icon": "fas fa-torii-gate",
+    "color": "linear-gradient(135deg, #eb3349 0%, #f45c43 100%)"
+  },
+  {
+    "id": "s16",
+    "title": "日本語で話す (Berbicara dalam Bahasa Jepang)",
+    "category": "Persiapan Ujian",
+    "translation": "Sejak datang ke Jepang, kesempatan menggunakan bahasa Jepang semakin banyak. Awalnya saya khawatir membuat kesalahan, sehingga sulit untuk berbicara. Saya juga mulai menggunakan bahasa Jepang saat chatting dengan teman baru. Saya memutuskan untuk terus berani berbicara meskipun kadang membuat kesalahan.\n\nTapi setelah berbicara sedikit demi sedikit setiap hari, saya menjadi terbiasa. Meski membuat kesalahan, orang Jepang dengan ramah merespons. Meskipun masih sering salah, saya tidak pernah takut untuk terus mencoba berbicara. Saya belajar bahwa kesalahan adalah bagian dari proses belajar yang sesungguhnya.\n\nSekarang saya sudah bisa memesan di toko atau bertanya arah. Ketika bahasa Jepang saya bisa dipahami, saya sangat senang. Saya ingin semakin mahir. Kemajuan yang saya rasakan setiap hari membuat semangat belajar saya semakin besar.",
+    "template": "[[日本|にほん]]に [[来|き]]てから、[[日本語|にほんご]]を [[使|つか]]う [[機会|きかい]]が とても [[増|ふ]]えました。[[最初|さいしょ]]は [[間違|まちが]]えることが [[心配|しんぱい]]で、なかなか [[話|はな]]せませんでした。\n\nでも [[毎日|まいにち]] [[少|すこ]]しずつ [[話|はな]]すうちに、[[慣|な]]れてきました。[[間違|まちが]]えても [[日本人|にほんじん]]は [[優|やさ]]しく [[対応|たいおう]]してくれます。\n\n[[今|いま]]では [[店|みせ]]で [[注文|ちゅうもん]]したり、[[道|みち]]を [[聞|き]]いたりすることが できます。[[日本語|にほんご]]が [[通|つう]]じると [[嬉|うれ]]しいです。もっと [[上手|じょうず]]になりたいです。",
+    "icon": "fas fa-comments",
+    "color": "linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)"
+  },
+  {
+    "id": "s17",
+    "title": "JFTの準備 (Persiapan Ujian JFT-Basic)",
+    "category": "Persiapan Ujian",
+    "translation": "Selain N4, saya juga ingin mengikuti JFT-Basic. JFT adalah ujian untuk bekerja menggunakan bahasa Jepang. Saya mengunduh aplikasi latihan soal JFT untuk berlatih setiap hari. Saya juga bergabung dengan komunitas belajar online untuk memperdalam materi ujian.\n\nJFT menguji bahasa Jepang dalam kehidupan sehari-hari dan di tempat kerja. Pusatnya adalah mendengarkan dan membaca. Banyak konten yang bersifat praktis. Banyak materi JFT yang mirip dengan situasi yang sudah saya alami di Jepang.\n\nSaya ingin berlatih setiap hari dan lulus JFT juga. Saya punya impian untuk bekerja di Jepang di masa depan. Untuk itu, saya akan mempersiapkan diri mulai sekarang. Saya yakin dengan persiapan yang matang, saya bisa lulus ujian JFT dengan baik.",
+    "template": "[[N4|エヌよん]]の [[他|ほか]]に、[[JFT|ジェイエフティー]]‐[[Basic|ベーシック]]も [[受|う]]けたいと [[思|おも]]っています。[[JFT|ジェイエフティー]]は [[日本語|にほんご]]で [[働|はたら]]くための [[試験|しけん]]です。\n\n[[JFT|ジェイエフティー]]は [[日常生活|にちじょうせいかつ]]や [[職場|しょくば]]での [[日本語|にほんご]]が [[試|ため]]されます。[[聴解|ちょうかい]]と [[読解|どっかい]]が [[中心|ちゅうしん]]です。[[実践的|じっせんてき]]な [[内容|ないよう]]が [[多|おお]]いです。\n\n[[毎日|まいにち]] [[練習|れんしゅう]]して、[[JFT|ジェイエフティー]]も [[合格|ごうかく]]したいです。[[将来|しょうらい]]、[[日本|にほん]]で [[働|はたら]]く [[夢|ゆめ]]があります。そのために [[今|いま]]から [[準備|じゅんび]]します。",
+    "icon": "fas fa-clipboard-list",
+    "color": "linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%)"
+  },
+  {
+    "id": "s18",
+    "title": "日本のラーメン (Menikmati Ramen Jepang)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Ramen Jepang terkenal di seluruh dunia. Ada banyak jenisnya seperti shoyu, miso, shio, dan tonkotsu. Saya juga mencoba berbagai topping seperti chashu, telur rebus, dan nori. Saya sangat bersemangat untuk mencoba semua jenis ramen yang ada di Jepang.\n\nHari ini saya pergi ke restoran ramen Hakata yang terkenal. Sup tonkotsu-nya kental, dan mienya tipis dan keras. Suasana restoran ramen yang ramai membuat pengalaman makan semakin menyenangkan. Tekstur mie yang unik membuat pengalaman makan ramen menjadi semakin berkesan.\n\nAda budaya yang disebut 'kaedama' (tambahan mie). Kita bisa memesan mie tambahan. Saya pertama kali memesan kaedama. Saya sangat puas. Saya sudah berniat untuk mencoba berbagai jenis ramen dari berbagai daerah di Jepang.",
+    "template": "[[日本|にほん]]の [[ラーメン|らーめん]]は [[世界中|せかいじゅう]]で [[有名|ゆうめい]]です。[[醤油|しょうゆ]]、[[味噌|みそ]]、[[塩|しお]]、[[豚骨|とんこつ]]など、[[種類|しゅるい]]がたくさんあります。\n\n[[今日|きょう]]は [[博多|はかた]][[ラーメン|らーめん]]の [[有名|ゆうめい]]な [[店|みせ]]に [[行|い]]きました。[[豚骨|とんこつ]][[スープ|すーぷ]]が [[濃|こ]]くて、[[麺|めん]]は [[細|ほそ]]くて [[硬|かた]]かったです。\n\n「[[替え玉|かえだま]]」という [[文化|ぶんか]]があります。[[追加|ついか]]の [[麺|めん]]を [[注文|ちゅうもん]]できます。[[初|はじ]]めて [[替え玉|かえだま]]をしました。とても [[満足|まんぞく]]しました。",
+    "icon": "fas fa-bowl-food",
+    "color": "linear-gradient(135deg, #f6d365 0%, #fda085 100%)"
+  },
+  {
+    "id": "s19",
+    "title": "日本で友達を作る (Mencari Teman di Jepang)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Saya sedang belajar di sekolah bahasa Jepang. Di kelas ada banyak mahasiswa asing dari berbagai negara. Awalnya gugup, tapi lama-lama menjadi akrab. Kami juga sering belajar bersama di perpustakaan setelah jam pelajaran selesai.\n\nSaya sering berbicara dengan teman dari Korea yang duduk di sebelah saya. Dia juga belajar bahasa Jepang dengan sungguh-sungguh. Kami saling menyemangati satu sama lain. Berteman dengan orang dari berbagai negara membuat wawasan saya semakin luas.\n\nSaya juga ingin membuat teman dari Jepang. Saya berencana mencoba menggunakan aplikasi pertukaran bahasa. Kalau teman semakin banyak, saya bisa semakin mahir berbahasa Jepang. Persahabatan yang terjalin di sekolah bahasa menjadi kenangan tak ternilai bagi saya.",
+    "template": "[[日本語|にほんご]][[学校|がっこう]]で [[勉強|べんきょう]]しています。[[クラス|くらす]]には [[いろいろな|いろいろな]] [[国|くに]]から [[来|き]]た [[留学生|りゅうがくせい]]がいます。[[最初|さいしょ]]は [[緊張|きんちょう]]しましたが、だんだん [[仲良|なかよ]]くなりました。\n\n[[隣|となり]]に [[座|すわ]]っている [[韓国|かんこく]][[人|じん]]の [[友達|ともだち]]と よく [[話|はな]]します。[[彼女|かのじょ]]も [[日本語|にほんご]]を [[一生懸命|いっしょうけんめい]] [[勉強|べんきょう]]しています。[[お互|たが]]いに [[励|はげ]]まし[[合|あ]]っています。\n\n[[日本人|にほんじん]]の [[友達|ともだち]]も [[作|つく]]りたいです。[[言語交換|げんごこうかん]][[アプリ|あぷり]]を [[使|つか]]ってみようと [[思|おも]]っています。[[友達|ともだち]]が [[増|ふ]]えると、もっと [[日本語|にほんご]]が [[上手|じょうず]]になれます。",
     "icon": "fas fa-user-friends",
     "color": "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)"
   },
   {
-    "id": "s7",
-    "title": "模擬試験を受けた (Mengikuti Ujian Simulasi)",
+    "id": "s20",
+    "title": "試験の日 (Hari Ujian N4)",
     "category": "Persiapan Ujian",
-    "translation": "先週、N4の模擬試験を受けました。家でやってみました。時間を計って、本番のようにやりました。結果は思ったより良かったです。でも、まだ間違えた問題がたくさんありました。\n\n特に文法の問題が難しかったです。言葉の問題は少しできました。聴解はまだ練習が必要です。間違えた問題を全部確認しました。なぜ間違えたかを考えました。\n\n試験まであと3か月あります。毎日コツコツ勉強します。弱いところを集中して練習します。次の模擬試験ではもっといい点数を取りたいです。必ず合格できると信じています！",
-    "template": "[[先週|せんしゅう]]、[[N4|エヌよん]]の[[模擬試験|もぎしけん]]を[[受|う]]けました。[[家|いえ]]でやってみました。[[時間|じかん]]を[[計|はか]]って、[[本番|ほんばん]]のようにやりました。[[結果|けっか]]は[[思|おも]]ったより[[良|よ]]かったです。でも、まだ[[間違|まちが]]えた[[問題|もんだい]]がたくさんありました。\n\n[[特|とく]]に[[文法|ぶんぽう]]の[[問題|もんだい]]が[[難|むずか]]しかったです。[[言葉|ことば]]の[[問題|もんだい]]は[[少|すこ]]しできました。[[聴解|ちょうかい]]はまだ[[練習|れんしゅう]]が[[必要|ひつよう]]です。[[間違|まちが]]えた[[問題|もんだい]]を[[全部|ぜんぶ]][[確認|かくにん]]しました。なぜ[[間違|まちが]]えたかを[[考|かんが]]えました。\n\n[[試験|しけん]]まであと3か[[月|げつ]]あります。[[毎日|まいにち]]コツコツ[[勉強|べんきょう]]します。[[弱|よわ]]いところを[[集中|しゅうちゅう]]して[[練習|れんしゅう]]します。[[次|つぎ]]の[[模擬試験|もぎしけん]]ではもっといい[[点数|てんすう]]を[[取|と]]りたいです。[[必|かなら]]ず[[合格|ごうかく]]できると[[信|しん]]じています！",
-    "icon": "fas fa-pencil-alt",
-    "color": "linear-gradient(135deg, #f6d365 0%, #fda085 100%)"
+    "translation": "Hari ini adalah hari ujian N4. Saya bangun pagi-pagi dan makan sarapan dengan baik. Saya agak gugup. Sebelum masuk ruang ujian, saya membaca catatan kecil yang sudah saya siapkan.\n\nSaya tiba di lokasi ujian. Ada banyak peserta ujian. Saya menarik napas dalam-dalam dan berkata kepada diri sendiri, 'Aku sudah berjuang keras sampai sekarang'. Saya mencoba tetap tenang dan mengerjakan setiap soal dengan penuh kehati-hatian.\n\nUjian selesai. Ada juga soal-soal yang sulit, tapi saya menjawab semuanya tanpa menyerah. Saya akan menunggu hasilnya dengan antusias. Apapun hasilnya, pengalaman mengikuti ujian ini sangat berharga bagi perjalanan belajar saya.",
+    "template": "[[今日|きょう]]は [[N4|エヌよん]]の [[試験|しけん]]の [[日|ひ]]です。[[朝|あさ]] [[早|はや]]く [[起|お]]きて、[[朝食|ちょうしょく]]を しっかり [[食|た]]べました。[[少|すこ]]し [[緊張|きんちょう]]しています。\n\n[[試験会場|しけんかいじょう]]に [[着|つ]]きました。[[受験者|じゅけんしゃ]]が たくさんいました。[[深呼吸|ふかいき]]をして、「[[今|いま]]まで [[頑張|がんば]]ってきた」と [[自分|じぶん]]に [[言|い]]い[[聞|き]]かせました。\n\n[[試験|しけん]]が [[終|お]]わりました。[[難|むずか]]しい [[問題|もんだい]]もありましたが、[[諦|あきら]]めずに [[全部|ぜんぶ]] [[答|こた]]えました。[[結果|けっか]]が [[出|で]]るまで [[楽|たの]]しみに [[待|ま]]ちます。",
+    "icon": "fas fa-pen-to-square",
+    "color": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
   },
   {
-    "id": "s8",
-    "title": "日本のコンビニ文化 (Budaya Konbini Jepang)",
-    "category": "Budaya Jepang",
-    "translation": "日本にはコンビニがたくさんあります。セブンイレブン、ローソン、ファミリーマートなどが有名です。コンビニでは食べ物だけでなく、いろいろなものが買えます。公共料金の支払いもできます。とても便利だと思います。\n\n日本のコンビニのおにぎりは有名です。いろいろな種類があります。温かいお弁当もあります。値段もそんなに高くないです。日本に行ったら、毎日コンビニに行きたいです。\n\nコンビニの店員さんの言葉も勉強になります。「いらっしゃいませ」や「ありがとうございました」は大切な言葉です。日本に行ったとき、コンビニで自分で買い物したいです。そのために、日本語を頑張って勉強しています！",
-    "template": "[[日本|にほん]]にはコンビニがたくさんあります。セブンイレブン、ローソン、ファミリーマートなどが[[有名|ゆうめい]]です。コンビニでは[[食|た]]べ[[物|もの]]だけでなく、いろいろなものが[[買|か]]えます。[[公共料金|こうきょうりょうきん]]の[[支払|しはら]]いもできます。とても[[便利|べんり]]だと[[思|おも]]います。\n\n[[日本|にほん]]のコンビニのおにぎりは[[有名|ゆうめい]]です。いろいろな[[種類|しゅるい]]があります。[[温|あたた]]かいお[[弁当|べんとう]]もあります。[[値段|ねだん]]もそんなに[[高|たか]]くないです。[[日本|にほん]]に[[行|い]]ったら、[[毎日|まいにち]]コンビニに[[行|い]]きたいです。\n\nコンビニの[[店員|てんいん]]さんの[[言葉|ことば]]も[[勉強|べんきょう]]になります。「いらっしゃいませ」や「ありがとうございました」は[[大切|たいせつ]]な[[言葉|ことば]]です。[[日本|にほん]]に[[行|い]]ったとき、コンビニで[[自分|じぶん]]で[[買|か]]い[[物|もの]]したいです。そのために、[[日本語|にほんご]]を[[頑張|がんば]]って[[勉強|べんきょう]]しています！",
-    "icon": "fas fa-store",
-    "color": "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)"
+    "id": "s21",
+    "title": "カメラを借りて (Meminjam Kamera)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Kemarin, saya meminjam kamera dari ayah. Ini kamera mahal yang bagus. Saya membawa kamera ini dan pergi ke gunung untuk memotret. Ayah berpesan agar saya berhati-hati saat menggunakan kamera di alam terbuka.\n\nDi gunung ada banyak burung yang indah. Pepohonan dan bunga juga cantik. Saya mengambil banyak foto yang bagus. Pemandangan alam yang indah membuat setiap foto terasa seperti karya seni.\n\nSetelah pulang ke rumah, saya melihat foto-fotonya. Ayah juga melihat bersama dan terlihat sangat senang. Terima kasih, Ayah. Pengalaman memotret bersama kamera ayah membuat saya semakin tertarik dengan fotografi.",
+    "template": "[[昨日|きのう]]、[[お父|おとう]]さんに [[カメラ|かめら]]を [[借|か]]りました。[[高|たか]]くて、いい [[カメラ|かめら]]です。この [[カメラ|かめら]]を [[持|も]]って、[[山|やま]]に [[写真|しゃしん]]を [[撮|と]]りに [[行|い]]きました。\n\n[[山|やま]]には [[綺麗|きれい]]な [[鳥|とり]]が たくさん いました。[[木|き]]や [[花|はな]]も [[綺麗|きれい]]でした。いい [[写真|しゃしん]]を たくさん [[撮|と]]りました。\n\n[[家|いえ]]に [[帰|かえ]]って、[[写真|しゃしん]]を [[見|み]]ました。[[お父|おとう]]さんも [[一緒|いっしょ]]に [[見|み]]て、とても [[嬉|うれ]]しそうでした。[[お父|おとう]]さん、ありがとう。",
+    "icon": "fas fa-camera-retro",
+    "color": "linear-gradient(135deg,#f093fb 0%,#f5576c 100%)"
   },
   {
-    "id": "s9",
-    "title": "日本の季節と旅行計画 (Musim di Jepang & Rencana Perjalanan)",
-    "category": "Impian ke Jepang",
-    "translation": "日本には四つの季節があります。春、夏、秋、冬です。春は桜がきれいです。秋は紅葉が美しいです。どの季節も素晴らしいと思います。\n\n私が一番行きたいのは春です。桜の木の下で写真を撮りたいです。「花見」という文化があると聞きました。友達と一緒に花見をしたいです。とても楽しそうです。\n\n旅行のために、今からお金を貯めています。N4に合格したら、旅行の計画を本格的に立てます。飛行機のチケットとホテルを予約します。夢が実現するように、毎日頑張ります！",
-    "template": "[[日本|にほん]]には[[四|よっ]]つの[[季節|きせつ]]があります。[[春|はる]]、[[夏|なつ]]、[[秋|あき]]、[[冬|ふゆ]]です。[[春|はる]]は[[桜|さくら]]が[[きれい]]です。[[秋|あき]]は[[紅葉|こうよう]]が[[美|うつく]]しいです。どの[[季節|きせつ]]も[[素晴|すば]]らしいと[[思|おも]]います。\n\n[[私|わたし]]が[[一番|いちばん]][[行|い]]きたいのは[[春|はる]]です。[[桜|さくら]]の[[木|き]]の[[下|した]]で[[写真|しゃしん]]を[[撮|と]]りたいです。「[[花見|はなみ]]」という[[文化|ぶんか]]があると[[聞|き]]きました。[[友達|ともだち]]と[[一緒|いっしょ]]に[[花見|はなみ]]をしたいです。とても[[楽|たの]]しそうです。\n\n[[旅行|りょこう]]のために、[[今|いま]]から[[お金|おかね]]を[[貯|た]]めています。[[N4|エヌよん]]に[[合格|ごうかく]]したら、[[旅行|りょこう]]の[[計画|けいかく]]を[[本格的|ほんかくてき]]に[[立|た]]てます。[[飛行機|ひこうき]]のチケットとホテルを[[予約|よやく]]します。[[夢|ゆめ]]が[[実現|じつげん]]するように、[[毎日|まいにち]][[頑張|がんば]]ります！",
+    "id": "s22",
+    "title": "今日はタクシーで帰りました (Pulang Naik Taksi)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Hari ini, setelah bekerja, saya berencana pulang naik kereta. Tapi ketika keluar dari stasiun, hujan deras sedang turun. Karena tidak membawa payung, saya kebingungan. Supir taksi sangat sopan dan mengemudi dengan hati-hati meski jalanan basah.\n\nHujan terus turun. Karena saya sangat lelah, saya memutuskan untuk menggunakan taksi hari ini. Taksi di Jepang mahal, tapi tidak ada pilihan lain. Saya berterima kasih kepada supir dan membayar ongkos dengan uang yang sudah disiapkan.\n\nKetika naik taksi, supir bertanya 'Mau kemana?'. Setelah menyampaikan alamat, taksi mulai bergerak. Karena lelah, saya langsung tertidur. Ketika tiba di rumah, supir membangunkan saya. Pengalaman naik taksi di Jepang mengajarkan saya pentingnya selalu membawa payung.",
+    "template": "[[今日|きょう]]は [[仕事|しごと]]の [[後|あと]]、[[電車|でんしゃ]]で [[帰|かえ]]ろうと [[思|おも]]いました。でも [[駅|えき]]の [[外|そと]]に [[出|で]]ると、[[大雨|おおあめ]]が [[降|ふ]]っていました。[[傘|かさ]]を [[持|も]]っていなかったので、[[困|こま]]りました。\n\n[[雨|あめ]]は ずっと [[降|ふ]]り [[続|つづ]]いていました。[[私|わたし]]は とても [[疲|つか]]れていたので、[[今日|きょう]]は [[タクシー|たくしー]]を [[使|つか]]うことに しました。[[日本|にほん]]の [[タクシー|たくしー]]は [[高|たか]]いですが、[[仕方|しかた]]がありませんでした。\n\n[[タクシー|たくしー]]に [[乗|の]]ると、[[運転手|うんてんしゅ]]が「[[どちら|どちら]]まで ですか？」と [[聞|き]]きました。[[住所|じゅうしょ]]を [[伝|つた]]えると、[[タクシー|たくしー]]が [[動|うご]]き [[始|はじ]]めました。[[疲|つか]]れていたので、すぐ [[眠|ねむ]]ってしまいました。[[家|いえ]]に [[着|つ]]くと [[運転手|うんてんしゅ]]が [[起|お]]こしてくれました。",
+    "icon": "fas fa-taxi",
+    "color": "linear-gradient(135deg,#43e97b 0%,#38f9d7 100%)"
+  },
+  {
+    "id": "s23",
+    "title": "みんなの傘 (Payung Milik Semua)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Tadi malam saya bekerja hingga larut. Setelah bekerja, saya pulang naik kereta. Ketika turun dari kereta, di luar hujan, tapi saya tidak punya payung. Saya berterima kasih kepada petugas stasiun yang sudah membantu saya malam itu.\n\nPetugas stasiun melihat saya dan berkata 'Tolong gunakan payung yang ada di dalam kotak itu'. Di dalam kotak ada 3 payung. Tidak perlu bayar. Keesokan paginya, saya mengembalikan payung ke kotak sesuai pesan petugas.\n\nSaya diberitahu 'Besok, kembalikan ke kotak itu ya'. Saya berkata 'Baik, terima kasih' lalu meminjam payung dan pulang. Kebaikan kecil petugas stasiun itu membuat saya semakin kagum dengan budaya Jepang. Saya bertekad untuk selalu membalas kebaikan orang lain seperti yang diajarkan budaya Jepang.",
+    "template": "[[昨日|きのう]]の [[夜|よる]]は [[遅|おそ]]くまで [[仕事|しごと]]を しました。[[仕事|しごと]]の [[後|あと]]、[[電車|でんしゃ]]で [[帰|かえ]]りました。[[駅|えき]]を [[降|お]]りると、[[外|そと]]は [[雨|あめ]]でしたが、[[私|わたし]]は [[傘|かさ]]が ありませんでした。\n\n[[駅|えき]]の [[人|ひと]]が [[私|わたし]]を [[見|み]]て「あの [[箱|はこ]]の [[中|なか]]の [[傘|かさ]]を [[使|つか]]って [[下|くだ]]さい」と [[言|い]]いました。[[箱|はこ]]の [[中|なか]]には [[傘|かさ]]が 3[[本|ほん]]ありました。[[お金|おかね]]は [[要|い]]りません。\n\n「[[明日|あした]]、あの [[箱|はこ]]に [[返|かえ]]して [[下|くだ]]さい」と [[言|い]]われました。[[私|わたし]]は「[[分|わ]]かりました。[[ありがとう|ありがとう]]ございます」と [[言|い]]って、[[傘|かさ]]を [[借|か]]りて [[帰|かえ]]りました。",
+    "icon": "fas fa-umbrella",
+    "color": "linear-gradient(135deg,#4facfe 0%,#00f2fe 100%)"
+  },
+  {
+    "id": "s24",
+    "title": "読書が趣味です (Membaca adalah Hobi Saya)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Hobi saya adalah membaca buku. Terutama saya suka membaca novel. Di hari libur saya meminjam buku di perpustakaan dan membacanya. Saya sering membaca di depan jendela sambil menikmati sinar matahari pagi.\n\nKalau sudah mulai membaca buku, saya bisa terus membaca sekitar 5 jam. Juga sering terjadi saya tertidur sambil membaca buku. Perpustakaan yang dekat rumah membuat hobi membaca saya semakin mudah dijalankan. Saya juga mencatat rekomendasi buku dari teman-teman untuk menambah referensi bacaan.\n\nKekhawatiran terbesar belakangan ini adalah penglihatan saya memburuk karena terlalu banyak membaca. Karena membaca di tempat gelap membuat mata memburuk, saya berencana membaca di tempat yang terang. Saya berencana lebih bijak dalam mengatur waktu membaca agar mata tetap sehat. Menjaga keseimbangan antara hobi membaca dan kesehatan mata sangat penting bagi saya.",
+    "template": "[[私|わたし]]の [[趣味|しゅみ]]は、[[本|ほん]]を [[読|よ]]む ことです。[[特|とく]]に [[小説|しょうせつ]]を [[読|よ]]むのが [[好|す]]きです。[[休|やす]]みの [[日|ひ]]には [[図書館|としょかん]]で [[本|ほん]]を [[借|か]]りて [[読|よ]]みます。\n\n[[私|わたし]]は [[本|ほん]]を [[読|よ]]み [[始|はじ]]めると、5[[時間|じかん]]ぐらい [[読|よ]]み [[続|つづ]]けてしまいます。[[本|ほん]]を [[読|よ]]みながら [[眠|ねむ]]って しまうことも よく あります。\n\n[[最近|さいきん]] [[一番|いちばん]]の [[悩|なや]]みは、[[本|ほん]]を [[読|よ]]み すぎて [[目|め]]が [[悪|わる]]くなって きた ことです。[[暗|くら]]い ところで [[本|ほん]]を [[読|よ]]むと [[目|め]]が [[悪|わる]]くなるので、[[明|あか]]るい ところで [[読|よ]]もうと [[思|おも]]います。",
+    "icon": "fas fa-book-open",
+    "color": "linear-gradient(135deg,#a18cd1 0%,#fbc2eb 100%)"
+  },
+  {
+    "id": "s25",
+    "title": "バレンタインデー (Hari Valentine di Jepang)",
+    "category": "Wisata & Budaya",
+    "translation": "Valentine's Day adalah tanggal 14 Februari. Di Jepang, wanita memberikan cokelat kepada pria. Ini adalah acara penting di Jepang. Di sekolah, kami juga membuat cokelat sendiri bersama teman-teman sekelas.\n\nCokelat juga diberikan kepada teman, keluarga, dan rekan kerja. Ini adalah hari penting untuk menyampaikan perasaan kepada orang yang disukai. Saya memberikan cokelat buatan sendiri kepada sahabat yang sudah banyak membantu. Saya juga memberikan cokelat kepada guru bahasa Jepang yang sudah banyak membantu saya.\n\nBulan berikutnya setelah Valentine, tanggal 14 Maret adalah White Day. Pria memberikan balasan kepada wanita. Saya pikir ini adalah budaya yang khas Jepang. Tradisi Valentine di Jepang mengajarkan saya tentang pentingnya mengungkapkan rasa terima kasih.",
+    "template": "[[バレンタインデー|ばれんたいんでー]]は、2[[月|がつ]]14[[日|にち]]です。[[日本|にほん]]では、[[女|おんな]]の [[人|ひと]]が [[男|おとこ]]の [[人|ひと]]に [[チョコレート|ちょこれーと]]を あげます。これは [[日本|にほん]]の [[大切|たいせつ]]な [[イベント|いべんと]]です。\n\n[[友達|ともだち]]や [[家族|かぞく]]、[[会社|かいしゃ]]の [[人|ひと]]にも [[チョコレート|ちょこれーと]]を あげる ことが あります。[[好|す]]きな [[人|ひと]]には [[気持|きも]]ちを [[伝|つた]]える [[大切|たいせつ]]な [[日|ひ]]です。\n\n[[バレンタインデー|ばれんたいんでー]]の [[次|つぎ]]の [[月|つき]]、3[[月|がつ]]14[[日|にち]]は [[ホワイトデー|ほわいとでー]]です。[[男|おとこ]]の [[人|ひと]]が [[女|おんな]]の [[人|ひと]]に お[[返|かえ]]しを します。[[日本|にほん]]らしい [[文化|ぶんか]]だと [[思|おも]]います。",
+    "icon": "fas fa-heart",
+    "color": "linear-gradient(135deg,#ff6b6b 0%,#feca57 100%)"
+  },
+  {
+    "id": "s26",
+    "title": "父の気持ち (Perasaan Ayah)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Waktu kecil, saya tidak suka kopi. Karena ayah minum kopi setiap hari, suatu hari saya pernah mencicipi seteguk. Kini setiap pagi saya pun menikmati secangkir kopi sebelum memulai aktivitas. Saya penasaran dan ingin mencoba meminum kopi seperti yang selalu ayah lakukan.\n\nRasanya sama sekali tidak enak, jadi saya berteriak 'Ih, tidak enak!' dan mengeluarkan semuanya dari mulut. Ayah berkata 'Kalau sudah dewasa, pasti akan tahu enaknya'. Rasa kopi yang dulu terasa pahit kini menjadi sahabat setia saat belajar malam. Kenangan lucu itu selalu membuat saya tersenyum setiap kali menyeruput kopi hari ini.\n\nSekarang saya sudah menjadi mahasiswa dan minum kopi setiap hari. Minum saat belajar maupun setelah makan. Sekarang saya mengerti perasaan ayah. Kenangan kecil bersama ayah itu membuat setiap tegukan kopi terasa lebih bermakna.",
+    "template": "[[子供|こども]]の [[頃|ころ]]、[[私|わたし]]は [[コーヒー|こーひー]]が [[好|す]]きじゃありませんでした。[[父|ちち]]は [[毎日|まいにち]] [[コーヒー|こーひー]]を [[飲|の]]んでいたので、ある [[日|ひ]]、[[一口|ひとくち]] もらった ことが あります。\n\n[[全然|ぜんぜん]] [[美味|おい]]しくなかったので「うえ、まずい！」と [[言|い]]って、[[口|くち]]から [[全部|ぜんぶ]] [[出|だ]]してしまいました。[[父|ちち]]は「[[大人|おとな]]に なったら きっと [[美味|おい]]しさが [[分|わ]]かるよ」と [[言|い]]いました。\n\n[[今|いま]]、[[私|わたし]]は [[大学生|だいがくせい]]になって、[[毎日|まいにち]] [[コーヒー|こーひー]]を [[飲|の]]んでいます。[[勉強|べんきょう]]の [[時|とき]]にも、[[食事|しょくじ]]の [[後|あと]]にも [[飲|の]]みます。[[今|いま]]なら [[父|ちち]]の [[気持|きも]]ちが [[分|わ]]かります。",
+    "icon": "fas fa-mug-hot",
+    "color": "linear-gradient(135deg,#6a3093 0%,#a044ff 100%)"
+  },
+  {
+    "id": "s27",
+    "title": "相撲 (Sumo, Olahraga Tradisional Jepang)",
+    "category": "Wisata & Budaya",
+    "translation": "Sumo adalah olahraga tradisional Jepang dengan sejarah ratusan tahun. Sumo sejak dahulu kala berkaitan dengan acara kuil dan festival. Para rikishi juga menjalani ritual khusus sebelum pertandingan sebagai bentuk penghormatan. Sumo adalah bagian dari warisan budaya Jepang yang perlu dilestarikan oleh generasi mendatang.\n\nOrang yang bertanding sumo disebut rikishi. Rikishi berlatih keras setiap hari dan membangun tubuh yang kuat. Pertandingan sumo diadakan di tempat bulat yang disebut dohyo. Saya menonton pertandingan sumo secara langsung dan sangat terpesona oleh atmosfernya.\n\nAturannya sederhana, orang yang mengeluarkan lawan keluar dari dohyo, atau yang jatuh duluan akan kalah. Sebelum pertandingan, rikishi menaburkan garam dan memberi hormat. Sumo bukan sekadar olahraga, tetapi juga cerminan nilai-nilai budaya dan spiritualitas Jepang. Menonton pertandingan sumo secara langsung adalah pengalaman yang benar-benar mengesankan.",
+    "template": "[[相撲|すもう]]は [[日本|にほん]]の [[伝統的|でんとうてき]]な [[スポーツ|すぽーつ]]で、[[何百年|なんびゃくねん]]もの [[歴史|れきし]]が あります。[[相撲|すもう]]は [[昔|むかし]]から [[神社|じんじゃ]]の [[行事|ぎょうじ]]や [[お祭|おまつ]]りと [[関係|かんけい]]が あります。\n\n[[相撲|すもう]]を する [[人|ひと]]は [[力士|りきし]]と [[呼|よ]]ばれます。[[力士|りきし]]は [[毎日|まいにち]] [[厳|きび]]しい [[練習|れんしゅう]]を して、[[強|つよ]]い [[体|からだ]]を [[作|つく]]ります。[[相撲|すもう]]の [[試合|しあい]]は [[土俵|どひょう]]という [[丸|まる]]い [[場所|ばしょ]]で [[行|おこな]]われます。\n\n[[ルール|るーる]]は [[簡単|かんたん]]で、[[相手|あいて]]を [[土俵|どひょう]]の [[外|そと]]に [[出|だ]]すか、[[先|さき]]に [[倒|たお]]した [[人|ひと]]が [[負|ま]]けに なります。[[試合|しあい]]の [[前|まえ]]に [[力士|りきし]]は [[塩|しお]]を まいて [[礼|れい]]を します。",
+    "icon": "fas fa-fist-raised",
+    "color": "linear-gradient(135deg,#f7971e 0%,#ffd200 100%)"
+  },
+  {
+    "id": "s28",
+    "title": "日本の挨拶 (Salam dalam Budaya Jepang)",
+    "category": "Wisata & Budaya",
+    "translation": "Di Jepang, salam sangat penting. Salam memperbaiki hubungan antar sesama. Ketika bertemu seseorang di pagi hari, kita mengucapkan 'Ohayou gozaimasu'. Mengucapkan salam dengan tulus dapat menciptakan suasana yang hangat dan bersahabat.\n\nSaat siang hari mengucapkan 'Konnichiwa', saat malam 'Konbanwa'. Sebelum tidur mengucapkan 'Oyasuminasai'. Di tempat kerja atau sekolah, kita mengucapkan salam yang sopan. Saya terus berlatih menggunakan berbagai salam Jepang dalam percakapan sehari-hari.\n\nDi kereta atau toko pun, sering menggunakan 'Arigatou gozaimasu' dan 'Sumimasen'. Dengan mengucapkan salam, perasaan lawan bicara menjadi lebih baik. Orang Jepang menghargai salam setiap harinya. Kebiasaan memberi salam yang baik di Jepang menjadi inspirasi bagi saya dalam kehidupan.",
+    "template": "[[日本|にほん]]では、[[挨拶|あいさつ]]は とても [[大切|たいせつ]]です。[[挨拶|あいさつ]]は [[人|ひと]]と [[人|ひと]]の [[関係|かんけい]]を よく します。[[朝|あさ]]、[[人|ひと]]に [[会|あ]]った [[時|とき]]は「おはようございます」と [[言|い]]います。\n\n[[昼|ひる]]は「こんにちは」、[[夜|よる]]は「こんばんは」と [[言|い]]います。[[寝|ね]]る [[前|まえ]]は「おやすみなさい」と [[言|い]]います。[[仕事|しごと]]や [[学校|がっこう]]では、ていねいな [[挨拶|あいさつ]]を します。\n\n[[電車|でんしゃ]]や [[店|みせ]]でも、「ありがとうございます」や「すみません」を よく [[使|つか]]います。[[挨拶|あいさつ]]を すると、[[相手|あいて]]の [[気持|きも]]ちが よくなります。[[日本人|にほんじん]]は [[毎日|まいにち]] [[挨拶|あいさつ]]を [[大事|だいじ]]に しています。",
+    "icon": "fas fa-hands",
+    "color": "linear-gradient(135deg,#89f7fe 0%,#66a6ff 100%)"
+  },
+  {
+    "id": "s29",
+    "title": "お花見 (Hanami, Menikmati Bunga Sakura)",
+    "category": "Wisata & Budaya",
+    "translation": "Hanami adalah acara penting di musim semi Jepang. Ketika musim semi tiba, bunga sakura bermekaran banyak sekali. Bunga sakura berwarna pink dan sangat indah. Banyak orang datang lebih pagi untuk mendapatkan tempat duduk terbaik saat hanami.\n\nOrang Jepang pergi ke taman atau tepi sungai bersama keluarga dan teman. Di taman, semua orang makan bersama, minum minuman, dan berpiknik. Musik dan tawa mengisi udara sementara kelopak sakura beterbangan indah di sekitar. Semua orang menikmati keindahan alam sambil tertawa dan berbagi cerita bersama.\n\nSambil makan makanan yang enak, mereka menikmati pemandangan sakura. Semua orang berfoto dan bercakap-cakap banyak. Hanami di hari yang cerah sangat menyenangkan. Hanami mengajarkan saya untuk menghargai keindahan alam dan momen kebersamaan bersama orang-orang tersayang.",
+    "template": "[[お花見|はなみ]]は [[日本|にほん]]の [[春|はる]]の [[大切|たいせつ]]な [[行事|ぎょうじ]]です。[[春|はる]]になると、[[桜|さくら]]の [[花|はな]]が たくさん [[咲|さ]]きます。[[桜|さくら]]の [[花|はな]]は [[ピンク|ぴんく]][[色|いろ]]で、とても [[綺麗|きれい]]です。\n\n[[日本人|にほんじん]]は [[家族|かぞく]]や [[友達|ともだち]]と いっしょに [[公園|こうえん]]や [[川|かわ]]の [[近|ちか]]くへ [[行|い]]きます。[[公園|こうえん]]では、みんなで [[ごはん|ごはん]]を [[食|た]]べたり、[[飲|の]]み[[物|もの]]を [[飲|の]]んだり、[[ピクニック|ぴくにっく]]を したりします。\n\n[[美味|おい]]しい [[料理|りょうり]]を [[食|た]]べながら [[桜|さくら]]を [[見|み]]ます。みんなで [[写真|しゃしん]]を とったり、たくさん [[話|はなし]]したりします。[[天気|てんき]]が いい [[日|ひ]]の [[お花見|はなみ]]は、とても [[楽|たの]]しいです。",
     "icon": "fas fa-leaf",
-    "color": "linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)"
+    "color": "linear-gradient(135deg,#f6d365 0%,#fda085 100%)"
   },
   {
-    "id": "s10",
-    "title": "N4合格の目標を持つ (Memiliki Target Lulus N4)",
+    "id": "s30",
+    "title": "富士山 (Gunung Fuji, Simbol Jepang)",
+    "category": "Wisata & Budaya",
+    "translation": "Gunung Fuji adalah gunung tertinggi di Jepang. Ini adalah gunung yang sangat besar dan indah. Gunung Fuji sangat terkenal di Jepang dan merupakan simbolnya. Gunung Fuji juga menjadi inspirasi bagi banyak seniman dan penyair Jepang sepanjang sejarah.\n\nBanyak orang Jepang dan wisatawan asing pergi untuk melihat Gunung Fuji. Gunung Fuji di musim dingin ada salju putih dan sangat indah. Di musim panas, banyak orang mendaki Gunung Fuji. Saya membeli miniatur Gunung Fuji sebagai kenang-kenangan dari perjalanan saya ke Jepang.\n\nDi sekitar Gunung Fuji ada danau dan hutan. Di hari yang cerah, langit biru dan Gunung Fuji terlihat sangat indah. Suatu hari nanti, saya ingin mendaki Gunung Fuji. Melihat Gunung Fuji secara langsung adalah pengalaman yang menggugah rasa kagum yang dalam.",
+    "template": "[[富士山|ふじさん]]は [[日本|にほん]]で [[一番|いちばん]] [[高|たか]]い [[山|やま]]です。とても [[大|おお]]きくて [[綺麗|きれい]]な [[山|やま]]です。[[富士山|ふじさん]]は [[日本|にほん]]で とても [[有名|ゆうめい]]で、[[日本|にほん]]の [[シンボル|しんぼる]]です。\n\nたくさんの [[日本人|にほんじん]]や [[外国人|がいこくじん]]が [[富士山|ふじさん]]を [[見|み]]に [[行|い]]きます。[[冬|ふゆ]]の [[富士山|ふじさん]]は [[白|しろ]]い [[雪|ゆき]]があって、とても [[美|うつく]]しいです。[[夏|なつ]]には [[富士山|ふじさん]]に [[登|のぼ]]る [[人|ひと]]が たくさん います。\n\n[[富士山|ふじさん]]の [[周|まわ]]りには [[湖|みずうみ]]や [[森|もり]]が あります。[[天気|てんき]]が いい [[日|ひ]]には [[空|そら]]が [[青|あお]]くて、[[富士山|ふじさん]]が とても [[綺麗|きれい]]に [[見|み]]えます。[[私|わたし]]は いつか [[富士山|ふじさん]]に [[登|のぼ]]りたいです。",
+    "icon": "fas fa-mountain",
+    "color": "linear-gradient(135deg,#e0c3fc 0%,#8ec5fc 100%)"
+  },
+  {
+    "id": "s31",
+    "title": "わたしの家族 (Keluarga Saya)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Keluarga saya ada 5 orang. Ibu, ayah, kakak laki-laki, adik perempuan, dan saya. Ayah adalah karyawan perusahaan. Setiap hari pergi ke kantor pagi-pagi. Kami selalu sarapan bersama sebelum memulai hari dan itu menjadi tradisi keluarga.\n\nIbu ada di rumah. Ibu pandai memasak. Setiap hari memasak makanan yang enak. Kakak laki-laki adalah insinyur. Bekerja di perusahaan IT. Setiap anggota keluarga saling mendukung dan membantu satu sama lain dalam keseharian.\n\nKami pergi ke taman bersama setiap hari Minggu. Saya merasa bahagia ketika bersama keluarga. Saya sangat menyayangi keluarga. Kebersamaan dalam keluarga adalah kekuatan terbesar yang selalu membuat saya merasa bersyukur.",
+    "template": "[[私|わたし]]の [[家族|かぞく]]は 5[[人|にん]]です。[[母|はは]]と [[父|ちち]]と [[兄|あに]]と [[妹|いもうと]]と [[私|わたし]]です。[[父|ちち]]は [[会社員|かいしゃいん]]です。[[毎日|まいにち]] [[朝|あさ]] [[早|はや]]く [[会社|かいしゃ]]へ [[行|い]]きます。\n\n[[母|はは]]は [[家|いえ]]に います。[[母|はは]]は [[料理|りょうり]]が [[上手|じょうず]]です。[[毎日|まいにち]] [[美味|おい]]しい [[料理|りょうり]]を [[作|つく]]ります。[[兄|あに]]は [[エンジニア|えんじにあ]]です。[[IT|アイティー]]の [[会社|かいしゃ]]で [[働|はたら]]いています。\n\n[[私|わたし]]たちは [[毎週|まいしゅう]]の [[日曜日|にちようび]]に [[一緒|いっしょ]]に [[公園|こうえん]]へ [[行|い]]きます。[[家族|かぞく]]と [[一緒|いっしょ]]に いると [[幸|しあわ]]せです。[[私|わたし]]は [[家族|かぞく]]が [[大好|だいす]]きです。",
+    "icon": "fas fa-users",
+    "color": "linear-gradient(135deg,#667eea 0%,#764ba2 100%)"
+  },
+  {
+    "id": "s32",
+    "title": "犬の生活 (Kehidupan Seekor Anjing)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Saya adalah Tomo. Saya tinggal di rumah Pak Santos. Setiap pagi saya berjalan-jalan bersama nyonya rumah. Sekitar jam 8, saya mengantar anak-anak yang pergi ke sekolah. Anak-anak juga sering membawakan camilan untukku sepulang dari sekolah setiap harinya.\n\nSore hari, saya pergi menjemput anak-anak di sekolah. Kemudian kami pergi bermain ke taman bersama. Di akhir pekan, semua keluarga pergi bermain ke tempat yang jauh. Saya juga ikut pergi. Aku selalu setia menjaga rumah dan memberi tahu bila ada tamu yang datang.\n\nDi rumah ada juga kucing. Kucing tidak melakukan apa-apa setiap hari. Saya sibuk dari pagi hingga malam. Tidak ada istirahat sama sekali. Saya ingin beristirahat bersama kucing. Meski kadang lelah, hidup bersama keluarga Santos membuatku merasa bahagia dan dicintai.",
+    "template": "[[私|わたし]]は トモです。[[サントス|さんとす]]さんの [[家|いえ]]に います。[[私|わたし]]は [[毎朝|まいあさ]] [[奥|おく]]さんと [[散歩|さんぽ]]に [[行|い]]きます。8[[時|じ]]ごろ [[学校|がっこう]]へ [[行|い]]く [[子|こ]]を [[見送|みおく]]ります。\n\n[[午後|ごご]]、[[学校|がっこう]]へ [[子|こ]]を [[迎|むか]]えに [[行|い]]きます。それから [[一緒|いっしょ]]に [[公園|こうえん]]へ [[遊|あそ]]びに [[行|い]]きます。[[週末|しゅうまつ]]は [[家族|かぞく]]みんなで [[遠|とお]]い [[所|ところ]]へ [[遊|あそ]]びに [[行|い]]きます。[[私|わたし]]も [[一緒|いっしょ]]に [[行|い]]きます。\n\n[[家|いえ]]には [[猫|ねこ]]も います。[[猫|ねこ]]は [[毎日|まいにち]] なにも しません。[[私|わたし]]は [[朝|あさ]]から [[晩|ばん]]まで [[忙|いそが]]しいです。[[休|やす]]みが [[全然|ぜんぜん]]ありません。[[猫|ねこ]]と いっしょに [[休|やす]]みたいです。",
+    "icon": "fas fa-dog",
+    "color": "linear-gradient(135deg,#f6d365 0%,#fda085 100%)"
+  },
+  {
+    "id": "s33",
+    "title": "僕のおばあちゃん (Nenekku)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Nenekku berusia 72 tahun dan sehat. Dia tinggal seorang diri. Ketika cuaca bagus, nenek pergi ke rumah sakit untuk menemui teman-temannya. Nenek selalu menyambutku dengan pelukan hangat setiap kali aku berkunjung ke rumahnya.\n\nKetika nenek datang ke rumahku, aku menyanyikan lagu yang dipelajari di sekolah untuknya. Nenek menceritakan kisah-kisah Jepang zaman dulu kepadaku. Aku selalu menunggu-nunggu saat nenek datang karena suasana rumah menjadi lebih hidup. Saya selalu merindukan cerita dan nasihat nenek yang penuh kebijaksanaan dan kasih sayang.\n\nKetika nenek datang ke rumah, suasana rumah menjadi sangat ramai. Aku sangat suka roti dan kue yang dibuat nenek. Nenek adalah harta karunку. Cinta nenek yang tulus dan tanpa syarat adalah anugerah terbesar dalam hidupku.",
+    "template": "[[僕|ぼく]]の おばあちゃんは 72[[歳|さい]]で [[元気|げんき]]です。[[一人|ひとり]]で [[住|す]]んでいます。[[天気|てんき]]が いい [[時|とき]]、おばあちゃんは [[病院|びょういん]]へ [[友達|ともだち]]に [[会|あ]]いに [[行|い]]きます。\n\nおばあちゃんが [[僕|ぼく]]の [[家|いえ]]へ [[来|き]]た [[時|とき]]、[[僕|ぼく]]は [[学校|がっこう]]で [[習|なら]]った [[歌|うた]]を [[歌|うた]]って あげます。おばあちゃんは [[僕|ぼく]]に [[古|ふる]]い [[日本|にほん]]の [[話|はなし]]を して くれます。\n\nおばあちゃんが [[家|いえ]]へ [[来|き]]ると、[[家|いえ]]の [[中|なか]]が とても にぎやかに なります。おばあちゃんが [[作|つく]]って くれる [[パン|ぱん]]や [[お菓子|おかし]]が [[大好|だいす]]きです。おばあちゃんは [[僕|ぼく]]の [[宝物|たからもの]]です。",
+    "icon": "fas fa-heart",
+    "color": "linear-gradient(135deg,#fccb90 0%,#d57eeb 100%)"
+  },
+  {
+    "id": "s34",
+    "title": "カンガルーの名前 (Asal-usul Nama Kanguru)",
+    "category": "Wisata & Budaya",
+    "translation": "Apakah Anda tahu nama hewan ini? Itu adalah 'kanguru'. Ada cerita menarik tentang nama kanguru. Orang-orang Australia pun tertawa mendengar kesalahpahaman yang terjadi antara Cook dan mereka.\n\nPada tahun 1770, Kapten Cook dari Inggris pergi ke Australia dengan kapal. Dan dia melihat hewan ini untuk pertama kalinya. Cook berkata kepada penduduk Australia bahwa dia ingin tahu nama hewan ini. Kisah ini menjadi bukti bahwa hambatan bahasa dapat memunculkan cerita yang tak terduga.\n\nPenduduk Australia berkata dalam bahasa mereka sendiri 'Kangaroo (tidak tahu)'. Maka Cook mengira nama hewan ini adalah 'kangaroo'. Menarik bukan! Asal-usul nama kanguru mengajarkan kita untuk selalu penasaran dan mau belajar hal baru.",
+    "template": "この [[動物|どうぶつ]]の [[名前|なまえ]]を [[知|し]]っていますか。「[[カンガルー|かんがるー]]」です。[[カンガルー|かんがるー]]の [[名前|なまえ]]について [[面白|おもしろ]]い [[話|はなし]]が あります。\n\n1770[[年|ねん]]に [[イギリス|いぎりす]]の [[キャプテン|きゃぷてん]]・[[クック|くっく]]は [[船|ふね]]で [[オーストラリア|おーすとらりあ]]へ [[行|い]]きました。そして [[初|はじ]]めて この [[動物|どうぶつ]]を [[見|み]]ました。[[クック|くっく]]は [[オーストラリア|おーすとらりあ]]の [[人|ひと]]に この [[動物|どうぶつ]]の [[名前|なまえ]]を [[知|し]]りたいと [[言|い]]いました。\n\n[[オーストラリア|おーすとらりあ]]の [[人|ひと]]は [[自分|じぶん]]たちの [[言葉|ことば]]で「[[カンガルー|かんがるー]]（[[分|わ]]からない）」と [[言|い]]いました。それで [[クック|くっく]]は この [[動物|どうぶつ]]の [[名前|なまえ]]は「[[カンガルー|かんがるー]]」だと [[思|おも]]いました。[[面白|おもしろ]]いですね！",
+    "icon": "fas fa-paw",
+    "color": "linear-gradient(135deg,#96fbc4 0%,#f9f586 100%)"
+  },
+  {
+    "id": "s35",
+    "title": "わたしの夢 (Impianku)",
     "category": "Persiapan Ujian",
-    "translation": "N4に合格するのが今年の目標です。N4に合格すれば、日本語の基礎ができたと言えます。就職や旅行でも役に立ちます。だから、真剣に取り組んでいます。絶対に合格したいです。\n\nN4の試験内容は文字・語彙、文法、読解、聴解です。それぞれ練習が必要です。特に読解と聴解に力を入れています。毎日少しずつ練習すれば、必ず上手になります。\n\n試験まであと少しです。今まで頑張ってきたので、自信があります。リラックスして試験に臨みたいです。合格したら、N3の勉強をすぐに始めます。そして、いつか日本で働くのが最終目標です！",
-    "template": "[[N4|エヌよん]]に[[合格|ごうかく]]するのが[[今年|ことし]]の[[目標|もくひょう]]です。[[N4|エヌよん]]に[[合格|ごうかく]]すれば、[[日本語|にほんご]]の[[基礎|きそ]]ができたと[[言|い]]えます。[[就職|しゅうしょく]]や[[旅行|りょこう]]でも[[役|やく]]に[[立|た]]ちます。だから、[[真剣|しんけん]]に[[取|と]]り[[組|く]]んでいます。[[絶対|ぜったい]]に[[合格|ごうかく]]したいです。\n\n[[N4|エヌよん]]の[[試験|しけん]][[内容|ないよう]]は[[文字|もじ]]・[[語彙|ごい]]、[[文法|ぶんぽう]]、[[読解|どっかい]]、[[聴解|ちょうかい]]です。それぞれ[[練習|れんしゅう]]が[[必要|ひつよう]]です。[[特|とく]]に[[読解|どっかい]]と[[聴解|ちょうかい]]に[[力|ちから]]を[[入|い]]れています。[[毎日|まいにち]][[少|すこ]]しずつ[[練習|れんしゅう]]すれば、[[必|かなら]]ず[[上手|じょうず]]になります。\n\n[[試験|しけん]]まであと[[少|すこ]]しです。[[今|いま]]まで[[頑張|がんば]]ってきたので、[[自信|じしん]]があります。リラックスして[[試験|しけん]]に[[臨|のぞ]]みたいです。[[合格|ごうかく]]したら、[[N3|エヌさん]]の[[勉強|べんきょう]]をすぐに[[始|はじ]]めます。そして、いつか[[日本|にほん]]で[[働|はたら]]くのが[[最終|さいしゅう]][[目標|もくひょう]]です！",
-    "icon": "fas fa-trophy",
-    "color": "linear-gradient(135deg, #30cfd0 0%, #330867 100%)"
+    "translation": "Impianku adalah berbisnis. Di masa depan, saya ingin membuat perusahaan sendiri. Meski kecil, saya ingin membuat perusahaan yang baik. Saya juga berlatih percakapan bahasa Jepang dan Inggris dengan aplikasi di ponsel.\n\nSaya ingin bekerja bersama banyak orang. Saya ingin bersikap baik kepada pelanggan. Saya ingin bekerja keras setiap hari. Saya ingin menggunakan uang dengan benar. Setiap pencapaian kecil dalam belajar membuat saya semakin yakin bisa meraih impian.\n\nUntuk itu, sekarang saya belajar keras. Saya belajar bahasa Jepang maupun bahasa Inggris. Suatu hari nanti, saya ingin mewujudkan impian sendiri. Saya percaya bahwa ketekunan dan kerja keras akan membawa saya menuju impian yang diinginkan.",
+    "template": "[[私|わたし]]の [[夢|ゆめ]]は [[ビジネス|びじねす]]を する ことです。[[将来|しょうらい]]、[[自分|じぶん]]の [[会社|かいしゃ]]を [[作|つく]]りたいです。[[小|ちい]]さくても、いい [[会社|かいしゃ]]を [[作|つく]]りたいです。\n\nたくさんの [[人|ひと]]と [[働|はたら]]きたいです。[[お客|おきゃく]]さんに [[優|やさ]]しくしたいです。[[毎日|まいにち]] [[一生懸命|いっしょうけんめい]] [[働|はたら]]きたいです。[[お金|おかね]]を [[正|ただ]]しく [[使|つか]]いたいです。\n\nその ために、[[今|いま]] [[勉強|べんきょう]]を [[頑張|がんば]]っています。[[日本語|にほんご]]も [[英語|えいご]]も [[勉強|べんきょう]]しています。いつか、[[自分|じぶん]]の [[夢|ゆめ]]を かなえたいです。",
+    "icon": "fas fa-star",
+    "color": "linear-gradient(135deg,#f093fb 0%,#f5576c 100%)"
+  },
+  {
+    "id": "s36",
+    "title": "私のうち (Rumah dan Lingkungan Tempat Tinggalku)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Rumah baru saya berada di tempat yang tenang. Di sebelah rumah ada taman yang indah. Di depan taman ada perpustakaan dan kafe. Perpustakaan dekat rumah menjadi tempat favorit saya untuk menikmati waktu santai.\n\nSaya meminjam buku di perpustakaan. Lalu membacanya di taman. Kadang-kadang membaca di kafe. Kopi di kafe itu enak. Suasana tenang di sekitar rumah sangat mendukung produktivitas dan ketenangan pikiran.\n\nDi dekat rumah ada kantor pos dan bank. Di antara kantor pos dan bank ada supermarket. Di dalam supermarket ada toko bunga dan toko roti yang enak. Sangat praktis. Saya merasa sangat beruntung bisa tinggal di lingkungan yang nyaman dan lengkap fasilitasnya.",
+    "template": "[[私|わたし]]の [[新|あたら]]しい [[家|いえ]]は [[静|しず]]かな [[所|ところ]]に あります。[[家|いえ]]の [[隣|となり]]に [[綺麗|きれい]]な [[公園|こうえん]]が あります。[[公園|こうえん]]の [[前|まえ]]に [[図書館|としょかん]]と [[喫茶店|きっさてん]]が あります。\n\n[[私|わたし]]は [[図書館|としょかん]]で [[本|ほん]]を [[借|か]]ります。そして、[[公園|こうえん]]で [[読|よ]]みます。[[時々|ときどき]] [[喫茶店|きっさてん]]で [[読|よ]]みます。[[喫茶店|きっさてん]]の [[コーヒー|こーひー]]は [[美味|おい]]しいです。\n\n[[家|いえ]]の [[近|ちか]]くに [[郵便局|ゆうびんきょく]]と [[銀行|ぎんこう]]が あります。[[郵便局|ゆうびんきょく]]と [[銀行|ぎんこう]]の [[間|あいだ]]に [[スーパー|すーぱー]]が あります。[[スーパー|すーぱー]]の [[中|なか]]に [[花屋|はなや]]や [[美味|おい]]しい [[パン屋|ぱんや]]が あります。とても [[便利|べんり]]です。",
+    "icon": "fas fa-home",
+    "color": "linear-gradient(135deg,#43e97b 0%,#38f9d7 100%)"
+  },
+  {
+    "id": "s37",
+    "title": "クリスマス (Natal di Jepang)",
+    "category": "Wisata & Budaya",
+    "translation": "Natal adalah tanggal 24 Desember. Natal adalah hari yang sangat istimewa. Ketika Desember tiba, menjadi dingin. Di rumah dan toko ada dekorasi Natal. Semua orang bertukar ucapan dan hadiah kecil sebagai tanda kasih sayang dan persahabatan.\n\nMelihat pohon Natal yang besar itu menyenangkan. Di malam hari, makan bersama keluarga. Makan kue dan minum jus. Dekorasi Natal yang meriah di mana-mana membuat suasana kota menjadi sangat istimewa.\n\nKepada teman mengucapkan 'Merry Christmas!'. Anak-anak senang mendapatkan hadiah. Natal adalah hari yang sangat menyenangkan. Natal di Jepang mengajarkan saya bahwa kebahagiaan sejati lahir dari kebersamaan dengan orang-orang terkasih.",
+    "template": "[[クリスマス|くりすます]]は 12[[月|がつ]]24[[日|にち]]です。[[クリスマス|くりすます]]は とても [[特別|とくべつ]]な [[日|ひ]]です。12[[月|がつ]]に なると、[[寒|さむ]]く なります。[[家|いえ]]や [[店|みせ]]に [[クリスマス|くりすます]]の [[飾|かざ]]りが あります。\n\n[[大|おお]]きい [[クリスマス|くりすます]][[ツリー|つりー]]を [[見|み]]るのは [[楽|たの]]しいです。[[夜|よる]]、[[家族|かぞく]]と [[一緒|いっしょ]]に [[食事|しょくじ]]を します。[[ケーキ|けーき]]を [[食|た]]べて、[[ジュース|じゅーす]]を [[飲|の]]みます。\n\n[[友達|ともだち]]に「[[メリークリスマス|めりーくりすます]]！」と [[言|い]]います。[[子供|こども]]たちは [[プレゼント|ぷれぜんと]]を もらって [[嬉|うれ]]しいです。[[クリスマス|くりすます]]はとても [[楽|たの]]しい [[日|ひ]]です。",
+    "icon": "fas fa-snowflake",
+    "color": "linear-gradient(135deg,#eb3349 0%,#f45c43 100%)"
+  },
+  {
+    "id": "s38",
+    "title": "自己紹介をする (Memperkenalkan Diri dalam Bahasa Jepang)",
+    "category": "Persiapan Ujian",
+    "translation": "Perkenalkan. Nama saya Ardian. Saat ini saya tinggal di Pekanbaru, Indonesia. Saya sedang belajar bahasa Jepang. Saya berharap bisa berteman dengan banyak orang melalui kemampuan bahasa Jepang saya.\n\nTahun ini saya mulai belajar bahasa Jepang. Bahasa Jepang sulit, tapi sangat menyenangkan. Saya ingin lulus ujian N4. Setiap hari saya berusaha belajar hal baru agar kemampuan bahasa Jepang saya terus berkembang.\n\nHobi saya mendengarkan musik dan berwisata. Di masa depan, saya ingin pergi ke Jepang. Senang berkenalan dengan Anda. Saya sangat senang bisa berbagi cerita tentang diri saya dalam bahasa Jepang.",
+    "template": "はじめまして。[[私|わたし]]の [[名前|なまえ]]は アルディアンです。[[現在|げんざい]]、[[インドネシア|いんどねしあ]]の [[ペカンバル|ぺかんばる]]に [[住|す]]んでいます。[[日本語|にほんご]]を [[勉強|べんきょう]]しています。\n\n[[今年|ことし]]から [[日本語|にほんご]]の [[勉強|べんきょう]]を [[始|はじ]]めました。[[日本語|にほんご]]は [[難|むずか]]しいですが、とても [[楽|たの]]しいです。[[N4|エヌよん]]の [[試験|しけん]]に [[合格|ごうかく]]したいです。\n\n[[趣味|しゅみ]]は [[音楽|おんがく]]を [[聴|き]]いたり、[[旅行|りょこう]]を したりすることです。[[将来|しょうらい]]、[[日本|にほん]]に [[行|い]]きたいです。どうぞ よろしく お[[願|ねが]]いします。",
+    "icon": "fas fa-user",
+    "color": "linear-gradient(135deg,#a1c4fd 0%,#c2e9fb 100%)"
   }
 ]

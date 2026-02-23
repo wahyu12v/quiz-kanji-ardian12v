@@ -25,9 +25,30 @@ function renderProgressBar() {
             <span style="font-weight:600; font-size:0.9rem; color:var(--text-primary);">
                 <i class="bi bi-journal-check me-1" style="color:#0D9488;"></i> Progress Membaca
             </span>
-            <span style="font-size:0.85rem; color:var(--text-muted);">
-                <b style="color:#0D9488;">${done}</b> / ${total} cerita
-            </span>
+            <div style="display:flex; align-items:center; gap:10px;">
+                <span style="font-size:0.85rem; color:var(--text-muted);">
+                    <b style="color:#0D9488;">${done}</b> / ${total} cerita
+                </span>
+                ${done > 0 ? `
+                <button onclick="confirmResetProgress()" title="Reset Progress" style="
+                    background: none;
+                    border: 1.5px solid #E2E8F0;
+                    border-radius: 8px;
+                    padding: 3px 9px;
+                    font-size: 0.72rem;
+                    font-weight: 600;
+                    color: #94A3B8;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                    transition: all 0.15s ease;
+                    white-space: nowrap;
+                " onmouseover="this.style.borderColor='#EF4444';this.style.color='#EF4444';this.style.background='rgba(239,68,68,0.06)'"
+                   onmouseout="this.style.borderColor='#E2E8F0';this.style.color='#94A3B8';this.style.background='none'">
+                    <i class="bi bi-arrow-counterclockwise"></i> Reset
+                </button>` : ''}
+            </div>
         </div>
         <div style="background: var(--bg-card-alt, #f3f4f6); border-radius:999px; height:10px; overflow:hidden;">
             <div style="
