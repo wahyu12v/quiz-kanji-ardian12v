@@ -178,5 +178,95 @@
     "template": "[[今日|きょう]]、[[仕事|しごと]]の [[帰|かえ]]りに、[[電車|でんしゃ]]の [[中|なか]]で ある ことが ありました。\n\n[[混|こ]]んでいる [[電車|でんしゃ]]に、[[年|とし]]を とった おばあさんが [[乗|の]]ってきました。[[扉|とびら]]の [[近|ちか]]くに [[座|すわ]]っていた [[若|わか]]い [[男|おとこ]]の [[人|ひと]]が すぐに [[立|た]]って「どうぞ [[座|すわ]]って ください。」と [[言|い]]いました。おばあさんは うれしそうな [[顔|かお]]で「ありがとう ございます。」と [[言|い]]いました。\n\nその [[様子|ようす]]を [[見|み]]て、[[周|まわ]]りの [[乗客|じょうきゃく]]も なんとなく [[温|あたた]]かい [[気持|きも]]ちに なったようでした。こういう [[小|ちい]]さな [[行動|こうどう]]が [[大切|たいせつ]]だと [[思|おも]]います。[[私|わたし]]も [[周|まわ]]りの [[人|ひと]]に [[気|き]]を [[配|くば]]りたいと [[思|おも]]いました。",
     "icon": "fas fa-train",
     "color": "linear-gradient(135deg,#667eea 0%,#764ba2 100%)"
+  },
+  {
+    "id": "s21",
+    "title": "アイスクリーム (Es Krim)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Hari ini sangat panas. Saya membeli es krim di toko.\n\nEs krimnya berwarna merah muda dan manis. Sangat enak!\n\nSaya ingin makan es krim lagi besok.",
+    "template": "[[今日|きょう]]は とても [[暑|あつ]]いです。[[店|みせ]]で [[アイスクリーム|あいすくりーむ]]を [[買|か]]いました。\n\n[[アイスクリーム|あいすくりーむ]]は [[pink|ぴんく]]いろで、あまいです。とても おいしかったです！\n\nまた [[明日|あした]]も [[食|た]]べたいです。",
+    "icon": "fas fa-ice-cream",
+    "color": "linear-gradient(135deg,#ffecd2 0%,#fcb69f 100%)"
+  },
+  {
+    "id": "s22",
+    "title": "ねこと あそぶ (Bermain dengan Kucing)",
+    "category": "Hewan & Peliharaan",
+    "translation": "Saya punya seekor kucing bernama Shiro. Shiro sangat lucu.\n\nSetiap hari saya bermain bersama Shiro. Shiro suka bola.\n\nShiro adalah teman terbaik saya.",
+    "template": "わたしは [[猫|ねこ]]を [[一匹|いっぴき]] [[飼|か]]っています。[[名前|なまえ]]は [[白|しろ]]です。[[白|しろ]]は とても かわいいです。\n\n[[毎日|まいにち]]、[[白|しろ]]と いっしょに [[遊|あそ]]びます。[[白|しろ]]は [[ボール|ぼーる]]が [[好|す]]きです。\n\n[[白|しろ]]は わたしの いちばん いい [[友達|ともだち]]です。",
+    "icon": "fas fa-cat",
+    "color": "linear-gradient(135deg,#e0c3fc 0%,#8ec5fc 100%)"
+  },
+  {
+    "id": "s23",
+    "title": "はじめての りょうり (Masak untuk Pertama Kali)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Kemarin saya memasak untuk pertama kali. Saya membuat nasi goreng.\n\nMemasaknya sulit, tapi menyenangkan. Ayah bilang enak.\n\nSaya ingin memasak lagi.",
+    "template": "[[昨日|きのう]]、はじめて [[料理|りょうり]]を しました。[[炒飯|チャーハン]]を [[作|つく]]りました。\n\n[[料理|りょうり]]は [[難|むずか]]しかったですが、たのしかったです。[[お父|おとう]]さんは「おいしい」と [[言|い]]いました。\n\nまた [[料理|りょうり]]を したいです。",
+    "icon": "fas fa-utensils",
+    "color": "linear-gradient(135deg,#fddb92 0%,#d1fdff 100%)"
+  },
+  {
+    "id": "s24",
+    "title": "こうえんで (Di Taman)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Minggu ini saya pergi ke taman bersama ibu. Cuacanya sangat bagus.\n\nDi taman ada banyak bunga. Bunganya sangat cantik.\n\nSaya senang sekali hari ini.",
+    "template": "[[今週|こんしゅう]]、[[お母|おかあ]]さんと [[公園|こうえん]]に [[行|い]]きました。[[天気|てんき]]は とても よかったです。\n\n[[公園|こうえん]]に [[花|はな]]が たくさん ありました。[[花|はな]]は とても きれいでした。\n\n[[今日|きょう]]は とても うれしかったです。",
+    "icon": "fas fa-leaf",
+    "color": "linear-gradient(135deg,#84fab0 0%,#8fd3f4 100%)"
+  },
+  {
+    "id": "s25",
+    "title": "わたしの かばん (Tas Saya)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Saya punya tas baru. Warnanya biru dan sangat bagus.\n\nDi dalam tas ada buku, pensil, dan dompet. Saya sangat suka tas ini.\n\nSaya membawa tas ini setiap hari ke sekolah.",
+    "template": "わたしは [[新|あたら]]しい [[鞄|かばん]]を もっています。[[色|いろ]]は [[青|あお]]で、とても いいです。\n\n[[鞄|かばん]]の [[中|なか]]に [[本|ほん]]と [[鉛筆|えんぴつ]]と [[財布|さいふ]]が あります。この [[鞄|かばん]]が とても [[好|す]]きです。\n\n[[毎日|まいにち]]、[[学校|がっこう]]に この [[鞄|かばん]]を もって [[行|い]]きます。",
+    "icon": "fas fa-shopping-bag",
+    "color": "linear-gradient(135deg,#a1c4fd 0%,#c2e9fb 100%)"
+  },
+  {
+    "id": "s26",
+    "title": "おじいさんの いえ (Rumah Kakek)",
+    "category": "Keluarga",
+    "translation": "Minggu lalu saya pergi ke rumah kakek. Rumahnya besar dan nyaman.\n\nKakek membuat kue yang enak untuk saya. Kami makan bersama.\n\nSaya ingin pergi ke rumah kakek lagi.",
+    "template": "[[先週|せんしゅう]]、[[祖父|おじいさん]]の [[家|いえ]]に [[行|い]]きました。[[家|いえ]]は [[大|おお]]きくて、きもちよかったです。\n\n[[祖父|おじいさん]]は わたしに おいしい [[菓子|おかし]]を [[作|つく]]って くれました。みんなで [[一緒|いっしょ]]に [[食|た]]べました。\n\nまた [[祖父|おじいさん]]の [[家|いえ]]に [[行|い]]きたいです。",
+    "icon": "fas fa-house-user",
+    "color": "linear-gradient(135deg,#fbc2eb 0%,#a6c1ee 100%)"
+  },
+  {
+    "id": "s27",
+    "title": "すきな スポーツ (Olahraga Favorit)",
+    "category": "Hobi",
+    "translation": "Olahraga favorit saya adalah berenang. Setiap Sabtu saya pergi ke kolam renang.\n\nBerenang itu menyenangkan dan menyehatkan. Teman saya juga suka berenang.\n\nSaya ingin menjadi perenang yang hebat.",
+    "template": "わたしの [[好|す]]きな [[スポーツ|すぽーつ]]は [[水泳|すいえい]]です。[[毎週|まいしゅう]][[土曜日|どようび]]に [[プール|ぷーる]]に [[行|い]]きます。\n\n[[水泳|すいえい]]は たのしくて、[[体|からだ]]に いいです。[[友達|ともだち]]も [[水泳|すいえい]]が [[好|す]]きです。\n\nじょうずな [[泳|およ]]ぎ [[手|て]]に なりたいです。",
+    "icon": "fas fa-swimming-pool",
+    "color": "linear-gradient(135deg,#4facfe 0%,#00f2fe 100%)"
+  },
+  {
+    "id": "s28",
+    "title": "ゆめの しごと (Pekerjaan Impian)",
+    "category": "Mimpi & Tujuan",
+    "translation": "Impian saya adalah menjadi dokter. Dokter membantu banyak orang.\n\nSekarang saya belajar keras setiap hari. Saya juga suka pelajaran sains.\n\nSaya pasti akan menjadi dokter yang baik.",
+    "template": "わたしの [[夢|ゆめ]]は [[医者|いしゃ]]に なることです。[[医者|いしゃ]]は [[多|おお]]くの [[人|ひと]]を たすけます。\n\n[[今|いま]]、[[毎日|まいにち]] いっしょうけんめい [[勉強|べんきょう]]しています。[[理科|りか]]の [[授業|じゅぎょう]]も [[好|す]]きです。\n\nきっと いい [[医者|いしゃ]]に なります。",
+    "icon": "fas fa-user-md",
+    "color": "linear-gradient(135deg,#f093fb 0%,#f5576c 100%)"
+  },
+  {
+    "id": "s29",
+    "title": "[[富士山|ふじさん]] (Gunung Fuji)",
+    "category": "Tempat Wisata Jepang",
+    "translation": "Gunung Fuji adalah gunung tertinggi di Jepang. Sangat terkenal di seluruh dunia.\n\nPuncaknya berwarna putih karena salju. Sangat indah.\n\nSaya ingin pergi melihat Gunung Fuji suatu hari nanti.",
+    "template": "[[富士山|ふじさん]]は [[日本|にほん]]で いちばん [[高|たか]]い [[山|やま]]です。[[世界中|せかいじゅう]]で とても [[有名|ゆうめい]]です。\n\n[[山|やま]]の [[頂上|ちょうじょう]]は [[雪|ゆき]]で [[白|しろ]]いです。とても きれいです。\n\nいつか [[富士山|ふじさん]]を [[見|み]]に [[行|い]]きたいです。",
+    "icon": "fas fa-mountain",
+    "color": "linear-gradient(135deg,#e0eafc 0%,#cfdef3 100%)"
+  },
+  {
+    "id": "s30",
+    "title": "むしと しぜん (Serangga dan Alam)",
+    "category": "Pengetahuan Umum",
+    "translation": "Di Jepang ada banyak jenis serangga. Kupu-kupu, kumbang, dan belalang sangat terkenal.\n\nSerangga hidup di alam. Mereka memakan bunga dan daun.\n\nSerangga sangat penting untuk alam.",
+    "template": "[[日本|にほん]]には [[虫|むし]]が たくさん います。[[蝶|ちょう]]や [[カブトムシ|かぶとむし]]や [[バッタ|ばった]]は とても [[有名|ゆうめい]]です。\n\n[[虫|むし]]は [[自然|しぜん]]の [[中|なか]]に [[住|す]]んでいます。[[花|はな]]や [[葉|は]]を [[食|た]]べます。\n\n[[虫|むし]]は [[自然|しぜん]]に とても [[大切|たいせつ]]です。",
+    "icon": "fas fa-bug",
+    "color": "linear-gradient(135deg,#96fbc4 0%,#f9f586 100%)"
   }
 ]
