@@ -268,5 +268,95 @@
     "template": "[[日本|にほん]]には [[虫|むし]]が たくさん います。[[蝶|ちょう]]や [[カブトムシ|かぶとむし]]や [[バッタ|ばった]]は とても [[有名|ゆうめい]]です。\n\n[[虫|むし]]は [[自然|しぜん]]の [[中|なか]]に [[住|す]]んでいます。[[花|はな]]や [[葉|は]]を [[食|た]]べます。\n\n[[虫|むし]]は [[自然|しぜん]]に とても [[大切|たいせつ]]です。",
     "icon": "fas fa-bug",
     "color": "linear-gradient(135deg,#96fbc4 0%,#f9f586 100%)"
+  },
+  {
+    "id": "s31",
+    "title": "ラーメンを 食べました (Makan Ramen)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Saya makan ramen di restoran terkenal dekat stasiun. Antreannya panjang tapi rasanya sangat enak.\n\nKaldunya lezat dan ada daging serta telur di atasnya. Saya memakannya sampai habis.\n\nRamen adalah makanan Jepang yang sangat populer. Saya ingin datang lagi.",
+    "template": "[[駅|えき]]の [[近|ちか]]くの [[有名|ゆうめい]]な [[ラーメン|らーめん]][[屋|や]]に [[行|い]]きました。[[行列|ぎょうれつ]]が [[長|なが]]かったですが、とても [[美味|おい]]しかったです。\n\n[[スープ|すーぷ]]は [[美味|おい]]しくて、[[上|うえ]]に [[肉|にく]]と [[卵|たまご]]が [[乗|の]]っていました。[[全部|ぜんぶ]] [[食|た]]べてしまいました。\n\n[[ラーメン|らーめん]]は [[日本|にほん]]で とても [[人気|にんき]]な [[食|た]]べ [[物|もの]]です。また [[来|き]]たいです。",
+    "icon": "fas fa-bowl-food",
+    "color": "linear-gradient(135deg,#f7971e 0%,#ffd200 100%)"
+  },
+  {
+    "id": "s32",
+    "title": "学校の 遠足 (Piknik Sekolah)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Minggu lalu sekolah saya mengadakan piknik. Kami pergi ke taman besar dengan bus.\n\nKami bermain bersama dan makan bekal di luar. Sangat menyenangkan.\n\nSaya sangat lelah tapi senang. Saya ingin piknik lagi.",
+    "template": "[[先週|せんしゅう]]、[[学校|がっこう]]で [[遠足|えんそく]]が ありました。[[バス|ばす]]で [[大|おお]]きな [[公園|こうえん]]に [[行|い]]きました。\n\nみんなで [[遊|あそ]]んで、[[外|そと]]で [[弁当|べんとう]]を [[食|た]]べました。とても [[楽|たの]]しかったです。\n\nとても [[疲|つか]]れましたが、[[嬉|うれ]]しかったです。また [[遠足|えんそく]]に [[行|い]]きたいです。",
+    "icon": "fas fa-school",
+    "color": "linear-gradient(135deg,#84fab0 0%,#8fd3f4 100%)"
+  },
+  {
+    "id": "s33",
+    "title": "新幹線に 乗りました (Naik Shinkansen)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Saya naik shinkansen untuk pertama kali. Tujuannya adalah Osaka.\n\nKecepatannya sangat luar biasa. Di tengah perjalanan Gunung Fuji terlihat sangat indah.\n\nPerjalanan ke Osaka hanya 2 jam 30 menit. Sungguh pengalaman yang tidak terlupakan.",
+    "template": "はじめて [[新幹線|しんかんせん]]に [[乗|の]]りました。[[目的地|もくてきち]]は [[大阪|おおさか]]です。\n\n[[速|はや]]さが とても [[速|はや]]かったです。[[道中|どうちゅう]]、[[富士山|ふじさん]]が とても きれいに [[見|み]]えました。\n\n[[大阪|おおさか]]まで 2[[時間|じかん]]30[[分|ふん]]で [[着|つ]]きました。[[忘|わす]]れられない [[体験|たいけん]]に なりました。",
+    "icon": "fas fa-train",
+    "color": "linear-gradient(135deg,#4facfe 0%,#00f2fe 100%)"
+  },
+  {
+    "id": "s34",
+    "title": "スーパーで 買い物 (Belanja di Supermarket)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Hari ini saya pergi belanja ke supermarket. Saya membeli sayuran, ikan, dan onigiri.\n\nKasirnya ramah dan cepat. Total belanjaan 2.350 yen.\n\nBelanja sendiri sangat menyenangkan. Saya ingin memasak malam ini.",
+    "template": "[[今日|きょう]]、[[スーパー|すーぱー]]に [[買|か]]い [[物|もの]]に [[行|い]]きました。[[野菜|やさい]]と [[魚|さかな]]と [[おにぎり|おにぎり]]を [[買|か]]いました。\n\n[[店員|てんいん]]さんは [[親切|しんせつ]]で [[仕事|しごと]]が [[速|はや]]かったです。[[合計|ごうけい]]は 2,350[[円|えん]]でした。\n\n[[自分|じぶん]]で [[買|か]]い [[物|もの]]を するのは [[楽|たの]]しいです。[[今夜|こんや]]、[[料理|りょうり]]を したいです。",
+    "icon": "fas fa-shopping-cart",
+    "color": "linear-gradient(135deg,#f6d365 0%,#fda085 100%)"
+  },
+  {
+    "id": "s35",
+    "title": "雨の 日曜日 (Hari Minggu yang Hujan)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Hari Minggu ini hujan sejak pagi. Saya tidak bisa pergi ke taman.\n\nSaya membersihkan kamar dan membaca buku di rumah. Suara hujan terasa menenangkan.\n\nMalam hari langit menjadi cerah. Besok pasti cuacanya bagus.",
+    "template": "この [[日曜日|にちようび]]は [[朝|あさ]]から [[雨|あめ]]でした。[[公園|こうえん]]に [[行|い]]けませんでした。\n\n[[部屋|へや]]を [[掃除|そうじ]]して、[[家|いえ]]で [[本|ほん]]を [[読|よ]]みました。[[雨音|あまおと]]が とても [[落|お]]ち [[着|つ]]きます。\n\n[[夜|よる]]に [[空|そら]]が [[晴|は]]れました。[[明日|あした]]は きっと いい [[天気|てんき]]に なるでしょう。",
+    "icon": "fas fa-cloud-rain",
+    "color": "linear-gradient(135deg,#a1c4fd 0%,#c2e9fb 100%)"
+  },
+  {
+    "id": "s36",
+    "title": "初めてのマラソン (Maraton Pertama)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Bulan lalu saya ikut lomba lari maraton untuk pertama kali. Jaraknya 5 kilometer.\n\nBanyak orang memberikan semangat di pinggir jalan. Saya berhasil sampai garis finish dalam 32 menit.\n\nSaya sangat lelah tapi sangat bahagia. Saya ingin ikut lagi tahun depan.",
+    "template": "[[先月|せんげつ]]、はじめて [[マラソン|まらそん]][[大会|たいかい]]に [[参加|さんか]]しました。[[距離|きょり]]は 5[[キロメートル|きろめーとる]]です。\n\nたくさんの [[人|ひと]]が [[道|みち]]の [[脇|わき]]で [[応援|おうえん]]して くれました。32[[分|ふん]]で [[ゴール|ごーる]]に [[辿|たど]]り [[着|つ]]きました。\n\nとても [[疲|つか]]れましたが、とても [[嬉|うれ]]しかったです。[[来年|らいねん]]も [[参加|さんか]]したいです。",
+    "icon": "fas fa-running",
+    "color": "linear-gradient(135deg,#f093fb 0%,#f5576c 100%)"
+  },
+    {
+    "id": "s37",
+    "title": "引っ越し (Pindah Rumah)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Bulan lalu saya pindah ke apartemen baru dekat stasiun. Ini pertama kalinya tinggal sendiri.\n\nTeman-teman membantu membawa barang. Setelah selesai kami makan pizza bersama di lantai.\n\nTinggal sendiri agak kesepian tapi menyenangkan. Saya semakin mencintai apartemen baru saya.",
+    "template": "[[先月|せんげつ]]、[[駅|えき]]の [[近|ちか]]くの [[新|あたら]]しい [[アパート|あぱーと]]に [[引|ひ]]っ[[越|こ]]しました。[[一人暮|ひとりぐ]]らしは はじめてです。\n\n[[友達|ともだち]]が [[荷物|にもつ]]を [[運|はこ]]ぶのを [[手伝|てつだ]]って くれました。[[終|お]]わってから [[床|ゆか]]に [[座|すわ]]って [[一緒|いっしょ]]に [[ピザ|ぴざ]]を [[食|た]]べました。\n\n[[一人暮|ひとりぐ]]らしは すこし [[寂|さび]]しいですが、[[楽|たの]]しいです。[[新|あたら]]しい [[アパート|あぱーと]]が だんだん [[好|す]]きに なって きました。",
+    "icon": "fas fa-truck-moving",
+    "color": "linear-gradient(135deg,#fbc2eb 0%,#a6c1ee 100%)"
+  },
+  {
+    "id": "s38",
+    "title": "迷子の 猫 (Kucing yang Tersesat)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Saya menemukan kucing kecil berwarna oranye di depan rumah. Kucing itu tampak kelaparan.\n\nAda tanda di lehernya bertuliskan nama dan nomor telepon. Saya menelepon dan pemiliknya segera datang.\n\nAnak kecil itu memeluk kucingnya sambil menangis. Saya ikut merasa bahagia.",
+    "template": "[[家|いえ]]の [[前|まえ]]で [[小|ちい]]さい [[オレンジ|おれんじ]][[色|いろ]]の [[猫|ねこ]]を [[見|み]]つけました。[[お腹|おなか]]が [[空|す]]いている ようでした。\n\n[[首|くび]]に [[名前|なまえ]][[札|ふだ]]が [[付|つ]]いていました。[[電話|でんわ]]すると、[[飼|か]]い [[主|ぬし]]が すぐに [[来|き]]ました。\n\n[[小|ちい]]さい [[女|おんな]]の [[子|こ]]が [[泣|な]]きながら [[猫|ねこ]]を [[抱|だ]]きしめました。[[私|わたし]]も とても [[嬉|うれ]]しかったです。",
+    "icon": "fas fa-cat",
+    "color": "linear-gradient(135deg,#fddb92 0%,#d1fdff 100%)"
+  },
+  {
+    "id": "s39",
+    "title": "アルバイト (Kerja Part-time)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Sejak bulan lalu saya kerja part-time di kafe dekat kampus. Awalnya sering salah pesanan.\n\nSetelah dua minggu saya sudah terbiasa. Gaji pertama saya 28.000 yen dan saya sangat senang.\n\nKerja part-time mengajarkan saya banyak hal. Saya ingin terus bekerja di sini.",
+    "template": "[[先月|せんげつ]]から [[大学|だいがく]]の [[近|ちか]]くの [[カフェ|かふぇ]]で [[アルバイト|あるばいと]]を [[始|はじ]]めました。[[最初|さいしょ]]は [[注文|ちゅうもん]]を よく [[間違|まちが]]えました。\n\n2[[週間|しゅうかん]][[後|ご]]、[[仕事|しごと]]に [[慣|な]]れました。はじめての [[給料|きゅうりょう]]は 28,000[[円|えん]]で、とても [[嬉|うれ]]しかったです。\n\n[[アルバイト|あるばいと]]で たくさんの ことを [[学|まな]]びました。これからも ここで [[働|はたら]]き [[続|つづ]]けたいです。",
+    "icon": "fas fa-mug-hot",
+    "color": "linear-gradient(135deg,#d4a96a 0%,#a0522d 100%)"
+  },
+  {
+    "id": "s40",
+    "title": "祖父の 誕生日 (Ulang Tahun Kakek)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Minggu lalu adalah ulang tahun kakek yang ke-70. Seluruh keluarga berkumpul di rumah kakek.\n\nNenek menyiapkan sushi dan tempura. Kami menyanyikan lagu ulang tahun bersama dan kakek sangat bahagia.\n\nSaat berpisah kakek berkata ini ulang tahun terbaik dalam hidupnya. Saya berjanji akan datang lagi tahun depan.",
+    "template": "[[先週|せんしゅう]]、[[祖父|そふ]]の 70[[歳|さい]]の [[誕生日|たんじょうび]]でした。[[家族|かぞく]][[全員|ぜんいん]]が [[祖父|そふ]]の [[家|いえ]]に [[集|あつ]]まりました。\n\n[[祖母|そぼ]]が [[寿司|すし]]や [[天ぷら|てんぷら]]を [[用意|ようい]]しました。みんなで [[誕生日|たんじょうび]]の [[歌|うた]]を [[歌|うた]]って、[[祖父|そふ]]は とても [[嬉|うれ]]しそうでした。\n\n[[別|わか]]れる [[時|とき]]、[[祖父|そふ]]は「[[人生|じんせい]]で [[一番|いちばん]]いい [[誕生日|たんじょうび]]だった」と [[言|い]]いました。[[来年|らいねん]]も また [[来|く]]ることを [[約束|やくそく]]しました。",
+    "icon": "fas fa-birthday-cake",
+    "color": "linear-gradient(135deg,#f6d365 0%,#fda085 100%)"
   }
 ]
