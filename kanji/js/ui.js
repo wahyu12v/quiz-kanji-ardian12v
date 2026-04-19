@@ -103,22 +103,14 @@ export function renderQuiz(state, qNo) {
     const isLupa  = state.answers[idx] === "Lupa";
 
     const kanjiTxt = String(q[KEYS.kanji]    || "").trim();
-    const meanTxt  = String(q[KEYS.meaning]  || "").trim();
-    const hiraTxt  = String(q[KEYS.hiragana] || "").trim();
     const typeVal  = q.type || "";
     const levelVal = q.level || "";
 
-    let displayHtml = "";
-    if (state.sessionType === "quiz_hiragana") {
-        // Tebak Cara Baca → soal: ARTI INDONESIA
-        displayHtml = formatQuestion(meanTxt);
-    } else {
-        // Tebak Arti → soal: KANJI (tampilkan kanji besar + hiragana kecil di bawah)
-        displayHtml = `
-            <div class="d-flex flex-column align-items-center justify-content-center px-3" style="min-height: 150px;">
-                <span class="q-text-base q-size-lg">${escapeHtml(kanjiTxt)}</span>
-            </div>`;
-    }
+    // Semua soal pilihan ganda (Tebak Arti maupun Cara Baca) menampilkan Kanji
+    let displayHtml = `
+        <div class="d-flex flex-column align-items-center justify-content-center px-3" style="min-height: 150px;">
+            <span class="q-text-base q-size-lg">${escapeHtml(kanjiTxt)}</span>
+        </div>`;
 
     let choicesHtml = '<div class="d-grid gap-3">';
     choices.forEach((c, i) => {
@@ -184,26 +176,22 @@ export function renderMem(state, qNo) {
     const val = state.answers[idx] === "Lupa" ? "" : state.answers[idx] || "";
 
     const kanjiTxt = String(q[KEYS.kanji]    || "").trim();
-    const meanTxt  = String(q[KEYS.meaning]  || "").trim();
-    const hiraTxt  = String(q[KEYS.hiragana] || "").trim();
     const typeVal  = q.type  || "";
     const levelVal = q.level || "";
 
-    let displayHtml = "";
+    // Semua soal isian (Tulis Arti maupun Tulis Romaji) menampilkan Kanji
+    let displayHtml = `
+        <div class="d-flex flex-column align-items-center justify-content-center px-3" style="min-height: 150px;">
+            <span class="q-text-base q-size-lg">${escapeHtml(kanjiTxt)}</span>
+        </div>`;
+
     let placeholderTxt = "";
     let labelTxt = "";
 
     if (state.sessionType === "write_romaji") {
-        // Soal: ARTI INDONESIA → Jawab: Romaji / Hiragana
-        displayHtml    = formatQuestion(meanTxt);
         placeholderTxt = "Ketik Romaji-nya...";
         labelTxt       = "TULIS ROMAJI / CARA BACA";
     } else {
-        // Soal: KANJI + HIRAGANA → Jawab: ARTI INDONESIA
-        displayHtml = `
-            <div class="d-flex flex-column align-items-center justify-content-center px-3" style="min-height: 150px;">
-                <span class="q-text-base q-size-lg">${escapeHtml(kanjiTxt)}</span>
-            </div>`;
         placeholderTxt = "Ketik artinya dalam bahasa Indonesia...";
         labelTxt       = "TERJEMAHKAN KE INDONESIA";
     }
@@ -322,17 +310,14 @@ export function renderResult(result, sessionType, wrongIndices = []) {
             const type   = d.q.type             || "";
             const level  = d.q.level            || "";
 
-            let mainText  = "";
+            let mainText  = kanji; // Selalu jadikan Kanji sebagai teks utama di halaman hasil
             let correctAns = "";
 
             if (sessionType === "quiz_hiragana") {
-                mainText   = mean;
                 correctAns = hira;
             } else if (sessionType === "quiz" || sessionType === "mem") {
-                mainText   = kanji;
                 correctAns = mean;
             } else if (sessionType === "write_romaji") {
-                mainText   = mean;
                 correctAns = `${romaji} / ${hira}`;
             }
 
