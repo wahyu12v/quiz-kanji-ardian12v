@@ -333,18 +333,35 @@ export function renderResult(result, sessionType, wrongIndices = []) {
                 correctAns = `${romaji} / ${hira}`;
             }
 
+            // HTML Diperbarui: Menampilkan Kanji, Hiragana, Romaji, dan Arti
             html += `
-                <div class="res-item mb-3">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
+                <div class="res-item mb-4 text-start shadow-sm">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
                         <div class="d-flex align-items-center gap-2">
-                            <div class="res-kanji fs-3">${escapeHtml(mainText)}</div>
+                            <div class="res-kanji display-6 fw-bold" style="color: var(--text-primary);">${escapeHtml(mainText)}</div>
                             ${typeBadgeHtml(type)}
                             <small class="text-muted fw-bold">${escapeHtml(level)}</small>
                         </div>
                         ${isCorrect
-                            ? '<i class="bi bi-check-circle-fill text-neon-green fs-3"></i>'
-                            : '<i class="bi bi-x-circle-fill text-neon-red fs-3"></i>'}
+                            ? '<i class="bi bi-check-circle-fill text-neon-green fs-1"></i>'
+                            : '<i class="bi bi-x-circle-fill text-neon-red fs-1"></i>'}
                     </div>
+
+                    <div class="p-3 mb-3 rounded-3" style="background-color: var(--bg-main); border: 1px solid var(--border);">
+                        <div class="row align-items-center mb-2">
+                            <div class="col-4 text-muted fw-bold small text-uppercase">Hiragana</div>
+                            <div class="col-8 fw-semibold fs-6">${escapeHtml(hira)}</div>
+                        </div>
+                        <div class="row align-items-center mb-2">
+                            <div class="col-4 text-muted fw-bold small text-uppercase">Romaji</div>
+                            <div class="col-8 fw-bold fs-6" style="color: var(--teal);">${escapeHtml(romaji)}</div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-4 text-muted fw-bold small text-uppercase">Arti</div>
+                            <div class="col-8 fw-semibold fs-6">${escapeHtml(mean)}</div>
+                        </div>
+                    </div>
+
                     <div class="d-flex flex-column gap-2">
                         ${!isCorrect ? `<div class="res-box res-wrong"><span class="res-label">KAMU</span><span class="res-val">${escapeHtml(userTxt)}</span></div>` : ""}
                         <div class="res-box res-correct"><span class="res-label">BENAR</span><span class="res-val">${escapeHtml(correctAns)}</span></div>
