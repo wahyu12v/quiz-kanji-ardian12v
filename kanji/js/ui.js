@@ -106,6 +106,11 @@ export function renderQuiz(state, qNo) {
     const typeVal  = q.type || "";
     const levelVal = q.level || "";
 
+    // Cek apakah sedang me-render ulang soal yang sama (mencegah animasi berkedip ganda)
+    const existingCard = area.firstElementChild;
+    const isSameQuestion = existingCard && existingCard.getAttribute("data-qindex") === String(idx);
+    const enterClass = isSameQuestion ? "" : "card-enter";
+
     // Semua soal pilihan ganda (Tebak Arti maupun Cara Baca) menampilkan Kanji
     let displayHtml = `
         <div class="d-flex flex-column align-items-center justify-content-center px-3" style="min-height: 150px;">
@@ -126,7 +131,8 @@ export function renderQuiz(state, qNo) {
     choicesHtml += "</div>";
 
     const card = document.createElement("div");
-    card.className = "quiz-card p-4 h-100 d-flex flex-column card-enter";
+    card.className = `quiz-card p-4 h-100 d-flex flex-column ${enterClass}`;
+    card.setAttribute("data-qindex", idx); // Menyimpan index soal saat ini
     card.style.cssText = "animation-fill-mode: both;";
     card.innerHTML = `
         <div class="d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom border-secondary border-opacity-25">
@@ -179,6 +185,11 @@ export function renderMem(state, qNo) {
     const typeVal  = q.type  || "";
     const levelVal = q.level || "";
 
+    // Cek apakah sedang me-render ulang soal yang sama (mencegah animasi berkedip ganda)
+    const existingCard = area.firstElementChild;
+    const isSameQuestion = existingCard && existingCard.getAttribute("data-qindex") === String(idx);
+    const enterClass = isSameQuestion ? "" : "card-enter";
+
     // Semua soal isian (Tulis Arti maupun Tulis Romaji) menampilkan Kanji
     let displayHtml = `
         <div class="d-flex flex-column align-items-center justify-content-center px-3" style="min-height: 150px;">
@@ -197,7 +208,8 @@ export function renderMem(state, qNo) {
     }
 
     const card = document.createElement("div");
-    card.className = "mem-card p-4 d-flex flex-column align-items-center justify-content-center h-100 card-enter";
+    card.className = `mem-card p-4 d-flex flex-column align-items-center justify-content-center h-100 ${enterClass}`;
+    card.setAttribute("data-qindex", idx); // Menyimpan index soal saat ini
     card.innerHTML = `
         <div class="d-flex justify-content-between align-items-center w-100 mb-3 border-bottom border-secondary border-opacity-25 pb-3">
             <span class="badge badge-neon px-3 py-2">Soal ${idx + 1} / ${state.batch.length}</span>
