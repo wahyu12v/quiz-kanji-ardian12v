@@ -358,5 +358,185 @@
     "template": "[[先週|せんしゅう]]、[[祖父|そふ]]の 70[[歳|さい]]の [[誕生日|たんじょうび]]でした。[[家族|かぞく]][[全員|ぜんいん]]が [[祖父|そふ]]の [[家|いえ]]に [[集|あつ]]まりました。\n\n[[祖母|そぼ]]が [[寿司|すし]]や [[天ぷら|てんぷら]]を [[用意|ようい]]しました。みんなで [[誕生日|たんじょうび]]の [[歌|うた]]を [[歌|うた]]って、[[祖父|そふ]]は とても [[嬉|うれ]]しそうでした。\n\n[[別|わか]]れる [[時|とき]]、[[祖父|そふ]]は「[[人生|じんせい]]で [[一番|いちばん]]いい [[誕生日|たんじょうび]]だった」と [[言|い]]いました。[[来年|らいねん]]も また [[来|く]]ることを [[約束|やくそく]]しました。",
     "icon": "fas fa-birthday-cake",
     "color": "linear-gradient(135deg,#f6d365 0%,#fda085 100%)"
+  },
+   {
+    "id": "s41",
+    "title": "雪の日 (Hari Salju)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Suatu pagi salju turun. Saya pergi ke taman dan bermain salju bersama teman-teman. Kami membuat manusia salju dan bermain bola salju. Hari itu sangat menyenangkan.",
+    "template": "ある [[朝|あさ]]、[[雪|ゆき]]が [[降|ふ]]りました。[[公園|こうえん]]で [[友達|ともだち]]と [[雪|ゆき]]で [[遊|あそ]]びました。[[雪|ゆき]]だるまを [[作|つく]]ったり、[[雪合戦|ゆきがっせん]]を したり しました。とても [[楽|たの]]しい [[一日|いちにち]]でした。",
+    "icon": "fas fa-snowman",
+    "color": "linear-gradient(135deg,#e0f7fa 0%,#80deea 100%)"
+  },
+  {
+    "id": "s42",
+    "title": "漢字の勉強 (Belajar Kanji)",
+    "category": "Hobi",
+    "translation": "Saya belajar kanji setiap hari. Teman saya Yuki membuat kartu kanji. Kami belajar bersama dan saya jadi lebih mahir.",
+    "template": "[[毎日|まいにち]] [[漢字|かんじ]]を [[勉強|べんきょう]]して います。[[友達|ともだち]]の [[ユキ|ゆき]]さんが [[漢字|かんじ]]カードを [[作|つく]]って くれました。いっしょに [[練習|れんしゅう]]して、[[漢字|かんじ]]が [[上手|じょうず]]に なりました。",
+    "icon": "fas fa-pen",
+    "color": "linear-gradient(135deg,#f6d365 0%,#fda085 100%)"
+  },
+  {
+    "id": "s43",
+    "title": "夏祭りの花火 (Kembang Api Festival Musim Panas)",
+    "category": "Budaya",
+    "translation": "Saya pergi ke festival musim panas dengan keluarga. Saya memakai yukata dan menonton kembang api yang sangat indah.",
+    "template": "[[先週|せんしゅう]]、[[家族|かぞく]]と [[夏祭|なつまつ]]りに [[行|い]]きました。[[浴衣|ゆかた]]を [[着|き]]て、[[花火|はなび]]を [[見|み]]ました。とても [[綺麗|きれい]]でした。",
+    "icon": "fas fa-firework",
+    "color": "linear-gradient(135deg,#f093fb 0%,#f5576c 100%)"
+  },
+  {
+    "id": "s44",
+    "title": "初めての自転車 (Sepeda Pertama)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Dulu ayah mengajari saya naik sepeda di taman. Setelah seminggu saya bisa. Sekarang saya bersepeda ke sekolah setiap hari.",
+    "template": "[[子供|こども]]の [[時|とき]]、[[父|ちち]]が [[自転車|じてんしゃ]]を [[教|おし]]えて くれました。1[[週間|しゅうかん]]で [[乗|の]]れるように なりました。[[今|いま]]は [[毎日|まいにち]] [[自転車|じてんしゃ]]で [[学校|がっこう]]に [[行|い]]きます。",
+    "icon": "fas fa-bicycle",
+    "color": "linear-gradient(135deg,#84fab0 0%,#8fd3f4 100%)"
+  },
+  {
+    "id": "s45",
+    "title": "母の手料理 (Masakan Ibu)",
+    "category": "Keluarga",
+    "translation": "Masakan ibu selalu enak. Hari ini dia membuat kari dan sup miso. Saya senang makan malam bersama keluarga.",
+    "template": "[[母|はは]]の [[手料理|てりょうり]]は いつも [[美味|おい]]しいです。[[今日|きょう]]は [[カレー|かれー]]と [[味噌汁|みそしる]]を [[作|つく]]って くれました。[[家族|かぞく]]と [[一緒|いっしょ]]に [[夕飯|ゆうはん]]を [[食|た]]べて、とても [[幸|しあわ]]せでした。",
+    "icon": "fas fa-utensils",
+    "color": "linear-gradient(135deg,#fddb92 0%,#d1fdff 100%)"
+  },
+  {
+    "id": "s46",
+    "title": "図書館の一日 (Sehari di Perpustakaan)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Hari ini saya pergi ke perpustakaan. Saya membaca novel dan buku sejarah. Belajar di sana sangat tenang dan menyenangkan.",
+    "template": "[[今日|きょう]]、[[図書館|としょかん]]に [[行|い]]きました。[[小説|しょうせつ]]や [[歴史|れきし]]の [[本|ほん]]を [[読|よ]]みました。とても [[静|しず]]かで、[[勉強|べんきょう]]が はかどりました。",
+    "icon": "fas fa-book-reader",
+    "color": "linear-gradient(135deg,#f6d365 0%,#fda085 100%)"
+  },
+  {
+    "id": "s47",
+    "title": "おにぎりを作る (Membuat Onigiri)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Saya belajar membuat onigiri dari ibu. Kami mengisi dengan tuna mayo. Bentuknya segitiga dan rasanya enak.",
+    "template": "[[母|はは]]に [[おにぎり|おにぎり]]の [[作|つく]]り [[方|かた]]を [[習|なら]]いました。[[中|なか]]に [[ツナマヨ|つなまよ]]を [[入|い]]れました。[[三角|さんかく]]の [[形|かたち]]で、とても [[美味|おい]]しかったです。",
+    "icon": "fas fa-fish",
+    "color": "linear-gradient(135deg,#a1c4fd 0%,#c2e9fb 100%)"
+  },
+  {
+    "id": "s48",
+    "title": "電車を間違える (Salah Naik Kereta)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Hari ini saya salah naik kereta. Saya naik kereta ekspres yang tidak berhenti di stasiun saya. Saya harus putar balik.",
+    "template": "[[今日|きょう]]、[[電車|でんしゃ]]を [[間違|まちが]]えて [[急行|きゅうこう]]に [[乗|の]]って しまいました。[[自分|じぶん]]の [[駅|えき]]に [[止|と]]まらず、[[戻|もど]]るのに [[時間|じかん]]が かかりました。",
+    "icon": "fas fa-train",
+    "color": "linear-gradient(135deg,#f093fb 0%,#f5576c 100%)"
+  },
+  {
+    "id": "s49",
+    "title": "テストの前夜 (Malam Sebelum Ujian)",
+    "category": "Mimpi & Tujuan",
+    "translation": "Besok ujian bahasa Jepang. Saya belajar sampai larut malam. Saya sedikit gugup tapi sudah berusaha keras.",
+    "template": "[[明日|あした]]は [[日本語|にほんご]]の [[テスト|てすと]]です。[[夜遅|よるおそ]]くまで [[勉強|べんきょう]]しました。すこし [[緊張|きんちょう]]しますが、[[精一杯|せいいっぱい]] やったので [[大丈夫|だいじょうぶ]]です。",
+    "icon": "fas fa-pencil-alt",
+    "color": "linear-gradient(135deg,#fbc2eb 0%,#a6c1ee 100%)"
+  },
+  {
+    "id": "s50",
+    "title": "花を買う (Membeli Bunga)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Saya membeli bunga di toko bunga dekat stasiun. Saya memilih bunga matahari kecil. Ini hadiah untuk ulang tahun ibu.",
+    "template": "[[駅|えき]]の [[近|ちか]]くの [[花屋|はなや]]で [[花|はな]]を [[買|か]]いました。[[小|ちい]]さい [[向日葵|ひまわり]]を [[選|えら]]びました。[[母|はは]]の [[誕生日|たんじょうび]]の [[プレゼント|ぷれぜんと]]です。",
+    "icon": "fas fa-seedling",
+    "color": "linear-gradient(135deg,#ffecd2 0%,#fcb69f 100%)"
+  },
+    {
+    "id": "s51",
+    "title": "風邪をひく (Masuk Angin)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Kemarin saya masuk angin. Kepala pusing dan tenggorokan sakit. Ibu membuatkan bubur hangat untuk saya. Setelah minum obat dan tidur, saya merasa lebih baik.",
+    "template": "[[昨日|きのう]]、[[風邪|かぜ]]を ひきました。[[頭|あたま]]が いたくて、[[喉|のど]]が いたかったです。[[母|はは]]が あたたかい [[粥|おかゆ]]を [[作|つく]]って くれました。[[薬|くすり]]を [[飲|の]]んで [[寝|ね]]たら、だいぶ [[良|よ]]くなりました。",
+    "icon": "fas fa-thermometer-half",
+    "color": "linear-gradient(135deg,#f093fb 0%,#f5576c 100%)"
+  },
+  {
+    "id": "s52",
+    "title": "習字を習う (Belajar Kaligrafi)",
+    "category": "Hobi",
+    "translation": "Saya mulai belajar kaligrafi. Memegang kuas dengan benar itu sulit. Guru memuji tulisan saya. Saya senang dan ingin terus berlatih.",
+    "template": "[[習字|しゅうじ]]を [[習|なら]]い [[始|はじ]]めました。[[筆|ふで]]の [[持|も]]ち [[方|かた]]が [[難|むずか]]しいです。[[先生|せんせい]]が [[私|わたし]]の [[字|じ]]を ほめて くれました。[[嬉|うれ]]しかったので、これからも [[練習|れんしゅう]]したいです。",
+    "icon": "fas fa-paint-brush",
+    "color": "linear-gradient(135deg,#d4a96a 0%,#a0522d 100%)"
+  },
+  {
+    "id": "s53",
+    "title": "動物園に行く (Pergi ke Kebun Binatang)",
+    "category": "Hewan & Peliharaan",
+    "translation": "Minggu lalu saya pergi ke kebun binatang dengan sepupu. Kami melihat gajah, panda, dan monyet. Monyetnya lucu sedang makan pisang. Saya ingin pergi lagi.",
+    "template": "[[先週|せんしゅう]]、[[従兄弟|いとこ]]と [[動物園|どうぶつえん]]に [[行|い]]きました。[[象|ぞう]]や [[パンダ|ぱんだ]]、[[猿|さる]]を [[見|み]]ました。[[猿|さる]]が [[バナナ|ばなな]]を [[食|た]]べていて かわいかったです。また [[行|い]]きたいです。",
+    "icon": "fas fa-hippo",
+    "color": "linear-gradient(135deg,#84fab0 0%,#8fd3f4 100%)"
+  },
+  {
+    "id": "s54",
+    "title": "財布を落とす (Kehilangan Dompet)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Hari ini saya kehilangan dompet di jalan. Saya mencari ke mana-mana tapi tidak ketemu. Seseorang mengembalikannya ke kantor polisi. Saya sangat lega.",
+    "template": "[[今日|きょう]]、[[道|みち]]で [[財布|さいふ]]を [[落|お]]としました。あちこち [[探|さが]]しましたが、[[見|み]]つかりませんでした。[[誰|だれ]]かが [[交番|こうばん]]に [[届|とど]]けて くれて、とても [[安心|あんしん]]しました。",
+    "icon": "fas fa-wallet",
+    "color": "linear-gradient(135deg,#f6d365 0%,#fda085 100%)"
+  },
+  {
+    "id": "s55",
+    "title": "妹とクッキーを作る (Membuat Kue Kering dengan Adik)",
+    "category": "Keluarga",
+    "translation": "Sore ini saya membuat kue kering dengan adik. Kami mencampur tepung, gula, dan mentega. Membentuk bintang dan hati. Hasilnya enak, ayah pun senang.",
+    "template": "[[今日|きょう]]の [[午後|ごご]]、[[妹|いもうと]]と [[一緒|いっしょ]]に [[クッキー|くっきー]]を [[作|つく]]りました。[[小麦粉|こむぎこ]]と [[砂糖|さとう]]と [[バター|ばたー]]を まぜました。[[星|ほし]]や [[ハート|はーと]]の [[形|かたち]]に しました。とても [[美味|おい]]しくて、[[父|ちち]]も [[喜|よろこ]]びました。",
+    "icon": "fas fa-cookie-bite",
+    "color": "linear-gradient(135deg,#ffecd2 0%,#fcb69f 100%)"
+  },
+  {
+    "id": "s56",
+    "title": "野球の試合を見る (Menonton Pertandingan Bisbol)",
+    "category": "Hobi",
+    "translation": "Sabtu lalu saya menonton bisbol di stadion. Suasananya ramai. Tim tuan rumah menang 5-3. Saya ikut bersorak sampai suara serak.",
+    "template": "[[先週|せんしゅう]]の [[土曜日|どようび]]、[[球場|きゅうじょう]]で [[野球|やきゅう]]を [[見|み]]ました。[[観客|かんきゃく]]が たくさん いて、にぎやかでした。[[地元|じもと]]の [[チーム|ちーむ]]が 5-3で [[勝|か]]ちました。[[私|わたし]]も [[大声|おおごえ]]で [[応援|おうえん]]して、[[声|こえ]]が かれました。",
+    "icon": "fas fa-baseball-ball",
+    "color": "linear-gradient(135deg,#4facfe 0%,#00f2fe 100%)"
+  },
+  {
+    "id": "s57",
+    "title": "ゴミ拾いボランティア (Relawan Memungut Sampah)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Hari Minggu saya ikut kegiatan memungut sampah di sungai. Banyak sampah plastik dan kaleng. Setelah bersih, sungai jadi indah. Saya ingin melakukannya lagi.",
+    "template": "[[日曜日|にちようび]]に [[川|かわ]]の [[ゴミ拾|ごみひろ]]いボランティアに [[参加|さんか]]しました。[[プラスチック|ぷらすちっく]]や [[空|あ]]き [[缶|かん]]が たくさん ありました。[[綺麗|きれい]]に なって、[[川|かわ]]が [[輝|かがや]]いて [[見|み]]えました。また [[参加|さんか]]したいです。",
+    "icon": "fas fa-recycle",
+    "color": "linear-gradient(135deg,#96fbc4 0%,#f9f586 100%)"
+  },
+  {
+    "id": "s58",
+    "title": "味噌汁の作り方 (Cara Membuat Sup Miso)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Saya belajar membuat sup miso dari nenek. Kami merebus air, memasukkan tahu dan wakame, lalu menambahkan miso. Aromanya harum dan rasanya nikmat.",
+    "template": "[[祖母|そぼ]]に [[味噌汁|みそしる]]の [[作|つく]]り [[方|かた]]を [[教|おし]]わりました。[[湯|ゆ]]を わかして、[[豆腐|とうふ]]と [[ワカメ|わかめ]]を [[入|い]]れます。あとで [[味噌|みそ]]を ときます。とても いい [[香|かお]]りで、[[味|あじ]]も おいしかったです。",
+    "icon": "fas fa-mug-hot",
+    "color": "linear-gradient(135deg,#f7971e 0%,#ffd200 100%)"
+  },
+  {
+    "id": "s59",
+    "title": "小さな山に登る (Mendaki Gunung Kecil)",
+    "category": "Tempat Wisata Jepang",
+    "translation": "Saya mendaki gunung kecil di dekat kota. Jalannya mudah dan pemandangan dari atas indah. Saya membawa onigiri dan makan di puncak. Perjalanan yang menyenangkan.",
+    "template": "[[町|まち]]の [[外|そと]]に ある [[小|ちい]]さな [[山|やま]]に [[登|のぼ]]りました。[[道|みち]]は [[優|やさ]]しくて、[[頂上|ちょうじょう]]からの [[景色|けしき]]が とても [[綺麗|きれい]]でした。[[おにぎり|おにぎり]]を [[持|も]]って [[行|い]]って、[[頂上|ちょうじょう]]で [[食|た]]べました。[[楽|たの]]しい [[山登|やまのぼ]]りでした。",
+    "icon": "fas fa-hiking",
+    "color": "linear-gradient(135deg,#e0f7fa 0%,#80deea 100%)"
+  },
+  {
+    "id": "s60",
+    "title": "席替え (Pindah Tempat Duduk)",
+    "category": "Kehidupan Sehari-hari",
+    "translation": "Hari ini di kelas ada pertukaran tempat duduk. Saya pindah ke depan, di sebelah jendela. Teman baru saya ramah. Dari jendela terlihat bunga sakura. Saya senang.",
+    "template": "[[今日|きょう]]、[[教室|きょうしつ]]で [[席替|せきが]]えが ありました。[[私|わたし]]は [[窓|まど]]の [[近|ちか]]くの [[一番前|いちばんまえ]]に なりました。[[隣|となり]]の [[席|せき]]の [[人|ひと]]は [[親切|しんせつ]]でした。[[窓|まど]]から [[桜|さくら]]が [[見|み]]えて、とても [[嬉|うれ]]しいです。",
+    "icon": "fas fa-chair",
+    "color": "linear-gradient(135deg,#a18cd1 0%,#fbc2eb 100%)"
   }
 ]
